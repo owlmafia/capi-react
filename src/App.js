@@ -1,6 +1,5 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Home } from "./Home";
 import { CreateProject } from "./CreateProject";
 import { Invest } from "./Invest";
 import { Project } from "./Project";
