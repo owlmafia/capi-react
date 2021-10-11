@@ -63,6 +63,7 @@ export const Invest = (props) => {
                         bridge_submit_buy_shares,
                       } = await wasmPromise;
 
+                      props.showProgress(true);
                       // 1. sign tx for app opt-in
                       // TODO ensure that both project and address are always set here, is state managed well?
                       let optInToAppRes = await bridge_opt_in_to_app_if_needed({
@@ -74,6 +75,7 @@ export const Invest = (props) => {
                       );
                       var optInToAppSignedOptional = null;
                       if (optInToAppRes.to_sign != null) {
+                        props.showProgress(false);
                         optInToAppSignedOptional = await signTx(
                           optInToAppRes.to_sign
                         );
@@ -83,6 +85,7 @@ export const Invest = (props) => {
                           JSON.stringify(optInToAppSignedOptional)
                       );
 
+                      props.showProgress(true);
                       // 2. buy the shares (requires app opt-in for local state)
                       // TODO write which local state
                       let buyRes = await bridge_buy_shares({
@@ -92,10 +95,14 @@ export const Invest = (props) => {
                         app_opt_in_tx: optInToAppSignedOptional,
                       });
                       console.log("buyRes: " + JSON.stringify(buyRes));
+                      props.showProgress(false);
+
                       let buySharesSigned = await signTxs(buyRes.to_sign);
                       console.log(
                         "buySharesSigned: " + JSON.stringify(buySharesSigned)
                       );
+
+                      props.showProgress(true);
                       let submitBuySharesRes = await bridge_submit_buy_shares({
                         txs: buySharesSigned,
                         pt: buyRes.pt,
@@ -104,6 +111,7 @@ export const Invest = (props) => {
                         "submitBuySharesRes: " +
                           JSON.stringify(submitBuySharesRes)
                       );
+                      props.showProgress(false);
 
                       props.showModal({
                         title: "Congratulations!",
@@ -130,6 +138,7 @@ export const Invest = (props) => {
                       });
                     } catch (e) {
                       props.statusMsg.error(e);
+                      props.showProgress(false);
                     }
                   }}
                 >

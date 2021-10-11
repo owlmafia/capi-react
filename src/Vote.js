@@ -93,17 +93,20 @@ export const Vote = (props) => {
                           const { bridge_vote, bridge_submit_vote } =
                             await wasmPromise;
 
+                          props.showProgress(true);
                           let voteRes = await bridge_vote({
                             project_id: props.match.params.id,
                             voter_address: props.myAddress,
                           });
                           // TODO update list with returned withdrawals list
                           console.log("voteRes: " + JSON.stringify(voteRes));
+                          props.showProgress(false);
 
                           let voteSigned = await signTxs(voteRes.to_sign);
 
                           console.log("voteSigned: " + voteSigned);
 
+                          props.showProgress(true);
                           let submitVoteRes = await bridge_submit_vote({
                             project_id: props.match.params.id,
                             txs: voteSigned,
@@ -114,8 +117,10 @@ export const Vote = (props) => {
                             "submitVoteRes: " + JSON.stringify(submitVoteRes)
                           );
                           props.statusMsg.success("Voted!");
+                          props.showProgress(false);
                         } catch (e) {
                           props.statusMsg.error(e);
+                          props.showProgress(false);
                         }
                       }}
                     >

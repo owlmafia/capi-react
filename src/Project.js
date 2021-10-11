@@ -113,16 +113,21 @@ export const Project = (props) => {
                   const { bridge_drain, bridge_submit_drain } =
                     await wasmPromise;
 
+                  props.showProgress(true);
+
                   let drainRes = await bridge_drain({
                     project_id: props.match.params.id,
                     drainer_address: props.myAddress,
                   });
                   console.log("drainRes: " + JSON.stringify(drainRes));
+                  props.showProgress(false);
+
                   let drainResSigned = await signTxs(drainRes.to_sign);
                   console.log(
                     "drainResSigned: " + JSON.stringify(drainResSigned)
                   );
 
+                  props.showProgress(true);
                   let submitDrainRes = await bridge_submit_drain({
                     txs: drainResSigned,
                     pt: drainRes.pt,
@@ -135,8 +140,10 @@ export const Project = (props) => {
                     submitDrainRes.new_customer_escrow_balance
                   );
                   props.statusMsg.success("Funds transferred");
+                  props.showProgress(false);
                 } catch (e) {
                   props.statusMsg.error(e);
+                  props.showProgress(false);
                 }
               }}
             >

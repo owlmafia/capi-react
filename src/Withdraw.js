@@ -53,17 +53,20 @@ export const Withdrawal = (props) => {
                   bridge_load_withdrawal_requests,
                 } = await wasmPromise;
 
+                props.showProgress(true);
                 let withdrawRes = await bridge_withdraw({
                   project_id: project.id,
                   sender: props.myAddress,
                   withdrawal_amount: req.amount_not_formatted,
                 });
                 console.log("withdrawRes: " + JSON.stringify(withdrawRes));
+                props.showProgress(false);
 
                 let withdrawSigned = await signTxs(withdrawRes.to_sign);
 
                 console.log("withdrawSigned: " + withdrawSigned);
 
+                props.showProgress(true);
                 let submitWithdrawalRes =
                   await bridge_submit_withdrawal_request({
                     request_id: req.request_id,
@@ -90,8 +93,10 @@ export const Withdrawal = (props) => {
                 props.statusMsg.success("Withdrawal success");
 
                 setWithdrawalRequests(withdrawalRequestsRes.requests);
+                props.showProgress(false);
               } catch (e) {
                 props.statusMsg.error(e);
+                props.showProgress(false);
               }
             }}
           >
@@ -138,6 +143,7 @@ export const Withdrawal = (props) => {
               try {
                 const { bridge_send_withdrawal_request } = await wasmPromise;
 
+                props.showProgress(true);
                 let withdrawalRequestRes = await bridge_send_withdrawal_request(
                   {
                     project_id: project.id,
@@ -161,8 +167,10 @@ export const Withdrawal = (props) => {
                   )
                 );
                 props.statusMsg.success("Withdrawal request submitted");
+                props.showProgress(false);
               } catch (e) {
                 props.statusMsg.error(e);
+                props.showProgress(false);
               }
             }}
           >

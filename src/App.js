@@ -22,6 +22,7 @@ const App = () => {
   const [modal, setModal] = useState(null);
   const [statusMsg, setStatusMsg] = useState(null);
   const [errorMsgIsCopied, setErrorMsgIsCopied] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
 
   class StatusMsgUpdater {
     constructor() {}
@@ -129,6 +130,14 @@ const App = () => {
     }
   };
 
+  const progressElement = () => {
+    if (showProgress) {
+      return <p>{"Loading.."}</p>;
+    } else {
+      return null;
+    }
+  };
+
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -139,6 +148,7 @@ const App = () => {
     return (
       <div>
         <div className="container">
+          {progressElement()}
           {connectButtonElement()}
           {yourAddressElement()}
           <Router>
@@ -151,6 +161,7 @@ const App = () => {
                   <CreateProject
                     myAddress={myAddress}
                     showModal={(modal) => setModal(modal)}
+                    showProgress={(show) => setShowProgress(show)}
                     statusMsg={statusMsgUpdater}
                   />
                 </Route>
@@ -162,6 +173,7 @@ const App = () => {
                       {...routeProps}
                       myAddress={myAddress}
                       showModal={(modal) => setModal(modal)}
+                      showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
                   )}
@@ -174,6 +186,7 @@ const App = () => {
                       {...routeProps}
                       myAddress={myAddress}
                       showModal={(modal) => setModal(modal)}
+                      showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
                   )}
@@ -185,6 +198,7 @@ const App = () => {
                     <Investment
                       {...routeProps}
                       myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
                   )}
@@ -196,6 +210,7 @@ const App = () => {
                     <Withdrawal
                       {...routeProps}
                       myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
                   )}
@@ -207,6 +222,7 @@ const App = () => {
                     <Vote
                       {...routeProps}
                       myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
                   )}

@@ -83,6 +83,7 @@ export const CreateProject = (props) => {
                 bridge_submit_create_project,
               } = await wasmPromise;
 
+              props.showProgress(true);
               console.log("creator: " + props.myAddress);
               try {
                 let createProjectAssetsRes =
@@ -98,6 +99,7 @@ export const CreateProject = (props) => {
                     // it's passed again and used in the next step
                     asset_price: sharePrice,
                   });
+                props.showProgress(false);
 
                 let createAssetSigned = await signTxs(
                   createProjectAssetsRes.to_sign
@@ -106,6 +108,7 @@ export const CreateProject = (props) => {
                   "createAssetSigned: " + JSON.stringify(createAssetSigned)
                 );
 
+                props.showProgress(true);
                 let createProjectRes = await bridge_create_project({
                   name: projectName,
                   creator: props.myAddress,
@@ -119,6 +122,7 @@ export const CreateProject = (props) => {
                 console.log(
                   "createProjectRes: " + JSON.stringify(createProjectRes)
                 );
+                props.showProgress(false);
 
                 let createProjectSigned = await signTxs(
                   createProjectRes.to_sign
@@ -127,6 +131,7 @@ export const CreateProject = (props) => {
                   "createProjectSigned: " + JSON.stringify(createProjectSigned)
                 );
 
+                props.showProgress(true);
                 let submitProjectRes = await bridge_submit_create_project({
                   txs: createProjectSigned,
                   pt: createProjectRes.pt, // passthrough
@@ -137,8 +142,10 @@ export const CreateProject = (props) => {
                 );
 
                 setCreateProjectSuccess(submitProjectRes);
+                props.showProgress(false);
               } catch (e) {
                 props.statusMsg.error(e);
+                props.showProgress(false);
               }
             }}
           >

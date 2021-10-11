@@ -74,16 +74,20 @@ export const Investment = (props) => {
                   bridge_load_investment,
                 } = await wasmPromise;
 
+                props.showProgress(true);
                 let harvestRes = await bridge_harvest({
                   project_id: props.match.params.id,
                   investor_address: props.myAddress,
                 });
                 console.log("harvestRes: " + JSON.stringify(harvestRes));
+                props.showProgress(false);
+
                 let harvestResSigned = await signTxs(harvestRes.to_sign);
                 console.log(
                   "harvestResSigned: " + JSON.stringify(harvestResSigned)
                 );
 
+                props.showProgress(true);
                 let submitHarvestRes = await bridge_submit_harvest({
                   txs: harvestResSigned,
                   pt: harvestRes.pt,
@@ -102,8 +106,10 @@ export const Investment = (props) => {
                 );
 
                 props.statusMsg.success("Profits retrieved");
+                props.showProgress(false);
               } catch (e) {
                 props.statusMsg.error(e);
+                props.showProgress(false);
               }
             }}
           >
