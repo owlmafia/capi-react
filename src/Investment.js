@@ -113,7 +113,60 @@ export const Investment = (props) => {
               }
             }}
           >
-            {"Retrieve"}
+            {"Retrieve profits"}
+          </button>
+          <br />
+          <br />
+          <button
+            disabled={chainInvestmentData.investor_shares_count === 0}
+            onClick={async () => {
+              try {
+                const {
+                  bridge_unstake,
+                  bridge_submit_unstake,
+                  bridge_load_investment,
+                } = await wasmPromise;
+
+                props.showProgress(true);
+                let unstakeRes = await bridge_unstake({
+                  project_id: props.match.params.id,
+                  investor_address: props.myAddress,
+                });
+                console.log("unstakeRes: " + JSON.stringify(unstakeRes));
+                props.showProgress(false);
+
+                let unstakeResSigned = await signTxs(unstakeRes.to_sign);
+                console.log(
+                  "unstakeResSigned: " + JSON.stringify(unstakeResSigned)
+                );
+
+                props.showProgress(true);
+                let submitUnstakeRes = await bridge_submit_unstake({
+                  txs: unstakeResSigned,
+                  pt: unstakeRes.pt,
+                });
+                console.log(
+                  "submitUnstakeRes: " + JSON.stringify(submitUnstakeRes)
+                );
+
+                setChainInvestmentData(
+                  await bridge_load_investment({
+                    project_id: props.match.params.id,
+                    app_id: project.central_app_id,
+                    shares_asset_id: project.share_asset_id,
+                    investor_address: props.myAddress,
+                  })
+                );
+
+                props.statusMsg.success("Shares unstaked");
+                props.showProgress(false);
+              } catch (e) {
+                props.statusMsg.error(e);
+                props.showProgress(false);
+              }
+            }}
+          >
+            {"Unstake shares"}
           </button>
         </div>
       );

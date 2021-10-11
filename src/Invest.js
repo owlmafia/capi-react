@@ -6,23 +6,51 @@ const wasmPromise = import("wasm");
 export const Invest = (props) => {
   const [project, setProject] = useState(null);
   const [buySharesCount, setBuySharesCount] = useState("");
+  const [investorCurrentSharesCount, setInvestorCurrentSharesCount] =
+    useState("");
 
   console.log("props: " + JSON.stringify(props));
 
   useEffect(() => {
     const init = async () => {
       try {
-        const { init_log, bridge_load_project_user_view } = await wasmPromise;
+        const {
+          init_log,
+          bridge_load_project_user_view,
+          bridge_get_user_shares_count,
+        } = await wasmPromise;
 
         await init_log();
         //   console.log("loading project id: " + JSON.stringify(props.match.params));
-        setProject(await bridge_load_project_user_view(props.match.params.id));
+
+        let project = await bridge_load_project_user_view(
+          props.match.params.id
+        );
+        setProject(project);
+
+        if (props.myAddress) {
+          let owned_share_count = await bridge_get_user_shares_count({
+            address: props.myAddress,
+            shares_asset_id: project.share_asset_id,
+          });
+          console.log("Not staked shares: " + owned_share_count);
+          setInvestorCurrentSharesCount(owned_share_count);
+        }
       } catch (e) {
         props.statusMsg.error(e);
       }
     };
     init();
-  }, [props.match.params.id, props.statusMsg]);
+  }, [props.match.params.id, props.statusMsg, props.myAddress]);
+
+  const yourFreeSharesElement = () => {
+    // if (investorCurrentSharesCount !== "") {
+    if (props.myAddress) {
+      return <p>{"Unstaked shares: " + investorCurrentSharesCount}</p>;
+    } else {
+      return null;
+    }
+  };
 
   const projectElement = () => {
     if (project) {
@@ -63,10 +91,10 @@ export const Invest = (props) => {
                         bridge_buy_shares,
                         bridge_submit_buy_shares,
                       } = await wasmPromise;
-
-                      props.showProgress(true);
+                      ///////////////////////////////////
+                      // TODO refactor invest/stake
                       // 1. sign tx for app opt-in
-                      // TODO ensure that both project and address are always set here, is state managed well?
+                      props.showProgress(true);
                       let optInToAppRes = await bridge_opt_in_to_app_if_needed({
                         app_id: "" + project.central_app_id,
                         investor_address: props.myAddress,
@@ -85,6 +113,7 @@ export const Invest = (props) => {
                         "optInToAppSignedOptional: " +
                           JSON.stringify(optInToAppSignedOptional)
                       );
+                      ///////////////////////////////////
 
                       props.showProgress(true);
                       // 2. buy the shares (requires app opt-in for local state)
@@ -156,6 +185,109 @@ export const Invest = (props) => {
                 />
                 <span>{"Shares"}</span>
                 {/* <p>{"(" + (project.sh) + ")"}</p> */}
+
+                <br />
+                {yourFreeSharesElement()}
+                <button
+                  disabled={
+                    props.myAddress === "" || investorCurrentSharesCount === 0
+                  }
+                  onClick={async () => {
+                    try {
+                      const {
+                        bridge_stake,
+                        bridge_submit_stake,
+                        bridge_load_project_user_view,
+                        bridge_opt_in_to_app_if_needed,
+                      } = await wasmPromise;
+
+                      ///////////////////////////////////
+                      // TODO refactor invest/stake
+                      // 1. sign tx for app opt-in
+                      props.showProgress(true);
+                      let optInToAppRes = await bridge_opt_in_to_app_if_needed({
+                        app_id: "" + project.central_app_id,
+                        investor_address: props.myAddress,
+                      });
+                      console.log(
+                        "optInToAppRes: " + JSON.stringify(optInToAppRes)
+                      );
+
+                      var optInToAppSignedOptional = null;
+                      if (optInToAppRes.to_sign != null) {
+                        props.showProgress(false);
+                        optInToAppSignedOptional = await signTx(
+                          optInToAppRes.to_sign
+                        );
+                      }
+                      console.log(
+                        "optInToAppSignedOptional: " +
+                          JSON.stringify(optInToAppSignedOptional)
+                      );
+                      ///////////////////////////////////
+
+                      // 2. stake
+                      props.showProgress(true);
+                      let stakeRes = await bridge_stake({
+                        project_id: props.match.params.id,
+                        investor_address: props.myAddress,
+                      });
+                      console.log("stakeRes: " + JSON.stringify(stakeRes));
+                      props.showProgress(false);
+
+                      let stakeResSigned = await signTxs(stakeRes.to_sign);
+                      console.log(
+                        "stakeResSigned: " + JSON.stringify(stakeResSigned)
+                      );
+
+                      props.showProgress(true);
+
+                      let submitStakeRes = await bridge_submit_stake({
+                        app_opt_in: optInToAppSignedOptional,
+                        txs: stakeResSigned,
+                      });
+                      console.log(
+                        "submitStakeRes: " + JSON.stringify(submitStakeRes)
+                      );
+
+                      setProject(
+                        await bridge_load_project_user_view(
+                          props.match.params.id
+                        )
+                      );
+
+                      props.statusMsg.success("Shares staked");
+                      props.showProgress(false);
+
+                      props.showModal({
+                        title: "Success",
+                        body: (
+                          <p>
+                            <span>{"Your shares are staked."}</span>
+                            <button
+                              onClick={(_) => {
+                                props.history.push({
+                                  pathname:
+                                    "/investment/" + props.match.params.id,
+                                  // TODO ensure project is set when calling this?
+                                  state: project,
+                                });
+                                props.showModal(null);
+                              }}
+                            >
+                              {"Go to your investor site"}
+                            </button>
+                          </p>
+                        ),
+                      });
+                    } catch (e) {
+                      props.statusMsg.error(e);
+                      props.showProgress(false);
+                    }
+                  }}
+                >
+                  {"Stake"}
+                </button>
               </div>
             </div>
           </div>
