@@ -155,7 +155,7 @@ const App = () => {
               {statusMsgElement()}
 
               <Switch>
-                <Route exact path="/" component={Home} />
+                {/* <Route exact path="/" component={Home} /> */}
                 <Route exact path="/create">
                   <CreateProject
                     myAddress={myAddress}
