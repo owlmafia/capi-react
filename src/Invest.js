@@ -22,7 +22,7 @@ export const Invest = (props) => {
       }
     };
     init();
-  }, [props.match.params.id]);
+  }, [props.match.params.id, props.statusMsg]);
 
   const projectElement = () => {
     if (project) {
@@ -30,7 +30,7 @@ export const Invest = (props) => {
         <div>
           <div className="container">
             <p>{"Project name:"}</p>
-            <a href={project.project_link} target="_blank">
+            <a href={project.project_link} target="_blank" rel="noreferrer">
               {project.name}
             </a>
             <p>{"Share supply:"}</p>
@@ -44,6 +44,7 @@ export const Invest = (props) => {
                 project.share_asset_id
               }
               target="_blank"
+              rel="noreferrer"
             >
               {project.share_asset_id}
             </a>

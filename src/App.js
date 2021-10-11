@@ -25,7 +25,6 @@ const App = () => {
   const [showProgress, setShowProgress] = useState(false);
 
   class StatusMsgUpdater {
-    constructor() {}
     success(msg) {
       msg = msg + "";
       console.log(msg);
@@ -93,6 +92,7 @@ const App = () => {
             <a
               href={"https://testnet.algoexplorer.io/address/" + myAddress}
               target="_blank"
+              rel="noreferrer"
             >
               {myAddressDisplay}
             </a>
@@ -106,7 +106,6 @@ const App = () => {
 
   const statusMsgElement = () => {
     if (statusMsg) {
-      var className = "";
       if (statusMsg.type === "success") {
         return <div className="success">{statusMsg.msg}</div>;
       } else if (statusMsg.type === "error") {
@@ -123,7 +122,7 @@ const App = () => {
           </div>
         );
       } else {
-        throw "Invalid status msg type: " + statusMsg.type;
+        throw Error("Invalid status msg type: " + statusMsg.type);
       }
     } else {
       return null;

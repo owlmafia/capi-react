@@ -69,8 +69,8 @@ export const Project = (props) => {
             <p>{"Funds (Algo):"}</p>
             {funds}
             <button
-              disabled={props.myAddress === "" || funds == 0}
-              hidden={viewProject.project.creator_address != props.myAddress}
+              disabled={props.myAddress === "" || funds === 0}
+              hidden={viewProject.project.creator_address !== props.myAddress}
               onClick={(_) => {
                 props.history.push({
                   pathname: "/withdraw/" + viewProject.project.id,
@@ -107,7 +107,7 @@ export const Project = (props) => {
             {customerBalance}
             {/* TODO: substract min balance from funds to drain showed here (WASM) */}
             <button
-              disabled={props.myAddress === "" || customerBalance == 0}
+              disabled={props.myAddress === "" || customerBalance === 0}
               onClick={async (_) => {
                 try {
                   const { bridge_drain, bridge_submit_drain } =
@@ -162,6 +162,7 @@ export const Project = (props) => {
                     viewProject.project.customer_escrow_address
                   }
                   target="_blank"
+                  rel="noreferrer"
                 >
                   {viewProject.project.customer_escrow_address}
                 </a>
@@ -194,7 +195,11 @@ export const Project = (props) => {
               onCopy={onCopyInvestingLink}
             >
               <div>
-                <a href={viewProject.project.invest_link} target="_blank">
+                <a
+                  href={viewProject.project.invest_link}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {"Investing link"}
                 </a>
                 <span className="copy">
@@ -203,7 +208,11 @@ export const Project = (props) => {
               </div>
             </CopyToClipboard>
             <br />
-            <a href={viewProject.project.my_investment_link} target="_blank">
+            <a
+              href={viewProject.project.my_investment_link}
+              target="_blank"
+              rel="noreferrer"
+            >
               {"My investment"}
             </a>
           </div>

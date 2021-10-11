@@ -60,7 +60,7 @@ export const Vote = (props) => {
       }
     };
     init();
-  }, [props.match.params]);
+  }, [props.match.params, props.myAddress]);
 
   return (
     <div>
@@ -68,7 +68,7 @@ export const Vote = (props) => {
         <div>
           <div className="container">
             <p>{"Project name:"}</p>
-            <a href={project.project_link} target="_blank">
+            <a href={project.project_link} target="_blank" rel="noreferrer">
               {project.name}
             </a>
             {userDataElement()}

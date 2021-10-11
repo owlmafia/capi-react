@@ -4,11 +4,10 @@ import { signTxs } from "./MyAlgo";
 const wasmPromise = import("wasm");
 
 export const Withdrawal = (props) => {
-  const project = props.history.location.state;
-
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
   const [withdrawalRequests, setWithdrawalRequests] = useState([]);
+  const [project, setProject] = useState(null);
 
   useEffect(() => {
     const init = async () => {
@@ -20,8 +19,14 @@ export const Withdrawal = (props) => {
         } = await wasmPromise;
         await init_log();
 
+        console.log(
+          "props.history.location.state: " + props.history.location.state
+        );
         // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
-        if (!project) {
+        var project = null;
+        if (props.history.location.state) {
+          project = props.history.location.state;
+        } else {
           project = await bridge_load_project_user_view(props.match.params.id);
         }
 
@@ -31,13 +36,15 @@ export const Withdrawal = (props) => {
         console.log(
           "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
         );
+
+        setProject(project);
         setWithdrawalRequests(withdrawalRequestsRes.requests);
       } catch (e) {
         props.statusMsg.error(e);
       }
     };
     init();
-  }, [project]);
+  }, [props.history.location.state, props.match.params, props.statusMsg]);
 
   const withdrawButtonEl = (req) => {
     if (req.can_withdraw) {
@@ -114,7 +121,7 @@ export const Withdrawal = (props) => {
       return (
         <div>
           <p>{"Project name:"}</p>
-          <a href={project.project_link} target="_blank">
+          <a href={project.project_link} target="_blank" rel="noreferrer">
             {project.name}
           </a>
           <p>{"How much (Algo)?"}</p>

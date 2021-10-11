@@ -16,7 +16,7 @@ export const CreateProjectSuccess = (props) => {
     <div>
       <div className="container">
         <p>{"Project name:"}</p>
-        <a href={props.project.project_link} target="_blank">
+        <a href={props.project.project_link} target="_blank" rel="noreferrer">
           {props.project.name}
         </a>
         <p>{"Share supply:"}</p>
@@ -28,6 +28,7 @@ export const CreateProjectSuccess = (props) => {
             props.project.share_asset_id
           }
           target="_blank"
+          rel="noreferrer"
         >
           {props.project.share_asset_id}
         </a>
@@ -36,7 +37,7 @@ export const CreateProjectSuccess = (props) => {
         <p>
           {"Vote threshold:"}
           <a
-            href="#"
+            href="/#"
             onClick={() =>
               props.showModal({
                 title: "Vote threshold",
@@ -59,7 +60,11 @@ export const CreateProjectSuccess = (props) => {
         <br />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
           <div>
-            <a href={props.project.invest_link} target="_blank">
+            <a
+              href={props.project.invest_link}
+              target="_blank"
+              rel="noreferrer"
+            >
               {"Investing link"}
             </a>
             <span className="copy">

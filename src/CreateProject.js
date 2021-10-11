@@ -6,7 +6,6 @@ const wasmPromise = import("wasm");
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("my1project");
-  const [shareName, setShareName] = useState("foo");
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
@@ -72,7 +71,6 @@ export const CreateProject = (props) => {
             disabled={
               props.myAddress === "" ||
               projectName === "" ||
-              shareName === "" ||
               shareCount === "" ||
               sharePrice === ""
             }

@@ -46,7 +46,7 @@ export const Investment = (props) => {
       }
     };
     init();
-  }, [props.match.params, props.myAddress]);
+  }, [props.match.params, props.myAddress, props.statusMsg]);
 
   const userElement = () => {
     if (chainInvestmentData) {
@@ -65,7 +65,7 @@ export const Investment = (props) => {
           <p>{chainInvestmentData.investor_harvestable_amount}</p>
           <button
             className="harvest-button"
-            disabled={chainInvestmentData.investor_harvestable_amount == 0}
+            disabled={chainInvestmentData.investor_harvestable_amount === 0}
             onClick={async () => {
               try {
                 const {
@@ -140,7 +140,7 @@ export const Investment = (props) => {
       return (
         <div>
           <p>{"Project name:"}</p>
-          <a href={project.project_link} target="_blank">
+          <a href={project.project_link} target="_blank" rel="noreferrer">
             {project.name}
           </a>
           {userElement()}
