@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
-import { signTxs } from "./MyAlgo";
+import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
