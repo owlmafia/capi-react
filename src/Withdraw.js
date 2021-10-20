@@ -65,6 +65,7 @@ export const Withdrawal = (props) => {
                   project_id: project.id,
                   sender: props.myAddress,
                   withdrawal_amount: req.amount_not_formatted,
+                  slot_id: req.slot_id,
                 });
                 console.log("withdrawRes: " + JSON.stringify(withdrawRes));
                 props.showProgress(false);
@@ -148,31 +149,54 @@ export const Withdrawal = (props) => {
             disabled={props.myAddress === ""}
             onClick={async () => {
               try {
-                const { bridge_send_withdrawal_request } = await wasmPromise;
+                const {
+                  bridge_init_withdrawal_request,
+                  bridge_submit_init_withdrawal_request,
+                } = await wasmPromise;
 
                 props.showProgress(true);
-                let withdrawalRequestRes = await bridge_send_withdrawal_request(
-                  {
+                let initWithdrawalRequestRes =
+                  await bridge_init_withdrawal_request({
                     project_id: project.id,
                     sender: props.myAddress,
                     withdrawal_amount: withdrawalAmount,
-                    withdrawal_descr: withdrawalDescr,
-                  }
-                );
+                  });
                 // TODO update list with returned withdrawals list
                 console.log(
-                  "withdrawalRequestRes: " +
-                    JSON.stringify(withdrawalRequestRes)
+                  "initWithdrawalRequestRes: " +
+                    JSON.stringify(initWithdrawalRequestRes)
+                );
+                props.showProgress(false);
+
+                let initWithdrawalRequestSigned = await signTxs(
+                  initWithdrawalRequestRes.to_sign
+                );
+                console.log(
+                  "initWithdrawalRequestSigned: " + initWithdrawalRequestSigned
+                );
+
+                props.showProgress(true);
+                let submitInitWithdrawalRequestRes =
+                  await bridge_submit_init_withdrawal_request({
+                    txs: initWithdrawalRequestSigned,
+                    pt: initWithdrawalRequestRes.pt,
+                    description: withdrawalDescr,
+                  });
+
+                console.log(
+                  "submitInitWithdrawalRequestRes: " +
+                    JSON.stringify(submitInitWithdrawalRequestRes)
                 );
 
                 // we just prepend the added request in js
                 // can consider doing this in the server later to make sure list/page is up to date,
                 // prob not worth it though, as there's only one person making requests at a time
                 setWithdrawalRequests(
-                  [withdrawalRequestRes.saved_request].concat(
+                  [submitInitWithdrawalRequestRes.saved_request].concat(
                     withdrawalRequests
                   )
                 );
+
                 props.statusMsg.success("Withdrawal request submitted");
                 props.showProgress(false);
               } catch (e) {

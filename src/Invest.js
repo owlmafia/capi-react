@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { signTxs, signTx } from "./MyAlgo";
+import { signTxs } from "./MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -87,7 +87,7 @@ export const Invest = (props) => {
                   onClick={async (_) => {
                     try {
                       const {
-                        bridge_opt_in_to_app_if_needed,
+                        bridge_opt_in_to_apps_if_needed,
                         bridge_buy_shares,
                         bridge_submit_buy_shares,
                       } = await wasmPromise;
@@ -95,23 +95,25 @@ export const Invest = (props) => {
                       // TODO refactor invest/stake
                       // 1. sign tx for app opt-in
                       props.showProgress(true);
-                      let optInToAppRes = await bridge_opt_in_to_app_if_needed({
-                        app_id: "" + project.central_app_id,
-                        investor_address: props.myAddress,
-                      });
+                      let optInToAppsRes =
+                        await bridge_opt_in_to_apps_if_needed({
+                          app_id: "" + project.central_app_id,
+                          slot_ids: project.slot_ids,
+                          investor_address: props.myAddress,
+                        });
                       console.log(
-                        "optInToAppRes: " + JSON.stringify(optInToAppRes)
+                        "optInToAppsRes: " + JSON.stringify(optInToAppsRes)
                       );
-                      var optInToAppSignedOptional = null;
-                      if (optInToAppRes.to_sign != null) {
+                      var optInToAppsSignedOptional = null;
+                      if (optInToAppsRes.to_sign != null) {
                         props.showProgress(false);
-                        optInToAppSignedOptional = await signTx(
-                          optInToAppRes.to_sign
+                        optInToAppsSignedOptional = await signTxs(
+                          optInToAppsRes.to_sign
                         );
                       }
                       console.log(
-                        "optInToAppSignedOptional: " +
-                          JSON.stringify(optInToAppSignedOptional)
+                        "optInToAppsSignedOptional: " +
+                          JSON.stringify(optInToAppsSignedOptional)
                       );
                       ///////////////////////////////////
 
@@ -122,7 +124,7 @@ export const Invest = (props) => {
                         project_id: props.match.params.id,
                         share_count: buySharesCount,
                         investor_address: props.myAddress,
-                        app_opt_in_tx: optInToAppSignedOptional,
+                        app_opt_ins: optInToAppsSignedOptional,
                       });
                       console.log("buyRes: " + JSON.stringify(buyRes));
                       props.showProgress(false);
@@ -198,31 +200,34 @@ export const Invest = (props) => {
                         bridge_stake,
                         bridge_submit_stake,
                         bridge_load_project_user_view,
-                        bridge_opt_in_to_app_if_needed,
+                        bridge_opt_in_to_apps_if_needed,
                       } = await wasmPromise;
 
                       ///////////////////////////////////
                       // TODO refactor invest/stake
                       // 1. sign tx for app opt-in
                       props.showProgress(true);
-                      let optInToAppRes = await bridge_opt_in_to_app_if_needed({
-                        app_id: "" + project.central_app_id,
-                        investor_address: props.myAddress,
-                      });
+                      let optInToAppRes = await bridge_opt_in_to_apps_if_needed(
+                        {
+                          app_id: "" + project.central_app_id,
+                          slot_ids: project.slot_ids,
+                          investor_address: props.myAddress,
+                        }
+                      );
                       console.log(
                         "optInToAppRes: " + JSON.stringify(optInToAppRes)
                       );
 
-                      var optInToAppSignedOptional = null;
+                      var optInToAppsSignedOptional = null;
                       if (optInToAppRes.to_sign != null) {
                         props.showProgress(false);
-                        optInToAppSignedOptional = await signTx(
+                        optInToAppsSignedOptional = await signTxs(
                           optInToAppRes.to_sign
                         );
                       }
                       console.log(
-                        "optInToAppSignedOptional: " +
-                          JSON.stringify(optInToAppSignedOptional)
+                        "optInToAppsSignedOptional: " +
+                          JSON.stringify(optInToAppsSignedOptional)
                       );
                       ///////////////////////////////////
 
@@ -243,7 +248,7 @@ export const Invest = (props) => {
                       props.showProgress(true);
 
                       let submitStakeRes = await bridge_submit_stake({
-                        app_opt_in: optInToAppSignedOptional,
+                        app_opt_ins: optInToAppsSignedOptional,
                         txs: stakeResSigned,
                       });
                       console.log(

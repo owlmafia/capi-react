@@ -96,6 +96,7 @@ export const Vote = (props) => {
                           props.showProgress(true);
                           let voteRes = await bridge_vote({
                             project_id: props.match.params.id,
+                            slot_id: req.slot_id,
                             voter_address: props.myAddress,
                           });
                           // TODO update list with returned withdrawals list
@@ -109,6 +110,7 @@ export const Vote = (props) => {
                           props.showProgress(true);
                           let submitVoteRes = await bridge_submit_vote({
                             project_id: props.match.params.id,
+                            slot_id: req.slot_id,
                             txs: voteSigned,
                             pt: voteRes.pt,
                           });
