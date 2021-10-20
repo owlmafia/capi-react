@@ -45,7 +45,7 @@ const App = () => {
 
   const statusMsgUpdater = new StatusMsgUpdater();
 
-  const connectButtonElement = () => {
+  const connectButton = () => {
     if (myAddress === "") {
       return (
         <button
@@ -82,7 +82,7 @@ const App = () => {
     }
   };
 
-  const yourAddressElement = () => {
+  const yourAddressView = () => {
     if (myAddress !== "") {
       return (
         <div>
@@ -103,7 +103,7 @@ const App = () => {
     }
   };
 
-  const statusMsgElement = () => {
+  const statusMsgView = () => {
     if (statusMsg) {
       if (statusMsg.type === "success") {
         return <div className="success">{statusMsg.msg}</div>;
@@ -128,7 +128,7 @@ const App = () => {
     }
   };
 
-  const progressElement = () => {
+  const progressView = () => {
     if (showProgress) {
       return <p>{"Loading.."}</p>;
     } else {
@@ -146,12 +146,12 @@ const App = () => {
     return (
       <div>
         <div className="container">
-          {progressElement()}
-          {connectButtonElement()}
-          {yourAddressElement()}
+          {progressView()}
+          {connectButton()}
+          {yourAddressView()}
           <Router>
             <div id="wrapper">
-              {statusMsgElement()}
+              {statusMsgView()}
 
               <Switch>
                 {/* <Route exact path="/" component={Home} /> */}

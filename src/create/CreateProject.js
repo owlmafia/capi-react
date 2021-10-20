@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
-import { signTxs } from "../MyAlgo";
-
-const wasmPromise = import("wasm");
+import { init, createProject } from "./controller";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("my1project");
@@ -13,15 +11,10 @@ export const CreateProject = (props) => {
   console.log("props: " + JSON.stringify(props));
 
   useEffect(() => {
-    const init = async () => {
-      const { init_log } = await wasmPromise;
-      await init_log();
-    };
-
     init();
   }, []);
 
-  const formElement = () => {
+  const formView = () => {
     if (props.myAddress) {
       return (
         <div>
@@ -75,76 +68,15 @@ export const CreateProject = (props) => {
               sharePrice === ""
             }
             onClick={async () => {
-              const {
-                bridge_create_project_assets_txs,
-                bridge_create_project,
-                bridge_submit_create_project,
-              } = await wasmPromise;
-
-              props.showProgress(true);
-              console.log("creator: " + props.myAddress);
-              try {
-                let createProjectAssetsRes =
-                  await bridge_create_project_assets_txs({
-                    creator: props.myAddress,
-                    // token_name: shareName,
-                    token_name:
-                      projectName.length > 7
-                        ? projectName.substring(0, 7)
-                        : projectName,
-                    count: shareCount,
-                    // passed here only for validation (so it's validated before signing the asset txs).
-                    // it's passed again and used in the next step
-                    asset_price: sharePrice,
-                  });
-                props.showProgress(false);
-
-                let createAssetSigned = await signTxs(
-                  createProjectAssetsRes.to_sign
-                );
-                console.log(
-                  "createAssetSigned: " + JSON.stringify(createAssetSigned)
-                );
-
-                props.showProgress(true);
-                let createProjectRes = await bridge_create_project({
-                  name: projectName,
-                  creator: props.myAddress,
-                  asset_specs: createProjectAssetsRes.asset_spec, // passthrough
-                  asset_price: sharePrice,
-                  // for now harcoded to keep settings easy to understand
-                  // it probably should be under "advanced" or similar later
-                  vote_threshold: "70",
-                  create_assets_signed_txs: createAssetSigned,
-                });
-                console.log(
-                  "createProjectRes: " + JSON.stringify(createProjectRes)
-                );
-                props.showProgress(false);
-
-                let createProjectSigned = await signTxs(
-                  createProjectRes.to_sign
-                );
-                console.log(
-                  "createProjectSigned: " + JSON.stringify(createProjectSigned)
-                );
-
-                props.showProgress(true);
-                let submitProjectRes = await bridge_submit_create_project({
-                  txs: createProjectSigned,
-                  pt: createProjectRes.pt, // passthrough
-                });
-
-                console.log(
-                  "submitProjectRes: " + JSON.stringify(submitProjectRes)
-                );
-
-                setCreateProjectSuccess(submitProjectRes);
-                props.showProgress(false);
-              } catch (e) {
-                props.statusMsg.error(e);
-                props.showProgress(false);
-              }
+              await createProject(
+                props.myAddress,
+                props.showProgress,
+                props.statusMsg,
+                projectName,
+                shareCount,
+                sharePrice,
+                setCreateProjectSuccess
+              );
             }}
           >
             {"Submit project"}
@@ -156,7 +88,7 @@ export const CreateProject = (props) => {
     }
   };
 
-  const bodyElement = () => {
+  const bodyView = () => {
     if (createProjectSuccess) {
       return (
         <CreateProjectSuccess
@@ -165,13 +97,13 @@ export const CreateProject = (props) => {
         />
       );
     } else {
-      return formElement();
+      return formView();
     }
   };
 
   return (
     <div>
-      <div className="container">{bodyElement()}</div>
+      <div className="container">{bodyView()}</div>
     </div>
   );
 };

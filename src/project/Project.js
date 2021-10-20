@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { signTxs } from "../MyAlgo";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
+import { init, drain } from "./controller";
 
 var QRCode = require("qrcode.react");
-
-const wasmPromise = import("wasm");
 
 export const Project = (props) => {
   const [viewProject, setViewProject] = useState(null);
@@ -40,22 +38,11 @@ export const Project = (props) => {
   };
 
   useEffect(() => {
-    const init = async () => {
-      const { init_log, bridge_view_project } = await wasmPromise;
-      await init_log();
-      //   console.log("loading project id: " + JSON.stringify(props.match.params));
-      let project = await bridge_view_project({
-        project_id: props.match.params.id,
-      });
-      setViewProject(project);
-      // these are overwritten when draining, so we keep them separate
-      setFunds(project.funds);
-      setCustomerBalance(project.funds_to_drain);
-    };
-    init();
+    //   console.log("loading project id: " + JSON.stringify(props.match.params));
+    init(props.match.params.id, setViewProject, setFunds, setCustomerBalance);
   }, [props.match.params.id]);
 
-  const projectElement = () => {
+  const projectView = () => {
     if (viewProject) {
       return (
         <div>
@@ -109,42 +96,14 @@ export const Project = (props) => {
             <button
               disabled={props.myAddress === "" || customerBalance === 0}
               onClick={async (_) => {
-                try {
-                  const { bridge_drain, bridge_submit_drain } =
-                    await wasmPromise;
-
-                  props.showProgress(true);
-
-                  let drainRes = await bridge_drain({
-                    project_id: props.match.params.id,
-                    drainer_address: props.myAddress,
-                  });
-                  console.log("drainRes: " + JSON.stringify(drainRes));
-                  props.showProgress(false);
-
-                  let drainResSigned = await signTxs(drainRes.to_sign);
-                  console.log(
-                    "drainResSigned: " + JSON.stringify(drainResSigned)
-                  );
-
-                  props.showProgress(true);
-                  let submitDrainRes = await bridge_submit_drain({
-                    txs: drainResSigned,
-                    pt: drainRes.pt,
-                  });
-                  console.log(
-                    "submitDrainRes: " + JSON.stringify(submitDrainRes)
-                  );
-                  setFunds(submitDrainRes.new_central_escrow_balance);
-                  setCustomerBalance(
-                    submitDrainRes.new_customer_escrow_balance
-                  );
-                  props.statusMsg.success("Funds transferred");
-                  props.showProgress(false);
-                } catch (e) {
-                  props.statusMsg.error(e);
-                  props.showProgress(false);
-                }
+                await drain(
+                  props.myAddress,
+                  props.showProgress,
+                  props.statusMsg,
+                  props.match.params.id,
+                  setFunds,
+                  setCustomerBalance
+                );
               }}
             >
               {"Transfer to funds"}
@@ -225,7 +184,7 @@ export const Project = (props) => {
 
   return (
     <div>
-      <div className="container">{projectElement()}</div>
+      <div className="container">{projectView()}</div>
     </div>
   );
 };

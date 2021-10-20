@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { signTxs } from "../MyAlgo";
-
-const wasmPromise = import("wasm");
+import { init, vote } from "./controller";
 
 export const Vote = (props) => {
   const [project, setProject] = useState([]);
   const [withdrawalRequests, setWithdrawalRequests] = useState([]);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
 
-  const userDataElement = () => {
-    console.log("Rendering: " + userDataElement);
+  const userDataView = () => {
+    console.log("Rendering: " + userDataView);
     if (chainInvestmentData) {
       return (
         <div>
@@ -23,43 +21,14 @@ export const Vote = (props) => {
   };
 
   useEffect(() => {
-    const init = async () => {
-      const {
-        init_log,
-        bridge_load_withdrawal_requests,
-        bridge_load_project_user_view,
-        bridge_load_investment,
-      } = await wasmPromise;
-      await init_log();
-
-      // TODO (later) in parallel (e.g. get project, withdrawal reqs)? parallelize in rust? or here?
-
-      console.log("loading project id: " + JSON.stringify(props.match.params));
-      let project = await bridge_load_project_user_view(props.match.params.id);
-      console.log("project: " + JSON.stringify(project));
-      setProject(project);
-
-      const withdrawalRequestsRes = await bridge_load_withdrawal_requests({
-        project_id: props.match.params.id,
-      });
-      console.log(
-        "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
-      );
-      setWithdrawalRequests(withdrawalRequestsRes.requests);
-
-      if (props.myAddress) {
-        console.log("props.myAddress: " + props.myAddress);
-        let investorData = await bridge_load_investment({
-          project_id: props.match.params.id,
-          app_id: project.central_app_id,
-          shares_asset_id: project.share_asset_id,
-          investor_address: props.myAddress,
-        });
-        console.log("investorData: " + JSON.stringify(investorData));
-        setChainInvestmentData(investorData);
-      }
-    };
-    init();
+    console.log("loading project id: " + JSON.stringify(props.match.params));
+    init(
+      props.match.params.id,
+      props.myAddress,
+      setProject,
+      setWithdrawalRequests,
+      setChainInvestmentData
+    );
   }, [props.match.params, props.myAddress]);
 
   return (
@@ -71,7 +40,7 @@ export const Vote = (props) => {
             <a href={project.project_link} target="_blank" rel="noreferrer">
               {project.name}
             </a>
-            {userDataElement()}
+            {userDataView()}
             <div className="withdrawal-cell-container">
               {withdrawalRequests &&
                 withdrawalRequests.map((req) => (
@@ -89,41 +58,13 @@ export const Vote = (props) => {
                     <button
                       disabled={props.myAddress === ""}
                       onClick={async () => {
-                        try {
-                          const { bridge_vote, bridge_submit_vote } =
-                            await wasmPromise;
-
-                          props.showProgress(true);
-                          let voteRes = await bridge_vote({
-                            project_id: props.match.params.id,
-                            slot_id: req.slot_id,
-                            voter_address: props.myAddress,
-                          });
-                          // TODO update list with returned withdrawals list
-                          console.log("voteRes: " + JSON.stringify(voteRes));
-                          props.showProgress(false);
-
-                          let voteSigned = await signTxs(voteRes.to_sign);
-
-                          console.log("voteSigned: " + voteSigned);
-
-                          props.showProgress(true);
-                          let submitVoteRes = await bridge_submit_vote({
-                            project_id: props.match.params.id,
-                            slot_id: req.slot_id,
-                            txs: voteSigned,
-                            pt: voteRes.pt,
-                          });
-
-                          console.log(
-                            "submitVoteRes: " + JSON.stringify(submitVoteRes)
-                          );
-                          props.statusMsg.success("Voted!");
-                          props.showProgress(false);
-                        } catch (e) {
-                          props.statusMsg.error(e);
-                          props.showProgress(false);
-                        }
+                        await vote(
+                          props.myAddress,
+                          props.showProgress,
+                          props.statusMsg,
+                          props.match.params.id,
+                          req
+                        );
                       }}
                     >
                       {"Vote"}
