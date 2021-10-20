@@ -17,6 +17,9 @@ export const init = async (
   // these are overwritten when draining, so we keep them separate
   setFunds(project.funds);
   setCustomerBalance(project.funds_to_drain);
+
+  // return data for immediate consumption on the UI. TODO probably it's better to attach a listener to the hook or similar
+  return project;
 };
 
 export const drain = async (

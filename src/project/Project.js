@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import { init, drain } from "./controller";
+import { ProjectName } from "../ProjectName";
 
 var QRCode = require("qrcode.react");
 
@@ -9,6 +10,8 @@ export const Project = (props) => {
   const [viewProject, setViewProject] = useState(null);
   const [funds, setFunds] = useState(null);
   const [customerBalance, setCustomerBalance] = useState(null);
+
+  const [customerAddressDisplay, setCustomerAddressDisplay] = useState("");
 
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
   const [paymentLinkIsCopied, setPaymentLinkIsCopied] = useState(false);
@@ -38,8 +41,25 @@ export const Project = (props) => {
   };
 
   useEffect(() => {
-    //   console.log("loading project id: " + JSON.stringify(props.match.params));
-    init(props.match.params.id, setViewProject, setFunds, setCustomerBalance);
+    async function asyncInit() {
+      //   console.log("loading project id: " + JSON.stringify(props.match.params));
+      const viewProject = await init(
+        props.match.params.id,
+        setViewProject,
+        setFunds,
+        setCustomerBalance
+      );
+
+      const customerAddress = viewProject.project.customer_escrow_address;
+      const short_chars = 3;
+      const leading = customerAddress.substring(0, short_chars);
+      const trailing = customerAddress.substring(
+        customerAddress.length - short_chars
+      );
+      const shortAddress = leading + "..." + trailing;
+      setCustomerAddressDisplay(shortAddress);
+    }
+    asyncInit();
   }, [props.match.params.id]);
 
   const projectView = () => {
@@ -47,14 +67,19 @@ export const Project = (props) => {
       return (
         <div>
           <div className="container">
-            <p>{"Project name:"}</p>
-            {viewProject.project.name}
-            <p>{"Total share supply:"}</p>
-            {viewProject.shares_supply}
-            <p>{"Shares for sale:"}</p>
-            {viewProject.shares_available}
-            <p>{"Funds (Algo):"}</p>
-            {funds}
+            <ProjectName project={viewProject.project} />
+            <p>
+              <span className="key-val-key">{"Shares available:"}</span>
+              <span className="key-val-val">
+                {viewProject.shares_available +
+                  " / " +
+                  viewProject.shares_supply}
+              </span>
+            </p>
+            <p>
+              <span className="key-val-key">{"Funds (Algo):"}</span>
+              <span className="key-val-val">{funds}</span>
+            </p>
             <button
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewProject.project.creator_address !== props.myAddress}
@@ -67,7 +92,27 @@ export const Project = (props) => {
             >
               {"Withdraw"}
             </button>
-            <p>{"Outstanding funds (Algo):"}</p>
+            <p>
+              <span className="key-val-key">{"Outstanding funds (Algo):"}</span>
+              <span className="key-val-val">{customerBalance}</span>
+            </p>
+            <button
+              // className="rightButton"
+              disabled={props.myAddress === "" || customerBalance === 0}
+              hidden={props.myAddress === ""}
+              onClick={async (_) => {
+                await drain(
+                  props.myAddress,
+                  props.showProgress,
+                  props.statusMsg,
+                  props.match.params.id,
+                  setFunds,
+                  setCustomerBalance
+                );
+              }}
+            >
+              {"Transfer to funds"}
+            </button>
             {/* <p>
               {"Outstanding funds:"}
               <a
@@ -91,26 +136,36 @@ export const Project = (props) => {
                 ?
               </a>
             </p> */}
-            {customerBalance}
             {/* TODO: substract min balance from funds to drain showed here (WASM) */}
-            <button
-              disabled={props.myAddress === "" || customerBalance === 0}
-              onClick={async (_) => {
-                await drain(
-                  props.myAddress,
-                  props.showProgress,
-                  props.statusMsg,
-                  props.match.params.id,
-                  setFunds,
-                  setCustomerBalance
-                );
-              }}
-            >
-              {"Transfer to funds"}
-            </button>
-            <p>{"Customer payment address:"}</p>
+            <div className="sectionSpacer" />
+            <p className="subtitle">{"Customer payment data"}</p>
+            <p>
+              <span className="key-val-key">{"Address:"}</span>
+              <span className="key-val-val">
+                <CopyToClipboard
+                  text={viewProject.project.customer_escrow_address}
+                  onCopy={onCopyPaymentAddress}
+                >
+                  <span>
+                    <a
+                      href={
+                        "https://testnet.algoexplorer.io/address/" +
+                        viewProject.project.customer_escrow_address
+                      }
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {customerAddressDisplay}
+                    </a>
+                    <span className="copy">
+                      {paymentAddressIsCopied ? "copied!" : <MdContentCopy />}
+                    </span>
+                  </span>
+                </CopyToClipboard>
+              </span>
+            </p>
 
-            <CopyToClipboard
+            {/* <CopyToClipboard
               text={viewProject.project.customer_escrow_address}
               onCopy={onCopyPaymentAddress}
             >
@@ -130,30 +185,29 @@ export const Project = (props) => {
                   {paymentAddressIsCopied ? "copied!" : <MdContentCopy />}
                 </span>
               </div>
-            </CopyToClipboard>
+            </CopyToClipboard> */}
 
             <CopyToClipboard
               text={viewProject.customer_payment_deeplink}
               onCopy={onCopyPaymentLink}
             >
               <div>
-                {"Customer payment link"}
+                {"Payment link"}
                 <span className="copy">
                   {paymentLinkIsCopied ? "copied!" : <MdContentCopy />}
                 </span>
               </div>
             </CopyToClipboard>
-
-            <br />
-            <p>{"Customer payment QR code:"}</p>
+            <p>{"Payment QR code:"}</p>
             <QRCode value={viewProject.customer_payment_deeplink} />
-            <br />
 
+            <div className="sectionSpacer" />
+            <p className="subtitle">{"Investor links"}</p>
             <CopyToClipboard
               text={viewProject.project.invest_link}
               onCopy={onCopyInvestingLink}
             >
-              <div>
+              <p>
                 <a
                   href={viewProject.project.invest_link}
                   target="_blank"
@@ -164,9 +218,8 @@ export const Project = (props) => {
                 <span className="copy">
                   {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
                 </span>
-              </div>
+              </p>
             </CopyToClipboard>
-            <br />
             <a
               href={viewProject.project.my_investment_link}
               target="_blank"
@@ -175,6 +228,7 @@ export const Project = (props) => {
               {"My investment"}
             </a>
           </div>
+          <div className="sectionSpacer" />
         </div>
       );
     } else {

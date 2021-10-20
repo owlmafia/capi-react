@@ -200,6 +200,7 @@ export const stake = async (
               showModal(null);
             }}
           >
+            <div className="sectionSpacer" />
             {"Go to your investor site"}
           </button>
         </p>

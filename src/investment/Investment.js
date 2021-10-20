@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { init, retrieveProfits, unstake } from "./controller";
+import { ProjectName } from "../ProjectName";
 
 export const Investment = (props) => {
   const [project, setProject] = useState(null);
@@ -22,20 +23,34 @@ export const Investment = (props) => {
     if (chainInvestmentData) {
       return (
         <div>
-          <div>{"Your shares:"}</div>
-          <p>{chainInvestmentData.investor_shares_count}</p>
+          <p>
+            <span className="key-val-key">{"Your shares:"}</span>
+            <span className="key-val-val">
+              {chainInvestmentData.investor_shares_count}
+            </span>
+          </p>
+          <p>
+            <span className="key-val-key">{"Your voting power:"}</span>
+            <span className="key-val-val">
+              {chainInvestmentData.investor_percentage}
+            </span>
+          </p>
+          <p>
+            <span className="key-val-key">{"Retrieved profits (Algo):"}</span>
+            <span className="key-val-val">
+              {chainInvestmentData.investor_already_retrieved_amount}
+            </span>
+          </p>
+          <p>
+            <span className="key-val-key">{"Retrievable profits (Algo):"}</span>
+            <span className="key-val-val">
+              {chainInvestmentData.investor_harvestable_amount}
+            </span>
+          </p>
 
-          <div>{"Your voting power:"}</div>
-          <p>{chainInvestmentData.investor_percentage}</p>
-
-          <div>{"Retrieved profits (Algo):"}</div>
-          <p>{chainInvestmentData.investor_already_retrieved_amount}</p>
-
-          <div>{"Retrievable profits (Algo):"}</div>
-          <p>{chainInvestmentData.investor_harvestable_amount}</p>
           <button
             className="harvest-button"
-            disabled={chainInvestmentData.investor_harvestable_amount === 0}
+            hidden={chainInvestmentData.investor_harvestable_amount === "0"}
             onClick={async () => {
               await retrieveProfits(
                 props.myAddress,
@@ -52,7 +67,7 @@ export const Investment = (props) => {
           <br />
           <br />
           <button
-            disabled={chainInvestmentData.investor_shares_count === 0}
+            disabled={chainInvestmentData.investor_shares_count === "0"}
             onClick={async () => {
               await unstake(
                 props.myAddress,
@@ -90,10 +105,7 @@ export const Investment = (props) => {
     if (project) {
       return (
         <div>
-          <p>{"Project name:"}</p>
-          <a href={project.project_link} target="_blank" rel="noreferrer">
-            {project.name}
-          </a>
+          <ProjectName project={project} />
           {userView()}
           {youAreNotInvestedView()}
         </div>

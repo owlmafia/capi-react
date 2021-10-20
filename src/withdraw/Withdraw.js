@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { init, withdraw, addRequest } from "./controller";
+import { ProjectName } from "../ProjectName";
+import { WithdrawalRequest } from "../WithdrawalRequest";
 
 export const Withdrawal = (props) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
@@ -20,25 +22,29 @@ export const Withdrawal = (props) => {
     );
   }, [props.history.location.state, props.match.params, props.statusMsg]);
 
-  const withdrawButtonView = (req) => {
-    if (req.can_withdraw) {
+  const withdrawalRequestsView = () => {
+    if (withdrawalRequests) {
       return (
-        <div>
-          <button
-            disabled={req.votes < project.vote_threshold}
-            onClick={async () => {
-              await withdraw(
-                props.myAddress,
-                props.showProgress,
-                props.statusMsg,
-                props.match.params.id,
-                req,
-                setWithdrawalRequests
-              );
-            }}
-          >
-            {"Withdraw"}
-          </button>
+        <div className="withdrawal-cell-container">
+          <div className="subtitle">{"Requests"}</div>
+          {withdrawalRequests &&
+            withdrawalRequests.map((req) => (
+              <WithdrawalRequest
+                req={req}
+                buttonDisabled={() => req.votes < project.vote_threshold}
+                onButtonClick={async () => {
+                  await withdraw(
+                    props.myAddress,
+                    props.showProgress,
+                    props.statusMsg,
+                    props.match.params.id,
+                    req,
+                    setWithdrawalRequests
+                  );
+                }}
+                buttonLabel={"Withdraw"}
+              />
+            ))}
         </div>
       );
     } else {
@@ -50,24 +56,21 @@ export const Withdrawal = (props) => {
     if (project) {
       return (
         <div>
-          <p>{"Project name:"}</p>
-          <a href={project.project_link} target="_blank" rel="noreferrer">
-            {project.name}
-          </a>
-          <p>{"How much (Algo)?"}</p>
+          <ProjectName project={project} />
+          <div>{"How much (Algo)?"}</div>
           <input
             placeholder=""
-            className="address-input"
+            className="full-width-input"
             size="64"
             value={withdrawalAmount}
             onChange={(event) => {
               setWithdrawalAmount(event.target.value);
             }}
           />
-          <p>{"For what?"}</p>
+          <div>{"For what?"}</div>
           <input
             placeholder=""
-            className="address-input"
+            className="full-width-input"
             size="64"
             value={withdrawalDescr}
             onChange={(event) => {
@@ -89,26 +92,10 @@ export const Withdrawal = (props) => {
               );
             }}
           >
-            {"Submit"}
+            {"Request funds"}
           </button>
-          <div className="withdrawal-cell-container">
-            {withdrawalRequests &&
-              withdrawalRequests.map((req) => (
-                // TODO db id maybe? - or ensure backend uses this as unique
-                <div
-                  key={req.date + req.description}
-                  className="withdrawal-cell"
-                >
-                  {/* maybe format the date in JS? not sure we want to internationalize wasm */}
-                  <p>{"Date: " + req.date}</p>
-                  <p>{"Amount: " + req.amount}</p>
-                  <p>{"Description: " + req.description}</p>
-                  <p>{"Votes: " + req.votes}</p>
-                  <p>{"Complete: " + req.complete}</p>
-                  {withdrawButtonView(req)}
-                </div>
-              ))}
-          </div>
+
+          {withdrawalRequestsView()}
         </div>
       );
     } else {

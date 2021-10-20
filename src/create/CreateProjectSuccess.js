@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
+import { ProjectName } from "../ProjectName";
 
 export const CreateProjectSuccess = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
@@ -15,49 +16,58 @@ export const CreateProjectSuccess = (props) => {
   return (
     <div>
       <div className="container">
-        <p>{"Project name:"}</p>
-        <a href={props.project.project_link} target="_blank" rel="noreferrer">
-          {props.project.name}
-        </a>
-        <p>{"Share supply:"}</p>
-        {props.project.share_supply}
-        <p>{"Share asset id:"}</p>
-        <a
-          href={
-            "https://testnet.algoexplorer.io/asset/" +
-            props.project.share_asset_id
-          }
-          target="_blank"
-          rel="noreferrer"
-        >
-          {props.project.share_asset_id}
-        </a>
-        <p>{"Share price per unit:"}</p>
-        {props.project.share_price}
+        <ProjectName project={props.project} />
         <p>
-          {"Vote threshold:"}
-          <a
-            href="/#"
-            onClick={() =>
-              props.showModal({
-                title: "Vote threshold",
-                body: (
-                  <div>
-                    <p>
-                      {
-                        "Votes % (relative to total share supply) required to withdraw funds."
-                      }
-                    </p>
-                  </div>
-                ),
-              })
-            }
-          >
-            ?
-          </a>
+          <span className="key-val-key">{"Share supply:"}</span>
+          <span className="key-val-val">{props.project.share_supply}</span>
         </p>
-        {props.project.vote_threshold}
-        <br />
+        <p>
+          <span className="key-val-key">{"Share price:"}</span>
+          <span className="key-val-val">{props.project.share_price}</span>
+        </p>
+        <p>
+          <span className="key-val-key">{"Share asset id:"}</span>
+          <span className="key-val-val">
+            {" "}
+            <a
+              href={
+                "https://testnet.algoexplorer.io/asset/" +
+                props.project.share_asset_id
+              }
+              target="_blank"
+              rel="noreferrer"
+            >
+              {props.project.share_asset_id}
+            </a>
+          </span>
+        </p>
+        <p>
+          <span className="key-val-key">
+            {"Vote threshold"}
+            <a
+              href="#"
+              onClick={() =>
+                props.showModal({
+                  title: "Vote threshold",
+                  body: (
+                    <div>
+                      <p>
+                        {
+                          "Votes % (relative to total share supply) required to withdraw funds."
+                        }
+                      </p>
+                    </div>
+                  ),
+                })
+              }
+            >
+              ?:
+            </a>
+          </span>
+          <span className="key-val-val">{props.project.vote_threshold}</span>
+        </p>
+
+        <div className="sectionSpacer" />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
           <div>
             <a

@@ -68,6 +68,7 @@ export const createProject = async (
 
     setCreateProjectSuccess(submitProjectRes);
     showProgress(false);
+    statusMsg.success("Project created!");
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

@@ -86,7 +86,7 @@ const App = () => {
     if (myAddress !== "") {
       return (
         <div>
-          <div>{"Your address:"}</div>
+          {/* <div>{"Your address:"}</div> */}
           <div className="your-address">
             <a
               href={"https://testnet.algoexplorer.io/address/" + myAddress}

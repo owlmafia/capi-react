@@ -22,13 +22,11 @@ dd {
 input {
   border-style: solid;
   border-width: 1px;
-  border-radius: 4px;
-  border-color: lightgray;
   margin-bottom: 16px;
   appearance: none;
-  height: 35px;
-  border-radius: 20px;
-  border: 1px solid #d8e1ea;
+  height: 30px;
+  border-radius: 12px;
+  border: 1px solid #383e42;
   padding: 10px 15px;
   font-family: inherit;
   font-size: 16px;
@@ -37,8 +35,12 @@ input {
   margin-top: 8px;
 }
 
-.address-input {
+.full-width-input {
   width: 100%;
+}
+
+.input-label {
+  /* text-align: left; */
 }
 
 .connect-button {
@@ -89,7 +91,7 @@ select {
 }
 
 #wrapper {
-  max-width: 700px;
+  max-width: 500px;
   display: inline-block;
   box-sizing: border-box;
   position: relative;
@@ -104,33 +106,42 @@ select {
 }
 
 .error {
-  border-radius: 10px;
+  border-radius: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: red;
   margin-bottom: 16px;
-  padding: 20px;
-  color: red;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  /* color: red; */
 }
 
 .success {
-  border-radius: 10px;
+  border-radius: 12px;
   border-style: solid;
   border-width: 1px;
   border-color: green;
   margin-bottom: 16px;
-  padding: 20px;
-  color: green;
+  padding: 10px;
+  background-color: green;
+  color: white;
+  /* color: green; */
 }
 
 button {
   appearance: none;
   height: 35px;
-  border-radius: 20px;
-  border: 1px solid #d8e1ea;
+  border-radius: 16px;
+  /* border: 0px solid transparent; */
+  /* border: 1px solid #383e42; */
   padding: 0px 15px;
   font-size: 16px;
   cursor: pointer;
+  /* background-color: #383e42; */
+  /* background-color: black; */
+  /* color: white; */
+  /* color: white; */
 }
 
 .submit-msg {
@@ -140,17 +151,6 @@ button {
 .submit-msg-warning {
   margin-bottom: 16px;
   color: orangered;
-}
-
-.swap-link {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: green;
-  margin-bottom: 16px;
-  padding: 20px;
-  color: green;
-  cursor: pointer;
 }
 
 .submit-swap-title {
@@ -198,7 +198,7 @@ button {
 }
 
 a {
-  color: gray;
+  color: black;
   text-decoration: none;
   cursor: pointer;
 }
@@ -222,7 +222,7 @@ a {
   padding: 20px 20px 20px 20px;
   border: 1px solid grey;
   position: absolute;
-  border-radius: 20px;
+  border-radius: 12px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -242,13 +242,13 @@ a {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  border-bottom: 1px solid #1a47d3;
+  border-bottom: 1px solid black;
   padding-bottom: 10px;
 }
 
 .modal-topbar-title {
   margin: 0;
-  color: #1a47d3;
+  color: black;
 }
 
 .modal-topbar-x {
@@ -283,18 +283,78 @@ a {
 }
 
 .withdrawal-cell-container {
-  margin-top: 20px;
+  margin-top: 40px;
+  min-width: 400px;
 }
 
 .withdrawal-cell {
   border-style: solid;
   border-width: 1px;
-  border-radius: 4px;
-  border-color: lightgray;
+  border-radius: 12px;
+  /* border: 1px solid #383e42; */
+  border: 1px solid grey;
   margin-bottom: 20px;
+  padding-bottom: 20px;
+  /* color: grey; */
 }
 
 .copy {
   margin-left: 6px;
   cursor: pointer;
+}
+
+.project-name-container {
+  margin-bottom: 26px;
+}
+
+.project-name {
+  font-size: 2em;
+  color: black;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.name-label {
+  margin-bottom: 6px;
+}
+
+.key-val-key {
+  /* font-weight: 300; */
+  color: gray;
+}
+
+.key-val-val {
+  /* font-weight: 600; */
+  margin-left: 4px;
+}
+
+button:enabled {
+  /* border: 0px solid transparent; */
+  /* border: 1px solid #383e42; */
+  padding: 0px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #383e42;
+  color: white;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.rightButton {
+  margin-left: 6px;
+  height: 25px;
+  border: 1px solid lightgray;
+  padding: 0px 6px;
+}
+
+.sectionSpacer {
+  height: 20px;
 }
