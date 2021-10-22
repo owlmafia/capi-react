@@ -358,3 +358,7 @@ button:disabled {
 .section-spacer {
   height: 20px;
 }
+
+.modal-button {
+  margin-top: 20px;
+}

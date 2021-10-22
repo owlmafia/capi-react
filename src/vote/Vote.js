@@ -44,7 +44,11 @@ export const Vote = (props) => {
               withdrawalRequests.map((req) => (
                 <WithdrawalRequest
                   req={req}
-                  buttonDisabled={() => false}
+                  buttonDisabled={() =>
+                    !props.myAddress ||
+                    !chainInvestmentData ||
+                    !chainInvestmentData.investor_percentage
+                  }
                   onButtonClick={async () => {
                     await vote(
                       props.myAddress,

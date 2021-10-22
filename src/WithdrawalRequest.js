@@ -38,7 +38,7 @@ const withdrawButton = (req, buttonDisabled, onClick, label) => {
     return (
       <div>
         <button
-          disabled={buttonDisabled}
+          disabled={buttonDisabled()}
           onClick={async () => {
             onClick();
           }}
