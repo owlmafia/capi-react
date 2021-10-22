@@ -23,7 +23,7 @@ export const Withdrawal = (props) => {
   }, [props.history.location.state, props.match.params, props.statusMsg]);
 
   const withdrawalRequestsView = () => {
-    if (withdrawalRequests) {
+    if (withdrawalRequests && withdrawalRequests.length) {
       return (
         <div className="withdrawal-cell-container">
           <div className="subtitle">{"Requests"}</div>
