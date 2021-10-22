@@ -32,6 +32,7 @@ export const drain = async (
 ) => {
   try {
     const { bridge_drain, bridge_submit_drain } = await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
 

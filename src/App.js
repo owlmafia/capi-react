@@ -35,6 +35,9 @@ const App = () => {
       console.error(msg);
       setStatusMsg({ msg: msg, type: "error" });
     }
+    clear() {
+      setStatusMsg(null);
+    }
   }
 
   const onCopyErrorMsg = () => {

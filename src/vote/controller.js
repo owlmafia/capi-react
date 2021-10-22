@@ -55,6 +55,7 @@ export const vote = async (
 ) => {
   try {
     const { bridge_vote, bridge_submit_vote } = await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
     let voteRes = await bridge_vote({

@@ -50,6 +50,7 @@ export const invest = async (
       bridge_buy_shares,
       bridge_submit_buy_shares,
     } = await wasmPromise;
+    statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/stake
     // 1. sign tx for app opt-in
@@ -139,7 +140,7 @@ export const stake = async (
       bridge_load_project_user_view,
       bridge_opt_in_to_apps_if_needed,
     } = await wasmPromise;
-
+    statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/stake
     // 1. sign tx for app opt-in

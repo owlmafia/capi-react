@@ -23,6 +23,7 @@ export const createProject = async (
     bridge_submit_create_project,
   } = await wasmPromise;
 
+  statusMsg.clear();
   showProgress(true);
   console.log("creator: " + myAddress);
   try {

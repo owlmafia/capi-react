@@ -50,6 +50,7 @@ export const retrieveProfits = async (
   try {
     const { bridge_harvest, bridge_submit_harvest, bridge_load_investment } =
       await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
     let harvestRes = await bridge_harvest({
@@ -97,6 +98,7 @@ export const unstake = async (
   try {
     const { bridge_unstake, bridge_submit_unstake, bridge_load_investment } =
       await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
     let unstakeRes = await bridge_unstake({

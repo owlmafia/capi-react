@@ -53,6 +53,7 @@ export const withdraw = async (
       bridge_submit_withdrawal_request,
       bridge_load_withdrawal_requests,
     } = await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
@@ -112,6 +113,7 @@ export const addRequest = async (
       bridge_init_withdrawal_request,
       bridge_submit_init_withdrawal_request,
     } = await wasmPromise;
+    statusMsg.clear();
 
     showProgress(true);
     let initWithdrawalRequestRes = await bridge_init_withdrawal_request({
