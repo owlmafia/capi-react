@@ -34,7 +34,7 @@ export const Invest = (props) => {
     if (props.myAddress) {
       return (
         <div>
-          <div className="sectionSpacer" />
+          <div className="section-spacer" />
           <div className="input-label">{"Buy shares:"}</div>
           <input
             placeholder={""}

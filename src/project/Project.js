@@ -97,7 +97,7 @@ export const Project = (props) => {
               <span className="key-val-val">{customerBalance}</span>
             </p>
             <button
-              // className="rightButton"
+              // className="right-button"
               disabled={props.myAddress === "" || customerBalance === 0}
               hidden={props.myAddress === ""}
               onClick={async (_) => {
@@ -137,7 +137,7 @@ export const Project = (props) => {
               </a>
             </p> */}
             {/* TODO: substract min balance from funds to drain showed here (WASM) */}
-            <div className="sectionSpacer" />
+            <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
             <p>
               <span className="key-val-key">{"Address:"}</span>
@@ -201,7 +201,7 @@ export const Project = (props) => {
             <p>{"Payment QR code:"}</p>
             <QRCode value={viewProject.customer_payment_deeplink} />
 
-            <div className="sectionSpacer" />
+            <div className="section-spacer" />
             <p className="subtitle">{"Investor links"}</p>
             <CopyToClipboard
               text={viewProject.project.invest_link}
@@ -228,7 +228,7 @@ export const Project = (props) => {
               {"My investment"}
             </a>
           </div>
-          <div className="sectionSpacer" />
+          <div className="section-spacer" />
         </div>
       );
     } else {

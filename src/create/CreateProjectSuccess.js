@@ -67,7 +67,7 @@ export const CreateProjectSuccess = (props) => {
           <span className="key-val-val">{props.project.vote_threshold}</span>
         </p>
 
-        <div className="sectionSpacer" />
+        <div className="section-spacer" />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
           <div>
             <a

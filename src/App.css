@@ -348,13 +348,13 @@ button:disabled {
   pointer-events: all !important;
 }
 
-.rightButton {
+.right-button {
   margin-left: 6px;
   height: 25px;
   border: 1px solid lightgray;
   padding: 0px 6px;
 }
 
-.sectionSpacer {
+.section-spacer {
   height: 20px;
 }

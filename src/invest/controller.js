@@ -100,6 +100,7 @@ export const invest = async (
           <span>{"You've become an investor of "}</span>
           <b> {project.name}</b>
           <span>{". "}</span>
+          <div className="section-spacer" />
           <button
             onClick={(_) => {
               history.push({
@@ -191,6 +192,7 @@ export const stake = async (
         <p>
           <span>{"Your shares are staked."}</span>
           <button
+            className="modal-button"
             onClick={(_) => {
               history.push({
                 pathname: "/investment/" + projectId,
@@ -200,7 +202,7 @@ export const stake = async (
               showModal(null);
             }}
           >
-            <div className="sectionSpacer" />
+            <div className="section-spacer" />
             {"Go to your investor site"}
           </button>
         </p>
