@@ -4,6 +4,8 @@ body {
   font-weight: 400;
   font-size: 16px;
   position: relative;
+  min-height: 100vh;
+  margin: 0;
 }
 
 dl {
@@ -44,11 +46,7 @@ input {
 }
 
 .connect-button {
-  display: block;
   position: relative;
-  left: 50%;
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-50%, 0%);
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -362,3 +360,62 @@ button:disabled {
 .modal-button {
   margin-top: 20px;
 }
+
+.slider {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  overflow-x: hidden;
+}
+
+/*********************/
+/* progress bar */
+/*********************/
+.line {
+  position: absolute;
+  opacity: 0.4;
+  background: black;
+  width: 100%;
+  height: 5px;
+}
+
+.subline {
+  position: absolute;
+  background: black;
+  height: 5px;
+}
+
+.inc {
+  animation: increase 2s infinite;
+}
+
+.dec {
+  animation: decrease 2s 0.5s infinite;
+}
+
+@keyframes increase {
+  from {
+    left: -5%;
+    width: 5%;
+  }
+
+  to {
+    left: 130%;
+    width: 100%;
+  }
+}
+
+@keyframes decrease {
+  from {
+    left: -80%;
+    width: 80%;
+  }
+
+  to {
+    left: 110%;
+    width: 10%;
+  }
+}
+
+/*********************/
+/*********************/

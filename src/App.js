@@ -12,6 +12,7 @@ import { NotFound } from "./NotFound";
 import Modal from "./Modal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
+import ProgressBar from "./ProgressBar";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -128,14 +129,6 @@ const App = () => {
     }
   };
 
-  const progressView = () => {
-    if (showProgress) {
-      return <p>{"Loading.."}</p>;
-    } else {
-      return null;
-    }
-  };
-
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -146,7 +139,7 @@ const App = () => {
     return (
       <div>
         <div className="container">
-          {progressView()}
+          {showProgress && <ProgressBar />}
           {connectButton()}
           {yourAddressView()}
           <Router>
