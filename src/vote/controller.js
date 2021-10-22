@@ -11,7 +11,7 @@ export const init = async (
 ) => {
   const {
     init_log,
-    bridge_load_withdrawal_requests,
+    bridge_load_withdrawal_requests_for_voters,
     bridge_load_project_user_view,
     bridge_load_investment,
   } = await wasmPromise;
@@ -23,15 +23,17 @@ export const init = async (
   console.log("project: " + JSON.stringify(project));
   setProject(project);
 
-  const withdrawalRequestsRes = await bridge_load_withdrawal_requests({
-    project_id: projectId,
-  });
-  console.log(
-    "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
-  );
-  setWithdrawalRequests(withdrawalRequestsRes.requests);
-
   if (myAddress) {
+    const withdrawalRequestsRes =
+      await bridge_load_withdrawal_requests_for_voters({
+        project_id: projectId,
+        user_address: myAddress,
+      });
+    console.log(
+      "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
+    );
+    setWithdrawalRequests(withdrawalRequestsRes.requests);
+
     console.log("myAddress: " + myAddress);
     let investorData = await bridge_load_investment({
       project_id: projectId,

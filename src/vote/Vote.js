@@ -9,7 +9,6 @@ export const Vote = (props) => {
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
 
   const userDataView = () => {
-    console.log("Rendering: " + userDataView);
     if (chainInvestmentData) {
       return (
         <div>
@@ -43,11 +42,13 @@ export const Vote = (props) => {
             {withdrawalRequests &&
               withdrawalRequests.map((req) => (
                 <WithdrawalRequest
-                  req={req}
-                  buttonDisabled={() =>
-                    !props.myAddress ||
-                    !chainInvestmentData ||
-                    !chainInvestmentData.investor_percentage
+                  req={req.req}
+                  buttonDisabled={
+                    () =>
+                      !props.myAddress || // not connected
+                      !chainInvestmentData || // user data not loaded yet
+                      !chainInvestmentData.investor_percentage || // doesn't have shares
+                      req.user_voted // already voted
                   }
                   onButtonClick={async () => {
                     await vote(
@@ -55,7 +56,7 @@ export const Vote = (props) => {
                       props.showProgress,
                       props.statusMsg,
                       props.match.params.id,
-                      req
+                      req.req
                     );
                   }}
                   buttonLabel={"Vote"}
