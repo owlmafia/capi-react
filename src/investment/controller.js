@@ -45,6 +45,7 @@ export const retrieveProfits = async (
   statusMsg,
   projectId,
   project,
+  amount,
   setChainInvestmentData
 ) => {
   try {
@@ -55,6 +56,7 @@ export const retrieveProfits = async (
     showProgress(true);
     let harvestRes = await bridge_harvest({
       project_id: projectId,
+      amount: amount,
       investor_address: myAddress,
     });
     console.log("harvestRes: " + JSON.stringify(harvestRes));

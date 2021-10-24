@@ -58,6 +58,7 @@ export const Investment = (props) => {
                 props.statusMsg,
                 props.match.params.id,
                 project,
+                chainInvestmentData.investor_harvestable_amount_microalgos,
                 setChainInvestmentData
               );
             }}

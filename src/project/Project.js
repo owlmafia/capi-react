@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { init, drain } from "./controller";
+import { init } from "./controller";
 import { ProjectName } from "../ProjectName";
 
 var QRCode = require("qrcode.react");
@@ -9,7 +9,6 @@ var QRCode = require("qrcode.react");
 export const Project = (props) => {
   const [viewProject, setViewProject] = useState(null);
   const [funds, setFunds] = useState(null);
-  const [customerBalance, setCustomerBalance] = useState(null);
 
   const [customerAddressDisplay, setCustomerAddressDisplay] = useState("");
 
@@ -43,21 +42,13 @@ export const Project = (props) => {
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading project id: " + JSON.stringify(props.match.params));
-      const viewProject = await init(
+      await init(
         props.match.params.id,
         setViewProject,
         setFunds,
-        setCustomerBalance
+        setCustomerAddressDisplay,
+        props.statusMsg
       );
-
-      const customerAddress = viewProject.project.customer_escrow_address;
-      const short_chars = 3;
-      const leading = customerAddress.substring(0, short_chars);
-      const trailing = customerAddress.substring(
-        customerAddress.length - short_chars
-      );
-      const shortAddress = leading + "..." + trailing;
-      setCustomerAddressDisplay(shortAddress);
     }
     asyncInit();
   }, [props.match.params.id]);
@@ -92,51 +83,6 @@ export const Project = (props) => {
             >
               {"Withdraw"}
             </button>
-            <p>
-              <span className="key-val-key">{"Outstanding funds (Algo):"}</span>
-              <span className="key-val-val">{customerBalance}</span>
-            </p>
-            <button
-              // className="right-button"
-              disabled={props.myAddress === "" || customerBalance === 0}
-              hidden={props.myAddress === ""}
-              onClick={async (_) => {
-                await drain(
-                  props.myAddress,
-                  props.showProgress,
-                  props.statusMsg,
-                  props.match.params.id,
-                  setFunds,
-                  setCustomerBalance
-                );
-              }}
-            >
-              {"Transfer to funds"}
-            </button>
-            {/* <p>
-              {"Outstanding funds:"}
-              <a
-                href="#"
-                onClick={() =>
-                  props.showModal({
-                    title: "Drain",
-                    body: (
-                      <div>
-                        <p>
-                          {
-                            "This transfers the funds from the customer payment address to the project's funding pot."
-                          }
-                        </p>
-                        <p>{"Anyone can trigger this."}</p>
-                      </div>
-                    ),
-                  })
-                }
-              >
-                ?
-              </a>
-            </p> */}
-            {/* TODO: substract min balance from funds to drain showed here (WASM) */}
             <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
             <p>
