@@ -75,7 +75,7 @@ const App = () => {
     } else {
       return (
         <button
-          className="connect-button"
+          className="disconnect-button"
           onClick={() => {
             setMyAddress("");
           }}
@@ -143,7 +143,7 @@ const App = () => {
       <div>
         <div className="container">
           {showProgress && <ProgressBar />}
-          {connectButton()}
+          <div>{connectButton()}</div>
           {yourAddressView()}
           <Router>
             <div id="wrapper">
