@@ -7,6 +7,7 @@ export const Invest = (props) => {
   const [buySharesCount, setBuySharesCount] = useState("");
   const [investorCurrentSharesCount, setInvestorCurrentSharesCount] =
     useState("");
+  const [buySharesTotalPrice, setBuySharesTotalPrice] = useState("");
 
   console.log("props: " + JSON.stringify(props));
 
@@ -31,7 +32,7 @@ export const Invest = (props) => {
   };
 
   const buyView = () => {
-    if (props.myAddress) {
+    if (props.myAddress && project) {
       return (
         <div>
           <div className="section-spacer" />
@@ -39,12 +40,18 @@ export const Invest = (props) => {
           <input
             placeholder={""}
             className="inline"
-            size="16"
+            size="4"
             value={buySharesCount}
             onChange={(event) => {
+              const input = event.target.value;
+              if (!isNaN(input)) {
+                const price = input * project.share_price_number_algo;
+                setBuySharesTotalPrice(price + " Algo");
+              }
               setBuySharesCount(event.target.value);
             }}
           />
+          <span class="shares-total-price">{buySharesTotalPrice}</span>
           <div>
             <button
               disabled={props.myAddress === ""}
