@@ -51,7 +51,7 @@ export const Project = (props) => {
       );
     }
     asyncInit();
-  }, [props.match.params.id]);
+  }, [props.match.params.id, props.statusMsg]);
 
   const projectView = () => {
     if (viewProject) {
