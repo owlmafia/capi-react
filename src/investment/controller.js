@@ -72,6 +72,9 @@ export const retrieveProfits = async (
 
     showProgress(true);
     let submitHarvestRes = await bridge_submit_harvest({
+      investor_address_for_diagnostics: myAddress,
+      project_id_for_diagnostics: projectId,
+
       txs: harvestResSigned,
       pt: harvestRes.pt,
     });
