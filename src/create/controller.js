@@ -11,6 +11,7 @@ export const createProject = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
 
   projectName,
   shareCount,
@@ -21,6 +22,7 @@ export const createProject = async (
     bridge_create_project_assets_txs,
     bridge_create_project,
     bridge_submit_create_project,
+    bridge_balance,
   } = await wasmPromise;
 
   statusMsg.clear();
@@ -70,6 +72,9 @@ export const createProject = async (
     setCreateProjectSuccess(submitProjectRes);
     showProgress(false);
     statusMsg.success("Project created!");
+
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

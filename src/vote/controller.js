@@ -50,11 +50,13 @@ export const vote = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
   projectId,
   req
 ) => {
   try {
-    const { bridge_vote, bridge_submit_vote } = await wasmPromise;
+    const { bridge_vote, bridge_submit_vote, bridge_balance } =
+      await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
@@ -82,6 +84,9 @@ export const vote = async (
     console.log("submitVoteRes: " + JSON.stringify(submitVoteRes));
     statusMsg.success("Voted!");
     showProgress(false);
+
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

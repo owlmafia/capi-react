@@ -55,6 +55,7 @@ export const Vote = (props) => {
                       props.myAddress,
                       props.showProgress,
                       props.statusMsg,
+                      props.setMyBalance,
                       props.match.params.id,
                       req.req
                     );

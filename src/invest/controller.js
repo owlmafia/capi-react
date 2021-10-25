@@ -38,6 +38,7 @@ export const invest = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
   showModal,
   history,
   projectId,
@@ -49,6 +50,7 @@ export const invest = async (
       bridge_opt_in_to_apps_if_needed,
       bridge_buy_shares,
       bridge_submit_buy_shares,
+      bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
@@ -94,6 +96,9 @@ export const invest = async (
     console.log("submitBuySharesRes: " + JSON.stringify(submitBuySharesRes));
     showProgress(false);
 
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
+
     showModal({
       title: "Congratulations!",
       body: (
@@ -127,6 +132,7 @@ export const stake = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
   showModal,
   setProject,
   history,
@@ -139,6 +145,7 @@ export const stake = async (
       bridge_submit_stake,
       bridge_load_project_user_view,
       bridge_opt_in_to_apps_if_needed,
+      bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
@@ -186,6 +193,9 @@ export const stake = async (
 
     statusMsg.success("Shares staked");
     showProgress(false);
+
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
 
     showModal({
       title: "Success",

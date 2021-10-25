@@ -16,8 +16,11 @@ import ProgressBar from "./ProgressBar";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
+const wasmPromise = import("wasm");
+
 const App = () => {
   const [myAddress, setMyAddress] = useState("");
+  const [myBalance, setMyBalance] = useState("");
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
   const [statusMsg, setStatusMsg] = useState(null);
@@ -56,6 +59,8 @@ const App = () => {
           className="connect-button"
           onClick={async (event) => {
             try {
+              const { bridge_balance } = await wasmPromise;
+
               let address = await connectWallet();
               setMyAddress(address);
 
@@ -64,6 +69,9 @@ const App = () => {
               const trailing = address.substring(address.length - short_chars);
               const shortAddress = leading + "..." + trailing;
               setMyAddressDisplay(shortAddress);
+
+              const balance = await bridge_balance({ address: address });
+              setMyBalance(balance.balance);
             } catch (e) {
               statusMsgUpdater.error(e);
             }
@@ -89,7 +97,7 @@ const App = () => {
   const yourAddressView = () => {
     if (myAddress !== "") {
       return (
-        <div>
+        <div id="user-data">
           {/* <div>{"Your address:"}</div> */}
           <div className="your-address">
             <a
@@ -100,6 +108,7 @@ const App = () => {
               {myAddressDisplay}
             </a>
           </div>
+          <div id="my-balance">{myBalance}</div>
         </div>
       );
     } else {
@@ -157,6 +166,7 @@ const App = () => {
                     showModal={(modal) => setModal(modal)}
                     showProgress={(show) => setShowProgress(show)}
                     statusMsg={statusMsgUpdater}
+                    setMyBalance={setMyBalance}
                   />
                 </Route>
                 <Route
@@ -182,6 +192,7 @@ const App = () => {
                       showModal={(modal) => setModal(modal)}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
                     />
                   )}
                 />
@@ -194,6 +205,7 @@ const App = () => {
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
                     />
                   )}
                 />
@@ -206,6 +218,7 @@ const App = () => {
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
                     />
                   )}
                 />
@@ -218,6 +231,7 @@ const App = () => {
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
                     />
                   )}
                 />

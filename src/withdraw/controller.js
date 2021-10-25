@@ -43,6 +43,7 @@ export const withdraw = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
   projectId,
   req,
   setWithdrawalRequests
@@ -52,6 +53,7 @@ export const withdraw = async (
       bridge_withdraw,
       bridge_submit_withdrawal_request,
       bridge_load_withdrawal_requests,
+      bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
 
@@ -92,6 +94,9 @@ export const withdraw = async (
 
     setWithdrawalRequests(withdrawalRequestsRes.requests);
     showProgress(false);
+
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
@@ -102,6 +107,7 @@ export const addRequest = async (
   myAddress,
   showProgress,
   statusMsg,
+  setMyBalance,
   projectId,
   withdrawalAmount,
   setWithdrawalRequests,
@@ -112,6 +118,7 @@ export const addRequest = async (
     const {
       bridge_init_withdrawal_request,
       bridge_submit_init_withdrawal_request,
+      bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
 
@@ -154,6 +161,9 @@ export const addRequest = async (
 
     statusMsg.success("Withdrawal request submitted");
     showProgress(false);
+
+    const balance = await bridge_balance({ address: myAddress });
+    setMyBalance(balance.balance);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

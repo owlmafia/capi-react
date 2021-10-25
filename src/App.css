@@ -83,7 +83,7 @@ select {
 
 .your-address {
   margin-top: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 4px;
 }
 
 .form {
@@ -374,6 +374,15 @@ button:disabled {
 .shares-total-price {
   margin-left: 4px;
   color: gray;
+}
+
+#my-balance {
+  font-size: 0.8em;
+  color: gray;
+}
+
+#user-data {
+  margin-bottom: 16px;
 }
 
 /*********************/

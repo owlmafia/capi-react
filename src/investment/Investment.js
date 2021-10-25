@@ -56,6 +56,7 @@ export const Investment = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
+                props.setMyBalance,
                 props.match.params.id,
                 project,
                 chainInvestmentData.investor_harvestable_amount_microalgos,
@@ -74,6 +75,7 @@ export const Investment = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
+                props.setMyBalance,
                 props.match.params.id,
                 project,
                 setChainInvestmentData

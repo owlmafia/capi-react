@@ -72,6 +72,7 @@ export const CreateProject = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
+                props.setMyBalance,
                 projectName,
                 shareCount,
                 sharePrice,

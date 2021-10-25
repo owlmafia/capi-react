@@ -37,6 +37,7 @@ export const Withdrawal = (props) => {
                     props.myAddress,
                     props.showProgress,
                     props.statusMsg,
+                    props.setMyBalance,
                     props.match.params.id,
                     req,
                     setWithdrawalRequests
@@ -84,6 +85,7 @@ export const Withdrawal = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
+                props.setMyBalance,
                 project.id,
                 withdrawalAmount,
                 setWithdrawalRequests,
