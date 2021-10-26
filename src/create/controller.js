@@ -16,6 +16,7 @@ export const createProject = async (
   projectName,
   shareCount,
   sharePrice,
+  investorsShare,
   setCreateProjectSuccess
 ) => {
   const {
@@ -35,9 +36,12 @@ export const createProject = async (
       token_name:
         projectName.length > 7 ? projectName.substring(0, 7) : projectName,
       count: shareCount,
+      /////////
       // passed here only for validation (so it's validated before signing the asset txs).
       // it's passed again and used in the next step
       asset_price: sharePrice,
+      investors_share: investorsShare,
+      /////////
     });
     showProgress(false);
 
@@ -53,6 +57,7 @@ export const createProject = async (
       // for now harcoded to keep settings easy to understand
       // it probably should be under "advanced" or similar later
       vote_threshold: "70",
+      investors_share: investorsShare,
       create_assets_signed_txs: createAssetSigned,
     });
     console.log("createProjectRes: " + JSON.stringify(createProjectRes));

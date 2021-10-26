@@ -83,6 +83,31 @@ export const Project = (props) => {
             >
               {"Withdraw"}
             </button>
+            <p>
+              <span className="key-val-key">
+                {"Investor's part"}
+                <a
+                  href="#"
+                  onClick={() =>
+                    props.showModal({
+                      title: "Investor's share",
+                      body: (
+                        <div>
+                          <p>
+                            {
+                              "The % of the project's income reserved to investors"
+                            }
+                          </p>
+                        </div>
+                      ),
+                    })
+                  }
+                >
+                  ?:
+                </a>
+              </span>
+              <span className="key-val-val">{viewProject.investors_share}</span>
+            </p>
             <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
             <p>

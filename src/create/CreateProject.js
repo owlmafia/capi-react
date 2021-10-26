@@ -4,8 +4,9 @@ import { init, createProject } from "./controller";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("my1project");
-  const [shareCount, setShareCount] = useState("100");
+  const [shareCount, setShareCount] = useState("300");
   const [sharePrice, setSharePrice] = useState("10");
+  const [investorsShare, setInvestorsShare] = useState("40");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
 
   console.log("props: " + JSON.stringify(props));
@@ -58,6 +59,40 @@ export const CreateProject = (props) => {
               setSharePrice(event.target.value);
             }}
           />
+          <div className="input-label">
+            {"Investor's part: "}
+            <a
+              href="#"
+              onClick={() =>
+                props.showModal({
+                  title: "Investor's share",
+                  body: (
+                    <div>
+                      <p>
+                        {"The % of the project's income reserved to investors"}
+                      </p>
+                      <p>
+                        {
+                          "Note that you can borrow from this income, if enough investors vote for it."
+                        }
+                      </p>
+                    </div>
+                  ),
+                })
+              }
+            >
+              ?
+            </a>
+          </div>
+          <input
+            placeholder=""
+            className="full-width-input"
+            size="10"
+            value={investorsShare}
+            onChange={(event) => {
+              setInvestorsShare(event.target.value);
+            }}
+          />
 
           <button
             className="submit-button"
@@ -65,7 +100,8 @@ export const CreateProject = (props) => {
               props.myAddress === "" ||
               projectName === "" ||
               shareCount === "" ||
-              sharePrice === ""
+              sharePrice === "" ||
+              investorsShare === ""
             }
             onClick={async () => {
               await createProject(
@@ -76,6 +112,7 @@ export const CreateProject = (props) => {
                 projectName,
                 shareCount,
                 sharePrice,
+                investorsShare,
                 setCreateProjectSuccess
               );
             }}
