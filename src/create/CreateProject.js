@@ -23,7 +23,7 @@ export const CreateProject = (props) => {
           <input
             placeholder=""
             className="full-width-input"
-            size="64"
+            size="30"
             value={projectName}
             onChange={(event) => {
               setProjectName(event.target.value);
