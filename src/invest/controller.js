@@ -202,6 +202,7 @@ export const stake = async (
       body: (
         <p>
           <span>{"Your shares are staked."}</span>
+          <div className="section-spacer" />
           <button
             className="modal-button"
             onClick={(_) => {
@@ -213,7 +214,6 @@ export const stake = async (
               showModal(null);
             }}
           >
-            <div className="section-spacer" />
             {"Go to your investor site"}
           </button>
         </p>
