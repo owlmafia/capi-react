@@ -20,7 +20,7 @@ export const Investment = (props) => {
   }, [props.match.params, props.myAddress, props.statusMsg]);
 
   const userView = () => {
-    if (chainInvestmentData) {
+    if (chainInvestmentData && !youAreNotInvested) {
       return (
         <div>
           <p>
@@ -78,7 +78,8 @@ export const Investment = (props) => {
                 props.setMyBalance,
                 props.match.params.id,
                 project,
-                setChainInvestmentData
+                setChainInvestmentData,
+                setYouAreNotInvested
               );
             }}
           >

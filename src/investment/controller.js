@@ -107,7 +107,8 @@ export const unstake = async (
   setMyBalance,
   projectId,
   project,
-  setChainInvestmentData
+  setChainInvestmentData,
+  setYouAreNotInvested
 ) => {
   try {
     const {
@@ -147,6 +148,7 @@ export const unstake = async (
 
     statusMsg.success("Shares unstaked");
     showProgress(false);
+    setYouAreNotInvested(true);
 
     const balance = await bridge_balance({ address: myAddress });
     setMyBalance(balance.balance);
