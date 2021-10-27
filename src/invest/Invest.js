@@ -25,7 +25,7 @@ export const Invest = (props) => {
   const yourFreeSharesView = () => {
     // if (investorCurrentSharesCount !== "") {
     if (props.myAddress) {
-      return <p>{"Unstaked shares: " + investorCurrentSharesCount}</p>;
+      return <p>{"Free shares: " + investorCurrentSharesCount}</p>;
     } else {
       return null;
     }
@@ -84,6 +84,7 @@ export const Invest = (props) => {
     if (investorCurrentSharesCount) {
       return (
         <div>
+          <div className="section-spacer" />
           <div className="input-label">{"Or stake:"}</div>
           {yourFreeSharesView()}
           <button
