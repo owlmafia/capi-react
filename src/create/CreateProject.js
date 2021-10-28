@@ -4,7 +4,7 @@ import { init, createProject } from "./controller";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("my1project");
-  const [shareCount, setShareCount] = useState("300");
+  const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
