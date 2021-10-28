@@ -127,6 +127,7 @@ export const addRequest = async (
       project_id: projectId,
       sender: myAddress,
       withdrawal_amount: withdrawalAmount,
+      description: withdrawalDescr,
     });
     // TODO update list with returned withdrawals list
     console.log(

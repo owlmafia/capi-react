@@ -31,17 +31,14 @@ export const createProject = async (
   console.log("creator: " + myAddress);
   try {
     let createProjectAssetsRes = await bridge_create_project_assets_txs({
-      creator: myAddress,
-      // token_name: shareName,
-      token_name:
-        projectName.length > 7 ? projectName.substring(0, 7) : projectName,
-      count: shareCount,
-      /////////
-      // passed here only for validation (so it's validated before signing the asset txs).
-      // it's passed again and used in the next step
-      asset_price: sharePrice,
-      investors_share: investorsShare,
-      /////////
+      inputs: {
+        creator: myAddress,
+        project_name: projectName,
+        share_count: shareCount,
+        asset_price: sharePrice,
+        investors_share: investorsShare,
+        vote_threshold: "70",
+      },
     });
     showProgress(false);
 
@@ -50,15 +47,8 @@ export const createProject = async (
 
     showProgress(true);
     let createProjectRes = await bridge_create_project({
-      name: projectName,
-      creator: myAddress,
-      asset_specs: createProjectAssetsRes.asset_spec, // passthrough
-      asset_price: sharePrice,
-      // for now harcoded to keep settings easy to understand
-      // it probably should be under "advanced" or similar later
-      vote_threshold: "70",
-      investors_share: investorsShare,
       create_assets_signed_txs: createAssetSigned,
+      pt: createProjectAssetsRes.pt,
     });
     console.log("createProjectRes: " + JSON.stringify(createProjectRes));
     showProgress(false);
