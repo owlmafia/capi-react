@@ -3,7 +3,7 @@ import { CreateProjectSuccess } from "./CreateProjectSuccess";
 import { init, createProject } from "./controller";
 
 export const CreateProject = (props) => {
-  const [projectName, setProjectName] = useState("my1project");
+  const [projectName, setProjectName] = useState("");
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
