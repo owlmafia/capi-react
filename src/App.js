@@ -118,6 +118,12 @@ const App = () => {
 
   const statusMsgView = () => {
     if (statusMsg) {
+      let shortMsg = statusMsg.msg;
+      let maxMsgLength = 200;
+      if (shortMsg.length > maxMsgLength) {
+        shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
+      }
+
       if (statusMsg.type === "success") {
         return <div className="success">{statusMsg.msg}</div>;
       } else if (statusMsg.type === "error") {
@@ -125,7 +131,7 @@ const App = () => {
           <div className="error">
             <CopyToClipboard text={statusMsg.msg} onCopy={onCopyErrorMsg}>
               <div>
-                {statusMsg.msg}
+                {shortMsg}
                 <span className="copy">
                   {errorMsgIsCopied ? "copied!" : <MdContentCopy />}
                 </span>
