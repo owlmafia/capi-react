@@ -43,14 +43,14 @@ const App = () => {
     }
   }
 
+  const [statusMsgUpdater, _] = useState(new StatusMsgUpdater());
+
   const onCopyErrorMsg = () => {
     setErrorMsgIsCopied(true);
     setTimeout(() => {
       setErrorMsgIsCopied(false);
     }, 1000);
   };
-
-  const statusMsgUpdater = new StatusMsgUpdater();
 
   const connectButton = () => {
     if (myAddress === "") {
