@@ -184,7 +184,7 @@ export const Project = (props) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {"Investing link"}
+                  {"Invest"}
                 </a>
                 <span className="copy">
                   {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
