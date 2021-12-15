@@ -71,11 +71,6 @@ export const CreateProject = (props) => {
                       <p>
                         {"The % of the project's income reserved to investors"}
                       </p>
-                      <p>
-                        {
-                          "Note that you can borrow from this income, if enough investors vote for it."
-                        }
-                      </p>
                     </div>
                   ),
                 })

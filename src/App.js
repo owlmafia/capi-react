@@ -7,7 +7,6 @@ import React, { useState } from "react";
 import { connectWallet } from "./MyAlgo";
 import { Investment } from "./investment/Investment";
 import { Withdrawal } from "./withdraw/Withdraw";
-import { Vote } from "./vote/Vote";
 import { NotFound } from "./NotFound";
 import Modal from "./Modal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -220,19 +219,6 @@ const App = () => {
                   path="/withdraw/:id"
                   render={(routeProps) => (
                     <Withdrawal
-                      {...routeProps}
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  )}
-                />
-                <Route
-                  exact
-                  path="/vote/:id"
-                  render={(routeProps) => (
-                    <Vote
                       {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}

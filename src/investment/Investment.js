@@ -6,7 +6,6 @@ export const Investment = (props) => {
   const [project, setProject] = useState(null);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
   const [youAreNotInvested, setYouAreNotInvested] = useState(false);
-  const [pendingVotes, setPendingVotes] = useState("");
 
   useEffect(() => {
     console.log("loading project id: " + JSON.stringify(props.match.params));
@@ -16,8 +15,7 @@ export const Investment = (props) => {
       props.statusMsg,
       setProject,
       setYouAreNotInvested,
-      setChainInvestmentData,
-      setPendingVotes
+      setChainInvestmentData
     );
   }, [props.match.params, props.myAddress, props.statusMsg]);
 
@@ -87,37 +85,6 @@ export const Investment = (props) => {
           >
             {"Unstake shares"}
           </button>
-          {pendingVotesView()}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
-
-  const pendingVotesText = (votes) => {
-    if (votes === "1") {
-      return "There's " + votes + " withdrawal request waiting for your vote";
-    } else {
-      return (
-        "There are " + votes + " withdrawal requests waiting for your vote"
-      );
-    }
-  };
-
-  // TODO url from wasm
-  const pendingVotesView = () => {
-    if (pendingVotes && pendingVotes !== "0" && project && !youAreNotInvested) {
-      return (
-        <div>
-          <div className="section-spacer" />
-          <a
-            href={"http://localhost:3000/vote/" + props.match.params.id}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {pendingVotesText(pendingVotes)}
-          </a>
         </div>
       );
     } else {

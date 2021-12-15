@@ -41,31 +41,6 @@ export const CreateProjectSuccess = (props) => {
             </a>
           </span>
         </p>
-        <p>
-          <span className="key-val-key">
-            {"Vote threshold"}
-            <a
-              href="#"
-              onClick={() =>
-                props.showModal({
-                  title: "Vote threshold",
-                  body: (
-                    <div>
-                      <p>
-                        {
-                          "Votes % (relative to total share supply) required to withdraw funds."
-                        }
-                      </p>
-                    </div>
-                  ),
-                })
-              }
-            >
-              ?:
-            </a>
-          </span>
-          <span className="key-val-val">{props.project.vote_threshold}</span>
-        </p>
 
         <div className="section-spacer" />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>

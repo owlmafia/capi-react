@@ -141,10 +141,6 @@ export const Invest = (props) => {
               <span className="key-val-key">{"Share price:"}</span>
               <span className="key-val-val">{project.share_price}</span>
             </p>
-            <p>
-              <span className="key-val-key">{"Vote threshold:"}</span>
-              <span className="key-val-val">{project.vote_threshold}</span>
-            </p>
 
             <div>
               {buyView()}

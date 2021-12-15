@@ -59,7 +59,6 @@ export const invest = async (
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
       app_id: "" + project.central_app_id,
-      slot_ids: project.slot_ids,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
@@ -154,7 +153,6 @@ export const stake = async (
     showProgress(true);
     let optInToAppRes = await bridge_opt_in_to_apps_if_needed({
       app_id: "" + project.central_app_id,
-      slot_ids: project.slot_ids,
       investor_address: myAddress,
     });
     console.log("optInToAppRes: " + JSON.stringify(optInToAppRes));

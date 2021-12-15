@@ -8,8 +8,7 @@ export const init = async (
   statusMsg,
   setProject,
   setYouAreNotInvested,
-  setChainInvestmentData,
-  setPendingVotes
+  setChainInvestmentData
 ) => {
   try {
     const { init_log, bridge_load_project_user_view, bridge_load_investment } =
@@ -30,7 +29,6 @@ export const init = async (
           investor_address: myAddress,
         })
       );
-      retrievePendingVotes(projectId, myAddress, statusMsg, setPendingVotes);
     }
   } catch (e) {
     if (e === "You're not invested in this project.") {
@@ -38,25 +36,6 @@ export const init = async (
     } else {
       statusMsg.error(e);
     }
-  }
-};
-
-export const retrievePendingVotes = async (
-  projectId,
-  myAddress,
-  statusMsg,
-  setPendingVotes
-) => {
-  try {
-    const { bridge_load_pending_votes } = await wasmPromise;
-    let res = await bridge_load_pending_votes({
-      project_id: projectId,
-      investor_address: myAddress,
-    });
-    console.log("pending votes res: " + JSON.stringify(res));
-    setPendingVotes(res.pending_votes);
-  } catch (e) {
-    statusMsg.error(e);
   }
 };
 

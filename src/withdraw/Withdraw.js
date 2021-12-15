@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { init, withdraw, addRequest } from "./controller";
 import { ProjectName } from "../ProjectName";
-import { WithdrawalRequest } from "../WithdrawalRequest";
+import { WithdrawalEntry } from "../Withdrawal";
 
 export const Withdrawal = (props) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
-  const [withdrawalRequests, setWithdrawalRequests] = useState([]);
+  const [withdrawals, setWithdrawals] = useState([]);
   const [project, setProject] = useState(null);
 
   useEffect(() => {
@@ -17,34 +17,19 @@ export const Withdrawal = (props) => {
       props.match.params.id,
       props.history.location.state,
       setProject,
-      setWithdrawalRequests,
+      setWithdrawals,
       props.statusMsg
     );
   }, [props.history.location.state, props.match.params, props.statusMsg]);
 
-  const withdrawalRequestsView = () => {
-    if (withdrawalRequests && withdrawalRequests.length) {
+  const withdrawalsView = () => {
+    if (withdrawals && withdrawals.length) {
       return (
         <div className="withdrawal-cell-container">
-          <div className="subtitle">{"Requests"}</div>
-          {withdrawalRequests &&
-            withdrawalRequests.map((req) => (
-              <WithdrawalRequest
-                req={req}
-                buttonDisabled={() => req.votes < project.vote_threshold}
-                onButtonClick={async () => {
-                  await withdraw(
-                    props.myAddress,
-                    props.showProgress,
-                    props.statusMsg,
-                    props.setMyBalance,
-                    props.match.params.id,
-                    req,
-                    setWithdrawalRequests
-                  );
-                }}
-                buttonLabel={"Withdraw"}
-              />
+          <div className="subtitle">{"History"}</div>
+          {withdrawals &&
+            withdrawals.map((withdrawal) => (
+              <WithdrawalEntry withdrawal={withdrawal} />
             ))}
         </div>
       );
@@ -53,7 +38,7 @@ export const Withdrawal = (props) => {
     }
   };
 
-  const projectView = () => {
+  const view = () => {
     if (project) {
       return (
         <div>
@@ -81,23 +66,23 @@ export const Withdrawal = (props) => {
           <button
             disabled={props.myAddress === ""}
             onClick={async () => {
-              await addRequest(
+              await withdraw(
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
                 project.id,
                 withdrawalAmount,
-                setWithdrawalRequests,
-                withdrawalRequests,
+                setWithdrawals,
+                withdrawals,
                 withdrawalDescr
               );
             }}
           >
-            {"Request funds"}
+            {"Withdraw"}
           </button>
 
-          {withdrawalRequestsView()}
+          {withdrawalsView()}
         </div>
       );
     } else {
@@ -107,7 +92,7 @@ export const Withdrawal = (props) => {
 
   return (
     <div>
-      <div className="container">{projectView()}</div>
+      <div className="container">{view()}</div>
     </div>
   );
 };

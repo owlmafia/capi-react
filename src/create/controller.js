@@ -37,7 +37,6 @@ export const createProject = async (
         share_count: shareCount,
         asset_price: sharePrice,
         investors_share: investorsShare,
-        vote_threshold: "70",
       },
     });
     showProgress(false);

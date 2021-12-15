@@ -16,8 +16,6 @@ export const Project = (props) => {
   const [paymentLinkIsCopied, setPaymentLinkIsCopied] = useState(false);
   const [paymentAddressIsCopied, setPaymentAddressIsCopied] = useState(false);
 
-  const [openWithdrawalRequestsCount, setOpenWithdrawalRequestsCount] = useState("");
-
   console.log("props: " + JSON.stringify(props));
 
   const onCopyPaymentAddress = () => {
@@ -41,36 +39,6 @@ export const Project = (props) => {
     }, 1000);
   };
 
-  const openWithdrawalRequestsText = (requestCount) => {
-    if (requestCount === "1") {
-      return "There's " + requestCount + " open withdrawal request";
-    } else {
-      return (
-        "There are " + requestCount + " open withdrawal requests"
-      );
-    }
-  };
-
-  const openWithdrawalRequestsCountView = () => {
-    if (openWithdrawalRequestsCount && openWithdrawalRequestsCount !== "0" && viewProject) {
-      return (
-        <div>
-          <div className="section-spacer" />
-          <p className="subtitle">{"Withdrawal requests"}</p>
-          <a
-            href={"http://localhost:3000/vote/" + viewProject.project.id}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {openWithdrawalRequestsText(openWithdrawalRequestsCount)}
-          </a>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
-
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading project id: " + JSON.stringify(props.match.params));
@@ -79,8 +47,7 @@ export const Project = (props) => {
         setViewProject,
         setFunds,
         setCustomerAddressDisplay,
-        props.statusMsg,
-        setOpenWithdrawalRequestsCount
+        props.statusMsg
       );
     }
     asyncInit();
@@ -232,7 +199,6 @@ export const Project = (props) => {
               {"My investment"}
             </a>
           </div>
-          {openWithdrawalRequestsCountView()}
           <div className="section-spacer" />
         </div>
       );

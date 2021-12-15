@@ -10,11 +10,8 @@ export const init = async (
   statusMsg
 ) => {
   try {
-    const {
-      init_log,
-      bridge_load_withdrawal_requests,
-      bridge_load_project_user_view,
-    } = await wasmPromise;
+    const { init_log, bridge_load_withdrawals, bridge_load_project_user_view } =
+      await wasmPromise;
     await init_log();
 
     // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
@@ -25,15 +22,13 @@ export const init = async (
       project = await bridge_load_project_user_view(projectId);
     }
 
-    const withdrawalRequestsRes = await bridge_load_withdrawal_requests({
+    const withdrawalsRes = await bridge_load_withdrawals({
       project_id: project.id,
     });
-    console.log(
-      "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
-    );
+    console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));
 
     setProject(project);
-    setWithdrawalRequests(withdrawalRequestsRes.requests);
+    setWithdrawalRequests(withdrawalsRes.entries);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -45,120 +40,43 @@ export const withdraw = async (
   statusMsg,
   setMyBalance,
   projectId,
-  req,
-  setWithdrawalRequests
+  withdrawalAmount,
+  setWithdrawals,
+  // TODO: don't pass - use setter parameter
+  withdrawals,
+  withdrawalDescr
 ) => {
   try {
-    const {
-      bridge_withdraw,
-      bridge_submit_withdrawal_request,
-      bridge_load_withdrawal_requests,
-      bridge_balance,
-    } = await wasmPromise;
+    const { bridge_withdraw, bridge_submit_withdraw, bridge_balance } =
+      await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
       project_id: projectId,
       sender: myAddress,
-      withdrawal_amount: req.amount_not_formatted,
-      slot_id: req.slot_id,
-    });
-    console.log("withdrawRes: " + JSON.stringify(withdrawRes));
-    showProgress(false);
-
-    let withdrawSigned = await signTxs(withdrawRes.to_sign);
-
-    console.log("withdrawSigned: " + withdrawSigned);
-
-    showProgress(true);
-    let submitWithdrawalRes = await bridge_submit_withdrawal_request({
-      request_id: req.request_id,
-      txs: withdrawSigned,
-      pt: withdrawRes.pt,
-    });
-
-    console.log("submitWithdrawalRes: " + JSON.stringify(submitWithdrawalRes));
-
-    // reload withdrawal requests: to refresh completed status (UI)
-    // TODO maybe frontend-only operation, especially when using indexer later to
-    // determine this it will be slow most likely
-    const withdrawalRequestsRes = await bridge_load_withdrawal_requests({
-      project_id: projectId,
-    });
-    console.log(
-      "withdrawalRequestsRes: " + JSON.stringify(withdrawalRequestsRes)
-    );
-
-    statusMsg.success("Withdrawal success");
-
-    setWithdrawalRequests(withdrawalRequestsRes.requests);
-    showProgress(false);
-
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
-  } catch (e) {
-    statusMsg.error(e);
-    showProgress(false);
-  }
-};
-
-export const addRequest = async (
-  myAddress,
-  showProgress,
-  statusMsg,
-  setMyBalance,
-  projectId,
-  withdrawalAmount,
-  setWithdrawalRequests,
-  withdrawalRequests,
-  withdrawalDescr
-) => {
-  try {
-    const {
-      bridge_init_withdrawal_request,
-      bridge_submit_init_withdrawal_request,
-      bridge_balance,
-    } = await wasmPromise;
-    statusMsg.clear();
-
-    showProgress(true);
-    let initWithdrawalRequestRes = await bridge_init_withdrawal_request({
-      project_id: projectId,
-      sender: myAddress,
       withdrawal_amount: withdrawalAmount,
       description: withdrawalDescr,
     });
     // TODO update list with returned withdrawals list
-    console.log(
-      "initWithdrawalRequestRes: " + JSON.stringify(initWithdrawalRequestRes)
-    );
+    console.log("withdrawRes: " + JSON.stringify(withdrawRes));
     showProgress(false);
 
-    let initWithdrawalRequestSigned = await signTxs(
-      initWithdrawalRequestRes.to_sign
-    );
-    console.log("initWithdrawalRequestSigned: " + initWithdrawalRequestSigned);
+    let withdrawResSigned = await signTxs(withdrawRes.to_sign);
+    console.log("withdrawResSigned: " + withdrawResSigned);
 
     showProgress(true);
-    let submitInitWithdrawalRequestRes =
-      await bridge_submit_init_withdrawal_request({
-        txs: initWithdrawalRequestSigned,
-        pt: initWithdrawalRequestRes.pt,
-        description: withdrawalDescr,
-      });
+    let submitWithdrawRes = await bridge_submit_withdraw({
+      txs: withdrawResSigned,
+      pt: withdrawRes.pt,
+    });
 
-    console.log(
-      "submitInitWithdrawalRequestRes: " +
-        JSON.stringify(submitInitWithdrawalRequestRes)
-    );
+    console.log("submitWithdrawRes: " + JSON.stringify(submitWithdrawRes));
 
     // we just prepend the added request in js
     // can consider doing this in the server later to make sure list/page is up to date,
     // prob not worth it though, as there's only one person making requests at a time
-    setWithdrawalRequests(
-      [submitInitWithdrawalRequestRes.saved_request].concat(withdrawalRequests)
-    );
+    setWithdrawals([submitWithdrawRes.saved_withdrawal].concat(withdrawals));
 
     statusMsg.success("Withdrawal request submitted");
     showProgress(false);
