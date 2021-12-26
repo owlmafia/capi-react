@@ -1,15 +1,22 @@
 import moment from "moment";
 export const WithdrawalEntry = ({ withdrawal }) => {
+  const finalWithdrawalDateStr = (dateStr) => {
+    // the withdrawal can be a date or text like "just now"
+    // we don't format the date in rust, because it requires additional libraries which have issues on WASM
+    // (don't remember exactly - may be not supported or build size. Also might have not checked enough libraries).
+    if (moment(withdrawal.date).isValid()) {
+      return moment(withdrawal.date).format("LLL");
+    } else {
+      return withdrawal.date;
+    }
+  };
+
   return (
-    // TODO db id maybe? - or ensure backend uses this as unique
-    <div
-      key={withdrawal.date + withdrawal.description}
-      className="withdrawal-cell"
-    >
+    <div key={withdrawal.view_id} className="withdrawal-cell">
       <p>
         <span className="key-val-key">{"Date:"}</span>
         <span className="key-val-val">
-          {moment(withdrawal.date).format("LLL")}
+          {finalWithdrawalDateStr(withdrawal.date)}
         </span>
       </p>
       <p>
