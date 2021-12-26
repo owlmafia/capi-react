@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { init, withdraw, addRequest } from "./controller";
+import { init, withdraw, loadWithdrawals } from "./controller";
 import { ProjectName } from "../ProjectName";
 import { WithdrawalEntry } from "../Withdrawal";
 
@@ -10,17 +10,24 @@ export const Withdrawal = (props) => {
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    console.log(
-      "props.history.location.state: " + props.history.location.state
-    );
     init(
       props.match.params.id,
       props.history.location.state,
       setProject,
-      setWithdrawals,
       props.statusMsg
     );
-  }, [props.history.location.state, props.match.params, props.statusMsg]);
+  }, [props.history.location.state, props.match.params.id, props.statusMsg]);
+
+  useEffect(() => {
+    if (props.myAddress) {
+      loadWithdrawals(
+        props.statusMsg,
+        props.match.params.id,
+        props.myAddress,
+        setWithdrawals
+      );
+    }
+  }, [props.match.params.id, props.statusMsg, props.myAddress]);
 
   const withdrawalsView = () => {
     if (withdrawals && withdrawals.length) {
@@ -71,7 +78,7 @@ export const Withdrawal = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                project.id,
+                props.match.params.id,
                 withdrawalAmount,
                 setWithdrawals,
                 withdrawals,
