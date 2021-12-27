@@ -27,27 +27,6 @@ export const init = async (
   }
 };
 
-export const loadWithdrawals = async (
-  statusMsg,
-  projectUuid,
-  creatorAddress,
-  setWithdrawalRequests
-) => {
-  try {
-    const { bridge_load_withdrawals } = await wasmPromise;
-
-    const withdrawalsRes = await bridge_load_withdrawals({
-      project_uuid: projectUuid,
-      creator_address: creatorAddress,
-    });
-    console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));
-
-    setWithdrawalRequests(withdrawalsRes.entries);
-  } catch (e) {
-    statusMsg.error(e);
-  }
-};
-
 export const withdraw = async (
   myAddress,
   showProgress,
@@ -55,9 +34,6 @@ export const withdraw = async (
   setMyBalance,
   projectUuid,
   withdrawalAmount,
-  setWithdrawals,
-  // TODO: don't pass - use setter parameter
-  withdrawals,
   withdrawalDescr
 ) => {
   try {
@@ -86,11 +62,6 @@ export const withdraw = async (
     });
 
     console.log("submitWithdrawRes: " + JSON.stringify(submitWithdrawRes));
-
-    // we just prepend the added request in js
-    // can consider doing this in the server later to make sure list/page is up to date,
-    // prob not worth it though, as there's only one person making requests at a time
-    setWithdrawals([submitWithdrawRes.saved_withdrawal].concat(withdrawals));
 
     statusMsg.success("Withdrawal request submitted");
     showProgress(false);

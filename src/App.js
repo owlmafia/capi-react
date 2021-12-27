@@ -12,6 +12,7 @@ import Modal from "./Modal";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import ProgressBar from "./ProgressBar";
+import { WithdrawalHistory } from "./withdrawal_history/WithdrawalHistory";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -227,7 +228,19 @@ const App = () => {
                     />
                   )}
                 />
-
+                <Route
+                  exact
+                  path="/withdrawal_history/:uuid"
+                  render={(routeProps) => (
+                    <WithdrawalHistory
+                      {...routeProps}
+                      myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
+                      statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
+                    />
+                  )}
+                />
                 <Route path="*">
                   <NotFound />
                 </Route>

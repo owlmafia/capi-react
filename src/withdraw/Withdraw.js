@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { init, withdraw, loadWithdrawals } from "./controller";
 import { ProjectName } from "../ProjectName";
-import { WithdrawalEntry } from "../Withdrawal";
 
 export const Withdrawal = (props) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
-  const [withdrawals, setWithdrawals] = useState([]);
   const [project, setProject] = useState(null);
 
   useEffect(() => {
@@ -17,33 +15,6 @@ export const Withdrawal = (props) => {
       props.statusMsg
     );
   }, [props.history.location.state, props.match.params.uuid, props.statusMsg]);
-
-  useEffect(() => {
-    if (props.myAddress) {
-      loadWithdrawals(
-        props.statusMsg,
-        props.match.params.uuid,
-        props.myAddress,
-        setWithdrawals
-      );
-    }
-  }, [props.match.params.uuid, props.statusMsg, props.myAddress]);
-
-  const withdrawalsView = () => {
-    if (withdrawals && withdrawals.length) {
-      return (
-        <div className="withdrawal-cell-container">
-          <div className="subtitle">{"History"}</div>
-          {withdrawals &&
-            withdrawals.map((withdrawal) => (
-              <WithdrawalEntry withdrawal={withdrawal} />
-            ))}
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
 
   const view = () => {
     if (project) {
@@ -80,16 +51,12 @@ export const Withdrawal = (props) => {
                 props.setMyBalance,
                 props.match.params.uuid,
                 withdrawalAmount,
-                setWithdrawals,
-                withdrawals,
                 withdrawalDescr
               );
             }}
           >
             {"Withdraw"}
           </button>
-
-          {withdrawalsView()}
         </div>
       );
     } else {
