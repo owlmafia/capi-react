@@ -4,10 +4,10 @@ export const WithdrawalEntry = ({ withdrawal }) => {
     // the withdrawal can be a date or text like "just now"
     // we don't format the date in rust, because it requires additional libraries which have issues on WASM
     // (don't remember exactly - may be not supported or build size. Also might have not checked enough libraries).
-    if (moment(withdrawal.date).isValid()) {
-      return moment(withdrawal.date).format("LLL");
+    if (moment(dateStr).isValid()) {
+      return moment(dateStr).format("LLL");
     } else {
-      return withdrawal.date;
+      return dateStr;
     }
   };
 

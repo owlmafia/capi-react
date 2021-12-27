@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { init, withdraw, loadWithdrawals } from "./controller";
+import { init, withdraw } from "./controller";
 import { ProjectName } from "../ProjectName";
 
 export const Withdrawal = (props) => {
