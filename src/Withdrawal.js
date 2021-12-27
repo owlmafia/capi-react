@@ -12,7 +12,13 @@ export const WithdrawalEntry = ({ withdrawal }) => {
   };
 
   return (
-    <div key={withdrawal.view_id} className="withdrawal-cell">
+    <div key={withdrawal.tx_id} className="withdrawal-cell">
+      <p>
+        <span className="key-val-key">{"Tx id:"}</span>
+        <span className="key-val-val">
+          <a href={withdrawal.tx_link}>{withdrawal.tx_id}</a>
+        </span>
+      </p>
       <p>
         <span className="key-val-key">{"Date:"}</span>
         <span className="key-val-val">
