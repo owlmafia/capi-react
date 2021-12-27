@@ -76,7 +76,7 @@ export const Project = (props) => {
               hidden={viewProject.project.creator_address !== props.myAddress}
               onClick={(_) => {
                 props.history.push({
-                  pathname: "/withdraw/" + viewProject.project.id,
+                  pathname: "/withdraw/" + viewProject.project.uuid,
                   state: viewProject.project,
                 });
               }}

@@ -11,23 +11,23 @@ export const Withdrawal = (props) => {
 
   useEffect(() => {
     init(
-      props.match.params.id,
+      props.match.params.uuid,
       props.history.location.state,
       setProject,
       props.statusMsg
     );
-  }, [props.history.location.state, props.match.params.id, props.statusMsg]);
+  }, [props.history.location.state, props.match.params.uuid, props.statusMsg]);
 
   useEffect(() => {
     if (props.myAddress) {
       loadWithdrawals(
         props.statusMsg,
-        props.match.params.id,
+        props.match.params.uuid,
         props.myAddress,
         setWithdrawals
       );
     }
-  }, [props.match.params.id, props.statusMsg, props.myAddress]);
+  }, [props.match.params.uuid, props.statusMsg, props.myAddress]);
 
   const withdrawalsView = () => {
     if (withdrawals && withdrawals.length) {
@@ -78,7 +78,7 @@ export const Withdrawal = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                props.match.params.id,
+                props.match.params.uuid,
                 withdrawalAmount,
                 setWithdrawals,
                 withdrawals,

@@ -2,9 +2,15 @@ import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
+export const init = async (
+  projectUuid,
+  projectMaybe,
+  setProject,
+  statusMsg
+) => {
   try {
-    const { init_log, bridge_load_project_user_view } = await wasmPromise;
+    const { init_log, bridge_load_project_user_view_with_uuid } =
+      await wasmPromise;
     await init_log();
 
     // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
@@ -12,7 +18,7 @@ export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
     if (projectMaybe) {
       project = projectMaybe;
     } else {
-      project = await bridge_load_project_user_view(projectId);
+      project = await bridge_load_project_user_view_with_uuid(projectUuid);
     }
 
     setProject(project);
@@ -23,7 +29,7 @@ export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
 
 export const loadWithdrawals = async (
   statusMsg,
-  projectId,
+  projectUuid,
   creatorAddress,
   setWithdrawalRequests
 ) => {
@@ -31,7 +37,7 @@ export const loadWithdrawals = async (
     const { bridge_load_withdrawals } = await wasmPromise;
 
     const withdrawalsRes = await bridge_load_withdrawals({
-      project_id: projectId,
+      project_uuid: projectUuid,
       creator_address: creatorAddress,
     });
     console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));
@@ -47,7 +53,7 @@ export const withdraw = async (
   showProgress,
   statusMsg,
   setMyBalance,
-  projectId,
+  projectUuid,
   withdrawalAmount,
   setWithdrawals,
   // TODO: don't pass - use setter parameter
@@ -61,7 +67,7 @@ export const withdraw = async (
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
-      project_id: projectId,
+      project_uuid: projectUuid,
       sender: myAddress,
       withdrawal_amount: withdrawalAmount,
       description: withdrawalDescr,

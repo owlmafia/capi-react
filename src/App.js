@@ -216,7 +216,7 @@ const App = () => {
                 />
                 <Route
                   exact
-                  path="/withdraw/:id"
+                  path="/withdraw/:uuid"
                   render={(routeProps) => (
                     <Withdrawal
                       {...routeProps}
