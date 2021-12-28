@@ -436,3 +436,21 @@ button:disabled {
 
 /*********************/
 /*********************/
+
+.relative_pos {
+  position: relative;
+}
+
+.centered_overlay {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
+.perc_symbol_in_pie_chart {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  transform: translate(12%, -50%);
+}

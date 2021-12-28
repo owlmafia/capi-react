@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
 import { init, createProject } from "./controller";
+import renderInvestorsShareChart from "./investorsShareChart";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
@@ -9,11 +10,19 @@ export const CreateProject = (props) => {
   const [investorsShare, setInvestorsShare] = useState("40");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
 
+  const d3Container = useRef(null);
+
   console.log("props: " + JSON.stringify(props));
 
   useEffect(() => {
     init();
   }, []);
+
+  useEffect(() => {
+    if (d3Container.current) {
+      renderInvestorsShareChart(d3Container.current, investorsShare);
+    }
+  }, [investorsShare, d3Container.current]);
 
   const formView = () => {
     if (props.myAddress) {
@@ -79,15 +88,29 @@ export const CreateProject = (props) => {
               ?
             </a>
           </div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="10"
-            value={investorsShare}
-            onChange={(event) => {
-              setInvestorsShare(event.target.value);
-            }}
-          />
+
+          <div className="relative_pos">
+            <div>
+              <svg width={200} height={200} ref={d3Container} />
+            </div>
+            <div className="centered_overlay">
+              <input
+                placeholder=""
+                className="full-width-input"
+                size="10"
+                value={investorsShare}
+                style={{
+                  width: "70px",
+                  textAlign: "center",
+                  margin: "0",
+                }}
+                onChange={(event) => {
+                  setInvestorsShare(event.target.value);
+                }}
+              />
+              <span className="perc_symbol_in_pie_chart">{"%"}</span>
+            </div>
+          </div>
 
           <button
             className="submit-button"
