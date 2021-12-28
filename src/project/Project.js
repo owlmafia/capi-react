@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { init } from "./controller";
+import { init, fetchHolderCount } from "./controller";
 import { ProjectName } from "../ProjectName";
 
 var QRCode = require("qrcode.react");
@@ -9,6 +9,8 @@ var QRCode = require("qrcode.react");
 export const Project = (props) => {
   const [viewProject, setViewProject] = useState(null);
   const [funds, setFunds] = useState(null);
+
+  const [holderCount, setHolderCount] = useState(null);
 
   const [customerAddressDisplay, setCustomerAddressDisplay] = useState("");
 
@@ -39,6 +41,12 @@ export const Project = (props) => {
     }, 1000);
   };
 
+  const project = useMemo(() => {
+    if (viewProject) {
+      return viewProject.project;
+    }
+  }, [viewProject]);
+
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading project id: " + JSON.stringify(props.match.params));
@@ -52,6 +60,16 @@ export const Project = (props) => {
     }
     asyncInit();
   }, [props.match.params.id, props.statusMsg]);
+
+  useEffect(() => {
+    if (project) {
+      fetchHolderCount(
+        props.statusMsg,
+        project.shares_asset_id,
+        setHolderCount
+      );
+    }
+  }, [project]);
 
   const projectView = () => {
     if (viewProject) {
@@ -107,6 +125,10 @@ export const Project = (props) => {
                 </a>
               </span>
               <span className="key-val-val">{viewProject.investors_share}</span>
+            </p>
+            <p>
+              <span className="key-val-key">{"Holders"}</span>
+              <span className="key-val-val">{holderCount}</span>
             </p>
             <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
