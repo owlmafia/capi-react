@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { init, retrieveProfits, unstake } from "./controller";
 import { ProjectName } from "../ProjectName";
+import renderPieChart from "../charts/renderPieChart";
 
 export const Investment = (props) => {
   const [project, setProject] = useState(null);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
   const [youAreNotInvested, setYouAreNotInvested] = useState(false);
+  const myShareChart = useRef(null);
 
   useEffect(() => {
     console.log("loading project id: " + JSON.stringify(props.match.params));
@@ -19,6 +21,18 @@ export const Investment = (props) => {
     );
   }, [props.match.params, props.myAddress, props.statusMsg]);
 
+  useEffect(() => {
+    if (myShareChart.current && chainInvestmentData) {
+      const notMyShare = 1 - chainInvestmentData.investor_percentage_number;
+      // the labels are irrelevant here
+      const data = {
+        a: chainInvestmentData.investor_percentage_number,
+        b: notMyShare,
+      };
+      renderPieChart(myShareChart.current, data, (d) => d[1]);
+    }
+  }, [project, chainInvestmentData, myShareChart.current]);
+
   const userView = () => {
     if (chainInvestmentData && !youAreNotInvested) {
       return (
@@ -28,6 +42,14 @@ export const Investment = (props) => {
             <span className="key-val-val">
               {chainInvestmentData.investor_shares_count}
             </span>
+            <div>
+              <svg width={200} height={200} ref={myShareChart} />
+            </div>
+          </p>
+          <p>
+            {"You're entitled to " +
+              chainInvestmentData.investor_percentage +
+              " of the project's funds"}
           </p>
           <p>
             <span className="key-val-key">{"Your voting power:"}</span>
