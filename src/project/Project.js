@@ -3,7 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import { init, fetchHolderCount, fetchSharesDistribution } from "./controller";
 import { ProjectName } from "../ProjectName";
-import renderSharesDistributionChart from "./sharesDistributionChart";
+import PieChart from "./PieChart";
 
 var QRCode = require("qrcode.react");
 
@@ -19,7 +19,7 @@ export const Project = (props) => {
   const [paymentLinkIsCopied, setPaymentLinkIsCopied] = useState(false);
   const [paymentAddressIsCopied, setPaymentAddressIsCopied] = useState(false);
 
-  const sharesDistributionChart = useRef(null);
+  const [sharesDistribution, setSharesDistribution] = useState(null);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -87,19 +87,17 @@ export const Project = (props) => {
   }, [viewProject]);
 
   useEffect(async () => {
-    if (sharesAssetId && sharesSupply && sharesDistributionChart.current) {
-      const sharesDistribution = await fetchSharesDistribution(
+    if (sharesAssetId && sharesSupply) {
+      const sharesDist = await fetchSharesDistribution(
         props.statusMsg,
         sharesAssetId,
         sharesSupply
       );
 
-      renderSharesDistributionChart(
-        sharesDistributionChart.current,
-        sharesDistribution
-      );
+      console.log("?? shares dist: %o", sharesDist);
+      setSharesDistribution(sharesDist);
     }
-  }, [sharesAssetId, sharesSupply, sharesDistributionChart.current]);
+  }, [sharesAssetId, sharesSupply]);
 
   const projectView = () => {
     if (viewProject) {
@@ -158,9 +156,15 @@ export const Project = (props) => {
             </p>
             <div className="section-spacer" />
             <p className="subtitle">{"Holders distribution"}</p>
-            <div>
-              <svg width={200} height={200} ref={sharesDistributionChart} />
-            </div>
+            {sharesDistribution && (
+              <div>
+                <PieChart
+                  data={sharesDistribution}
+                  // the first element is the index in the array, second is the object as we passed it
+                  dataNumberSelector={(d) => d[1].percentage_number}
+                />
+              </div>
+            )}
             <p>
               <span className="key-val-key">{"Total:"}</span>
               <span className="key-val-val">{holderCount}</span>
