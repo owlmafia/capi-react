@@ -52,12 +52,6 @@ export const Investment = (props) => {
               " of the project's funds"}
           </p>
           <p>
-            <span className="key-val-key">{"Your voting power:"}</span>
-            <span className="key-val-val">
-              {chainInvestmentData.investor_percentage}
-            </span>
-          </p>
-          <p>
             <span className="key-val-key">{"Retrieved profits (Algo):"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_already_retrieved_amount}
