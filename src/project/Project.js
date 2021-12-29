@@ -3,7 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import { init, fetchHolderCount, fetchSharesDistribution } from "./controller";
 import { ProjectName } from "../ProjectName";
-import renderSharesDistributionChart from "./sharesDistributionChart";
+import renderPieChart from "../charts/renderPieChart";
 
 var QRCode = require("qrcode.react");
 
@@ -94,9 +94,10 @@ export const Project = (props) => {
         sharesSupply
       );
 
-      renderSharesDistributionChart(
+      renderPieChart(
         sharesDistributionChart.current,
-        sharesDistribution
+        sharesDistribution,
+        (d) => d[1].percentage_number
       );
     }
   }, [sharesAssetId, sharesSupply, sharesDistributionChart.current]);

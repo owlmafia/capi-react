@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
 import { init, createProject } from "./controller";
-import renderInvestorsShareChart from "./investorsShareChart";
+import renderPieChart from "../charts/renderPieChart";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
@@ -9,7 +9,6 @@ export const CreateProject = (props) => {
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
-
   const investorsShareChart = useRef(null);
 
   console.log("props: " + JSON.stringify(props));
@@ -20,7 +19,12 @@ export const CreateProject = (props) => {
 
   useEffect(() => {
     if (investorsShareChart.current) {
-      renderInvestorsShareChart(investorsShareChart.current, investorsShare);
+      // investors share % expected to be 0-100 (user input)
+      // note that this text currently isn't validated and can be anything - the d3 chart shows the last valid data, no errors.
+      const nonInvestorsShare = 100 - investorsShare;
+      // the labels are irrelevant here
+      const data = { a: investorsShare, b: nonInvestorsShare };
+      renderPieChart(investorsShareChart.current, data, (d) => d[1]);
     }
   }, [investorsShare, investorsShareChart.current]);
 

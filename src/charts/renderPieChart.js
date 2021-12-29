@@ -1,6 +1,8 @@
 import * as d3 from "d3";
 
-const renderSharesDistributionChart = (container, sharesDistribution) => {
+const renderPieChart = (container, data, dataNumberSelector) => {
+  console.log("Rendering pie chart, data: %o");
+
   // TODO pass parent's dimensions
   const width = 200,
     height = 200,
@@ -16,12 +18,10 @@ const renderSharesDistributionChart = (container, sharesDistribution) => {
     .append("g")
     .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-  const data = sharesDistribution;
   const color = d3.scaleOrdinal().range(["#f00", "#000", "#ff0", "#00f"]);
 
   const pie = d3.pie().value(function (d) {
-    // the first element is the index in the array, second is the object as we passed it
-    return d[1].percentage_number;
+    return dataNumberSelector(d);
   });
   const data_ready = pie(Object.entries(data));
 
@@ -37,4 +37,4 @@ const renderSharesDistributionChart = (container, sharesDistribution) => {
     .style("opacity", 1);
 };
 
-export default renderSharesDistributionChart;
+export default renderPieChart;
