@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { init, fetchHolderCount } from "./controller";
+import { init, fetchHolderCount, fetchSharesDistribution } from "./controller";
 import { ProjectName } from "../ProjectName";
+import renderSharesDistributionChart from "./sharesDistributionChart";
 
 var QRCode = require("qrcode.react");
 
@@ -17,6 +18,8 @@ export const Project = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
   const [paymentLinkIsCopied, setPaymentLinkIsCopied] = useState(false);
   const [paymentAddressIsCopied, setPaymentAddressIsCopied] = useState(false);
+
+  const sharesDistributionChart = useRef(null);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -70,6 +73,33 @@ export const Project = (props) => {
       );
     }
   }, [project]);
+
+  const sharesAssetId = useMemo(() => {
+    if (project) {
+      return project.shares_asset_id;
+    }
+  }, [project]);
+
+  const sharesSupply = useMemo(() => {
+    if (viewProject) {
+      return viewProject.shares_supply;
+    }
+  }, [viewProject]);
+
+  useEffect(async () => {
+    if (sharesAssetId && sharesSupply && sharesDistributionChart.current) {
+      const sharesDistribution = await fetchSharesDistribution(
+        props.statusMsg,
+        sharesAssetId,
+        sharesSupply
+      );
+
+      renderSharesDistributionChart(
+        sharesDistributionChart.current,
+        sharesDistribution
+      );
+    }
+  }, [sharesAssetId, sharesSupply, sharesDistributionChart.current]);
 
   const projectView = () => {
     if (viewProject) {
@@ -126,8 +156,13 @@ export const Project = (props) => {
               </span>
               <span className="key-val-val">{viewProject.investors_share}</span>
             </p>
+            <div className="section-spacer" />
+            <p className="subtitle">{"Holders distribution"}</p>
+            <div>
+              <svg width={200} height={200} ref={sharesDistributionChart} />
+            </div>
             <p>
-              <span className="key-val-key">{"Holders"}</span>
+              <span className="key-val-key">{"Total:"}</span>
               <span className="key-val-val">{holderCount}</span>
             </p>
             <div className="section-spacer" />

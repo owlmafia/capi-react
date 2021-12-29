@@ -10,7 +10,7 @@ export const CreateProject = (props) => {
   const [investorsShare, setInvestorsShare] = useState("40");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
 
-  const d3Container = useRef(null);
+  const investorsShareChart = useRef(null);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -19,10 +19,10 @@ export const CreateProject = (props) => {
   }, []);
 
   useEffect(() => {
-    if (d3Container.current) {
-      renderInvestorsShareChart(d3Container.current, investorsShare);
+    if (investorsShareChart.current) {
+      renderInvestorsShareChart(investorsShareChart.current, investorsShare);
     }
-  }, [investorsShare, d3Container.current]);
+  }, [investorsShare, investorsShareChart.current]);
 
   const formView = () => {
     if (props.myAddress) {
@@ -91,7 +91,7 @@ export const CreateProject = (props) => {
 
           <div className="relative_pos">
             <div>
-              <svg width={200} height={200} ref={d3Container} />
+              <svg width={200} height={200} ref={investorsShareChart} />
             </div>
             <div className="centered_overlay">
               <input

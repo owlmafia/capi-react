@@ -39,6 +39,26 @@ export const fetchHolderCount = async (statusMsg, assetId, setHolderCount) => {
   }
 };
 
+export const fetchSharesDistribution = async (
+  statusMsg,
+  assetId,
+  assetSupply
+) => {
+  try {
+    const { init_log, bridge_shares_distribution } = await wasmPromise;
+    await init_log();
+    let res = await bridge_shares_distribution({
+      asset_id: assetId,
+      asset_supply: assetSupply,
+    });
+    console.log("Shares distribution res: " + JSON.stringify(res));
+    return res.holders;
+  } catch (e) {
+    statusMsg.error(e);
+    return null;
+  }
+};
+
 const shortedAddress = (address) => {
   const short_chars = 3;
   const leading = address.substring(0, short_chars);
