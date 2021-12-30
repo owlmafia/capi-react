@@ -45,14 +45,30 @@ export const fetchSharesDistribution = async (
   assetSupply
 ) => {
   try {
-    const { init_log, bridge_shares_distribution } = await wasmPromise;
-    await init_log();
+    const { bridge_shares_distribution } = await wasmPromise;
     let res = await bridge_shares_distribution({
       asset_id: assetId,
       asset_supply: assetSupply,
     });
     console.log("Shares distribution res: " + JSON.stringify(res));
     return res.holders;
+  } catch (e) {
+    statusMsg.error(e);
+    return null;
+  }
+};
+
+export const fetchIncomeVsSpendingChartData = async (
+  statusMsg,
+  projectUuid
+) => {
+  try {
+    const { bridge_income_vs_spending } = await wasmPromise;
+    let res = await bridge_income_vs_spending({
+      project_uuid: projectUuid,
+    });
+    console.log("Income and spending chart: %o");
+    return res;
   } catch (e) {
     statusMsg.error(e);
     return null;

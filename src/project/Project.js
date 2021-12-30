@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { init, fetchHolderCount, fetchSharesDistribution } from "./controller";
+import {
+  init,
+  fetchHolderCount,
+  fetchSharesDistribution,
+  fetchIncomeVsSpendingChartData,
+} from "./controller";
 import { ProjectName } from "../ProjectName";
 import renderPieChart from "../charts/renderPieChart";
+import renderMultilineChart from "../charts/renderMultilineChart";
 
 var QRCode = require("qrcode.react");
 
@@ -20,6 +26,7 @@ export const Project = (props) => {
   const [paymentAddressIsCopied, setPaymentAddressIsCopied] = useState(false);
 
   const sharesDistributionChart = useRef(null);
+  const incomeVsSpendingChart = useRef(null);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -86,6 +93,12 @@ export const Project = (props) => {
     }
   }, [viewProject]);
 
+  const projectUuid = useMemo(() => {
+    if (project) {
+      return project.uuid;
+    }
+  }, [project]);
+
   useEffect(async () => {
     if (sharesAssetId && sharesSupply && sharesDistributionChart.current) {
       const sharesDistribution = await fetchSharesDistribution(
@@ -101,6 +114,25 @@ export const Project = (props) => {
       );
     }
   }, [sharesAssetId, sharesSupply, sharesDistributionChart.current]);
+
+  useEffect(async () => {
+    if (projectUuid && incomeVsSpendingChart.current) {
+      const chartData = await fetchIncomeVsSpendingChartData(
+        props.statusMsg,
+        projectUuid
+      );
+
+      if (chartData) {
+        renderMultilineChart(
+          incomeVsSpendingChart.current,
+          chartData.flat_data_points,
+          chartData.chart_lines
+        );
+      } else {
+        console.error("Couldn't render income vs spending chart");
+      }
+    }
+  }, [projectUuid, incomeVsSpendingChart.current]);
 
   const projectView = () => {
     if (viewProject) {
@@ -166,6 +198,11 @@ export const Project = (props) => {
               <span className="key-val-key">{"Total:"}</span>
               <span className="key-val-val">{holderCount}</span>
             </p>
+            <p className="subtitle">{"Income and spending"}</p>
+            <div>
+              <svg width={200} height={200} ref={incomeVsSpendingChart} />
+            </div>
+
             <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
             <p>
