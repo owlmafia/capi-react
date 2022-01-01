@@ -42,7 +42,9 @@ const renderMultilineChart = (svg, flatData, lineData) => {
       }),
     ])
     .range([height, 0]);
-  selected.append("g").call(d3.axisLeft(y).ticks(4));
+  selected
+    .append("g")
+    .call(d3.axisLeft(y).ticks(4).tickFormat(d3.format(".0s")));
 
   const lineColors = d3.scaleOrdinal().range(["#e41a1c", "#377eb8"]);
 
