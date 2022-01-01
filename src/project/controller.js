@@ -67,7 +67,7 @@ export const fetchIncomeVsSpendingChartData = async (
     let res = await bridge_income_vs_spending({
       project_uuid: projectUuid,
     });
-    console.log("Income and spending chart: %o");
+    console.log("Income and spending chart: %o", res);
     return res;
   } catch (e) {
     statusMsg.error(e);

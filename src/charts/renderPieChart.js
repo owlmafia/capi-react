@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 
 const renderPieChart = (container, data, dataNumberSelector) => {
-  console.log("Rendering pie chart, data: %o");
+  console.log("Rendering pie chart, data: %o", data);
 
   // TODO pass parent's dimensions
   const width = 200,
