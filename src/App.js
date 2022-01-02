@@ -13,6 +13,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import ProgressBar from "./ProgressBar";
 import { WithdrawalHistory } from "./withdrawal_history/WithdrawalHistory";
+import { Roadmap } from "./roadmap/Roadmap";
+import { AddRoadmapItem } from "./roadmap/AddRoadmapItem";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -233,6 +235,32 @@ const App = () => {
                   path="/withdrawal_history/:uuid"
                   render={(routeProps) => (
                     <WithdrawalHistory
+                      {...routeProps}
+                      myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
+                      statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/roadmap/:uuid"
+                  render={(routeProps) => (
+                    <Roadmap
+                      {...routeProps}
+                      myAddress={myAddress}
+                      showProgress={(show) => setShowProgress(show)}
+                      statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
+                    />
+                  )}
+                />
+                <Route
+                  exact
+                  path="/roadmap/add/:uuid"
+                  render={(routeProps) => (
+                    <AddRoadmapItem
                       {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
