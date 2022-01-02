@@ -5,7 +5,9 @@ export const RoadMapItem = ({ item, onEdit }) => {
       <p>
         <span className="key-val-key">{"Tx id:"}</span>
         <span className="key-val-val">
-          <a href={item.tx_link}>{item.tx_id}</a>
+          <a href={item.tx_link} target="_blank">
+            {item.tx_id}
+          </a>
         </span>
       </p>
       <p>

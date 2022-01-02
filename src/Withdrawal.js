@@ -16,7 +16,9 @@ export const WithdrawalEntry = ({ withdrawal }) => {
       <p>
         <span className="key-val-key">{"Tx id:"}</span>
         <span className="key-val-val">
-          <a href={withdrawal.tx_link}>{withdrawal.tx_id}</a>
+          <a href={withdrawal.tx_link} target="_blank">
+            {withdrawal.tx_id}
+          </a>
         </span>
       </p>
       <p>
