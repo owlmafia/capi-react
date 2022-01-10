@@ -9,23 +9,23 @@ export const WithdrawalHistory = (props) => {
 
   useEffect(() => {
     init(
-      props.match.params.uuid,
+      props.match.params.id,
       props.history.location.state,
       setProject,
       props.statusMsg
     );
-  }, [props.history.location.state, props.match.params.uuid, props.statusMsg]);
+  }, [props.history.location.state, props.match.params.id, props.statusMsg]);
 
   useEffect(() => {
     if (props.myAddress) {
       loadWithdrawals(
         props.statusMsg,
-        props.match.params.uuid,
+        props.match.params.id,
         props.myAddress,
         setWithdrawals
       );
     }
-  }, [props.match.params.uuid, props.statusMsg, props.myAddress]);
+  }, [props.match.params.id, props.statusMsg, props.myAddress]);
 
   const withdrawalsHistory = () => {
     return (

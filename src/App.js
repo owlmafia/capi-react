@@ -219,7 +219,7 @@ const App = () => {
                 />
                 <Route
                   exact
-                  path="/withdraw/:uuid"
+                  path="/withdraw/:id"
                   render={(routeProps) => (
                     <Withdrawal
                       {...routeProps}
@@ -232,7 +232,7 @@ const App = () => {
                 />
                 <Route
                   exact
-                  path="/withdrawal_history/:uuid"
+                  path="/withdrawal_history/:id"
                   render={(routeProps) => (
                     <WithdrawalHistory
                       {...routeProps}
@@ -245,7 +245,7 @@ const App = () => {
                 />
                 <Route
                   exact
-                  path="/roadmap/:uuid"
+                  path="/roadmap/:id"
                   render={(routeProps) => (
                     <Roadmap
                       {...routeProps}
@@ -258,7 +258,7 @@ const App = () => {
                 />
                 <Route
                   exact
-                  path="/roadmap/add/:uuid"
+                  path="/roadmap/add/:id"
                   render={(routeProps) => (
                     <AddRoadmapItem
                       {...routeProps}

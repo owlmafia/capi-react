@@ -2,14 +2,9 @@ import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (
-  projectUuid,
-  projectMaybe,
-  setProject,
-  statusMsg
-) => {
+export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_uuid } =
+    const { init_log, bridge_load_project_user_view_with_id } =
       await wasmPromise;
     await init_log();
 
@@ -18,7 +13,7 @@ export const init = async (
     if (projectMaybe) {
       project = projectMaybe;
     } else {
-      project = await bridge_load_project_user_view_with_uuid(projectUuid);
+      project = await bridge_load_project_user_view_with_id(projectId);
     }
 
     setProject(project);
@@ -33,7 +28,6 @@ export const withdraw = async (
   statusMsg,
   setMyBalance,
   projectId,
-  projectUuid,
   withdrawalAmount,
   withdrawalDescr
 ) => {
@@ -45,7 +39,6 @@ export const withdraw = async (
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
       project_id: projectId,
-      project_uuid: projectUuid,
       sender: myAddress,
       withdrawal_amount: withdrawalAmount,
       description: withdrawalDescr,

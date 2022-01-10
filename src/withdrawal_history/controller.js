@@ -1,13 +1,8 @@
 const wasmPromise = import("wasm");
 
-export const init = async (
-  projectUuid,
-  projectMaybe,
-  setProject,
-  statusMsg
-) => {
+export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_uuid } =
+    const { init_log, bridge_load_project_user_view_with_id } =
       await wasmPromise;
     await init_log();
 
@@ -16,7 +11,7 @@ export const init = async (
     if (projectMaybe) {
       project = projectMaybe;
     } else {
-      project = await bridge_load_project_user_view_with_uuid(projectUuid);
+      project = await bridge_load_project_user_view_with_id(projectId);
     }
 
     setProject(project);
@@ -27,7 +22,7 @@ export const init = async (
 
 export const loadWithdrawals = async (
   statusMsg,
-  projectUuid,
+  projectId,
   creatorAddress,
   setWithdrawalRequests
 ) => {
@@ -35,7 +30,7 @@ export const loadWithdrawals = async (
     const { bridge_load_withdrawals } = await wasmPromise;
 
     const withdrawalsRes = await bridge_load_withdrawals({
-      project_uuid: projectUuid,
+      project_id: projectId,
       creator_address: creatorAddress,
     });
     console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));

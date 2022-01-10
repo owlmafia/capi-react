@@ -8,19 +8,19 @@ export const Roadmap = (props) => {
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    init(props.match.params.uuid, setProject, props.statusMsg);
-  }, [props.match.params.uuid, props.statusMsg]);
+    init(props.match.params.id, setProject, props.statusMsg);
+  }, [props.match.params.id, props.statusMsg]);
 
   useEffect(() => {
     if (props.myAddress) {
       loadRoadmap(
         props.statusMsg,
-        props.match.params.uuid,
+        props.match.params.id,
         props.myAddress,
         setRoadmapItems
       );
     }
-  }, [props.match.params.uuid, props.statusMsg, props.myAddress]);
+  }, [props.match.params.id, props.statusMsg, props.myAddress]);
 
   const roadmapItemsView = () => {
     return (

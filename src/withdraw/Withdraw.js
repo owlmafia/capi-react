@@ -9,12 +9,12 @@ export const Withdrawal = (props) => {
 
   useEffect(() => {
     init(
-      props.match.params.uuid,
+      props.match.params.id,
       props.history.location.state,
       setProject,
       props.statusMsg
     );
-  }, [props.history.location.state, props.match.params.uuid, props.statusMsg]);
+  }, [props.history.location.state, props.match.params.id, props.statusMsg]);
 
   const view = () => {
     if (project) {
@@ -49,9 +49,7 @@ export const Withdrawal = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                // TODO withdraw should work with hash too. Maybe we can remove uuid?
-                null,
-                props.match.params.uuid,
+                props.match.params.id,
                 withdrawalAmount,
                 withdrawalDescr
               );

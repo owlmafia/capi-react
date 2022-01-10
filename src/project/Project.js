@@ -93,12 +93,6 @@ export const Project = (props) => {
     }
   }, [project]);
 
-  const projectUuid = useMemo(() => {
-    if (project) {
-      return project.uuid;
-    }
-  }, [project]);
-
   useEffect(async () => {
     if (sharesAssetId && sharesSupply && sharesDistributionChart.current) {
       const sharesDistribution = await fetchSharesDistribution(
@@ -116,11 +110,10 @@ export const Project = (props) => {
   }, [sharesAssetId, sharesSupply, sharesDistributionChart.current]);
 
   useEffect(async () => {
-    if (projectUuid && incomeVsSpendingChart.current) {
+    if (incomeVsSpendingChart.current) {
       const chartData = await fetchIncomeVsSpendingChartData(
         props.statusMsg,
-        props.match.params.id,
-        projectUuid
+        props.match.params.id
       );
 
       if (chartData) {
@@ -133,7 +126,7 @@ export const Project = (props) => {
         console.error("Couldn't render income vs spending chart");
       }
     }
-  }, [projectUuid, incomeVsSpendingChart.current]);
+  }, [incomeVsSpendingChart.current]);
 
   const projectView = () => {
     if (viewProject) {
@@ -158,7 +151,7 @@ export const Project = (props) => {
               hidden={viewProject.project.creator_address !== props.myAddress}
               onClick={(_) => {
                 props.history.push({
-                  pathname: "/withdraw/" + viewProject.project.uuid,
+                  pathname: "/withdraw/" + props.match.params.id,
                   state: viewProject.project,
                 });
               }}

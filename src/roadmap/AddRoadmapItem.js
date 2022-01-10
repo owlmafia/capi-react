@@ -7,8 +7,8 @@ export const AddRoadmapItem = (props) => {
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    init(props.match.params.uuid, setProject, props.statusMsg);
-  }, [props.match.params.uuid, props.statusMsg]);
+    init(props.match.params.id, setProject, props.statusMsg);
+  }, [props.match.params.id, props.statusMsg]);
 
   const view = () => {
     return (
@@ -32,7 +32,7 @@ export const AddRoadmapItem = (props) => {
                 props.statusMsg,
                 props.showProgress,
                 props.setMyBalance,
-                props.match.params.uuid,
+                props.match.params.id,
                 props.myAddress,
                 itemTitle
               );

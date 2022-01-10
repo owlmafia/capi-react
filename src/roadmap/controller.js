@@ -2,14 +2,14 @@ import { signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (projectUuid, setProject, statusMsg) => {
+export const init = async (projectId, setProject, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_uuid } =
+    const { init_log, bridge_load_project_user_view_with_id } =
       await wasmPromise;
     await init_log();
 
     // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
-    var project = await bridge_load_project_user_view_with_uuid(projectUuid);
+    var project = await bridge_load_project_user_view_with_id(projectId);
     setProject(project);
   } catch (e) {
     statusMsg.error(e);
@@ -18,7 +18,7 @@ export const init = async (projectUuid, setProject, statusMsg) => {
 
 export const loadRoadmap = async (
   statusMsg,
-  projectUuid,
+  projectId,
   creatorAddress,
   setRoadmapItems
 ) => {
@@ -27,7 +27,7 @@ export const loadRoadmap = async (
 
     const roadmapRes = await bridge_load_roadmap({
       creator_address: creatorAddress,
-      project_uuid: projectUuid,
+      project_id: projectId,
     });
     console.log("roadmapRes: " + JSON.stringify(roadmapRes));
 
@@ -41,7 +41,7 @@ export const addRoadmapItem = async (
   statusMsg,
   showProgress,
   setMyBalance,
-  projectUuid,
+  projectId,
   creatorAddress,
   title
 ) => {
@@ -57,7 +57,7 @@ export const addRoadmapItem = async (
 
     const roadmapRes = await bridge_add_roadmap_item({
       creator_address: creatorAddress,
-      project_uuid: projectUuid,
+      project_id: projectId,
       title: title,
       parent: null,
     });
