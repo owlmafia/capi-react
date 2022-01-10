@@ -32,6 +32,7 @@ export const withdraw = async (
   showProgress,
   statusMsg,
   setMyBalance,
+  projectId,
   projectUuid,
   withdrawalAmount,
   withdrawalDescr
@@ -43,6 +44,7 @@ export const withdraw = async (
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
+      project_id: projectId,
       project_uuid: projectUuid,
       sender: myAddress,
       withdrawal_amount: withdrawalAmount,

@@ -32,12 +32,12 @@ export const CreateProjectSuccess = (props) => {
             <a
               href={
                 "https://testnet.algoexplorer.io/asset/" +
-                props.project.share_asset_id
+                props.project.shares_asset_id
               }
               target="_blank"
               rel="noreferrer"
             >
-              {props.project.share_asset_id}
+              {props.project.shares_asset_id}
             </a>
           </span>
         </p>

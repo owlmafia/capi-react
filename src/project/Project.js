@@ -88,10 +88,10 @@ export const Project = (props) => {
   }, [project]);
 
   const sharesSupply = useMemo(() => {
-    if (viewProject) {
-      return viewProject.shares_supply;
+    if (project) {
+      return project.share_supply;
     }
-  }, [viewProject]);
+  }, [project]);
 
   const projectUuid = useMemo(() => {
     if (project) {
@@ -119,6 +119,7 @@ export const Project = (props) => {
     if (projectUuid && incomeVsSpendingChart.current) {
       const chartData = await fetchIncomeVsSpendingChartData(
         props.statusMsg,
+        props.match.params.id,
         projectUuid
       );
 
@@ -145,7 +146,7 @@ export const Project = (props) => {
               <span className="key-val-val">
                 {viewProject.shares_available +
                   " / " +
-                  viewProject.shares_supply}
+                  viewProject.project.share_supply}
               </span>
             </p>
             <p>

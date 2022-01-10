@@ -1,4 +1,4 @@
-import { signTxs } from "../MyAlgo";
+import { signTxs, signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -23,6 +23,7 @@ export const createProject = async (
     bridge_create_project_assets_txs,
     bridge_create_project,
     bridge_submit_create_project,
+    bridge_submit_save_project,
     bridge_balance,
   } = await wasmPromise;
 
@@ -60,10 +61,16 @@ export const createProject = async (
       txs: createProjectSigned,
       pt: createProjectRes.pt, // passthrough
     });
-
     console.log("submitProjectRes: " + JSON.stringify(submitProjectRes));
+    showProgress(false);
 
-    setCreateProjectSuccess(submitProjectRes);
+    let saveProjectSigned = await signTx(submitProjectRes.to_sign);
+    console.log("saveProjectSigned: " + JSON.stringify(saveProjectSigned));
+    let saveProjectRes = await bridge_submit_save_project({
+      tx: saveProjectSigned,
+      pt: submitProjectRes.pt, // passthrough
+    });
+    setCreateProjectSuccess(saveProjectRes);
     showProgress(false);
     statusMsg.success("Project created!");
 

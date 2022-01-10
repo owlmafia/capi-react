@@ -128,12 +128,12 @@ export const Invest = (props) => {
                 <a
                   href={
                     "https://testnet.algoexplorer.io/asset/" +
-                    project.share_asset_id
+                    project.shares_asset_id
                   }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {project.share_asset_id}
+                  {project.shares_asset_id}
                 </a>
               </span>
             </p>

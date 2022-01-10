@@ -49,6 +49,8 @@ export const Withdrawal = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
+                // TODO withdraw should work with hash too. Maybe we can remove uuid?
+                null,
                 props.match.params.uuid,
                 withdrawalAmount,
                 withdrawalDescr

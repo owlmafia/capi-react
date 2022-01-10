@@ -24,7 +24,7 @@ export const init = async (
     if (myAddress) {
       let owned_share_count = await bridge_get_user_shares_count({
         address: myAddress,
-        shares_asset_id: project.share_asset_id,
+        shares_asset_id: project.shares_asset_id,
       });
       console.log("Not staked shares: " + owned_share_count);
       setInvestorCurrentSharesCount(owned_share_count);

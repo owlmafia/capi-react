@@ -25,7 +25,7 @@ export const init = async (
         await bridge_load_investment({
           project_id: projectId,
           app_id: project.central_app_id,
-          shares_asset_id: project.share_asset_id,
+          shares_asset_id: project.shares_asset_id,
           investor_address: myAddress,
         })
       );
@@ -84,7 +84,7 @@ export const retrieveProfits = async (
       await bridge_load_investment({
         project_id: projectId,
         app_id: project.central_app_id,
-        shares_asset_id: project.share_asset_id,
+        shares_asset_id: project.shares_asset_id,
         investor_address: myAddress,
       })
     );
@@ -141,7 +141,7 @@ export const unstake = async (
       await bridge_load_investment({
         project_id: projectId,
         app_id: project.central_app_id,
-        shares_asset_id: project.share_asset_id,
+        shares_asset_id: project.shares_asset_id,
         investor_address: myAddress,
       })
     );
