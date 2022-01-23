@@ -149,6 +149,112 @@ const App = () => {
     }
   };
 
+  const routesView = () => {
+    return (
+      <Routes>
+        {/* <Route exact path="/" component={Home} /> */}
+        <Route
+          path="create"
+          element={
+            <CreateProject
+              myAddress={myAddress}
+              showModal={(modal) => setModal(modal)}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/project/:id"
+          element={
+            <Project
+              myAddress={myAddress}
+              showModal={(modal) => setModal(modal)}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/invest/:id"
+          render={
+            <Invest
+              myAddress={myAddress}
+              showModal={(modal) => setModal(modal)}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/investment/:id"
+          render={
+            <Investment
+              myAddress={myAddress}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/withdraw/:id"
+          render={
+            <Withdrawal
+              myAddress={myAddress}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/withdrawal_history/:id"
+          render={
+            <WithdrawalHistory
+              myAddress={myAddress}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/roadmap/:id"
+          render={
+            <Roadmap
+              myAddress={myAddress}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route
+          exact
+          path="/roadmap/add/:id"
+          render={
+            <AddRoadmapItem
+              myAddress={myAddress}
+              showProgress={(show) => setShowProgress(show)}
+              statusMsg={statusMsgUpdater}
+              setMyBalance={setMyBalance}
+            />
+          }
+        />
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
+    );
+  };
+
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -175,108 +281,7 @@ const App = () => {
             </nav>
             <div id="wrapper">
               {statusMsgView()}
-
-              <Routes>
-                {/* <Route exact path="/" component={Home} /> */}
-                <Route
-                  path="create"
-                  element={
-                    <CreateProject
-                      myAddress={myAddress}
-                      showModal={(modal) => setModal(modal)}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/project/:id"
-                  element={
-                    <Project
-                      myAddress={myAddress}
-                      showModal={(modal) => setModal(modal)}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/invest/:id"
-                  render={
-                    <Invest
-                      myAddress={myAddress}
-                      showModal={(modal) => setModal(modal)}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/investment/:id"
-                  render={
-                    <Investment
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/withdraw/:id"
-                  render={
-                    <Withdrawal
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/withdrawal_history/:id"
-                  render={
-                    <WithdrawalHistory
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/roadmap/:id"
-                  render={
-                    <Roadmap
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route
-                  exact
-                  path="/roadmap/add/:id"
-                  render={
-                    <AddRoadmapItem
-                      myAddress={myAddress}
-                      showProgress={(show) => setShowProgress(show)}
-                      statusMsg={statusMsgUpdater}
-                      setMyBalance={setMyBalance}
-                    />
-                  }
-                />
-                <Route path="*" element={<NotFound />}></Route>
-              </Routes>
+              {routesView()}
             </div>
           </BrowserRouter>
           {modal && (
