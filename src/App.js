@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import { CreateProject } from "./create/CreateProject";
 import { Invest } from "./invest/Invest";
 import { Project } from "./project/Project";
@@ -161,120 +161,124 @@ const App = () => {
         <div className="container">
           {showProgress && <ProgressBar />}
           <div>{connectButton()}</div>
-          {yourAddressView()}
-          <Router>
+
+          <BrowserRouter>
+            {yourAddressView()}
+            <nav
+              style={{
+                borderBottom: "solid 1px",
+                paddingBottom: "1rem",
+              }}
+            >
+              <Link to="/create">Create</Link> |{" "}
+              <Link to="/my_projects">My projects</Link>
+            </nav>
             <div id="wrapper">
               {statusMsgView()}
 
-              <Switch>
+              <Routes>
                 {/* <Route exact path="/" component={Home} /> */}
-                <Route exact path="/create">
-                  <CreateProject
-                    myAddress={myAddress}
-                    showModal={(modal) => setModal(modal)}
-                    showProgress={(show) => setShowProgress(show)}
-                    statusMsg={statusMsgUpdater}
-                    setMyBalance={setMyBalance}
-                  />
-                </Route>
+                <Route
+                  path="create"
+                  element={
+                    <CreateProject
+                      myAddress={myAddress}
+                      showModal={(modal) => setModal(modal)}
+                      showProgress={(show) => setShowProgress(show)}
+                      statusMsg={statusMsgUpdater}
+                      setMyBalance={setMyBalance}
+                    />
+                  }
+                />
                 <Route
                   exact
                   path="/project/:id"
-                  render={(routeProps) => (
+                  element={
                     <Project
-                      {...routeProps}
                       myAddress={myAddress}
                       showModal={(modal) => setModal(modal)}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/invest/:id"
-                  render={(routeProps) => (
+                  render={
                     <Invest
-                      {...routeProps}
                       myAddress={myAddress}
                       showModal={(modal) => setModal(modal)}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/investment/:id"
-                  render={(routeProps) => (
+                  render={
                     <Investment
-                      {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/withdraw/:id"
-                  render={(routeProps) => (
+                  render={
                     <Withdrawal
-                      {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/withdrawal_history/:id"
-                  render={(routeProps) => (
+                  render={
                     <WithdrawalHistory
-                      {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/roadmap/:id"
-                  render={(routeProps) => (
+                  render={
                     <Roadmap
-                      {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
                 <Route
                   exact
                   path="/roadmap/add/:id"
-                  render={(routeProps) => (
+                  render={
                     <AddRoadmapItem
-                      {...routeProps}
                       myAddress={myAddress}
                       showProgress={(show) => setShowProgress(show)}
                       statusMsg={statusMsgUpdater}
                       setMyBalance={setMyBalance}
                     />
-                  )}
+                  }
                 />
-                <Route path="*">
-                  <NotFound />
-                </Route>
-              </Switch>
+                <Route path="*" element={<NotFound />}></Route>
+              </Routes>
             </div>
-          </Router>
+          </BrowserRouter>
           {modal && (
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>
               {modal.body}

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { init, addRoadmapItem } from "./controller";
 import { ProjectName } from "../ProjectName";
+import { useParams } from "react-router-dom";
 
 export const AddRoadmapItem = (props) => {
+  let params = useParams();
+
   const [itemTitle, setItemTitle] = useState("item title blabbla");
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    init(props.match.params.id, setProject, props.statusMsg);
-  }, [props.match.params.id, props.statusMsg]);
+    init(params.id, setProject, props.statusMsg);
+  }, [params.id, props.statusMsg]);
 
   const view = () => {
     return (
@@ -32,7 +35,7 @@ export const AddRoadmapItem = (props) => {
                 props.statusMsg,
                 props.showProgress,
                 props.setMyBalance,
-                props.match.params.id,
+                params.id,
                 props.myAddress,
                 itemTitle
               );

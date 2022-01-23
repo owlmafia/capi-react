@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { init, invest, stake } from "./controller";
 import { ProjectName } from "../ProjectName";
+import { useParams } from "react-router-dom";
 
 export const Invest = (props) => {
+  let params = useParams();
+
   const [project, setProject] = useState(null);
   const [buySharesCount, setBuySharesCount] = useState("");
   const [investorCurrentSharesCount, setInvestorCurrentSharesCount] =
@@ -12,15 +15,15 @@ export const Invest = (props) => {
   console.log("props: " + JSON.stringify(props));
 
   useEffect(() => {
-    //   console.log("loading project id: " + JSON.stringify(props.match.params));
+    //   console.log("loading project id: " + JSON.stringify(params));
     init(
-      props.match.params.id,
+      params.id,
       props.myAddress,
       props.statusMsg,
       setProject,
       setInvestorCurrentSharesCount
     );
-  }, [props.match.params.id, props.statusMsg, props.myAddress]);
+  }, [params.id, props.statusMsg, props.myAddress]);
 
   const yourFreeSharesView = () => {
     // if (investorCurrentSharesCount !== "") {
@@ -63,7 +66,7 @@ export const Invest = (props) => {
                   props.setMyBalance,
                   props.showModal,
                   props.history,
-                  props.match.params.id,
+                  params.id,
                   project,
                   buySharesCount
                 );
@@ -97,7 +100,7 @@ export const Invest = (props) => {
                 props.showModal,
                 setProject,
                 props.history,
-                props.match.params.id,
+                params.id,
                 project
               );
             }}

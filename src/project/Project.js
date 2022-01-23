@@ -10,10 +10,13 @@ import {
 import { ProjectName } from "../ProjectName";
 import renderPieChart from "../charts/renderPieChart";
 import renderMultilineChart from "../charts/renderMultilineChart";
+import { Link, useParams } from "react-router-dom";
 
 var QRCode = require("qrcode.react");
 
 export const Project = (props) => {
+  let params = useParams();
+
   const [viewProject, setViewProject] = useState(null);
   const [funds, setFunds] = useState(null);
 
@@ -59,9 +62,9 @@ export const Project = (props) => {
 
   useEffect(() => {
     async function asyncInit() {
-      //   console.log("loading project id: " + JSON.stringify(props.match.params));
+      //   console.log("loading project id: " + JSON.stringify(params));
       await init(
-        props.match.params.id,
+        params.id,
         setViewProject,
         setFunds,
         setCustomerAddressDisplay,
@@ -69,7 +72,7 @@ export const Project = (props) => {
       );
     }
     asyncInit();
-  }, [props.match.params.id, props.statusMsg]);
+  }, [params.id, props.statusMsg]);
 
   useEffect(() => {
     if (project) {
@@ -113,7 +116,7 @@ export const Project = (props) => {
     if (incomeVsSpendingChart.current) {
       const chartData = await fetchIncomeVsSpendingChartData(
         props.statusMsg,
-        props.match.params.id
+        params.id
       );
 
       if (chartData) {
@@ -146,18 +149,13 @@ export const Project = (props) => {
               <span className="key-val-key">{"Funds (Algo):"}</span>
               <span className="key-val-val">{funds}</span>
             </p>
-            <button
+            <Link
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewProject.project.creator_address !== props.myAddress}
-              onClick={(_) => {
-                props.history.push({
-                  pathname: "/withdraw/" + props.match.params.id,
-                  state: viewProject.project,
-                });
-              }}
+              to={"/withdraw/" + params.id}
             >
               {"Withdraw"}
-            </button>
+            </Link>
             <p>
               <span className="key-val-key">
                 {"Investor's part"}
@@ -196,7 +194,6 @@ export const Project = (props) => {
             <div>
               <svg width={200} height={200} ref={incomeVsSpendingChart} />
             </div>
-
             <div className="section-spacer" />
             <p className="subtitle">{"Customer payment data"}</p>
             <p>
@@ -224,7 +221,6 @@ export const Project = (props) => {
                 </CopyToClipboard>
               </span>
             </p>
-
             {/* <CopyToClipboard
               text={viewProject.project.customer_escrow_address}
               onCopy={onCopyPaymentAddress}
@@ -246,7 +242,6 @@ export const Project = (props) => {
                 </span>
               </div>
             </CopyToClipboard> */}
-
             <CopyToClipboard
               text={viewProject.customer_payment_deeplink}
               onCopy={onCopyPaymentLink}
@@ -260,7 +255,6 @@ export const Project = (props) => {
             </CopyToClipboard>
             <p>{"Payment QR code:"}</p>
             <QRCode value={viewProject.customer_payment_deeplink} />
-
             <div className="section-spacer" />
             <p className="subtitle">{"Investor links"}</p>
             <CopyToClipboard
@@ -280,13 +274,9 @@ export const Project = (props) => {
                 </span>
               </p>
             </CopyToClipboard>
-            <a
-              href={viewProject.project.my_investment_link}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <Link to={viewProject.project.my_investment_link_rel}>
               {"My investment"}
-            </a>
+            </Link>
           </div>
           <div className="section-spacer" />
         </div>

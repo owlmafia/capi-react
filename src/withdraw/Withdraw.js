@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { init, withdraw } from "./controller";
 import { ProjectName } from "../ProjectName";
+import { useParams } from "react-router-dom";
 
 export const Withdrawal = (props) => {
+  let params = useParams();
+
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
   const [project, setProject] = useState(null);
 
   useEffect(() => {
-    init(
-      props.match.params.id,
-      props.history.location.state,
-      setProject,
-      props.statusMsg
-    );
-  }, [props.history.location.state, props.match.params.id, props.statusMsg]);
+    // TODO pass cached project (props.history.location.state)? not sure this is still needed, with the new navigation
+    // init(params.id, props.history.location.state, setProject, props.statusMsg);
+    init(params.id, null, setProject, props.statusMsg);
+    // }, [props.history.location.state, params.id, props.statusMsg]);
+  }, [params.id, props.statusMsg]);
 
   const view = () => {
     if (project) {
@@ -49,7 +50,7 @@ export const Withdrawal = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                props.match.params.id,
+                params.id,
                 withdrawalAmount,
                 withdrawalDescr
               );

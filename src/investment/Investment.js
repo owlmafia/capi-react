@@ -2,24 +2,27 @@ import React, { useState, useEffect, useRef } from "react";
 import { init, retrieveProfits, unstake } from "./controller";
 import { ProjectName } from "../ProjectName";
 import renderPieChart from "../charts/renderPieChart";
+import { useParams } from "react-router-dom";
 
 export const Investment = (props) => {
+  let params = useParams();
+
   const [project, setProject] = useState(null);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
   const [youAreNotInvested, setYouAreNotInvested] = useState(false);
   const myShareChart = useRef(null);
 
   useEffect(() => {
-    console.log("loading project id: " + JSON.stringify(props.match.params));
+    console.log("loading project id: " + JSON.stringify(params));
     init(
-      props.match.params.id,
+      params.id,
       props.myAddress,
       props.statusMsg,
       setProject,
       setYouAreNotInvested,
       setChainInvestmentData
     );
-  }, [props.match.params, props.myAddress, props.statusMsg]);
+  }, [params.id, props.myAddress, props.statusMsg]);
 
   useEffect(() => {
     if (myShareChart.current && chainInvestmentData) {
@@ -73,7 +76,7 @@ export const Investment = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                props.match.params.id,
+                params.id,
                 project,
                 chainInvestmentData.investor_harvestable_amount_microalgos,
                 setChainInvestmentData
@@ -92,7 +95,7 @@ export const Investment = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.setMyBalance,
-                props.match.params.id,
+                params.id,
                 project,
                 setChainInvestmentData,
                 setYouAreNotInvested
