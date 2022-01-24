@@ -1,32 +1,27 @@
 import { Outlet } from "react-router-dom";
+import { MyAccount } from "./MyAccount.js";
 
-export const OuterWireframe = ({ myAddress, myAddressDisplay, myBalance }) => {
+export const OuterWireframe = ({
+  myAddress,
+  setMyAddress,
+  myAddressDisplay,
+  setMyAddressDisplay,
+  myBalance,
+  setMyBalance,
+  statusMsgUpdater,
+}) => {
   return (
     <div>
-      {yourAddressView(myAddress, myAddressDisplay, myBalance)}
+      <MyAccount
+        myAddress={myAddress}
+        setMyAddress={setMyAddress}
+        myAddressDisplay={myAddressDisplay}
+        setMyAddressDisplay={setMyAddressDisplay}
+        myBalance={myBalance}
+        setMyBalance={setMyBalance}
+        statusMsgUpdater={statusMsgUpdater}
+      />
       <Outlet />
     </div>
   );
-};
-
-const yourAddressView = (myAddress, myAddressDisplay, myBalance) => {
-  if (myAddress !== "") {
-    return (
-      <div id="user-data">
-        {/* <div>{"Your address:"}</div> */}
-        <div className="your-address">
-          <a
-            href={"https://testnet.algoexplorer.io/address/" + myAddress}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {myAddressDisplay}
-          </a>
-        </div>
-        <div id="my-balance">{myBalance}</div>
-      </div>
-    );
-  } else {
-    return null;
-  }
 };

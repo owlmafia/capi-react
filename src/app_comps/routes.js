@@ -14,6 +14,7 @@ import { Route, Routes } from "react-router-dom";
 
 export const routesView = (
   myAddress,
+  setMyAddress,
   setModal,
   setShowProgress,
   statusMsgUpdater,
@@ -22,7 +23,8 @@ export const routesView = (
   myBalance,
   statusMsg,
   onCopyErrorMsg,
-  errorMsgIsCopied
+  errorMsgIsCopied,
+  setMyAddressDisplay
 ) => {
   return (
     <Routes>
@@ -31,8 +33,12 @@ export const routesView = (
         element={
           <OuterWireframe
             myAddress={myAddress}
+            setMyAddress={setMyAddress}
             myAddressDisplay={myAddressDisplay}
+            setMyAddressDisplay={setMyAddressDisplay}
             myBalance={myBalance}
+            setMyBalance={setMyBalance}
+            statusMsgUpdater={statusMsgUpdater}
           />
         }
       >
