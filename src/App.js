@@ -1,5 +1,11 @@
 import "./App.scss";
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link,
+  useParams,
+} from "react-router-dom";
 import { CreateProject } from "./create/CreateProject";
 import { Invest } from "./invest/Invest";
 import { Project } from "./project/Project";
@@ -15,6 +21,22 @@ import ProgressBar from "./ProgressBar";
 import { WithdrawalHistory } from "./withdrawal_history/WithdrawalHistory";
 import { Roadmap } from "./roadmap/Roadmap";
 import { AddRoadmapItem } from "./roadmap/AddRoadmapItem";
+import {
+  ProSidebar,
+  Menu,
+  MenuItem,
+  SubMenu,
+  SidebarContent,
+  SidebarHeader,
+} from "react-pro-sidebar";
+import {
+  FaTachometerAlt,
+  FaGem,
+  FaList,
+  FaGithub,
+  FaRegLaughWink,
+  FaHeart,
+} from "react-icons/fa";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -166,6 +188,10 @@ const App = () => {
           }
         />
         <Route
+          path="my_projects"
+          element={<div>{"hellooooo my projects todo"}</div>}
+        />
+        <Route
           exact
           path="/project/:id"
           element={
@@ -180,7 +206,7 @@ const App = () => {
         <Route
           exact
           path="/invest/:id"
-          render={
+          element={
             <Invest
               myAddress={myAddress}
               showModal={(modal) => setModal(modal)}
@@ -193,7 +219,7 @@ const App = () => {
         <Route
           exact
           path="/investment/:id"
-          render={
+          element={
             <Investment
               myAddress={myAddress}
               showProgress={(show) => setShowProgress(show)}
@@ -205,7 +231,7 @@ const App = () => {
         <Route
           exact
           path="/withdraw/:id"
-          render={
+          element={
             <Withdrawal
               myAddress={myAddress}
               showProgress={(show) => setShowProgress(show)}
@@ -217,7 +243,7 @@ const App = () => {
         <Route
           exact
           path="/withdrawal_history/:id"
-          render={
+          element={
             <WithdrawalHistory
               myAddress={myAddress}
               showProgress={(show) => setShowProgress(show)}
@@ -229,7 +255,7 @@ const App = () => {
         <Route
           exact
           path="/roadmap/:id"
-          render={
+          element={
             <Roadmap
               myAddress={myAddress}
               showProgress={(show) => setShowProgress(show)}
@@ -241,7 +267,7 @@ const App = () => {
         <Route
           exact
           path="/roadmap/add/:id"
-          render={
+          element={
             <AddRoadmapItem
               myAddress={myAddress}
               showProgress={(show) => setShowProgress(show)}
@@ -250,6 +276,7 @@ const App = () => {
             />
           }
         />
+
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     );
@@ -270,18 +297,13 @@ const App = () => {
 
           <BrowserRouter>
             {yourAddressView()}
-            <nav
-              style={{
-                borderBottom: "solid 1px",
-                paddingBottom: "1rem",
-              }}
-            >
-              <Link to="/create">Create</Link> |{" "}
-              <Link to="/my_projects">My projects</Link>
-            </nav>
-            <div id="wrapper">
-              {statusMsgView()}
-              {routesView()}
+
+            <div id="nav_and_main">
+              <SideBar />
+              <div id="wrapper">
+                {statusMsgView()}
+                {routesView()}
+              </div>
             </div>
           </BrowserRouter>
           {modal && (
@@ -296,3 +318,38 @@ const App = () => {
 };
 
 export default App;
+
+export const SideBar = (props) => {
+  let params = useParams();
+
+  return (
+    <ProSidebar>
+      <SidebarHeader>
+        <div
+          style={{
+            height: "80px",
+            padding: "50px 20px 50px 20px",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "red",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <Menu iconShape="square">
+          <MenuItem icon={<FaGem />}>
+            <Link to="/create">Create</Link>
+          </MenuItem>
+          <MenuItem icon={<FaHeart />}>
+            <Link to="/my_projects">My projects</Link>
+          </MenuItem>
+        </Menu>
+      </SidebarContent>
+    </ProSidebar>
+  );
+};

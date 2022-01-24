@@ -7,7 +7,12 @@ body {
     min-height: 100vh;
     margin: 0;
   }
-  
+    
+  #nav_and_main {
+    display: flex;
+    gap: 100px;
+  }
+
   dl {
     display: grid;
     grid-template-columns: max-content auto;
