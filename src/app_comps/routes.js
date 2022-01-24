@@ -28,20 +28,7 @@ export const routesView = (
 ) => {
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          <OuterWireframe
-            myAddress={myAddress}
-            setMyAddress={setMyAddress}
-            myAddressDisplay={myAddressDisplay}
-            setMyAddressDisplay={setMyAddressDisplay}
-            myBalance={myBalance}
-            setMyBalance={setMyBalance}
-            statusMsgUpdater={statusMsgUpdater}
-          />
-        }
-      >
+      <Route path="/" element={<OuterWireframe />}>
         <Route
           path="global"
           element={
@@ -50,6 +37,13 @@ export const routesView = (
               statusMsg={statusMsg}
               onCopyErrorMsg={onCopyErrorMsg}
               errorMsgIsCopied={errorMsgIsCopied}
+              myAddress={myAddress}
+              setMyAddress={setMyAddress}
+              myAddressDisplay={myAddressDisplay}
+              setMyAddressDisplay={setMyAddressDisplay}
+              myBalance={myBalance}
+              setMyBalance={setMyBalance}
+              statusMsgUpdater={statusMsgUpdater}
             />
           }
         >
@@ -78,6 +72,13 @@ export const routesView = (
               statusMsg={statusMsg}
               onCopyErrorMsg={onCopyErrorMsg}
               errorMsgIsCopied={errorMsgIsCopied}
+              myAddress={myAddress}
+              setMyAddress={setMyAddress}
+              myAddressDisplay={myAddressDisplay}
+              setMyAddressDisplay={setMyAddressDisplay}
+              myBalance={myBalance}
+              setMyBalance={setMyBalance}
+              statusMsgUpdater={statusMsgUpdater}
             />
           }
         >

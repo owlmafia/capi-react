@@ -1,27 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { MyAccount } from "./MyAccount.js";
 
-export const OuterWireframe = ({
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  setMyBalance,
-  statusMsgUpdater,
-}) => {
-  return (
-    <div>
-      <MyAccount
-        myAddress={myAddress}
-        setMyAddress={setMyAddress}
-        myAddressDisplay={myAddressDisplay}
-        setMyAddressDisplay={setMyAddressDisplay}
-        myBalance={myBalance}
-        setMyBalance={setMyBalance}
-        statusMsgUpdater={statusMsgUpdater}
-      />
-      <Outlet />
-    </div>
-  );
+export const OuterWireframe = () => {
+  // Just an outlet: outer wireframe is currently not really needed
+  // (it was when there was a topbar)
+  // but it might be in the future, so leaving it
+  return <Outlet />;
 };

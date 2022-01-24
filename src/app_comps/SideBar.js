@@ -4,11 +4,21 @@ import {
   MenuItem,
   SidebarContent,
   SidebarHeader,
+  SidebarFooter,
 } from "react-pro-sidebar";
 import { FaGem, FaHeart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MyAccount } from "./MyAccount";
 
-export const SideBar = () => {
+export const SideBar = ({
+  myAddress,
+  setMyAddress,
+  myAddressDisplay,
+  setMyAddressDisplay,
+  myBalance,
+  setMyBalance,
+  statusMsgUpdater,
+}) => {
   return (
     <ProSidebar>
       <SidebarHeader>
@@ -37,6 +47,17 @@ export const SideBar = () => {
           </MenuItem>
         </Menu>
       </SidebarContent>
+      <SidebarFooter>
+        <MyAccount
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          setMyBalance={setMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+        />
+      </SidebarFooter>
     </ProSidebar>
   );
 };

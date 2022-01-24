@@ -4,11 +4,21 @@ import {
   MenuItem,
   SidebarContent,
   SidebarHeader,
+  SidebarFooter,
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import { FaAddressBook, FaAnchor } from "react-icons/fa";
+import { MyAccount } from "./MyAccount";
 
-export const SideBarDao = () => {
+export const SideBarDao = ({
+  myAddress,
+  setMyAddress,
+  myAddressDisplay,
+  setMyAddressDisplay,
+  myBalance,
+  setMyBalance,
+  statusMsgUpdater,
+}) => {
   return (
     <ProSidebar>
       <SidebarHeader>
@@ -49,6 +59,17 @@ export const SideBarDao = () => {
           </MenuItem>
         </Menu>
       </SidebarContent>
+      <SidebarFooter>
+        <MyAccount
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          setMyBalance={setMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+        />
+      </SidebarFooter>
     </ProSidebar>
   );
 };

@@ -9,12 +9,40 @@ export const Wireframe = ({
   statusMsg,
   onCopyErrorMsg,
   errorMsgIsCopied,
+
+  myAddress,
+  setMyAddress,
+  myAddressDisplay,
+  setMyAddressDisplay,
+  myBalance,
+  setMyBalance,
+  statusMsgUpdater,
 }) => {
   const sideBar = () => {
     if (isGlobal) {
-      return <SideBar />;
+      return (
+        <SideBar
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          setMyBalance={setMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+        />
+      );
     } else {
-      return <SideBarDao />;
+      return (
+        <SideBarDao
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          setMyBalance={setMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+        />
+      );
     }
   };
   return (
