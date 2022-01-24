@@ -5,6 +5,7 @@ import {
   Routes,
   Link,
   useParams,
+  Outlet,
 } from "react-router-dom";
 import { CreateProject } from "./create/CreateProject";
 import { Invest } from "./invest/Invest";
@@ -25,18 +26,11 @@ import {
   ProSidebar,
   Menu,
   MenuItem,
-  SubMenu,
   SidebarContent,
   SidebarHeader,
 } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
-} from "react-icons/fa";
+import { FaGem, FaHeart, FaAddressBook, FaAnchor } from "react-icons/fa";
+import { Stats } from "./stats/Stats";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -118,170 +112,6 @@ const App = () => {
     }
   };
 
-  const yourAddressView = () => {
-    if (myAddress !== "") {
-      return (
-        <div id="user-data">
-          {/* <div>{"Your address:"}</div> */}
-          <div className="your-address">
-            <a
-              href={"https://testnet.algoexplorer.io/address/" + myAddress}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {myAddressDisplay}
-            </a>
-          </div>
-          <div id="my-balance">{myBalance}</div>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
-
-  const statusMsgView = () => {
-    if (statusMsg) {
-      let shortMsg = statusMsg.msg;
-      let maxMsgLength = 200;
-      if (shortMsg.length > maxMsgLength) {
-        shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
-      }
-
-      if (statusMsg.type === "success") {
-        return <div className="success">{statusMsg.msg}</div>;
-      } else if (statusMsg.type === "error") {
-        return (
-          <div className="error">
-            <CopyToClipboard text={statusMsg.msg} onCopy={onCopyErrorMsg}>
-              <div>
-                {shortMsg}
-                <span className="copy">
-                  {errorMsgIsCopied ? "copied!" : <MdContentCopy />}
-                </span>
-              </div>
-            </CopyToClipboard>
-          </div>
-        );
-      } else {
-        throw Error("Invalid status msg type: " + statusMsg.type);
-      }
-    } else {
-      return null;
-    }
-  };
-
-  const routesView = () => {
-    return (
-      <Routes>
-        {/* <Route exact path="/" component={Home} /> */}
-        <Route
-          path="create"
-          element={
-            <CreateProject
-              myAddress={myAddress}
-              showModal={(modal) => setModal(modal)}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          path="my_projects"
-          element={<div>{"hellooooo my projects todo"}</div>}
-        />
-        <Route
-          exact
-          path="/project/:id"
-          element={
-            <Project
-              myAddress={myAddress}
-              showModal={(modal) => setModal(modal)}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/invest/:id"
-          element={
-            <Invest
-              myAddress={myAddress}
-              showModal={(modal) => setModal(modal)}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/investment/:id"
-          element={
-            <Investment
-              myAddress={myAddress}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/withdraw/:id"
-          element={
-            <Withdrawal
-              myAddress={myAddress}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/withdrawal_history/:id"
-          element={
-            <WithdrawalHistory
-              myAddress={myAddress}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/roadmap/:id"
-          element={
-            <Roadmap
-              myAddress={myAddress}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-        <Route
-          exact
-          path="/roadmap/add/:id"
-          element={
-            <AddRoadmapItem
-              myAddress={myAddress}
-              showProgress={(show) => setShowProgress(show)}
-              statusMsg={statusMsgUpdater}
-              setMyBalance={setMyBalance}
-            />
-          }
-        />
-
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
-    );
-  };
-
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -297,14 +127,19 @@ const App = () => {
 
           <BrowserRouter>
             {yourAddressView()}
+            {routesView(
+              myAddress,
+              setModal,
+              setShowProgress,
+              statusMsgUpdater,
+              setMyBalance,
+              myAddressDisplay,
+              myBalance,
 
-            <div id="nav_and_main">
-              <SideBar />
-              <div id="wrapper">
-                {statusMsgView()}
-                {routesView()}
-              </div>
-            </div>
+              statusMsg,
+              onCopyErrorMsg,
+              errorMsgIsCopied
+            )}
           </BrowserRouter>
           {modal && (
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>
@@ -318,6 +153,258 @@ const App = () => {
 };
 
 export default App;
+
+export const Wireframe = ({
+  isGlobal,
+  statusMsg,
+  onCopyErrorMsg,
+  errorMsgIsCopied,
+}) => {
+  const sideBar = () => {
+    if (isGlobal) {
+      return <SideBar />;
+    } else {
+      return <SideBarDao />;
+    }
+  };
+  return (
+    <div id="nav_and_main">
+      {sideBar()}
+      <div id="wrapper">
+        {statusMsgView(statusMsg, onCopyErrorMsg, errorMsgIsCopied)}
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
+const yourAddressView = (myAddress, myAddressDisplay, myBalance) => {
+  if (myAddress !== "") {
+    return (
+      <div id="user-data">
+        {/* <div>{"Your address:"}</div> */}
+        <div className="your-address">
+          <a
+            href={"https://testnet.algoexplorer.io/address/" + myAddress}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {myAddressDisplay}
+          </a>
+        </div>
+        <div id="my-balance">{myBalance}</div>
+      </div>
+    );
+  } else {
+    return null;
+  }
+};
+
+export const OuterWireframe = ({ myAddress, myAddressDisplay, myBalance }) => {
+  return (
+    <div>
+      {yourAddressView(myAddress, myAddressDisplay, myBalance)}
+      <Outlet />
+    </div>
+  );
+};
+
+const routesView = (
+  myAddress,
+  setModal,
+  setShowProgress,
+  statusMsgUpdater,
+  setMyBalance,
+  myAddressDisplay,
+  myBalance,
+
+  statusMsg,
+  onCopyErrorMsg,
+  errorMsgIsCopied
+) => {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <OuterWireframe
+            myAddress={myAddress}
+            myAddressDisplay={myAddressDisplay}
+            myBalance={myBalance}
+          />
+        }
+      >
+        <Route
+          path="global"
+          element={
+            <Wireframe
+              isGlobal={true}
+              statusMsg={statusMsg}
+              onCopyErrorMsg={onCopyErrorMsg}
+              errorMsgIsCopied={errorMsgIsCopied}
+            />
+          }
+        >
+          <Route
+            path="create"
+            element={
+              <CreateProject
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            path="my_projects"
+            element={<div>{"hellooooo my projects todo"}</div>}
+          />
+        </Route>
+        <Route
+          path=":id"
+          element={
+            <Wireframe
+              isGlobal={false}
+              statusMsg={statusMsg}
+              onCopyErrorMsg={onCopyErrorMsg}
+              errorMsgIsCopied={errorMsgIsCopied}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Project
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+              />
+            }
+          />
+
+          <Route
+            exact
+            path="invest"
+            element={
+              <Invest
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="investment"
+            element={
+              <Investment
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="withdraw"
+            element={
+              <Withdrawal
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="withdrawal_history"
+            element={
+              <WithdrawalHistory
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="roadmap"
+            element={
+              <Roadmap
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="roadmap/add"
+            element={
+              <AddRoadmapItem
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="stats"
+            element={
+              <Stats
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+              />
+            }
+          />
+        </Route>
+      </Route>
+      <Route path="*" element={<NotFound />}></Route>
+    </Routes>
+  );
+};
+
+const statusMsgView = (statusMsg, onCopyErrorMsg, errorMsgIsCopied) => {
+  if (statusMsg) {
+    let shortMsg = statusMsg.msg;
+    let maxMsgLength = 200;
+    if (shortMsg.length > maxMsgLength) {
+      shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
+    }
+
+    if (statusMsg.type === "success") {
+      return <div className="success">{statusMsg.msg}</div>;
+    } else if (statusMsg.type === "error") {
+      return (
+        <div className="error">
+          <CopyToClipboard text={statusMsg.msg} onCopy={onCopyErrorMsg}>
+            <div>
+              {shortMsg}
+              <span className="copy">
+                {errorMsgIsCopied ? "copied!" : <MdContentCopy />}
+              </span>
+            </div>
+          </CopyToClipboard>
+        </div>
+      );
+    } else {
+      throw Error("Invalid status msg type: " + statusMsg.type);
+    }
+  } else {
+    return null;
+  }
+};
 
 export const SideBar = (props) => {
   let params = useParams();
@@ -343,10 +430,57 @@ export const SideBar = (props) => {
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<FaGem />}>
-            <Link to="/create">Create</Link>
+            <Link to="create">Create</Link>
           </MenuItem>
           <MenuItem icon={<FaHeart />}>
-            <Link to="/my_projects">My projects</Link>
+            <Link to="my_projects">My projects</Link>
+          </MenuItem>
+        </Menu>
+      </SidebarContent>
+    </ProSidebar>
+  );
+};
+
+export const SideBarDao = ({ projectId }) => {
+  let params = useParams();
+
+  return (
+    <ProSidebar>
+      <SidebarHeader>
+        <div
+          style={{
+            height: "80px",
+            padding: "50px 20px 50px 20px",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "blue",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <Menu iconShape="square">
+          <MenuItem icon={<FaAddressBook />}>
+            <Link to="">Home</Link>
+          </MenuItem>
+          <MenuItem icon={<FaAnchor />}>
+            <Link to="roadmap">Roadmap</Link>
+          </MenuItem>
+          <MenuItem icon={<FaAnchor />}>
+            <Link to="stats">Stats</Link>
+          </MenuItem>
+          <MenuItem icon={<FaAnchor />}>
+            <Link to="investment">My investment</Link>
+          </MenuItem>
+          <MenuItem icon={<FaAnchor />}>
+            <Link to="withdraw">Withdraw</Link>
+          </MenuItem>
+          <MenuItem icon={<FaAnchor />}>
+            <Link to="withdrawal_history">Funds activity</Link>
           </MenuItem>
         </Menu>
       </SidebarContent>

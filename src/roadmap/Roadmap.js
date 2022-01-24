@@ -43,6 +43,7 @@ export const Roadmap = (props) => {
       project && (
         <div>
           <ProjectName project={project} />
+          <div>{"yes this is the roadmap"}</div>
           {roadmapItemsView()}
         </div>
       )
