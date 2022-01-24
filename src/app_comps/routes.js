@@ -1,0 +1,178 @@
+import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
+import { Roadmap } from "../roadmap/Roadmap";
+import { AddRoadmapItem } from "../roadmap/AddRoadmapItem";
+import { Stats } from "../stats/Stats";
+import { OuterWireframe } from "./OuterWireframe.js";
+import { Wireframe } from "./Wireframe";
+import { Investment } from "../investment/Investment";
+import { Withdrawal } from "../withdraw/Withdraw";
+import { NotFound } from "./NotFound";
+import { CreateProject } from "../create/CreateProject";
+import { Invest } from "../invest/Invest";
+import { Project } from "../project/Project";
+import { Route, Routes } from "react-router-dom";
+
+export const routesView = (
+  myAddress,
+  setModal,
+  setShowProgress,
+  statusMsgUpdater,
+  setMyBalance,
+  myAddressDisplay,
+  myBalance,
+  statusMsg,
+  onCopyErrorMsg,
+  errorMsgIsCopied
+) => {
+  return (
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <OuterWireframe
+            myAddress={myAddress}
+            myAddressDisplay={myAddressDisplay}
+            myBalance={myBalance}
+          />
+        }
+      >
+        <Route
+          path="global"
+          element={
+            <Wireframe
+              isGlobal={true}
+              statusMsg={statusMsg}
+              onCopyErrorMsg={onCopyErrorMsg}
+              errorMsgIsCopied={errorMsgIsCopied}
+            />
+          }
+        >
+          <Route
+            path="create"
+            element={
+              <CreateProject
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            path="my_projects"
+            element={<div>{"hellooooo my projects todo"}</div>}
+          />
+        </Route>
+        <Route
+          path=":id"
+          element={
+            <Wireframe
+              isGlobal={false}
+              statusMsg={statusMsg}
+              onCopyErrorMsg={onCopyErrorMsg}
+              errorMsgIsCopied={errorMsgIsCopied}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Project
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+              />
+            }
+          />
+
+          <Route
+            exact
+            path="invest"
+            element={
+              <Invest
+                myAddress={myAddress}
+                showModal={(modal) => setModal(modal)}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="investment"
+            element={
+              <Investment
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="withdraw"
+            element={
+              <Withdrawal
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="withdrawal_history"
+            element={
+              <WithdrawalHistory
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="roadmap"
+            element={
+              <Roadmap
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="roadmap/add"
+            element={
+              <AddRoadmapItem
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="stats"
+            element={
+              <Stats
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+              />
+            }
+          />
+        </Route>
+      </Route>
+      <Route path="*" element={<NotFound />}></Route>
+    </Routes>
+  );
+};
