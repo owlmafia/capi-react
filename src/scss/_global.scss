@@ -1,5 +1,6 @@
 body {
-    font-family: system-ui;
+    // font-family: system-ui;
+    font-family: roboto;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -12,6 +13,20 @@ body {
     display: flex;
     gap: 100px;
   }
+
+    
+  .project-name-container {
+    margin-bottom: 26px;
+  }
+  
+.content {
+  &__title {
+    font-weight: 700;
+    font-size: 34px;
+    color: black;
+    margin-bottom: 26px;
+  }
+}
 
   dl {
     display: grid;
@@ -96,7 +111,7 @@ body {
     margin-bottom: 10px;
   }
   
-  #wrapper {
+  #content {
     max-width: 500px;
     display: inline-block;
     box-sizing: border-box;
@@ -307,16 +322,6 @@ body {
   .copy {
     margin-left: 6px;
     cursor: pointer;
-  }
-  
-  .project-name-container {
-    margin-bottom: 26px;
-  }
-  
-  .project-name {
-    font-size: 2em;
-    color: black;
-    font-weight: 700;
   }
   
   .subtitle {

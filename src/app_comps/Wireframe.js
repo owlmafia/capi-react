@@ -48,7 +48,7 @@ export const Wireframe = ({
   return (
     <div id="nav_and_main">
       {sideBar()}
-      <div id="wrapper">
+      <div id="content">
         {statusMsgView(statusMsg, onCopyErrorMsg, errorMsgIsCopied)}
         <Outlet />
       </div>
