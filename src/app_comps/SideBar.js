@@ -20,14 +20,9 @@ export const SideBar = ({
   statusMsgUpdater,
 }) => {
   return (
-    <ProSidebar>
+    <ProSidebar id="sidebar">
       <SidebarHeader>
-        <div
-          style={{
-            height: "80px",
-            padding: "50px 20px 50px 20px",
-          }}
-        >
+        <div id="sidebar__header">
           <div
             style={{
               backgroundColor: "red",

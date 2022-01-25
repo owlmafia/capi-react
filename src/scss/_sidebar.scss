@@ -1,0 +1,8 @@
+@import "global_vars";
+
+#sidebar {
+    &__header {
+        height: 80px;
+        padding: 50px $global_top_padding 50px 20px;
+    }
+}
