@@ -73,7 +73,7 @@ export const CreateProject = (props) => {
               setSharePrice(event.target.value);
             }}
           />
-          <div className="input-label">
+          <div className="chart__title">
             {"Investor's part: "}
             <a
               href="#"
@@ -94,11 +94,9 @@ export const CreateProject = (props) => {
             </a>
           </div>
 
-          <div className="relative_pos">
-            <div>
-              <svg width={200} height={200} ref={investorsShareChart} />
-            </div>
-            <div className="centered_overlay">
+          <div className="pie_chart__container">
+            <svg className="pie_chart__svg" ref={investorsShareChart} />
+            <div className="pie_chart__centered_text">
               <input
                 placeholder=""
                 className="full-width-input"
@@ -113,12 +111,12 @@ export const CreateProject = (props) => {
                   setInvestorsShare(event.target.value);
                 }}
               />
-              <span className="perc_symbol_in_pie_chart">{"%"}</span>
+              <span className="pie_chart__perc_symbol">{"%"}</span>
             </div>
           </div>
 
           <button
-            className="submit-button"
+            className="button__submit"
             disabled={
               props.myAddress === "" ||
               projectName === "" ||
@@ -161,7 +159,7 @@ export const CreateProject = (props) => {
       return (
         <div>
           <ContentTitle title="Create project" />
-          {formView()};
+          {formView()}
         </div>
       );
     }

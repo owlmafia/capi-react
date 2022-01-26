@@ -3,20 +3,19 @@ import * as d3 from "d3";
 const renderPieChart = (container, data, dataNumberSelector) => {
   console.log("Rendering pie chart, data: %o", data);
 
-  // TODO pass parent's dimensions
-  const width = 200,
-    height = 200,
-    margin = 20;
+  // For now the same for all pie charts: we also use a global value in CSS
+  // note that value in CSS (pie_chart_diameter) has to be identical
+  let diameter = 160;
 
-  const radius = Math.min(width, height) / 2 - margin;
+  const radius = diameter / 2;
 
   const svg = d3
     .select(container)
     .append("svg")
-    .attr("width", width)
-    .attr("height", height)
+    .attr("width", diameter)
+    .attr("height", diameter)
     .append("g")
-    .attr("transform", `translate(${width / 2}, ${height / 2})`);
+    .attr("transform", `translate(${diameter / 2}, ${diameter / 2})`);
 
   const color = d3.scaleOrdinal().range(["#f00", "#000", "#ff0", "#00f"]);
 

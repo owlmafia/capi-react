@@ -1,0 +1,36 @@
+$pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
+
+.chart {
+    &__title {
+        margin-bottom: 10px;
+    }
+}
+
+.pie_chart{
+    &__container {
+        position: relative;
+        width: $pie_chart_diameter;
+        height: $pie_chart_diameter;
+    }
+
+    &__svg {
+        width: $pie_chart_diameter;
+        height: $pie_chart_diameter; 
+    }
+
+    &__centered_text {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+    }
+
+
+    &__perc_symbol {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        transform: translate(12%, -50%);
+        color: white;
+    }
+}

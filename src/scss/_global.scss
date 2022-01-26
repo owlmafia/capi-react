@@ -87,9 +87,6 @@ body {
     position: relative;
     margin-top: 8px;
     margin-bottom: 16px;
-    left: 50%;
-    -ms-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
   }
   
   select {
@@ -446,22 +443,4 @@ body {
   
   /*********************/
   /*********************/
-  
-  .relative_pos {
-    position: relative;
-  }
-  
-  .centered_overlay {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-  }
-  
-  .perc_symbol_in_pie_chart {
-    position: absolute;
-    margin: 0;
-    top: 50%;
-    transform: translate(12%, -50%);
-  }
   
