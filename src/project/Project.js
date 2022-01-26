@@ -7,7 +7,7 @@ import {
   fetchSharesDistribution,
   fetchIncomeVsSpendingChartData,
 } from "./controller";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 import renderPieChart from "../charts/renderPieChart";
 import renderMultilineChart from "../charts/renderMultilineChart";
 import { Link, useParams } from "react-router-dom";

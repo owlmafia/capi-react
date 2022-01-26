@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { init, retrieveProfits, unstake } from "./controller";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 import renderPieChart from "../charts/renderPieChart";
 import { useParams } from "react-router-dom";
 

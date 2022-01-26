@@ -1,0 +1,10 @@
+.my_project {
+    display: flex;
+    gap: 20px;
+
+    &__involvement_icon {
+        width: 20px;
+        height: 20px;
+        background-color: red; // tmp
+    }
+}

@@ -7,3 +7,7 @@ export const ProjectName = (props) => {
     </div>
   );
 };
+
+export const ContentTitle = ({ title }) => {
+  return <div id="content__title">{title}</div>;
+};

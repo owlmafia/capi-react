@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { init, addRoadmapItem } from "./controller";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 import { useParams } from "react-router-dom";
 
 export const AddRoadmapItem = (props) => {

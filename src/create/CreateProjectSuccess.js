@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 
 export const CreateProjectSuccess = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);

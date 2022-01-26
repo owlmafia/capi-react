@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { init, withdraw, loadWithdrawals } from "./controller";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 import { WithdrawalEntry } from "../Withdrawal";
 import { useParams } from "react-router-dom";
 

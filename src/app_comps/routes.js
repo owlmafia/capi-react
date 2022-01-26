@@ -11,6 +11,7 @@ import { CreateProject } from "../create/CreateProject";
 import { Invest } from "../invest/Invest";
 import { Project } from "../project/Project";
 import { Route, Routes } from "react-router-dom";
+import { MyProjects } from "../my_projects/MyProjects";
 
 export const routesView = (
   myAddress,
@@ -61,7 +62,14 @@ export const routesView = (
           />
           <Route
             path="my_projects"
-            element={<div>{"hellooooo my projects todo"}</div>}
+            element={
+              <MyProjects
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
           />
         </Route>
         <Route

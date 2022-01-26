@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { init, loadRoadmap } from "./controller";
-import { ProjectName } from "../ProjectName";
+import { ProjectName } from "../ContentTitle";
 import { RoadMapItem } from "./RoadmapItem";
 import { useParams } from "react-router-dom";
 
