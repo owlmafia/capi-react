@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
 import { init, createProject } from "./controller";
 import renderPieChart from "../charts/renderPieChart";
+import { ContentTitle } from "../ContentTitle";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
@@ -157,7 +158,12 @@ export const CreateProject = (props) => {
         />
       );
     } else {
-      return formView();
+      return (
+        <div>
+          <ContentTitle title="Create project" />
+          {formView()};
+        </div>
+      );
     }
   };
 
