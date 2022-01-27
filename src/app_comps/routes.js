@@ -98,6 +98,7 @@ export const routesView = (
                 showModal={(modal) => setModal(modal)}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
               />
             }
           />

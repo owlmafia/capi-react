@@ -11,6 +11,7 @@ import { ProjectName } from "../ContentTitle";
 import renderPieChart from "../charts/renderPieChart";
 import renderMultilineChart from "../charts/renderMultilineChart";
 import { Link, useParams } from "react-router-dom";
+import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 
 var QRCode = require("qrcode.react");
 
@@ -27,6 +28,8 @@ export const Project = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
   const [paymentLinkIsCopied, setPaymentLinkIsCopied] = useState(false);
   const [paymentAddressIsCopied, setPaymentAddressIsCopied] = useState(false);
+
+  const [showInvestTab, setShowInvestTab] = useState(false);
 
   const sharesDistributionChart = useRef(null);
   const incomeVsSpendingChart = useRef(null);
@@ -131,12 +134,38 @@ export const Project = (props) => {
     }
   }, [incomeVsSpendingChart.current]);
 
+  const actions_tabs_classes = (tabIsShowing) => {
+    var clazz = "link_button";
+    if (tabIsShowing) {
+      clazz += " project_action_tab_item__sel";
+    }
+    return clazz;
+  };
+
   const projectView = () => {
     if (viewProject) {
       return (
         <div>
           <div className="container">
             <ProjectName project={viewProject.project} />
+            <div id="project_action_tab_items">
+              <p
+                class={actions_tabs_classes(showInvestTab)}
+                onClick={() => setShowInvestTab((current) => !current)}
+              >
+                {"Invest"}
+              </p>
+              <p class="link_button">{"Pay"}</p>
+            </div>
+            {showInvestTab && (
+              <InvestEmbedded
+                showProgress={props.showProgress}
+                statusMsg={props.statusMsg}
+                setMyBalance={props.setMyBalance}
+                myAddress={props.myAddress}
+                project={project}
+              />
+            )}
             <p>
               <span className="key-val-key">{"Shares available:"}</span>
               <span className="key-val-val">

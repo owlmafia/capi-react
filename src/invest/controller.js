@@ -1,4 +1,5 @@
 import { signTxs } from "../MyAlgo";
+import { Link } from "react-router-dom";
 
 const wasmPromise = import("wasm");
 
@@ -40,7 +41,6 @@ export const invest = async (
   statusMsg,
   setMyBalance,
   showModal,
-  history,
   projectId,
   project,
   buySharesCount
@@ -106,18 +106,9 @@ export const invest = async (
           <b> {project.name}</b>
           <span>{". "}</span>
           <div className="section-spacer" />
-          <button
-            onClick={(_) => {
-              history.push({
-                pathname: "/investment/" + projectId,
-                // TODO ensure project is set when calling this?
-                state: project,
-              });
-              showModal(null);
-            }}
-          >
+          <Link to={"/" + projectId + "/investment"}>
             {"Go to your investor site"}
-          </button>
+          </Link>
         </p>
       ),
     });

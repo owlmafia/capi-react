@@ -1,0 +1,24 @@
+  
+.input_label {
+    margin-bottom: 4px;
+    color: black;
+}
+  
+input {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 12px;
+    appearance: none;
+    height: 30px;
+    border: 1px solid #383e42;
+    padding: 10px 15px;
+    font-family: inherit;
+    font-size: 16px;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+// the last input in a form (i.e. the bottom of the form content wise)
+.last_input {
+    margin-bottom: 20px;
+}

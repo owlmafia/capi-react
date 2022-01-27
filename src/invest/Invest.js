@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { init, invest, stake } from "./controller";
 import { ProjectName } from "../ContentTitle";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Invest = (props) => {
   let params = useParams();
@@ -118,6 +119,9 @@ export const Invest = (props) => {
     if (project) {
       return (
         <div>
+          <Link to={"/" + params.id + "/investment"}>
+            {"Go to your investor site"}
+          </Link>
           <div className="container">
             <ProjectName project={project} />
             <p>

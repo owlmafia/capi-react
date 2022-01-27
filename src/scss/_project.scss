@@ -1,0 +1,17 @@
+#project_action_tab_items {
+    display: flex;
+    gap: 30px;
+
+}
+
+.project_action_tab_item {
+    &__sel {
+        font-weight: 600;
+    }
+}
+
+.project_action_active_tab {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}

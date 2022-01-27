@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
 import { ProjectName } from "../ContentTitle";
+import { Link } from "react-router-dom";
 
 export const CreateProjectSuccess = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
@@ -45,13 +46,7 @@ export const CreateProjectSuccess = (props) => {
         <div className="section-spacer" />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
           <div>
-            <a
-              href={props.project.invest_link}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {"Investing link"}
-            </a>
+            <Link to={props.project.invest_link}>{"Investing link"}</Link>
             <span className="copy">
               {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
             </span>
