@@ -1,12 +1,6 @@
 const wasmPromise = import("wasm");
 
-export const init = async (
-  projectId,
-  setViewProject,
-  setFunds,
-  setCustomerAddressDisplay,
-  statusMsg
-) => {
+export const init = async (projectId, setViewProject, setFunds, statusMsg) => {
   try {
     const { init_log, bridge_view_project } = await wasmPromise;
     await init_log();
@@ -16,10 +10,6 @@ export const init = async (
     setViewProject(viewProject);
     // these are overwritten when draining, so we keep them separate
     setFunds(viewProject.available_funds);
-
-    const customerAddress = viewProject.project.customer_escrow_address;
-    const shortAddress = shortedAddress(customerAddress);
-    setCustomerAddressDisplay(shortAddress);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -36,39 +26,6 @@ export const fetchHolderCount = async (statusMsg, assetId, setHolderCount) => {
     setHolderCount(res.count);
   } catch (e) {
     statusMsg.error(e);
-  }
-};
-
-export const fetchSharesDistribution = async (
-  statusMsg,
-  assetId,
-  assetSupply
-) => {
-  try {
-    const { bridge_shares_distribution } = await wasmPromise;
-    let res = await bridge_shares_distribution({
-      asset_id: assetId,
-      asset_supply: assetSupply,
-    });
-    console.log("Shares distribution res: " + JSON.stringify(res));
-    return res.holders;
-  } catch (e) {
-    statusMsg.error(e);
-    return null;
-  }
-};
-
-export const fetchIncomeVsSpendingChartData = async (statusMsg, projectId) => {
-  try {
-    const { bridge_income_vs_spending } = await wasmPromise;
-    let res = await bridge_income_vs_spending({
-      project_id: projectId,
-    });
-    console.log("Income and spending chart: %o", res);
-    return res;
-  } catch (e) {
-    statusMsg.error(e);
-    return null;
   }
 };
 

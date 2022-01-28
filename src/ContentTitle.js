@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
+
 export const ProjectName = (props) => {
   return (
     <div id="content__title">
-      <a href={props.project.project_link} target="_blank" rel="noreferrer">
-        {props.project.name}
-      </a>
+      <Link to={props.project.project_link}>{props.project.name}</Link>
+      {props.children}
     </div>
   );
 };

@@ -22,7 +22,8 @@ body {
   }
   
 #content {
-  max-width: 500px;
+  min-width: 500px;
+  max-width: 600px;
   display: inline-block;
   box-sizing: border-box;
   position: relative;
@@ -33,6 +34,8 @@ body {
     font-size: 34px;
     color: black;
     margin-bottom: 26px;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -53,11 +56,7 @@ body {
   .full-width-input {
     width: 100%;
   }
-  
-  .input-label {
-    /* text-align: left; */
-  }
-  
+ 
   .connect-button {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -428,3 +427,17 @@ body {
   
   /*********************/
   /*********************/
+
+.labeled_box {
+  margin-bottom: 40px;
+}
+
+.labeled_box_label {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+p {
+  margin: 0px;
+}

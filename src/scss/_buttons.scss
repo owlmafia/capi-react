@@ -1,6 +1,16 @@
+@mixin submit_button {
+    display: block; // always in new line
+}
+
 .button {
     &__submit {
+        @include submit_button();
         margin-top: 20px;
+    }
+    
+    &__submit_after_input {
+        @include submit_button();
+        margin-top: 10px;
     }
 }
 
@@ -9,7 +19,3 @@
     cursor: pointer;
 }
 
-// last piece of content (unrelated to the submit button) before a submit button (vertically)
-.last_before_submit_button {
-    margin-bottom: 20px;
-}

@@ -1,7 +1,19 @@
-#project_action_tab_items {
+#project_actions_top_bar {
     display: flex;
     gap: 30px;
+    align-items: center;
+}
 
+#project_funds {
+    &__cont {
+        margin-left: auto;
+    }
+
+    &__val {
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-align: right;
+    }
 }
 
 .project_action_tab_item {
@@ -14,4 +26,11 @@
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
+}
+
+#project_share {
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    cursor: pointer;
 }

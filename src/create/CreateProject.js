@@ -33,7 +33,7 @@ export const CreateProject = (props) => {
     if (props.myAddress) {
       return (
         <div>
-          <div className="input-label">{"Project name"}</div>
+          <div className="input_label">{"Project name"}</div>
           <input
             placeholder=""
             className="full-width-input"
@@ -53,20 +53,20 @@ export const CreateProject = (props) => {
               setShareName(event.target.value);
             }}
           /> */}
-          <div className="input-label">{"Share supply"}</div>
+          <div className="input_label">{"Share supply"}</div>
           <input
             placeholder=""
-            className="full-width-input"
+            className="full-width-input "
             size="10"
             value={shareCount}
             onChange={(event) => {
               setShareCount(event.target.value);
             }}
           />
-          <div className="input-label">{"Share price per unit (Algo)"}</div>
+          <div className="input_label">{"Share price per unit (Algo)"}</div>
           <input
             placeholder=""
-            className="full-width-input"
+            className="full-width-input last_input"
             size="10"
             value={sharePrice}
             onChange={(event) => {

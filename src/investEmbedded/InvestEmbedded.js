@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { init, invest, handleSharesCountInput } from "./controller";
 import { useParams } from "react-router-dom";
+import { AmountInput } from "../common_comps/AmountInput";
 
 export const InvestEmbedded = ({
   showProgress,
@@ -20,27 +21,24 @@ export const InvestEmbedded = ({
   return (
     <div class="project_action_active_tab">
       <p class="input_label">{"Shares:"}</p>
-      <input
-        placeholder=""
-        size="30"
-        id="invest_em_share_count_input"
-        className="last_input"
+      <AmountInput
         value={buySharesCount}
-        onChange={(event) =>
+        onChange={(input) =>
           handleSharesCountInput(
-            event.target.value,
+            input,
             project,
             setBuySharesCount,
             setTotalCost
           )
         }
       />
-      <div className="secondary_info last_before_submit_button">
+      <div className="secondary_info">
         <span>{"Cost:"}</span>
         <span className="one_line_key_val_val">{totalCost}</span>
       </div>
       <button
         disabled={myAddress === ""}
+        className="button__submit"
         onClick={async (_) => {
           await invest(
             myAddress,
