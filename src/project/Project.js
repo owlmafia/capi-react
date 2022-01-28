@@ -99,7 +99,15 @@ export const Project = (props) => {
               >
                 {"Pay"}
               </p>
-              <Funds funds={funds} />
+              <Funds
+                funds={funds}
+                amICreator={
+                  props.myAddress &&
+                  viewProject.project.creator_address &&
+                  viewProject.project.creator_address === props.myAddress
+                }
+                projectId={params.id}
+              />
             </div>
             {showInvestTab && (
               <InvestEmbedded
@@ -119,13 +127,13 @@ export const Project = (props) => {
                 project={project}
               />
             )}
-            <Link
+            {/* <Link
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewProject.project.creator_address !== props.myAddress}
               to={"/withdraw/" + params.id}
             >
-              {"Withdraw"}
-            </Link>
+              <button>{"Withdraw"}</button>
+            </Link> */}
             <div className="section-spacer" />
             <SharesDistributionBox
               statusMsg={props.statusMsg}

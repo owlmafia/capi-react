@@ -5,6 +5,7 @@
 }
 
 #project_funds {
+
     &__cont {
         margin-left: auto;
     }
@@ -13,6 +14,12 @@
         font-size: 1.2rem;
         font-weight: 600;
         text-align: right;
+
+        // for the icon
+        display: flex;
+        align-items: center;
+        justify-items: right;
+        height: 100%;
     }
 }
 
@@ -32,5 +39,14 @@
     width: 30px;
     height: 30px;
     margin-left: auto;
+    cursor: pointer;
+}
+
+#withdraw_icon {
+    // needed to center vertically (given it's in flex box)
+    display: block; 
+    margin: 0 auto;
+
+    margin-left: 6px;
     cursor: pointer;
 }
