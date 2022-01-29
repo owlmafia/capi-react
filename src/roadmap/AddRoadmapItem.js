@@ -1,43 +1,50 @@
 import React, { useState, useEffect } from "react";
 import { init, addRoadmapItem } from "./controller";
-import { ProjectName } from "../ContentTitle";
 import { useParams } from "react-router-dom";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import { LabeledInput } from "../common_comps/LabeledInput";
 
-export const AddRoadmapItem = (props) => {
+export const AddRoadmapItem = ({
+  statusMsg,
+  showProgress,
+  setMyBalance,
+  projectId,
+  myAddress,
+}) => {
   let params = useParams();
 
-  const [itemTitle, setItemTitle] = useState("item title blabbla");
+  const [itemTitle, setItemTitle] = useState("");
   const [project, setProject] = useState(null);
+  const [value, onChange] = useState(new Date());
 
   useEffect(() => {
-    init(params.id, setProject, props.statusMsg);
-  }, [params.id, props.statusMsg]);
+    init(projectId, setProject, statusMsg);
+  }, [projectId, statusMsg]);
 
   const view = () => {
     return (
       project && (
         <div>
-          <ProjectName project={project} />
-          <div>{"Title"}</div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="64"
-            value={itemTitle}
-            onChange={(event) => {
-              setItemTitle(event.target.value);
-            }}
+          <LabeledInput
+            label={"Label:"}
+            inputValue={itemTitle}
+            onChange={(input) => setItemTitle(input)}
+            placeholder="Describe the item"
           />
+          <Calendar onChange={onChange} value={value} />
           <button
-            disabled={props.myAddress === ""}
+            className="button__submit"
+            disabled={myAddress === ""}
             onClick={async () => {
               await addRoadmapItem(
-                props.statusMsg,
-                props.showProgress,
-                props.setMyBalance,
+                statusMsg,
+                showProgress,
+                setMyBalance,
                 params.id,
-                props.myAddress,
-                itemTitle
+                myAddress,
+                itemTitle,
+                value.getTime()
               );
             }}
           >

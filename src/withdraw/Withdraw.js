@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { init, withdraw } from "./controller";
 import { ProjectName } from "../ContentTitle";
 import { useParams } from "react-router-dom";
+import { LabeledInput } from "../common_comps/LabeledInput";
 
 export const Withdrawal = (props) => {
   let params = useParams();
@@ -22,25 +23,15 @@ export const Withdrawal = (props) => {
       return (
         <div>
           <ProjectName project={project} />
-          <div>{"How much (Algo)?"}</div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="64"
-            value={withdrawalAmount}
-            onChange={(event) => {
-              setWithdrawalAmount(event.target.value);
-            }}
+          <LabeledInput
+            label={"How much (Algo)?"}
+            inputValue={withdrawalAmount}
+            onChange={(input) => setWithdrawalAmount(input)}
           />
-          <div>{"For what?"}</div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="64"
-            value={withdrawalDescr}
-            onChange={(event) => {
-              setWithdrawalDescr(event.target.value);
-            }}
+          <LabeledInput
+            label={"For what?"}
+            inputValue={withdrawalDescr}
+            onChange={(input) => setWithdrawalDescr(input)}
           />
           <button
             disabled={props.myAddress === ""}

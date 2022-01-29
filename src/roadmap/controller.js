@@ -43,7 +43,9 @@ export const addRoadmapItem = async (
   setMyBalance,
   projectId,
   creatorAddress,
-  title
+  title,
+  // epoch milliseconds
+  dateTimestamp
 ) => {
   try {
     const {
@@ -60,6 +62,8 @@ export const addRoadmapItem = async (
       project_id: projectId,
       title: title,
       parent: null,
+      // in rust we use seconds - the fact that we get milliseconds from moment.js is seen as a js impl detail, so changed in js
+      date: "" + dateTimestamp / 1000,
     });
     showProgress(false);
 

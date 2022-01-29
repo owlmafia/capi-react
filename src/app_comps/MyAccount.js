@@ -56,7 +56,7 @@ const connectButton = (
   if (myAddress === "") {
     return (
       <button
-        className="connect-button"
+        className="button__connect"
         onClick={async (event) => {
           try {
             const { bridge_balance } = await wasmPromise;
@@ -83,7 +83,7 @@ const connectButton = (
   } else {
     return (
       <button
-        className="disconnect-button"
+        className="button__disconnect"
         onClick={() => {
           setMyAddress("");
         }}

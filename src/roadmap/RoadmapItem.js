@@ -1,26 +1,21 @@
 import moment from "moment";
-export const RoadMapItem = ({ item, onEdit }) => {
+export const RoadMapItem = ({ item }) => {
   return (
-    <div key={item.tx_id} className="withdrawal-cell">
-      <p>
-        <span className="key-val-key">{"Tx id:"}</span>
-        <span className="key-val-val">
-          <a href={item.tx_link} target="_blank">
-            {item.tx_id}
-          </a>
-        </span>
-      </p>
-      <p>
-        <span className="key-val-key">{"Title:"}</span>
-        <span className="key-val-val">
-          <a href={item.title}>{item.title}</a>
-        </span>
-      </p>
-      <p>
-        <span className="key-val-key">{"Date:"}</span>
-        <span className="key-val-val">{moment(item.date).format("LLL")}</span>
-      </p>
-      <button onClick={() => onEdit(item)}>{"Edit"}</button>
+    <div className="roadmap_item">
+      <div className="roadmap_item__line">
+        <svg className="roadmap_item__line_svg">
+          <line x1="50%" y1="0" x2="50%" y2="100%" />
+          <circle cx="50%" cy="50%" r="4" />
+        </svg>
+      </div>
+      <a
+        href={"https://testnet.algoexplorer.io/tx/" + item.tx_id}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {item.text}
+      </a>
     </div>
+    // Note: not showing date for now. Not sure where - might not be necessary at all on the UI.
   );
 };

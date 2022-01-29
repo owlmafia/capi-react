@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { init, loadRoadmap } from "./controller";
-import { ProjectName } from "../ContentTitle";
 import { RoadMapItem } from "./RoadmapItem";
 import { useParams } from "react-router-dom";
+import { ContentTitle } from "../ContentTitle";
+import { HiPlus as AddIcon } from "react-icons/hi";
+import Modal from "../Modal";
+import { AddRoadmapItem } from "./AddRoadmapItem";
 
 export const Roadmap = (props) => {
   let params = useParams();
 
   const [roadmapItems, setRoadmapItems] = useState([]);
   const [project, setProject] = useState(null);
+  const [modal, setModal] = useState(null);
 
   useEffect(() => {
     init(params.id, setProject, props.statusMsg);
@@ -20,31 +24,17 @@ export const Roadmap = (props) => {
     }
   }, [params.id, props.statusMsg, props.myAddress]);
 
-  const roadmapItemsView = () => {
-    return (
-      roadmapItems &&
-      roadmapItems.length > 0 && (
-        <div className="withdrawal-cell-container">
-          <div className="subtitle">{"Roadmap"}</div>
-          {roadmapItems &&
-            roadmapItems.map((item) => (
-              <RoadMapItem
-                item={item}
-                onEdit={(item) => console.log("TODO edit item: %o", item)}
-              />
-            ))}
-        </div>
-      )
-    );
-  };
-
   const view = () => {
     return (
       project && (
         <div>
-          <ProjectName project={project} />
-          <div>{"yes this is the roadmap"}</div>
-          {roadmapItemsView()}
+          <ContentTitle title={"Roadmap"}>
+            <AddIcon
+              className="title_right_button"
+              onClick={() => setModal((visible) => !visible)}
+            />
+          </ContentTitle>
+          {roadmapItems && roadmapItems.length > 0 && itemsList(roadmapItems)}
         </div>
       )
     );
@@ -53,6 +43,50 @@ export const Roadmap = (props) => {
   return (
     <div>
       <div className="container">{view()}</div>
+      {modal && (
+        <Modal title={"Add roadmap item"} onCloseClick={() => setModal(null)}>
+          <AddRoadmapItem
+            statusMsg={props.statusMsg}
+            showProgress={props.showProgress}
+            setMyBalance={props.setMyBalance}
+            projectId={params.id}
+            myAddress={props.myAddress}
+          />
+        </Modal>
+      )}
+    </div>
+  );
+};
+
+const itemsList = (items) => {
+  return (
+    <div className="withdrawal-cell-container">
+      {items.map((item) => toElement(item))}
+    </div>
+  );
+};
+
+const toElement = (item) => {
+  if (item.item_type === "item") {
+    return toItemElement(item);
+  } else if (item.item_type === "header") {
+    return toHeaderElement(item);
+  } else {
+    throw Error("Invalid item type in roadmap: " + JSON.stringify(item));
+  }
+};
+
+const toItemElement = (item) => {
+  return <RoadMapItem item={item} key={item.tx_id} />;
+};
+
+const toHeaderElement = (header) => {
+  return (
+    <div key={header.text} className="roadmap_header">
+      <svg className="roadmap_header__line_svg">
+        <line x1="50%" y1="0" x2="50%" y2="100%" />
+      </svg>
+      <p>{header.text}</p>
     </div>
   );
 };

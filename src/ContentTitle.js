@@ -9,6 +9,10 @@ export const ProjectName = (props) => {
   );
 };
 
-export const ContentTitle = ({ title }) => {
-  return <div id="content__title">{title}</div>;
+export const ContentTitle = ({ title, children }) => {
+  return (
+    <div id="content__title">
+      {title} {children}
+    </div>
+  );
 };

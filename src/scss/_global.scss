@@ -51,21 +51,7 @@ body {
   dd {
     grid-column-start: 2;
   }
-  
 
-  .full-width-input {
-    width: 100%;
-  }
- 
-  .connect-button {
-    margin-top: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .disconnect-button {
-    margin-top: 16px;
-  }
-  
   .submit-button {
     display: block;
     position: relative;
@@ -130,21 +116,7 @@ body {
     color: white;
     /* color: green; */
   }
-  
-  button {
-    appearance: none;
-    height: 35px;
-    border-radius: 16px;
-    /* border: 0px solid transparent; */
-    /* border: 1px solid #383e42; */
-    padding: 0px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    /* background-color: #383e42; */
-    /* background-color: black; */
-    /* color: white; */
-    /* color: white; */
-  }
+
   
   .submit-msg {
     margin-bottom: 16px;
@@ -259,7 +231,6 @@ body {
   }
   
   .modal-body {
-    max-height: 220px;
     overflow-y: scroll;
     scrollbar-width: none;
   }
@@ -323,21 +294,6 @@ body {
   .key-val-val {
     /* font-weight: 600; */
     margin-left: 4px;
-  }
-  
-  button:enabled {
-    /* border: 0px solid transparent; */
-    /* border: 1px solid #383e42; */
-    padding: 0px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #383e42;
-    color: white;
-  }
-  
-  button:disabled {
-    cursor: not-allowed;
-    pointer-events: all !important;
   }
   
   .right-button {
@@ -440,4 +396,11 @@ body {
 
 p {
   margin: 0px;
+}
+
+.title_right_button {
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  cursor: pointer;
 }

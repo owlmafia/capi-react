@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { init, fetchHolderCount } from "./controller";
 import { ProjectName } from "../ContentTitle";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
 import { Funds } from "./Funds";
@@ -75,7 +75,7 @@ export const Project = (props) => {
           <div className="container">
             <ProjectName project={viewProject.project}>
               <ShareIcon
-                id="project_share"
+                class="title_right_button"
                 onClick={() => console.log("Share clicked!")}
               />
             </ProjectName>

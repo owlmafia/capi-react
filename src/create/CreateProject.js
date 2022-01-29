@@ -3,6 +3,7 @@ import { CreateProjectSuccess } from "./CreateProjectSuccess";
 import { init, createProject } from "./controller";
 import renderPieChart from "../charts/renderPieChart";
 import { ContentTitle } from "../ContentTitle";
+import { LabeledInput } from "../common_comps/LabeledInput";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
@@ -33,45 +34,20 @@ export const CreateProject = (props) => {
     if (props.myAddress) {
       return (
         <div>
-          <div className="input_label">{"Project name"}</div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="30"
-            value={projectName}
-            onChange={(event) => {
-              setProjectName(event.target.value);
-            }}
+          <LabeledInput
+            label={"Project name"}
+            inputValue={projectName}
+            onChange={(input) => setProjectName(input)}
           />
-          {/* <div>{"Share asset name"}</div>
-          <input
-            placeholder=""
-            className="full-width-input"
-            size="10"
-            value={shareName}
-            onChange={(event) => {
-              setShareName(event.target.value);
-            }}
-          /> */}
-          <div className="input_label">{"Share supply"}</div>
-          <input
-            placeholder=""
-            className="full-width-input "
-            size="10"
-            value={shareCount}
-            onChange={(event) => {
-              setShareCount(event.target.value);
-            }}
+          <LabeledInput
+            label={"Share supply"}
+            inputValue={shareCount}
+            onChange={(input) => setShareCount(input)}
           />
-          <div className="input_label">{"Share price per unit (Algo)"}</div>
-          <input
-            placeholder=""
-            className="full-width-input last_input"
-            size="10"
-            value={sharePrice}
-            onChange={(event) => {
-              setSharePrice(event.target.value);
-            }}
+          <LabeledInput
+            label={"Share price per unit (Algo)"}
+            inputValue={sharePrice}
+            onChange={(input) => setShareCount(input)}
           />
           <div className="chart__title">
             {"Investor's part: "}
@@ -99,7 +75,7 @@ export const CreateProject = (props) => {
             <div className="pie_chart__centered_text">
               <input
                 placeholder=""
-                className="full-width-input"
+                className="full_width_input"
                 size="10"
                 value={investorsShare}
                 style={{

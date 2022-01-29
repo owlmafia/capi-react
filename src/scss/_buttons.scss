@@ -1,16 +1,49 @@
-@mixin submit_button {
+@mixin primary_button {
     display: block; // always in new line
+    cursor: pointer;
+    appearance: none;
+    height: 35px;
+    border-radius: 16px;
+    padding: 0px 15px;
+    font-size: 16px;
 }
 
 .button {
+
     &__submit {
-        @include submit_button();
+        @include primary_button();
         margin-top: 20px;
+        
+        &:enabled {
+            /* border: 0px solid transparent; */
+            border: 1px solid #383e42;
+            padding: 0px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #383e42;
+            color: white;
+        }
+
+        &:disabled {
+            cursor: not-allowed;
+            pointer-events: all !important; 
+        }
     }
     
     &__submit_after_input {
-        @include submit_button();
+        @include primary_button();
         margin-top: 10px;
+    }
+    
+    &__connect {
+        @include primary_button();
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+    
+    &__disconnect {
+        @include primary_button();
+        margin-top: 16px;
     }
 }
 
