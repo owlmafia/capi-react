@@ -8,6 +8,7 @@ import { Funds } from "./Funds";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { BsShare as ShareIcon } from "react-icons/bs";
+import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 
 var QRCode = require("qrcode.react");
 
@@ -127,6 +128,11 @@ export const Project = (props) => {
                 project={project}
               />
             )}
+            <FundsActivityEmbedded 
+              statusMsg={props.statusMsg}
+              projectId={params.id}
+              myAddress={props.myAddress} 
+            />
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewProject.project.creator_address !== props.myAddress}

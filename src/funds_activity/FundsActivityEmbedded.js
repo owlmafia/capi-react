@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { init, loadFundsActivity } from "./controller";
 import { ContentTitle } from "../ContentTitle";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FundsActivityEntry } from "./FundsActivityEntry";
+import { LabeledBox } from "../common_comps/LabeledBox";
 
-export const FundsActivity = (props) => {
-  let params = useParams();
-
+export const FundsActivityEmbedded = ({statusMsg, projectId, myAddress}) => {
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
-    init(params.id);
-  }, [props.statusMsg]);
+    init(projectId);
+  }, [statusMsg]);
 
   useEffect(() => {
-    if (props.myAddress) {
+    if (myAddress) {
       loadFundsActivity(
-        props.statusMsg,
-        params.id,
-        props.myAddress,
+        statusMsg,
+        projectId,
+        myAddress,
         setActivityEntries,
-        null
+        "3"
       );
     }
-  }, [params.id, props.statusMsg, props.myAddress]);
+  }, [projectId, statusMsg, myAddress]);
 
   const fundsActivity = () => {
     return (
@@ -41,9 +40,15 @@ export const FundsActivity = (props) => {
 
   const view = () => {
     return (
-        <div>
-          <ContentTitle title={"Funds activity"} />
-          {fundsActivity()}
+        <div class="first_project_widget">
+          <LabeledBox label="Recent funds activity">
+            {fundsActivity()}
+            <Link to="funds_activity">
+              <p className="link_button">
+                {"Show all"}
+              </p>
+            </Link>
+          </LabeledBox>
         </div>
     );
   };
