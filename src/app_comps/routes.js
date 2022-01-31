@@ -12,6 +12,7 @@ import { Invest } from "../invest/Invest";
 import { Project } from "../project/Project";
 import { Route, Routes } from "react-router-dom";
 import { MyProjects } from "../my_projects/MyProjects";
+import { FundsActivity } from "../funds_activity/FundsActivity";
 
 export const routesView = (
   myAddress,
@@ -145,6 +146,18 @@ export const routesView = (
             path="withdrawal_history"
             element={
               <WithdrawalHistory
+                myAddress={myAddress}
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+                setMyBalance={setMyBalance}
+              />
+            }
+          />
+          <Route
+            exact
+            path="funds_activity"
+            element={
+              <FundsActivity
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}

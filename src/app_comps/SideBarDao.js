@@ -50,7 +50,7 @@ export const SideBarDao = ({
             <Link to="withdraw">Withdraw</Link>
           </MenuItem>
           <MenuItem icon={<FaAnchor />}>
-            <Link to="withdrawal_history">Funds activity</Link>
+            <Link to="funds_activity">Funds activity</Link>
           </MenuItem>
         </Menu>
       </SidebarContent>
