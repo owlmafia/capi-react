@@ -2,6 +2,7 @@ import { fetchSharesDistribution } from "./controller";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import React, { useEffect, useState } from "react";
+import { HolderEntry } from "./HolderEntry";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -11,6 +12,33 @@ export const SharesDistributionBox = ({
   holderCount,
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
+  const [showMore, setShowMore] = useState(null);
+
+  const entries_small_count = 3;
+
+  const holdersListItems = () => {
+    if (sharesDistr && sharesDistr.length > 0) {
+      var entries = sharesDistr;
+      var hasToCollapse = !showMore && sharesDistr.length > entries_small_count;
+      if (hasToCollapse) {
+        entries = sharesDistr.slice(0, entries_small_count);
+      }
+      return (
+        <div class="holder_list_container">
+          {entries.map((entry) => (
+            <HolderEntry entry={entry} />
+          ))}
+          {hasToCollapse && (
+            <div className="link_button" onClick={() => setShowMore(true)}>
+              {"Show more"}
+            </div>
+          )}
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
 
   useEffect(async () => {
     if (sharesAssetId && sharesSupply) {
@@ -26,10 +54,7 @@ export const SharesDistributionBox = ({
   return (
     <LabeledBox label={"Holders distribution"}>
       <SharesDistributionChart sharesDistr={sharesDistr} />
-      <p>
-        <span className="key-val-key">{"Total:"}</span>
-        <span className="key-val-val">{holderCount}</span>
-      </p>
+      {holdersListItems()}
     </LabeledBox>
   );
 };

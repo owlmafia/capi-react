@@ -33,3 +33,17 @@ $pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
         color: white;
     }
 }
+
+.holder_list_container {
+    margin-top: 20px;
+    border-top: 1px solid black;
+    padding: 0px 20px 0px 20px;
+}
+
+.holder_item {
+    &__container {
+        display: flex;
+        padding: 10px 0px 10px 0px;
+        justify-content: space-between;
+    }
+}
