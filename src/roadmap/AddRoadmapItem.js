@@ -55,9 +55,5 @@ export const AddRoadmapItem = ({
     );
   };
 
-  return (
-    <div>
-      <div className="container">{view()}</div>
-    </div>
-  );
+  return <div>{view()}</div>;
 };

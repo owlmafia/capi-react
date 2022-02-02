@@ -6,9 +6,12 @@ import {
   SidebarHeader,
   SidebarFooter,
 } from "react-pro-sidebar";
-import { Link } from "react-router-dom";
-import { FaAddressBook, FaAnchor } from "react-icons/fa";
+import { Link, NavLink } from "react-router-dom";
+import { FaAddressBook, FaRoad, FaCoins } from "react-icons/fa";
 import { MyAccount } from "./MyAccount";
+import { BsArrowUpCircle } from "react-icons/bs";
+import { IoMdStats } from "react-icons/io";
+import { VscArrowSwap } from "react-icons/vsc";
 
 export const SideBarDao = ({
   myAddress,
@@ -23,48 +26,41 @@ export const SideBarDao = ({
     <ProSidebar id="sidebar">
       <SidebarHeader>
         <div id="sidebar__header">
-          <div
-            style={{
-              backgroundColor: "blue",
-              height: "100%",
-              width: "100%",
-            }}
+          <img id="sidebar__logo" />
+          <MyAccount
+            myAddress={myAddress}
+            setMyAddress={setMyAddress}
+            myAddressDisplay={myAddressDisplay}
+            setMyAddressDisplay={setMyAddressDisplay}
+            myBalance={myBalance}
+            setMyBalance={setMyBalance}
+            statusMsgUpdater={statusMsgUpdater}
           />
         </div>
       </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<FaAddressBook />}>
-            <Link to="">Home</Link>
+            <NavLink to="">Home</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaAnchor />}>
-            <Link to="roadmap">Roadmap</Link>
+          <MenuItem icon={<FaRoad />}>
+            <NavLink to="roadmap">Roadmap</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaAnchor />}>
-            <Link to="stats">Stats</Link>
+          <MenuItem icon={<IoMdStats />}>
+            <NavLink to="stats">Stats</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaAnchor />}>
-            <Link to="investment">My investment</Link>
+          <MenuItem icon={<FaCoins />}>
+            <NavLink to="investment">My investment</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaAnchor />}>
-            <Link to="withdraw">Withdraw</Link>
+          <MenuItem icon={<BsArrowUpCircle />}>
+            <NavLink to="withdraw">Withdraw</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaAnchor />}>
-            <Link to="funds_activity">Funds activity</Link>
+          <MenuItem icon={<VscArrowSwap />}>
+            <NavLink to="funds_activity">Funds activity</NavLink>
           </MenuItem>
         </Menu>
       </SidebarContent>
-      <SidebarFooter>
-        <MyAccount
-          myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          setMyBalance={setMyBalance}
-          statusMsgUpdater={statusMsgUpdater}
-        />
-      </SidebarFooter>
+      <SidebarFooter></SidebarFooter>
     </ProSidebar>
   );
 };

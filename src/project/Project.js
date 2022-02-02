@@ -74,7 +74,7 @@ export const Project = (props) => {
     if (viewProject) {
       return (
         <div>
-          <div className="container">
+          <div>
             <ProjectName project={viewProject.project}>
               <ShareIcon
                 class="title_right_button"
@@ -162,9 +162,5 @@ export const Project = (props) => {
     }
   };
 
-  return (
-    <div>
-      <div className="container">{projectView()}</div>
-    </div>
-  );
+  return <div>{projectView()}</div>;
 };

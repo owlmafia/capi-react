@@ -9,13 +9,16 @@ body {
     position: relative;
     min-height: 100vh;
     margin: 0;
+    background-color: #E8E8E8;
   }
     
   #nav_and_main {
-    display: flex;
-    gap: 100px;
+    display: inline-flex;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 100px;
   }
-
     
   .project-name-container {
     margin-bottom: 26px;
@@ -23,11 +26,15 @@ body {
   
 #content {
   min-width: 500px;
-  max-width: 600px;
+  max-width: 700px;
   display: inline-block;
   box-sizing: border-box;
   position: relative;
   padding-top: $global_top_padding;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: white;
+  border-radius: 20px;
 
   &__title {
     font-weight: 700;
@@ -68,17 +75,18 @@ body {
     font-size: 16px;
   }
   
-  .container * {
-    word-break: break-word;
-  }
+#container {
+    text-align: center;
+}
   
+#container * {
+    word-break: break-word;
+    // recet text-align: center in container to center the main content
+    text-align: left;
+}
+
   .input-row input {
     margin-right: 5px;
-  }
-  
-  .your-address {
-    margin-top: 8px;
-    margin-bottom: 4px;
   }
   
   .form {

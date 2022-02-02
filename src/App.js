@@ -50,7 +50,7 @@ const App = () => {
   } else {
     return (
       <div>
-        <div className="container">
+        <div id="container">
           {showProgress && <ProgressBar />}
           {/* <div>{connectButton()}</div> */}
 

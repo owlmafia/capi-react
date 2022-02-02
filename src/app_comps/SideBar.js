@@ -6,7 +6,9 @@ import {
   SidebarHeader,
   SidebarFooter,
 } from "react-pro-sidebar";
-import { FaGem, FaHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { IoCreateOutline } from "react-icons/io5";
+import { VscListFlat } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import { MyAccount } from "./MyAccount";
 
@@ -23,36 +25,29 @@ export const SideBar = ({
     <ProSidebar id="sidebar">
       <SidebarHeader>
         <div id="sidebar__header">
-          <div
-            style={{
-              backgroundColor: "red",
-              height: "100%",
-              width: "100%",
-            }}
+          <img id="sidebar__logo" src="/logo.svg" />
+          <MyAccount
+            myAddress={myAddress}
+            setMyAddress={setMyAddress}
+            myAddressDisplay={myAddressDisplay}
+            setMyAddressDisplay={setMyAddressDisplay}
+            myBalance={myBalance}
+            setMyBalance={setMyBalance}
+            statusMsgUpdater={statusMsgUpdater}
           />
         </div>
       </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">
-          <MenuItem icon={<FaGem />}>
+          <MenuItem icon={<IoCreateOutline />}>
             <Link to="create">Create</Link>
           </MenuItem>
-          <MenuItem icon={<FaHeart />}>
+          <MenuItem icon={<VscListFlat />}>
             <Link to="my_projects">My projects</Link>
           </MenuItem>
         </Menu>
       </SidebarContent>
-      <SidebarFooter>
-        <MyAccount
-          myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          setMyBalance={setMyBalance}
-          statusMsgUpdater={statusMsgUpdater}
-        />
-      </SidebarFooter>
+      <SidebarFooter></SidebarFooter>
     </ProSidebar>
   );
 };

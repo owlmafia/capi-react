@@ -27,9 +27,8 @@ export const MyAccount = ({
 const myAddressView = (myAddress, myAddressDisplay, myBalance) => {
   if (myAddress !== "") {
     return (
-      <div id="user-data">
-        {/* <div>{"Your address:"}</div> */}
-        <div className="your-address">
+      <div id="user_data">
+        <div className="my_address">
           <a
             href={"https://testnet.algoexplorer.io/address/" + myAddress}
             target="_blank"

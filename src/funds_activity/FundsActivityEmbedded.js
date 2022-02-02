@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { FundsActivityEntry } from "./FundsActivityEntry";
 import { LabeledBox } from "../common_comps/LabeledBox";
 
-export const FundsActivityEmbedded = ({statusMsg, projectId, myAddress}) => {
+export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
@@ -40,22 +40,16 @@ export const FundsActivityEmbedded = ({statusMsg, projectId, myAddress}) => {
 
   const view = () => {
     return (
-        <div class="first_project_widget">
-          <LabeledBox label="Recent funds activity">
-            {fundsActivity()}
-            <Link to="funds_activity">
-              <p className="link_button">
-                {"Show all"}
-              </p>
-            </Link>
-          </LabeledBox>
-        </div>
+      <div class="first_project_widget">
+        <LabeledBox label="Recent funds activity">
+          {fundsActivity()}
+          <Link to="funds_activity">
+            <p className="link_button">{"Show all"}</p>
+          </Link>
+        </LabeledBox>
+      </div>
     );
   };
 
-  return (
-    <div>
-      <div className="container">{view()}</div>
-    </div>
-  );
+  return <div>{view()}</div>;
 };

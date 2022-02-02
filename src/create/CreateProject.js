@@ -141,9 +141,5 @@ export const CreateProject = (props) => {
     }
   };
 
-  return (
-    <div>
-      <div className="container">{bodyView()}</div>
-    </div>
-  );
+  return <div>{bodyView()}</div>;
 };

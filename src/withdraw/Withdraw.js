@@ -34,6 +34,7 @@ export const Withdrawal = (props) => {
             onChange={(input) => setWithdrawalDescr(input)}
           />
           <button
+            className="button__submit"
             disabled={props.myAddress === ""}
             onClick={async () => {
               await withdraw(
@@ -56,9 +57,5 @@ export const Withdrawal = (props) => {
     }
   };
 
-  return (
-    <div>
-      <div className="container">{view()}</div>
-    </div>
-  );
+  return <div>{view()}</div>;
 };

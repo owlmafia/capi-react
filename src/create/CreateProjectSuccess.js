@@ -16,7 +16,7 @@ export const CreateProjectSuccess = (props) => {
 
   return (
     <div>
-      <div className="container">
+      <div>
         <ProjectName project={props.project} />
         <p>
           <span className="key-val-key">{"Share supply:"}</span>

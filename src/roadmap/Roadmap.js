@@ -42,7 +42,7 @@ export const Roadmap = (props) => {
 
   return (
     <div>
-      <div className="container">{view()}</div>
+      <div>{view()}</div>
       {modal && (
         <Modal title={"Add roadmap item"} onCloseClick={() => setModal(null)}>
           <AddRoadmapItem

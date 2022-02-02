@@ -41,16 +41,12 @@ export const FundsActivity = (props) => {
 
   const view = () => {
     return (
-        <div>
-          <ContentTitle title={"Funds activity"} />
-          {fundsActivity()}
-        </div>
+      <div>
+        <ContentTitle title={"Funds activity"} />
+        {fundsActivity()}
+      </div>
     );
   };
 
-  return (
-    <div>
-      <div className="container">{view()}</div>
-    </div>
-  );
+  return <div>{view()}</div>;
 };

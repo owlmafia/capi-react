@@ -54,9 +54,5 @@ export const WithdrawalHistory = (props) => {
     );
   };
 
-  return (
-    <div>
-      <div className="container">{view()}</div>
-    </div>
-  );
+  return <div>{view()}</div>;
 };

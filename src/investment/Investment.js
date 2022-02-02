@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { init, retrieveProfits, unstake } from "./controller";
-import { ProjectName } from "../ContentTitle";
 import renderPieChart from "../charts/renderPieChart";
 import { useParams } from "react-router-dom";
+import { ContentTitle } from "../ContentTitle";
 
 export const Investment = (props) => {
   let params = useParams();
@@ -128,7 +128,6 @@ export const Investment = (props) => {
     if (project) {
       return (
         <div>
-          <ProjectName project={project} />
           {userView()}
           {youAreNotInvestedView()}
         </div>
@@ -140,7 +139,8 @@ export const Investment = (props) => {
 
   return (
     <div>
-      <div className="container">{bodyView()}</div>
+      <ContentTitle title={"My investment"} />
+      <div>{bodyView()}</div>
     </div>
   );
 };

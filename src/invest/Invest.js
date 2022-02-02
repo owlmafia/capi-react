@@ -122,7 +122,7 @@ export const Invest = (props) => {
           <Link to={"/" + params.id + "/investment"}>
             {"Go to your investor site"}
           </Link>
-          <div className="container">
+          <div>
             <ProjectName project={project} />
             <p>
               <span className="key-val-key">{"Share supply:"}</span>
@@ -163,9 +163,5 @@ export const Invest = (props) => {
     }
   };
 
-  return (
-    <div>
-      <div className="container">{projectView()}</div>
-    </div>
-  );
+  return <div>{projectView()}</div>;
 };
