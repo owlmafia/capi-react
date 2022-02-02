@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { init, fetchHolderCount } from "./controller";
+import { init } from "./controller";
 import { ProjectName } from "../ContentTitle";
 import { useParams } from "react-router-dom";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
@@ -9,6 +9,7 @@ import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/Sha
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { BsShare as ShareIcon } from "react-icons/bs";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
+import { fetchHolderCount } from "../common_functions/stats_common";
 
 var QRCode = require("qrcode.react");
 
@@ -128,10 +129,10 @@ export const Project = (props) => {
                 project={project}
               />
             )}
-            <FundsActivityEmbedded 
+            <FundsActivityEmbedded
               statusMsg={props.statusMsg}
               projectId={params.id}
-              myAddress={props.myAddress} 
+              myAddress={props.myAddress}
             />
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
