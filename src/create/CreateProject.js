@@ -10,6 +10,7 @@ export const CreateProject = (props) => {
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
+  const [logoUrl, setLogoUrl] = useState("");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
   const investorsShareChart = useRef(null);
 
@@ -49,6 +50,7 @@ export const CreateProject = (props) => {
             inputValue={sharePrice}
             onChange={(input) => setShareCount(input)}
           />
+
           <div className="chart__title">
             {"Investor's part: "}
             <a
@@ -70,7 +72,7 @@ export const CreateProject = (props) => {
             </a>
           </div>
 
-          <div className="pie_chart__container">
+          <div className="pie_chart__container input_spacing">
             <svg className="pie_chart__svg" ref={investorsShareChart} />
             <div className="pie_chart__centered_text">
               <input
@@ -91,6 +93,12 @@ export const CreateProject = (props) => {
             </div>
           </div>
 
+          <LabeledInput
+            label={"Logo URL (optional)"}
+            inputValue={logoUrl}
+            onChange={(input) => setLogoUrl(input)}
+          />
+
           <button
             className="button__submit"
             disabled={
@@ -110,6 +118,7 @@ export const CreateProject = (props) => {
                 shareCount,
                 sharePrice,
                 investorsShare,
+                logoUrl,
                 setCreateProjectSuccess
               );
             }}

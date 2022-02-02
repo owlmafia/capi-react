@@ -6,12 +6,15 @@ import {
   SidebarHeader,
   SidebarFooter,
 } from "react-pro-sidebar";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaAddressBook, FaRoad, FaCoins } from "react-icons/fa";
 import { MyAccount } from "./MyAccount";
 import { BsArrowUpCircle } from "react-icons/bs";
 import { IoMdStats } from "react-icons/io";
 import { VscArrowSwap } from "react-icons/vsc";
+import { useParams } from "react-router-dom";
+import { init } from "./controller";
+import React, { useState, useEffect, useMemo } from "react";
 
 export const SideBarDao = ({
   myAddress,
@@ -22,11 +25,21 @@ export const SideBarDao = ({
   setMyBalance,
   statusMsgUpdater,
 }) => {
+  let params = useParams();
+  const [viewProject, setViewProject] = useState(null);
+
+  useEffect(() => {
+    async function asyncInit() {
+      await init(params.id, setViewProject, statusMsgUpdater);
+    }
+    asyncInit();
+  }, [params.id, statusMsgUpdater]);
+
   return (
     <ProSidebar id="sidebar">
       <SidebarHeader>
         <div id="sidebar__header">
-          <img id="sidebar__logo" />
+          <img id="sidebar__logo" src={viewProject?.project?.logo_url ?? ""} />
           <MyAccount
             myAddress={myAddress}
             setMyAddress={setMyAddress}

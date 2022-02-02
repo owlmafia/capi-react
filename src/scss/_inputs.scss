@@ -27,3 +27,8 @@ input {
 .full_width_input {
     width: 100%;
 }
+
+// for things that are not inputs but appear in forms and need the same bottom spacing
+.input_spacing {
+    margin-bottom: 20px;
+}

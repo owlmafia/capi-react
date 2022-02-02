@@ -17,6 +17,7 @@ export const createProject = async (
   shareCount,
   sharePrice,
   investorsShare,
+  logoUrl,
   setCreateProjectSuccess
 ) => {
   const {
@@ -38,6 +39,7 @@ export const createProject = async (
         share_count: shareCount,
         asset_price: sharePrice,
         investors_share: investorsShare,
+        logo_url: logoUrl,
       },
     });
     showProgress(false);
