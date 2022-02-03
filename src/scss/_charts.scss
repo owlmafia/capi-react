@@ -47,3 +47,28 @@ $pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
         justify-content: space-between;
     }
 }
+
+.chart_legends_container {
+    display: flex;
+}
+
+.chart_legend {
+    &__container {
+        margin-right: 10px;
+    }
+
+    &__color {
+        width: 10px;
+        height: 10px;
+        margin-right: 4px;
+    }
+
+    &__text {
+        font-size: 0.8rem;
+        font-weight: 300;
+    }
+}
+
+.chart_with_legends_container > svg {
+    display: block;
+}

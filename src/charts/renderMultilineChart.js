@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const renderMultilineChart = (svg, flatData, lineData) => {
+const renderMultilineChart = (svg, flatData, lineData, lineColors) => {
   // TODO pass parent's dimensions
   const margin = { top: 10, right: 10, bottom: 30, left: 40 },
     width = 200 - margin.left - margin.right,
@@ -46,7 +46,7 @@ const renderMultilineChart = (svg, flatData, lineData) => {
     .append("g")
     .call(d3.axisLeft(y).ticks(4).tickFormat(d3.format(".0s")));
 
-  const lineColors = d3.scaleOrdinal().range(["#e41a1c", "#377eb8"]);
+  const lineColorsRange = d3.scaleOrdinal().range(lineColors);
 
   selected
     .selectAll(".line")
@@ -54,7 +54,7 @@ const renderMultilineChart = (svg, flatData, lineData) => {
     .join("path")
     .attr("fill", "none")
     .attr("stroke", function (d) {
-      return lineColors(d[0]);
+      return lineColorsRange(d[0]);
     })
     .attr("stroke-width", 1.5)
     .attr("d", function (d) {

@@ -1,18 +1,35 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
+import { ChartLegends } from "./ChartLegends";
 import renderMultilineChart from "./renderMultilineChart";
 
 export const IncomeVsSpendingChart = ({ chartData }) => {
   const chart = useRef(null);
+
+  const lineColors = useMemo(() => {
+    // HACK: TODO: derive correctly colors / legends from data. Currently e.g. order and count of lines is assumed when defining legends.
+    return ["#377eb8", "#e41a1c"];
+  }, []);
 
   useEffect(() => {
     if (chartData && chart.current) {
       renderMultilineChart(
         chart.current,
         chartData.flat_data_points,
-        chartData.chart_lines
+        chartData.chart_lines,
+        lineColors
       );
     }
   }, [chartData, chart.current]);
 
-  return <svg width={200} height={200} ref={chart} />;
+  return (
+    <div class="chart_with_legends_container">
+      <svg width={200} height={200} ref={chart} />
+      <ChartLegends
+        legends={[
+          { color: lineColors[1], text: "Income" },
+          { color: lineColors[0], text: "Spending" },
+        ]}
+      />
+    </div>
+  );
 };
