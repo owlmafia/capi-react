@@ -68,7 +68,7 @@ export const Investment = (props) => {
           </p>
 
           <button
-            className="harvest-button"
+            className="button__submit"
             hidden={chainInvestmentData.investor_harvestable_amount === "0"}
             onClick={async () => {
               await retrieveProfits(
@@ -88,6 +88,7 @@ export const Investment = (props) => {
           <br />
           <br />
           <button
+            className="button__submit"
             disabled={chainInvestmentData.investor_shares_count === "0"}
             onClick={async () => {
               await unstake(
