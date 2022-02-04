@@ -26,7 +26,9 @@ export const routesView = (
   statusMsg,
   onCopyErrorMsg,
   errorMsgIsCopied,
-  setMyAddressDisplay
+  setMyAddressDisplay,
+  myShares,
+  updateMyShares
 ) => {
   return (
     <Routes>
@@ -88,6 +90,8 @@ export const routesView = (
               myBalance={myBalance}
               setMyBalance={setMyBalance}
               statusMsgUpdater={statusMsgUpdater}
+              myShares={myShares}
+              updateMyShares={updateMyShares}
             />
           }
         >
@@ -100,6 +104,7 @@ export const routesView = (
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
                 setMyBalance={setMyBalance}
+                updateMyShares={updateMyShares}
               />
             }
           />

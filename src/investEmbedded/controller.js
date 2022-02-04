@@ -51,7 +51,8 @@ export const invest = async (
   setMyBalance,
   projectId,
   project,
-  buySharesCount
+  buySharesCount,
+  updateMyShares
 ) => {
   try {
     const {
@@ -109,6 +110,8 @@ export const invest = async (
     statusMsg.success(
       "Congratulations! you bought " + buySharesCount + " shares."
     );
+
+    updateMyShares(projectId, myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

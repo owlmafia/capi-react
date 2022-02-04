@@ -17,6 +17,9 @@ export const Wireframe = ({
   myBalance,
   setMyBalance,
   statusMsgUpdater,
+
+  myShares,
+  updateMyShares,
 }) => {
   const sideBar = () => {
     if (isGlobal) {
@@ -41,6 +44,8 @@ export const Wireframe = ({
           myBalance={myBalance}
           setMyBalance={setMyBalance}
           statusMsgUpdater={statusMsgUpdater}
+          myShares={myShares}
+          updateMyShares={updateMyShares}
         />
       );
     }

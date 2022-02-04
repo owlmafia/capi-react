@@ -1,4 +1,7 @@
+import React, { useEffect, useState } from "react";
 import { connectWallet } from "../MyAlgo";
+import { getMyShares } from "./controller";
+
 const wasmPromise = import("wasm");
 
 export const MyAccount = ({
@@ -9,6 +12,9 @@ export const MyAccount = ({
   myBalance,
   setMyBalance,
   statusMsgUpdater,
+  // optional: if set, shows "my shares"
+  projectId,
+  myShares,
 }) => {
   return (
     <div>
@@ -19,12 +25,12 @@ export const MyAccount = ({
         setMyBalance,
         statusMsgUpdater
       )}
-      {myAddressView(myAddress, myAddressDisplay, myBalance)}
+      {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
     </div>
   );
 };
 
-const myAddressView = (myAddress, myAddressDisplay, myBalance) => {
+const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
   if (myAddress !== "") {
     return (
       <div id="user_data">
@@ -37,7 +43,12 @@ const myAddressView = (myAddress, myAddressDisplay, myBalance) => {
             {myAddressDisplay}
           </a>
         </div>
-        <div id="my-balance">{myBalance}</div>
+        {myShares && (
+          <div id="my_account_my_balance__shares">
+            {"Your shares: " + myShares}
+          </div>
+        )}
+        <div id="my_account_my_balance__balance">{myBalance}</div>
       </div>
     );
   } else {

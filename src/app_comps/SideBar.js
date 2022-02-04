@@ -34,6 +34,8 @@ export const SideBar = ({
             myBalance={myBalance}
             setMyBalance={setMyBalance}
             statusMsgUpdater={statusMsgUpdater}
+            // no project / DAO here
+            projectId={null}
           />
         </div>
       </SidebarHeader>

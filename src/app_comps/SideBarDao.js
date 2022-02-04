@@ -13,8 +13,8 @@ import { BsArrowUpCircle } from "react-icons/bs";
 import { IoMdStats } from "react-icons/io";
 import { VscArrowSwap } from "react-icons/vsc";
 import { useParams } from "react-router-dom";
-import { init } from "./controller";
-import React, { useState, useEffect, useMemo } from "react";
+import { init, updateMyShares } from "./controller";
+import React, { useState, useEffect } from "react";
 
 export const SideBarDao = ({
   myAddress,
@@ -24,6 +24,8 @@ export const SideBarDao = ({
   myBalance,
   setMyBalance,
   statusMsgUpdater,
+  myShares,
+  updateMyShares,
 }) => {
   let params = useParams();
   const [viewProject, setViewProject] = useState(null);
@@ -34,6 +36,15 @@ export const SideBarDao = ({
     }
     asyncInit();
   }, [params.id, statusMsgUpdater]);
+
+  useEffect(() => {
+    async function asyncFn() {
+      updateMyShares(params.id, myAddress);
+    }
+    if (myAddress) {
+      asyncFn();
+    }
+  }, [params.id, myAddress]);
 
   return (
     <ProSidebar id="sidebar">
@@ -48,6 +59,8 @@ export const SideBarDao = ({
             myBalance={myBalance}
             setMyBalance={setMyBalance}
             statusMsgUpdater={statusMsgUpdater}
+            projectId={params.id}
+            myShares={myShares}
           />
         </div>
       </SidebarHeader>

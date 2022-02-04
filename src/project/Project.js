@@ -118,6 +118,7 @@ export const Project = (props) => {
                 setMyBalance={props.setMyBalance}
                 myAddress={props.myAddress}
                 project={project}
+                updateMyShares={props.updateMyShares}
               />
             )}
             {showPayTab && (
