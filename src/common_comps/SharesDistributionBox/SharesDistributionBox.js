@@ -9,6 +9,9 @@ export const SharesDistributionBox = ({
   statusMsg,
   sharesAssetId,
   sharesSupply,
+  appId,
+  investingEscrowAddress,
+  stakingEscrowAddress,
   holderCount,
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
@@ -40,21 +43,38 @@ export const SharesDistributionBox = ({
     }
   };
 
+  const content = () => {
+    if (sharesDistr && sharesDistr.length === 0) {
+      return <div>{"No investors yet"}</div>;
+    } else {
+      return (
+        <div>
+          <SharesDistributionChart sharesDistr={sharesDistr} />
+          {holdersListItems()}
+        </div>
+      );
+    }
+  };
+
   useEffect(async () => {
     if (sharesAssetId && sharesSupply) {
       const sharesDistr = await fetchSharesDistribution(
         statusMsg,
         sharesAssetId,
-        sharesSupply
+        sharesSupply,
+        appId,
+        investingEscrowAddress,
+        stakingEscrowAddress
       );
       setSharesDistr(sharesDistr);
     }
-  }, [sharesAssetId, sharesSupply]);
+  }, [
+    sharesAssetId,
+    sharesSupply,
+    appId,
+    investingEscrowAddress,
+    stakingEscrowAddress,
+  ]);
 
-  return (
-    <LabeledBox label={"Holders distribution"}>
-      <SharesDistributionChart sharesDistr={sharesDistr} />
-      {holdersListItems()}
-    </LabeledBox>
-  );
+  return <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>;
 };

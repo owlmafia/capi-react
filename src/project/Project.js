@@ -45,6 +45,8 @@ export const Project = (props) => {
       fetchHolderCount(
         props.statusMsg,
         project.shares_asset_id,
+        project.investing_escrow_address,
+        project.staking_escrow_address,
         setHolderCount
       );
     }
@@ -143,12 +145,17 @@ export const Project = (props) => {
               <button>{"Withdraw"}</button>
             </Link> */}
             <div className="section-spacer" />
-            <SharesDistributionBox
-              statusMsg={props.statusMsg}
-              sharesAssetId={sharesAssetId}
-              sharesSupply={sharesSupply}
-              holderCount={holderCount}
-            />
+            {project && (
+              <SharesDistributionBox
+                statusMsg={props.statusMsg}
+                sharesAssetId={sharesAssetId}
+                sharesSupply={sharesSupply}
+                holderCount={holderCount}
+                appId={project.central_app_id}
+                investingEscrowAddress={project.investing_escrow_address}
+                stakingEscrowAddress={project.staking_escrow_address}
+              />
+            )}
 
             <IncomeVsSpendingBox
               statusMsg={props.statusMsg}

@@ -49,12 +49,17 @@ export const Stats = ({ statusMsg }) => {
       <div>
         <ContentTitle title={"Stats"} />
       </div>
-      <SharesDistributionBox
-        statusMsg={statusMsg}
-        sharesAssetId={sharesAssetId}
-        sharesSupply={sharesSupply}
-        holderCount={holderCount}
-      />
+      {project && (
+        <SharesDistributionBox
+          statusMsg={statusMsg}
+          sharesAssetId={sharesAssetId}
+          sharesSupply={sharesSupply}
+          holderCount={holderCount}
+          appId={project.central_app_id}
+          investingEscrowAddress={project.investing_escrow_address}
+          stakingEscrowAddress={project.staking_escrow_address}
+        />
+      )}
 
       <IncomeVsSpendingBox statusMsg={statusMsg} projectId={params.id} />
     </div>
