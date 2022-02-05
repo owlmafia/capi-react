@@ -1,18 +1,18 @@
-import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
-import { Roadmap } from "../roadmap/Roadmap";
+import { Route, Routes } from "react-router-dom";
+import { CreateProject } from "../create/CreateProject";
+import { FundsActivity } from "../funds_activity/FundsActivity";
+import { Invest } from "../invest/Invest";
+import { Investment } from "../investment/Investment";
+import { MyProjects } from "../my_projects/MyProjects";
+import { Project } from "../project/Project";
 import { AddRoadmapItem } from "../roadmap/AddRoadmapItem";
+import { Roadmap } from "../roadmap/Roadmap";
 import { Stats } from "../stats/Stats";
+import { Withdrawal } from "../withdraw/Withdraw";
+import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
+import { NotFound } from "./NotFound";
 import { OuterWireframe } from "./OuterWireframe.js";
 import { Wireframe } from "./Wireframe";
-import { Investment } from "../investment/Investment";
-import { Withdrawal } from "../withdraw/Withdraw";
-import { NotFound } from "./NotFound";
-import { CreateProject } from "../create/CreateProject";
-import { Invest } from "../invest/Invest";
-import { Project } from "../project/Project";
-import { Route, Routes } from "react-router-dom";
-import { MyProjects } from "../my_projects/MyProjects";
-import { FundsActivity } from "../funds_activity/FundsActivity";
 
 export const routesView = (
   myAddress,
@@ -105,6 +105,7 @@ export const routesView = (
                 statusMsg={statusMsgUpdater}
                 setMyBalance={setMyBalance}
                 updateMyShares={updateMyShares}
+                myShares={myShares}
               />
             }
           />
@@ -131,6 +132,8 @@ export const routesView = (
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
                 setMyBalance={setMyBalance}
+                updateMyShares={updateMyShares}
+                myShares={myShares}
               />
             }
           />

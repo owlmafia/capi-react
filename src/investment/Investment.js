@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { init, retrieveProfits, unstake } from "./controller";
-import renderPieChart from "../charts/renderPieChart";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import renderPieChart from "../charts/renderPieChart";
 import { ContentTitle } from "../ContentTitle";
+import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
+import { init, retrieveProfits, unstake } from "./controller";
 
 export const Investment = (props) => {
   let params = useParams();
@@ -41,7 +42,7 @@ export const Investment = (props) => {
       return (
         <div>
           <p>
-            <span className="key-val-key">{"Your shares:"}</span>
+            <span className="key-val-key">{"Your staked shares:"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_shares_count}
             </span>
@@ -131,6 +132,15 @@ export const Investment = (props) => {
         <div>
           {userView()}
           {youAreNotInvestedView()}
+          <StakeEmbedded
+            showProgress={props.showProgress}
+            statusMsg={props.statusMsg}
+            setMyBalance={props.setMyBalance}
+            myAddress={props.myAddress}
+            project={project}
+            updateMyShares={props.updateMyShares}
+            myShares={props.myShares}
+          />
         </div>
       );
     } else {

@@ -14,7 +14,7 @@ export const updateMyShares = async (
       my_address: myAddress,
     });
     console.log("mySharesRes: %o", mySharesRes);
-    setMyShares(mySharesRes.shares);
+    setMyShares(mySharesRes);
   } catch (e) {
     statusMsg.error(e);
   }

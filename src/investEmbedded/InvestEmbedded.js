@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { init, invest, handleSharesCountInput } from "./controller";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AmountInput } from "../common_comps/AmountInput";
+import { LabeledInput } from "../common_comps/LabeledInput";
+import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
+import { handleSharesCountInput, init, invest } from "./controller";
 
 export const InvestEmbedded = ({
   showProgress,
@@ -10,6 +11,7 @@ export const InvestEmbedded = ({
   myAddress,
   project,
   updateMyShares,
+  myShares,
 }) => {
   let params = useParams();
   const [buySharesCount, setBuySharesCount] = useState("10");
@@ -21,9 +23,9 @@ export const InvestEmbedded = ({
 
   return (
     <div class="project_action_active_tab">
-      <p class="input_label">{"Shares:"}</p>
-      <AmountInput
-        value={buySharesCount}
+      <LabeledInput
+        label={"Buy:"}
+        inputValue={buySharesCount}
         onChange={(input) =>
           handleSharesCountInput(
             input,
@@ -32,6 +34,7 @@ export const InvestEmbedded = ({
             setTotalCost
           )
         }
+        placeholder={""}
       />
       <div className="secondary_info">
         <span>{"Cost:"}</span>
@@ -55,6 +58,15 @@ export const InvestEmbedded = ({
       >
         {"Buy"}
       </button>
+      <StakeEmbedded
+        showProgress={showProgress}
+        statusMsg={statusMsg}
+        setMyBalance={setMyBalance}
+        myAddress={myAddress}
+        project={project}
+        updateMyShares={updateMyShares}
+        myShares={myShares}
+      />
     </div>
   );
 };

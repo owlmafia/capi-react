@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { init } from "./controller";
-import { ProjectName } from "../ContentTitle";
+import React, { useEffect, useMemo, useState } from "react";
+import { BsShare as ShareIcon } from "react-icons/bs";
 import { useParams } from "react-router-dom";
+import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
+import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
+import { fetchHolderCount } from "../common_functions/stats_common";
+import { ProjectName } from "../ContentTitle";
+import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
+import { init } from "./controller";
 import { Funds } from "./Funds";
-import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
-import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
-import { BsShare as ShareIcon } from "react-icons/bs";
-import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
-import { fetchHolderCount } from "../common_functions/stats_common";
 
 var QRCode = require("qrcode.react");
 
@@ -121,6 +121,7 @@ export const Project = (props) => {
                 myAddress={props.myAddress}
                 project={project}
                 updateMyShares={props.updateMyShares}
+                myShares={props.myShares}
               />
             )}
             {showPayTab && (

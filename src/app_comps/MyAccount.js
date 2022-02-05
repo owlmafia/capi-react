@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connectWallet } from "../MyAlgo";
-import { getMyShares } from "./controller";
 
 const wasmPromise = import("wasm");
 
@@ -45,7 +44,7 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
         </div>
         {myShares && (
           <div id="my_account_my_balance__shares">
-            {"Your shares: " + myShares}
+            {"Your shares: " + myShares.total}
           </div>
         )}
         <div id="my_account_my_balance__balance">{myBalance}</div>

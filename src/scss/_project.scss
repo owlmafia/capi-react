@@ -34,6 +34,17 @@
     padding: 10px;
 }
 
+.project_action {
+    &__stake_container {
+        margin-top: 10px;
+        padding-top: 20px;
+        border-top: 1px solid black;
+    }
+
+    &__stake_info {
+        margin-bottom: 20px;
+    }
+}
 
 #withdraw_icon {
     // needed to center vertically (given it's in flex box)
