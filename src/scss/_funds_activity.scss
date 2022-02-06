@@ -24,7 +24,7 @@
             @include amount;
             color: green;
         }
-        
+
         &__spending {
             @include amount;
             color: red;
@@ -47,4 +47,3 @@
         color: grey;
     }
 }
-  

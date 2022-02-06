@@ -9,11 +9,10 @@
 }
 
 .button {
-
     &__submit {
         @include primary_button();
         margin-top: 20px;
-        
+
         &:enabled {
             /* border: 0px solid transparent; */
             border: 1px solid #383e42;
@@ -26,19 +25,19 @@
 
         &:disabled {
             cursor: not-allowed;
-            pointer-events: all !important; 
+            pointer-events: all !important;
         }
     }
-    
+
     &__submit_after_input {
         @include primary_button();
         margin-top: 10px;
     }
-    
+
     &__connect {
         @include primary_button();
     }
-    
+
     &__disconnect {
         @include primary_button();
         margin-top: 16px;
@@ -49,4 +48,3 @@
     text-decoration-line: underline;
     cursor: pointer;
 }
-

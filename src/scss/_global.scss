@@ -9,99 +9,99 @@ body {
     position: relative;
     min-height: 100vh;
     margin: 0;
-    background-color: #E8E8E8;
-  }
-    
-  #nav_and_main {
+    background-color: #e8e8e8;
+}
+
+#nav_and_main {
     display: inline-flex;
     gap: 20px;
     max-width: 1200px;
     margin: auto;
     margin-top: 100px;
-  }
-    
-  .project-name-container {
-    margin-bottom: 26px;
-  }
-  
-#content {
-  min-width: 500px;
-  max-width: 700px;
-  display: inline-block;
-  box-sizing: border-box;
-  position: relative;
-  padding-top: $global_top_padding;
-  padding-left: 50px;
-  padding-right: 50px;
-  background-color: white;
-  border-radius: 20px;
-
-  &__title {
-    font-weight: 700;
-    font-size: 34px;
-    color: black;
-    margin-bottom: 26px;
-    display: flex;
-    align-items: center;
-  }
 }
 
-  dl {
+.project-name-container {
+    margin-bottom: 26px;
+}
+
+#content {
+    min-width: 500px;
+    max-width: 700px;
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    padding-top: $global_top_padding;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: white;
+    border-radius: 20px;
+
+    &__title {
+        font-weight: 700;
+        font-size: 34px;
+        color: black;
+        margin-bottom: 26px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+dl {
     display: grid;
     grid-template-columns: max-content auto;
-  }
-  
-  dt {
-    grid-column-start: 1;
-  }
-  
-  dd {
-    grid-column-start: 2;
-  }
+}
 
-  .submit-button {
+dt {
+    grid-column-start: 1;
+}
+
+dd {
+    grid-column-start: 2;
+}
+
+.submit-button {
     display: block;
     position: relative;
     margin-top: 8px;
     margin-bottom: 16px;
-  }
-  
-  select {
+}
+
+select {
     outline: none;
     height: 35px;
     border-radius: 20px;
     border: 1px solid #d8e1ea;
     padding: 0px 15px;
     font-size: 16px;
-  }
-  
+}
+
 #container {
     text-align: center;
 }
-  
+
 #container * {
     word-break: break-word;
     // recet text-align: center in container to center the main content
     text-align: left;
 }
 
-  .input-row input {
+.input-row input {
     margin-right: 5px;
-  }
-  
-  .form {
+}
+
+.form {
     padding-top: 20px;
     margin-bottom: 10px;
-  }
+}
 
-  #root {
-  }
-  
-  .inline {
+#root {
+}
+
+.inline {
     display: inline-block;
-  }
-  
-  .error {
+}
+
+.error {
     border-radius: 12px;
     border-style: solid;
     border-width: 1px;
@@ -111,9 +111,9 @@ body {
     background-color: red;
     color: white;
     /* color: red; */
-  }
-  
-  .success {
+}
+
+.success {
     border-radius: 12px;
     border-style: solid;
     border-width: 1px;
@@ -123,28 +123,27 @@ body {
     background-color: green;
     color: white;
     /* color: green; */
-  }
+}
 
-  
-  .submit-msg {
+.submit-msg {
     margin-bottom: 16px;
-  }
-  
-  .submit-msg-warning {
+}
+
+.submit-msg-warning {
     margin-bottom: 16px;
     color: orangered;
-  }
-  
-  .submit-swap-title {
+}
+
+.submit-swap-title {
     margin-bottom: 16px;
-  }
-  
-  .submit-swap-label {
+}
+
+.submit-swap-label {
     margin-top: 16px;
     margin-bottom: 2px;
-  }
-  
-  .submit-sign-and-submit-button {
+}
+
+.submit-sign-and-submit-button {
     display: block;
     position: relative;
     margin-top: 16px;
@@ -152,14 +151,14 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, 0%);
     transform: translate(-50%, 0%);
-  }
-  
-  .warning {
+}
+
+.warning {
     color: orangered;
     margin-bottom: 12px;
-  }
-  
-  .footer {
+}
+
+.footer {
     position: fixed;
     left: 0;
     padding-bottom: 20px;
@@ -173,19 +172,19 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-  }
-  
-  .footer > *:not(:last-child) {
+}
+
+.footer > *:not(:last-child) {
     margin-right: 20px;
-  }
-  
-  a {
+}
+
+a {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
-  
-  .modal {
+}
+
+.modal {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -193,9 +192,9 @@ body {
     height: 100vh;
     background: rgba(0, 0, 0, 0.2);
     z-index: 1201;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     box-sizing: border-box;
     padding: 20px 20px 20px 20px;
     border: 1px solid grey;
@@ -206,15 +205,15 @@ body {
     transform: translate(-50%, -50%);
     background-color: #fff;
     z-index: 2000;
-  }
-  
-  .modal-content-size {
+}
+
+.modal-content-size {
     max-width: 400px;
     min-width: 400px;
     min-height: 400px;
-  }
-  
-  .modal-topbar {
+}
+
+.modal-topbar {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -222,49 +221,49 @@ body {
     margin-bottom: 20px;
     border-bottom: 1px solid black;
     padding-bottom: 10px;
-  }
-  
-  .modal-topbar-title {
+}
+
+.modal-topbar-title {
     margin: 0;
     color: black;
-  }
-  
-  .modal-topbar-x {
+}
+
+.modal-topbar-x {
     margin: 0;
     cursor: pointer;
-  }
-  
-  .modal-body {
+}
+
+.modal-body {
     overflow-y: scroll;
     scrollbar-width: none;
-  }
-  
-  .modal-body::-webkit-scrollbar {
+}
+
+.modal-body::-webkit-scrollbar {
     width: 4px;
-  }
-  
-  .modal-body::-webkit-scrollbar-thumb {
+}
+
+.modal-body::-webkit-scrollbar-thumb {
     background: #888;
-  }
-  
-  @media only screen and (max-width: 460px) {
+}
+
+@media only screen and (max-width: 460px) {
     .modal-content-size {
-      max-width: 350px;
-      min-width: 350px;
-      min-height: 350px;
+        max-width: 350px;
+        min-width: 350px;
+        min-height: 350px;
     }
-  }
-  
-  .link-data-container {
+}
+
+.link-data-container {
     text-align: center;
-  }
-  
-  .withdrawal-cell-container {
+}
+
+.withdrawal-cell-container {
     margin-top: 40px;
     min-width: 400px;
-  }
-  
-  .withdrawal-cell {
+}
+
+.withdrawal-cell {
     border-style: solid;
     border-width: 1px;
     border-radius: 12px;
@@ -273,138 +272,138 @@ body {
     margin-bottom: 20px;
     padding-bottom: 20px;
     /* color: grey; */
-  }
-  
-  .subtitle {
+}
+
+.subtitle {
     font-size: 1.1em;
     font-weight: 500;
     margin-bottom: 20px;
-  }
-  
-  .name-label {
+}
+
+.name-label {
     margin-bottom: 6px;
-  }
-  
-  .key-val-key {
+}
+
+.key-val-key {
     /* font-weight: 300; */
     color: gray;
-  }
-  
-  .key-val-val {
+}
+
+.key-val-val {
     /* font-weight: 600; */
     margin-left: 4px;
-  }
-  
-  .right-button {
+}
+
+.right-button {
     margin-left: 6px;
     height: 25px;
     border: 1px solid lightgray;
     padding: 0px 6px;
-  }
-  
-  .section-spacer {
+}
+
+.section-spacer {
     height: 20px;
-  }
-  
-  .modal-button {
+}
+
+.modal-button {
     margin-top: 20px;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     width: 100%;
     height: 5px;
     overflow-x: hidden;
-  }
-  
-  .shares-total-price {
+}
+
+.shares-total-price {
     margin-left: 4px;
     color: gray;
-  }
+}
 
-  #user-data {
+#user-data {
     margin-bottom: 16px;
-  }
-  
-  /*********************/
-  /* progress bar */
-  /*********************/
-  .line {
+}
+
+/*********************/
+/* progress bar */
+/*********************/
+.line {
     position: absolute;
     opacity: 0.4;
     background: black;
     width: 100%;
     height: 5px;
-  }
-  
-  .subline {
+}
+
+.subline {
     position: absolute;
     background: black;
     height: 5px;
-  }
-  
-  .inc {
+}
+
+.inc {
     animation: increase 2s infinite;
-  }
-  
-  .dec {
+}
+
+.dec {
     animation: decrease 2s 0.5s infinite;
-  }
-  
-  @keyframes increase {
+}
+
+@keyframes increase {
     from {
-      left: -5%;
-      width: 5%;
+        left: -5%;
+        width: 5%;
     }
-  
+
     to {
-      left: 130%;
-      width: 100%;
+        left: 130%;
+        width: 100%;
     }
-  }
-  
-  @keyframes decrease {
+}
+
+@keyframes decrease {
     from {
-      left: -80%;
-      width: 80%;
+        left: -80%;
+        width: 80%;
     }
-  
+
     to {
-      left: 110%;
-      width: 10%;
+        left: 110%;
+        width: 10%;
     }
-  }
-  
-  /*********************/
-  /*********************/
+}
+
+/*********************/
+/*********************/
 
 .labeled_box {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 .labeled_box_label {
-  font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 12px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
 }
 
 p {
-  margin: 0px;
+    margin: 0px;
 }
 
 .title_right_button {
-  width: 30px;
-  height: 30px;
-  margin-left: auto;
-  cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    cursor: pointer;
 }
 
 .labeled_box_children {
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
 }
 
 .first_project_widget {
-  margin-top: 40px;
+    margin-top: 40px;
 }

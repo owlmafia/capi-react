@@ -6,7 +6,7 @@ $pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-.pie_chart{
+.pie_chart {
     &__container {
         position: relative;
         width: $pie_chart_diameter;
@@ -15,7 +15,7 @@ $pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
 
     &__svg {
         width: $pie_chart_diameter;
-        height: $pie_chart_diameter; 
+        height: $pie_chart_diameter;
     }
 
     &__centered_text {
