@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
+import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
 import { updateMyShares } from "./controller";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
-import { StatusMsgUpdater } from "./StatusMsgUpdater";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -18,7 +18,6 @@ const App = () => {
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
   const [statusMsg, setStatusMsg] = useState(null);
-  const [errorMsgIsCopied, setErrorMsgIsCopied] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
 
   const [statusMsgUpdater, _] = useState(StatusMsgUpdater(setStatusMsg));
@@ -27,13 +26,6 @@ const App = () => {
     if (myAddress) {
       await updateMyShares(statusMsgUpdater, projectId, myAddress, setMyShares);
     }
-  };
-
-  const onCopyErrorMsg = () => {
-    setErrorMsgIsCopied(true);
-    setTimeout(() => {
-      setErrorMsgIsCopied(false);
-    }, 1000);
   };
 
   if (isIE) {
@@ -60,8 +52,6 @@ const App = () => {
               myAddressDisplay,
               myBalance,
               statusMsg,
-              onCopyErrorMsg,
-              errorMsgIsCopied,
               setMyAddressDisplay,
               myShares,
               updateShares

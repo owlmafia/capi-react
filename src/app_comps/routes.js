@@ -23,8 +23,6 @@ export const routesView = (
   myAddressDisplay,
   myBalance,
   statusMsg,
-  onCopyErrorMsg,
-  errorMsgIsCopied,
   setMyAddressDisplay,
   myShares,
   updateMyShares
@@ -38,8 +36,6 @@ export const routesView = (
             <Wireframe
               isGlobal={true}
               statusMsg={statusMsg}
-              onCopyErrorMsg={onCopyErrorMsg}
-              errorMsgIsCopied={errorMsgIsCopied}
               myAddress={myAddress}
               setMyAddress={setMyAddress}
               myAddressDisplay={myAddressDisplay}
@@ -80,8 +76,6 @@ export const routesView = (
             <Wireframe
               isGlobal={false}
               statusMsg={statusMsg}
-              onCopyErrorMsg={onCopyErrorMsg}
-              errorMsgIsCopied={errorMsgIsCopied}
               myAddress={myAddress}
               setMyAddress={setMyAddress}
               myAddressDisplay={myAddressDisplay}

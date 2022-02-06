@@ -1,0 +1,41 @@
+.msg {
+    position: relative;
+    margin: 16px auto;
+    padding: 10px 24px 10px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+  
+    &__error {
+      color: white;
+      background: red;
+    }
+  
+    &__success {
+      color: white;
+      background: green;
+    }
+    
+  
+    &__close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+  
+      svg {
+        display: block;
+        width: 10px;
+        height: 10px;
+        stroke: white;
+        stroke-width: 1;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    }
+  }
+
+.copy_msg {
+  font-weight: 600;
+}
