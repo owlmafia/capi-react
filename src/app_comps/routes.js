@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { CreateProject } from "../create/CreateProject";
 import { FundsActivity } from "../funds_activity/FundsActivity";
-import { Invest } from "../invest/Invest";
 import { Investment } from "../investment/Investment";
 import { MyProjects } from "../my_projects/MyProjects";
 import { Project } from "../project/Project";
@@ -100,26 +99,11 @@ export const routesView = (
             element={
               <Project
                 myAddress={myAddress}
-                showModal={(modal) => setModal(modal)}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
                 setMyBalance={setMyBalance}
                 updateMyShares={updateMyShares}
                 myShares={myShares}
-              />
-            }
-          />
-
-          <Route
-            exact
-            path="invest"
-            element={
-              <Invest
-                myAddress={myAddress}
-                showModal={(modal) => setModal(modal)}
-                showProgress={(show) => setShowProgress(show)}
-                statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
               />
             }
           />

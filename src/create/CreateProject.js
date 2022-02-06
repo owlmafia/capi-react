@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { CreateProjectSuccess } from "./CreateProjectSuccess";
-import { init, createProject } from "./controller";
+import React, { useEffect, useRef, useState } from "react";
 import renderPieChart from "../charts/renderPieChart";
-import { ContentTitle } from "../ContentTitle";
 import { LabeledInput } from "../common_comps/LabeledInput";
+import { ContentTitle } from "../ContentTitle";
+import { createProject, init } from "./controller";
+import { CreateProjectSuccess } from "./CreateProjectSuccess";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
@@ -134,12 +134,7 @@ export const CreateProject = (props) => {
 
   const bodyView = () => {
     if (createProjectSuccess) {
-      return (
-        <CreateProjectSuccess
-          project={createProjectSuccess}
-          showModal={props.showModal}
-        />
-      );
+      return <CreateProjectSuccess project={createProjectSuccess} />;
     } else {
       return (
         <div>
