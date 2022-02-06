@@ -1,10 +1,11 @@
-import "./App.scss";
-import { BrowserRouter } from "react-router-dom";
 import React, { useState } from "react";
-import Modal from "./Modal";
-import ProgressBar from "./ProgressBar";
+import { BrowserRouter } from "react-router-dom";
+import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { updateMyShares } from "./controller";
+import Modal from "./Modal";
+import ProgressBar from "./ProgressBar";
+import { StatusMsgUpdater } from "./StatusMsgUpdater";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -20,23 +21,7 @@ const App = () => {
   const [errorMsgIsCopied, setErrorMsgIsCopied] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
 
-  class StatusMsgUpdater {
-    success(msg) {
-      msg = msg + "";
-      console.log(msg);
-      setStatusMsg({ msg: msg, type: "success" });
-    }
-    error(msg) {
-      msg = msg + "";
-      console.error(msg);
-      setStatusMsg({ msg: msg, type: "error" });
-    }
-    clear() {
-      setStatusMsg(null);
-    }
-  }
-
-  const [statusMsgUpdater, _] = useState(new StatusMsgUpdater());
+  const [statusMsgUpdater, _] = useState(StatusMsgUpdater(setStatusMsg));
 
   const updateShares = async (projectId, myAddress) => {
     if (myAddress) {
