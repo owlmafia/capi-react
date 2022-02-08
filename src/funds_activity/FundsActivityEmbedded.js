@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { init, loadFundsActivity } from "./controller";
-import { ContentTitle } from "../ContentTitle";
-import { Link, useParams } from "react-router-dom";
-import { FundsActivityEntry } from "./FundsActivityEntry";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { LabeledBox } from "../common_comps/LabeledBox";
+import { init, loadFundsActivity } from "./controller";
+import { FundsActivityEntry } from "./FundsActivityEntry";
 
 export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
-    init(projectId);
+    init(statusMsg);
   }, [statusMsg]);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
 
   const view = () => {
     return (
-      <div class="first_project_widget">
+      <div className="first_project_widget">
         <LabeledBox label="Recent funds activity">
           {fundsActivity()}
           <Link to="funds_activity">

@@ -20,7 +20,7 @@ const App = () => {
   const [statusMsg, setStatusMsg] = useState(null);
   const [showProgress, setShowProgress] = useState(false);
 
-  const [statusMsgUpdater, _] = useState(StatusMsgUpdater(setStatusMsg));
+  const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
   const updateShares = async (projectId, myAddress) => {
     if (myAddress) {

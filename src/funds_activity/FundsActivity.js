@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { init, loadFundsActivity } from "./controller";
-import { ContentTitle } from "../ContentTitle";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ContentTitle } from "../ContentTitle";
+import { init, loadFundsActivity } from "./controller";
 import { FundsActivityEntry } from "./FundsActivityEntry";
 
 export const FundsActivity = (props) => {
@@ -10,7 +10,7 @@ export const FundsActivity = (props) => {
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
-    init(params.id);
+    init(props.statusMsg);
   }, [props.statusMsg]);
 
   useEffect(() => {

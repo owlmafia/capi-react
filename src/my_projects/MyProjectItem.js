@@ -13,14 +13,14 @@ export const MyProjectItem = ({ project }) => {
 const involvementIcons = (project) => {
   let icons = [];
   if (project.created_by_me === "true") {
-    icons.push(involvementIcon("todo"));
+    icons.push(involvementIcon("todo", "Created by me"));
   }
   if (project.invested_by_me === "true") {
-    icons.push(involvementIcon("todo"));
+    icons.push(involvementIcon("todo", "Invested"));
   }
   return icons;
 };
 
-const involvementIcon = (src) => {
-  return <img className="my_project__involvement_icon" src={src} />;
+const involvementIcon = (src, alt) => {
+  return <img className="my_project__involvement_icon" src={src} alt={alt} />;
 };

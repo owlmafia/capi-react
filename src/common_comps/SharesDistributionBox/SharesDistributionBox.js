@@ -1,7 +1,7 @@
-import { fetchSharesDistribution } from "./controller";
-import { LabeledBox } from "../../common_comps/LabeledBox";
-import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import React, { useEffect, useState } from "react";
+import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
+import { LabeledBox } from "../../common_comps/LabeledBox";
+import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
@@ -27,7 +27,7 @@ export const SharesDistributionBox = ({
         entries = sharesDistr.slice(0, entries_small_count);
       }
       return (
-        <div class="holder_list_container">
+        <div className="holder_list_container">
           {entries.map((entry) => (
             <HolderEntry entry={entry} />
           ))}
@@ -56,19 +56,23 @@ export const SharesDistributionBox = ({
     }
   };
 
-  useEffect(async () => {
-    if (sharesAssetId && sharesSupply) {
-      const sharesDistr = await fetchSharesDistribution(
-        statusMsg,
-        sharesAssetId,
-        sharesSupply,
-        appId,
-        investingEscrowAddress,
-        stakingEscrowAddress
-      );
-      setSharesDistr(sharesDistr);
+  useEffect(() => {
+    async function fetchData() {
+      if (sharesAssetId && sharesSupply) {
+        const sharesDistr = await fetchSharesDistribution(
+          statusMsg,
+          sharesAssetId,
+          sharesSupply,
+          appId,
+          investingEscrowAddress,
+          stakingEscrowAddress
+        );
+        setSharesDistr(sharesDistr);
+      }
     }
+    fetchData();
   }, [
+    statusMsg,
     sharesAssetId,
     sharesSupply,
     appId,

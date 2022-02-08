@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { init, pay } from "./controller";
+import React, { useEffect, useState } from "react";
 import { AmountInput } from "../common_comps/AmountInput";
+import { init, pay } from "./controller";
 
 export const PayEmbedded = ({
   showProgress,
@@ -16,8 +16,8 @@ export const PayEmbedded = ({
   }, [statusMsg]);
 
   return (
-    <div class="project_action_active_tab">
-      <p class="input_label">{"Amount:"}</p>
+    <div className="project_action_active_tab">
+      <p className="input_label">{"Amount:"}</p>
       <AmountInput value={amount} onChange={(input) => setAmount(input)} />
       <button
         disabled={myAddress === ""}

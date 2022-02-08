@@ -29,7 +29,9 @@ export const CreateProject = (props) => {
       const data = { a: investorsShare, b: nonInvestorsShare };
       renderPieChart(investorsShareChart.current, data, (d) => d[1]);
     }
-  }, [investorsShare, investorsShareChart.current]);
+    // for now no deps - mutable value doesn't cause a re-render
+    //   }, [investorsShare, investorsShareChart.current]);
+  });
 
   const formView = () => {
     if (props.myAddress) {
@@ -58,8 +60,7 @@ export const CreateProject = (props) => {
 
           <div className="chart__title">
             {"Investor's part: "}
-            <a
-              href="#"
+            <p
               onClick={() =>
                 props.showModal({
                   title: "Investor's share",
@@ -74,7 +75,7 @@ export const CreateProject = (props) => {
               }
             >
               ?
-            </a>
+            </p>
           </div>
 
           <div className="pie_chart__container input_spacing">

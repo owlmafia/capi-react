@@ -19,10 +19,10 @@ export const InvestEmbedded = ({
 
   useEffect(() => {
     init(statusMsg, buySharesCount, project, setTotalCost);
-  }, [statusMsg, buySharesCount]);
+  }, [statusMsg, buySharesCount, project]);
 
   return (
-    <div class="project_action_active_tab">
+    <div className="project_action_active_tab">
       <LabeledInput
         label={"Buy:"}
         inputValue={buySharesCount}

@@ -8,7 +8,9 @@ export const SharesDistributionChart = ({ sharesDistr }) => {
     if (sharesDistr && chart.current) {
       renderPieChart(chart.current, sharesDistr, (d) => d[1].percentage_number);
     }
-  }, [sharesDistr, chart.current]);
+    // for now no deps - mutable value doesn't cause a re-render
+    //   }, [sharesDistr]);
+  });
 
-  return <svg class="pie_chart__svg" ref={chart} />;
+  return <svg className="pie_chart__svg" ref={chart} />;
 };

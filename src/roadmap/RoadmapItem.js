@@ -1,4 +1,3 @@
-import moment from "moment";
 export const RoadMapItem = ({ item }) => {
   return (
     <div className="roadmap_item">

@@ -43,13 +43,17 @@ export const SideBarDao = ({
     if (myAddress) {
       asyncFn();
     }
-  }, [params.id, myAddress]);
+  }, [params.id, myAddress, updateMyShares]);
 
   return (
     <ProSidebar id="sidebar">
       <SidebarHeader>
         <div id="sidebar__header">
-          <img id="sidebar__logo" src={viewProject?.project?.logo_url ?? ""} />
+          <img
+            id="sidebar__logo"
+            src={viewProject?.project?.logo_url ?? ""}
+            alt="Logo"
+          />
           <MyAccount
             myAddress={myAddress}
             setMyAddress={setMyAddress}
@@ -89,12 +93,12 @@ export const SideBarDao = ({
         {viewProject &&
           viewProject.project &&
           viewProject.project.social_media_url && (
-            <div class="social_media__container">
+            <div className="social_media__container">
               <a
                 href={viewProject.project.social_media_url}
                 target="_blank"
                 rel="noreferrer"
-                class="social_media__link"
+                className="social_media__link"
               >
                 Social media
               </a>

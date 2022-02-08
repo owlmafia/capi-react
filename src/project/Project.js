@@ -11,8 +11,6 @@ import { PayEmbedded } from "../payEmbedded/PayEmbedded";
 import { init } from "./controller";
 import { Funds } from "./Funds";
 
-var QRCode = require("qrcode.react");
-
 export const Project = (props) => {
   let params = useParams();
 
@@ -50,7 +48,7 @@ export const Project = (props) => {
         setHolderCount
       );
     }
-  }, [project]);
+  }, [props.statusMsg, project]);
 
   const sharesAssetId = useMemo(() => {
     if (project) {
@@ -79,7 +77,7 @@ export const Project = (props) => {
           <div>
             <ProjectName project={viewProject.project}>
               <ShareIcon
-                class="title_right_button"
+                className="title_right_button"
                 onClick={() => console.log("Share clicked!")}
               />
             </ProjectName>
@@ -90,7 +88,7 @@ export const Project = (props) => {
 
             <div id="project_actions_top_bar">
               <p
-                class={actions_tabs_classes(showInvestTab)}
+                className={actions_tabs_classes(showInvestTab)}
                 onClick={() => {
                   setShowPayTab(false);
                   setShowInvestTab((current) => !current);
@@ -99,7 +97,7 @@ export const Project = (props) => {
                 {"Invest"}
               </p>
               <p
-                class={actions_tabs_classes(showPayTab)}
+                className={actions_tabs_classes(showPayTab)}
                 onClick={() => {
                   setShowInvestTab(false);
                   setShowPayTab((current) => !current);

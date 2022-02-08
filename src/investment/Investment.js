@@ -14,7 +14,6 @@ export const Investment = (props) => {
   const myShareChart = useRef(null);
 
   useEffect(() => {
-    console.log("loading project id: " + JSON.stringify(params));
     init(
       params.id,
       props.myAddress,
@@ -35,7 +34,7 @@ export const Investment = (props) => {
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [project, chainInvestmentData, myShareChart.current]);
+  }, [project, chainInvestmentData]);
 
   const userView = () => {
     if (chainInvestmentData && !youAreNotInvested) {

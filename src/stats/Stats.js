@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
@@ -42,7 +42,7 @@ export const Stats = ({ statusMsg }) => {
     if (sharesAssetId) {
       fetchHolderCount(statusMsg, sharesAssetId, setHolderCount);
     }
-  }, [sharesAssetId]);
+  }, [statusMsg, sharesAssetId]);
 
   return (
     <div>

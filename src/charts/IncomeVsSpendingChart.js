@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useMemo } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { ChartLegends } from "./ChartLegends";
 import renderMultilineChart from "./renderMultilineChart";
 
@@ -19,10 +19,12 @@ export const IncomeVsSpendingChart = ({ chartData }) => {
         lineColors
       );
     }
-  }, [chartData, chart.current]);
+    // for now no deps - mutable value doesn't cause a re-render
+    //   }, [chartData, lineColors]);
+  });
 
   return (
-    <div class="chart_with_legends_container">
+    <div className="chart_with_legends_container">
       <svg width={200} height={200} ref={chart} />
       <ChartLegends
         legends={[
