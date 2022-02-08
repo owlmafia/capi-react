@@ -78,9 +78,11 @@ export const SideBarDao = ({
           <MenuItem icon={<IoMdStats />}>
             <NavLink to="stats">Stats</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaCoins />}>
-            <NavLink to="investment">My investment</NavLink>
-          </MenuItem>
+          {myShares && myShares.total > 0 && (
+            <MenuItem icon={<FaCoins />}>
+              <NavLink to="investment">My investment</NavLink>
+            </MenuItem>
+          )}
           <MenuItem icon={<BsArrowUpCircle />}>
             <NavLink to="withdraw">Withdraw</NavLink>
           </MenuItem>
