@@ -39,10 +39,16 @@ export const Stats = ({ statusMsg }) => {
   }, [project]);
 
   useEffect(() => {
-    if (sharesAssetId) {
-      fetchHolderCount(statusMsg, sharesAssetId, setHolderCount);
+    if (sharesAssetId && project) {
+      fetchHolderCount(
+        statusMsg,
+        sharesAssetId,
+        project.investing_escrow_address,
+        project.staking_escrow_address,
+        setHolderCount
+      );
     }
-  }, [statusMsg, sharesAssetId]);
+  }, [statusMsg, sharesAssetId, project]);
 
   return (
     <div>
