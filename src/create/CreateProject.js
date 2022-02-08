@@ -48,7 +48,7 @@ export const CreateProject = (props) => {
           <LabeledInput
             label={"Share price per unit (Algo)"}
             inputValue={sharePrice}
-            onChange={(input) => setShareCount(input)}
+            onChange={(input) => setSharePrice(input)}
           />
 
           <div className="chart__title">
