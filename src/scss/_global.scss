@@ -30,9 +30,7 @@ body {
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    padding-top: $global_top_padding;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: $global_top_padding 50px 50px 50px;
     background-color: white;
     border-radius: 20px;
 

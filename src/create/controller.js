@@ -1,4 +1,4 @@
-import { signTxs, signTx } from "../MyAlgo";
+import { signTx, signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -14,10 +14,12 @@ export const createProject = async (
   setMyBalance,
 
   projectName,
+  projectDescr,
   shareCount,
   sharePrice,
   investorsShare,
   logoUrl,
+  socialMediaUrl,
   setCreateProjectSuccess
 ) => {
   const {
@@ -36,10 +38,12 @@ export const createProject = async (
       inputs: {
         creator: myAddress,
         project_name: projectName,
+        project_description: projectDescr,
         share_count: shareCount,
         asset_price: sharePrice,
         investors_share: investorsShare,
         logo_url: logoUrl,
+        social_media_url: socialMediaUrl,
       },
     });
     showProgress(false);

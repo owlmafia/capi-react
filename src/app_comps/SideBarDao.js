@@ -1,20 +1,19 @@
-import {
-  ProSidebar,
-  Menu,
-  MenuItem,
-  SidebarContent,
-  SidebarHeader,
-  SidebarFooter,
-} from "react-pro-sidebar";
-import { NavLink } from "react-router-dom";
-import { FaAddressBook, FaRoad, FaCoins } from "react-icons/fa";
-import { MyAccount } from "./MyAccount";
+import React, { useEffect, useState } from "react";
 import { BsArrowUpCircle } from "react-icons/bs";
+import { FaAddressBook, FaCoins, FaRoad } from "react-icons/fa";
 import { IoMdStats } from "react-icons/io";
 import { VscArrowSwap } from "react-icons/vsc";
-import { useParams } from "react-router-dom";
-import { init, updateMyShares } from "./controller";
-import React, { useState, useEffect } from "react";
+import {
+  Menu,
+  MenuItem,
+  ProSidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+} from "react-pro-sidebar";
+import { NavLink, useParams } from "react-router-dom";
+import { init } from "./controller";
+import { MyAccount } from "./MyAccount";
 
 export const SideBarDao = ({
   myAddress,
@@ -86,7 +85,22 @@ export const SideBarDao = ({
           </MenuItem>
         </Menu>
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+        {viewProject &&
+          viewProject.project &&
+          viewProject.project.social_media_url && (
+            <div class="social_media__container">
+              <a
+                href={viewProject.project.social_media_url}
+                target="_blank"
+                rel="noreferrer"
+                class="social_media__link"
+              >
+                Social media
+              </a>
+            </div>
+          )}
+      </SidebarFooter>
     </ProSidebar>
   );
 };

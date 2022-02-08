@@ -84,6 +84,10 @@ export const Project = (props) => {
               />
             </ProjectName>
 
+            <div id="project_description">
+              {viewProject.project.description}
+            </div>
+
             <div id="project_actions_top_bar">
               <p
                 class={actions_tabs_classes(showInvestTab)}

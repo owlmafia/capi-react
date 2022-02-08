@@ -7,14 +7,14 @@ import { CreateProjectSuccess } from "./CreateProjectSuccess";
 
 export const CreateProject = (props) => {
   const [projectName, setProjectName] = useState("");
+  const [projectDescr, setProjectDescr] = useState("");
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [logoUrl, setLogoUrl] = useState("");
+  const [socialMediaUrl, setSocialMediaUrl] = useState("");
   const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
   const investorsShareChart = useRef(null);
-
-  console.log("props: " + JSON.stringify(props));
 
   useEffect(() => {
     init();
@@ -39,6 +39,11 @@ export const CreateProject = (props) => {
             label={"Project name"}
             inputValue={projectName}
             onChange={(input) => setProjectName(input)}
+          />
+          <LabeledInput
+            label={"Description"}
+            inputValue={projectDescr}
+            onChange={(input) => setProjectDescr(input)}
           />
           <LabeledInput
             label={"Share supply"}
@@ -98,7 +103,11 @@ export const CreateProject = (props) => {
             inputValue={logoUrl}
             onChange={(input) => setLogoUrl(input)}
           />
-
+          <LabeledInput
+            label={"Primary social media (optional)"}
+            inputValue={socialMediaUrl}
+            onChange={(input) => setSocialMediaUrl(input)}
+          />
           <button
             className="button__submit"
             disabled={
@@ -115,10 +124,12 @@ export const CreateProject = (props) => {
                 props.statusMsg,
                 props.setMyBalance,
                 projectName,
+                projectDescr,
                 shareCount,
                 sharePrice,
                 investorsShare,
                 logoUrl,
+                socialMediaUrl,
                 setCreateProjectSuccess
               );
             }}
