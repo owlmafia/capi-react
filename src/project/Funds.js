@@ -1,5 +1,6 @@
 import { BsArrowUpCircle } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { FundsAssetImg } from "../images/FundsAssetImg";
 
 export const Funds = ({ funds, amICreator, projectId }) => {
   const withdrawButton = () => {
@@ -19,6 +20,7 @@ export const Funds = ({ funds, amICreator, projectId }) => {
       <div>{"Available funds"}</div>
       <div id="project_funds__val">
         <div>{funds}</div>
+        <FundsAssetImg />
         {withdrawButton()}
       </div>
     </div>

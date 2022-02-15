@@ -1,4 +1,5 @@
 import React from "react";
+import { FundsAssetImg } from "../images/FundsAssetImg";
 import { connectWallet } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
@@ -47,7 +48,10 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
             {"Your shares: " + myShares.total}
           </div>
         )}
-        <div id="my_account_my_balance__balance">{myBalance}</div>
+        <div id="my_account_my_balance__balance">
+          <div>{myBalance}</div>
+          <FundsAssetImg />
+        </div>
       </div>
     );
   } else {
@@ -80,7 +84,9 @@ const connectButton = (
             setMyAddressDisplay(shortAddress);
 
             const balance = await bridge_balance({ address: address });
-            setMyBalance(balance.balance);
+            // for now show only funds asset. Algo can be helpful for fees, but it clutters the UI a bit.
+            // setMyBalance(balance.balance_algos);
+            setMyBalance(balance.balance_funds_asset);
           } catch (e) {
             statusMsgUpdater.error(e);
           }

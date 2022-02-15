@@ -1,9 +1,11 @@
+$input_height: 30px;
+
 input {
     border-style: solid;
     border-width: 1px;
     border-radius: 12px;
     appearance: none;
-    height: 30px;
+    height: $input_height;
     border: 1px solid #383e42;
     padding: 10px 15px;
     font-family: inherit;
@@ -32,4 +34,15 @@ input {
 // for things that are not inputs but appear in forms and need the same bottom spacing
 .input_spacing {
     margin-bottom: 20px;
+}
+
+.input_with_currency {
+    &__container {
+        display: flex;
+        gap: 10px;
+
+        > svg {
+            height: $input_height;
+        }
+    }
 }

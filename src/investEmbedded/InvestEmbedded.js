@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LabeledInput } from "../common_comps/LabeledInput";
+import { FundsAssetImg } from "../images/FundsAssetImg";
 import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
 import { handleSharesCountInput, init, invest } from "./controller";
 
@@ -36,9 +37,10 @@ export const InvestEmbedded = ({
         }
         placeholder={""}
       />
-      <div className="secondary_info">
-        <span>{"Cost:"}</span>
-        <span className="one_line_key_val_val">{totalCost}</span>
+      <div id="shares_const_container" className="secondary_info">
+        <div>{"Cost:"}</div>
+        <div className="one_line_key_val_val">{totalCost}</div>
+        <FundsAssetImg />
       </div>
       <button
         disabled={myAddress === ""}

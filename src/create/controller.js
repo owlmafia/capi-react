@@ -40,7 +40,7 @@ export const createProject = async (
         project_name: projectName,
         project_description: projectDescr,
         share_count: shareCount,
-        asset_price: sharePrice,
+        share_price: sharePrice,
         investors_share: investorsShare,
         logo_url: logoUrl,
         social_media_url: socialMediaUrl,

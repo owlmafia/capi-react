@@ -1,6 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import renderPieChart from "../charts/renderPieChart";
-import { LabeledInput } from "../common_comps/LabeledInput";
+import {
+  LabeledCurrencyInput,
+  LabeledInput,
+} from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { createProject, init } from "./controller";
 import { CreateProjectSuccess } from "./CreateProjectSuccess";
@@ -52,11 +55,16 @@ export const CreateProject = (props) => {
             inputValue={shareCount}
             onChange={(input) => setShareCount(input)}
           />
-          <LabeledInput
-            label={"Share price per unit (Algo)"}
+          <LabeledCurrencyInput
+            label={"Share price per unit"}
             inputValue={sharePrice}
             onChange={(input) => setSharePrice(input)}
           />
+          {/* <LabeledInput
+            label={"Share price per unit"}
+            inputValue={sharePrice}
+            onChange={(input) => setSharePrice(input)}
+          /> */}
 
           <div className="chart__title">
             {"Investor's part: "}

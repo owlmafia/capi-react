@@ -38,6 +38,13 @@
     &__balance {
         font-size: 0.8rem;
         color: gray;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+
+        svg {
+            height: 14px;
+        }
     }
 }
 

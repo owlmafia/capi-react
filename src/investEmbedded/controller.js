@@ -38,7 +38,7 @@ export const updateTotalCost = async (
   // TODO (low prio) do calculation in WASM - JS only strictly presentation logic
   if (!isNaN(shareCountInput)) {
     const price = shareCountInput * project.share_price_number_algo;
-    setBuySharesTotalPrice(price + " Algo");
+    setBuySharesTotalPrice(price);
   } else {
     setBuySharesTotalPrice("");
   }

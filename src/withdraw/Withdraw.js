@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { init, withdraw } from "./controller";
-import { ProjectName } from "../ContentTitle";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { LabeledInput } from "../common_comps/LabeledInput";
+import {
+  LabeledCurrencyInput,
+  LabeledInput,
+} from "../common_comps/LabeledInput";
+import { ProjectName } from "../ContentTitle";
+import { init, withdraw } from "./controller";
 
 export const Withdrawal = (props) => {
   let params = useParams();
@@ -23,8 +26,8 @@ export const Withdrawal = (props) => {
       return (
         <div>
           <ProjectName project={project} />
-          <LabeledInput
-            label={"How much (Algo)?"}
+          <LabeledCurrencyInput
+            label={"How much?"}
             inputValue={withdrawalAmount}
             onChange={(input) => setWithdrawalAmount(input)}
           />

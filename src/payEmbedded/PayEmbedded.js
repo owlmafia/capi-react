@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AmountInput } from "../common_comps/AmountInput";
+import { LabeledCurrencyInput } from "../common_comps/LabeledInput";
 import { init, pay } from "./controller";
 
 export const PayEmbedded = ({
@@ -17,8 +17,11 @@ export const PayEmbedded = ({
 
   return (
     <div className="project_action_active_tab">
-      <p className="input_label">{"Amount:"}</p>
-      <AmountInput value={amount} onChange={(input) => setAmount(input)} />
+      <LabeledCurrencyInput
+        label={"Amount"}
+        inputValue={amount}
+        onChange={(input) => setAmount(input)}
+      />
       <button
         disabled={myAddress === ""}
         className="button__submit_after_input"

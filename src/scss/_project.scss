@@ -24,6 +24,11 @@
         align-items: center;
         justify-items: right;
         height: 100%;
+        gap: 4px;
+
+        svg {
+            height: 16px;
+        }
     }
 }
 

@@ -1,3 +1,13 @@
 #invest_em_share_count_input {
     width: 100px;
 }
+
+#shares_const_container {
+    display: flex;
+    align-items: center;
+
+    svg {
+        height: 14px;
+        margin-left: 4px;
+    }
+}
