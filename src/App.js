@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
@@ -22,11 +22,11 @@ const App = () => {
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
-  const updateShares = async (projectId, myAddress) => {
+  const updateShares = useCallback(async (projectId, myAddress) => {
     if (myAddress) {
       await updateMyShares(statusMsgUpdater, projectId, myAddress, setMyShares);
     }
-  };
+  }, []);
 
   if (isIE) {
     return (
