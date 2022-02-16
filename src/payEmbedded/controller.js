@@ -1,4 +1,4 @@
-import { signTx } from "../MyAlgo";
+import { signTx } from "../MyAlgo"; 
 
 const wasmPromise = import("wasm");
 
@@ -17,11 +17,11 @@ export const pay = async (
   statusMsg,
   updateMyBalance,
   project,
-  amount
+  amount,
+  updateFunds
 ) => {
   try {
-    const { bridge_pay_project, bridge_submit_pay_project, bridge_balance } =
-      await wasmPromise;
+    const { bridge_pay_project, bridge_submit_pay_project } = await wasmPromise;
     statusMsg.clear();
 
     // console.log("??? %o", project);
@@ -45,9 +45,10 @@ export const pay = async (
     console.log("submitPayRes: " + JSON.stringify(submitPayRes));
     showProgress(false);
 
-    await updateMyBalance(myAddress);
-
     statusMsg.success("Payment submitted!");
+
+    await updateMyBalance(myAddress);
+    await updateFunds();
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

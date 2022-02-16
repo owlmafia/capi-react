@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { BsShare as ShareIcon } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
@@ -8,7 +8,7 @@ import { ProjectName } from "../ContentTitle";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
-import { init } from "./controller";
+import { init, updateFunds_ } from "./controller";
 import { Funds } from "./Funds";
 
 export const Project = (props) => {
@@ -29,6 +29,10 @@ export const Project = (props) => {
       return viewProject.project;
     }
   }, [viewProject]);
+
+  const updateFunds = useCallback(async () => {
+    await updateFunds_(params.id, setViewProject, setFunds, props.statusMsg);
+  }, []);
 
   useEffect(() => {
     async function asyncInit() {
@@ -124,6 +128,7 @@ export const Project = (props) => {
                 project={project}
                 updateMyShares={props.updateMyShares}
                 myShares={props.myShares}
+                updateFunds={updateFunds}
               />
             )}
             {showPayTab && (
@@ -133,6 +138,7 @@ export const Project = (props) => {
                 updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
                 project={project}
+                updateFunds={updateFunds}
               />
             )}
             <FundsActivityEmbedded

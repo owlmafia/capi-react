@@ -52,14 +52,14 @@ export const invest = async (
   projectId,
   project,
   buySharesCount,
-  updateMyShares
+  updateMyShares,
+  updateFunds
 ) => {
   try {
     const {
       bridge_opt_in_to_apps_if_needed,
       bridge_buy_shares,
       bridge_submit_buy_shares,
-      bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
@@ -110,7 +110,8 @@ export const invest = async (
       "Congratulations! you bought " + buySharesCount + " shares."
     );
 
-    updateMyShares(projectId, myAddress);
+    await updateMyShares(projectId, myAddress);
+    await updateFunds();
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

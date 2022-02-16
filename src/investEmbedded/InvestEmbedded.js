@@ -13,6 +13,7 @@ export const InvestEmbedded = ({
   project,
   updateMyShares,
   myShares,
+  updateFunds,
 }) => {
   let params = useParams();
   const [buySharesCount, setBuySharesCount] = useState("10");
@@ -54,7 +55,8 @@ export const InvestEmbedded = ({
             params.id,
             project,
             buySharesCount,
-            updateMyShares
+            updateMyShares,
+            updateFunds
           );
         }}
       >

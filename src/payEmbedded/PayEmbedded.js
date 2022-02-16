@@ -8,6 +8,7 @@ export const PayEmbedded = ({
   updateMyBalance,
   myAddress,
   project,
+  updateFunds,
 }) => {
   const [amount, setAmount] = useState("10");
 
@@ -32,7 +33,8 @@ export const PayEmbedded = ({
             statusMsg,
             updateMyBalance,
             project,
-            amount
+            amount,
+            updateFunds
           );
         }}
       >
