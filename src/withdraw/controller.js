@@ -29,11 +29,11 @@ export const withdraw = async (
   updateMyBalance,
   projectId,
   withdrawalAmount,
-  withdrawalDescr
+  withdrawalDescr,
+  updateFunds
 ) => {
   try {
-    const { bridge_withdraw, bridge_submit_withdraw, bridge_balance } =
-      await wasmPromise;
+    const { bridge_withdraw, bridge_submit_withdraw } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
@@ -62,8 +62,40 @@ export const withdraw = async (
     showProgress(false);
 
     await updateMyBalance(myAddress);
+    await updateFunds();
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
   }
+};
+
+export const updateProject = async (
+  projectId,
+  setViewProject,
+  setFunds,
+  statusMsg
+) => {
+  try {
+    const { bridge_view_project } = await wasmPromise;
+    let viewProject = await bridge_view_project({
+      project_id: projectId,
+    });
+    // setViewProject(viewProject);
+    // these are overwritten when draining, so we keep them separate
+    // TODO drain here? is this comment up to date?
+    setFunds(viewProject.available_funds);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
+export const updateFunds_ = async (
+  projectId,
+  setViewProject,
+  setFunds,
+  statusMsg
+) => {
+  /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the project.
+  /// TODO: optimize: fetch only the funds (probably pass escrows/project as inputs), so request is quicker.
+  updateProject(projectId, setViewProject, setFunds, statusMsg);
 };

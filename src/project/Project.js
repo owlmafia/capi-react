@@ -111,7 +111,7 @@ export const Project = (props) => {
               </p>
               <Funds
                 funds={funds}
-                amICreator={
+                showWithdrawLink={
                   props.myAddress &&
                   viewProject.project.creator_address &&
                   viewProject.project.creator_address === props.myAddress
