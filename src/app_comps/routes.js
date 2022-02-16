@@ -19,7 +19,7 @@ export const routesView = (
   setModal,
   setShowProgress,
   statusMsgUpdater,
-  setMyBalance,
+  updateMyBalance,
   myAddressDisplay,
   myBalance,
   statusMsg,
@@ -41,7 +41,7 @@ export const routesView = (
               myAddressDisplay={myAddressDisplay}
               setMyAddressDisplay={setMyAddressDisplay}
               myBalance={myBalance}
-              setMyBalance={setMyBalance}
+              updateMyBalance={updateMyBalance}
               statusMsgUpdater={statusMsgUpdater}
             />
           }
@@ -54,7 +54,7 @@ export const routesView = (
                 showModal={(modal) => setModal(modal)}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -65,7 +65,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -81,7 +81,7 @@ export const routesView = (
               myAddressDisplay={myAddressDisplay}
               setMyAddressDisplay={setMyAddressDisplay}
               myBalance={myBalance}
-              setMyBalance={setMyBalance}
+              updateMyBalance={updateMyBalance}
               statusMsgUpdater={statusMsgUpdater}
               myShares={myShares}
               updateMyShares={updateMyShares}
@@ -95,7 +95,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
                 updateMyShares={updateMyShares}
                 myShares={myShares}
               />
@@ -109,7 +109,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
                 updateMyShares={updateMyShares}
                 myShares={myShares}
               />
@@ -123,7 +123,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -135,7 +135,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -147,7 +147,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -159,7 +159,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />
@@ -171,7 +171,7 @@ export const routesView = (
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
-                setMyBalance={setMyBalance}
+                updateMyBalance={updateMyBalance}
               />
             }
           />

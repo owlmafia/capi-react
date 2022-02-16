@@ -48,7 +48,7 @@ export const Roadmap = (props) => {
           <AddRoadmapItem
             statusMsg={props.statusMsg}
             showProgress={props.showProgress}
-            setMyBalance={props.setMyBalance}
+            updateMyBalance={props.updateMyBalance}
             projectId={params.id}
             myAddress={props.myAddress}
           />

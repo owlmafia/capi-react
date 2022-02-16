@@ -17,7 +17,7 @@ export const SideBar = ({
   myAddressDisplay,
   setMyAddressDisplay,
   myBalance,
-  setMyBalance,
+  updateMyBalance,
   statusMsgUpdater,
 }) => {
   return (
@@ -31,7 +31,7 @@ export const SideBar = ({
             myAddressDisplay={myAddressDisplay}
             setMyAddressDisplay={setMyAddressDisplay}
             myBalance={myBalance}
-            setMyBalance={setMyBalance}
+            updateMyBalance={updateMyBalance}
             statusMsgUpdater={statusMsgUpdater}
             // no project / DAO here
             projectId={null}

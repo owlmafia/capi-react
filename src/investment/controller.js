@@ -43,7 +43,7 @@ export const retrieveProfits = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   project,
   amount,
@@ -92,8 +92,7 @@ export const retrieveProfits = async (
     statusMsg.success("Profits retrieved");
     showProgress(false);
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
@@ -104,19 +103,15 @@ export const unstake = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   project,
   setChainInvestmentData,
   setYouAreNotInvested
 ) => {
   try {
-    const {
-      bridge_unstake,
-      bridge_submit_unstake,
-      bridge_load_investment,
-      bridge_balance,
-    } = await wasmPromise;
+    const { bridge_unstake, bridge_submit_unstake, bridge_load_investment } =
+      await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
@@ -150,8 +145,7 @@ export const unstake = async (
     showProgress(false);
     setYouAreNotInvested(true);
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

@@ -10,7 +10,7 @@ export const MyAccount = ({
   myAddressDisplay,
   setMyAddressDisplay,
   myBalance,
-  setMyBalance,
+  updateMyBalance,
   statusMsgUpdater,
   // optional: if set, shows "my shares"
   projectId,
@@ -22,7 +22,7 @@ export const MyAccount = ({
         myAddress,
         setMyAddress,
         setMyAddressDisplay,
-        setMyBalance,
+        updateMyBalance,
         statusMsgUpdater
       )}
       {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
@@ -48,8 +48,10 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
             {"Your shares: " + myShares.total}
           </div>
         )}
+        {/* for now show only funds asset. Algo can be helpful for fees, but it
+        clutters the UI a bit.  */}
         <div id="my_account_my_balance__balance">
-          <div>{myBalance}</div>
+          <div>{myBalance.balance_funds_asset}</div>
           <FundsAssetImg />
         </div>
       </div>
@@ -63,7 +65,7 @@ const connectButton = (
   myAddress,
   setMyAddress,
   setMyAddressDisplay,
-  setMyBalance,
+  updateMyBalance,
   statusMsgUpdater
 ) => {
   if (myAddress === "") {
@@ -72,8 +74,6 @@ const connectButton = (
         className="button__connect"
         onClick={async (event) => {
           try {
-            const { bridge_balance } = await wasmPromise;
-
             let address = await connectWallet();
             setMyAddress(address);
 
@@ -83,10 +83,7 @@ const connectButton = (
             const shortAddress = leading + "..." + trailing;
             setMyAddressDisplay(shortAddress);
 
-            const balance = await bridge_balance({ address: address });
-            // for now show only funds asset. Algo can be helpful for fees, but it clutters the UI a bit.
-            // setMyBalance(balance.balance_algos);
-            setMyBalance(balance.balance_funds_asset);
+            await updateMyBalance(address);
           } catch (e) {
             statusMsgUpdater.error(e);
           }

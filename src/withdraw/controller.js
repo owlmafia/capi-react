@@ -26,7 +26,7 @@ export const withdraw = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   withdrawalAmount,
   withdrawalDescr
@@ -61,8 +61,7 @@ export const withdraw = async (
     statusMsg.success("Withdrawal request submitted");
     showProgress(false);
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

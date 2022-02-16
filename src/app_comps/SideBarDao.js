@@ -21,7 +21,7 @@ export const SideBarDao = ({
   myAddressDisplay,
   setMyAddressDisplay,
   myBalance,
-  setMyBalance,
+  updateMyBalance,
   statusMsgUpdater,
   myShares,
   updateMyShares,
@@ -60,7 +60,7 @@ export const SideBarDao = ({
             myAddressDisplay={myAddressDisplay}
             setMyAddressDisplay={setMyAddressDisplay}
             myBalance={myBalance}
-            setMyBalance={setMyBalance}
+            updateMyBalance={updateMyBalance}
             statusMsgUpdater={statusMsgUpdater}
             projectId={params.id}
             myShares={myShares}

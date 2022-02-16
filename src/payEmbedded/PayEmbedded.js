@@ -5,7 +5,7 @@ import { init, pay } from "./controller";
 export const PayEmbedded = ({
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   myAddress,
   project,
 }) => {
@@ -30,7 +30,7 @@ export const PayEmbedded = ({
             myAddress,
             showProgress,
             statusMsg,
-            setMyBalance,
+            updateMyBalance,
             project,
             amount
           );

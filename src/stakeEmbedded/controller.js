@@ -8,7 +8,7 @@ export const stake = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   project,
   stakeSharesCount,
@@ -65,8 +65,7 @@ export const stake = async (
     console.log("submitStakeRes: " + JSON.stringify(submitStakeRes));
     showProgress(false);
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
 
     statusMsg.success(
       "Congratulations! you staked " + stakeSharesCount + " shares."

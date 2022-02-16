@@ -30,9 +30,7 @@ export const tryAssetNotOptedInError = (msg) => {
   if (match && match.length === 3) {
     let asset = match[1];
     let address = match[2];
-    return (
-      "Can't swap: Address " + address + " is not opted in to asset " + asset
-    );
+    return "Address " + address + " is not opted in to asset " + asset;
   } else {
     return null;
   }
@@ -47,7 +45,7 @@ export const tryAssetOverspendError = (msg) => {
     let attemptedAmount = match[1];
     let balance = match[2];
     return (
-      "Can't swap: Insuffient asset balance (holdings: " +
+      "Insuffient asset balance (holdings: " +
       balance +
       ", attempted: " +
       attemptedAmount +

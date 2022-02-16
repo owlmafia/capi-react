@@ -15,7 +15,7 @@ export const pay = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   project,
   amount
 ) => {
@@ -45,8 +45,7 @@ export const pay = async (
     console.log("submitPayRes: " + JSON.stringify(submitPayRes));
     showProgress(false);
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
 
     statusMsg.success("Payment submitted!");
   } catch (e) {

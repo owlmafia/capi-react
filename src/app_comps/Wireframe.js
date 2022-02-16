@@ -12,7 +12,7 @@ export const Wireframe = ({
   myAddressDisplay,
   setMyAddressDisplay,
   myBalance,
-  setMyBalance,
+  updateMyBalance,
   statusMsgUpdater,
 
   myShares,
@@ -27,7 +27,7 @@ export const Wireframe = ({
           myAddressDisplay={myAddressDisplay}
           setMyAddressDisplay={setMyAddressDisplay}
           myBalance={myBalance}
-          setMyBalance={setMyBalance}
+          updateMyBalance={updateMyBalance}
           statusMsgUpdater={statusMsgUpdater}
         />
       );
@@ -39,7 +39,7 @@ export const Wireframe = ({
           myAddressDisplay={myAddressDisplay}
           setMyAddressDisplay={setMyAddressDisplay}
           myBalance={myBalance}
-          setMyBalance={setMyBalance}
+          updateMyBalance={updateMyBalance}
           statusMsgUpdater={statusMsgUpdater}
           myShares={myShares}
           updateMyShares={updateMyShares}

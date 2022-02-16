@@ -6,7 +6,7 @@ import { stake } from "./controller";
 export const StakeEmbedded = ({
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   myAddress,
   project,
   updateMyShares,
@@ -36,7 +36,7 @@ export const StakeEmbedded = ({
               myAddress,
               showProgress,
               statusMsg,
-              setMyBalance,
+              updateMyBalance,
               params.id,
               project,
               stakeSharesCount,

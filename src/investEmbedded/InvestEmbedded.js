@@ -8,7 +8,7 @@ import { handleSharesCountInput, init, invest } from "./controller";
 export const InvestEmbedded = ({
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
   myAddress,
   project,
   updateMyShares,
@@ -50,7 +50,7 @@ export const InvestEmbedded = ({
             myAddress,
             showProgress,
             statusMsg,
-            setMyBalance,
+            updateMyBalance,
             params.id,
             project,
             buySharesCount,
@@ -63,7 +63,7 @@ export const InvestEmbedded = ({
       <StakeEmbedded
         showProgress={showProgress}
         statusMsg={statusMsg}
-        setMyBalance={setMyBalance}
+        updateMyBalance={updateMyBalance}
         myAddress={myAddress}
         project={project}
         updateMyShares={updateMyShares}

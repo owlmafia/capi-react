@@ -8,7 +8,7 @@ import { LabeledInput } from "../common_comps/LabeledInput";
 export const AddRoadmapItem = ({
   statusMsg,
   showProgress,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   myAddress,
 }) => {
@@ -38,9 +38,10 @@ export const AddRoadmapItem = ({
             disabled={myAddress === ""}
             onClick={async () => {
               await addRoadmapItem(
+                myAddress,
                 statusMsg,
                 showProgress,
-                setMyBalance,
+                updateMyBalance,
                 params.id,
                 myAddress,
                 itemTitle,

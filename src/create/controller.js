@@ -11,7 +11,7 @@ export const createProject = async (
   myAddress,
   showProgress,
   statusMsg,
-  setMyBalance,
+  updateMyBalance,
 
   projectName,
   projectDescr,
@@ -80,8 +80,7 @@ export const createProject = async (
     showProgress(false);
     statusMsg.success("Project created!");
 
-    const balance = await bridge_balance({ address: myAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

@@ -75,7 +75,7 @@ export const Investment = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
-                props.setMyBalance,
+                props.updateMyBalance,
                 params.id,
                 project,
                 chainInvestmentData.investor_harvestable_amount_microalgos,
@@ -95,7 +95,7 @@ export const Investment = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
-                props.setMyBalance,
+                props.updateMyBalance,
                 params.id,
                 project,
                 setChainInvestmentData,
@@ -134,7 +134,7 @@ export const Investment = (props) => {
           <StakeEmbedded
             showProgress={props.showProgress}
             statusMsg={props.statusMsg}
-            setMyBalance={props.setMyBalance}
+            updateMyBalance={props.updateMyBalance}
             myAddress={props.myAddress}
             project={project}
             updateMyShares={props.updateMyShares}

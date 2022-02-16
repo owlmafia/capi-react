@@ -119,7 +119,7 @@ export const Project = (props) => {
               <InvestEmbedded
                 showProgress={props.showProgress}
                 statusMsg={props.statusMsg}
-                setMyBalance={props.setMyBalance}
+                updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
                 project={project}
                 updateMyShares={props.updateMyShares}
@@ -130,7 +130,7 @@ export const Project = (props) => {
               <PayEmbedded
                 showProgress={props.showProgress}
                 statusMsg={props.statusMsg}
-                setMyBalance={props.setMyBalance}
+                updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
                 project={project}
               />

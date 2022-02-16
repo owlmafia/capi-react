@@ -131,7 +131,7 @@ export const CreateProject = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
-                props.setMyBalance,
+                props.updateMyBalance,
                 projectName,
                 projectDescr,
                 shareCount,

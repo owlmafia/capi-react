@@ -38,9 +38,10 @@ export const loadRoadmap = async (
 };
 
 export const addRoadmapItem = async (
+  myAddress,
   statusMsg,
   showProgress,
-  setMyBalance,
+  updateMyBalance,
   projectId,
   creatorAddress,
   title,
@@ -48,11 +49,8 @@ export const addRoadmapItem = async (
   dateTimestamp
 ) => {
   try {
-    const {
-      bridge_add_roadmap_item,
-      bridge_submit_add_roadmap_item,
-      bridge_balance,
-    } = await wasmPromise;
+    const { bridge_add_roadmap_item, bridge_submit_add_roadmap_item } =
+      await wasmPromise;
 
     statusMsg.clear();
     showProgress(true);
@@ -84,8 +82,7 @@ export const addRoadmapItem = async (
 
     // TODO review this: we're assuming that my address is always creator's address here,
     // it should be ok since only the creator can/should be able to add items to roadmap, but review
-    const balance = await bridge_balance({ address: creatorAddress });
-    setMyBalance(balance.balance);
+    await updateMyBalance(myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

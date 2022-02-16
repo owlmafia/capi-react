@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
-import { updateMyShares } from "./controller";
+import { updateMyShares, updateMyBalance_ } from "./controller";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
 
@@ -21,6 +21,12 @@ const App = () => {
   const [showProgress, setShowProgress] = useState(false);
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
+
+  const updateMyBalance = useCallback(async (myAddress) => {
+    if (myAddress) {
+      await updateMyBalance_(statusMsgUpdater, myAddress, setMyBalance);
+    }
+  }, []);
 
   const updateShares = useCallback(async (projectId, myAddress) => {
     if (myAddress) {
@@ -48,7 +54,7 @@ const App = () => {
               setModal,
               setShowProgress,
               statusMsgUpdater,
-              setMyBalance,
+              updateMyBalance,
               myAddressDisplay,
               myBalance,
               statusMsg,

@@ -44,7 +44,7 @@ export const Withdrawal = (props) => {
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
-                props.setMyBalance,
+                props.updateMyBalance,
                 params.id,
                 withdrawalAmount,
                 withdrawalDescr
