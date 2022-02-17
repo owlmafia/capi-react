@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { ContentTitle } from "../ContentTitle";
+import { FundsAssetImg } from "../images/FundsAssetImg";
 import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
 import { init, retrieveProfits, unstake } from "./controller";
 
@@ -40,31 +41,33 @@ export const Investment = (props) => {
     if (chainInvestmentData && !youAreNotInvested) {
       return (
         <div>
-          <p>
+          <div className="section_container">
             <span className="key-val-key">{"Your staked shares:"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_shares_count}
             </span>
-            <div>
-              <svg width={200} height={200} ref={myShareChart} />
-            </div>
-          </p>
-          <p>
+          </div>
+          <div>
+            <svg width={200} height={200} ref={myShareChart} />
+          </div>
+          <p className="section_container">
             {"You're entitled to " +
               chainInvestmentData.investor_percentage +
               " of the project's funds"}
           </p>
-          <p>
-            <span className="key-val-key">{"Retrieved profits (Algo):"}</span>
+          <p className="section_container text_with_currency section_small_bottom">
+            <span className="key-val-key">{"Retrieved profits:"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_already_retrieved_amount}
             </span>
+            <FundsAssetImg />
           </p>
-          <p>
-            <span className="key-val-key">{"Retrievable profits (Algo):"}</span>
+          <p className="section_container text_with_currency section_large_bottom">
+            <span className="key-val-key">{"Retrievable profits:"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_harvestable_amount}
             </span>
+            <FundsAssetImg />
           </p>
 
           <button
@@ -85,8 +88,6 @@ export const Investment = (props) => {
           >
             {"Retrieve profits"}
           </button>
-          <br />
-          <br />
           <button
             className="button__submit"
             disabled={chainInvestmentData.investor_shares_count === "0"}

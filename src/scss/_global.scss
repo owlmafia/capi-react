@@ -390,8 +390,7 @@ p {
 }
 
 .title_right_button {
-    width: 30px;
-    height: 30px;
+    height: 20px;
     margin-left: auto;
     cursor: pointer;
 }
@@ -404,4 +403,26 @@ p {
 
 .first_project_widget {
     margin-top: 40px;
+}
+
+.section_container {
+    margin-bottom: 20px;
+
+    svg {
+        height: 14px;
+        margin-left: 4px;
+    }
+}
+
+.text_with_currency {
+    display: flex;
+    align-items: center;
+}
+
+.section_small_bottom {
+    margin-bottom: 10px;
+}
+
+.section_large_bottom {
+    margin-bottom: 40px;
 }
