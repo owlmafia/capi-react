@@ -10,6 +10,7 @@ import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
 import { init, updateFunds_ } from "./controller";
 import { Funds } from "./Funds";
+import Modal from "../Modal";
 
 export const Project = (props) => {
   let params = useParams();
@@ -21,6 +22,8 @@ export const Project = (props) => {
 
   const [showInvestTab, setShowInvestTab] = useState(false);
   const [showPayTab, setShowPayTab] = useState(false);
+
+  const [showShareModal, setShowShareModal] = useState(false);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -82,7 +85,7 @@ export const Project = (props) => {
             <ProjectName project={viewProject.project}>
               <ShareIcon
                 className="title_right_button"
-                onClick={() => console.log("Share clicked!")}
+                onClick={() => setShowShareModal((visible) => !visible)}
               />
             </ProjectName>
 
@@ -179,5 +182,17 @@ export const Project = (props) => {
     }
   };
 
-  return <div>{projectView()}</div>;
+  return (
+    <div>
+      {projectView()}
+      {showShareModal && (
+        <Modal
+          title={"Share project"}
+          onCloseClick={() => setShowShareModal(false)}
+        >
+          <div>{"TODO Social media buttons to share this project"}</div>
+        </Modal>
+      )}
+    </div>
+  );
 };
