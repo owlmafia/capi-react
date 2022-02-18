@@ -27,7 +27,6 @@ export const createProject = async (
     bridge_create_project,
     bridge_submit_create_project,
     bridge_submit_save_project,
-    bridge_balance,
   } = await wasmPromise;
 
   statusMsg.clear();

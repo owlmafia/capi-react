@@ -15,12 +15,8 @@ export const lock = async (
   updateMyShares
 ) => {
   try {
-    const {
-      bridge_opt_in_to_apps_if_needed,
-      bridge_lock,
-      bridge_submit_lock,
-      bridge_balance,
-    } = await wasmPromise;
+    const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
+      await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/lock

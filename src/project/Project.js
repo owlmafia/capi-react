@@ -35,11 +35,10 @@ export const Project = (props) => {
 
   const updateFunds = useCallback(async () => {
     await updateFunds_(params.id, setViewProject, setFunds, props.statusMsg);
-  }, []);
+  }, [params.id, props.statusMsg]);
 
   useEffect(() => {
     async function asyncInit() {
-      //   console.log("loading project id: " + JSON.stringify(params));
       await init(params.id, setViewProject, setFunds, props.statusMsg);
     }
     asyncInit();

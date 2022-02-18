@@ -2,8 +2,6 @@ import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { connectWallet } from "../MyAlgo";
 
-const wasmPromise = import("wasm");
-
 export const MyAccount = ({
   myAddress,
   setMyAddress,

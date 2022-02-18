@@ -22,17 +22,28 @@ const App = () => {
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
-  const updateMyBalance = useCallback(async (myAddress) => {
-    if (myAddress) {
-      await updateMyBalance_(statusMsgUpdater, myAddress, setMyBalance);
-    }
-  }, []);
+  const updateMyBalance = useCallback(
+    async (myAddress) => {
+      if (myAddress) {
+        await updateMyBalance_(statusMsgUpdater, myAddress, setMyBalance);
+      }
+    },
+    [statusMsgUpdater]
+  );
 
-  const updateShares = useCallback(async (projectId, myAddress) => {
-    if (myAddress) {
-      await updateMyShares(statusMsgUpdater, projectId, myAddress, setMyShares);
-    }
-  }, []);
+  const updateShares = useCallback(
+    async (projectId, myAddress) => {
+      if (myAddress) {
+        await updateMyShares(
+          statusMsgUpdater,
+          projectId,
+          myAddress,
+          setMyShares
+        );
+      }
+    },
+    [statusMsgUpdater]
+  );
 
   if (isIE) {
     return (

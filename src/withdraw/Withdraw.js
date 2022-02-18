@@ -19,18 +19,16 @@ export const Withdrawal = (props) => {
 
   const updateFunds = useCallback(async () => {
     await updateFunds_(params.id, null, setFunds, props.statusMsg);
-  }, []);
+  }, [params.id, props.statusMsg]);
 
   useEffect(() => {
     async function asyncInit() {
-      // TODO pass cached project (props.history.location.state)? not sure this is still needed, with the new navigation
       // init(params.id, props.history.location.state, setProject, props.statusMsg);
       await init(params.id, null, setProject, props.statusMsg);
       await updateFunds();
     }
     asyncInit();
-    // }, [props.history.location.state, params.id, props.statusMsg]);
-  }, [params.id, props.statusMsg]);
+  }, [params.id, props.statusMsg, updateFunds]);
 
   const view = () => {
     if (project) {

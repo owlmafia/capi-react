@@ -50,12 +50,8 @@ export const retrieveProfits = async (
   setChainInvestmentData
 ) => {
   try {
-    const {
-      bridge_harvest,
-      bridge_submit_harvest,
-      bridge_load_investment,
-      bridge_balance,
-    } = await wasmPromise;
+    const { bridge_harvest, bridge_submit_harvest, bridge_load_investment } =
+      await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
