@@ -1,29 +1,29 @@
 import { signTxs } from "../MyAlgo";
 
-// Note: no staking for the embedded view because there's no design yet
+// Note: no locking for the embedded view because there's no design yet
 
 const wasmPromise = import("wasm");
 
-export const stake = async (
+export const lock = async (
   myAddress,
   showProgress,
   statusMsg,
   updateMyBalance,
   projectId,
   project,
-  stakeSharesCount,
+  lockSharesCount,
   updateMyShares
 ) => {
   try {
     const {
       bridge_opt_in_to_apps_if_needed,
-      bridge_stake,
-      bridge_submit_stake,
+      bridge_lock,
+      bridge_submit_lock,
       bridge_balance,
     } = await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
-    // TODO refactor invest/stake
+    // TODO refactor invest/lock
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
@@ -45,30 +45,30 @@ export const stake = async (
     // 2. buy the shares (requires app opt-in for local state)
     // TODO write which local state
 
-    let stakeRes = await bridge_stake({
+    let lockRes = await bridge_lock({
       project_id: projectId,
       investor_address: myAddress,
-      share_count: stakeSharesCount,
+      share_count: lockSharesCount,
     });
-    console.log("stakeRes: " + JSON.stringify(stakeRes));
+    console.log("lockRes: " + JSON.stringify(lockRes));
     showProgress(false);
 
-    let stakeResSigned = await signTxs(stakeRes.to_sign);
-    console.log("stakeResSigned: " + JSON.stringify(stakeResSigned));
+    let lockResSigned = await signTxs(lockRes.to_sign);
+    console.log("lockResSigned: " + JSON.stringify(lockResSigned));
 
     showProgress(true);
 
-    let submitStakeRes = await bridge_submit_stake({
+    let submitLockRes = await bridge_submit_lock({
       app_opt_ins: optInToAppsSignedOptional,
-      txs: stakeResSigned,
+      txs: lockResSigned,
     });
-    console.log("submitStakeRes: " + JSON.stringify(submitStakeRes));
+    console.log("submitLockRes: " + JSON.stringify(submitLockRes));
     showProgress(false);
 
     await updateMyBalance(myAddress);
 
     statusMsg.success(
-      "Congratulations! you staked " + stakeSharesCount + " shares."
+      "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
     updateMyShares(projectId, myAddress);

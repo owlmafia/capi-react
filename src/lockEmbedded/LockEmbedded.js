@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { LabeledInput } from "../common_comps/LabeledInput";
-import { stake } from "./controller";
+import { lock } from "./controller";
 
-export const StakeEmbedded = ({
+export const LockEmbedded = ({
   showProgress,
   statusMsg,
   updateMyBalance,
@@ -13,38 +13,38 @@ export const StakeEmbedded = ({
   myShares,
 }) => {
   let params = useParams();
-  const [stakeSharesCount, setStakeSharesCount] = useState("");
+  const [lockSharesCount, setLockSharesCount] = useState("");
 
   if (project && myShares && myShares.free > 0) {
     return (
-      <div className="project_action__stake_container">
-        <p className="project_action__stake_info">
+      <div className="project_action__lock_container">
+        <p className="project_action__lock_info">
           {"You've " + myShares.free + " free shares"}
         </p>
         <LabeledInput
           className=""
-          label={"Stake:"}
-          inputValue={stakeSharesCount}
-          onChange={(input) => setStakeSharesCount(input)}
+          label={"Lock:"}
+          inputValue={lockSharesCount}
+          onChange={(input) => setLockSharesCount(input)}
           placeholder={""}
         />
         <button
           disabled={myAddress === ""}
           className="button__submit"
           onClick={async (_) => {
-            await stake(
+            await lock(
               myAddress,
               showProgress,
               statusMsg,
               updateMyBalance,
               params.id,
               project,
-              stakeSharesCount,
+              lockSharesCount,
               updateMyShares
             );
           }}
         >
-          {"Stake"}
+          {"Lock"}
         </button>
       </div>
     );

@@ -45,13 +45,13 @@
 }
 
 .project_action {
-    &__stake_container {
+    &__lock_container {
         margin-top: 10px;
         padding-top: 20px;
         border-top: 1px solid black;
     }
 
-    &__stake_info {
+    &__lock_info {
         margin-bottom: 20px;
     }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
+import { LockEmbedded } from "../lockEmbedded/LockEmbedded";
 import { handleSharesCountInput, init, invest } from "./controller";
 
 export const InvestEmbedded = ({
@@ -62,7 +62,7 @@ export const InvestEmbedded = ({
       >
         {"Buy"}
       </button>
-      <StakeEmbedded
+      <LockEmbedded
         showProgress={showProgress}
         statusMsg={statusMsg}
         updateMyBalance={updateMyBalance}

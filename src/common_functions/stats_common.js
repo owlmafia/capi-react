@@ -4,7 +4,7 @@ export const fetchHolderCount = async (
   statusMsg,
   assetId,
   investingEscrowAddress,
-  stakingEscrowAddress,
+  lockingEscrowAddress,
   setHolderCount
 ) => {
   try {
@@ -13,7 +13,7 @@ export const fetchHolderCount = async (
     let res = await bridge_holders_count({
       asset_id: assetId,
       investing_escrow_address: investingEscrowAddress,
-      staking_escrow_address: stakingEscrowAddress,
+      locking_escrow_address: lockingEscrowAddress,
     });
     console.log("holders count res: " + JSON.stringify(res));
     setHolderCount(res.count);

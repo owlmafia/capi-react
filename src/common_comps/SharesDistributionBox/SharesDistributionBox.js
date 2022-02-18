@@ -11,7 +11,7 @@ export const SharesDistributionBox = ({
   sharesSupply,
   appId,
   investingEscrowAddress,
-  stakingEscrowAddress,
+  lockingEscrowAddress,
   holderCount,
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
@@ -65,7 +65,7 @@ export const SharesDistributionBox = ({
           sharesSupply,
           appId,
           investingEscrowAddress,
-          stakingEscrowAddress
+          lockingEscrowAddress
         );
         setSharesDistr(sharesDistr);
       }
@@ -77,7 +77,7 @@ export const SharesDistributionBox = ({
     sharesSupply,
     appId,
     investingEscrowAddress,
-    stakingEscrowAddress,
+    lockingEscrowAddress,
   ]);
 
   return <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>;

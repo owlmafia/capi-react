@@ -44,7 +44,7 @@ export const Stats = ({ statusMsg }) => {
         statusMsg,
         sharesAssetId,
         project.investing_escrow_address,
-        project.staking_escrow_address,
+        project.locking_escrow_address,
         setHolderCount
       );
     }
@@ -63,7 +63,7 @@ export const Stats = ({ statusMsg }) => {
           holderCount={holderCount}
           appId={project.central_app_id}
           investingEscrowAddress={project.investing_escrow_address}
-          stakingEscrowAddress={project.staking_escrow_address}
+          lockingEscrowAddress={project.locking_escrow_address}
         />
       )}
 

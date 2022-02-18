@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { ContentTitle } from "../ContentTitle";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import { StakeEmbedded } from "../stakeEmbedded/StakeEmbedded";
-import { init, retrieveProfits, unstake } from "./controller";
+import { LockEmbedded } from "../lockEmbedded/LockEmbedded";
+import { init, retrieveProfits, unlock } from "./controller";
 
 export const Investment = (props) => {
   let params = useParams();
@@ -42,7 +42,7 @@ export const Investment = (props) => {
       return (
         <div>
           <div className="section_container">
-            <span className="key-val-key">{"Your staked shares:"}</span>
+            <span className="key-val-key">{"Your locked shares:"}</span>
             <span className="key-val-val">
               {chainInvestmentData.investor_shares_count}
             </span>
@@ -92,7 +92,7 @@ export const Investment = (props) => {
             className="button__submit"
             disabled={chainInvestmentData.investor_shares_count === "0"}
             onClick={async () => {
-              await unstake(
+              await unlock(
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
@@ -104,7 +104,7 @@ export const Investment = (props) => {
               );
             }}
           >
-            {"Unstake shares"}
+            {"Unlock shares"}
           </button>
         </div>
       );
@@ -132,7 +132,7 @@ export const Investment = (props) => {
         <div>
           {userView()}
           {youAreNotInvestedView()}
-          <StakeEmbedded
+          <LockEmbedded
             showProgress={props.showProgress}
             statusMsg={props.statusMsg}
             updateMyBalance={props.updateMyBalance}

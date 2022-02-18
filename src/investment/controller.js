@@ -99,7 +99,7 @@ export const retrieveProfits = async (
   }
 };
 
-export const unstake = async (
+export const unlock = async (
   myAddress,
   showProgress,
   statusMsg,
@@ -110,27 +110,27 @@ export const unstake = async (
   setYouAreNotInvested
 ) => {
   try {
-    const { bridge_unstake, bridge_submit_unstake, bridge_load_investment } =
+    const { bridge_unlock, bridge_submit_unlock, bridge_load_investment } =
       await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
-    let unstakeRes = await bridge_unstake({
+    let unlockRes = await bridge_unlock({
       project_id: projectId,
       investor_address: myAddress,
     });
-    console.log("unstakeRes: " + JSON.stringify(unstakeRes));
+    console.log("unlockRes: " + JSON.stringify(unlockRes));
     showProgress(false);
 
-    let unstakeResSigned = await signTxs(unstakeRes.to_sign);
-    console.log("unstakeResSigned: " + JSON.stringify(unstakeResSigned));
+    let unlockResSigned = await signTxs(unlockRes.to_sign);
+    console.log("unlockResSigned: " + JSON.stringify(unlockResSigned));
 
     showProgress(true);
-    let submitUnstakeRes = await bridge_submit_unstake({
-      txs: unstakeResSigned,
-      pt: unstakeRes.pt,
+    let submitUnlockRes = await bridge_submit_unlock({
+      txs: unlockResSigned,
+      pt: unlockRes.pt,
     });
-    console.log("submitUnstakeRes: " + JSON.stringify(submitUnstakeRes));
+    console.log("submitUnlockRes: " + JSON.stringify(submitUnlockRes));
 
     setChainInvestmentData(
       await bridge_load_investment({
@@ -141,7 +141,7 @@ export const unstake = async (
       })
     );
 
-    statusMsg.success("Shares unstaked");
+    statusMsg.success("Shares unlocked");
     showProgress(false);
     setYouAreNotInvested(true);
 
