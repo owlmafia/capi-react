@@ -53,7 +53,7 @@ export const Investment = (props) => {
           <p className="section_container">
             {"You're entitled to " +
               chainInvestmentData.investor_percentage +
-              " of the project's funds"}
+              " of the investor's share"}
           </p>
           <p className="section_container text_with_currency section_small_bottom">
             <span className="key-val-key">{"Retrieved profits:"}</span>

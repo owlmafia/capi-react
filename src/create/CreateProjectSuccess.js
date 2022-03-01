@@ -46,7 +46,7 @@ export const CreateProjectSuccess = (props) => {
         <div className="section-spacer" />
         <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
           <div>
-            <Link to={props.project.invest_link}>{"Investing link"}</Link>
+            <Link to={props.project.invest_link}>{"Go to project"}</Link>
             <span className="copy">
               {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
             </span>
