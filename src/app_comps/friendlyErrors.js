@@ -1,5 +1,5 @@
 export const toFriendlyError = (msg) => {
-  console.log("to fiendlyerror: %o", msg);
+  console.log("toFriendlyError: %o", msg);
   return (
     txIdNotFoundError(msg) ??
     tryOverspendError(msg) ??
