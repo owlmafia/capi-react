@@ -10,7 +10,7 @@ export const InvestEmbedded = ({
   statusMsg,
   updateMyBalance,
   myAddress,
-  project,
+  dao,
   updateMyShares,
   myShares,
   updateFunds,
@@ -20,21 +20,16 @@ export const InvestEmbedded = ({
   const [totalCost, setTotalCost] = useState("");
 
   useEffect(() => {
-    init(statusMsg, buySharesCount, project, setTotalCost);
-  }, [statusMsg, buySharesCount, project]);
+    init(statusMsg, buySharesCount, dao, setTotalCost);
+  }, [statusMsg, buySharesCount, dao]);
 
   return (
-    <div className="project_action_active_tab">
+    <div className="dao_action_active_tab">
       <LabeledInput
         label={"Buy:"}
         inputValue={buySharesCount}
         onChange={(input) =>
-          handleSharesCountInput(
-            input,
-            project,
-            setBuySharesCount,
-            setTotalCost
-          )
+          handleSharesCountInput(input, dao, setBuySharesCount, setTotalCost)
         }
         placeholder={""}
       />
@@ -53,7 +48,7 @@ export const InvestEmbedded = ({
             statusMsg,
             updateMyBalance,
             params.id,
-            project,
+            dao,
             buySharesCount,
             updateMyShares,
             updateFunds
@@ -67,7 +62,7 @@ export const InvestEmbedded = ({
         statusMsg={statusMsg}
         updateMyBalance={updateMyBalance}
         myAddress={myAddress}
-        project={project}
+        dao={dao}
         updateMyShares={updateMyShares}
         myShares={myShares}
       />

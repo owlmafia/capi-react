@@ -2,21 +2,20 @@ import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
+export const init = async (daoId, daoMaybe, setDao, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_id } =
-      await wasmPromise;
+    const { init_log, bridge_load_dao_user_view_with_id } = await wasmPromise;
     await init_log();
 
-    // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
-    var project = null;
-    if (projectMaybe) {
-      project = projectMaybe;
+    // if we're loading via URL (instead of another page that passes the dao as parameter), fetch the dao
+    var dao = null;
+    if (daoMaybe) {
+      dao = daoMaybe;
     } else {
-      project = await bridge_load_project_user_view_with_id(projectId);
+      dao = await bridge_load_dao_user_view_with_id(daoId);
     }
 
-    setProject(project);
+    setDao(dao);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -27,7 +26,7 @@ export const withdraw = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
+  daoId,
   withdrawalAmount,
   withdrawalDescr,
   updateFunds
@@ -38,7 +37,7 @@ export const withdraw = async (
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
-      project_id: projectId,
+      dao_id: daoId,
       sender: myAddress,
       withdrawal_amount: withdrawalAmount,
       description: withdrawalDescr,
@@ -69,33 +68,23 @@ export const withdraw = async (
   }
 };
 
-export const updateProject = async (
-  projectId,
-  setViewProject,
-  setFunds,
-  statusMsg
-) => {
+export const updateDao = async (daoId, setViewDao, setFunds, statusMsg) => {
   try {
-    const { bridge_view_project } = await wasmPromise;
-    let viewProject = await bridge_view_project({
-      project_id: projectId,
+    const { bridge_view_dao } = await wasmPromise;
+    let viewDao = await bridge_view_dao({
+      dao_id: daoId,
     });
-    // setViewProject(viewProject);
+    // setViewDao(viewDao);
     // these are overwritten when draining, so we keep them separate
     // TODO drain here? is this comment up to date?
-    setFunds(viewProject.available_funds);
+    setFunds(viewDao.available_funds);
   } catch (e) {
     statusMsg.error(e);
   }
 };
 
-export const updateFunds_ = async (
-  projectId,
-  setViewProject,
-  setFunds,
-  statusMsg
-) => {
-  /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the project.
-  /// TODO: optimize: fetch only the funds (probably pass escrows/project as inputs), so request is quicker.
-  updateProject(projectId, setViewProject, setFunds, statusMsg);
+export const updateFunds_ = async (daoId, setViewDao, setFunds, statusMsg) => {
+  /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the dao.
+  /// TODO: optimize: fetch only the funds (probably pass escrows/dao as inputs), so request is quicker.
+  updateDao(daoId, setViewDao, setFunds, statusMsg);
 };

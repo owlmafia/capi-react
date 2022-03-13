@@ -1,13 +1,13 @@
 const wasmPromise = import("wasm");
 
-export const init = async (projectId, setViewProject, statusMsg) => {
+export const init = async (daoId, setViewDao, statusMsg) => {
   try {
-    const { init_log, bridge_view_project } = await wasmPromise;
+    const { init_log, bridge_view_dao } = await wasmPromise;
     await init_log();
-    let viewProject = await bridge_view_project({
-      project_id: projectId,
+    let viewDao = await bridge_view_dao({
+      dao_id: daoId,
     });
-    setViewProject(viewProject);
+    setViewDao(viewDao);
   } catch (e) {
     statusMsg.error(e);
   }

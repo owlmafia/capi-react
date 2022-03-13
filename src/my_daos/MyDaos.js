@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { init, loadMyProjects } from "./controller";
-import { MyProjectItem } from "./MyProjectItem";
+import { init, loadMyDaos } from "./controller";
+import { MyDaoItem } from "./MyDaoItem";
 import { ContentTitle } from "../ContentTitle";
 
-export const MyProjects = (props) => {
-  const [myProjects, setMyProjects] = useState([]);
+export const MyDaos = (props) => {
+  const [myDaos, setMyDaos] = useState([]);
 
   useEffect(() => {
     init(props.statusMsg);
@@ -12,16 +12,16 @@ export const MyProjects = (props) => {
 
   useEffect(() => {
     if (props.myAddress) {
-      loadMyProjects(props.statusMsg, props.myAddress, setMyProjects);
+      loadMyDaos(props.statusMsg, props.myAddress, setMyDaos);
     }
   }, [props.statusMsg, props.myAddress]);
 
-  const myProjectsView = () => {
+  const myDaosView = () => {
     return (
-      myProjects && (
+      myDaos && (
         <div>
-          {myProjects.map((project) => (
-            <MyProjectItem project={project} />
+          {myDaos.map((dao) => (
+            <MyDaoItem dao={dao} />
           ))}
         </div>
       )
@@ -32,7 +32,7 @@ export const MyProjects = (props) => {
     return (
       <div>
         <ContentTitle title="My projects" />
-        {myProjectsView()}
+        {myDaosView()}
       </div>
     );
   };

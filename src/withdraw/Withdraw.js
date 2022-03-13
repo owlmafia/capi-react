@@ -4,8 +4,8 @@ import {
   LabeledCurrencyInput,
   LabeledInput,
 } from "../common_comps/LabeledInput";
-import { ProjectName } from "../ContentTitle";
-import { Funds } from "../project/Funds";
+import { DaoName } from "../ContentTitle";
+import { Funds } from "../dao/Funds";
 import { init, withdraw, updateFunds_ } from "./controller";
 
 export const Withdrawal = (props) => {
@@ -13,7 +13,7 @@ export const Withdrawal = (props) => {
 
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
-  const [project, setProject] = useState(null);
+  const [dao, setDao] = useState(null);
 
   const [funds, setFunds] = useState(null);
 
@@ -23,23 +23,23 @@ export const Withdrawal = (props) => {
 
   useEffect(() => {
     async function asyncInit() {
-      // init(params.id, props.history.location.state, setProject, props.statusMsg);
-      await init(params.id, null, setProject, props.statusMsg);
+      // init(params.id, props.history.location.state, setDAo, props.statusMsg);
+      await init(params.id, null, setDao, props.statusMsg);
       await updateFunds();
     }
     asyncInit();
   }, [params.id, props.statusMsg, updateFunds]);
 
   const view = () => {
-    if (project) {
+    if (dao) {
       return (
         <div>
-          <ProjectName project={project} />
+          <DaoName dao={dao} />
           <Funds
             funds={funds}
             showWithdrawLink={false}
-            projectId={params.id}
-            containerClassNameOpt="project_funds__cont_in_withdraw"
+            daoId={params.id}
+            containerClassNameOpt="dao_funds__cont_in_withdraw"
           />
           <LabeledCurrencyInput
             label={"How much?"}

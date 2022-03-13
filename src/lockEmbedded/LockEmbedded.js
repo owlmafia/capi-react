@@ -8,17 +8,17 @@ export const LockEmbedded = ({
   statusMsg,
   updateMyBalance,
   myAddress,
-  project,
+  dao,
   updateMyShares,
   myShares,
 }) => {
   let params = useParams();
   const [lockSharesCount, setLockSharesCount] = useState("");
 
-  if (project && myShares && myShares.free > 0) {
+  if (dao && myShares && myShares.free > 0) {
     return (
-      <div className="project_action__lock_container">
-        <p className="project_action__lock_info">
+      <div className="dao_action__lock_container">
+        <p className="dao_action__lock_info">
           {"You've " + myShares.free + " free shares"}
         </p>
         <LabeledInput
@@ -38,7 +38,7 @@ export const LockEmbedded = ({
               statusMsg,
               updateMyBalance,
               params.id,
-              project,
+              dao,
               lockSharesCount,
               updateMyShares
             );

@@ -11,7 +11,7 @@ export const init = async (statusMsg) => {
 
 export const loadFundsActivity = async (
   statusMsg,
-  projectId,
+  daoId,
   creatorAddress,
   setActivityEntries,
   maxResults // null if it shouldn't be limited
@@ -20,9 +20,9 @@ export const loadFundsActivity = async (
     const { bridge_load_funds_activity } = await wasmPromise;
 
     const fundsActivityRes = await bridge_load_funds_activity({
-      project_id: projectId,
+      dao_id: daoId,
       creator_address: creatorAddress,
-      max_results: maxResults
+      max_results: maxResults,
     });
     console.log("fundsActivityRes: " + JSON.stringify(fundsActivityRes));
 

@@ -4,7 +4,7 @@ import { LabeledBox } from "../common_comps/LabeledBox";
 import { init, loadFundsActivity } from "./controller";
 import { FundsActivityEntry } from "./FundsActivityEntry";
 
-export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
+export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
@@ -13,15 +13,9 @@ export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
 
   useEffect(() => {
     if (myAddress) {
-      loadFundsActivity(
-        statusMsg,
-        projectId,
-        myAddress,
-        setActivityEntries,
-        "3"
-      );
+      loadFundsActivity(statusMsg, daoId, myAddress, setActivityEntries, "3");
     }
-  }, [projectId, statusMsg, myAddress]);
+  }, [daoId, statusMsg, myAddress]);
 
   const fundsActivity = () => {
     return (
@@ -39,7 +33,7 @@ export const FundsActivityEmbedded = ({ statusMsg, projectId, myAddress }) => {
 
   const view = () => {
     return (
-      <div className="first_project_widget">
+      <div className="first_dao_widget">
         <LabeledBox label="Recent funds activity">
           {fundsActivity()}
           <Link to="funds_activity">

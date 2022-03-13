@@ -1,15 +1,15 @@
-#project_actions_top_bar {
+#dao_actions_top_bar {
     display: flex;
     gap: 30px;
     align-items: center;
 }
 
-#project_description {
+#dao_description {
     color: grey;
     margin-bottom: 20px;
 }
 
-#project_funds {
+#dao_funds {
     &__cont {
         margin-left: auto;
     }
@@ -32,19 +32,19 @@
     }
 }
 
-.project_action_tab_item {
+.dao_action_tab_item {
     &__sel {
         font-weight: 600;
     }
 }
 
-.project_action_active_tab {
+.dao_action_active_tab {
     border: 1px solid black;
     border-radius: 10px;
     padding: 10px;
 }
 
-.project_action {
+.dao_action {
     &__lock_container {
         margin-top: 10px;
         padding-top: 20px;

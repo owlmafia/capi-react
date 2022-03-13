@@ -11,7 +11,7 @@ export const MyAccount = ({
   updateMyBalance,
   statusMsgUpdater,
   // optional: if set, shows "my shares"
-  projectId,
+  daoId,
   myShares,
 }) => {
   return (

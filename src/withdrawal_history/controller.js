@@ -1,20 +1,19 @@
 const wasmPromise = import("wasm");
 
-export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
+export const init = async (daoId, daoMaybe, setDao, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_id } =
-      await wasmPromise;
+    const { init_log, bridge_load_dao_user_view_with_id } = await wasmPromise;
     await init_log();
 
-    // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
-    var project = null;
-    if (projectMaybe) {
-      project = projectMaybe;
+    // if we're loading via URL (instead of another page that passes the dao as parameter), fetch the dao
+    var dao = null;
+    if (daoMaybe) {
+      dao = daoMaybe;
     } else {
-      project = await bridge_load_project_user_view_with_id(projectId);
+      dao = await bridge_load_dao_user_view_with_id(daoId);
     }
 
-    setProject(project);
+    setDao(dao);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -22,7 +21,7 @@ export const init = async (projectId, projectMaybe, setProject, statusMsg) => {
 
 export const loadWithdrawals = async (
   statusMsg,
-  projectId,
+  daoId,
   creatorAddress,
   setWithdrawalRequests
 ) => {
@@ -30,7 +29,7 @@ export const loadWithdrawals = async (
     const { bridge_load_withdrawals } = await wasmPromise;
 
     const withdrawalsRes = await bridge_load_withdrawals({
-      project_id: projectId,
+      dao_id: daoId,
       creator_address: creatorAddress,
     });
     console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));

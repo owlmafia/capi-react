@@ -1,4 +1,4 @@
-import { signTx } from "../MyAlgo"; 
+import { signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -16,20 +16,20 @@ export const pay = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  project,
+  dao,
   amount,
   updateFunds
 ) => {
   try {
-    const { bridge_pay_project, bridge_submit_pay_project } = await wasmPromise;
+    const { bridge_pay_dao, bridge_submit_pay_dao } = await wasmPromise;
     statusMsg.clear();
 
-    // console.log("??? %o", project);
+    // console.log("??? %o", dao);
     showProgress(true);
 
-    let payRes = await bridge_pay_project({
+    let payRes = await bridge_pay_dao({
       customer_address: myAddress,
-      customer_escrow_address: project.customer_escrow_address,
+      customer_escrow_address: dao.customer_escrow_address,
       amount: amount,
     });
     console.log("payRes: " + JSON.stringify(payRes));
@@ -39,7 +39,7 @@ export const pay = async (
     console.log("paySigned: " + JSON.stringify(paySigned));
 
     showProgress(true);
-    let submitPayRes = await bridge_submit_pay_project({
+    let submitPayRes = await bridge_submit_pay_dao({
       tx: paySigned,
     });
     console.log("submitPayRes: " + JSON.stringify(submitPayRes));

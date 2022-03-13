@@ -10,64 +10,64 @@ export const Stats = ({ statusMsg }) => {
   let params = useParams();
 
   const [holderCount, setHolderCount] = useState(null);
-  const [viewProject, setViewProject] = useState(null);
+  const [viewDao, setViewDao] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
-      //   console.log("loading project id: " + JSON.stringify(params));
-      await init(params.id, setViewProject, statusMsg);
+      //   console.log("loading dao id: " + JSON.stringify(params));
+      await init(params.id, setViewDao, statusMsg);
     }
     asyncInit();
   }, [params.id, statusMsg]);
 
-  const project = useMemo(() => {
-    if (viewProject) {
-      return viewProject.project;
+  const dao = useMemo(() => {
+    if (viewDao) {
+      return viewDao.dao;
     }
-  }, [viewProject]);
+  }, [viewDao]);
 
   const sharesAssetId = useMemo(() => {
-    if (project) {
-      return project.shares_asset_id;
+    if (dao) {
+      return dao.shares_asset_id;
     }
-  }, [project]);
+  }, [dao]);
 
   const sharesSupply = useMemo(() => {
-    if (project) {
-      return project.share_supply;
+    if (dao) {
+      return dao.share_supply;
     }
-  }, [project]);
+  }, [dao]);
 
   useEffect(() => {
-    if (sharesAssetId && project) {
+    if (sharesAssetId && dao) {
       fetchHolderCount(
         statusMsg,
         sharesAssetId,
-        project.investing_escrow_address,
-        project.locking_escrow_address,
+        dao.investing_escrow_address,
+        dao.locking_escrow_address,
         setHolderCount
       );
     }
-  }, [statusMsg, sharesAssetId, project]);
+  }, [statusMsg, sharesAssetId, dao]);
 
   return (
     <div>
       <div>
         <ContentTitle title={"Stats"} />
       </div>
-      {project && (
+      {dao && (
         <SharesDistributionBox
           statusMsg={statusMsg}
           sharesAssetId={sharesAssetId}
           sharesSupply={sharesSupply}
           holderCount={holderCount}
-          appId={project.central_app_id}
-          investingEscrowAddress={project.investing_escrow_address}
-          lockingEscrowAddress={project.locking_escrow_address}
+          appId={dao.central_app_id}
+          investingEscrowAddress={dao.investing_escrow_address}
+          lockingEscrowAddress={dao.locking_escrow_address}
         />
       )}
 
-      <IncomeVsSpendingBox statusMsg={statusMsg} projectId={params.id} />
+      <IncomeVsSpendingBox statusMsg={statusMsg} daoId={params.id} />
     </div>
   );
 };

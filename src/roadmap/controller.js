@@ -2,15 +2,14 @@ import { signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (projectId, setProject, statusMsg) => {
+export const init = async (daoId, setDao, statusMsg) => {
   try {
-    const { init_log, bridge_load_project_user_view_with_id } =
-      await wasmPromise;
+    const { init_log, bridge_load_dao_user_view_with_id } = await wasmPromise;
     await init_log();
 
-    // if we're loading via URL (instead of another page that passes the project as parameter), fetch the project
-    var project = await bridge_load_project_user_view_with_id(projectId);
-    setProject(project);
+    // if we're loading via URL (instead of another page that passes the dao as parameter), fetch the dao
+    var dao = await bridge_load_dao_user_view_with_id(daoId);
+    setDao(dao);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -18,7 +17,7 @@ export const init = async (projectId, setProject, statusMsg) => {
 
 export const loadRoadmap = async (
   statusMsg,
-  projectId,
+  daoId,
   creatorAddress,
   setRoadmapItems
 ) => {
@@ -27,7 +26,7 @@ export const loadRoadmap = async (
 
     const roadmapRes = await bridge_load_roadmap({
       creator_address: creatorAddress,
-      project_id: projectId,
+      dao_id: daoId,
     });
     console.log("roadmapRes: " + JSON.stringify(roadmapRes));
 
@@ -42,7 +41,7 @@ export const addRoadmapItem = async (
   statusMsg,
   showProgress,
   updateMyBalance,
-  projectId,
+  daoId,
   creatorAddress,
   title,
   // epoch milliseconds
@@ -57,7 +56,7 @@ export const addRoadmapItem = async (
 
     const roadmapRes = await bridge_add_roadmap_item({
       creator_address: creatorAddress,
-      project_id: projectId,
+      dao_id: daoId,
       title: title,
       parent: null,
       // in rust we use seconds - the fact that we get milliseconds from moment.js is seen as a js impl detail, so changed in js

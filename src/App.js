@@ -32,14 +32,9 @@ const App = () => {
   );
 
   const updateShares = useCallback(
-    async (projectId, myAddress) => {
+    async (daoId, myAddress) => {
       if (myAddress) {
-        await updateMyShares(
-          statusMsgUpdater,
-          projectId,
-          myAddress,
-          setMyShares
-        );
+        await updateMyShares(statusMsgUpdater, daoId, myAddress, setMyShares);
       }
     },
     [statusMsgUpdater]

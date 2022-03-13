@@ -27,11 +27,11 @@ export const SideBarDao = ({
   updateMyShares,
 }) => {
   let params = useParams();
-  const [viewProject, setViewProject] = useState(null);
+  const [viewDao, setViewDao] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewProject, statusMsgUpdater);
+      await init(params.id, setViewDao, statusMsgUpdater);
     }
     asyncInit();
   }, [params.id, statusMsgUpdater]);
@@ -51,7 +51,7 @@ export const SideBarDao = ({
         <div id="sidebar__header">
           <img
             id="sidebar__logo"
-            src={viewProject?.project?.logo_url ?? ""}
+            src={viewDao?.dao?.logo_url ?? ""}
             alt="Logo"
           />
           <MyAccount
@@ -62,7 +62,7 @@ export const SideBarDao = ({
             myBalance={myBalance}
             updateMyBalance={updateMyBalance}
             statusMsgUpdater={statusMsgUpdater}
-            projectId={params.id}
+            daoId={params.id}
             myShares={myShares}
           />
         </div>
@@ -92,20 +92,18 @@ export const SideBarDao = ({
         </Menu>
       </SidebarContent>
       <SidebarFooter>
-        {viewProject &&
-          viewProject.project &&
-          viewProject.project.social_media_url && (
-            <div className="social_media__container">
-              <a
-                href={viewProject.project.social_media_url}
-                target="_blank"
-                rel="noreferrer"
-                className="social_media__link"
-              >
-                Social media
-              </a>
-            </div>
-          )}
+        {viewDao && viewDao.dao && viewDao.dao.social_media_url && (
+          <div className="social_media__container">
+            <a
+              href={viewDao.dao.social_media_url}
+              target="_blank"
+              rel="noreferrer"
+              className="social_media__link"
+            >
+              Social media
+            </a>
+          </div>
+        )}
       </SidebarFooter>
     </ProSidebar>
   );

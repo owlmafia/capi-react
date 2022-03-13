@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { MdContentCopy } from "react-icons/md";
-import { ProjectName } from "../ContentTitle";
+import { DaoName } from "../ContentTitle";
 import { Link } from "react-router-dom";
 
-export const CreateProjectSuccess = (props) => {
+export const CreateDaoSuccess = (props) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
 
   const onCopyText = () => {
@@ -17,14 +17,14 @@ export const CreateProjectSuccess = (props) => {
   return (
     <div>
       <div>
-        <ProjectName project={props.project} />
+        <DaoName dao={props.dao} />
         <p>
           <span className="key-val-key">{"Share supply:"}</span>
-          <span className="key-val-val">{props.project.share_supply}</span>
+          <span className="key-val-val">{props.dao.share_supply}</span>
         </p>
         <p>
           <span className="key-val-key">{"Share price:"}</span>
-          <span className="key-val-val">{props.project.share_price}</span>
+          <span className="key-val-val">{props.dao.share_price}</span>
         </p>
         <p>
           <span className="key-val-key">{"Share asset id:"}</span>
@@ -33,20 +33,20 @@ export const CreateProjectSuccess = (props) => {
             <a
               href={
                 "https://testnet.algoexplorer.io/asset/" +
-                props.project.shares_asset_id
+                props.dao.shares_asset_id
               }
               target="_blank"
               rel="noreferrer"
             >
-              {props.project.shares_asset_id}
+              {props.dao.shares_asset_id}
             </a>
           </span>
         </p>
 
         <div className="section-spacer" />
-        <CopyToClipboard text={props.project.invest_link} onCopy={onCopyText}>
+        <CopyToClipboard text={props.dao.invest_link} onCopy={onCopyText}>
           <div>
-            <Link to={props.project.invest_link}>{"Go to project"}</Link>
+            <Link to={props.dao.invest_link}>{"Go to project"}</Link>
             <span className="copy">
               {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
             </span>

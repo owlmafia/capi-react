@@ -9,22 +9,22 @@ export const AddRoadmapItem = ({
   statusMsg,
   showProgress,
   updateMyBalance,
-  projectId,
+  daoId,
   myAddress,
 }) => {
   let params = useParams();
 
   const [itemTitle, setItemTitle] = useState("");
-  const [project, setProject] = useState(null);
+  const [dao, setDao] = useState(null);
   const [value, onChange] = useState(new Date());
 
   useEffect(() => {
-    init(projectId, setProject, statusMsg);
-  }, [projectId, statusMsg]);
+    init(daoId, setDao, statusMsg);
+  }, [daoId, statusMsg]);
 
   const view = () => {
     return (
-      project && (
+      dao && (
         <div>
           <LabeledInput
             label={"Label:"}

@@ -9,7 +9,7 @@ import { init, retrieveProfits, unlock } from "./controller";
 export const Investment = (props) => {
   let params = useParams();
 
-  const [project, setProject] = useState(null);
+  const [dao, setDao] = useState(null);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
   const [youAreNotInvested, setYouAreNotInvested] = useState(false);
   const myShareChart = useRef(null);
@@ -19,7 +19,7 @@ export const Investment = (props) => {
       params.id,
       props.myAddress,
       props.statusMsg,
-      setProject,
+      setDao,
       setYouAreNotInvested,
       setChainInvestmentData
     );
@@ -35,7 +35,7 @@ export const Investment = (props) => {
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [project, chainInvestmentData]);
+  }, [dao, chainInvestmentData]);
 
   const userView = () => {
     if (chainInvestmentData && !youAreNotInvested) {
@@ -80,7 +80,7 @@ export const Investment = (props) => {
                 props.statusMsg,
                 props.updateMyBalance,
                 params.id,
-                project,
+                dao,
                 chainInvestmentData.investor_harvestable_amount_microalgos,
                 setChainInvestmentData
               );
@@ -98,7 +98,7 @@ export const Investment = (props) => {
                 props.statusMsg,
                 props.updateMyBalance,
                 params.id,
-                project,
+                dao,
                 setChainInvestmentData,
                 setYouAreNotInvested
               );
@@ -118,7 +118,7 @@ export const Investment = (props) => {
       return (
         <div>
           <p>{"You're not invested in this project"}</p>
-          <a href={project.invest_link}>{"Invest"}</a>
+          <a href={dao.invest_link}>{"Invest"}</a>
         </div>
       );
     } else {
@@ -127,7 +127,7 @@ export const Investment = (props) => {
   };
 
   const bodyView = () => {
-    if (project) {
+    if (dao) {
       return (
         <div>
           {userView()}
@@ -137,7 +137,7 @@ export const Investment = (props) => {
             statusMsg={props.statusMsg}
             updateMyBalance={props.updateMyBalance}
             myAddress={props.myAddress}
-            project={project}
+            dao={dao}
             updateMyShares={props.updateMyShares}
             myShares={props.myShares}
           />

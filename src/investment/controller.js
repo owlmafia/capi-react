@@ -3,35 +3,35 @@ import { signTxs } from "../MyAlgo";
 const wasmPromise = import("wasm");
 
 export const init = async (
-  projectId,
+  daoId,
   myAddress,
   statusMsg,
-  setProject,
+  setDao,
   setYouAreNotInvested,
   setChainInvestmentData
 ) => {
   try {
-    const { init_log, bridge_load_project_user_view, bridge_load_investment } =
+    const { init_log, bridge_load_dao_user_view, bridge_load_investment } =
       await wasmPromise;
     await init_log();
 
-    let project = await bridge_load_project_user_view(projectId);
-    console.log("project: " + JSON.stringify(project));
-    setProject(project);
+    let dao = await bridge_load_dao_user_view(daoId);
+    console.log("dao: " + JSON.stringify(dao));
+    setDao(dao);
 
     if (myAddress) {
       console.log("myAddress: " + myAddress);
       setChainInvestmentData(
         await bridge_load_investment({
-          project_id: projectId,
-          app_id: project.central_app_id,
-          shares_asset_id: project.shares_asset_id,
+          dao_id: daoId,
+          app_id: dao.central_app_id,
+          shares_asset_id: dao.shares_asset_id,
           investor_address: myAddress,
         })
       );
     }
   } catch (e) {
-    if (e === "You're not invested in this project.") {
+    if (e === "You're not invested in this dao.") {
       setYouAreNotInvested(true);
     } else {
       statusMsg.error(e);
@@ -44,8 +44,8 @@ export const retrieveProfits = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
-  project,
+  daoId,
+  dao,
   amount,
   setChainInvestmentData
 ) => {
@@ -56,7 +56,7 @@ export const retrieveProfits = async (
 
     showProgress(true);
     let harvestRes = await bridge_harvest({
-      project_id: projectId,
+      dao_id: daoId,
       amount: amount,
       investor_address: myAddress,
     });
@@ -69,7 +69,7 @@ export const retrieveProfits = async (
     showProgress(true);
     let submitHarvestRes = await bridge_submit_harvest({
       investor_address_for_diagnostics: myAddress,
-      project_id_for_diagnostics: projectId,
+      dao_id_for_diagnostics: daoId,
 
       txs: harvestResSigned,
       pt: harvestRes.pt,
@@ -78,9 +78,9 @@ export const retrieveProfits = async (
 
     setChainInvestmentData(
       await bridge_load_investment({
-        project_id: projectId,
-        app_id: project.central_app_id,
-        shares_asset_id: project.shares_asset_id,
+        dao_id: daoId,
+        app_id: dao.central_app_id,
+        shares_asset_id: dao.shares_asset_id,
         investor_address: myAddress,
       })
     );
@@ -100,8 +100,8 @@ export const unlock = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
-  project,
+  daoId,
+  dao,
   setChainInvestmentData,
   setYouAreNotInvested
 ) => {
@@ -112,7 +112,7 @@ export const unlock = async (
 
     showProgress(true);
     let unlockRes = await bridge_unlock({
-      project_id: projectId,
+      dao_id: daoId,
       investor_address: myAddress,
     });
     console.log("unlockRes: " + JSON.stringify(unlockRes));
@@ -130,9 +130,9 @@ export const unlock = async (
 
     setChainInvestmentData(
       await bridge_load_investment({
-        project_id: projectId,
-        app_id: project.central_app_id,
-        shares_asset_id: project.shares_asset_id,
+        dao_id: daoId,
+        app_id: dao.central_app_id,
+        shares_asset_id: dao.shares_asset_id,
         investor_address: myAddress,
       })
     );

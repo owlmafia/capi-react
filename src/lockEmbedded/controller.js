@@ -9,8 +9,8 @@ export const lock = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
-  project,
+  daoId,
+  dao,
   lockSharesCount,
   updateMyShares
 ) => {
@@ -23,7 +23,7 @@ export const lock = async (
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + project.central_app_id,
+      app_id: "" + dao.central_app_id,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
@@ -42,7 +42,7 @@ export const lock = async (
     // TODO write which local state
 
     let lockRes = await bridge_lock({
-      project_id: projectId,
+      dao_id: daoId,
       investor_address: myAddress,
       share_count: lockSharesCount,
     });
@@ -67,7 +67,7 @@ export const lock = async (
       "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
-    updateMyShares(projectId, myAddress);
+    updateMyShares(daoId, myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

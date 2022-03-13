@@ -2,14 +2,14 @@ const wasmPromise = import("wasm");
 
 export const updateMyShares = async (
   statusMsg,
-  projectId,
+  daoId,
   myAddress,
   setMyShares
 ) => {
   try {
     const { bridge_my_shares } = await wasmPromise;
     let mySharesRes = await bridge_my_shares({
-      project_id: projectId,
+      dao_id: daoId,
       my_address: myAddress,
     });
     console.log("mySharesRes: %o", mySharesRes);

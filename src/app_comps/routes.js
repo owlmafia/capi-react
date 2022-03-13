@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { CreateProject } from "../create/CreateProject";
+import { CreateDao } from "../create/CreateDao";
 import { FundsActivity } from "../funds_activity/FundsActivity";
 import { Investment } from "../investment/Investment";
-import { MyProjects } from "../my_projects/MyProjects";
-import { Project } from "../project/Project";
+import { MyDaos } from "../my_daos/MyDaos";
+import { Dao } from "../dao/Dao";
 import { AddRoadmapItem } from "../roadmap/AddRoadmapItem";
 import { Roadmap } from "../roadmap/Roadmap";
 import { Stats } from "../stats/Stats";
@@ -49,7 +49,7 @@ export const routesView = (
           <Route
             path="create"
             element={
-              <CreateProject
+              <CreateDao
                 myAddress={myAddress}
                 showModal={(modal) => setModal(modal)}
                 showProgress={(show) => setShowProgress(show)}
@@ -59,9 +59,9 @@ export const routesView = (
             }
           />
           <Route
-            path="my_projects"
+            path="my_daos"
             element={
-              <MyProjects
+              <MyDaos
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
@@ -91,7 +91,7 @@ export const routesView = (
           <Route
             index
             element={
-              <Project
+              <Dao
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}

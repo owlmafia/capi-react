@@ -7,7 +7,7 @@ export const PayEmbedded = ({
   statusMsg,
   updateMyBalance,
   myAddress,
-  project,
+  dao,
   updateFunds,
 }) => {
   const [amount, setAmount] = useState("10");
@@ -17,7 +17,7 @@ export const PayEmbedded = ({
   }, [statusMsg]);
 
   return (
-    <div className="project_action_active_tab">
+    <div className="dao_action_active_tab">
       <LabeledCurrencyInput
         label={"Amount"}
         inputValue={amount}
@@ -32,7 +32,7 @@ export const PayEmbedded = ({
             showProgress,
             statusMsg,
             updateMyBalance,
-            project,
+            dao,
             amount,
             updateFunds
           );

@@ -7,14 +7,14 @@ const wasmPromise = import("wasm");
 export const init = async (
   statusMsg,
   shareCountInput,
-  project,
+  dao,
   setBuySharesTotalPrice
 ) => {
   try {
     const { init_log } = await wasmPromise;
     await init_log();
 
-    updateTotalCost(shareCountInput, project, setBuySharesTotalPrice);
+    updateTotalCost(shareCountInput, dao, setBuySharesTotalPrice);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -22,22 +22,22 @@ export const init = async (
 
 export const handleSharesCountInput = async (
   shareCountInput,
-  project,
+  dao,
   setBuySharesCount,
   setBuySharesTotalPrice
 ) => {
   setBuySharesCount(shareCountInput);
-  updateTotalCost(shareCountInput, project, setBuySharesTotalPrice);
+  updateTotalCost(shareCountInput, dao, setBuySharesTotalPrice);
 };
 
 export const updateTotalCost = async (
   shareCountInput,
-  project,
+  dao,
   setBuySharesTotalPrice
 ) => {
   // TODO (low prio) do calculation in WASM - JS only strictly presentation logic
   if (!isNaN(shareCountInput)) {
-    const price = shareCountInput * project.share_price_number_algo;
+    const price = shareCountInput * dao.share_price_number_algo;
     setBuySharesTotalPrice(price);
   } else {
     setBuySharesTotalPrice("");
@@ -49,8 +49,8 @@ export const invest = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
-  project,
+  daoId,
+  dao,
   buySharesCount,
   updateMyShares,
   updateFunds
@@ -67,7 +67,7 @@ export const invest = async (
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + project.central_app_id,
+      app_id: "" + dao.central_app_id,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
@@ -85,7 +85,7 @@ export const invest = async (
     // 2. buy the shares (requires app opt-in for local state)
     // TODO write which local state
     let buyRes = await bridge_buy_shares({
-      project_id: projectId,
+      dao_id: daoId,
       share_count: buySharesCount,
       investor_address: myAddress,
       app_opt_ins: optInToAppsSignedOptional,
@@ -110,7 +110,7 @@ export const invest = async (
       "Congratulations! you bought " + buySharesCount + " shares."
     );
 
-    await updateMyShares(projectId, myAddress);
+    await updateMyShares(daoId, myAddress);
     await updateFunds();
   } catch (e) {
     statusMsg.error(e);
@@ -123,8 +123,8 @@ export const lock = async (
   showProgress,
   statusMsg,
   updateMyBalance,
-  projectId,
-  project,
+  daoId,
+  dao,
   lockSharesCount,
   updateMyShares
 ) => {
@@ -137,7 +137,7 @@ export const lock = async (
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + project.central_app_id,
+      app_id: "" + dao.central_app_id,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
@@ -156,7 +156,7 @@ export const lock = async (
     // TODO write which local state
 
     let lockRes = await bridge_lock({
-      project_id: projectId,
+      dao_id: daoId,
       investor_address: myAddress,
     });
     console.log("lockRes: " + JSON.stringify(lockRes));
@@ -180,7 +180,7 @@ export const lock = async (
       "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
-    updateMyShares(projectId, myAddress);
+    updateMyShares(daoId, myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

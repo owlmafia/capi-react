@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 
-export const ProjectName = (props) => {
+export const DaoName = (props) => {
   return (
     <div id="content__title">
-      <Link to={props.project.project_link}>{props.project.name}</Link>
+      <Link to={props.dao.dao_link}>{props.dao.name}</Link>
       {props.children}
     </div>
   );

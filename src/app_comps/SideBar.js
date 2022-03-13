@@ -33,8 +33,8 @@ export const SideBar = ({
             myBalance={myBalance}
             updateMyBalance={updateMyBalance}
             statusMsgUpdater={statusMsgUpdater}
-            // no project / DAO here
-            projectId={null}
+            // no dao here
+            daoId={null}
           />
         </div>
       </SidebarHeader>
@@ -44,7 +44,7 @@ export const SideBar = ({
             <Link to="create">Create</Link>
           </MenuItem>
           <MenuItem icon={<VscListFlat />}>
-            <Link to="my_projects">My projects</Link>
+            <Link to="my_daos">My daos</Link>
           </MenuItem>
         </Menu>
       </SidebarContent>

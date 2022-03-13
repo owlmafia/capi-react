@@ -11,11 +11,11 @@ export const Roadmap = (props) => {
   let params = useParams();
 
   const [roadmapItems, setRoadmapItems] = useState([]);
-  const [project, setProject] = useState(null);
+  const [dao, setDao] = useState(null);
   const [modal, setModal] = useState(null);
 
   useEffect(() => {
-    init(params.id, setProject, props.statusMsg);
+    init(params.id, setDao, props.statusMsg);
   }, [params.id, props.statusMsg]);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const Roadmap = (props) => {
 
   const view = () => {
     return (
-      project && (
+      dao && (
         <div>
           <ContentTitle title={"Roadmap"}>
             <AddIcon
@@ -49,7 +49,7 @@ export const Roadmap = (props) => {
             statusMsg={props.statusMsg}
             showProgress={props.showProgress}
             updateMyBalance={props.updateMyBalance}
-            projectId={params.id}
+            daoId={params.id}
             myAddress={props.myAddress}
           />
         </Modal>

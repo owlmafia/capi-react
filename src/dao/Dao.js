@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { fetchHolderCount } from "../common_functions/stats_common";
-import { ProjectName } from "../ContentTitle";
+import { DaoName } from "../ContentTitle";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
@@ -12,10 +12,10 @@ import { init, updateFunds_ } from "./controller";
 import { Funds } from "./Funds";
 import Modal from "../Modal";
 
-export const Project = (props) => {
+export const Dao = (props) => {
   let params = useParams();
 
-  const [viewProject, setViewProject] = useState(null);
+  const [viewDao, setViewDao] = useState(null);
   const [funds, setFunds] = useState(null);
 
   const [holderCount, setHolderCount] = useState(null);
@@ -27,72 +27,70 @@ export const Project = (props) => {
 
   console.log("props: " + JSON.stringify(props));
 
-  const project = useMemo(() => {
-    if (viewProject) {
-      return viewProject.project;
+  const dao = useMemo(() => {
+    if (viewDao) {
+      return viewDao.dao;
     }
-  }, [viewProject]);
+  }, [viewDao]);
 
   const updateFunds = useCallback(async () => {
-    await updateFunds_(params.id, setViewProject, setFunds, props.statusMsg);
+    await updateFunds_(params.id, setViewDao, setFunds, props.statusMsg);
   }, [params.id, props.statusMsg]);
 
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewProject, setFunds, props.statusMsg);
+      await init(params.id, setViewDao, setFunds, props.statusMsg);
     }
     asyncInit();
   }, [params.id, props.statusMsg]);
 
   useEffect(() => {
-    if (project) {
+    if (dao) {
       fetchHolderCount(
         props.statusMsg,
-        project.shares_asset_id,
-        project.investing_escrow_address,
-        project.locking_escrow_address,
+        dao.shares_asset_id,
+        dao.investing_escrow_address,
+        dao.locking_escrow_address,
         setHolderCount
       );
     }
-  }, [props.statusMsg, project]);
+  }, [props.statusMsg, dao]);
 
   const sharesAssetId = useMemo(() => {
-    if (project) {
-      return project.shares_asset_id;
+    if (dao) {
+      return dao.shares_asset_id;
     }
-  }, [project]);
+  }, [dao]);
 
   const sharesSupply = useMemo(() => {
-    if (project) {
-      return project.share_supply;
+    if (dao) {
+      return dao.share_supply;
     }
-  }, [project]);
+  }, [dao]);
 
   const actions_tabs_classes = (tabIsShowing) => {
     var clazz = "link_button";
     if (tabIsShowing) {
-      clazz += " project_action_tab_item__sel";
+      clazz += " dao_action_tab_item__sel";
     }
     return clazz;
   };
 
-  const projectView = () => {
-    if (viewProject) {
+  const daoView = () => {
+    if (viewDao) {
       return (
         <div>
           <div>
-            <ProjectName project={viewProject.project}>
+            <DaoName dao={viewDao.dao}>
               <ShareIcon
                 className="title_right_button"
                 onClick={() => setShowShareModal((visible) => !visible)}
               />
-            </ProjectName>
+            </DaoName>
 
-            <div id="project_description">
-              {viewProject.project.description}
-            </div>
+            <div id="dao_description">{viewDao.dao.description}</div>
 
-            <div id="project_actions_top_bar">
+            <div id="dao_actions_top_bar">
               <p
                 className={actions_tabs_classes(showInvestTab)}
                 onClick={() => {
@@ -115,10 +113,10 @@ export const Project = (props) => {
                 funds={funds}
                 showWithdrawLink={
                   props.myAddress &&
-                  viewProject.project.creator_address &&
-                  viewProject.project.creator_address === props.myAddress
+                  viewDao.dao.creator_address &&
+                  viewDao.dao.creator_address === props.myAddress
                 }
-                projectId={params.id}
+                daoId={params.id}
               />
             </div>
             {showInvestTab && (
@@ -127,7 +125,7 @@ export const Project = (props) => {
                 statusMsg={props.statusMsg}
                 updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
-                project={project}
+                dao={dao}
                 updateMyShares={props.updateMyShares}
                 myShares={props.myShares}
                 updateFunds={updateFunds}
@@ -139,38 +137,38 @@ export const Project = (props) => {
                 statusMsg={props.statusMsg}
                 updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
-                project={project}
+                dao={dao}
                 updateFunds={updateFunds}
               />
             )}
             <FundsActivityEmbedded
               statusMsg={props.statusMsg}
-              projectId={params.id}
+              daoId={params.id}
               myAddress={props.myAddress}
             />
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
-              hidden={viewProject.project.creator_address !== props.myAddress}
+              hidden={viewDao.dao.creator_address !== props.myAddress}
               to={"/withdraw/" + params.id}
             >
               <button>{"Withdraw"}</button>
             </Link> */}
             <div className="section-spacer" />
-            {project && (
+            {dao && (
               <SharesDistributionBox
                 statusMsg={props.statusMsg}
                 sharesAssetId={sharesAssetId}
                 sharesSupply={sharesSupply}
                 holderCount={holderCount}
-                appId={project.central_app_id}
-                investingEscrowAddress={project.investing_escrow_address}
-                lockingEscrowAddress={project.locking_escrow_address}
+                appId={dao.central_app_id}
+                investingEscrowAddress={dao.investing_escrow_address}
+                lockingEscrowAddress={dao.locking_escrow_address}
               />
             )}
 
             <IncomeVsSpendingBox
               statusMsg={props.statusMsg}
-              projectId={params.id}
+              daoId={params.id}
             />
           </div>
           <div className="section-spacer" />
@@ -183,13 +181,13 @@ export const Project = (props) => {
 
   return (
     <div>
-      {projectView()}
+      {daoView()}
       {showShareModal && (
         <Modal
-          title={"Share project"}
+          title={"Share dao"}
           onCloseClick={() => setShowShareModal(false)}
         >
-          <div>{"TODO Social media buttons to share this project"}</div>
+          <div>{"TODO Social media buttons to share this dao"}</div>
         </Modal>
       )}
     </div>

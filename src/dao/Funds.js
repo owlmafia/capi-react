@@ -5,14 +5,14 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 export const Funds = ({
   funds,
   showWithdrawLink,
-  projectId,
+  daoId,
   containerClassNameOpt,
 }) => {
   const withdrawButton = () => {
     return (
       showWithdrawLink && (
         <span>
-          <Link to={"/" + projectId + "/withdraw"}>
+          <Link to={"/" + daoId + "/withdraw"}>
             <BsArrowUpCircle id="withdraw_icon" />
           </Link>
         </span>
@@ -21,9 +21,9 @@ export const Funds = ({
   };
 
   return (
-    <div id="project_funds__cont" className={containerClassNameOpt}>
+    <div id="dao_funds__cont" className={containerClassNameOpt}>
       <div>{"Available funds"}</div>
-      <div id="project_funds__val">
+      <div id="dao_funds__val">
         <div>{funds}</div>
         <FundsAssetImg />
         {withdrawButton()}

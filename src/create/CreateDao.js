@@ -5,18 +5,18 @@ import {
   LabeledInput,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
-import { createProject, init } from "./controller";
-import { CreateProjectSuccess } from "./CreateProjectSuccess";
+import { createDao, init } from "./controller";
+import { CreateDaoSuccess } from "./CreateDaoSuccess";
 
-export const CreateProject = (props) => {
-  const [projectName, setProjectName] = useState("");
-  const [projectDescr, setProjectDescr] = useState("");
+export const CreateDao = (props) => {
+  const [daoName, setDaoName] = useState("");
+  const [daoDescr, setDaoDescr] = useState("");
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [logoUrl, setLogoUrl] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
-  const [createProjectSuccess, setCreateProjectSuccess] = useState(null);
+  const [createDaoSuccess, setCreateDaoSuccess] = useState(null);
   const investorsShareChart = useRef(null);
 
   useEffect(() => {
@@ -42,13 +42,13 @@ export const CreateProject = (props) => {
         <div>
           <LabeledInput
             label={"Project name"}
-            inputValue={projectName}
-            onChange={(input) => setProjectName(input)}
+            inputValue={daoName}
+            onChange={(input) => setDaoName(input)}
           />
           <LabeledInput
             label={"Description"}
-            inputValue={projectDescr}
-            onChange={(input) => setProjectDescr(input)}
+            inputValue={daoDescr}
+            onChange={(input) => setDaoDescr(input)}
           />
           <LabeledInput
             label={"Share supply"}
@@ -121,25 +121,25 @@ export const CreateProject = (props) => {
             className="button__submit"
             disabled={
               props.myAddress === "" ||
-              projectName === "" ||
+              daoName === "" ||
               shareCount === "" ||
               sharePrice === "" ||
               investorsShare === ""
             }
             onClick={async () => {
-              await createProject(
+              await createDao(
                 props.myAddress,
                 props.showProgress,
                 props.statusMsg,
                 props.updateMyBalance,
-                projectName,
-                projectDescr,
+                daoName,
+                daoDescr,
                 shareCount,
                 sharePrice,
                 investorsShare,
                 logoUrl,
                 socialMediaUrl,
-                setCreateProjectSuccess
+                setCreateDaoSuccess
               );
             }}
           >
@@ -153,8 +153,8 @@ export const CreateProject = (props) => {
   };
 
   const bodyView = () => {
-    if (createProjectSuccess) {
-      return <CreateProjectSuccess project={createProjectSuccess} />;
+    if (createDaoSuccess) {
+      return <CreateDaoSuccess dao={createDaoSuccess} />;
     } else {
       return (
         <div>
