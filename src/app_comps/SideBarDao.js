@@ -49,11 +49,7 @@ export const SideBarDao = ({
     <ProSidebar id="sidebar">
       <SidebarHeader>
         <div id="sidebar__header">
-          <img
-            id="sidebar__logo"
-            src={viewDao?.dao?.logo_url ?? ""}
-            alt="Logo"
-          />
+          {logoView(viewDao?.dao)}
           <MyAccount
             myAddress={myAddress}
             setMyAddress={setMyAddress}
@@ -107,4 +103,19 @@ export const SideBarDao = ({
       </SidebarFooter>
     </ProSidebar>
   );
+};
+
+const logoView = (dao) => {
+  return <NavLink to="">{logoNestedView(dao)}</NavLink>;
+};
+
+const logoNestedView = (dao) => {
+  console.log("dao???: %o", dao);
+  if (dao?.logo_url) {
+    return <img id="sidebar__logo" src={dao?.logo_url ?? ""} alt="Logo" />;
+  } else if (dao?.name) {
+    return <div id="sidebar__dao_name">{dao?.name}</div>;
+  } else {
+    return null;
+  }
 };
