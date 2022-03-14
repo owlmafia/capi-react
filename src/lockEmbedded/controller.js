@@ -12,7 +12,8 @@ export const lock = async (
   daoId,
   dao,
   lockSharesCount,
-  updateMyShares
+  updateMyShares,
+  onLockOpt
 ) => {
   try {
     const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
@@ -68,6 +69,9 @@ export const lock = async (
     );
 
     updateMyShares(daoId, myAddress);
+    if (onLockOpt) {
+      onLockOpt();
+    }
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

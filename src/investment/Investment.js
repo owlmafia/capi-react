@@ -1,10 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { ContentTitle } from "../ContentTitle";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { LockEmbedded } from "../lockEmbedded/LockEmbedded";
-import { init, retrieveProfits, unlock } from "./controller";
+import {
+  init,
+  retrieveProfits,
+  unlock,
+  updateChainInvestmentData_,
+} from "./controller";
 
 export const Investment = (props) => {
   let params = useParams();
@@ -13,14 +18,28 @@ export const Investment = (props) => {
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
   const myShareChart = useRef(null);
 
+  const updateInvestmentData = useCallback(async () => {
+    if (props.myAddress) {
+      await updateChainInvestmentData_(
+        props.statusMsg,
+        props.myAddress,
+        params.id,
+        setChainInvestmentData
+      );
+    }
+  }, [props.statusMsg, props.myAddress, params.id]);
+
   useEffect(() => {
-    init(
-      params.id,
-      props.myAddress,
-      props.statusMsg,
-      setDao,
-      setChainInvestmentData
-    );
+    async function doInit() {
+      init(
+        params.id,
+        props.myAddress,
+        props.statusMsg,
+        setDao,
+        updateInvestmentData
+      );
+    }
+    doInit();
   }, [params.id, props.myAddress, props.statusMsg]);
 
   useEffect(() => {
@@ -80,7 +99,7 @@ export const Investment = (props) => {
                 params.id,
                 dao,
                 chainInvestmentData.investor_harvestable_amount_microalgos,
-                setChainInvestmentData
+                updateInvestmentData
               );
             }}
           >
@@ -124,6 +143,7 @@ export const Investment = (props) => {
             dao={dao}
             updateMyShares={props.updateMyShares}
             myShares={props.myShares}
+            onLockOpt={updateInvestmentData}
           />
         </div>
       );

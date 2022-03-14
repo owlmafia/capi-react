@@ -7,7 +7,7 @@ export const init = async (
   myAddress,
   statusMsg,
   setDao,
-  setChainInvestmentData
+  updateInvestmentData
 ) => {
   try {
     const { init_log, bridge_load_dao_user_view, bridge_load_investment } =
@@ -19,12 +19,26 @@ export const init = async (
     setDao(dao);
 
     if (myAddress) {
-      console.log("myAddress: " + myAddress);
+      await updateInvestmentData();
+    }
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
+export const updateChainInvestmentData_ = async (
+  statusMsg,
+  myAddress,
+  daoId,
+  setChainInvestmentData
+) => {
+  try {
+    const { bridge_load_investment } = await wasmPromise;
+
+    if (myAddress) {
       setChainInvestmentData(
         await bridge_load_investment({
           dao_id: daoId,
-          app_id: dao.central_app_id,
-          shares_asset_id: dao.shares_asset_id,
           investor_address: myAddress,
         })
       );
@@ -42,7 +56,7 @@ export const retrieveProfits = async (
   daoId,
   dao,
   amount,
-  setChainInvestmentData
+  updateInvestmentData
 ) => {
   try {
     const { bridge_harvest, bridge_submit_harvest, bridge_load_investment } =
@@ -71,14 +85,7 @@ export const retrieveProfits = async (
     });
     console.log("submitHarvestRes: " + JSON.stringify(submitHarvestRes));
 
-    setChainInvestmentData(
-      await bridge_load_investment({
-        dao_id: daoId,
-        app_id: dao.central_app_id,
-        shares_asset_id: dao.shares_asset_id,
-        investor_address: myAddress,
-      })
-    );
+    await updateInvestmentData();
 
     statusMsg.success("Profits retrieved");
     showProgress(false);
@@ -98,7 +105,7 @@ export const unlock = async (
   updateMyShares,
   daoId,
   dao,
-  setChainInvestmentData
+  updateInvestmentData
 ) => {
   try {
     const { bridge_unlock, bridge_submit_unlock, bridge_load_investment } =
@@ -123,14 +130,7 @@ export const unlock = async (
     });
     console.log("submitUnlockRes: " + JSON.stringify(submitUnlockRes));
 
-    setChainInvestmentData(
-      await bridge_load_investment({
-        dao_id: daoId,
-        app_id: dao.central_app_id,
-        shares_asset_id: dao.shares_asset_id,
-        investor_address: myAddress,
-      })
-    );
+    await updateInvestmentData();
 
     statusMsg.success("Shares unlocked");
     showProgress(false);

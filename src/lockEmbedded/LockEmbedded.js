@@ -11,6 +11,7 @@ export const LockEmbedded = ({
   dao,
   updateMyShares,
   myShares,
+  onLockOpt,
 }) => {
   let params = useParams();
   const [lockSharesCount, setLockSharesCount] = useState("");
@@ -40,7 +41,8 @@ export const LockEmbedded = ({
               params.id,
               dao,
               lockSharesCount,
-              updateMyShares
+              updateMyShares,
+              onLockOpt
             );
           }}
         >
