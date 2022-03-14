@@ -65,9 +65,6 @@ export const SideBarDao = ({
       </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">
-          <MenuItem icon={<FaAddressBook />}>
-            <NavLink to="">Home</NavLink>
-          </MenuItem>
           <MenuItem icon={<FaRoad />}>
             <NavLink to="roadmap">Roadmap</NavLink>
           </MenuItem>
