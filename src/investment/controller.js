@@ -7,7 +7,6 @@ export const init = async (
   myAddress,
   statusMsg,
   setDao,
-  setYouAreNotInvested,
   setChainInvestmentData
 ) => {
   try {
@@ -31,11 +30,7 @@ export const init = async (
       );
     }
   } catch (e) {
-    if (e === "You're not invested in this dao.") {
-      setYouAreNotInvested(true);
-    } else {
-      statusMsg.error(e);
-    }
+    statusMsg.error(e);
   }
 };
 
@@ -102,8 +97,7 @@ export const unlock = async (
   updateMyBalance,
   daoId,
   dao,
-  setChainInvestmentData,
-  setYouAreNotInvested
+  setChainInvestmentData
 ) => {
   try {
     const { bridge_unlock, bridge_submit_unlock, bridge_load_investment } =
@@ -139,7 +133,6 @@ export const unlock = async (
 
     statusMsg.success("Shares unlocked");
     showProgress(false);
-    setYouAreNotInvested(true);
 
     await updateMyBalance(myAddress);
   } catch (e) {

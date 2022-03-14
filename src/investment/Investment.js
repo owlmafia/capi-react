@@ -11,7 +11,6 @@ export const Investment = (props) => {
 
   const [dao, setDao] = useState(null);
   const [chainInvestmentData, setChainInvestmentData] = useState(null);
-  const [youAreNotInvested, setYouAreNotInvested] = useState(false);
   const myShareChart = useRef(null);
 
   useEffect(() => {
@@ -20,7 +19,6 @@ export const Investment = (props) => {
       props.myAddress,
       props.statusMsg,
       setDao,
-      setYouAreNotInvested,
       setChainInvestmentData
     );
   }, [params.id, props.myAddress, props.statusMsg]);
@@ -38,7 +36,7 @@ export const Investment = (props) => {
   }, [dao, chainInvestmentData]);
 
   const userView = () => {
-    if (chainInvestmentData && !youAreNotInvested) {
+    if (chainInvestmentData) {
       return (
         <div>
           <div className="section_container">
@@ -99,8 +97,7 @@ export const Investment = (props) => {
                 props.updateMyBalance,
                 params.id,
                 dao,
-                setChainInvestmentData,
-                setYouAreNotInvested
+                setChainInvestmentData
               );
             }}
           >
@@ -113,25 +110,11 @@ export const Investment = (props) => {
     }
   };
 
-  const youAreNotInvestedView = () => {
-    if (youAreNotInvested) {
-      return (
-        <div>
-          <p>{"You're not invested in this project"}</p>
-          <a href={dao.invest_link}>{"Invest"}</a>
-        </div>
-      );
-    } else {
-      return null;
-    }
-  };
-
   const bodyView = () => {
     if (dao) {
       return (
         <div>
           {userView()}
-          {youAreNotInvestedView()}
           <LockEmbedded
             showProgress={props.showProgress}
             statusMsg={props.statusMsg}
