@@ -95,6 +95,7 @@ export const Investment = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.updateMyBalance,
+                props.updateMyShares,
                 params.id,
                 dao,
                 setChainInvestmentData

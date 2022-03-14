@@ -95,6 +95,7 @@ export const unlock = async (
   showProgress,
   statusMsg,
   updateMyBalance,
+  updateMyShares,
   daoId,
   dao,
   setChainInvestmentData
@@ -135,6 +136,7 @@ export const unlock = async (
     showProgress(false);
 
     await updateMyBalance(myAddress);
+    await updateMyShares(daoId, myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
