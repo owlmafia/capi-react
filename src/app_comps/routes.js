@@ -59,7 +59,7 @@ export const routesView = (
             }
           />
           <Route
-            path="my_daos"
+            path="my_projects"
             element={
               <MyDaos
                 myAddress={myAddress}

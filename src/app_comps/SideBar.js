@@ -44,7 +44,7 @@ export const SideBar = ({
             <Link to="create">Create</Link>
           </MenuItem>
           <MenuItem icon={<VscListFlat />}>
-            <Link to="my_daos">My daos</Link>
+            <Link to="my_projects">My projects</Link>
           </MenuItem>
         </Menu>
       </SidebarContent>
