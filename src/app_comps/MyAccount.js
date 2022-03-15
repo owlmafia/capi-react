@@ -29,6 +29,7 @@ export const MyAccount = ({
 };
 
 const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
+  console.log("Showing my shares: %o", myShares);
   if (myAddress !== "") {
     return (
       <div id="user_data">
