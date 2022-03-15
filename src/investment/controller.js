@@ -7,7 +7,8 @@ export const init = async (
   myAddress,
   statusMsg,
   setDao,
-  updateInvestmentData
+  updateInvestmentData,
+  updateMyShares
 ) => {
   try {
     const { init_log, bridge_load_dao_user_view, bridge_load_investment } =
@@ -19,7 +20,9 @@ export const init = async (
     setDao(dao);
 
     if (myAddress) {
+      // TODO check for daoId? or do we know it's always set?
       await updateInvestmentData();
+      await updateMyShares(daoId, myAddress);
     }
   } catch (e) {
     statusMsg.error(e);
@@ -36,12 +39,12 @@ export const updateChainInvestmentData_ = async (
     const { bridge_load_investment } = await wasmPromise;
 
     if (myAddress) {
-      setChainInvestmentData(
-        await bridge_load_investment({
-          dao_id: daoId,
-          investor_address: myAddress,
-        })
-      );
+      let data = await bridge_load_investment({
+        dao_id: daoId,
+        investor_address: myAddress,
+      });
+      console.log("Investment data: %o", data);
+      setChainInvestmentData(data);
     }
   } catch (e) {
     statusMsg.error(e);

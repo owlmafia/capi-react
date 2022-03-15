@@ -31,12 +31,13 @@ export const Investment = (props) => {
 
   useEffect(() => {
     async function doInit() {
-      init(
+      await init(
         params.id,
         props.myAddress,
         props.statusMsg,
         setDao,
-        updateInvestmentData
+        updateInvestmentData,
+        props.updateMyShares
       );
     }
     doInit();
@@ -117,7 +118,7 @@ export const Investment = (props) => {
                 props.updateMyShares,
                 params.id,
                 dao,
-                setChainInvestmentData
+                updateInvestmentData
               );
             }}
           >
