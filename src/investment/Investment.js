@@ -83,14 +83,14 @@ export const Investment = (props) => {
           <p className="section_container text_with_currency section_large_bottom">
             <span className="key-val-key">{"Retrievable profits:"}</span>
             <span className="key-val-val">
-              {chainInvestmentData.investor_harvestable_amount}
+              {chainInvestmentData.investor_claimable_dividend}
             </span>
             <FundsAssetImg />
           </p>
 
           <button
             className="button__submit"
-            hidden={chainInvestmentData.investor_harvestable_amount === "0"}
+            hidden={chainInvestmentData.investor_claimable_dividend === "0"}
             onClick={async () => {
               await retrieveProfits(
                 props.myAddress,
@@ -99,7 +99,7 @@ export const Investment = (props) => {
                 props.updateMyBalance,
                 params.id,
                 dao,
-                chainInvestmentData.investor_harvestable_amount_microalgos,
+                chainInvestmentData.investor_claimable_dividend_microalgos,
                 updateInvestmentData
               );
             }}

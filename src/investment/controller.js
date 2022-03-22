@@ -62,31 +62,31 @@ export const retrieveProfits = async (
   updateInvestmentData
 ) => {
   try {
-    const { bridge_harvest, bridge_submit_harvest, bridge_load_investment } =
+    const { bridge_claim, bridge_submit_claim, bridge_load_investment } =
       await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
-    let harvestRes = await bridge_harvest({
+    let claimRes = await bridge_claim({
       dao_id: daoId,
       amount: amount,
       investor_address: myAddress,
     });
-    console.log("harvestRes: " + JSON.stringify(harvestRes));
+    console.log("claimRes: " + JSON.stringify(claimRes));
     showProgress(false);
 
-    let harvestResSigned = await signTxs(harvestRes.to_sign);
-    console.log("harvestResSigned: " + JSON.stringify(harvestResSigned));
+    let claimResSigned = await signTxs(claimRes.to_sign);
+    console.log("claimResSigned: " + JSON.stringify(claimResSigned));
 
     showProgress(true);
-    let submitHarvestRes = await bridge_submit_harvest({
+    let submitClaimRes = await bridge_submit_claim({
       investor_address_for_diagnostics: myAddress,
       dao_id_for_diagnostics: daoId,
 
-      txs: harvestResSigned,
-      pt: harvestRes.pt,
+      txs: claimResSigned,
+      pt: claimRes.pt,
     });
-    console.log("submitHarvestRes: " + JSON.stringify(submitHarvestRes));
+    console.log("submitClaimRes: " + JSON.stringify(submitClaimRes));
 
     await updateInvestmentData();
 
