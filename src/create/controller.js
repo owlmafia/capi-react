@@ -26,7 +26,6 @@ export const createDao = async (
     bridge_create_dao_assets_txs,
     bridge_create_dao,
     bridge_submit_create_dao,
-    bridge_submit_save_dao,
   } = await wasmPromise;
 
   statusMsg.clear();
@@ -67,15 +66,8 @@ export const createDao = async (
       pt: createDaoRes.pt, // passthrough
     });
     console.log("submitDaoRes: " + JSON.stringify(submitDaoRes));
-    showProgress(false);
 
-    let saveDaoSigned = await signTx(submitDaoRes.to_sign);
-    console.log("saveDaoSigned: " + JSON.stringify(saveDaoSigned));
-    let saveDaoRes = await bridge_submit_save_dao({
-      tx: saveDaoSigned,
-      pt: submitDaoRes.pt, // passthrough
-    });
-    setCreateDaoSuccess(saveDaoRes);
+    setCreateDaoSuccess(submitDaoRes);
     showProgress(false);
     statusMsg.success("Project created!");
 
