@@ -107,7 +107,6 @@ const logoView = (dao) => {
 };
 
 const logoNestedView = (dao) => {
-  console.log("dao???: %o", dao);
   if (dao?.logo_url) {
     return <img id="sidebar__logo" src={dao?.logo_url ?? ""} alt="Logo" />;
   } else if (dao?.name) {
