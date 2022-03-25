@@ -61,7 +61,7 @@ export const Stats = ({ statusMsg }) => {
           sharesAssetId={sharesAssetId}
           sharesSupply={sharesSupply}
           holderCount={holderCount}
-          appId={dao.central_app_id}
+          appId={dao.app_id}
           investingEscrowAddress={dao.investing_escrow_address}
           lockingEscrowAddress={dao.locking_escrow_address}
         />

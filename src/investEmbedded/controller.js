@@ -67,7 +67,7 @@ export const invest = async (
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + dao.central_app_id,
+      app_id: "" + dao.app_id,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
@@ -137,7 +137,7 @@ export const lock = async (
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + dao.central_app_id,
+      app_id: "" + dao.app_id,
       investor_address: myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
