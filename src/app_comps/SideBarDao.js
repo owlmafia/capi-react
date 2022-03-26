@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BsArrowUpCircle } from "react-icons/bs";
-import { FaAddressBook, FaCoins, FaRoad } from "react-icons/fa";
+import { FaCoins, FaRoad } from "react-icons/fa";
+import { FiSettings } from "react-icons/fi";
 import { IoMdStats } from "react-icons/io";
 import { VscArrowSwap } from "react-icons/vsc";
 import {
@@ -81,6 +82,9 @@ export const SideBarDao = ({
           </MenuItem>
           <MenuItem icon={<VscArrowSwap />}>
             <NavLink to="funds_activity">Funds activity</NavLink>
+          </MenuItem>
+          <MenuItem icon={<FiSettings />}>
+            <NavLink to="settings">Settings</NavLink>
           </MenuItem>
         </Menu>
       </SidebarContent>

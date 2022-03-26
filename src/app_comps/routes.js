@@ -12,6 +12,7 @@ import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
 import { NotFound } from "./NotFound";
 import { OuterWireframe } from "./OuterWireframe.js";
 import { Wireframe } from "./Wireframe";
+import { Settings } from "../settings/Settings";
 
 export const routesView = (
   myAddress,
@@ -180,6 +181,17 @@ export const routesView = (
             path="stats"
             element={
               <Stats
+                showProgress={(show) => setShowProgress(show)}
+                statusMsg={statusMsgUpdater}
+              />
+            }
+          />
+          <Route
+            exact
+            path="settings"
+            element={
+              <Settings
+                myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
               />
