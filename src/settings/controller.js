@@ -45,15 +45,36 @@ export const prefillInputs = async (
   }
 };
 
-export const updateApp = async (statusMsg, daoId, owner, version) => {
+export const updateApp = async (
+  statusMsg,
+  showProgress,
+  daoId,
+  owner,
+  version
+) => {
   try {
-    const { bridge_update_app_txs } = await wasmPromise;
+    const { bridge_update_app_txs, bridge_submit_update_app } =
+      await wasmPromise;
 
-    await bridge_update_app_txs({
+    showProgress(true);
+    let updateAppRes = await bridge_update_app_txs({
       dao_id: daoId,
       owner: owner,
       version: version,
     });
+    console.log("Update app res: %o", updateAppRes);
+    showProgress(false);
+
+    let updateAppResSigned = await signTx(updateAppRes.to_sign);
+    console.log("updateAppResSigned: " + JSON.stringify(updateAppResSigned));
+
+    showProgress(true);
+    let submitUpdateAppRes = await bridge_submit_update_app({
+      tx: updateAppResSigned,
+    });
+    console.log("submitUpdateAppRes: " + JSON.stringify(submitUpdateAppRes));
+
+    showProgress(false);
     statusMsg.success("App updated!");
   } catch (e) {
     statusMsg.error(e);
