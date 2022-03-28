@@ -21,6 +21,11 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const [investingEscrow, setInvestingEscrow] = useState("");
   const [lockingEscrow, setLockingEscrow] = useState("");
 
+  const [centralEscrowVersion, setCentralEscrowVersion] = useState("");
+  const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
+  const [investingEscrowVersion, setInvestingEscrowVersion] = useState("");
+  const [lockingEscrowVersion, setLockingEscrowVersion] = useState("");
+
   const [owner, setOwner] = useState("");
 
   useEffect(() => {
@@ -87,9 +92,19 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           onChange={(input) => setCentralEscrow(input)}
         />
         <LabeledInput
+          label={"Funds escrow version"}
+          inputValue={centralEscrowVersion}
+          onChange={(input) => setCentralEscrowVersion(input)}
+        />
+        <LabeledInput
           label={"Payments escrow address"}
           inputValue={customerEscrow}
           onChange={(input) => setCustomerEscrow(input)}
+        />
+        <LabeledInput
+          label={"Payments escrow version"}
+          inputValue={customerEscrowVersion}
+          onChange={(input) => setCustomerEscrowVersion(input)}
         />
         <LabeledInput
           label={"Investing escrow address"}
@@ -97,9 +112,19 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           onChange={(input) => setInvestingEscrow(input)}
         />
         <LabeledInput
+          label={"Investing escrow version"}
+          inputValue={investingEscrowVersion}
+          onChange={(input) => setInvestingEscrowVersion(input)}
+        />
+        <LabeledInput
           label={"Locking escrow address"}
           inputValue={lockingEscrow}
           onChange={(input) => setLockingEscrow(input)}
+        />
+        <LabeledInput
+          label={"Locking escrow version"}
+          inputValue={lockingEscrowVersion}
+          onChange={(input) => setLockingEscrowVersion(input)}
         />
         <LabeledInput
           label={"Project owner"}
@@ -118,6 +143,11 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
               customer_escrow: customerEscrow,
               investing_escrow: investingEscrow,
               locking_escrow: lockingEscrow,
+
+              central_escrow_version: centralEscrowVersion,
+              customer_escrow_version: customerEscrowVersion,
+              investing_escrow_version: investingEscrowVersion,
+              locking_escrow_version: lockingEscrowVersion,
 
               project_name: daoName,
               project_desc: daoDescr,

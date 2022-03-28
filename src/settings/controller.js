@@ -50,7 +50,8 @@ export const updateApp = async (
   showProgress,
   daoId,
   owner,
-  version
+  approvalVersion,
+  clearVersion
 ) => {
   try {
     const { bridge_update_app_txs, bridge_submit_update_app } =
@@ -60,7 +61,8 @@ export const updateApp = async (
     let updateAppRes = await bridge_update_app_txs({
       dao_id: daoId,
       owner: owner,
-      version: version,
+      approval_version: approvalVersion,
+      clear_version: clearVersion,
     });
     console.log("Update app res: %o", updateAppRes);
     showProgress(false);

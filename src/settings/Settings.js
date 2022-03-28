@@ -22,7 +22,7 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
           <button
             className="button__submit"
             onClick={() =>
-              updateApp(statusMsg, showProgress, params.id, myAddress, "1")
+              updateApp(statusMsg, showProgress, params.id, myAddress, "1", "1")
             }
           >
             {"Update"}
