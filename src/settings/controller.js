@@ -23,6 +23,10 @@ export const prefillInputs = async (
   setCustomerEscrow,
   setInvestingEscrow,
   setLockingEscrow,
+  setCentralEscrowVersion,
+  setCustomerEscrowVersion,
+  setInvestingEscrowVersion,
+  setLockingEscrowVersion,
   setOwner
 ) => {
   try {
@@ -39,6 +43,10 @@ export const prefillInputs = async (
     setCustomerEscrow(updatableData.customer_escrow);
     setInvestingEscrow(updatableData.investing_escrow);
     setLockingEscrow(updatableData.locking_escrow);
+    setCentralEscrowVersion(updatableData.central_escrow_version);
+    setCustomerEscrowVersion(updatableData.customer_escrow_version);
+    setInvestingEscrowVersion(updatableData.investing_escrow_version);
+    setLockingEscrowVersion(updatableData.locking_escrow_version);
     setOwner(updatableData.owner);
   } catch (e) {
     statusMsg.error(e);

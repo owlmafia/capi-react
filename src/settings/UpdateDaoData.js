@@ -50,6 +50,10 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           setCustomerEscrow,
           setInvestingEscrow,
           setLockingEscrow,
+          setCentralEscrowVersion,
+          setCustomerEscrowVersion,
+          setInvestingEscrowVersion,
+          setLockingEscrowVersion,
           setOwner
         );
       }
