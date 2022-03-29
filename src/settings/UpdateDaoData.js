@@ -64,7 +64,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const body = () => {
     return (
       <div>
-        <div className="subtitle">{"Update dao data"}</div>
+        <div className="subtitle">{"Update project data"}</div>
         <LabeledInput
           label={"Project name"}
           inputValue={daoName}
@@ -170,10 +170,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
 
   return (
     <div>
-      <div>
-        <ContentTitle title={"Settings"} />
-        {body()}
-      </div>
+      <div>{body()}</div>
     </div>
   );
 };
