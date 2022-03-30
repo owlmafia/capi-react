@@ -1,9 +1,16 @@
 import { FundsAssetImg } from "../images/FundsAssetImg";
 
-export const LabeledInput = ({ label, inputValue, onChange, placeholder }) => {
+export const LabeledInput = ({
+  label,
+  inputValue,
+  onChange,
+  placeholder,
+  errorMsg,
+}) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
+      <div className="labeled_input__error">{errorMsg}</div>
       {input(inputValue, onChange, placeholder)}
     </div>
   );
@@ -14,10 +21,12 @@ export const LabeledCurrencyInput = ({
   inputValue,
   onChange,
   placeholder,
+  errorMsg,
 }) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
+      <div className="labeled_input__error">{errorMsg}</div>
       <div className="input_with_currency__container">
         {input(inputValue, onChange, placeholder)}
         <FundsAssetImg />

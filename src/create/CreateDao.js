@@ -16,7 +16,17 @@ export const CreateDao = (props) => {
   const [investorsShare, setInvestorsShare] = useState("40");
   const [logoUrl, setLogoUrl] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
+
+  const [daoNameError, setDaoNameError] = useState("");
+  const [daoDescrError, setDaoDescrError] = useState("");
+  const [shareCountError, setShareCountError] = useState("");
+  const [sharePriceError, setSharePriceError] = useState("");
+  const [investorsShareError, setInvestorsShareError] = useState("");
+  const [logoUrlError, setLogoUrlError] = useState("");
+  const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+
   const [createDaoSuccess, setCreateDaoSuccess] = useState(null);
+
   const investorsShareChart = useRef(null);
 
   useEffect(() => {
@@ -44,21 +54,25 @@ export const CreateDao = (props) => {
             label={"Project name"}
             inputValue={daoName}
             onChange={(input) => setDaoName(input)}
+            errorMsg={daoNameError}
           />
           <LabeledInput
             label={"Description"}
             inputValue={daoDescr}
             onChange={(input) => setDaoDescr(input)}
+            errorMsg={daoDescrError}
           />
           <LabeledInput
             label={"Share supply"}
             inputValue={shareCount}
             onChange={(input) => setShareCount(input)}
+            errorMsg={shareCountError}
           />
           <LabeledCurrencyInput
             label={"Share price per unit"}
             inputValue={sharePrice}
             onChange={(input) => setSharePrice(input)}
+            errorMsg={sharePriceError}
           />
           {/* <LabeledInput
             label={"Share price per unit"}
@@ -85,6 +99,7 @@ export const CreateDao = (props) => {
               ?
             </p>
           </div>
+          <div className="labeled_input__error">{investorsShareError}</div>
 
           <div className="pie_chart__container input_spacing">
             <svg className="pie_chart__svg" ref={investorsShareChart} />
@@ -111,11 +126,13 @@ export const CreateDao = (props) => {
             label={"Logo URL (optional)"}
             inputValue={logoUrl}
             onChange={(input) => setLogoUrl(input)}
+            errorMsg={logoUrlError}
           />
           <LabeledInput
             label={"Primary social media (optional)"}
             inputValue={socialMediaUrl}
             onChange={(input) => setSocialMediaUrl(input)}
+            errorMsg={socialMediaUrlError}
           />
           <button
             className="button__submit"
@@ -139,7 +156,15 @@ export const CreateDao = (props) => {
                 investorsShare,
                 logoUrl,
                 socialMediaUrl,
-                setCreateDaoSuccess
+                setCreateDaoSuccess,
+
+                setDaoNameError,
+                setDaoDescrError,
+                setShareCountError,
+                setSharePriceError,
+                setInvestorsShareError,
+                setLogoUrlError,
+                setSocialMediaUrlError
               );
             }}
           >
