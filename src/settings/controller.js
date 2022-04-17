@@ -36,11 +36,9 @@ export const prefillInputs = async (
   setSharePrice,
   setLogoUrl,
   setSocialMediaUrl,
-  setCentralEscrow,
   setCustomerEscrow,
   setInvestingEscrow,
   setLockingEscrow,
-  setCentralEscrowVersion,
   setCustomerEscrowVersion,
   setInvestingEscrowVersion,
   setLockingEscrowVersion,
@@ -56,11 +54,9 @@ export const prefillInputs = async (
     setSharePrice(updatableData.share_price);
     setLogoUrl(updatableData.logo_url);
     setSocialMediaUrl(updatableData.social_media_url);
-    setCentralEscrow(updatableData.central_escrow);
     setCustomerEscrow(updatableData.customer_escrow);
     setInvestingEscrow(updatableData.investing_escrow);
     setLockingEscrow(updatableData.locking_escrow);
-    setCentralEscrowVersion(updatableData.central_escrow_version);
     setCustomerEscrowVersion(updatableData.customer_escrow_version);
     setInvestingEscrowVersion(updatableData.investing_escrow_version);
     setLockingEscrowVersion(updatableData.locking_escrow_version);

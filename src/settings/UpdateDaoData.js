@@ -16,12 +16,10 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const [logoUrl, setLogoUrl] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
-  const [centralEscrow, setCentralEscrow] = useState("");
   const [customerEscrow, setCustomerEscrow] = useState("");
   const [investingEscrow, setInvestingEscrow] = useState("");
   const [lockingEscrow, setLockingEscrow] = useState("");
 
-  const [centralEscrowVersion, setCentralEscrowVersion] = useState("");
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
   const [investingEscrowVersion, setInvestingEscrowVersion] = useState("");
   const [lockingEscrowVersion, setLockingEscrowVersion] = useState("");
@@ -46,11 +44,9 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           setSharePrice,
           setLogoUrl,
           setSocialMediaUrl,
-          setCentralEscrow,
           setCustomerEscrow,
           setInvestingEscrow,
           setLockingEscrow,
-          setCentralEscrowVersion,
           setCustomerEscrowVersion,
           setInvestingEscrowVersion,
           setLockingEscrowVersion,
@@ -89,16 +85,6 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
           onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Funds escrow address"}
-          inputValue={centralEscrow}
-          onChange={(input) => setCentralEscrow(input)}
-        />
-        <LabeledInput
-          label={"Funds escrow version"}
-          inputValue={centralEscrowVersion}
-          onChange={(input) => setCentralEscrowVersion(input)}
         />
         <LabeledInput
           label={"Payments escrow address"}
@@ -143,12 +129,10 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
               dao_id: params.id,
               owner: owner,
 
-              central_escrow: centralEscrow,
               customer_escrow: customerEscrow,
               investing_escrow: investingEscrow,
               locking_escrow: lockingEscrow,
 
-              central_escrow_version: centralEscrowVersion,
               customer_escrow_version: customerEscrowVersion,
               investing_escrow_version: investingEscrowVersion,
               locking_escrow_version: lockingEscrowVersion,
