@@ -4,7 +4,6 @@ import {
   LabeledCurrencyInput,
   LabeledInput,
 } from "../common_comps/LabeledInput";
-import { ContentTitle } from "../ContentTitle";
 import { init, prefillInputs, updateDaoData } from "./controller";
 
 export const UpdateDaoData = ({ statusMsg, showProgress }) => {
@@ -18,11 +17,9 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
 
   const [customerEscrow, setCustomerEscrow] = useState("");
   const [investingEscrow, setInvestingEscrow] = useState("");
-  const [lockingEscrow, setLockingEscrow] = useState("");
 
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
   const [investingEscrowVersion, setInvestingEscrowVersion] = useState("");
-  const [lockingEscrowVersion, setLockingEscrowVersion] = useState("");
 
   const [owner, setOwner] = useState("");
 
@@ -46,10 +43,8 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           setSocialMediaUrl,
           setCustomerEscrow,
           setInvestingEscrow,
-          setLockingEscrow,
           setCustomerEscrowVersion,
           setInvestingEscrowVersion,
-          setLockingEscrowVersion,
           setOwner
         );
       }
@@ -107,16 +102,6 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           onChange={(input) => setInvestingEscrowVersion(input)}
         />
         <LabeledInput
-          label={"Locking escrow address"}
-          inputValue={lockingEscrow}
-          onChange={(input) => setLockingEscrow(input)}
-        />
-        <LabeledInput
-          label={"Locking escrow version"}
-          inputValue={lockingEscrowVersion}
-          onChange={(input) => setLockingEscrowVersion(input)}
-        />
-        <LabeledInput
           label={"Project owner"}
           inputValue={owner}
           onChange={(input) => setOwner(input)}
@@ -131,11 +116,9 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
 
               customer_escrow: customerEscrow,
               investing_escrow: investingEscrow,
-              locking_escrow: lockingEscrow,
 
               customer_escrow_version: customerEscrowVersion,
               investing_escrow_version: investingEscrowVersion,
-              locking_escrow_version: lockingEscrowVersion,
 
               project_name: daoName,
               project_desc: daoDescr,

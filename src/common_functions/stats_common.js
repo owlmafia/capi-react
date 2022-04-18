@@ -3,8 +3,8 @@ const wasmPromise = import("wasm");
 export const fetchHolderCount = async (
   statusMsg,
   assetId,
+  appId,
   investingEscrowAddress,
-  lockingEscrowAddress,
   setHolderCount
 ) => {
   try {
@@ -13,7 +13,7 @@ export const fetchHolderCount = async (
     let res = await bridge_holders_count({
       asset_id: assetId,
       investing_escrow_address: investingEscrowAddress,
-      locking_escrow_address: lockingEscrowAddress,
+      app_id: appId,
     });
     console.log("holders count res: " + JSON.stringify(res));
     setHolderCount(res.count);

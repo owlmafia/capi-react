@@ -5,8 +5,7 @@ export const fetchSharesDistribution = async (
   assetId,
   assetSupply,
   appId,
-  investingEscrowAddress,
-  lockingEscrowAddress
+  investingEscrowAddress
 ) => {
   try {
     const { bridge_shares_distribution } = await wasmPromise;
@@ -15,7 +14,6 @@ export const fetchSharesDistribution = async (
       share_supply: assetSupply,
       app_id: appId,
       investing_escrow_address: investingEscrowAddress,
-      locking_escrow_address: lockingEscrowAddress,
     });
     console.log("Shares distribution res: " + JSON.stringify(res));
     return res.holders;

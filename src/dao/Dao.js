@@ -49,8 +49,8 @@ export const Dao = (props) => {
       fetchHolderCount(
         props.statusMsg,
         dao.shares_asset_id,
+        dao.app_id,
         dao.investing_escrow_address,
-        dao.locking_escrow_address,
         setHolderCount
       );
     }
@@ -162,7 +162,6 @@ export const Dao = (props) => {
                 holderCount={holderCount}
                 appId={dao.app_id}
                 investingEscrowAddress={dao.investing_escrow_address}
-                lockingEscrowAddress={dao.locking_escrow_address}
               />
             )}
 
