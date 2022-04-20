@@ -40,13 +40,7 @@ export const Stats = ({ statusMsg }) => {
 
   useEffect(() => {
     if (sharesAssetId && dao) {
-      fetchHolderCount(
-        statusMsg,
-        sharesAssetId,
-        dao.app_id,
-        dao.investing_escrow_address,
-        setHolderCount
-      );
+      fetchHolderCount(statusMsg, sharesAssetId, dao.app_id, setHolderCount);
     }
   }, [statusMsg, sharesAssetId, dao]);
 
@@ -62,7 +56,6 @@ export const Stats = ({ statusMsg }) => {
           sharesSupply={sharesSupply}
           holderCount={holderCount}
           appId={dao.app_id}
-          investingEscrowAddress={dao.investing_escrow_address}
         />
       )}
 

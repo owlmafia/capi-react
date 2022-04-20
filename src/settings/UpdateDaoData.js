@@ -16,10 +16,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
   const [customerEscrow, setCustomerEscrow] = useState("");
-  const [investingEscrow, setInvestingEscrow] = useState("");
-
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
-  const [investingEscrowVersion, setInvestingEscrowVersion] = useState("");
 
   const [owner, setOwner] = useState("");
 
@@ -42,9 +39,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           setLogoUrl,
           setSocialMediaUrl,
           setCustomerEscrow,
-          setInvestingEscrow,
           setCustomerEscrowVersion,
-          setInvestingEscrowVersion,
           setOwner
         );
       }
@@ -92,16 +87,6 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           onChange={(input) => setCustomerEscrowVersion(input)}
         />
         <LabeledInput
-          label={"Investing escrow address"}
-          inputValue={investingEscrow}
-          onChange={(input) => setInvestingEscrow(input)}
-        />
-        <LabeledInput
-          label={"Investing escrow version"}
-          inputValue={investingEscrowVersion}
-          onChange={(input) => setInvestingEscrowVersion(input)}
-        />
-        <LabeledInput
           label={"Project owner"}
           inputValue={owner}
           onChange={(input) => setOwner(input)}
@@ -115,10 +100,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
               owner: owner,
 
               customer_escrow: customerEscrow,
-              investing_escrow: investingEscrow,
-
               customer_escrow_version: customerEscrowVersion,
-              investing_escrow_version: investingEscrowVersion,
 
               project_name: daoName,
               project_desc: daoDescr,

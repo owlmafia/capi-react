@@ -50,7 +50,6 @@ export const Dao = (props) => {
         props.statusMsg,
         dao.shares_asset_id,
         dao.app_id,
-        dao.investing_escrow_address,
         setHolderCount
       );
     }
@@ -161,7 +160,6 @@ export const Dao = (props) => {
                 sharesSupply={sharesSupply}
                 holderCount={holderCount}
                 appId={dao.app_id}
-                investingEscrowAddress={dao.investing_escrow_address}
               />
             )}
 

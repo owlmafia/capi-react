@@ -37,9 +37,7 @@ export const prefillInputs = async (
   setLogoUrl,
   setSocialMediaUrl,
   setCustomerEscrow,
-  setInvestingEscrow,
   setCustomerEscrowVersion,
-  setInvestingEscrowVersion,
   setOwner
 ) => {
   try {
@@ -53,9 +51,7 @@ export const prefillInputs = async (
     setLogoUrl(updatableData.logo_url);
     setSocialMediaUrl(updatableData.social_media_url);
     setCustomerEscrow(updatableData.customer_escrow);
-    setInvestingEscrow(updatableData.investing_escrow);
     setCustomerEscrowVersion(updatableData.customer_escrow_version);
-    setInvestingEscrowVersion(updatableData.investing_escrow_version);
     setOwner(updatableData.owner);
   } catch (e) {
     statusMsg.error(e);
