@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { ChartLegends } from "./ChartLegends";
-import renderMultilineChart from "./renderMultilineChart";
+import renderBarChart from "./renderBarChart";
 
 export const IncomeVsSpendingChart = ({ chartData }) => {
   const chart = useRef(null);
@@ -12,7 +12,7 @@ export const IncomeVsSpendingChart = ({ chartData }) => {
 
   useEffect(() => {
     if (chartData && chart.current) {
-      renderMultilineChart(
+      renderBarChart(
         chart.current,
         chartData.flat_data_points,
         chartData.chart_lines,
