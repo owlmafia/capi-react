@@ -12,7 +12,7 @@ export const init = async (statusMsg) => {
 export const loadFundsActivity = async (
   statusMsg,
   daoId,
-  creatorAddress,
+  ownerAddress,
   setActivityEntries,
   maxResults // null if it shouldn't be limited
 ) => {
@@ -21,7 +21,7 @@ export const loadFundsActivity = async (
 
     const fundsActivityRes = await bridge_load_funds_activity({
       dao_id: daoId,
-      creator_address: creatorAddress,
+      owner_address: ownerAddress,
       max_results: maxResults,
     });
     console.log("fundsActivityRes: " + JSON.stringify(fundsActivityRes));

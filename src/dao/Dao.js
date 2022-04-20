@@ -112,8 +112,8 @@ export const Dao = (props) => {
                 funds={funds}
                 showWithdrawLink={
                   props.myAddress &&
-                  viewDao.dao.creator_address &&
-                  viewDao.dao.creator_address === props.myAddress
+                  viewDao.dao.owner_address &&
+                  viewDao.dao.owner_address === props.myAddress
                 }
                 daoId={params.id}
               />
@@ -147,7 +147,7 @@ export const Dao = (props) => {
             />
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
-              hidden={viewDao.dao.creator_address !== props.myAddress}
+              hidden={viewDao.dao.owner_address !== props.myAddress}
               to={"/withdraw/" + params.id}
             >
               <button>{"Withdraw"}</button>

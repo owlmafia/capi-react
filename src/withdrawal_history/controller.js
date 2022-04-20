@@ -22,7 +22,7 @@ export const init = async (daoId, daoMaybe, setDao, statusMsg) => {
 export const loadWithdrawals = async (
   statusMsg,
   daoId,
-  creatorAddress,
+  ownerAddress,
   setWithdrawalRequests
 ) => {
   try {
@@ -30,7 +30,7 @@ export const loadWithdrawals = async (
 
     const withdrawalsRes = await bridge_load_withdrawals({
       dao_id: daoId,
-      creator_address: creatorAddress,
+      owner_address: ownerAddress,
     });
     console.log("withdrawalsRes: " + JSON.stringify(withdrawalsRes));
 
