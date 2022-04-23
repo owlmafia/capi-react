@@ -5,7 +5,7 @@ import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
 import { useParams } from "react-router-dom";
-import { init } from "./controller";
+import { init, initWithDaoId } from "./controller";
 
 export const Wireframe = ({
   isGlobal,
@@ -27,7 +27,11 @@ export const Wireframe = ({
 
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewDao, statusMsgUpdater);
+      if (params.id) {
+        await initWithDaoId(params.id, setViewDao, statusMsgUpdater);
+      } else {
+        await init(params.id, setViewDao, statusMsgUpdater);
+      }
     }
     asyncInit();
   }, [params.id, statusMsgUpdater]);
