@@ -19,6 +19,14 @@ wasm-build (unzipped directory)
 
 ## Start
 
+In the react directory:
+
+The first time, install dependencies:
+
+```
+npm install
+```
+
 Now you just have to start the app:
 
 ```
