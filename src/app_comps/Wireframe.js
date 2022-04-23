@@ -1,8 +1,11 @@
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { RightCol } from "../right_col/RightCol";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
+import { useParams } from "react-router-dom";
+import { init } from "./controller";
 
 export const Wireframe = ({
   isGlobal,
@@ -19,6 +22,16 @@ export const Wireframe = ({
   myShares,
   updateMyShares,
 }) => {
+  let params = useParams();
+  const [viewDao, setViewDao] = useState(null);
+
+  useEffect(() => {
+    async function asyncInit() {
+      await init(params.id, setViewDao, statusMsgUpdater);
+    }
+    asyncInit();
+  }, [params.id, statusMsgUpdater]);
+
   const sideBar = () => {
     if (isGlobal) {
       return (
@@ -53,6 +66,8 @@ export const Wireframe = ({
             statusMsg={statusMsg}
           />
         )}
+
+        {logoView(viewDao?.dao)}
         <Outlet />
       </div>
       <RightCol
@@ -68,4 +83,14 @@ export const Wireframe = ({
       />
     </div>
   );
+};
+
+const logoView = (dao) => {
+  if (dao?.logo_url) {
+    return (
+      <img id="banner_img" src={dao?.logo_url ?? ""} alt="Project image" />
+    );
+  } else {
+    return null;
+  }
 };

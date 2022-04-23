@@ -1,21 +1,5 @@
 @import "global_vars";
 
-#sidebar {
-    &__header {
-        padding: $global_top_padding 30px 20px 30px;
-    }
-
-    &__logo {
-        height: 26px;
-        margin-bottom: 20px;
-    }
-
-    &__dao_name {
-        color: white;
-        margin-bottom: 20px;
-    }
-}
-
 .pro-sidebar .pro-menu a.active {
     color: white;
 }

@@ -5,7 +5,6 @@ import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeV
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { fetchHolderCount } from "../common_functions/stats_common";
 import { DaoName } from "../ContentTitle";
-import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
 import { init, updateFunds_ } from "./controller";

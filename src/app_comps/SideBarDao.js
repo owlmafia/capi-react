@@ -42,11 +42,11 @@ export const SideBarDao = ({
 
   return (
     <ProSidebar id="sidebar">
-      <SidebarHeader>
-        <div id="sidebar__header">{logoView(viewDao?.dao)}</div>
-      </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">
+          <MenuItem icon={<FaRoad />}>
+            <NavLink to="">Project Home</NavLink>
+          </MenuItem>
           <MenuItem icon={<FaRoad />}>
             <NavLink to="roadmap">Roadmap</NavLink>
           </MenuItem>
@@ -85,18 +85,4 @@ export const SideBarDao = ({
       </SidebarFooter>
     </ProSidebar>
   );
-};
-
-const logoView = (dao) => {
-  return <NavLink to="">{logoNestedView(dao)}</NavLink>;
-};
-
-const logoNestedView = (dao) => {
-  if (dao?.logo_url) {
-    return <img id="sidebar__logo" src={dao?.logo_url ?? ""} alt="Logo" />;
-  } else if (dao?.name) {
-    return <div id="sidebar__dao_name">{dao?.name}</div>;
-  } else {
-    return null;
-  }
 };
