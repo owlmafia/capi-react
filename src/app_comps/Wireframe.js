@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { RightCol } from "../right_col/RightCol";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
@@ -35,11 +36,6 @@ export const Wireframe = ({
       return (
         <SideBarDao
           myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          updateMyBalance={updateMyBalance}
           statusMsgUpdater={statusMsgUpdater}
           myShares={myShares}
           updateMyShares={updateMyShares}
@@ -59,6 +55,17 @@ export const Wireframe = ({
         )}
         <Outlet />
       </div>
+      <RightCol
+        myAddress={myAddress}
+        setMyAddress={setMyAddress}
+        myAddressDisplay={myAddressDisplay}
+        setMyAddressDisplay={setMyAddressDisplay}
+        myBalance={myBalance}
+        updateMyBalance={updateMyBalance}
+        statusMsgUpdater={statusMsgUpdater}
+        myShares={myShares}
+        updateMyShares={updateMyShares}
+      />
     </div>
   );
 };

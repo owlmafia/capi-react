@@ -14,15 +14,9 @@ import {
 } from "react-pro-sidebar";
 import { NavLink, useParams } from "react-router-dom";
 import { init } from "./controller";
-import { MyAccount } from "./MyAccount";
 
 export const SideBarDao = ({
   myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  updateMyBalance,
   statusMsgUpdater,
   myShares,
   updateMyShares,
@@ -49,20 +43,7 @@ export const SideBarDao = ({
   return (
     <ProSidebar id="sidebar">
       <SidebarHeader>
-        <div id="sidebar__header">
-          {logoView(viewDao?.dao)}
-          <MyAccount
-            myAddress={myAddress}
-            setMyAddress={setMyAddress}
-            myAddressDisplay={myAddressDisplay}
-            setMyAddressDisplay={setMyAddressDisplay}
-            myBalance={myBalance}
-            updateMyBalance={updateMyBalance}
-            statusMsgUpdater={statusMsgUpdater}
-            daoId={params.id}
-            myShares={myShares}
-          />
-        </div>
+        <div id="sidebar__header">{logoView(viewDao?.dao)}</div>
       </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">

@@ -140,11 +140,6 @@ export const Dao = (props) => {
                 updateFunds={updateFunds}
               />
             )}
-            <FundsActivityEmbedded
-              statusMsg={props.statusMsg}
-              daoId={params.id}
-              myAddress={props.myAddress}
-            />
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewDao.dao.owner_address !== props.myAddress}

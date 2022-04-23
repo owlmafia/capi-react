@@ -1,0 +1,52 @@
+@import "global_vars";
+
+#rightcol {
+    width: 300px;
+}
+
+.my_address {
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.my_address > a {
+    color: black;
+}
+
+#user_data {
+    margin-bottom: 16px;
+}
+
+.pro-sidebar .pro-menu a.active {
+    color: white;
+}
+
+#my_account_my_balance {
+    &__shares {
+        font-size: 0.8rem;
+        color: gray;
+        font-weight: 600;
+    }
+
+    &__balance {
+        font-size: 0.8rem;
+        color: gray;
+        display: flex;
+        gap: 4px;
+        align-items: center;
+
+        svg {
+            height: 14px;
+        }
+    }
+}
+
+.social_media {
+    &__container {
+        padding: 20px 20px 20px 40px;
+    }
+    &__link {
+        color: #adadad;
+        font-weight: 300;
+    }
+}
