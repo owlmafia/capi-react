@@ -9,35 +9,10 @@ import {
   SidebarHeader,
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import { MyAccount } from "./MyAccount";
 
-export const SideBar = ({
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  updateMyBalance,
-  statusMsgUpdater,
-}) => {
+export const SideBar = ({}) => {
   return (
     <ProSidebar id="sidebar">
-      <SidebarHeader>
-        <div id="sidebar__header">
-          <img id="sidebar__logo" src="/logo.svg" alt="Logo" />
-          <MyAccount
-            myAddress={myAddress}
-            setMyAddress={setMyAddress}
-            myAddressDisplay={myAddressDisplay}
-            setMyAddressDisplay={setMyAddressDisplay}
-            myBalance={myBalance}
-            updateMyBalance={updateMyBalance}
-            statusMsgUpdater={statusMsgUpdater}
-            // no dao here
-            daoId={null}
-          />
-        </div>
-      </SidebarHeader>
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<IoCreateOutline />}>

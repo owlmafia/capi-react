@@ -6,6 +6,7 @@ import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
 import { useParams } from "react-router-dom";
 import { init, initWithDaoId } from "./controller";
+import { RightDaoCol } from "../right_col/RightDaoCol";
 
 export const Wireframe = ({
   isGlobal,
@@ -38,17 +39,7 @@ export const Wireframe = ({
 
   const sideBar = () => {
     if (isGlobal) {
-      return (
-        <SideBar
-          myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          updateMyBalance={updateMyBalance}
-          statusMsgUpdater={statusMsgUpdater}
-        />
-      );
+      return <SideBar />;
     } else {
       return (
         <SideBarDao
@@ -60,6 +51,40 @@ export const Wireframe = ({
       );
     }
   };
+
+  const rightCol = () => {
+    if (isGlobal) {
+      //   return null;
+      return (
+        <RightCol
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          updateMyBalance={updateMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+          myShares={myShares}
+          updateMyShares={updateMyShares}
+        />
+      );
+    } else {
+      return (
+        <RightDaoCol
+          myAddress={myAddress}
+          setMyAddress={setMyAddress}
+          myAddressDisplay={myAddressDisplay}
+          setMyAddressDisplay={setMyAddressDisplay}
+          myBalance={myBalance}
+          updateMyBalance={updateMyBalance}
+          statusMsgUpdater={statusMsgUpdater}
+          myShares={myShares}
+          updateMyShares={updateMyShares}
+        />
+      );
+    }
+  };
+
   return (
     <div id="nav_and_main">
       {sideBar()}
@@ -74,17 +99,7 @@ export const Wireframe = ({
         {logoView(viewDao?.dao)}
         <Outlet />
       </div>
-      <RightCol
-        myAddress={myAddress}
-        setMyAddress={setMyAddress}
-        myAddressDisplay={myAddressDisplay}
-        setMyAddressDisplay={setMyAddressDisplay}
-        myBalance={myBalance}
-        updateMyBalance={updateMyBalance}
-        statusMsgUpdater={statusMsgUpdater}
-        myShares={myShares}
-        updateMyShares={updateMyShares}
-      />
+      {rightCol()}
     </div>
   );
 };
