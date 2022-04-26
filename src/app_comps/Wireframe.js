@@ -7,6 +7,7 @@ import { StatusMsgView } from "./StatusMsgView";
 import { useParams } from "react-router-dom";
 import { init, initWithDaoId } from "./controller";
 import { RightDaoCol } from "../right_col/RightDaoCol";
+import logo from '../images/logo.svg';
 
 export const Wireframe = ({
   isGlobal,
@@ -87,8 +88,12 @@ export const Wireframe = ({
 
   return (
     <div id="nav_and_main">
+      <div className="logo-container">
+        <img src={logo} alt="logo"/>
+      </div>
       {sideBar()}
       <div id="content">
+        <div className="content-img"></div>
         {statusMsg && (
           <StatusMsgView
             statusMsgUpdater={statusMsgUpdater}

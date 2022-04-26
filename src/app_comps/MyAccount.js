@@ -15,7 +15,8 @@ export const MyAccount = ({
   myShares,
 }) => {
   return (
-    <div>
+    <div className="my-account-container">
+      <div class="text">My Algo wallet</div>
       {connectButton(
         myAddress,
         setMyAddress,

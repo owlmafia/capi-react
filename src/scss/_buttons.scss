@@ -36,6 +36,11 @@
 
     &__connect {
         @include primary_button();
+        background-color: rgb(209, 85, 85);
+        color: white;
+        font-size: 14px;
+        padding: 0 50px;
+        border: none;
     }
 
     &__disconnect {
