@@ -46,7 +46,7 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
   const updateAppView = (updateData) => {
     if (updateData) {
       return (
-        <div>
+        <div id="update-app">
           <div>
             {"There's a new version: " +
               appVersionStr(

@@ -28,11 +28,15 @@
 
 #user_data {
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: space-between;
 }
 
-.pro-sidebar .pro-menu a.active {
-    color: white;
-}
+// .pro-sidebar .pro-menu a.active {
+//     color: white;
+// }
 
 #my_account_my_balance {
     &__shares {

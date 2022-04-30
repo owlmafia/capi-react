@@ -19,7 +19,7 @@ export const MyDaos = (props) => {
   const myDaosView = () => {
     return (
       myDaos && (
-        <div>
+        <div className="my-daos-container">
           {myDaos.map((dao) => (
             <MyDaoItem dao={dao} />
           ))}

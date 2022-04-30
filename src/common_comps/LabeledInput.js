@@ -29,7 +29,7 @@ export const LabeledCurrencyInput = ({
       <div className="labeled_input__error">{errorMsg}</div>
       <div className="input_with_currency__container">
         {input(inputValue, onChange, placeholder)}
-        <FundsAssetImg />
+        <div className="currency-icon"><FundsAssetImg /></div>
       </div>
     </div>
   );
@@ -38,6 +38,7 @@ export const LabeledCurrencyInput = ({
 const input = (inputValue, onChange, placeholder) => {
   return (
     <input
+      className="label-input-style"
       placeholder={placeholder}
       size="30"
       value={inputValue}

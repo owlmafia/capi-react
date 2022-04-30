@@ -3,8 +3,8 @@ export const RoadMapItem = ({ item }) => {
     <div className="roadmap_item">
       <div className="roadmap_item__line">
         <svg className="roadmap_item__line_svg">
-          <line x1="50%" y1="0" x2="50%" y2="100%" />
           <circle cx="50%" cy="50%" r="4" />
+          <line x1="50%" y1="0" x2="50%" y2="100%" />
         </svg>
       </div>
       <a

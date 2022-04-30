@@ -49,7 +49,8 @@ export const CreateDao = (props) => {
   const formView = () => {
     if (props.myAddress) {
       return (
-        <div>
+        <div className="create-dao-container">
+          <div className="dao-title">Project Info</div>
           <LabeledInput
             label={"Project name"}
             inputValue={daoName}

@@ -33,8 +33,9 @@ export const Withdrawal = (props) => {
   const view = () => {
     if (dao) {
       return (
-        <div>
-          <DaoName dao={dao} />
+        <div className="withdraw-container">
+          <div className="title">Withdraw Funds from project</div>
+          {/* <DaoName dao={dao} /> */}
           <Funds
             funds={funds}
             showWithdrawLink={false}

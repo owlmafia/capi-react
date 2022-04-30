@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LabeledBox } from "../common_comps/LabeledBox";
 import { init, loadFundsActivity } from "./controller";
 import { FundsActivityEntry } from "./FundsActivityEntry";
+import { FundsAssetImg } from "../images/FundsAssetImg";
 
 export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
   const [activityEntries, setActivityEntries] = useState([]);
@@ -34,6 +35,11 @@ export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
   const view = () => {
     return (
       <div className="first_dao_widget">
+        <LabeledBox label="Project funds">
+          <div className="funds-assets"><FundsAssetImg /></div>
+          <div>12252.6444</div>
+          <button className="become-investor-button">Become investor</button>
+        </LabeledBox>
         <LabeledBox label="Recent funds activity">
           {fundsActivity()}
           <Link to="funds_activity">

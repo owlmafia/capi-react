@@ -26,6 +26,7 @@ export const SharesDistributionBox = ({
       }
       return (
         <div className="holder_list_container">
+          <div className="sub-title">Investors {entries.length}</div>
           {entries.map((entry) => (
             <HolderEntry entry={entry} />
           ))}
@@ -46,7 +47,10 @@ export const SharesDistributionBox = ({
       return <div>{"No investors yet"}</div>;
     } else {
       return (
-        <div>
+        <div className="investors-container">
+          <div>
+            <div className="sub-title">Available Shares 1200</div>
+          </div>
           <SharesDistributionChart sharesDistr={sharesDistr} />
           {holdersListItems()}
         </div>

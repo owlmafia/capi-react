@@ -1,10 +1,21 @@
-.my_dao {
+.my-daos-container {
     display: flex;
-    gap: 20px;
+    flex-wrap: wrap;
+    gap: 40px;
+    .my_dao {
+        display: flex;
+        gap: 20px;
+        flex-direction: column-reverse;
+        width: calc((100% - 40px)/2);
+        box-sizing: border-box;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-radius: 12px;
 
-    &__involvement_icon {
-        width: 20px;
-        height: 20px;
-        background-color: red; // tmp
+        &__involvement_icon {
+            width: 100%;
+            height: 150px;
+            border-radius: 12px;
+        }
     }
 }

@@ -100,7 +100,6 @@ export const Wireframe = ({
             statusMsg={statusMsg}
           />
         )}
-
         {logoView(viewDao?.dao)}
         <Outlet />
       </div>

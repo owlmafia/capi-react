@@ -21,6 +21,7 @@ body {
     justify-content: space-between;
     padding: 0 50px;
     box-sizing: border-box;
+    min-width: 1032px;
     .logo-container {
         position: absolute;
         top: 20px;
@@ -45,6 +46,7 @@ body {
     padding: 0 50px 50px 50px;
     background-color: white;
     border-radius: 20px;
+
     .content-img {
         width: 100%;
         height: 280px;
@@ -60,6 +62,7 @@ body {
         margin-bottom: 26px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
 }
 
@@ -395,33 +398,84 @@ a {
 /*********************/
 
 .labeled_box {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
 }
 
 .labeled_box_label {
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: 2rem;
+    margin-bottom: 36px;
 }
 
 p {
     margin: 0px;
 }
 
-.title_right_button {
-    height: 20px;
-    margin-left: auto;
-    cursor: pointer;
+.labeled_box_children {
+    border: 1px solid rgb(236, 232, 232);
+    border-radius: 12px;
+    padding: 30px;
+    .investors-container {
+        display: flex;
+        justify-content: space-between;
+        .holder_item__container {
+            display: flex;
+            gap: 30px;
+            .percentage-text {
+                font-weight: bold;
+            }
+        }
+        .sub-title {
+            font-weight: bold;
+        }
+    }
 }
 
-.labeled_box_children {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 10px;
+.button__disconnect {
+    background-color: #d15555;
+    border: none;
+    color: white;
+    font-size: 14px;
+    padding: 6px 60px !important;
+    text-align: center !important;
+    width: 100%;
 }
 
 .first_dao_widget {
     margin-top: 40px;
+    .funds-assets {
+        width: 20px;
+        height: 20px;
+    }
+    .labeled_box_label {
+        font-size: 16px;
+    }
+    .labeled_box_children {
+        padding: 16px;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        flex-wrap: wrap;
+        gap: 8px;
+        .become-investor-button {
+            background-color: #d15555;
+            border: none;
+            color: white;
+            font-size: 16px;
+            padding: 10px 12px;
+            text-align: center !important;
+            border-radius: 24px;
+            width: 100%;
+            margin-top: 24px;
+        }
+    }
+    .funds_act_entry {
+        border: none;
+        padding: 10px;
+        margin-bottom: 6px;
+    }
 }
 
 .section_container {
@@ -444,6 +498,17 @@ p {
 
 .section_large_bottom {
     margin-bottom: 40px;
+}
+
+#update-app {
+    .button__submit {
+        background-color: #d15555;
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 6px 20px;
+        text-align: center !important;
+    }
 }
 
 #banner_img {

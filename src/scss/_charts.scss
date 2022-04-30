@@ -35,9 +35,9 @@ $pie_chart_diameter: 160px; // NOTE: has to be equal to value in js passed to d3
 }
 
 .holder_list_container {
-    margin-top: 20px;
-    border-top: 1px solid black;
-    padding: 0px 20px 0px 20px;
+    .sub-title {
+        font-weight: bold;
+    }
 }
 
 .holder_item {

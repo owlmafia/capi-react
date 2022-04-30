@@ -29,8 +29,8 @@ const AmountView = ({ entry }) => {
   }
   return (
     <div className="funds_act_entry__amount__container">
-      <div className={className}>{text}</div>
       <FundsAssetImg className="funds_act_entry__amount__logo" />
+      <div className={className}>{text}</div>
     </div>
   );
 };
