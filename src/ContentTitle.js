@@ -12,7 +12,7 @@ export const DaoName = (props) => {
 export const ContentTitle = ({ title, children }) => {
   return (
     <div id="content__title">
-      {children}
+      {title} {children}
     </div>
   );
 };

@@ -5,7 +5,7 @@
     .my-account-container {
         border: 1px solid rgb(237, 231, 231);
         padding: 24px;
-        border-radius: 12px;
+        border-radius: $global-border-radius;
         height: auto;
         box-sizing: border-box;
         .text {

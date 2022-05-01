@@ -136,7 +136,7 @@ export const CreateDao = (props) => {
             errorMsg={socialMediaUrlError}
           />
           <button
-            className="button__submit"
+            className="button-red"
             disabled={
               props.myAddress === "" ||
               daoName === "" ||

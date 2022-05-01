@@ -3,23 +3,22 @@
 body {
     // font-family: system-ui;
     font-style: normal;
-    font-weight: 400;
     font-size: 16px;
-    position: relative;
     min-height: 100vh;
     margin: 0;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 #nav_and_main {
     display: inline-flex;
-    gap: 20px;
     width: 100%;
     max-width: 1700px;
     margin: auto;
-    margin-top: 80px;
+    margin-top: 60px;
     justify-content: space-between;
-    padding: 0 50px;
+    padding: 0 30px;
     box-sizing: border-box;
     min-width: 1032px;
     .logo-container {
@@ -39,18 +38,46 @@ body {
 }
 
 #content {
-    width: calc(100% - 600px);
+    width: calc(100% - 540px);
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    padding: 0 50px 50px 50px;
     background-color: white;
     border-radius: 20px;
-
+    padding-bottom: 50px;
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        .title {
+            font-size: $global-title;
+            font-weight: bold;
+        }
+        .social-media-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            .button__follow {
+                background-color: rgb(91, 166, 247);
+            }
+            .share-icon {
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                background: rgb(89, 194, 177);
+                cursor: pointer;
+            }
+        }
+    }
     .content-img {
         width: 100%;
         height: 280px;
-        border-radius: 12px;
+        border-radius: $global-border-radius;
         margin-bottom: 36px;
         background: url('https://placekitten.com/1000/400')
     }
@@ -96,13 +123,13 @@ select {
 }
 
 #container {
-    text-align: center;
+    // width: 100vw;
+    box-sizing: border-box;
 }
 
 #container * {
     word-break: break-word;
     // recet text-align: center in container to center the main content
-    text-align: left;
 }
 
 .input-row input {
@@ -122,7 +149,7 @@ select {
 }
 
 .error {
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     border-style: solid;
     border-width: 1px;
     border-color: red;
@@ -134,7 +161,7 @@ select {
 }
 
 .success {
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     border-style: solid;
     border-width: 1px;
     border-color: green;
@@ -219,7 +246,7 @@ a {
     padding: 20px 20px 20px 20px;
     border: 1px solid grey;
     position: absolute;
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -286,7 +313,7 @@ a {
 .withdrawal-cell {
     border-style: solid;
     border-width: 1px;
-    border-radius: 12px;
+    border-radius:$global-border-radius;
     /* border: 1px solid #383e42; */
     border: 1px solid grey;
     margin-bottom: 20px;
@@ -403,7 +430,7 @@ a {
 
 .labeled_box_label {
     font-weight: 600;
-    font-size: 2rem;
+    font-size: $global-title;
     margin-bottom: 36px;
 }
 
@@ -412,8 +439,8 @@ p {
 }
 
 .labeled_box_children {
-    border: 1px solid rgb(236, 232, 232);
-    border-radius: 12px;
+    border: 1px solid $global-border;
+    border-radius: $global-border-radius;
     padding: 30px;
     .investors-container {
         display: flex;
@@ -429,16 +456,6 @@ p {
             font-weight: bold;
         }
     }
-}
-
-.button__disconnect {
-    background-color: #d15555;
-    border: none;
-    color: white;
-    font-size: 14px;
-    padding: 6px 60px !important;
-    text-align: center !important;
-    width: 100%;
 }
 
 .first_dao_widget {
@@ -459,17 +476,6 @@ p {
         font-weight: bold;
         flex-wrap: wrap;
         gap: 8px;
-        .become-investor-button {
-            background-color: #d15555;
-            border: none;
-            color: white;
-            font-size: 16px;
-            padding: 10px 12px;
-            text-align: center !important;
-            border-radius: 24px;
-            width: 100%;
-            margin-top: 24px;
-        }
     }
     .funds_act_entry {
         border: none;
@@ -498,17 +504,6 @@ p {
 
 .section_large_bottom {
     margin-bottom: 40px;
-}
-
-#update-app {
-    .button__submit {
-        background-color: #d15555;
-        border: none;
-        color: white;
-        font-size: 14px;
-        padding: 6px 20px;
-        text-align: center !important;
-    }
 }
 
 #banner_img {

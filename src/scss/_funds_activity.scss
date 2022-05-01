@@ -1,3 +1,5 @@
+@import "global_vars";
+
 @mixin amount {
     font-weight: 600px;
     font-size: 1.4rem;
@@ -6,8 +8,8 @@
 
 .funds_act_entry {
     display: flex;
-    border: 1px solid rgb(236, 232, 232);
-    border-radius: 12px;
+    border: 1px solid $global-border;
+    border-radius: $global-border-radius;
     padding: 30px 16px;
     align-items: center;
     cursor: pointer;

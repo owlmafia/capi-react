@@ -29,7 +29,6 @@ export const Roadmap = (props) => {
       dao && (
         <div className="roadmap-container">
           <ContentTitle title={"Roadmap"}>
-            <div>Roadmap</div>
             <button className="title_right_button" onClick={() => setModal((visible) => !visible)}>
               <AddIcon className="title_right_icon"/>
               Add milestone

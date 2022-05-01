@@ -31,7 +31,7 @@ export const LockEmbedded = ({
         />
         <button
           disabled={myAddress === ""}
-          className="button__submit"
+          className="button-red"
           onClick={async (_) => {
             await lock(
               myAddress,

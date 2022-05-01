@@ -71,7 +71,7 @@ const connectButton = (
   if (myAddress === "") {
     return (
       <button
-        className="button__connect"
+        className="button-red full-width-btn"
         onClick={async (event) => {
           try {
             let address = await connectWallet();
@@ -95,7 +95,7 @@ const connectButton = (
   } else {
     return (
       <button
-        className="button__disconnect"
+        className="button-red full-width-btn"
         onClick={() => {
           setMyAddress("");
         }}

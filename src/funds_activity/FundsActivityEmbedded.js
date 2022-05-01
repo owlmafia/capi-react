@@ -38,7 +38,7 @@ export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
         <LabeledBox label="Project funds">
           <div className="funds-assets"><FundsAssetImg /></div>
           <div>12252.6444</div>
-          <button className="become-investor-button">Become investor</button>
+          <button className="button-red full-width-btn">Become investor</button>
         </LabeledBox>
         <LabeledBox label="Recent funds activity">
           {fundsActivity()}

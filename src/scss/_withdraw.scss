@@ -1,3 +1,5 @@
+@import "global_vars";
+
 .dao_funds {
     &__cont_in_withdraw {
         margin-bottom: 30px;
@@ -14,13 +16,13 @@
 
 .withdraw-container {
     padding: 30px;
-    border-radius: 12px;
-    border: 1px solid rgb(247, 243, 243);
-    background-color: rgb(245, 251, 251);
+    border-radius: $global-border-radius;
+    border: 1px solid $global-border;
+    background-color: $global-blue-background;
 
     .title {
         font-size: 1.5rem;
-        color: rgb(102, 186, 210);
+        color: $global-light-blue;
         font-weight: bold;
         margin-bottom: 16px;
     }
@@ -30,13 +32,6 @@
             margin-bottom: 12px;
             font-weight: 600;
             font-size: 16px;
-        }
-        .label-input-style {
-            width: 100%;
-            border-radius: 24px;
-            height: 50px;
-            padding-left: 20px;
-            border: 1px solid rgb(236, 232, 232);
         }
     }
     .input_with_currency__container {
@@ -49,20 +44,5 @@
             top: 50%;
             transform: translate(-50%, -50%);
         }
-        .label-input-style {
-            width: 100%;
-            border-radius: 24px;
-            height: 50px;
-            padding-left: 50px;
-            border: 1px solid rgb(236, 232, 232);
-        }
-    }
-    .button__submit {
-        background-color: #d15555;
-        border: none;
-        color: white;
-        font-size: 14px;
-        padding: 6px 60px;
-        text-align: center !important;
     }
 }

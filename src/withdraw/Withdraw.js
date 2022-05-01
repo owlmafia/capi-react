@@ -53,7 +53,7 @@ export const Withdrawal = (props) => {
             onChange={(input) => setWithdrawalDescr(input)}
           />
           <button
-            className="button__submit"
+            className="button-red"
             disabled={props.myAddress === ""}
             onClick={async () => {
               await withdraw(
