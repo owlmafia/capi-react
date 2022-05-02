@@ -18,6 +18,7 @@ export const createDao = async (
   shareCount,
   sharePrice,
   investorsShare,
+  sharesForInvestors,
   logoUrl,
   socialMediaUrl,
   setCreateDaoSuccess,
@@ -27,6 +28,7 @@ export const createDao = async (
   setShareCountError,
   setSharePriceError,
   setInvestorsShareError,
+  setSharesForInvestorsError,
   setLogoUrlError,
   setSocialMediaUrlError
 ) => {
@@ -48,6 +50,7 @@ export const createDao = async (
         share_count: shareCount,
         share_price: sharePrice,
         investors_share: investorsShare,
+        shares_for_investors: sharesForInvestors,
         logo_url: logoUrl,
         social_media_url: socialMediaUrl,
       },
@@ -87,6 +90,7 @@ export const createDao = async (
       setShareCountError(toErrorMsg(e.share_supply));
       setSharePriceError(toErrorMsg(e.share_price));
       setInvestorsShareError(toErrorMsg(e.investors_share));
+      setSharesForInvestorsError(toErrorMsg(e.shares_for_investors));
       setLogoUrlError(toErrorMsg(e.logo_url));
       setSocialMediaUrlError(toErrorMsg(e.social_media_url));
 

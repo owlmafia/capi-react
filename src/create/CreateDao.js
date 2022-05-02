@@ -14,6 +14,7 @@ export const CreateDao = (props) => {
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
+  const [sharesForInvestors, setSharesForInvestors] = useState("");
   const [logoUrl, setLogoUrl] = useState("");
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
@@ -22,6 +23,7 @@ export const CreateDao = (props) => {
   const [shareCountError, setShareCountError] = useState("");
   const [sharePriceError, setSharePriceError] = useState("");
   const [investorsShareError, setInvestorsShareError] = useState("");
+  const [sharesForInvestorsError, setSharesForInvestorsError] = useState("");
   const [logoUrlError, setLogoUrlError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
 
@@ -122,7 +124,12 @@ export const CreateDao = (props) => {
               <span className="pie_chart__perc_symbol">{"%"}</span>
             </div>
           </div>
-
+          <LabeledCurrencyInput
+            label={"Shares for investors"}
+            inputValue={sharesForInvestors}
+            onChange={(input) => setSharesForInvestors(input)}
+            errorMsg={sharesForInvestorsError}
+          />
           <LabeledInput
             label={"Logo URL (optional)"}
             inputValue={logoUrl}
@@ -150,11 +157,13 @@ export const CreateDao = (props) => {
                 props.showProgress,
                 props.statusMsg,
                 props.updateMyBalance,
+
                 daoName,
                 daoDescr,
                 shareCount,
                 sharePrice,
                 investorsShare,
+                sharesForInvestors,
                 logoUrl,
                 socialMediaUrl,
                 setCreateDaoSuccess,
@@ -164,6 +173,7 @@ export const CreateDao = (props) => {
                 setShareCountError,
                 setSharePriceError,
                 setInvestorsShareError,
+                setSharesForInvestorsError,
                 setLogoUrlError,
                 setSocialMediaUrlError
               );
@@ -180,7 +190,7 @@ export const CreateDao = (props) => {
 
   const bodyView = () => {
     if (createDaoSuccess) {
-      return <CreateDaoSuccess dao={createDaoSuccess} />;
+      return <CreateDaoSuccess dao={createDaoSuccess.dao} />;
     } else {
       return (
         <div>

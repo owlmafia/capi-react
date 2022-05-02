@@ -4,7 +4,7 @@ import { MdContentCopy } from "react-icons/md";
 import { DaoName } from "../ContentTitle";
 import { Link } from "react-router-dom";
 
-export const CreateDaoSuccess = (props) => {
+export const CreateDaoSuccess = ({ dao }) => {
   const [investingLinkIsCopied, setInvestingLinkIsCopied] = useState(false);
 
   const onCopyText = () => {
@@ -17,14 +17,14 @@ export const CreateDaoSuccess = (props) => {
   return (
     <div>
       <div>
-        <DaoName dao={props.dao} />
+        <DaoName dao={dao} />
         <p>
           <span className="key-val-key">{"Share supply:"}</span>
-          <span className="key-val-val">{props.dao.share_supply}</span>
+          <span className="key-val-val">{dao.share_supply}</span>
         </p>
         <p>
           <span className="key-val-key">{"Share price:"}</span>
-          <span className="key-val-val">{props.dao.share_price}</span>
+          <span className="key-val-val">{dao.share_price}</span>
         </p>
         <p>
           <span className="key-val-key">{"Share asset id:"}</span>
@@ -32,21 +32,20 @@ export const CreateDaoSuccess = (props) => {
             {" "}
             <a
               href={
-                "https://testnet.algoexplorer.io/asset/" +
-                props.dao.shares_asset_id
+                "https://testnet.algoexplorer.io/asset/" + dao.shares_asset_id
               }
               target="_blank"
               rel="noreferrer"
             >
-              {props.dao.shares_asset_id}
+              {dao.shares_asset_id}
             </a>
           </span>
         </p>
 
         <div className="section-spacer" />
-        <CopyToClipboard text={props.dao.invest_link} onCopy={onCopyText}>
+        <CopyToClipboard text={dao.invest_link} onCopy={onCopyText}>
           <div>
-            <Link to={props.dao.invest_link}>{"Go to project"}</Link>
+            <Link to={dao.invest_link}>{"Go to project"}</Link>
             <span className="copy">
               {investingLinkIsCopied ? "copied!" : <MdContentCopy />}
             </span>
