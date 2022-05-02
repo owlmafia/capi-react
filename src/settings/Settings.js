@@ -55,7 +55,7 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
               )}
           </div>
           <button
-            className="button-red"
+            className="button-primary"
             onClick={() =>
               updateApp(
                 statusMsg,

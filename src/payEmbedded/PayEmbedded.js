@@ -25,7 +25,7 @@ export const PayEmbedded = ({
       />
       <button
         disabled={myAddress === ""}
-        className="button-red"
+        className="button-primary"
         onClick={async (_) => {
           await pay(
             myAddress,

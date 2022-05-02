@@ -89,7 +89,7 @@ export const Investment = (props) => {
           </p>
 
           <button
-            className="button-red"
+            className="button-primary"
             hidden={chainInvestmentData.investor_claimable_dividend === "0"}
             onClick={async () => {
               await retrieveProfits(
@@ -107,7 +107,7 @@ export const Investment = (props) => {
             {"Retrieve profits"}
           </button>
           <button
-            className="button-red"
+            className="button-primary"
             disabled={chainInvestmentData.investor_shares_count === "0"}
             onClick={async () => {
               await unlock(

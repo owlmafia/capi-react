@@ -40,7 +40,7 @@ export const InvestEmbedded = ({
       </div>
       <button
         disabled={myAddress === ""}
-        className="button-red"
+        className="button-primary"
         onClick={async (_) => {
           await invest(
             myAddress,
