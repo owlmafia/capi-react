@@ -23,8 +23,8 @@ body {
     min-width: 1032px;
     .logo-container {
         position: absolute;
-        top: 20px;
-        left: 80px;
+        top: 30px;
+        left: 4%;
         width: 70px;
         height: 30px;
         img {
@@ -38,7 +38,7 @@ body {
 }
 
 #content {
-    width: calc(100% - 540px);
+    width: calc(100% - 556px);
     display: inline-block;
     box-sizing: border-box;
     position: relative;
@@ -56,10 +56,15 @@ body {
         }
         .social-media-buttons {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             align-items: center;
             .button__follow {
-                background-color: rgb(91, 166, 247);
+                background-color: #55ACEE;
+                display: flex;
+                align-items: center;
+                width: 190px;
+                justify-content: center;
+                gap: 10px;
             }
             .share-icon {
                 border-radius: 50%;
@@ -79,7 +84,8 @@ body {
         height: 280px;
         border-radius: $global-border-radius;
         margin-bottom: 36px;
-        background: url('https://placekitten.com/1000/400')
+        background-image: url('../images/monkey.svg');
+        background-size: cover;
     }
 
     &__title {
@@ -125,6 +131,9 @@ select {
 #container {
     // width: 100vw;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #container * {

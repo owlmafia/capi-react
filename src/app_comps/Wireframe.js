@@ -8,7 +8,8 @@ import { useParams } from "react-router-dom";
 import { init, initWithDaoId } from "./controller";
 import { RightDaoCol } from "../right_col/RightDaoCol";
 import logo from '../images/logo.svg';
-import { BsShare as ShareIcon } from "react-icons/bs";
+import twitter from '../images/svg/twitter.svg';
+import share from '../images/svg/share.svg'
 
 export const Wireframe = ({
   isGlobal,
@@ -98,8 +99,13 @@ export const Wireframe = ({
         <div className="title-container">
           <div className='title'>Crypticmonster: Unique NFT artworks</div>
           <div className="social-media-buttons">
-            <button className="button__follow">Follow on Twitter</button>
-            <div className="share-icon"><ShareIcon/></div>
+            <button className="button__follow">
+              <img width="20" height="16" src={twitter} alt="logo-twitter"/>
+              Follow on Twitter
+            </button>
+            <div className="share-icon">
+              <img src={share} alt="share-icon"/>
+            </div>
           </div>
         </div>
         {statusMsg && (

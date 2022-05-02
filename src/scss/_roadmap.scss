@@ -28,7 +28,6 @@ $line_color: gray;
 
 .roadmap-container {
     .title_right_button {
-        height: 40px;
         border: 1px solid $global-red-button;
         color: $global-red-button;
         display: flex;
@@ -37,6 +36,7 @@ $line_color: gray;
         gap: 10px;
         background-color: transparent;
         font-weight: bold;
+        width: 174px;
         .title_right_icon {
             background-color: $global-red-button;
             color: white;
