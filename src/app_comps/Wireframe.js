@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { BsShare as ShareIcon } from "react-icons/bs";
+import { Outlet, useParams } from "react-router-dom";
+import logo from "../images/logo.svg";
 import { RightCol } from "../right_col/RightCol";
+import { RightDaoCol } from "../right_col/RightDaoCol";
+import { init, initWithDaoId } from "./controller";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
-import { useParams } from "react-router-dom";
-import { init, initWithDaoId } from "./controller";
-import { RightDaoCol } from "../right_col/RightDaoCol";
-import logo from '../images/logo.svg';
-import { BsShare as ShareIcon } from "react-icons/bs";
 
 export const Wireframe = ({
   isGlobal,
@@ -90,16 +89,18 @@ export const Wireframe = ({
   return (
     <div id="nav_and_main">
       <div className="logo-container">
-        <img src={logo} alt="logo"/>
+        <img src={logo} alt="logo" />
       </div>
       {sideBar()}
       <div id="content">
-        <div className="content-img"></div>
+        <div className="content-img">{logoView(viewDao?.dao)}</div>
         <div className="title-container">
-          <div className='title'>Crypticmonster: Unique NFT artworks</div>
+          <div className="title">Crypticmonster: Unique NFT artworks</div>
           <div className="social-media-buttons">
             <button className="button__follow">Follow on Twitter</button>
-            <div className="share-icon"><ShareIcon/></div>
+            <div className="share-icon">
+              <ShareIcon />
+            </div>
           </div>
         </div>
         {statusMsg && (
@@ -108,7 +109,6 @@ export const Wireframe = ({
             statusMsg={statusMsg}
           />
         )}
-        {logoView(viewDao?.dao)}
         <Outlet />
       </div>
       {rightCol()}
@@ -117,9 +117,9 @@ export const Wireframe = ({
 };
 
 const logoView = (dao) => {
-  if (dao?.logo_url) {
+  if (dao?.image_url) {
     return (
-      <img id="banner_img" src={dao?.logo_url ?? ""} alt="Project image" />
+      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project image" />
     );
   } else {
     return null;

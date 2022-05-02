@@ -7,7 +7,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     box-sizing: border-box;
 }
 
@@ -79,7 +79,7 @@ body {
         height: 280px;
         border-radius: $global-border-radius;
         margin-bottom: 36px;
-        background: url('https://placekitten.com/1000/400')
+        background: url("https://placekitten.com/1000/400");
     }
 
     &__title {
@@ -313,7 +313,7 @@ a {
 .withdrawal-cell {
     border-style: solid;
     border-width: 1px;
-    border-radius:$global-border-radius;
+    border-radius: $global-border-radius;
     /* border: 1px solid #383e42; */
     border: 1px solid grey;
     margin-bottom: 20px;
@@ -504,9 +504,4 @@ p {
 
 .section_large_bottom {
     margin-bottom: 40px;
-}
-
-#banner_img {
-    width: 100%;
-    margin-bottom: 30px;
 }
