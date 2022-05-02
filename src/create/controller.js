@@ -19,7 +19,7 @@ export const createDao = async (
   sharePrice,
   investorsShare,
   sharesForInvestors,
-  logoUrl,
+  imageBytes,
   socialMediaUrl,
   setCreateDaoSuccess,
 
@@ -40,7 +40,11 @@ export const createDao = async (
 
   statusMsg.clear();
   showProgress(true);
-  console.log("creator: " + myAddress);
+
+  const ib = await imageBytes;
+  const typedArray = new Uint8Array(ib);
+  const bytes = [...typedArray];
+
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
       inputs: {
@@ -51,7 +55,7 @@ export const createDao = async (
         share_price: sharePrice,
         investors_share: investorsShare,
         shares_for_investors: sharesForInvestors,
-        logo_url: logoUrl,
+        compressed_image: bytes,
         social_media_url: socialMediaUrl,
       },
     });

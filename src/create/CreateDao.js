@@ -7,6 +7,7 @@ import {
 import { ContentTitle } from "../ContentTitle";
 import { createDao, init } from "./controller";
 import { CreateDaoSuccess } from "./CreateDaoSuccess";
+import { ImageUpload } from "../app_comps/ImageUpload";
 
 export const CreateDao = (props) => {
   const [daoName, setDaoName] = useState("");
@@ -15,7 +16,7 @@ export const CreateDao = (props) => {
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [sharesForInvestors, setSharesForInvestors] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
+  const [imageBytes, setImageBytes] = useState([]);
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
   const [daoNameError, setDaoNameError] = useState("");
@@ -24,8 +25,10 @@ export const CreateDao = (props) => {
   const [sharePriceError, setSharePriceError] = useState("");
   const [investorsShareError, setInvestorsShareError] = useState("");
   const [sharesForInvestorsError, setSharesForInvestorsError] = useState("");
-  const [logoUrlError, setLogoUrlError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+
+  // TODO show this error
+  const [imageBytesError, setImageBytesError] = useState("");
 
   const [createDaoSuccess, setCreateDaoSuccess] = useState(null);
 
@@ -130,12 +133,8 @@ export const CreateDao = (props) => {
             onChange={(input) => setSharesForInvestors(input)}
             errorMsg={sharesForInvestorsError}
           />
-          <LabeledInput
-            label={"Logo URL (optional)"}
-            inputValue={logoUrl}
-            onChange={(input) => setLogoUrl(input)}
-            errorMsg={logoUrlError}
-          />
+
+          <ImageUpload setImageBytes={setImageBytes} />
           <LabeledInput
             label={"Primary social media (optional)"}
             inputValue={socialMediaUrl}
@@ -164,7 +163,7 @@ export const CreateDao = (props) => {
                 sharePrice,
                 investorsShare,
                 sharesForInvestors,
-                logoUrl,
+                imageBytes,
                 socialMediaUrl,
                 setCreateDaoSuccess,
 
@@ -174,7 +173,7 @@ export const CreateDao = (props) => {
                 setSharePriceError,
                 setInvestorsShareError,
                 setSharesForInvestorsError,
-                setLogoUrlError,
+                setImageBytesError,
                 setSocialMediaUrlError
               );
             }}
