@@ -49,7 +49,8 @@ export const CreateDao = (props) => {
   const formView = () => {
     if (props.myAddress) {
       return (
-        <div>
+        <div className="create-dao-container">
+          <div className="dao-title">Project Info</div>
           <LabeledInput
             label={"Project name"}
             inputValue={daoName}
@@ -135,7 +136,7 @@ export const CreateDao = (props) => {
             errorMsg={socialMediaUrlError}
           />
           <button
-            className="button__submit"
+            className="button-primary"
             disabled={
               props.myAddress === "" ||
               daoName === "" ||

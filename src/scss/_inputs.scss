@@ -1,17 +1,13 @@
-$input_height: 30px;
+@import "global_vars";
 
 input {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 12px;
-    appearance: none;
-    height: $input_height;
-    border: 1px solid #383e42;
+    width: 100%;
+    border-radius: 24px;
+    border: 1px solid $global-border;
     padding: 10px 15px;
-    font-family: inherit;
     font-size: 16px;
-    outline: 0;
     box-sizing: border-box;
+    height: 50px;
 }
 
 .labeled_input {
@@ -25,6 +21,10 @@ input {
     &__error {
         color: red;
         margin-bottom: 4px;
+    }
+
+    .label-input-style {
+        padding-left: 20px;
     }
 }
 
@@ -47,7 +47,7 @@ input {
         gap: 10px;
 
         > svg {
-            height: $input_height;
+            height: 40px;
         }
     }
 }

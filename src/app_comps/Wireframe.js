@@ -7,6 +7,8 @@ import { StatusMsgView } from "./StatusMsgView";
 import { useParams } from "react-router-dom";
 import { init, initWithDaoId } from "./controller";
 import { RightDaoCol } from "../right_col/RightDaoCol";
+import logo from '../images/logo.svg';
+import { BsShare as ShareIcon } from "react-icons/bs";
 
 export const Wireframe = ({
   isGlobal,
@@ -87,15 +89,25 @@ export const Wireframe = ({
 
   return (
     <div id="nav_and_main">
+      <div className="logo-container">
+        <img src={logo} alt="logo"/>
+      </div>
       {sideBar()}
       <div id="content">
+        <div className="content-img"></div>
+        <div className="title-container">
+          <div className='title'>Crypticmonster: Unique NFT artworks</div>
+          <div className="social-media-buttons">
+            <button className="button__follow">Follow on Twitter</button>
+            <div className="share-icon"><ShareIcon/></div>
+          </div>
+        </div>
         {statusMsg && (
           <StatusMsgView
             statusMsgUpdater={statusMsgUpdater}
             statusMsg={statusMsg}
           />
         )}
-
         {logoView(viewDao?.dao)}
         <Outlet />
       </div>

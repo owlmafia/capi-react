@@ -15,7 +15,9 @@ export const MyAccount = ({
   myShares,
 }) => {
   return (
-    <div>
+    <div className="my-account-container">
+      <div class="text">My Algo wallet</div>
+      {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
       {connectButton(
         myAddress,
         setMyAddress,
@@ -23,7 +25,6 @@ export const MyAccount = ({
         updateMyBalance,
         statusMsgUpdater
       )}
-      {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
     </div>
   );
 };
@@ -50,8 +51,8 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
         {/* for now show only funds asset. Algo can be helpful for fees, but it
         clutters the UI a bit.  */}
         <div id="my_account_my_balance__balance">
-          <div>{myBalance.balance_funds_asset}</div>
           <FundsAssetImg />
+          <div>{myBalance.balance_funds_asset}</div>
         </div>
       </div>
     );
@@ -70,7 +71,7 @@ const connectButton = (
   if (myAddress === "") {
     return (
       <button
-        className="button__connect"
+        className="button-primary full-width-btn"
         onClick={async (event) => {
           try {
             let address = await connectWallet();
@@ -94,7 +95,7 @@ const connectButton = (
   } else {
     return (
       <button
-        className="button__disconnect"
+        className="button-primary full-width-btn"
         onClick={() => {
           setMyAddress("");
         }}

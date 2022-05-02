@@ -27,12 +27,12 @@ export const Roadmap = (props) => {
   const view = () => {
     return (
       dao && (
-        <div>
+        <div className="roadmap-container">
           <ContentTitle title={"Roadmap"}>
-            <AddIcon
-              className="title_right_button"
-              onClick={() => setModal((visible) => !visible)}
-            />
+            <button className="title_right_button" onClick={() => setModal((visible) => !visible)}>
+              <AddIcon className="title_right_icon"/>
+              Add milestone
+            </button>
           </ContentTitle>
           {roadmapItems && roadmapItems.length > 0 && itemsList(roadmapItems)}
         </div>
@@ -84,6 +84,7 @@ const toHeaderElement = (header) => {
   return (
     <div key={header.text} className="roadmap_header">
       <svg className="roadmap_header__line_svg">
+        <circle cx="50%" cy="50%" r="4" />
         <line x1="50%" y1="0" x2="50%" y2="100%" />
       </svg>
       <p>{header.text}</p>

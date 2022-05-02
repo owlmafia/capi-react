@@ -34,7 +34,7 @@ export const AddRoadmapItem = ({
           />
           <Calendar onChange={onChange} value={value} />
           <button
-            className="button__submit"
+            className="button-primary"
             disabled={myAddress === ""}
             onClick={async () => {
               await addRoadmapItem(

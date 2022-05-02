@@ -2,22 +2,35 @@
 
 body {
     // font-family: system-ui;
-    font-family: roboto;
     font-style: normal;
-    font-weight: 400;
     font-size: 16px;
-    position: relative;
     min-height: 100vh;
     margin: 0;
-    background-color: #e8e8e8;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 #nav_and_main {
     display: inline-flex;
-    gap: 20px;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1700px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 60px;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-sizing: border-box;
+    min-width: 1032px;
+    .logo-container {
+        position: absolute;
+        top: 20px;
+        left: 80px;
+        width: 70px;
+        height: 30px;
+        img {
+            width: 100%;
+        }
+    }
 }
 
 .dao-name-container {
@@ -25,13 +38,49 @@ body {
 }
 
 #content {
-    width: 500px;
+    width: calc(100% - 540px);
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    padding: $global_top_padding 50px 50px 50px;
     background-color: white;
     border-radius: 20px;
+    padding-bottom: 50px;
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        .title {
+            font-size: $global-title;
+            font-weight: bold;
+        }
+        .social-media-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            .button__follow {
+                background-color: rgb(91, 166, 247);
+            }
+            .share-icon {
+                border-radius: 50%;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                background: rgb(89, 194, 177);
+                cursor: pointer;
+            }
+        }
+    }
+    .content-img {
+        width: 100%;
+        height: 280px;
+        border-radius: $global-border-radius;
+        margin-bottom: 36px;
+        background: url('https://placekitten.com/1000/400')
+    }
 
     &__title {
         font-weight: 700;
@@ -40,6 +89,7 @@ body {
         margin-bottom: 26px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
 }
 
@@ -73,13 +123,13 @@ select {
 }
 
 #container {
-    text-align: center;
+    // width: 100vw;
+    box-sizing: border-box;
 }
 
 #container * {
     word-break: break-word;
     // recet text-align: center in container to center the main content
-    text-align: left;
 }
 
 .input-row input {
@@ -99,7 +149,7 @@ select {
 }
 
 .error {
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     border-style: solid;
     border-width: 1px;
     border-color: red;
@@ -111,7 +161,7 @@ select {
 }
 
 .success {
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     border-style: solid;
     border-width: 1px;
     border-color: green;
@@ -196,7 +246,7 @@ a {
     padding: 20px 20px 20px 20px;
     border: 1px solid grey;
     position: absolute;
-    border-radius: 12px;
+    border-radius: $global-border-radius;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -263,7 +313,7 @@ a {
 .withdrawal-cell {
     border-style: solid;
     border-width: 1px;
-    border-radius: 12px;
+    border-radius:$global-border-radius;
     /* border: 1px solid #383e42; */
     border: 1px solid grey;
     margin-bottom: 20px;
@@ -375,33 +425,63 @@ a {
 /*********************/
 
 .labeled_box {
-    margin-bottom: 40px;
+    margin-bottom: 70px;
 }
 
 .labeled_box_label {
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
+    font-size: $global-title;
+    margin-bottom: 36px;
 }
 
 p {
     margin: 0px;
 }
 
-.title_right_button {
-    height: 20px;
-    margin-left: auto;
-    cursor: pointer;
-}
-
 .labeled_box_children {
-    border: 1px solid black;
-    border-radius: 10px;
-    padding: 10px;
+    border: 1px solid $global-border;
+    border-radius: $global-border-radius;
+    padding: 30px;
+    .investors-container {
+        display: flex;
+        justify-content: space-between;
+        .holder_item__container {
+            display: flex;
+            gap: 30px;
+            .percentage-text {
+                font-weight: bold;
+            }
+        }
+        .sub-title {
+            font-weight: bold;
+        }
+    }
 }
 
 .first_dao_widget {
     margin-top: 40px;
+    .funds-assets {
+        width: 20px;
+        height: 20px;
+    }
+    .labeled_box_label {
+        font-size: 16px;
+    }
+    .labeled_box_children {
+        padding: 16px;
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        font-size: 18px;
+        font-weight: bold;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .funds_act_entry {
+        border: none;
+        padding: 10px;
+        margin-bottom: 6px;
+    }
 }
 
 .section_container {

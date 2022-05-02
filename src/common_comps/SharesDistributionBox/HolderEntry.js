@@ -23,8 +23,8 @@ const notOwnedEntry = (entry) => {
 const entryBody = (entry) => {
   return (
     <div className="holder_item__container">
+      <div className="percentage-text">{entry.percentage_formatted}</div>
       <div>{entry.label}</div>
-      <div>{entry.percentage_formatted}</div>
     </div>
   );
 };

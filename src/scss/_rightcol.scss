@@ -2,6 +2,19 @@
 
 #rightcol {
     width: 300px;
+    .my-account-container {
+        border: 1px solid rgb(237, 231, 231);
+        padding: 24px;
+        border-radius: $global-border-radius;
+        height: auto;
+        box-sizing: border-box;
+        .text {
+            color: #000000;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+    }
 }
 
 .my_address {
@@ -15,11 +28,15 @@
 
 #user_data {
     margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    justify-content: space-between;
 }
 
-.pro-sidebar .pro-menu a.active {
-    color: white;
-}
+// .pro-sidebar .pro-menu a.active {
+//     color: white;
+// }
 
 #my_account_my_balance {
     &__shares {

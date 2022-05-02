@@ -1,12 +1,13 @@
 $roadmap_item_height: 100px;
 $roadmap_header_height: 60px;
 $line_color: gray;
+@import "global_vars";
 
 @mixin line_svg {
     width: 60px;
     height: 100%;
-    stroke: $line_color;
-    fill: $line_color;
+    stroke: rgb(139, 221, 240);
+    fill: rgb(139, 221, 240);
 }
 
 .roadmap_header {
@@ -15,9 +16,33 @@ $line_color: gray;
     height: $roadmap_header_height;
     line-height: $roadmap_header_height;
     display: flex;
+    margin-left: -30px;
 
     &__line_svg {
         @include line_svg();
+    }
+}
+.roadmap_item {
+    margin-left: -30px;
+}
+
+.roadmap-container {
+    .title_right_button {
+        height: 40px;
+        border: 1px solid $global-red-button;
+        color: $global-red-button;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background-color: transparent;
+        font-weight: bold;
+        .title_right_icon {
+            background-color: $global-red-button;
+            color: white;
+            border-radius: 50%;
+            padding: 2px;
+        }
     }
 }
 
