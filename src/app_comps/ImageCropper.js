@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Cropper from "react-easy-crop";
 
-const IMAGE_WIDTH = 1000;
-const ASPECT_RATIO = 2.77777777778;
+const IMAGE_WIDTH = 1033;
+const ASPECT_RATIO = 2.86944444;
 
 export const ImageCropper = ({ updateBlob, inputImg }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
