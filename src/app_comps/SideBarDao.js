@@ -14,6 +14,7 @@ import {
 } from "react-pro-sidebar";
 import { NavLink, useParams } from "react-router-dom";
 import { init } from "./controller";
+import home from '../images/sidebar/home.svg';
 
 export const SideBarDao = ({
   myAddress,
@@ -44,7 +45,7 @@ export const SideBarDao = ({
     <ProSidebar id="sidebar">
       <SidebarContent>
         <Menu iconShape="square">
-          <MenuItem icon={<FaRoad />}>
+          <MenuItem icon={<img src={home}/>}>
             <NavLink to="">Project Home</NavLink>
           </MenuItem>
           <MenuItem icon={<FaRoad />}>

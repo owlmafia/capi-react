@@ -1,16 +1,28 @@
 @import "global_vars";
 
 .pro-sidebar {
-    color: #000000;
+    color: $black;
     width: 200px !important;
     min-width: 200px !important;
+    margin-top: 24px;
     .pro-menu a {
-        color: #000000;
+        color: $black;
+        font-size: 16px;
+    }
+    .pro-menu .pro-menu-item > .pro-inner-item {
+        margin-bottom: 6px;
     }
     .pro-menu a:hover, .pro-menu-item:hover .pro-icon {
         transition: 0.3s;
-        color: rgb(118, 177, 209);
+        color: $blue-primary;
         font-weight: bold;
+        img {
+            width: 20px;
+            height: 20px;
+            path {
+                fill: $blue-primary;
+            }
+        }
     }
 }
 
