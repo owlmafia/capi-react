@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { init } from "./controller";
 import { MyAccount } from "../app_comps/MyAccount";
 

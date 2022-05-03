@@ -6,11 +6,10 @@ import {
   ProSidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 
-export const SideBar = ({}) => {
+export const SideBar = () => {
   return (
     <ProSidebar id="sidebar">
       <SidebarContent>

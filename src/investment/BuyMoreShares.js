@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
-import { ContentTitle } from "../ContentTitle";
 import { invest } from "./controller";
 
 export const BuyMoreShares = ({

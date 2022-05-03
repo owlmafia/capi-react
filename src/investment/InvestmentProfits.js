@@ -42,7 +42,7 @@ export const InvestmentProfits = ({
       );
     }
     doInit();
-  }, [params.id, myAddress, statusMsg]);
+  }, [params.id, myAddress, statusMsg, updateInvestmentData, updateMyShares]);
 
   const view = () => {
     return (

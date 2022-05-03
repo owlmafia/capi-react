@@ -12,7 +12,6 @@ import {
   ProSidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
 } from "react-pro-sidebar";
 import { NavLink, useParams, Link } from "react-router-dom";
 import { init } from "./controller";
@@ -55,7 +54,7 @@ export const SideBarDao = ({
           </MenuItem>
         </Menu>
         <Menu iconShape="square">
-          <MenuItem icon={<img src={home} />}>
+          <MenuItem icon={<img src={home} alt="Home" />}>
             <NavLink to="">Project Home</NavLink>
           </MenuItem>
           <MenuItem icon={<FaRoad />}>

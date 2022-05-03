@@ -7,8 +7,8 @@ import { init, initWithDaoId } from "./controller";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
-import twitter from '../images/svg/twitter.svg';
-import share from '../images/svg/share.svg'
+import twitter from "../images/svg/twitter.svg";
+import share from "../images/svg/share.svg";
 
 export const Wireframe = ({
   isGlobal,
@@ -99,11 +99,11 @@ export const Wireframe = ({
           <div className="title">Crypticmonster: Unique NFT artworks</div>
           <div className="social-media-buttons">
             <button className="button__follow">
-              <img width="20" height="16" src={twitter} alt="logo-twitter"/>
+              <img width="20" height="16" src={twitter} alt="logo-twitter" />
               Follow on Twitter
             </button>
             <div className="share-icon">
-              <img src={share} alt="share-icon"/>
+              <img src={share} alt="share-icon" />
             </div>
           </div>
         </div>
@@ -123,7 +123,7 @@ export const Wireframe = ({
 const logoView = (dao) => {
   if (dao?.image_url) {
     return (
-      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project image" />
+      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project banner" />
     );
   } else {
     return null;

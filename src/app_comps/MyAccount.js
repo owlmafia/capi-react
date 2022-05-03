@@ -16,7 +16,7 @@ export const MyAccount = ({
 }) => {
   return (
     <div className="my-account-container">
-      <div class="text">My Algo wallet</div>
+      <div className="text">My Algo wallet</div>
       {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
       {connectButton(
         myAddress,

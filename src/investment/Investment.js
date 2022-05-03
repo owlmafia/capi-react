@@ -40,7 +40,13 @@ export const Investment = (props) => {
       );
     }
     doInit();
-  }, [params.id, props.myAddress, props.statusMsg]);
+  }, [
+    params.id,
+    props.myAddress,
+    props.statusMsg,
+    updateInvestmentData,
+    props.updateMyShares,
+  ]);
 
   useEffect(() => {
     if (myShareChart.current && investmentData) {

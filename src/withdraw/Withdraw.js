@@ -4,7 +4,6 @@ import {
   LabeledCurrencyInput,
   LabeledInput,
 } from "../common_comps/LabeledInput";
-import { DaoName } from "../ContentTitle";
 import { Funds } from "../dao/Funds";
 import { init, withdraw, updateFunds_ } from "./controller";
 

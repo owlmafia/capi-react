@@ -11,8 +11,7 @@ export const init = async (
   updateMyShares
 ) => {
   try {
-    const { init_log, bridge_load_dao_user_view, bridge_load_investment } =
-      await wasmPromise;
+    const { init_log, bridge_load_dao_user_view } = await wasmPromise;
     await init_log();
 
     let dao = await bridge_load_dao_user_view(daoId);
@@ -62,8 +61,7 @@ export const retrieveProfits = async (
   updateInvestmentData
 ) => {
   try {
-    const { bridge_claim, bridge_submit_claim, bridge_load_investment } =
-      await wasmPromise;
+    const { bridge_claim, bridge_submit_claim } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
@@ -111,8 +109,7 @@ export const unlock = async (
   updateInvestmentData
 ) => {
   try {
-    const { bridge_unlock, bridge_submit_unlock, bridge_load_investment } =
-      await wasmPromise;
+    const { bridge_unlock, bridge_submit_unlock } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);

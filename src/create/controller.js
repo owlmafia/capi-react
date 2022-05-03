@@ -1,4 +1,4 @@
-import { signTx, signTxs } from "../MyAlgo";
+import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -88,7 +88,7 @@ export const createDao = async (
 
     await updateMyBalance(myAddress);
   } catch (e) {
-    if (e.type_identifier == "input_errors") {
+    if (e.type_identifier === "input_errors") {
       setDaoNameError(toErrorMsg(e.name));
       setDaoDescrError(toErrorMsg(e.description));
       setShareCountError(toErrorMsg(e.share_supply));
