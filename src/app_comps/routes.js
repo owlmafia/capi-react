@@ -4,8 +4,6 @@ import { FundsActivity } from "../funds_activity/FundsActivity";
 import { Investment } from "../investment/Investment";
 import { MyDaos } from "../my_daos/MyDaos";
 import { Dao } from "../dao/Dao";
-import { AddRoadmapItem } from "../roadmap/AddRoadmapItem";
-import { Roadmap } from "../roadmap/Roadmap";
 import { Stats } from "../stats/Stats";
 import { Withdrawal } from "../withdraw/Withdraw";
 import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
@@ -145,30 +143,6 @@ export const routesView = (
             path="funds_activity"
             element={
               <FundsActivity
-                myAddress={myAddress}
-                showProgress={(show) => setShowProgress(show)}
-                statusMsg={statusMsgUpdater}
-                updateMyBalance={updateMyBalance}
-              />
-            }
-          />
-          <Route
-            exact
-            path="roadmap"
-            element={
-              <Roadmap
-                myAddress={myAddress}
-                showProgress={(show) => setShowProgress(show)}
-                statusMsg={statusMsgUpdater}
-                updateMyBalance={updateMyBalance}
-              />
-            }
-          />
-          <Route
-            exact
-            path="roadmap/add"
-            element={
-              <AddRoadmapItem
                 myAddress={myAddress}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}

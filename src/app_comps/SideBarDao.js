@@ -57,9 +57,6 @@ export const SideBarDao = ({
           <MenuItem icon={<img src={home} alt="Home" />}>
             <NavLink to="">Project Home</NavLink>
           </MenuItem>
-          <MenuItem icon={<FaRoad />}>
-            <NavLink to="roadmap">Roadmap</NavLink>
-          </MenuItem>
           <MenuItem icon={<IoMdStats />}>
             <NavLink to="stats">Stats</NavLink>
           </MenuItem>
