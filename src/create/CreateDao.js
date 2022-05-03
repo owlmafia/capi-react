@@ -86,47 +86,13 @@ export const CreateDao = (props) => {
             onChange={(input) => setSharePrice(input)}
           /> */}
 
-          <div className="chart__title">
-            {"Investor's part: "}
-            <p
-              onClick={() =>
-                props.showModal({
-                  title: "Investor's share",
-                  body: (
-                    <div>
-                      <p>
-                        {"The % of the project's income reserved to investors"}
-                      </p>
-                    </div>
-                  ),
-                })
-              }
-            >
-              ?
-            </p>
-          </div>
-          <div className="labeled_input__error">{investorsShareError}</div>
-
-          <div className="pie_chart__container input_spacing">
-            <svg className="pie_chart__svg" ref={investorsShareChart} />
-            <div className="pie_chart__centered_text">
-              <input
-                placeholder=""
-                className="full_width_input"
-                size="10"
-                value={investorsShare}
-                style={{
-                  width: "70px",
-                  textAlign: "center",
-                  margin: "0",
-                }}
-                onChange={(event) => {
-                  setInvestorsShare(event.target.value);
-                }}
-              />
-              <span className="pie_chart__perc_symbol">{"%"}</span>
-            </div>
-          </div>
+          <LabeledCurrencyInput
+            label={"Investor's part:"}
+            inputValue={investorsShare}
+            onChange={(input) => setInvestorsShare(input)}
+            errorMsg={investorsShareError}
+            placeholder="Investor's part in %"
+          />
           <LabeledCurrencyInput
             label={"Shares for investors"}
             inputValue={sharesForInvestors}
