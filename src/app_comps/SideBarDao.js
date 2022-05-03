@@ -4,6 +4,8 @@ import { FaCoins, FaRoad } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
 import { IoMdStats } from "react-icons/io";
 import { VscArrowSwap } from "react-icons/vsc";
+import { IoCreateOutline } from "react-icons/io5";
+import { VscListFlat } from "react-icons/vsc";
 import {
   Menu,
   MenuItem,
@@ -12,9 +14,9 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "react-pro-sidebar";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, Link } from "react-router-dom";
 import { init } from "./controller";
-import home from '../images/sidebar/home.svg';
+import home from "../images/sidebar/home.svg";
 
 export const SideBarDao = ({
   myAddress,
@@ -45,7 +47,15 @@ export const SideBarDao = ({
     <ProSidebar id="sidebar">
       <SidebarContent>
         <Menu iconShape="square">
-          <MenuItem icon={<img src={home}/>}>
+          <MenuItem icon={<IoCreateOutline />}>
+            <Link to="/global/create">Create</Link>
+          </MenuItem>
+          <MenuItem icon={<VscListFlat />}>
+            <Link to="/global/my_projects">My projects</Link>
+          </MenuItem>
+        </Menu>
+        <Menu iconShape="square">
+          <MenuItem icon={<img src={home} />}>
             <NavLink to="">Project Home</NavLink>
           </MenuItem>
           <MenuItem icon={<FaRoad />}>
