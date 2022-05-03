@@ -6,8 +6,8 @@ import {
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { createDao, init } from "./controller";
-import { CreateDaoSuccess } from "./CreateDaoSuccess";
 import { ImageUpload } from "../app_comps/ImageUpload";
+import { useNavigate } from "react-router-dom";
 
 export const CreateDao = (props) => {
   const [daoName, setDaoName] = useState("");
@@ -30,7 +30,7 @@ export const CreateDao = (props) => {
   // TODO show this error
   const [imageBytesError, setImageBytesError] = useState("");
 
-  const [createDaoSuccess, setCreateDaoSuccess] = useState(null);
+  const navigate = useNavigate();
 
   const investorsShareChart = useRef(null);
 
@@ -131,7 +131,7 @@ export const CreateDao = (props) => {
                 sharesForInvestors,
                 imageBytes,
                 socialMediaUrl,
-                setCreateDaoSuccess,
+                navigate,
 
                 setDaoNameError,
                 setDaoDescrError,
@@ -153,18 +153,11 @@ export const CreateDao = (props) => {
     }
   };
 
-  const bodyView = () => {
-    if (createDaoSuccess) {
-      return <CreateDaoSuccess dao={createDaoSuccess.dao} />;
-    } else {
-      return (
-        <div>
-          <ContentTitle title="Create project" />
-          {formView()}
-        </div>
-      );
-    }
-  };
-
-  return <div>{bodyView()}</div>;
+  return (
+    <div>
+      {" "}
+      <ContentTitle title="Create project" />
+      {formView()}
+    </div>
+  );
 };

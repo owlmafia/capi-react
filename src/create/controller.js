@@ -21,7 +21,7 @@ export const createDao = async (
   sharesForInvestors,
   imageBytes,
   socialMediaUrl,
-  setCreateDaoSuccess,
+  navigate,
 
   setDaoNameError,
   setDaoDescrError,
@@ -82,7 +82,8 @@ export const createDao = async (
     });
     console.log("submitDaoRes: " + JSON.stringify(submitDaoRes));
 
-    setCreateDaoSuccess(submitDaoRes);
+    navigate(submitDaoRes.dao.dao_link);
+
     showProgress(false);
     statusMsg.success("Project created!");
 
