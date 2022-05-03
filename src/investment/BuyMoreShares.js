@@ -22,11 +22,13 @@ export const BuyMoreShares = ({
 
   const view = () => {
     return (
-      <div>
-        <div>
-          <div>{"Buy more shares"}</div>
-          <div>{"Project shares"}</div>
-          <div>{dao.share_supply}</div>
+      <div className="box-container">
+        <div className="w-60">
+          <div className="title">{"Buy more shares"}</div>
+          <div className="flex-block">
+            <div className="subTitle">{"Available Shares in project"}</div>
+            <div className="subTitle">{dao.share_supply}</div>
+          </div>
           <div>
             <div>{investmentData.available_shares}</div>
             <div>{"Not owned"}</div>

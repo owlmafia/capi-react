@@ -1,3 +1,5 @@
+@import "global_vars";
+
 #invest_em_share_count_input {
     width: 100px;
 }
@@ -11,3 +13,35 @@
         margin-left: 4px;
     }
 }
+
+.box-container {
+    margin-bottom: 92px;
+    .flex-block {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 32px;
+        .subTitle {
+            color: $black;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .retrieved {
+            color: #686777;
+            &:nth-child(2) {
+                margin-left: 12px;
+            }
+        }
+        .fund-asset {
+            width: 22px;
+            height: 22px;
+        }
+    }
+    .button-primary {
+        width: 236px;
+    }
+    .labeled_input {
+        margin-top: 40px;
+    }
+}
+
+

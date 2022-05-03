@@ -33,12 +33,24 @@ body {
     }
 }
 
+.box-container {
+    background-color: #F5FAFB;
+    border-radius: $global-border-radius-m;
+    padding: 40px;
+    .title {
+        color: $blue-primary;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 36px;
+    }
+}
+
 .dao-name-container {
     margin-bottom: 26px;
 }
 
 #content {
-    width: calc(100% - 556px);
+    width: calc(100% - 596px);
     display: inline-block;
     box-sizing: border-box;
     position: relative;
@@ -90,8 +102,8 @@ body {
 
     &__title {
         font-weight: 700;
-        font-size: 34px;
-        color: black;
+        font-size: 2rem;
+        color: $black;;
         margin-bottom: 26px;
         display: flex;
         align-items: center;
@@ -441,6 +453,7 @@ a {
     font-weight: 600;
     font-size: $global-title;
     margin-bottom: 36px;
+    color: $black;
 }
 
 p {
@@ -513,4 +526,33 @@ p {
 
 .section_large_bottom {
     margin-bottom: 40px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.w-100 {
+    width: 100%;
+}
+.w-80 {
+    width: 80%;
+}
+.w-60 {
+    width: 60%;
+}
+.flex-column {
+    flex-direction: column;
+}
+.align-start {
+    align-items: flex-start
+}
+.opacity-70 {
+    opacity: 0.7;
 }
