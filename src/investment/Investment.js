@@ -1,21 +1,20 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
-import { ContentTitle } from "../ContentTitle";
-import { FundsAssetImg } from "../images/FundsAssetImg";
-import { LockEmbedded } from "../lockEmbedded/LockEmbedded";
-import {
-  init,
-  retrieveProfits,
-  unlock,
-  updateChainInvestmentData_,
-} from "./controller";
+import { BuyMoreShares } from "./BuyMoreShares";
+import { init, updateChainInvestmentData_ } from "./controller";
+import { InvestmentProfits } from "./InvestmentProfits";
+import { UnlockShares } from "./UnlockShares";
 
 export const Investment = (props) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
-  const [chainInvestmentData, setChainInvestmentData] = useState(null);
+  const [investmentData, setChainInvestmentData] = useState(null);
+
+  const [showBuyMoreTab, setShowBuyMoreTab] = useState(true);
+  const [showUnlockTab, setShowUnlockTab] = useState(false);
+
   const myShareChart = useRef(null);
 
   const updateInvestmentData = useCallback(async () => {
@@ -44,86 +43,75 @@ export const Investment = (props) => {
   }, [params.id, props.myAddress, props.statusMsg]);
 
   useEffect(() => {
-    if (myShareChart.current && chainInvestmentData) {
-      const notMyShare = 1 - chainInvestmentData.investor_percentage_number;
+    if (myShareChart.current && investmentData) {
+      const notMyShare = 1 - investmentData.investor_percentage_number;
       // the labels are irrelevant here
       const data = {
-        a: chainInvestmentData.investor_percentage_number,
+        a: investmentData.investor_percentage_number,
         b: notMyShare,
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [dao, chainInvestmentData]);
+  }, [dao, investmentData]);
 
   const userView = () => {
-    if (chainInvestmentData) {
+    if (props.myAddress && dao && investmentData) {
       return (
         <div>
           <div className="section_container">
-            <span className="key-val-key">{"Your locked shares:"}</span>
-            <span className="key-val-val">
-              {chainInvestmentData.investor_shares_count}
-            </span>
-          </div>
-          <div>
-            <svg width={200} height={200} ref={myShareChart} />
-          </div>
-          <p className="section_container">
-            {"You're entitled to " +
-              chainInvestmentData.investor_percentage +
-              " of the investor's share"}
-          </p>
-          <p className="section_container text_with_currency section_small_bottom">
-            <span className="key-val-key">{"Retrieved profits:"}</span>
-            <span className="key-val-val">
-              {chainInvestmentData.investor_already_retrieved_amount}
-            </span>
-            <FundsAssetImg />
-          </p>
-          <p className="section_container text_with_currency section_large_bottom">
-            <span className="key-val-key">{"Retrievable profits:"}</span>
-            <span className="key-val-val">
-              {chainInvestmentData.investor_claimable_dividend}
-            </span>
-            <FundsAssetImg />
-          </p>
+            <InvestmentProfits
+              statusMsg={props.statusMsg}
+              showProgress={props.showProgress}
+              updateMyShares={props.updateMyShares}
+              updateMyBalance={props.updateMyBalance}
+              myAddress={props.myAddress}
+            />
 
-          <button
-            className="button-primary"
-            hidden={chainInvestmentData.investor_claimable_dividend === "0"}
-            onClick={async () => {
-              await retrieveProfits(
-                props.myAddress,
-                props.showProgress,
-                props.statusMsg,
-                props.updateMyBalance,
-                params.id,
-                dao,
-                chainInvestmentData.investor_claimable_dividend_microalgos,
-                updateInvestmentData
-              );
-            }}
-          >
-            {"Retrieve profits"}
-          </button>
-          <button
-            className="button-primary"
-            disabled={chainInvestmentData.investor_shares_count === "0"}
-            onClick={async () => {
-              await unlock(
-                props.myAddress,
-                props.showProgress,
-                props.statusMsg,
-                props.updateMyBalance,
-                props.updateMyShares,
-                params.id,
-                dao,
-                updateInvestmentData
-              );
-            }}
-          >
-            {"Unlock shares"}
-          </button>
+            <div id="dao_actions_top_bar">
+              <p
+                className={actions_tabs_classes(showBuyMoreTab)}
+                onClick={() => {
+                  setShowUnlockTab(false);
+                  setShowBuyMoreTab((current) => !current);
+                }}
+              >
+                {"Buy more shares"}
+              </p>
+              <p
+                className={actions_tabs_classes(showUnlockTab)}
+                onClick={() => {
+                  setShowBuyMoreTab(false);
+                  setShowUnlockTab((current) => !current);
+                }}
+              >
+                {"Unlock shares"}
+              </p>
+            </div>
+            {showBuyMoreTab && (
+              <BuyMoreShares
+                statusMsg={props.statusMsg}
+                showProgress={props.showProgress}
+                updateMyShares={props.updateMyShares}
+                updateMyBalance={props.updateMyBalance}
+                updateFunds={props.updateFunds}
+                myAddress={props.myAddress}
+                dao={dao}
+                investmentData={investmentData}
+              />
+            )}
+            {showUnlockTab && (
+              <UnlockShares
+                statusMsg={props.statusMsg}
+                showProgress={props.showProgress}
+                updateMyShares={props.updateMyShares}
+                updateMyBalance={props.updateMyBalance}
+                updateInvestmentData={updateInvestmentData}
+                myAddress={props.myAddress}
+                dao={dao}
+                investmentData={investmentData}
+              />
+            )}
+          </div>
         </div>
       );
     } else {
@@ -136,7 +124,7 @@ export const Investment = (props) => {
       return (
         <div>
           {userView()}
-          <LockEmbedded
+          {/* <LockEmbedded
             showProgress={props.showProgress}
             statusMsg={props.statusMsg}
             updateMyBalance={props.updateMyBalance}
@@ -145,7 +133,7 @@ export const Investment = (props) => {
             updateMyShares={props.updateMyShares}
             myShares={props.myShares}
             onLockOpt={updateInvestmentData}
-          />
+          /> */}
         </div>
       );
     } else {
@@ -155,8 +143,15 @@ export const Investment = (props) => {
 
   return (
     <div>
-      <ContentTitle title={"My investment"} />
       <div>{bodyView()}</div>
     </div>
   );
+};
+
+const actions_tabs_classes = (tabIsShowing) => {
+  var clazz = "link_button";
+  if (tabIsShowing) {
+    clazz += " dao_action_tab_item__sel";
+  }
+  return clazz;
 };

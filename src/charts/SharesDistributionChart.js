@@ -6,7 +6,7 @@ export const SharesDistributionChart = ({ sharesDistr }) => {
 
   useEffect(() => {
     if (sharesDistr && chart.current) {
-      renderPieChart(chart.current, sharesDistr, (d) => d[1].percentage_number);
+    renderPieChart(chart.current, sharesDistr, (d) => d[1].percentage_number);
     }
     // for now no deps - mutable value doesn't cause a re-render
     //   }, [sharesDistr]);
