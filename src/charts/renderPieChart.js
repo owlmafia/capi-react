@@ -1,5 +1,10 @@
 import * as d3 from "d3";
-const renderPieChart = (container, data, dataNumberSelector) => {
+const renderPieChart = (
+  container,
+  data,
+  dataNumberSelector,
+  onSegmentSelected
+) => {
   console.log("Rendering pie chart, data: %o", data);
 
   var margin = { top: 20, bottom: 20, right: 20, left: 20 },
@@ -78,8 +83,8 @@ const renderPieChart = (container, data, dataNumberSelector) => {
     .on("mousemove", handleMouseOver)
     .on("mouseout", handleMouseOut);
 
-  svg.selectAll("path").on("click", (d, i, n) => {
-    console.log(d, i, n);
+  svg.selectAll("path").on("click", (p, d) => {
+    onSegmentSelected(d.data);
   });
 };
 

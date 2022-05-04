@@ -1,28 +1,32 @@
 import React from "react";
 
-export const HolderEntry = ({ entry }) => {
+export const HolderEntry = ({ entry, isSelected }) => {
   if (entry.type_ === "holder") {
-    return holderEntry(entry);
+    return holderEntry(entry, isSelected);
   } else if (entry.type_ === "not_owned") {
-    return notOwnedEntry(entry);
+    return notOwnedEntry(entry, isSelected);
   }
 };
 
-const holderEntry = (entry) => {
+const holderEntry = (entry, isSelected) => {
   return (
     <a href={entry.address_browser_link} target="_blank" rel="noreferrer">
-      {entryBody(entry)}
+      {entryBody(entry, isSelected)}
     </a>
   );
 };
 
-const notOwnedEntry = (entry) => {
-  return entryBody(entry);
+const notOwnedEntry = (entry, isSelected) => {
+  return entryBody(entry, isSelected);
 };
 
-const entryBody = (entry) => {
+const entryBody = (entry, isSelected) => {
+  var containerClasses = "holder_item__container";
+  if (isSelected) {
+    containerClasses = containerClasses + " selected";
+  }
   return (
-    <div className="holder_item__container">
+    <div className={containerClasses}>
       <div className="percentage-text">{entry.percentage_formatted}</div>
       <div>{entry.label}</div>
     </div>
