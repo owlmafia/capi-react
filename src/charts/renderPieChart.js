@@ -1,39 +1,86 @@
 import * as d3 from "d3";
-
 const renderPieChart = (container, data, dataNumberSelector) => {
   console.log("Rendering pie chart, data: %o", data);
 
-  // For now the same for all pie charts: we also use a global value in CSS
-  // note that value in CSS (pie_chart_diameter) has to be identical
-  let diameter = 160;
+  var margin = { top: 20, bottom: 20, right: 20, left: 20 },
+    width = 280,
+    height = 280;
 
-  const radius = diameter / 2;
+  let outerRadius = (height / 2) * 0.6;
+  let innerRadius = (height / 2) * 0.4;
 
-  const svg = d3
-    .select(container)
-    .append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .append("g")
-    .attr("transform", `translate(${diameter / 2}, ${diameter / 2})`);
+  const getCoordinates = (angle, radius, svgSize) => {
+    const x = Math.cos(angle);
+    const y = Math.sin(angle);
+    const coordX = x * radius + svgSize / 2;
+    const coordY = y * -radius + svgSize / 2;
+    return [coordX, coordY].join(" ");
+  };
 
-  const color = d3.scaleOrdinal().range(["#f00", "#000", "#ff0", "#00f"]);
+  const svg = d3.select(container);
 
-  const pie = d3.pie().value(function (d) {
-    return dataNumberSelector(d);
-  });
-  const data_ready = pie(Object.entries(data));
+  svg.selectAll("*").remove();
+
+  svg.append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
+
+  const colors = (i) => d3.interpolateBlues(i / data.length);
+  var pie = d3
+    .pie()
+    .value(function (d) {
+      return +dataNumberSelector(d);
+    })
+    .startAngle(-Math.PI)
+    .endAngle(Math.PI);
+
+  const data_ready = pie(data);
 
   svg
     .selectAll()
     .data(data_ready)
     .join("path")
-    .attr("d", d3.arc().innerRadius(0).outerRadius(radius))
-    .attr("fill", function (d) {
-      return color(d.data[1]);
+    .attr("fill", (data) => colors(data.index))
+    .transition()
+    .delay(function (_, i) {
+      return i * 50;
     })
-    .style("stroke-width", "0px")
-    .style("opacity", 1);
+    .duration(50)
+    .attrTween("d", function (d) {
+      var i = d3.interpolate(d.startAngle, d.endAngle);
+      return function (t) {
+        d.endAngle = i(t);
+        return `M ${getCoordinates(
+          d.startAngle,
+          outerRadius,
+          width
+        )} A ${5} ${5} 0 ${0} 0 ${getCoordinates(d.startAngle, innerRadius, width)} A ${innerRadius} ${innerRadius} 0 ${0} 0 ${getCoordinates(d.endAngle, innerRadius, width)} A ${5} ${5} 0 ${0} 1  ${getCoordinates(d.endAngle, outerRadius, width)}A ${outerRadius} ${outerRadius} 0 ${0} 1 ${getCoordinates(d.startAngle, outerRadius, width)}`;
+      };
+    })
+    .attr("stroke", (d) => colors(d.index))
+    .attr("stroke-width", 0.2);
+
+  function handleMouseOver(d, i, n) {
+    d3.select(this)
+      .attr("stroke", colors(i.index))
+      .attr("stroke-width", 5)
+      .raise();
+  }
+
+  function handleMouseOut(d, i) {
+    d3.select(this).attr("stroke-width", 0.2);
+    d3.select(this)
+      .transition()
+      .duration(500)
+      .attr("transform", "translate(0,0)");
+  }
+
+  svg
+    .selectAll("path")
+    .on("mousemove", handleMouseOver)
+    .on("mouseout", handleMouseOut);
+
+  svg.selectAll("path").on("click", (d, i, n) => {
+    console.log(d, i, n);
+  });
 };
 
 export default renderPieChart;
