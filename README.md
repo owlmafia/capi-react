@@ -33,4 +33,4 @@ Now you just have to start the app:
 npm start --debug
 ```
 
-Navigate to http://localhost:3000/global/create in your browser.
+Navigate to http://localhost:3000 in your browser.
