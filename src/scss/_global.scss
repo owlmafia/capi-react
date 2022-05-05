@@ -104,7 +104,7 @@ body {
         font-weight: 700;
         font-size: 2rem;
         color: $black;;
-        margin-bottom: 26px;
+        margin-bottom: 40px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -555,4 +555,11 @@ p {
 }
 .opacity-70 {
     opacity: 0.7;
+}
+#update-app {
+    .button-primary {
+        margin-left: 30px;
+        height: 32px;
+        width: 90px;
+    }
 }

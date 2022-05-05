@@ -113,7 +113,13 @@
 
 .create-dao-container, .update-dao-data {
     .subtitle {
-        color: rgb(119, 111, 111);
+        color: #000000;
+        margin-bottom: 48px;
+    }
+    .info {
+        color: #686777;
+        font-weight: bold;
+        margin-bottom: 40px;
     }
     .dao-title {
         font-size: 18px;
