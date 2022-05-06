@@ -47,10 +47,10 @@ export const SideBarDao = ({
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<IoCreateOutline />}>
-            <Link to="/global/create">Create</Link>
+            <Link to="/">Create</Link>
           </MenuItem>
           <MenuItem icon={<VscListFlat />}>
-            <Link to="/global/my_projects">My projects</Link>
+            <Link to="/my_projects">My projects</Link>
           </MenuItem>
         </Menu>
         <Menu iconShape="square">

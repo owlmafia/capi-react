@@ -8,19 +8,17 @@ import { DaoName } from "../ContentTitle";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { PayEmbedded } from "../payEmbedded/PayEmbedded";
 import { init, updateFunds_ } from "./controller";
-import { Funds } from "./Funds";
 import Modal from "../Modal";
+import { updateInvestmentData_ } from "../shared_functions";
 
 export const Dao = (props) => {
   let params = useParams();
 
   const [viewDao, setViewDao] = useState(null);
   const [funds, setFunds] = useState(null);
+  const [investmentData, setInvestmentData] = useState(null);
 
   const [holderCount, setHolderCount] = useState(null);
-
-  const [showInvestTab, setShowInvestTab] = useState(false);
-  const [showPayTab, setShowPayTab] = useState(false);
 
   const [showShareModal, setShowShareModal] = useState(false);
 
@@ -53,6 +51,17 @@ export const Dao = (props) => {
       );
     }
   }, [props.statusMsg, dao]);
+
+  useEffect(async () => {
+    if (props.myAddress) {
+      await updateInvestmentData_(
+        props.statusMsg,
+        props.myAddress,
+        params.id,
+        setInvestmentData
+      );
+    }
+  }, [props.statusMsg, props.myAddress, params.id]);
 
   const sharesAssetId = useMemo(() => {
     if (dao) {
@@ -88,57 +97,20 @@ export const Dao = (props) => {
 
             <div id="dao_description">{viewDao.dao.description}</div>
 
-            <div id="dao_actions_top_bar">
-              <p
-                className={actions_tabs_classes(showInvestTab)}
-                onClick={() => {
-                  setShowPayTab(false);
-                  setShowInvestTab((current) => !current);
-                }}
-              >
-                {"Invest"}
-              </p>
-              <p
-                className={actions_tabs_classes(showPayTab)}
-                onClick={() => {
-                  setShowInvestTab(false);
-                  setShowPayTab((current) => !current);
-                }}
-              >
-                {"Pay"}
-              </p>
-              <Funds
-                funds={funds}
-                showWithdrawLink={
-                  props.myAddress &&
-                  viewDao.dao.owner_address &&
-                  viewDao.dao.owner_address === props.myAddress
-                }
-                daoId={params.id}
-              />
-            </div>
-            {showInvestTab && (
+            {investmentData && (
               <InvestEmbedded
                 showProgress={props.showProgress}
                 statusMsg={props.statusMsg}
                 updateMyBalance={props.updateMyBalance}
                 myAddress={props.myAddress}
                 dao={dao}
+                investmentData={investmentData}
                 updateMyShares={props.updateMyShares}
                 myShares={props.myShares}
                 updateFunds={updateFunds}
               />
             )}
-            {showPayTab && (
-              <PayEmbedded
-                showProgress={props.showProgress}
-                statusMsg={props.statusMsg}
-                updateMyBalance={props.updateMyBalance}
-                myAddress={props.myAddress}
-                dao={dao}
-                updateFunds={updateFunds}
-              />
-            )}
+
             {/* <Link
               disabled={props.myAddress === "" || funds === 0}
               hidden={viewDao.dao.owner_address !== props.myAddress}

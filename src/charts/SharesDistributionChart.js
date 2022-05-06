@@ -1,12 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import renderPieChart from "./renderPieChart";
 
-export const SharesDistributionChart = ({ sharesDistr }) => {
+export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
   const chart = useRef(null);
 
   useEffect(() => {
     if (sharesDistr && chart.current) {
-    renderPieChart(chart.current, sharesDistr, (d) => d[1].percentage_number);
+      renderPieChart(
+        chart.current,
+        sharesDistr,
+        (d) => d.percentage_number,
+        (d) => {
+          onAddressSelected(d.address);
+        }
+      );
     }
     // for now no deps - mutable value doesn't cause a re-render
     //   }, [sharesDistr]);

@@ -14,6 +14,7 @@ export const SharesDistributionBox = ({
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
   const [showMore, setShowMore] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
   const entries_small_count = 3;
 
@@ -27,9 +28,14 @@ export const SharesDistributionBox = ({
       return (
         <div className="holder_list_container">
           <div className="sub-title">Investors {entries.length}</div>
-          {entries.map((entry) => (
-            <HolderEntry entry={entry} />
-          ))}
+          {entries.map((entry) => {
+            return (
+              <HolderEntry
+                entry={entry}
+                isSelected={entry.address === selectedAddress}
+              />
+            );
+          })}
           {hasToCollapse && (
             <div className="link_button" onClick={() => setShowMore(true)}>
               {"Show more"}
@@ -51,7 +57,10 @@ export const SharesDistributionBox = ({
           <div>
             <div className="sub-title">Available Shares 1200</div>
           </div>
-          <SharesDistributionChart sharesDistr={sharesDistr} />
+          <SharesDistributionChart
+            sharesDistr={sharesDistr}
+            onAddressSelected={setSelectedAddress}
+          />
           {holdersListItems()}
         </div>
       );

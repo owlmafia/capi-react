@@ -71,7 +71,7 @@ body {
             gap: 16px;
             align-items: center;
             .button__follow {
-                background-color: #55ACEE;
+                background-color: #55acee;
                 display: flex;
                 align-items: center;
                 width: 190px;
@@ -96,7 +96,7 @@ body {
         height: 280px;
         border-radius: $global-border-radius;
         margin-bottom: 36px;
-        background-image: url('../images/monkey.svg');
+        background-image: url("../images/monkey.svg");
         background-size: cover;
     }
 
@@ -476,6 +476,9 @@ p {
         }
         .sub-title {
             font-weight: bold;
+        }
+        .selected {
+            border: 1px solid red;
         }
     }
 }

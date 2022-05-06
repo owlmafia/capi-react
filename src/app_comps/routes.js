@@ -30,7 +30,7 @@ export const routesView = (
     <Routes>
       <Route path="/" element={<OuterWireframe />}>
         <Route
-          path="global"
+          path="/"
           element={
             <Wireframe
               isGlobal={true}
@@ -46,7 +46,7 @@ export const routesView = (
           }
         >
           <Route
-            path="create"
+            path="/"
             element={
               <CreateDao
                 myAddress={myAddress}

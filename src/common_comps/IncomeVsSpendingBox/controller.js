@@ -1,10 +1,15 @@
 const wasmPromise = import("wasm");
 
-export const fetchIncomeVsSpendingChartData = async (statusMsg, daoId) => {
+export const fetchIncomeVsSpendingChartData = async (
+  statusMsg,
+  daoId,
+  interval
+) => {
   try {
     const { bridge_income_vs_spending } = await wasmPromise;
     let res = await bridge_income_vs_spending({
       dao_id: daoId,
+      interval: interval,
     });
     console.log("Income and spending chart: %o", res);
     return res;

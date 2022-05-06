@@ -15,7 +15,7 @@ export const SideBar = () => {
       <SidebarContent>
         <Menu iconShape="square">
           <MenuItem icon={<IoCreateOutline />}>
-            <Link to="create">Create</Link>
+            <Link to="/">Create</Link>
           </MenuItem>
           <MenuItem icon={<VscListFlat />}>
             <Link to="my_projects">My projects</Link>
