@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { BuyMoreShares } from "./BuyMoreShares";
-import { init, updateChainInvestmentData_ } from "./controller";
+import { init } from "./controller";
+import { updateInvestmentData_ } from "../shared_functions";
 import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 
@@ -10,7 +11,7 @@ export const Investment = (props) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
-  const [investmentData, setChainInvestmentData] = useState(null);
+  const [investmentData, setInvestmentData] = useState(null);
 
   const [showBuyMoreTab, setShowBuyMoreTab] = useState(true);
   const [showUnlockTab, setShowUnlockTab] = useState(false);
@@ -19,11 +20,11 @@ export const Investment = (props) => {
 
   const updateInvestmentData = useCallback(async () => {
     if (props.myAddress) {
-      await updateChainInvestmentData_(
+      await updateInvestmentData_(
         props.statusMsg,
         props.myAddress,
         params.id,
-        setChainInvestmentData
+        setInvestmentData
       );
     }
   }, [props.statusMsg, props.myAddress, params.id]);

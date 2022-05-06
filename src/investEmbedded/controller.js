@@ -4,43 +4,50 @@ import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (
-  statusMsg,
-  shareCountInput,
-  dao,
-  setBuySharesTotalPrice
-) => {
+export const init = async (statusMsg) => {
   try {
     const { init_log } = await wasmPromise;
     await init_log();
-
-    updateTotalCost(shareCountInput, dao, setBuySharesTotalPrice);
   } catch (e) {
     statusMsg.error(e);
   }
 };
 
 export const handleSharesCountInput = async (
+  statusMsg,
   shareCountInput,
   dao,
+  investmentData,
   setBuySharesCount,
-  setBuySharesTotalPrice
+  setBuySharesTotalPrice,
+  setProfitPercentage
 ) => {
-  setBuySharesCount(shareCountInput);
-  updateTotalCost(shareCountInput, dao, setBuySharesTotalPrice);
-};
+  try {
+    const { bridge_calculate_shares_price } = await wasmPromise;
 
-export const updateTotalCost = async (
-  shareCountInput,
-  dao,
-  setBuySharesTotalPrice
-) => {
-  // TODO (low prio) do calculation in WASM - JS only strictly presentation logic
-  if (!isNaN(shareCountInput)) {
-    const price = shareCountInput * dao.share_price_number_algo;
-    setBuySharesTotalPrice(price);
-  } else {
-    setBuySharesTotalPrice("");
+    // populate input
+    setBuySharesCount(shareCountInput);
+
+    if (shareCountInput === "") {
+      setBuySharesTotalPrice(investmentData.init_share_price);
+      setProfitPercentage(investmentData.init_profit_percentage);
+    } else {
+      let res = await bridge_calculate_shares_price({
+        shares_amount: shareCountInput,
+        available_shares: investmentData.available_shares,
+        share_supply: dao.share_supply,
+        investors_share: dao.investors_share,
+        share_price: dao.share_price,
+        share_specs_msg_pack: investmentData.share_specs_msg_pack,
+      });
+
+      console.log("res: %o", res);
+
+      setBuySharesTotalPrice(res.total_price);
+      setProfitPercentage(res.profit_percentage);
+    }
+  } catch (e) {
+    statusMsg.error(e);
   }
 };
 

@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { ContentTitle } from "../ContentTitle";
-import {
-  init,
-  retrieveProfits,
-  updateChainInvestmentData_ as updateInvestmentData_,
-} from "./controller";
+import { init, retrieveProfits } from "./controller";
+import { updateInvestmentData_ } from "../shared_functions";
 
 export const InvestmentProfits = ({
   statusMsg,
