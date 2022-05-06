@@ -91,15 +91,6 @@ export const InvestEmbedded = ({
       >
         {"Buy"}
       </button>
-      <LockEmbedded
-        showProgress={showProgress}
-        statusMsg={statusMsg}
-        updateMyBalance={updateMyBalance}
-        myAddress={myAddress}
-        dao={dao}
-        updateMyShares={updateMyShares}
-        myShares={myShares}
-      />
     </div>
   );
 };
