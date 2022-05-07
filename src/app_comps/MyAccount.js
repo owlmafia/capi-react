@@ -3,7 +3,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { connectWallet } from "../MyAlgo";
 import myalgo from "../images/svg/myalgo.svg";
 import arrow from "../images/svg/arrow-right.svg";
-import { retrieveProfits } from "../shared_functions";
+import { retrieveProfits, shortedAddress } from "../shared_functions";
 
 export const MyAccount = ({
   myAddress,
@@ -151,12 +151,7 @@ const connectButton = (
           try {
             let address = await connectWallet();
             setMyAddress(address);
-
-            const short_chars = 3;
-            const leading = address.substring(0, short_chars);
-            const trailing = address.substring(address.length - short_chars);
-            const shortAddress = leading + "..." + trailing;
-            setMyAddressDisplay(shortAddress);
+            setMyAddressDisplay(shortedAddress(address));
 
             await updateMyBalance(address);
           } catch (e) {

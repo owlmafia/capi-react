@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import myalgo from "../images/svg/myalgo.svg";
 
 const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -16,7 +17,14 @@ const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
     <CopyToClipboard text={copyText} onCopy={onCopy}>
       <div className="copyable">
         <div className="copyable__text">{text}</div>
-        <span className="copy_msg">{isCopied ? "Copied!" : null}</span>
+        {/* <span className="copy_msg">{isCopied ? "Copied!" : null}</span> */}
+        <span className={`copy ${isCopied ? "active" : ""}`}>
+          {isCopied ? (
+            " copied!"
+          ) : (
+            <img className="copy_icon" src={myalgo} alt="myalgo" />
+          )}
+        </span>
       </div>
     </CopyToClipboard>
   );

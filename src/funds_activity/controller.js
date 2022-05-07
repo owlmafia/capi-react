@@ -31,3 +31,15 @@ export const loadFundsActivity = async (
     statusMsg.error(e);
   }
 };
+
+export const loadDao = async (statusMsg, daoId, setDao) => {
+  try {
+    const { bridge_load_dao_user_view } = await wasmPromise;
+
+    let dao = await bridge_load_dao_user_view(daoId);
+    console.log("dao: " + JSON.stringify(dao));
+    setDao(dao);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};

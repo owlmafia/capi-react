@@ -68,3 +68,10 @@ export const retrieveProfits = async (
     showProgress(false);
   }
 };
+
+export const shortedAddress = (address) => {
+  const short_chars = 3;
+  const leading = address.substring(0, short_chars);
+  const trailing = address.substring(address.length - short_chars);
+  return leading + "..." + trailing;
+};
