@@ -25,6 +25,7 @@ export const MyAccount = ({
       {myAddressView(
         statusMsgUpdater,
         myAddress,
+        setMyAddress,
         myAddressDisplay,
         myBalance,
         myDividend,
@@ -47,6 +48,7 @@ export const MyAccount = ({
 const myAddressView = (
   statusMsg,
   myAddress,
+  setMyAddress,
   myAddressDisplay,
   myBalance,
   myDividend,
@@ -72,7 +74,12 @@ const myAddressView = (
           <div id="my_account_my_balance__balance">
             <FundsAssetImg />
             <div>{myBalance.balance_funds_asset}</div>
-            <img className="arrow" src={arrow} alt="arrow" />
+            <img
+              className="arrow"
+              src={arrow}
+              alt="arrow"
+              onClick={() => setMyAddress("")}
+            />
           </div>
         </div>
         {myDividend &&
