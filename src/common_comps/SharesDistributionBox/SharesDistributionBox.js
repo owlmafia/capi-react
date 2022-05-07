@@ -3,7 +3,6 @@ import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
-// import { scroller } from "react-scroll";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -21,11 +20,6 @@ export const SharesDistributionBox = ({
   const [entries, setEntries] = useState(sharesDistr);
 
   const entries_small_count = 3;
-
-  //   const refs = sharesDistr.reduce((acc, value) => {
-  //     acc[value.address] = React.createRef();
-  //     return acc;
-  //   }, {});
 
   useEffect(() => {
     async function fetchData() {
@@ -98,7 +92,6 @@ export const SharesDistributionBox = ({
             return (
               <HolderEntry
                 entry={entry}
-                // myRef={refs[entry.address]}
                 isSelected={entry.address === selectedAddress}
               />
             );
@@ -123,15 +116,6 @@ export const SharesDistributionBox = ({
           <SharesDistributionChart
             sharesDistr={sharesDistr}
             onAddressSelected={(address) => {
-              //   scroller.scrollTo(refs[address].current, {
-              //     duration: 800,
-              //     delay: 0,
-              //     smooth: "easeInOutQuart",
-              //   });
-              //   refs[address].current.scrollIntoView({
-              //     behavior: "smooth",
-              //     block: "start",
-              //   });
               setSelectedAddress(address);
             }}
           />
