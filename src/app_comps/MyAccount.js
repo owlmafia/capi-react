@@ -15,7 +15,6 @@ export const MyAccount = ({
   statusMsgUpdater,
   // optional: if set, shows "my shares"
   daoId,
-  myShares,
   myDividend,
   showProgress,
   updateInvestmentData,
@@ -27,7 +26,6 @@ export const MyAccount = ({
         statusMsgUpdater,
         myAddress,
         myAddressDisplay,
-        myShares,
         myBalance,
         myDividend,
         daoId,
@@ -50,7 +48,6 @@ const myAddressView = (
   statusMsg,
   myAddress,
   myAddressDisplay,
-  myShares,
   myBalance,
   myDividend,
   daoId,
@@ -78,11 +75,6 @@ const myAddressView = (
             <img className="arrow" src={arrow} alt="arrow" />
           </div>
         </div>
-        {myShares && (
-          <div id="my_account_my_balance__shares">
-            {"Your shares: " + myShares.total}
-          </div>
-        )}
         {myDividend &&
           dividendSection(
             showProgress,

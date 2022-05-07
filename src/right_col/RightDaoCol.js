@@ -12,7 +12,6 @@ export const RightDaoCol = ({
   myBalance,
   updateMyBalance,
   statusMsgUpdater,
-  myShares,
   updateMyShares,
   myDividend,
   updateMyDividend,
@@ -57,7 +56,6 @@ export const RightDaoCol = ({
         updateMyBalance={updateMyBalance}
         statusMsgUpdater={statusMsgUpdater}
         daoId={params.id}
-        myShares={myShares}
         myDividend={myDividend}
         showProgress={showProgress}
         updateInvestmentData={updateInvestmentData}

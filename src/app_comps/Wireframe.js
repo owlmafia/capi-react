@@ -70,7 +70,6 @@ export const Wireframe = ({
           myBalance={myBalance}
           updateMyBalance={updateMyBalance}
           statusMsgUpdater={statusMsgUpdater}
-          myShares={myShares}
           updateMyShares={updateMyShares}
         />
       );
@@ -84,7 +83,6 @@ export const Wireframe = ({
           myBalance={myBalance}
           updateMyBalance={updateMyBalance}
           statusMsgUpdater={statusMsgUpdater}
-          myShares={myShares}
           updateMyShares={updateMyShares}
           myDividend={myDividend}
           updateMyDividend={updateMyDividend}
