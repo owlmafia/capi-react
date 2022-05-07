@@ -3,6 +3,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { connectWallet } from "../MyAlgo";
 import myalgo from "../images/svg/myalgo.svg";
 import arrow from "../images/svg/arrow-right.svg";
+import { retrieveProfits } from "../shared_functions";
 
 export const MyAccount = ({
   myAddress,
@@ -15,11 +16,25 @@ export const MyAccount = ({
   // optional: if set, shows "my shares"
   daoId,
   myShares,
+  myDividend,
+  showProgress,
+  updateInvestmentData,
 }) => {
   return (
     <div className="my-account-container">
       <div className="text">My Algo wallet</div>
-      {myAddressView(myAddress, myAddressDisplay, myShares, myBalance)}
+      {myAddressView(
+        statusMsgUpdater,
+        myAddress,
+        myAddressDisplay,
+        myShares,
+        myBalance,
+        myDividend,
+        daoId,
+        updateMyBalance,
+        showProgress,
+        updateInvestmentData
+      )}
       {connectButton(
         myAddress,
         setMyAddress,
@@ -31,8 +46,18 @@ export const MyAccount = ({
   );
 };
 
-const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
-  console.log("Showing my shares: %o", myShares);
+const myAddressView = (
+  statusMsg,
+  myAddress,
+  myAddressDisplay,
+  myShares,
+  myBalance,
+  myDividend,
+  daoId,
+  updateMyBalance,
+  showProgress,
+  updateInvestmentData
+) => {
   if (myAddress !== "") {
     return (
       <div id="user_data">
@@ -50,7 +75,7 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
           <div id="my_account_my_balance__balance">
             <FundsAssetImg />
             <div>{myBalance.balance_funds_asset}</div>
-            <img className="arrow" src={arrow} alt="arrow"/>
+            <img className="arrow" src={arrow} alt="arrow" />
           </div>
         </div>
         {myShares && (
@@ -58,6 +83,16 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
             {"Your shares: " + myShares.total}
           </div>
         )}
+        {myDividend &&
+          dividendSection(
+            showProgress,
+            myAddress,
+            statusMsg,
+            updateMyBalance,
+            daoId,
+            myDividend,
+            updateInvestmentData
+          )}
         {/* for now show only funds asset. Algo can be helpful for fees, but it
         clutters the UI a bit.  */}
         {/* <div id="my_account_my_balance__balance">
@@ -69,6 +104,37 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
   } else {
     return null;
   }
+};
+
+const dividendSection = (
+  showProgress,
+  myAddress,
+  statusMsg,
+  updateMyBalance,
+  daoId,
+  dividend,
+  updateInvestmentData
+) => {
+  return (
+    <div>
+      <div>{"Claimable dividend: " + dividend}</div>
+      <button
+        className="button-primary full-width-btn"
+        onClick={async () => {
+          await retrieveProfits(
+            myAddress,
+            showProgress,
+            statusMsg,
+            updateMyBalance,
+            daoId,
+            updateInvestmentData
+          );
+        }}
+      >
+        {"Claim"}
+      </button>
+    </div>
+  );
 };
 
 const connectButton = (
@@ -103,15 +169,6 @@ const connectButton = (
       </button>
     );
   } else {
-    return (
-      <button
-        className="button-primary full-width-btn"
-        onClick={() => {
-          setMyAddress("");
-        }}
-      >
-        {"Disconnect"}
-      </button>
-    );
+    return null;
   }
 };

@@ -3,9 +3,14 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
-import { updateMyShares, updateMyBalance_ } from "./controller";
+import {
+  updateMyShares,
+  updateMyBalance_,
+  updateMyDividend_,
+} from "./controller";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
+import { updateInvestmentData_ } from "./shared_functions";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -14,11 +19,14 @@ const App = () => {
 
   const [myBalance, setMyBalance] = useState("");
   const [myShares, setMyShares] = useState(null);
+  const [myDividend, setMyDividend] = useState(null);
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
   const [statusMsg, setStatusMsg] = useState(null);
   const [showProgress, setShowProgress] = useState(false);
+
+  const [investmentData, setInvestmentData] = useState(null);
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
@@ -35,6 +43,34 @@ const App = () => {
     async (daoId, myAddress) => {
       if (myAddress) {
         await updateMyShares(statusMsgUpdater, daoId, myAddress, setMyShares);
+      }
+    },
+    [statusMsgUpdater]
+  );
+
+  const updateInvestmentData = useCallback(
+    async (daoId, myAddress) => {
+      if (myAddress) {
+        await updateInvestmentData_(
+          statusMsgUpdater,
+          myAddress,
+          daoId,
+          setInvestmentData
+        );
+      }
+    },
+    [statusMsg]
+  );
+
+  const updateMyDividend = useCallback(
+    async (daoId, myAddress) => {
+      if (myAddress) {
+        await updateMyDividend_(
+          statusMsgUpdater,
+          daoId,
+          myAddress,
+          setMyDividend
+        );
       }
     },
     [statusMsgUpdater]
@@ -66,7 +102,11 @@ const App = () => {
               statusMsg,
               setMyAddressDisplay,
               myShares,
-              updateShares
+              updateShares,
+              myDividend,
+              updateMyDividend,
+              investmentData,
+              updateInvestmentData
             )}
           </BrowserRouter>
           {modal && (

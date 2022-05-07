@@ -24,7 +24,11 @@ export const routesView = (
   statusMsg,
   setMyAddressDisplay,
   myShares,
-  updateMyShares
+  updateMyShares,
+  myDividend,
+  updateMyDividend,
+  investmentData,
+  updateInvestmentData
 ) => {
   return (
     <Routes>
@@ -42,6 +46,7 @@ export const routesView = (
               myBalance={myBalance}
               updateMyBalance={updateMyBalance}
               statusMsgUpdater={statusMsgUpdater}
+              showProgress={(show) => setShowProgress(show)}
             />
           }
         >
@@ -84,6 +89,10 @@ export const routesView = (
               statusMsgUpdater={statusMsgUpdater}
               myShares={myShares}
               updateMyShares={updateMyShares}
+              myDividend={myDividend}
+              updateMyDividend={updateMyDividend}
+              showProgress={(show) => setShowProgress(show)}
+              updateInvestmentData={updateInvestmentData}
             />
           }
         >
@@ -111,6 +120,8 @@ export const routesView = (
                 updateMyBalance={updateMyBalance}
                 updateMyShares={updateMyShares}
                 myShares={myShares}
+                investmentData={investmentData}
+                updateInvestmentData={updateInvestmentData}
               />
             }
           />

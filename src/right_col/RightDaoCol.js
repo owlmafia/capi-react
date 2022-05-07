@@ -14,6 +14,10 @@ export const RightDaoCol = ({
   statusMsgUpdater,
   myShares,
   updateMyShares,
+  myDividend,
+  updateMyDividend,
+  showProgress,
+  updateInvestmentData,
 }) => {
   let params = useParams();
 
@@ -33,6 +37,15 @@ export const RightDaoCol = ({
     }
   }, [params.id, myAddress, updateMyShares]);
 
+  useEffect(() => {
+    async function asyncFn() {
+      updateMyDividend(params.id, myAddress);
+    }
+    if (myAddress) {
+      asyncFn();
+    }
+  }, [params.id, myAddress, updateMyDividend]);
+
   return (
     <div id="rightcol">
       <MyAccount
@@ -45,6 +58,9 @@ export const RightDaoCol = ({
         statusMsgUpdater={statusMsgUpdater}
         daoId={params.id}
         myShares={myShares}
+        myDividend={myDividend}
+        showProgress={showProgress}
+        updateInvestmentData={updateInvestmentData}
       />
       <FundsActivityEmbedded
         statusMsg={statusMsgUpdater}

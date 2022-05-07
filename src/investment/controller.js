@@ -29,54 +29,6 @@ export const init = async (
 };
 
 
-export const retrieveProfits = async (
-  myAddress,
-  showProgress,
-  statusMsg,
-  updateMyBalance,
-  daoId,
-  dao,
-  amount,
-  updateInvestmentData
-) => {
-  try {
-    const { bridge_claim, bridge_submit_claim } = await wasmPromise;
-    statusMsg.clear();
-
-    showProgress(true);
-    let claimRes = await bridge_claim({
-      dao_id: daoId,
-      amount: amount,
-      investor_address: myAddress,
-    });
-    console.log("claimRes: " + JSON.stringify(claimRes));
-    showProgress(false);
-
-    let claimResSigned = await signTxs(claimRes.to_sign);
-    console.log("claimResSigned: " + JSON.stringify(claimResSigned));
-
-    showProgress(true);
-    let submitClaimRes = await bridge_submit_claim({
-      investor_address_for_diagnostics: myAddress,
-      dao_id_for_diagnostics: daoId,
-
-      txs: claimResSigned,
-      pt: claimRes.pt,
-    });
-    console.log("submitClaimRes: " + JSON.stringify(submitClaimRes));
-
-    await updateInvestmentData();
-
-    statusMsg.success("Profits retrieved");
-    showProgress(false);
-
-    await updateMyBalance(myAddress);
-  } catch (e) {
-    statusMsg.error(e);
-    showProgress(false);
-  }
-};
-
 export const unlock = async (
   myAddress,
   showProgress,

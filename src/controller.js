@@ -33,3 +33,22 @@ export const updateMyBalance_ = async (
     statusMsg.error(e);
   }
 };
+
+export const updateMyDividend_ = async (
+  statusMsg,
+  daoId,
+  myAddress,
+  setMyDividend
+) => {
+  try {
+    const { bridge_my_dividend } = await wasmPromise;
+    let myDividendRes = await bridge_my_dividend({
+      dao_id: daoId,
+      investor_address: myAddress,
+    });
+    console.log("myDividendRes: %o", myDividendRes);
+    setMyDividend(myDividendRes);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
