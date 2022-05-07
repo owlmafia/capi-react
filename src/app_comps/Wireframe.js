@@ -123,7 +123,8 @@ export const Wireframe = ({
 const logoView = (dao) => {
   if (dao?.image_url) {
     return (
-      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project banner" />
+      <div></div>
+      // <img id="banner_img" src={dao?.image_url ?? ""} alt="Project banner" />
     );
   } else {
     return null;

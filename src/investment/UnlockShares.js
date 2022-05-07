@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { unlock } from "./controller";
+import arrow from "../images/svg/arrow.svg";
 
 export const UnlockShares = ({
   statusMsg,
@@ -22,16 +23,19 @@ export const UnlockShares = ({
 
   const view = () => {
     return (
-      <div>
-        <div>
-          <div>{"Unlock shares"}</div>
-          <div>{"Project shares"}</div>
-          <div>{dao.share_supply}</div>
-          <div>
+      <div className="box-container">
+        <div className="w-60">
+          <div className="title">{"Unlock shares"}</div>
+          <div className="flex-block">
+            <div className="subTitle">{"Available Shares in project"}</div>
+            <div className="subTitle">{dao.share_supply}</div>
+            <img className="arrow" src={arrow} alt="arrow"/>
+          </div>
+          <div className="chartBlock">
             <div>{investmentData.investor_locked_shares}</div>
             <div>{"Your locked shares"}</div>
           </div>
-          <div>
+          <div className="chartBlock">
             <div>{investmentData.investor_unlocked_shares}</div>
             <div>{"Your unlocked shares"}</div>
           </div>

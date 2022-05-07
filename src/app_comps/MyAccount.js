@@ -1,6 +1,8 @@
 import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { connectWallet } from "../MyAlgo";
+import myalgo from "../images/svg/myalgo.svg";
+import arrow from "../images/svg/arrow-right.svg";
 
 export const MyAccount = ({
   myAddress,
@@ -35,13 +37,21 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
     return (
       <div id="user_data">
         <div className="my_address">
-          <a
-            href={"https://testnet.algoexplorer.io/address/" + myAddress}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {myAddressDisplay}
-          </a>
+          <div>
+            <a
+              href={"https://testnet.algoexplorer.io/address/" + myAddress}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {myAddressDisplay}
+            </a>
+            <img className="myalgo" src={myalgo} alt="myalgo" />
+          </div>
+          <div id="my_account_my_balance__balance">
+            <FundsAssetImg />
+            <div>{myBalance.balance_funds_asset}</div>
+            <img className="arrow" src={arrow} alt="arrow"/>
+          </div>
         </div>
         {myShares && (
           <div id="my_account_my_balance__shares">
@@ -50,10 +60,10 @@ const myAddressView = (myAddress, myAddressDisplay, myShares, myBalance) => {
         )}
         {/* for now show only funds asset. Algo can be helpful for fees, but it
         clutters the UI a bit.  */}
-        <div id="my_account_my_balance__balance">
+        {/* <div id="my_account_my_balance__balance">
           <FundsAssetImg />
           <div>{myBalance.balance_funds_asset}</div>
-        </div>
+        </div> */}
       </div>
     );
   } else {

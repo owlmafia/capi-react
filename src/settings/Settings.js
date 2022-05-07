@@ -47,14 +47,13 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
     if (updateData) {
       return (
         <div id="update-app">
-          <div>
+          <div className="d-flex align-center">
             {"There's a new version: " +
               appVersionStr(
                 updateData.new_approval_version,
                 updateData.new_clear_version
               )}
-          </div>
-          <button
+              <button
             className="button-primary"
             onClick={() =>
               updateApp(
@@ -69,6 +68,7 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
           >
             {"Update"}
           </button>
+          </div>
         </div>
       );
     } else {
@@ -90,7 +90,7 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
   return (
     <div>
       <div>
-        <ContentTitle title={"Settings"} />
+        <ContentTitle title={"Project settings"} />
         {body()}
       </div>
     </div>

@@ -51,6 +51,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
     return (
       <div className="update-dao-data">
         <div className="subtitle">{"Update project data"}</div>
+        <div className="info">{"Project Info"}</div>
         <LabeledInput
           label={"Project name"}
           inputValue={daoName}
@@ -61,39 +62,64 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           inputValue={daoDescr}
           onChange={(input) => setDaoDescr(input)}
         />
+        <LabeledInput
+          label={"Logo URL (optional)"}
+          inputValue={logoUrl}
+          onChange={(input) => setLogoUrl(input)}
+        />
+        <div className="info">{"Project Funds"}</div>
         <LabeledCurrencyInput
           label={"Share price per unit"}
           inputValue={sharePrice}
           onChange={(input) => setSharePrice(input)}
         />
         <LabeledInput
-          label={"Logo URL (optional)"}
-          inputValue={logoUrl}
-          onChange={(input) => setLogoUrl(input)}
+          label={"Funds escrow address"}
+          inputValue={customerEscrow}
+          onChange={(input) => setSocialMediaUrl(input)}
         />
         <LabeledInput
-          label={"Primary social media (optional)"}
-          inputValue={socialMediaUrl}
+          label={"Funds escrow version"}
+          inputValue={customerEscrowVersion}
+          onChange={(input) => setSocialMediaUrl(input)}
+        />
+        <LabeledInput
+          label={"Payments escrow version"}
+          inputValue={customerEscrow}
           onChange={(input) => setSocialMediaUrl(input)}
         />
         <LabeledInput
           label={"Payments escrow address"}
-          inputValue={customerEscrow}
-          onChange={(input) => setCustomerEscrow(input)}
+          inputValue={customerEscrowVersion}
+          onChange={(input) => setSocialMediaUrl(input)}
         />
         <LabeledInput
-          label={"Payments escrow version"}
-          inputValue={customerEscrowVersion}
-          onChange={(input) => setCustomerEscrowVersion(input)}
+          label={"Investing escrow address"}
+          inputValue={customerEscrow}
+          onChange={(input) => setSocialMediaUrl(input)}
         />
+        <LabeledInput
+          label={"Investing escrow version"}
+          inputValue={customerEscrowVersion}
+          onChange={(input) => setSocialMediaUrl(input)}
+        />
+        <LabeledInput
+          label={"Locking escrow address"}
+          inputValue={customerEscrow}
+          onChange={(input) => setSocialMediaUrl(input)}
+        />
+        {/* <LabeledInput
+          label={"Primary social media (optional)"}
+          inputValue={socialMediaUrl}
+          onChange={(input) => setSocialMediaUrl(input)}
+        /> */}
         <LabeledInput
           label={"Project owner"}
           inputValue={owner}
           onChange={(input) => setOwner(input)}
         />
-
         <button
-          className="button__submit"
+          className="button-primary"
           onClick={() =>
             updateDaoData(statusMsg, showProgress, {
               dao_id: params.id,
