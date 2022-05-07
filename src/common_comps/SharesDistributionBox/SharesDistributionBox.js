@@ -12,19 +12,79 @@ export const SharesDistributionBox = ({
   appId,
   holderCount,
 }) => {
-  const [sharesDistr, setSharesDistr] = useState(null);
-  const [showMore, setShowMore] = useState(null);
+  const [sharesDistr, setSharesDistr] = useState([]);
+  const [showMoreSelected, setShowMoreSelected] = useState(false);
+  // used to highlight the address on the right side
   const [selectedAddress, setSelectedAddress] = useState(null);
+
+  const [entries, setEntries] = useState(sharesDistr);
 
   const entries_small_count = 3;
 
-  const holdersListItems = () => {
-    if (sharesDistr && sharesDistr.length > 0) {
-      var entries = sharesDistr;
-      var hasToCollapse = !showMore && sharesDistr.length > entries_small_count;
-      if (hasToCollapse) {
-        entries = sharesDistr.slice(0, entries_small_count);
+  useEffect(() => {
+    async function fetchData() {
+      if (sharesAssetId && sharesSupply) {
+        const sharesDistr = await fetchSharesDistribution(
+          statusMsg,
+          sharesAssetId,
+          sharesSupply,
+          appId
+        );
+        setSharesDistr(sharesDistr);
       }
+    }
+    fetchData();
+  }, [statusMsg, sharesAssetId, sharesSupply, appId]);
+
+  const showAll = () => {
+    return showMoreSelected || sharesDistr.length <= entries_small_count;
+  };
+
+  const filterHolders = (startIndex) => {
+    let min = Math.min(sharesDistr.length, entries_small_count);
+    const holders = sharesDistr.slice(startIndex, startIndex + min);
+    return holders;
+  };
+
+  useEffect(() => {
+    if (showAll()) {
+      setEntries(sharesDistr);
+    } else {
+      // collapsed
+      var startIndex = 0;
+      if (selectedAddress) {
+        startIndex = sharesDistr.findIndex((d) => d.address == selectedAddress);
+      }
+      setEntries(filterHolders(startIndex));
+    }
+  }, [
+    statusMsg,
+    sharesAssetId,
+    sharesDistr,
+    showMoreSelected,
+    selectedAddress,
+  ]);
+
+  const showMoreOrLessFooter = () => {
+    // not enough entries for collapsing: no footer needed
+    if (sharesDistr.length <= entries_small_count) {
+      return null;
+    }
+
+    // since we discarded not enough entries case, showMore: true -> "show more", showMore: false -> "show less"
+    let showMore = !showMoreSelected;
+    return (
+      <div
+        className="link_button"
+        onClick={() => setShowMoreSelected(showMore)}
+      >
+        {showMore ? "Show more" : "Show less"}
+      </div>
+    );
+  };
+
+  const holdersListItems = () => {
+    if (sharesDistr.length > 0) {
       return (
         <div className="holder_list_container">
           <div className="sub-title">Investors {entries.length}</div>
@@ -36,11 +96,7 @@ export const SharesDistributionBox = ({
               />
             );
           })}
-          {hasToCollapse && (
-            <div className="link_button" onClick={() => setShowMore(true)}>
-              {"Show more"}
-            </div>
-          )}
+          {showMoreOrLessFooter()}
         </div>
       );
     } else {
@@ -59,28 +115,15 @@ export const SharesDistributionBox = ({
           </div>
           <SharesDistributionChart
             sharesDistr={sharesDistr}
-            onAddressSelected={setSelectedAddress}
+            onAddressSelected={(address) => {
+              setSelectedAddress(address);
+            }}
           />
           {holdersListItems()}
         </div>
       );
     }
   };
-
-  useEffect(() => {
-    async function fetchData() {
-      if (sharesAssetId && sharesSupply) {
-        const sharesDistr = await fetchSharesDistribution(
-          statusMsg,
-          sharesAssetId,
-          sharesSupply,
-          appId
-        );
-        setSharesDistr(sharesDistr);
-      }
-    }
-    fetchData();
-  }, [statusMsg, sharesAssetId, sharesSupply, appId]);
 
   return <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>;
 };
