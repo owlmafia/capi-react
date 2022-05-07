@@ -3,8 +3,18 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import myalgo from "../images/svg/myalgo.svg";
 
 const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
+  return (
+    <CopyPasteHtml
+      element={<div className="copyable__text">{text}</div>}
+      copyText={copyTextOpt ?? text}
+    />
+  );
+};
+
+export default CopyPasteText;
+
+export const CopyPasteHtml = ({ element, copyText }) => {
   const [isCopied, setIsCopied] = useState(false);
-  const copyText = copyTextOpt ?? text;
 
   const onCopy = () => {
     setIsCopied(true);
@@ -16,7 +26,7 @@ const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
   return (
     <CopyToClipboard text={copyText} onCopy={onCopy}>
       <div className="copyable">
-        <div className="copyable__text">{text}</div>
+        {element}
         {/* <span className="copy_msg">{isCopied ? "Copied!" : null}</span> */}
         <span className={`copy ${isCopied ? "active" : ""}`}>
           {isCopied ? (
@@ -29,5 +39,3 @@ const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
     </CopyToClipboard>
   );
 };
-
-export default CopyPasteText;

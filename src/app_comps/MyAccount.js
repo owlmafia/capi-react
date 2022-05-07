@@ -4,6 +4,7 @@ import { connectWallet } from "../MyAlgo";
 import myalgo from "../images/svg/myalgo.svg";
 import arrow from "../images/svg/arrow-right.svg";
 import { retrieveProfits, shortedAddress } from "../shared_functions";
+import { CopyPasteHtml } from "../common_comps/CopyPastText";
 
 export const MyAccount = ({
   myAddress,
@@ -62,14 +63,18 @@ const myAddressView = (
       <div id="user_data">
         <div className="my_address">
           <div>
-            <a
-              href={"https://testnet.algoexplorer.io/address/" + myAddress}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {myAddressDisplay}
-            </a>
-            <img className="myalgo" src={myalgo} alt="myalgo" />
+            <CopyPasteHtml
+              element={
+                <a
+                  href={"https://testnet.algoexplorer.io/address/" + myAddress}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {myAddressDisplay}
+                </a>
+              }
+              copyText={myAddress}
+            />
           </div>
           <div id="my_account_my_balance__balance">
             <FundsAssetImg />
