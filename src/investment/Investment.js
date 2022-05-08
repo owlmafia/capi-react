@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { BuyMoreShares } from "./BuyMoreShares";
 import { init } from "./controller";
-import { updateInvestmentData_ } from "../shared_functions";
 import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
@@ -12,25 +11,12 @@ export const Investment = (props) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
-  const [investmentData, setInvestmentData] = useState(null);
 
   const [showBuyMoreTab, setShowBuyMoreTab] = useState(true);
   const [showUnlockTab, setShowUnlockTab] = useState(false);
   const [showLockTab, setShowLockTab] = useState(false);
 
   const myShareChart = useRef(null);
-
-  // TODO repeated callback (also in app.js)
-  const updateInvestmentData = useCallback(async () => {
-    if (props.myAddress) {
-      await updateInvestmentData_(
-        props.statusMsg,
-        props.myAddress,
-        params.id,
-        setInvestmentData
-      );
-    }
-  }, [props.statusMsg, props.myAddress, params.id]);
 
   useEffect(() => {
     async function doInit() {
@@ -39,33 +25,37 @@ export const Investment = (props) => {
         props.myAddress,
         props.statusMsg,
         setDao,
-        updateInvestmentData,
+        props.updateInvestmentData,
         props.updateMyShares
       );
+
+      if (props.myAddress) {
+        await props.updateInvestmentData(params.id, props.myAddress);
+      }
     }
     doInit();
   }, [
     params.id,
     props.myAddress,
     props.statusMsg,
-    updateInvestmentData,
+    props.updateInvestmentData,
     props.updateMyShares,
   ]);
 
   useEffect(() => {
-    if (myShareChart.current && investmentData) {
-      const notMyShare = 1 - investmentData.investor_percentage_number;
+    if (myShareChart.current && props.investmentData) {
+      const notMyShare = 1 - props.investmentData.investor_percentage_number;
       // the labels are irrelevant here
       const data = {
-        a: investmentData.investor_percentage_number,
+        a: props.investmentData.investor_percentage_number,
         b: notMyShare,
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [dao, investmentData]);
+  }, [dao, props.investmentData]);
 
   const userView = () => {
-    if (props.myAddress && dao && investmentData) {
+    if (props.myAddress && dao && props.investmentData) {
       return (
         <div>
           <div className="section_container">
@@ -75,8 +65,8 @@ export const Investment = (props) => {
               updateMyShares={props.updateMyShares}
               updateMyBalance={props.updateMyBalance}
               myAddress={props.myAddress}
-              investmentData={investmentData}
-              updateInvestmentData={updateInvestmentData}
+              investmentData={props.investmentData}
+              updateInvestmentData={props.updateInvestmentData}
               updateFunds={props.updateFunds}
             />
 
@@ -121,7 +111,7 @@ export const Investment = (props) => {
                 updateFunds={props.updateFunds}
                 myAddress={props.myAddress}
                 dao={dao}
-                investmentData={investmentData}
+                investmentData={props.investmentData}
               />
             )}
             {showUnlockTab && (
@@ -131,10 +121,10 @@ export const Investment = (props) => {
                 myAddress={props.myAddress}
                 updateMyShares={props.updateMyShares}
                 updateMyBalance={props.updateMyBalance}
-                updateInvestmentData={updateInvestmentData}
+                updateInvestmentData={props.updateInvestmentData}
                 dao={dao}
                 daoId={params.id}
-                investmentData={investmentData}
+                investmentData={props.investmentData}
               />
             )}
             {showLockTab && (
@@ -144,11 +134,11 @@ export const Investment = (props) => {
                 myAddress={props.myAddress}
                 updateMyShares={props.updateMyShares}
                 updateMyBalance={props.updateMyBalance}
-                updateInvestmentData={updateInvestmentData}
+                updateInvestmentData={props.updateInvestmentData}
                 dao={dao}
                 daoId={params.id}
-                investmentData={investmentData}
-                onLockOpt={updateInvestmentData}
+                investmentData={props.investmentData}
+                onLockOpt={props.updateInvestmentData}
               />
             )}
           </div>
