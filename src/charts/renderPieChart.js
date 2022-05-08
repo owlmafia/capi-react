@@ -1,4 +1,8 @@
 import * as d3 from "d3";
+
+const UNUSED = "Not owned";
+const GRAY = "#EBECF1";
+const RED = "#DF5C60";
 const renderPieChart = (
   container,
   data,
@@ -7,75 +11,81 @@ const renderPieChart = (
 ) => {
   console.log("Rendering pie chart, data: %o", data);
 
-  var margin = { top: 20, bottom: 20, right: 20, left: 20 },
-    width = 280,
-    height = 280;
+  var width = 300,
+    height = 300;
 
   let outerRadius = (height / 2) * 0.6;
   let innerRadius = (height / 2) * 0.4;
 
-  const getCoordinates = (angle, radius, svgSize) => {
-    const x = Math.cos(angle);
-    const y = Math.sin(angle);
-    const coordX = x * radius + svgSize / 2;
-    const coordY = y * -radius + svgSize / 2;
-    return [coordX, coordY].join(" ");
+  const col = [
+    "#7FB7BB",
+    "#AFD5D6",
+    "#A1CDD0",
+    "#BCDBDF",
+    "#C8E3E3",
+    "#D9E9EB",
+    "#E4F0F1",
+    "#F1F8F8",
+  ];
+
+  const colors = (i, isGray = false) => {
+    return isGray ? GRAY : col[Math.round(i % 8)];
   };
 
   const svg = d3.select(container);
 
   svg.selectAll("*").remove();
 
-  svg.append("g").attr("transform", `translate(${width / 2}, ${height / 2})`);
+  const chart = svg
+    .append("g")
+    .attr("transform", `translate(${width / 2}, ${height / 2})`);
 
-  const colors = (i) => d3.interpolateBlues(i / data.length);
   var pie = d3
     .pie()
     .value(function (d) {
       return +dataNumberSelector(d);
     })
-    .startAngle(-Math.PI)
-    .endAngle(Math.PI);
+    .sort(null)
+    .startAngle(-3.5 * Math.PI)
+    .endAngle(0.5 * Math.PI);
 
   const data_ready = pie(data);
+  const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
 
-  svg
+  chart
+    .append("path")
+    .attr("fill", GRAY)
+    .attr("d", arc({ startAngle: 0, endAngle: 2 * Math.PI }));
+
+  chart
     .selectAll()
     .data(data_ready)
     .join("path")
-    .attr("fill", (data) => colors(data.index))
+
+    .attr("fill", (d, i) => colors(i, d.data.label === UNUSED))
     .transition()
     .delay(function (_, i) {
-      return i * 50;
+      return i * 500;
     })
-    .duration(50)
+    .duration(500)
     .attrTween("d", function (d) {
       var i = d3.interpolate(d.startAngle, d.endAngle);
       return function (t) {
         d.endAngle = i(t);
-        return `M ${getCoordinates(
-          d.startAngle,
-          outerRadius,
-          width
-        )} A ${5} ${5} 0 ${0} 0 ${getCoordinates(d.startAngle, innerRadius, width)} A ${innerRadius} ${innerRadius} 0 ${0} 0 ${getCoordinates(d.endAngle, innerRadius, width)} A ${5} ${5} 0 ${0} 1  ${getCoordinates(d.endAngle, outerRadius, width)}A ${outerRadius} ${outerRadius} 0 ${0} 1 ${getCoordinates(d.startAngle, outerRadius, width)}`;
+        return arc(d);
       };
-    })
-    .attr("stroke", (d) => colors(d.index))
-    .attr("stroke-width", 0.2);
+    });
 
   function handleMouseOver(d, i, n) {
-    d3.select(this)
-      .attr("stroke", colors(i.index))
-      .attr("stroke-width", 5)
-      .raise();
+    if (i && i.data.label !== UNUSED) {
+      d3.select(this).attr("fill", RED);
+    }
   }
 
   function handleMouseOut(d, i) {
-    d3.select(this).attr("stroke-width", 0.2);
-    d3.select(this)
-      .transition()
-      .duration(500)
-      .attr("transform", "translate(0,0)");
+    if (i && i.data.label !== UNUSED) {
+      d3.select(this).attr("fill", colors(i.index));
+    }
   }
 
   svg
