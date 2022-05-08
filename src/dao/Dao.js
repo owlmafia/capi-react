@@ -5,10 +5,7 @@ import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/Sha
 import { fetchHolderCount } from "../common_functions/stats_common";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { init } from "./controller";
-import Modal from "../Modal";
 import { updateInvestmentData_ } from "../shared_functions";
-import twitter from "../images/svg/twitter.svg";
-import share from "../images/svg/share.svg";
 
 export const Dao = (props) => {
   let params = useParams();
@@ -17,8 +14,6 @@ export const Dao = (props) => {
   const [investmentData, setInvestmentData] = useState(null);
 
   const [holderCount, setHolderCount] = useState(null);
-
-  const [showShareModal, setShowShareModal] = useState(false);
 
   console.log("props: " + JSON.stringify(props));
 
@@ -82,29 +77,6 @@ export const Dao = (props) => {
       return (
         <div>
           <div>
-            <div className="content-img">{logoView(viewDao.dao)}</div>
-            <div className="title-container">
-              <div className="title">Crypticmonster: Unique NFT artworks</div>
-              <div className="social-media-buttons">
-                <button className="button__follow">
-                  <img
-                    width="20"
-                    height="16"
-                    src={twitter}
-                    alt="logo-twitter"
-                  />
-                  Follow on Twitter
-                </button>
-                <div className="share-icon">
-                  <img
-                    src={share}
-                    alt="share-icon"
-                    onClick={() => setShowShareModal((visible) => !visible)}
-                  />
-                </div>
-              </div>
-            </div>
-
             <div id="dao_description">{viewDao.dao.description}</div>
 
             {investmentData && (
@@ -152,27 +124,5 @@ export const Dao = (props) => {
     }
   };
 
-  return (
-    <div>
-      {daoView()}
-      {showShareModal && (
-        <Modal
-          title={"Share dao"}
-          onCloseClick={() => setShowShareModal(false)}
-        >
-          <div>{"TODO Social media buttons to share this dao"}</div>
-        </Modal>
-      )}
-    </div>
-  );
-};
-
-const logoView = (dao) => {
-  if (dao.image_url) {
-    return (
-      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project banner" />
-    );
-  } else {
-    return null;
-  }
+  return <div>{daoView()}</div>;
 };

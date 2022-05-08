@@ -7,6 +7,9 @@ import { init, initWithDaoId } from "./controller";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
+import twitter from "../images/svg/twitter.svg";
+import share from "../images/svg/share.svg";
+import Modal from "../Modal";
 
 export const Wireframe = ({
   isGlobal,
@@ -30,14 +33,14 @@ export const Wireframe = ({
   updateFunds,
 }) => {
   let params = useParams();
-  const [viewDao, setViewDao] = useState(null);
+  const [dao, setDao] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
       if (params.id) {
-        await initWithDaoId(params.id, setViewDao, statusMsgUpdater);
+        await initWithDaoId(params.id, setDao, statusMsgUpdater);
       } else {
-        await init(params.id, setViewDao, statusMsgUpdater);
+        await init(params.id, setDao, statusMsgUpdater);
       }
     }
     asyncInit();
@@ -95,6 +98,10 @@ export const Wireframe = ({
     }
   };
 
+  const daoTop = () => {
+    return !isGlobal && dao && <DaoTop dao={dao} />;
+  };
+
   return (
     <div id="nav_and_main">
       <div className="logo-container">
@@ -108,9 +115,52 @@ export const Wireframe = ({
             statusMsg={statusMsg}
           />
         )}
+        {daoTop()}
         <Outlet />
       </div>
       {rightCol()}
     </div>
+  );
+};
+
+const DaoTop = (dao) => {
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  return (
+    <div>
+      <div className="content-img">{logoView(dao)}</div>
+      <div className="title-container">
+        <div className="title">Crypticmonster: Unique NFT artworks</div>
+        <div className="social-media-buttons">
+          <button className="button__follow">
+            <img width="20" height="16" src={twitter} alt="logo-twitter" />
+            Follow on Twitter
+          </button>
+          <div className="share-icon">
+            <img
+              src={share}
+              alt="share-icon"
+              onClick={() => setShowShareModal((visible) => !visible)}
+            />
+          </div>
+        </div>
+      </div>
+      {showShareModal && (
+        <Modal
+          title={"Share dao"}
+          onCloseClick={() => setShowShareModal(false)}
+        >
+          <div>{"TODO Social media buttons to share this dao"}</div>
+        </Modal>
+      )}
+    </div>
+  );
+};
+
+const logoView = (dao) => {
+  return (
+    dao.image_url && (
+      <img id="banner_img" src={dao.image_url ?? ""} alt="Project banner" />
+    )
   );
 };

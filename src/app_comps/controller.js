@@ -13,10 +13,10 @@ export const initWithDaoId = async (daoId, setViewDao, statusMsg) => {
   try {
     const { init_log, bridge_view_dao } = await wasmPromise;
     await init_log();
-    let viewDao = await bridge_view_dao({
+    let res = await bridge_view_dao({
       dao_id: daoId,
     });
-    setViewDao(viewDao);
+    setViewDao(res.dao);
   } catch (e) {
     statusMsg.error(e);
   }
