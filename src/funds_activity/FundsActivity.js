@@ -32,7 +32,7 @@ export const FundsActivity = (props) => {
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
-              <FundsActivityEntry entry={entry} />
+              <FundsActivityEntry entry={entry} showDescr={true} />
             ))}
         </div>
       )

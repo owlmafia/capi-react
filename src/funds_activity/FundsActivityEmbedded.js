@@ -36,7 +36,7 @@ export const FundsActivityEmbedded = ({
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
-              <FundsActivityEntry entry={entry} />
+              <FundsActivityEntry entry={entry} showDescr={false} />
             ))}
         </div>
       )

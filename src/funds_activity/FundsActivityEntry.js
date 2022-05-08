@@ -1,14 +1,14 @@
 import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 
-export const FundsActivityEntry = ({ entry }) => {
+export const FundsActivityEntry = ({ entry, showDescr }) => {
   return (
     <a href={entry.tx_link} target="_blank" rel="noreferrer">
       <div className="funds_act_entry">
         <AmountView entry={entry} />
         <div className="funds_act_entry__body">
           <div className="funds_act_entry__date">{entry.date}</div>
-          <div>{entry.description}</div>
+          {showDescr && <div>{entry.description}</div>}
         </div>
       </div>
     </a>
