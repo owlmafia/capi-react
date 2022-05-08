@@ -94,7 +94,9 @@ const renderPieChart = (
     .on("mouseout", handleMouseOut);
 
   svg.selectAll("path").on("click", (p, d) => {
-    onSegmentSelected(d.data);
+    if (d) {
+      onSegmentSelected(d.data);
+    }
   });
 };
 
