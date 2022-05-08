@@ -40,7 +40,7 @@ export const Wireframe = ({
       if (params.id) {
         await initWithDaoId(params.id, setDao, statusMsgUpdater);
       } else {
-        await init(params.id, setDao, statusMsgUpdater);
+        await init(statusMsgUpdater);
       }
     }
     asyncInit();
@@ -123,19 +123,22 @@ export const Wireframe = ({
   );
 };
 
-const DaoTop = (dao) => {
+const DaoTop = ({ dao }) => {
   const [showShareModal, setShowShareModal] = useState(false);
-
   return (
     <div>
       <div className="content-img">{logoView(dao)}</div>
       <div className="title-container">
         <div className="title">Crypticmonster: Unique NFT artworks</div>
         <div className="social-media-buttons">
-          <button className="button__follow">
-            <img width="20" height="16" src={twitter} alt="logo-twitter" />
-            Follow on Twitter
-          </button>
+          {dao.social_media_url && (
+            <a href={dao.social_media_url} target="_blank" rel="noreferrer">
+              <button className="button__follow">
+                <img width="20" height="16" src={twitter} alt="logo-twitter" />
+                Follow on Twitter
+              </button>
+            </a>
+          )}
           <div className="share-icon">
             <img
               src={share}
