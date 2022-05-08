@@ -24,11 +24,9 @@ export const SideBarDao = ({
   updateMyShares,
 }) => {
   let params = useParams();
-  const [viewDao, setViewDao] = useState(null);
-
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewDao, statusMsgUpdater);
+      await init(params.id);
     }
     asyncInit();
   }, [params.id, statusMsgUpdater]);
@@ -71,24 +69,12 @@ export const SideBarDao = ({
           <MenuItem icon={<VscArrowSwap />}>
             <NavLink to="funds_activity">Funds activity</NavLink>
           </MenuItem>
-          <MenuItem icon={<FiSettings />}>
-            <NavLink to="settings">Settings</NavLink>
-          </MenuItem>
         </Menu>
       </SidebarContent>
       <SidebarFooter>
-        {viewDao && viewDao.dao && viewDao.dao.social_media_url && (
-          <div className="social_media__container">
-            <a
-              href={viewDao.dao.social_media_url}
-              target="_blank"
-              rel="noreferrer"
-              className="social_media__link"
-            >
-              Social media
-            </a>
-          </div>
-        )}
+        <MenuItem icon={<FiSettings />}>
+          <NavLink to="settings">Settings</NavLink>
+        </MenuItem>
       </SidebarFooter>
     </ProSidebar>
   );
