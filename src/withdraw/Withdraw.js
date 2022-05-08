@@ -5,7 +5,7 @@ import {
   LabeledInput,
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
-import { init, withdraw, updateFunds_ } from "./controller";
+import { init, withdraw } from "./controller";
 
 export const Withdrawal = (props) => {
   let params = useParams();
@@ -14,20 +14,13 @@ export const Withdrawal = (props) => {
   const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
   const [dao, setDao] = useState(null);
 
-  const [funds, setFunds] = useState(null);
-
-  const updateFunds = useCallback(async () => {
-    await updateFunds_(params.id, null, setFunds, props.statusMsg);
-  }, [params.id, props.statusMsg]);
-
   useEffect(() => {
     async function asyncInit() {
       // init(params.id, props.history.location.state, setDAo, props.statusMsg);
       await init(params.id, null, setDao, props.statusMsg);
-      await updateFunds();
     }
     asyncInit();
-  }, [params.id, props.statusMsg, updateFunds]);
+  }, [params.id, props.statusMsg]);
 
   const view = () => {
     if (dao) {
@@ -36,7 +29,7 @@ export const Withdrawal = (props) => {
           <div className="title">Withdraw Funds from project</div>
           {/* <DaoName dao={dao} /> */}
           <Funds
-            funds={funds}
+            funds={props.funds}
             showWithdrawLink={false}
             daoId={params.id}
             containerClassNameOpt="dao_funds__cont_in_withdraw"
@@ -63,7 +56,7 @@ export const Withdrawal = (props) => {
                 params.id,
                 withdrawalAmount,
                 withdrawalDescr,
-                updateFunds
+                props.updateFunds
               );
             }}
           >

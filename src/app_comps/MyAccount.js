@@ -19,6 +19,7 @@ export const MyAccount = ({
   myDividend,
   showProgress,
   updateInvestmentData,
+  updateFunds,
 }) => {
   return (
     <div className="my-account-container">
@@ -33,7 +34,8 @@ export const MyAccount = ({
         daoId,
         updateMyBalance,
         showProgress,
-        updateInvestmentData
+        updateInvestmentData,
+        updateFunds
       )}
       {connectButton(
         myAddress,
@@ -56,7 +58,8 @@ const myAddressView = (
   daoId,
   updateMyBalance,
   showProgress,
-  updateInvestmentData
+  updateInvestmentData,
+  updateFunds
 ) => {
   if (myAddress !== "") {
     return (
@@ -95,7 +98,8 @@ const myAddressView = (
             updateMyBalance,
             daoId,
             myDividend,
-            updateInvestmentData
+            updateInvestmentData,
+            updateFunds
           )}
         {/* for now show only funds asset. Algo can be helpful for fees, but it
         clutters the UI a bit.  */}
@@ -117,7 +121,8 @@ const dividendSection = (
   updateMyBalance,
   daoId,
   dividend,
-  updateInvestmentData
+  updateInvestmentData,
+  updateFunds
 ) => {
   return (
     <div>
@@ -131,7 +136,8 @@ const dividendSection = (
             statusMsg,
             updateMyBalance,
             daoId,
-            updateInvestmentData
+            updateInvestmentData,
+            updateFunds
           );
         }}
       >

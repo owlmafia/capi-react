@@ -30,7 +30,8 @@ export const retrieveProfits = async (
   statusMsg,
   updateMyBalance,
   daoId,
-  updateInvestmentData
+  updateInvestmentData,
+  updateFunds
 ) => {
   try {
     const { bridge_claim, bridge_submit_claim } = await wasmPromise;
@@ -57,7 +58,8 @@ export const retrieveProfits = async (
     });
     console.log("submitClaimRes: " + JSON.stringify(submitClaimRes));
 
-    await updateInvestmentData();
+    await updateInvestmentData(daoId, myAddress);
+    await updateFunds(daoId);
 
     statusMsg.success("Dividend claimed");
     showProgress(false);
@@ -74,4 +76,21 @@ export const shortedAddress = (address) => {
   const leading = address.substring(0, short_chars);
   const trailing = address.substring(address.length - short_chars);
   return leading + "..." + trailing;
+};
+
+export const updateFunds_ = async (daoId, setFunds, statusMsg) => {
+  /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the dao.
+  /// TODO: optimize: fetch only the funds (probably pass escrows/dao as inputs), so request is quicker.
+  try {
+    const { bridge_view_dao } = await wasmPromise;
+    let viewDao = await bridge_view_dao({
+      dao_id: daoId,
+    });
+    // setViewDao(viewDao);
+    // these are overwritten when draining, so we keep them separate
+    // TODO drain here? is this comment up to date?
+    setFunds(viewDao.available_funds);
+  } catch (e) {
+    statusMsg.error(e);
+  }
 };

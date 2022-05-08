@@ -6,8 +6,7 @@ import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/Sha
 import { fetchHolderCount } from "../common_functions/stats_common";
 import { DaoName } from "../ContentTitle";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
-import { PayEmbedded } from "../payEmbedded/PayEmbedded";
-import { init, updateFunds_ } from "./controller";
+import { init } from "./controller";
 import Modal from "../Modal";
 import { updateInvestmentData_ } from "../shared_functions";
 
@@ -15,7 +14,6 @@ export const Dao = (props) => {
   let params = useParams();
 
   const [viewDao, setViewDao] = useState(null);
-  const [funds, setFunds] = useState(null);
   const [investmentData, setInvestmentData] = useState(null);
 
   const [holderCount, setHolderCount] = useState(null);
@@ -30,13 +28,9 @@ export const Dao = (props) => {
     }
   }, [viewDao]);
 
-  const updateFunds = useCallback(async () => {
-    await updateFunds_(params.id, setViewDao, setFunds, props.statusMsg);
-  }, [params.id, props.statusMsg]);
-
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewDao, setFunds, props.statusMsg);
+      await init(params.id, setViewDao, props.statusMsg);
     }
     asyncInit();
   }, [params.id, props.statusMsg]);
@@ -107,7 +101,7 @@ export const Dao = (props) => {
                 investmentData={investmentData}
                 updateMyShares={props.updateMyShares}
                 myShares={props.myShares}
-                updateFunds={updateFunds}
+                updateFunds={props.updateFunds}
               />
             )}
 

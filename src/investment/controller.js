@@ -141,7 +141,7 @@ export const invest = async (
     );
 
     await updateMyShares(daoId, myAddress);
-    await updateFunds();
+    await updateFunds(daoId);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);

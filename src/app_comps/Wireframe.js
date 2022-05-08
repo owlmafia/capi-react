@@ -28,6 +28,8 @@ export const Wireframe = ({
   updateMyDividend,
   showProgress,
   updateInvestmentData,
+  funds,
+  updateFunds,
 }) => {
   let params = useParams();
   const [viewDao, setViewDao] = useState(null);
@@ -88,6 +90,8 @@ export const Wireframe = ({
           updateMyDividend={updateMyDividend}
           showProgress={showProgress}
           updateInvestmentData={updateInvestmentData}
+          funds={funds}
+          updateFunds={updateFunds}
         />
       );
     }

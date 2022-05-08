@@ -28,7 +28,9 @@ export const routesView = (
   myDividend,
   updateMyDividend,
   investmentData,
-  updateInvestmentData
+  updateInvestmentData,
+  funds,
+  updateFunds
 ) => {
   return (
     <Routes>
@@ -93,6 +95,8 @@ export const routesView = (
               updateMyDividend={updateMyDividend}
               showProgress={(show) => setShowProgress(show)}
               updateInvestmentData={updateInvestmentData}
+              funds={funds}
+              updateFunds={updateFunds}
             />
           }
         >
@@ -106,6 +110,7 @@ export const routesView = (
                 updateMyBalance={updateMyBalance}
                 updateMyShares={updateMyShares}
                 myShares={myShares}
+                updateFunds={updateFunds}
               />
             }
           />
@@ -134,6 +139,8 @@ export const routesView = (
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}
                 updateMyBalance={updateMyBalance}
+                funds={funds}
+                updateFunds={updateFunds}
               />
             }
           />

@@ -4,7 +4,7 @@ import { ContentTitle } from "../ContentTitle";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 // import {updateChainInvestmentData_ as updateInvestmentData_} from "./controller";
 import { init } from "./controller";
-import { updateInvestmentData_, retrieveProfits } from "../shared_functions";
+import { retrieveProfits } from "../shared_functions";
 
 export const InvestmentProfits = ({
   statusMsg,
@@ -14,6 +14,7 @@ export const InvestmentProfits = ({
   updateMyBalance,
   investmentData,
   updateInvestmentData,
+  updateFunds,
 }) => {
   let params = useParams();
 
@@ -67,7 +68,8 @@ export const InvestmentProfits = ({
                 statusMsg,
                 updateMyBalance,
                 params.id,
-                updateInvestmentData
+                updateInvestmentData,
+                updateFunds
               );
             }}
           >

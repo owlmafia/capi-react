@@ -6,7 +6,12 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
 
-export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
+export const FundsActivityEmbedded = ({
+  statusMsg,
+  daoId,
+  myAddress,
+  funds,
+}) => {
   const [activityEntries, setActivityEntries] = useState([]);
   const [dao, setDao] = useState(null);
 
@@ -45,7 +50,7 @@ export const FundsActivityEmbedded = ({ statusMsg, daoId, myAddress }) => {
         <div className="funds-assets">
           <FundsAssetImg />
         </div>
-        <div>12252.6444</div>
+        <div>{funds}</div>
         {dao && (
           <div>
             <div>{"Project wallet address:"}</div>

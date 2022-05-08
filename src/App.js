@@ -10,7 +10,7 @@ import {
 } from "./controller";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
-import { updateInvestmentData_ } from "./shared_functions";
+import { updateInvestmentData_, updateFunds_ } from "./shared_functions";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -18,8 +18,10 @@ const App = () => {
   const [myAddress, setMyAddress] = useState("");
 
   const [myBalance, setMyBalance] = useState("");
+
   const [myShares, setMyShares] = useState(null);
   const [myDividend, setMyDividend] = useState(null);
+  const [funds, setFunds] = useState(null);
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
@@ -59,7 +61,7 @@ const App = () => {
         );
       }
     },
-    [statusMsg]
+    [statusMsgUpdater]
   );
 
   const updateMyDividend = useCallback(
@@ -72,6 +74,13 @@ const App = () => {
           setMyDividend
         );
       }
+    },
+    [statusMsgUpdater]
+  );
+
+  const updateFunds = useCallback(
+    async (daoId) => {
+      await updateFunds_(daoId, setFunds, statusMsgUpdater);
     },
     [statusMsgUpdater]
   );
@@ -106,7 +115,9 @@ const App = () => {
               myDividend,
               updateMyDividend,
               investmentData,
-              updateInvestmentData
+              updateInvestmentData,
+              funds,
+              updateFunds
             )}
           </BrowserRouter>
           {modal && (

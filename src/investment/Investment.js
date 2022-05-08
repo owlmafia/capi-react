@@ -74,6 +74,7 @@ export const Investment = (props) => {
               myAddress={props.myAddress}
               investmentData={investmentData}
               updateInvestmentData={updateInvestmentData}
+              updateFunds={props.updateFunds}
             />
 
             <div id="dao_actions_top_bar">

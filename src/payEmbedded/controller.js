@@ -48,7 +48,7 @@ export const pay = async (
     statusMsg.success("Payment submitted!");
 
     await updateMyBalance(myAddress);
-    await updateFunds();
+    await updateFunds(daoId);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
