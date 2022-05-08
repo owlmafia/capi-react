@@ -28,8 +28,12 @@ const renderPieChart = (
     "#F1F8F8",
   ];
 
-  const colors = (i, isGray = false) => {
-    return isGray ? GRAY : col[Math.round(i % 8)];
+  const colors = (d, i, isGray = false) => {
+    if (d && d.data.isSelected) {
+      return RED;
+    } else {
+      return isGray ? GRAY : col[Math.round(i % 8)];
+    }
   };
 
   const svg = d3.select(container);
@@ -46,8 +50,8 @@ const renderPieChart = (
       return +dataNumberSelector(d);
     })
     .sort(null)
-    .startAngle(-3.5 * Math.PI)
-    .endAngle(0.5 * Math.PI);
+    .startAngle(0.5 * Math.PI)
+    .endAngle(3.5 * Math.PI);
 
   const data_ready = pie(data);
   const arc = d3.arc().innerRadius(innerRadius).outerRadius(outerRadius);
@@ -57,47 +61,49 @@ const renderPieChart = (
     .attr("fill", GRAY)
     .attr("d", arc({ startAngle: 0, endAngle: 2 * Math.PI }));
 
-  chart
+  const updatedChart = chart
     .selectAll()
     .data(data_ready)
     .join("path")
+    .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
 
-    .attr("fill", (d, i) => colors(i, d.data.label === UNUSED))
+  let angleInterpolation = d3.interpolate(pie.startAngle()(), pie.endAngle()());
+  updatedChart
     .transition()
-    .delay(function (_, i) {
-      return i * 500;
-    })
-    .duration(500)
-    .attrTween("d", function (d) {
-      var i = d3.interpolate(d.startAngle, d.endAngle);
-      return function (t) {
-        d.endAngle = i(t);
+    .ease(d3.easeLinear)
+    .duration(2000)
+    .attrTween("d", (d) => {
+      let originalEnd = d.endAngle;
+      return (t) => {
+        let currentAngle = angleInterpolation(t);
+        if (currentAngle < d.startAngle) {
+          return "";
+        }
+        d.endAngle = Math.min(currentAngle, originalEnd);
+
         return arc(d);
       };
     });
 
-  function handleMouseOver(d, i, n) {
-    if (i && i.data.label !== UNUSED) {
-      d3.select(this).attr("fill", RED);
-    }
-  }
-
-  function handleMouseOut(d, i) {
-    if (i && i.data.label !== UNUSED) {
-      d3.select(this).attr("fill", colors(i.index));
-    }
-  }
-
-  svg
-    .selectAll("path")
-    .on("mousemove", handleMouseOver)
-    .on("mouseout", handleMouseOut);
-
-  svg.selectAll("path").on("click", (p, d) => {
+  function handleOnClick(p, d) {
     if (d) {
       onSegmentSelected(d.data);
     }
-  });
+    if (d.data.label !== UNUSED) {
+      updatedChart
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(200)
+        .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
+      d3.select(this)
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(200)
+        .attr("fill", RED);
+    }
+  }
+
+  svg.selectAll("path").on("click", handleOnClick);
 };
 
 export default renderPieChart;

@@ -116,7 +116,19 @@ export const SharesDistributionBox = ({
           <SharesDistributionChart
             sharesDistr={sharesDistr}
             onAddressSelected={(address) => {
-              setSelectedAddress(address);
+              const addressIndex = sharesDistr.findIndex(
+                (d) => d.address == address
+              );
+              // toggle selected state
+              let newSelected = !sharesDistr[addressIndex].isSelected;
+
+              // clear selection
+              sharesDistr.forEach((share) => (share.isSelected = false));
+              sharesDistr[addressIndex].isSelected = newSelected;
+
+              // set selected address (for address list) - if it was deselected, it's cleared
+              const selection = newSelected ? address : null;
+              setSelectedAddress(selection);
             }}
           />
           {holdersListItems()}
