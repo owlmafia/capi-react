@@ -6,6 +6,7 @@ import { init } from "./controller";
 import { updateInvestmentData_ } from "../shared_functions";
 import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
+import { LockShares } from "../lockShares/LockShares";
 
 export const Investment = (props) => {
   let params = useParams();
@@ -15,9 +16,11 @@ export const Investment = (props) => {
 
   const [showBuyMoreTab, setShowBuyMoreTab] = useState(true);
   const [showUnlockTab, setShowUnlockTab] = useState(false);
+  const [showLockTab, setShowLockTab] = useState(false);
 
   const myShareChart = useRef(null);
 
+  // TODO repeated callback (also in app.js)
   const updateInvestmentData = useCallback(async () => {
     if (props.myAddress) {
       await updateInvestmentData_(
@@ -82,6 +85,7 @@ export const Investment = (props) => {
                 className={actions_tabs_classes(showBuyMoreTab)}
                 onClick={() => {
                   setShowUnlockTab(false);
+                  setShowLockTab(false);
                   setShowBuyMoreTab((current) => !current);
                 }}
               >
@@ -91,10 +95,21 @@ export const Investment = (props) => {
                 className={actions_tabs_classes(showUnlockTab)}
                 onClick={() => {
                   setShowBuyMoreTab(false);
+                  setShowLockTab(false);
                   setShowUnlockTab((current) => !current);
                 }}
               >
                 {"Unlock shares"}
+              </p>
+              <p
+                className={actions_tabs_classes(showLockTab)}
+                onClick={() => {
+                  setShowBuyMoreTab(false);
+                  setShowUnlockTab(false);
+                  setShowLockTab((current) => !current);
+                }}
+              >
+                {"Lock shares"}
               </p>
             </div>
             {showBuyMoreTab && (
@@ -113,12 +128,27 @@ export const Investment = (props) => {
               <UnlockShares
                 statusMsg={props.statusMsg}
                 showProgress={props.showProgress}
+                myAddress={props.myAddress}
                 updateMyShares={props.updateMyShares}
                 updateMyBalance={props.updateMyBalance}
                 updateInvestmentData={updateInvestmentData}
-                myAddress={props.myAddress}
                 dao={dao}
+                daoId={params.id}
                 investmentData={investmentData}
+              />
+            )}
+            {showLockTab && (
+              <LockShares
+                statusMsg={props.statusMsg}
+                showProgress={props.showProgress}
+                myAddress={props.myAddress}
+                updateMyShares={props.updateMyShares}
+                updateMyBalance={props.updateMyBalance}
+                updateInvestmentData={updateInvestmentData}
+                dao={dao}
+                daoId={params.id}
+                investmentData={investmentData}
+                onLockOpt={updateInvestmentData}
               />
             )}
           </div>
@@ -131,21 +161,7 @@ export const Investment = (props) => {
 
   const bodyView = () => {
     if (dao) {
-      return (
-        <div>
-          {userView()}
-          {/* <LockEmbedded
-            showProgress={props.showProgress}
-            statusMsg={props.statusMsg}
-            updateMyBalance={props.updateMyBalance}
-            myAddress={props.myAddress}
-            dao={dao}
-            updateMyShares={props.updateMyShares}
-            myShares={props.myShares}
-            onLockOpt={updateInvestmentData}
-          /> */}
-        </div>
-      );
+      return <div>{userView()}</div>;
     } else {
       return null;
     }

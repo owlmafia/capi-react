@@ -6,7 +6,7 @@ export const updateInvestmentData_ = async (
   statusMsg,
   myAddress,
   daoId,
-  setChainInvestmentData
+  setInvestmentData
 ) => {
   try {
     const { bridge_load_investment } = await wasmPromise;
@@ -17,7 +17,7 @@ export const updateInvestmentData_ = async (
         investor_address: myAddress,
       });
       console.log("Investment data: %o", data);
-      setChainInvestmentData(data);
+      setInvestmentData(data);
     }
   } catch (e) {
     statusMsg.error(e);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import { LockEmbedded } from "../lockEmbedded/LockEmbedded";
 import { handleSharesCountInput, init, invest } from "./controller";
 
 export const InvestEmbedded = ({

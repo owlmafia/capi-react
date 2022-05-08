@@ -13,6 +13,7 @@ export const lock = async (
   dao,
   lockSharesCount,
   updateMyShares,
+  updateInvestmentData,
   onLockOpt
 ) => {
   try {
@@ -62,13 +63,14 @@ export const lock = async (
     console.log("submitLockRes: " + JSON.stringify(submitLockRes));
     showProgress(false);
 
-    await updateMyBalance(myAddress);
-
     statusMsg.success(
       "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
-    updateMyShares(daoId, myAddress);
+    await updateInvestmentData();
+    await updateMyBalance(myAddress);
+    await updateMyShares(daoId, myAddress);
+
     if (onLockOpt) {
       onLockOpt();
     }
