@@ -5,6 +5,7 @@ import { FundsActivityEntry } from "./FundsActivityEntry";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
+import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
 
 export const FundsActivityEmbedded = ({
   statusMsg,
@@ -36,7 +37,7 @@ export const FundsActivityEmbedded = ({
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
-              <FundsActivityEntry entry={entry} showDescr={false} />
+              <CompactFundsActivityEntry entry={entry} showDescr={false} />
             ))}
         </div>
       )

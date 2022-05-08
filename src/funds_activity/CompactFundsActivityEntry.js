@@ -1,7 +1,7 @@
 import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 
-export const FundsActivityEntry = ({ entry }) => {
+export const CompactFundsActivityEntry = ({ entry }) => {
   return (
     <div className="funds_act_entry">
       <AmountView entry={entry} />
@@ -12,7 +12,6 @@ export const FundsActivityEntry = ({ entry }) => {
       </a>
       <div className="funds_act_entry__body">
         <div className="funds_act_entry__date">{entry.date}</div>
-        <div>{entry.description}</div>
       </div>
     </div>
   );
