@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState, useCallback } from "react";
-import { BsShare as ShareIcon } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { fetchHolderCount } from "../common_functions/stats_common";
-import { DaoName } from "../ContentTitle";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { init } from "./controller";
 import Modal from "../Modal";
 import { updateInvestmentData_ } from "../shared_functions";
+import twitter from "../images/svg/twitter.svg";
+import share from "../images/svg/share.svg";
 
 export const Dao = (props) => {
   let params = useParams();
@@ -82,12 +82,28 @@ export const Dao = (props) => {
       return (
         <div>
           <div>
-            <DaoName dao={viewDao.dao}>
-              <ShareIcon
-                className="title_right_button"
-                onClick={() => setShowShareModal((visible) => !visible)}
-              />
-            </DaoName>
+            <div className="content-img">{logoView(viewDao.dao)}</div>
+            <div className="title-container">
+              <div className="title">Crypticmonster: Unique NFT artworks</div>
+              <div className="social-media-buttons">
+                <button className="button__follow">
+                  <img
+                    width="20"
+                    height="16"
+                    src={twitter}
+                    alt="logo-twitter"
+                  />
+                  Follow on Twitter
+                </button>
+                <div className="share-icon">
+                  <img
+                    src={share}
+                    alt="share-icon"
+                    onClick={() => setShowShareModal((visible) => !visible)}
+                  />
+                </div>
+              </div>
+            </div>
 
             <div id="dao_description">{viewDao.dao.description}</div>
 
@@ -149,4 +165,14 @@ export const Dao = (props) => {
       )}
     </div>
   );
+};
+
+const logoView = (dao) => {
+  if (dao.image_url) {
+    return (
+      <img id="banner_img" src={dao?.image_url ?? ""} alt="Project banner" />
+    );
+  } else {
+    return null;
+  }
 };
