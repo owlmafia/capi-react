@@ -129,6 +129,8 @@ export const SharesDistributionBox = ({
               // set selected address (for address list) - if it was deselected, it's cleared
               const selection = newSelected ? address : null;
               setSelectedAddress(selection);
+
+              return newSelected;
             }}
           />
           {holdersListItems()}

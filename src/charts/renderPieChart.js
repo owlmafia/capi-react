@@ -3,14 +3,14 @@ import * as d3 from "d3";
 const UNUSED = "Not owned";
 const GRAY = "#EBECF1";
 const RED = "#DF5C60";
+
+// onSegmentSelected has to return selected status, to highlight the segment
 const renderPieChart = (
   container,
   data,
   dataNumberSelector,
   onSegmentSelected
 ) => {
-  console.log("Rendering pie chart, data: %o", data);
-
   var width = 300,
     height = 300;
 
@@ -85,21 +85,37 @@ const renderPieChart = (
       };
     });
 
+  const defaultColorsState = () => {
+    updatedChart
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(200)
+      .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
+  };
+
+  const selectedColorState = (segment) => {
+    d3.select(segment)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(200)
+      .attr("fill", RED);
+  };
+
   function handleOnClick(p, d) {
-    if (d) {
-      onSegmentSelected(d.data);
-    }
-    if (d.data.label !== UNUSED) {
-      updatedChart
-        .transition()
-        .ease(d3.easeLinear)
-        .duration(200)
-        .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
-      d3.select(this)
-        .transition()
-        .ease(d3.easeLinear)
-        .duration(200)
-        .attr("fill", RED);
+    if (d && d.data.label !== UNUSED) {
+      // this is assumed to update the state somewhere up in the hierarchy
+      const select = onSegmentSelected(d.data);
+      // update UI for returned select status
+      // we update like this (instead of only reacting to state change),
+      // because it seems to be the easiest way, otherwise the chart re-animates when changing state and tuning that seems more complicated
+      // note that we also handle selected state on render, so if for whatever reason the chart re-renders again, it shows correctly
+      if (select) {
+        defaultColorsState();
+        selectedColorState(this);
+      } else {
+        selectedColorState(this);
+        defaultColorsState();
+      }
     }
   }
 

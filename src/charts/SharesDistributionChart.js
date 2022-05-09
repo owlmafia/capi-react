@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import renderPieChart from "./renderPieChart";
 
+// onAddressSelected has to return selected status, to highlight the segment
 export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
   const chart = useRef(null);
 
@@ -11,12 +12,10 @@ export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
         sharesDistr,
         (d) => d.percentage_number,
         (d) => {
-          onAddressSelected(d.address);
+          return onAddressSelected(d.address);
         }
       );
     }
-    // for now no deps - mutable value doesn't cause a re-render
-    //   }, [sharesDistr]);
   }, [chart.current]);
 
   return <svg className="pie_chart__svg" ref={chart} />;
