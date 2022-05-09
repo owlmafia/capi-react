@@ -17,7 +17,7 @@ export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
     }
     // for now no deps - mutable value doesn't cause a re-render
     //   }, [sharesDistr]);
-  });
+  }, [chart.current]);
 
   return <svg className="pie_chart__svg" ref={chart} />;
 };
