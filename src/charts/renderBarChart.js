@@ -36,9 +36,13 @@ const renderBarChart = (svg, flatData, colors) => {
   // removing existing svgs if any.
   selected.selectAll("*").remove();
 
+  const totalWidth = width + margin.left + margin.right;
+  const totalHeight = height + margin.top + margin.bottom;
+
   selected
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("viewBox", `0 0 ${totalWidth} ${totalHeight}`)
+    // .attr("width", totalWidth)
+    // .attr("height", totalHeight)
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 

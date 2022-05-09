@@ -17,7 +17,7 @@ export const IncomeVsSpendingChart = ({ chartData }) => {
 
   return (
     <div className="chart_with_legends_container">
-      <svg width={200} height={200} ref={chart} />
+      <svg ref={chart} />
       <ChartLegends
         legends={[
           { color: colors[1], text: "Income" },
