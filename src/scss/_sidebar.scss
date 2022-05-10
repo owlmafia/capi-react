@@ -17,11 +17,7 @@
         color: $blue-primary;
         font-weight: bold;
         img {
-            width: 20px;
-            height: 20px;
-            path {
-                fill: $blue-primary;
-            }
+            filter: invert(70%) sepia(14%) saturate(980%) hue-rotate(134deg) brightness(94%) contrast(93%);
         }
     }
 }

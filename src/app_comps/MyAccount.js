@@ -101,12 +101,6 @@ const myAddressView = (
             updateInvestmentData,
             updateFunds
           )}
-        {/* for now show only funds asset. Algo can be helpful for fees, but it
-        clutters the UI a bit.  */}
-        {/* <div id="my_account_my_balance__balance">
-          <FundsAssetImg />
-          <div>{myBalance.balance_funds_asset}</div>
-        </div> */}
       </div>
     );
   } else {

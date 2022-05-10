@@ -3,6 +3,7 @@ import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
+import green from "../../images/svg/green-arrow.svg";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -87,7 +88,9 @@ export const SharesDistributionBox = ({
     if (sharesDistr.length > 0) {
       return (
         <div className="holder_list_container">
-          <div className="sub-title">Investors {entries.length}</div>
+          <div className="sub-title">Investors {entries.length}
+            <img src={green} alt="arrow" />
+          </div>
           {entries.map((entry) => {
             return (
               <HolderEntry
@@ -110,8 +113,17 @@ export const SharesDistributionBox = ({
     } else {
       return (
         <div className="investors-container">
-          <div>
-            <div className="sub-title">Available Shares 1200</div>
+          <div className="d-flex flex-column flex-wrap">
+            <div className="sub-title">Available Shares 1200
+            </div>
+            <div className="flexBlock">
+              <div className="ft-weight-600">15</div>
+              <div className="ft-color-black">Unlocked Share</div>
+            </div>
+            <div className="flexBlock">
+              <div className="ft-weight-600">15</div>
+              <div className="ft-color-black">Your Unlocked Share</div>
+            </div>
           </div>
           <SharesDistributionChart
             sharesDistr={sharesDistr}

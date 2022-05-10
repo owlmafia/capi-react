@@ -71,22 +71,24 @@
 }
 
 .dao_action_active_tab {
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid $global-light-blue;
-    background-color: $global-blue-background;
-    margin-bottom: 40px;
-    .labeled_input {
-        margin-bottom: 30px;
-        .labeled_input__label {
-            font-size: 1.5rem;
-            color: rgb(102, 186, 210);
-            font-weight: bold;
-            margin-bottom: 16px;
-        }
+    display: flex;
+    flex-direction: column;
+    .label-input-style {
+        padding-left: 20px;
+        height: 64px;
+        box-sizing: border-box;
+        border-radius: 32px;
+        margin-bottom: 20px;
     }
-    .title_right_button {
-        border: none !important;
+    .flex-block {
+        margin-bottom: 36px !important;
+    }
+    .chartBlock {
+        margin-bottom: 16px !important;
+        margin-top: 0 !important;
+    }
+    .secondary_info {
+        margin-bottom: 20px;
     }
 }
 
@@ -132,5 +134,25 @@
            margin-left: 20px;
            margin-bottom: 8px;
        }
+    }
+}
+
+.social-media-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    .button__follow {
+        border: 1px solid #55acee !important;
+    }
+    .share-icon {
+        border-radius: 50%;
+        width: 48px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        border: 1px solid $blue-primary;
     }
 }
