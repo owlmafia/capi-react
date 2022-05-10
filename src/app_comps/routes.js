@@ -30,7 +30,8 @@ export const routesView = (
   investmentData,
   updateInvestmentData,
   funds,
-  updateFunds
+  updateFunds,
+  fundsChange
 ) => {
   return (
     <Routes>
@@ -97,6 +98,7 @@ export const routesView = (
               updateInvestmentData={updateInvestmentData}
               funds={funds}
               updateFunds={updateFunds}
+              fundsChange={fundsChange}
             />
           }
         >

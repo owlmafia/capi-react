@@ -78,11 +78,16 @@ export const shortedAddress = (address) => {
   return leading + "..." + trailing;
 };
 
-export const updateFunds_ = async (daoId, setFunds, statusMsg) => {
+export const updateFunds_ = async (
+  daoId,
+  setFunds,
+  setFundsChange,
+  statusMsg
+) => {
   /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the dao.
   /// TODO: optimize: fetch only the funds (probably pass escrows/dao as inputs), so request is quicker.
   try {
-    const { bridge_view_dao } = await wasmPromise;
+    const { bridge_view_dao, get_balance_change } = await wasmPromise;
     let viewDao = await bridge_view_dao({
       dao_id: daoId,
     });
@@ -90,6 +95,12 @@ export const updateFunds_ = async (daoId, setFunds, statusMsg) => {
     // these are overwritten when draining, so we keep them separate
     // TODO drain here? is this comment up to date?
     setFunds(viewDao.available_funds);
+
+    let balance_change_res = await get_balance_change({
+      dao_id: daoId,
+      customer_escrow: viewDao.dao.customer_escrow_address,
+    });
+    setFundsChange(balance_change_res.change);
   } catch (e) {
     statusMsg.error(e);
   }

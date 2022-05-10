@@ -19,6 +19,7 @@ export const RightDaoCol = ({
   updateInvestmentData,
   funds,
   updateFunds,
+  fundsChange,
 }) => {
   let params = useParams();
 
@@ -77,6 +78,7 @@ export const RightDaoCol = ({
         daoId={params.id}
         myAddress={myAddress}
         funds={funds}
+        fundsChange={fundsChange}
       />
     </div>
   );

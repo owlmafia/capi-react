@@ -31,6 +31,7 @@ export const Wireframe = ({
   updateInvestmentData,
   funds,
   updateFunds,
+  fundsChange,
 }) => {
   let params = useParams();
   const [dao, setDao] = useState(null);
@@ -93,6 +94,7 @@ export const Wireframe = ({
           updateInvestmentData={updateInvestmentData}
           funds={funds}
           updateFunds={updateFunds}
+          fundsChange={fundsChange}
         />
       );
     }

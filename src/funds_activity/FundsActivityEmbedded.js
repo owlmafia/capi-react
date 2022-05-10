@@ -12,6 +12,7 @@ export const FundsActivityEmbedded = ({
   daoId,
   myAddress,
   funds,
+  fundsChange,
 }) => {
   const [activityEntries, setActivityEntries] = useState([]);
   const [dao, setDao] = useState(null);
@@ -47,11 +48,16 @@ export const FundsActivityEmbedded = ({
   const view = () => {
     return (
       <div className="first_dao_widget">
-        <div>{"Project funds"}</div>
-        <div className="funds-assets">
-          <FundsAssetImg />
-        </div>
-        <div>{funds}</div>
+        {funds && (
+          <div>
+            <div>{"Project funds"}</div>
+            <div className="funds-assets">
+              <FundsAssetImg />
+            </div>
+            <div>{funds}</div>
+            <div>{fundsChangeArrow(fundsChange)}</div>
+          </div>
+        )}
         {dao && (
           <div>
             <div>{"Project wallet address:"}</div>
@@ -71,4 +77,15 @@ export const FundsActivityEmbedded = ({
   };
 
   return <div>{view()}</div>;
+};
+
+// TODO replace text with icons
+const fundsChangeArrow = (change) => {
+  if (change === "up") {
+    return <div>{"<up arrow>"}</div>;
+  } else if (change === "down") {
+    return <div>{"<down arrow>"}</div>;
+  } else {
+    return null;
+  }
 };

@@ -22,6 +22,7 @@ const App = () => {
   const [myShares, setMyShares] = useState(null);
   const [myDividend, setMyDividend] = useState(null);
   const [funds, setFunds] = useState(null);
+  const [fundsChange, setFundsChange] = useState(null);
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
@@ -80,7 +81,7 @@ const App = () => {
 
   const updateFunds = useCallback(
     async (daoId) => {
-      await updateFunds_(daoId, setFunds, statusMsgUpdater);
+      await updateFunds_(daoId, setFunds, setFundsChange, statusMsgUpdater);
     },
     [statusMsgUpdater]
   );
@@ -117,7 +118,8 @@ const App = () => {
               investmentData,
               updateInvestmentData,
               funds,
-              updateFunds
+              updateFunds,
+              fundsChange
             )}
           </BrowserRouter>
           {modal && (
