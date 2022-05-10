@@ -29,13 +29,16 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
   }, [statusMsg, daoId, selectedBarsInterval]);
 
   return (
-    <LabeledBox label={"Income and spending"}>
-      <Select
-        value={selectedBarsInterval}
-        onChange={setSelectedBarsInterval}
-        options={barsOptions}
-      />
-      <IncomeVsSpendingChart chartData={chartData} />
-    </LabeledBox>
+    <div className="charts-container">
+      <LabeledBox label={"Income and spending"}>
+        <Select
+          className="charts-select"
+          value={selectedBarsInterval}
+          onChange={setSelectedBarsInterval}
+          options={barsOptions}
+        />
+        <IncomeVsSpendingChart chartData={chartData} />
+      </LabeledBox>
+    </div>
   );
 };

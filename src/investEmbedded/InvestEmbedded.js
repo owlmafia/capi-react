@@ -26,25 +26,28 @@ export const InvestEmbedded = ({
   }, [statusMsg]);
 
   return (
-    <div className="dao_action_active_tab">
-      <div>{"Buy shares"}</div>
-      <div>
-        <div>{"Available shares: "}</div>
+    <div className="dao_action_active_tab box-container">
+      <div className="title">{"Buy shares"}</div>
+      <div className="flex-block">
+        <div className="subTitle">{"Available shares: "}</div>
         <div>{investmentData.available_shares}</div>
       </div>
-      <div>
+      <div className="chartBlock">
         <div>{investmentData.investor_locked_shares}</div>
+        <div className="circle"></div>
         <div>{"Your locked shares"}</div>
       </div>
-      <div>
+      <div className="chartBlock">
         <div>{investmentData.investor_unlocked_shares}</div>
+        <div className="circle"></div>
         <div>{"Your unlocked shares"}</div>
       </div>
-      <div>
-        <div>{"Cost"}</div>
-        <div>{totalCost}</div>
+      <div id="shares_const_container" className="secondary_info">
+        <div>{"Cost:"}</div>
+        <div className="one_line_key_val_val">{totalCost}</div>
+        <FundsAssetImg />
       </div>
-      <div>
+      <div className="chartBlock">
         <div>{"Dividend"}</div>
         <div>{totalPercentage}</div>
       </div>
@@ -65,12 +68,6 @@ export const InvestEmbedded = ({
           );
         }}
       />
-
-      <div id="shares_const_container" className="secondary_info">
-        <div>{"Cost:"}</div>
-        <div className="one_line_key_val_val">{totalCost}</div>
-        <FundsAssetImg />
-      </div>
       <button
         disabled={myAddress === ""}
         className="button-primary"

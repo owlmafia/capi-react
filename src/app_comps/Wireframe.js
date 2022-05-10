@@ -135,10 +135,9 @@ const DaoTop = ({ dao }) => {
         <div className="social-media-buttons">
           {dao.social_media_url && (
             <a href={dao.social_media_url} target="_blank" rel="noreferrer">
-              <button className="button__follow">
-                <img width="20" height="16" src={twitter} alt="logo-twitter" />
-                Follow on Twitter
-              </button>
+              <div className="share-icon button__follow">
+                <img src={twitter} alt="logo-twitter" />
+              </div>
             </a>
           )}
           <div className="share-icon">
@@ -165,7 +164,7 @@ const DaoTop = ({ dao }) => {
 const logoView = (dao) => {
   return (
     dao.image_url && (
-      <img id="banner_img" src={dao.image_url ?? ""} alt="Project banner" />
+      <img id="banner_img" class="content-img" src={dao.image_url ?? ""} alt="Project banner" />
     )
   );
 };

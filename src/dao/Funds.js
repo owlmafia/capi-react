@@ -22,15 +22,12 @@ export const Funds = ({
 
   return (
     <div id="dao_funds__cont" className={containerClassNameOpt}>
-      {/* <div className="dao-funds-title">Withdraw Funds from project</div> */}
-      {/* <div className="available-funds"> */}
-        <div>{"Available funds"}</div>
-        <div id="dao_funds__val">
-          <FundsAssetImg />
-          <div className="funds">{funds}</div>
-          {withdrawButton()}
-        </div>
-      {/* </div> */}
+      <div>{"Available funds"}</div>
+      <div id="dao_funds__val">
+        <FundsAssetImg />
+        <div className="funds">{funds}</div>
+        {withdrawButton()}
+      </div>
     </div>
   );
 };
