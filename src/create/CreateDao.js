@@ -11,14 +11,18 @@ import { useNavigate } from "react-router-dom";
 import { connectWalletAndUpdate } from "../shared_functions";
 
 export const CreateDao = (props) => {
-  const [daoName, setDaoName] = useState("");
-  const [daoDescr, setDaoDescr] = useState("");
+  const [daoName, setDaoName] = useState("My project");
+  const [daoDescr, setDaoDescr] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+  );
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
-  const [sharesForInvestors, setSharesForInvestors] = useState("");
+  const [sharesForInvestors, setSharesForInvestors] = useState("100");
   const [imageBytes, setImageBytes] = useState([]);
-  const [socialMediaUrl, setSocialMediaUrl] = useState("");
+  const [socialMediaUrl, setSocialMediaUrl] = useState(
+    "https://twitter.com/doesnotexist"
+  );
 
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
