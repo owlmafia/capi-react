@@ -76,7 +76,6 @@ export const RightDaoCol = ({
       <FundsActivityEmbedded
         statusMsg={statusMsgUpdater}
         daoId={params.id}
-        myAddress={myAddress}
         funds={funds}
         fundsChange={fundsChange}
       />

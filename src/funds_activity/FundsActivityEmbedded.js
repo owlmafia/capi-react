@@ -9,7 +9,6 @@ import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
 export const FundsActivityEmbedded = ({
   statusMsg,
   daoId,
-  myAddress,
   funds,
   fundsChange,
 }) => {
@@ -21,10 +20,8 @@ export const FundsActivityEmbedded = ({
   }, [statusMsg]);
 
   useEffect(() => {
-    if (myAddress) {
-      loadFundsActivity(statusMsg, daoId, myAddress, setActivityEntries, "3");
-    }
-  }, [daoId, statusMsg, myAddress]);
+    loadFundsActivity(statusMsg, daoId, setActivityEntries, "3");
+  }, [daoId, statusMsg]);
 
   useEffect(() => {
     loadDao(statusMsg, daoId, setDao);

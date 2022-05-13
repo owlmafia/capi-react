@@ -14,16 +14,8 @@ export const FundsActivity = (props) => {
   }, [props.statusMsg]);
 
   useEffect(() => {
-    if (props.myAddress) {
-      loadFundsActivity(
-        props.statusMsg,
-        params.id,
-        props.myAddress,
-        setActivityEntries,
-        null
-      );
-    }
-  }, [params.id, props.statusMsg, props.myAddress]);
+    loadFundsActivity(props.statusMsg, params.id, setActivityEntries, null);
+  }, [params.id, props.statusMsg]);
 
   const fundsActivity = () => {
     return (
