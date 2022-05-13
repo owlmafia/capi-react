@@ -1,28 +1,16 @@
-import { IoCreateOutline } from "react-icons/io5";
-import { VscListFlat } from "react-icons/vsc";
-import {
-  Menu,
-  MenuItem,
-  ProSidebar,
-  SidebarContent,
-  SidebarFooter,
-} from "react-pro-sidebar";
-import { Link } from "react-router-dom";
+import SideBarItem from "./SiteBarItem";
+import create from "../images/sidebar/create.svg";
+import project from "../images/sidebar/projects.svg";
 
 export const SideBar = () => {
   return (
-    <ProSidebar id="sidebar">
-      <SidebarContent>
-        <Menu iconShape="square">
-          <MenuItem icon={<IoCreateOutline />}>
-            <Link to="/">Create</Link>
-          </MenuItem>
-          <MenuItem icon={<VscListFlat />}>
-            <Link to="my_projects">My projects</Link>
-          </MenuItem>
-        </Menu>
-      </SidebarContent>
-      <SidebarFooter></SidebarFooter>
-    </ProSidebar>
+    <div>
+      <SideBarItem imageSrc={create} route="/" label="Create" />
+      <SideBarItem
+        imageSrc={project}
+        route="/my_projects"
+        label="My Projects"
+      />
+    </div>
   );
 };

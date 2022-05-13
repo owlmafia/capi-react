@@ -12,7 +12,8 @@
     .pro-menu .pro-menu-item > .pro-inner-item {
         margin-bottom: 6px;
     }
-    .pro-menu a:hover, .pro-menu-item:hover .pro-icon {
+    .pro-menu a:hover,
+    .pro-menu-item:hover .pro-icon {
         transition: 0.3s;
         color: $blue-primary;
         font-weight: bold;
@@ -30,4 +31,8 @@
         color: #adadad;
         font-weight: 300;
     }
+}
+
+.menu_active {
+    color: red;
 }
