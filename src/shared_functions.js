@@ -1,4 +1,4 @@
-import { signTxs } from "./MyAlgo";
+import { connectWallet, signTxs } from "./MyAlgo";
 
 const wasmPromise = import("wasm");
 
@@ -101,6 +101,25 @@ export const updateFunds_ = async (
       customer_escrow: viewDao.dao.customer_escrow_address,
     });
     setFundsChange(balance_change_res.change);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
+export const connectWalletAndUpdate = async (
+  statusMsg,
+  setMyAddress,
+  setMyAddressDisplay,
+  updateMyBalance
+) => {
+  try {
+    let address = await connectWallet();
+    setMyAddress(address);
+    setMyAddressDisplay(shortedAddress(address));
+
+    await updateMyBalance(address);
+
+    return address; // in case it's needed for immediate processing
   } catch (e) {
     statusMsg.error(e);
   }

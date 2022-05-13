@@ -58,6 +58,8 @@ export const routesView = (
             element={
               <CreateDao
                 myAddress={myAddress}
+                setMyAddress={setMyAddress}
+                setMyAddressDisplay={setMyAddressDisplay}
                 showModal={(modal) => setModal(modal)}
                 showProgress={(show) => setShowProgress(show)}
                 statusMsg={statusMsgUpdater}

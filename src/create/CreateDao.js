@@ -8,6 +8,7 @@ import { ContentTitle } from "../ContentTitle";
 import { createDao, init } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
+import { connectWalletAndUpdate } from "../shared_functions";
 
 export const CreateDao = (props) => {
   const [daoName, setDaoName] = useState("");
@@ -52,105 +53,111 @@ export const CreateDao = (props) => {
   });
 
   const formView = () => {
-    if (props.myAddress) {
-      return (
-        <div className="create-dao-container">
-          <div className="dao-title">Project Info</div>
-          <LabeledInput
-            label={"Project name"}
-            inputValue={daoName}
-            onChange={(input) => setDaoName(input)}
-            errorMsg={daoNameError}
-          />
-          <LabeledInput
-            label={"Description"}
-            inputValue={daoDescr}
-            onChange={(input) => setDaoDescr(input)}
-            errorMsg={daoDescrError}
-          />
-          <LabeledInput
-            label={"Share supply"}
-            inputValue={shareCount}
-            onChange={(input) => setShareCount(input)}
-            errorMsg={shareCountError}
-          />
-          <LabeledCurrencyInput
-            label={"Share price per unit"}
-            inputValue={sharePrice}
-            onChange={(input) => setSharePrice(input)}
-            errorMsg={sharePriceError}
-          />
-          {/* <LabeledInput
+    return (
+      <div className="create-dao-container">
+        <div className="dao-title">Project Info</div>
+        <LabeledInput
+          label={"Project name"}
+          inputValue={daoName}
+          onChange={(input) => setDaoName(input)}
+          errorMsg={daoNameError}
+        />
+        <LabeledInput
+          label={"Description"}
+          inputValue={daoDescr}
+          onChange={(input) => setDaoDescr(input)}
+          errorMsg={daoDescrError}
+        />
+        <LabeledInput
+          label={"Share supply"}
+          inputValue={shareCount}
+          onChange={(input) => setShareCount(input)}
+          errorMsg={shareCountError}
+        />
+        <LabeledCurrencyInput
+          label={"Share price per unit"}
+          inputValue={sharePrice}
+          onChange={(input) => setSharePrice(input)}
+          errorMsg={sharePriceError}
+        />
+        {/* <LabeledInput
             label={"Share price per unit"}
             inputValue={sharePrice}
             onChange={(input) => setSharePrice(input)}
           /> */}
 
-          <LabeledCurrencyInput
-            label={"Investor's part:"}
-            inputValue={investorsShare}
-            onChange={(input) => setInvestorsShare(input)}
-            errorMsg={investorsShareError}
-            placeholder="Investor's part in %"
-          />
-          <LabeledCurrencyInput
-            label={"Shares for investors"}
-            inputValue={sharesForInvestors}
-            onChange={(input) => setSharesForInvestors(input)}
-            errorMsg={sharesForInvestorsError}
-          />
+        <LabeledCurrencyInput
+          label={"Investor's part:"}
+          inputValue={investorsShare}
+          onChange={(input) => setInvestorsShare(input)}
+          errorMsg={investorsShareError}
+          placeholder="Investor's part in %"
+        />
+        <LabeledCurrencyInput
+          label={"Shares for investors"}
+          inputValue={sharesForInvestors}
+          onChange={(input) => setSharesForInvestors(input)}
+          errorMsg={sharesForInvestorsError}
+        />
 
-          <ImageUpload setImageBytes={setImageBytes} />
-          <LabeledInput
-            label={"Primary social media (optional)"}
-            inputValue={socialMediaUrl}
-            onChange={(input) => setSocialMediaUrl(input)}
-            errorMsg={socialMediaUrlError}
-          />
-          <button
-            className="button-primary"
-            disabled={
-              props.myAddress === "" ||
-              daoName === "" ||
-              shareCount === "" ||
-              sharePrice === "" ||
-              investorsShare === ""
-            }
-            onClick={async () => {
-              await createDao(
-                props.myAddress,
-                props.showProgress,
+        <ImageUpload setImageBytes={setImageBytes} />
+        <LabeledInput
+          label={"Primary social media (optional)"}
+          inputValue={socialMediaUrl}
+          onChange={(input) => setSocialMediaUrl(input)}
+          errorMsg={socialMediaUrlError}
+        />
+        <button
+          className="button-primary"
+          disabled={
+            daoName === "" ||
+            shareCount === "" ||
+            sharePrice === "" ||
+            investorsShare === ""
+          }
+          onClick={async () => {
+            // connect wallet if not connected yet
+            var myAddress = props.myAddress;
+            if (myAddress === "") {
+              myAddress = await connectWalletAndUpdate(
                 props.statusMsg,
-                props.updateMyBalance,
-
-                daoName,
-                daoDescr,
-                shareCount,
-                sharePrice,
-                investorsShare,
-                sharesForInvestors,
-                imageBytes,
-                socialMediaUrl,
-                navigate,
-
-                setDaoNameError,
-                setDaoDescrError,
-                setShareCountError,
-                setSharePriceError,
-                setInvestorsShareError,
-                setSharesForInvestorsError,
-                setImageBytesError,
-                setSocialMediaUrlError
+                props.setMyAddress,
+                props.setMyAddressDisplay,
+                props.updateMyBalance
               );
-            }}
-          >
-            {"Create project"}
-          </button>
-        </div>
-      );
-    } else {
-      return null;
-    }
+            }
+
+            await createDao(
+              myAddress,
+              props.showProgress,
+              props.statusMsg,
+              props.updateMyBalance,
+
+              daoName,
+              daoDescr,
+              shareCount,
+              sharePrice,
+              investorsShare,
+              sharesForInvestors,
+              imageBytes,
+              socialMediaUrl,
+              navigate,
+
+              setDaoNameError,
+              setDaoDescrError,
+              setShareCountError,
+              setSharePriceError,
+              setInvestorsShareError,
+              setSharesForInvestorsError,
+              setImageBytesError,
+              setSocialMediaUrlError
+            );
+          }}
+        >
+          {"Create project"}
+        </button>
+      </div>
+    );
   };
 
   return (

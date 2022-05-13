@@ -1,9 +1,12 @@
 import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import { connectWallet } from "../MyAlgo";
 import myalgo from "../images/svg/myalgo.svg";
 import arrow from "../images/svg/arrow-right.svg";
-import { retrieveProfits, shortedAddress } from "../shared_functions";
+import {
+  connectWalletAndUpdate,
+  retrieveProfits,
+  shortedAddress,
+} from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
 
 export const MyAccount = ({
@@ -146,22 +149,19 @@ const connectButton = (
   setMyAddress,
   setMyAddressDisplay,
   updateMyBalance,
-  statusMsgUpdater
+  statusMsg
 ) => {
   if (myAddress === "") {
     return (
       <button
         className="button-primary full-width-btn"
         onClick={async (event) => {
-          try {
-            let address = await connectWallet();
-            setMyAddress(address);
-            setMyAddressDisplay(shortedAddress(address));
-
-            await updateMyBalance(address);
-          } catch (e) {
-            statusMsgUpdater.error(e);
-          }
+          await connectWalletAndUpdate(
+            statusMsg,
+            setMyAddress,
+            setMyAddressDisplay,
+            updateMyBalance
+          );
         }}
       >
         {"Connect My Algo wallet"}
