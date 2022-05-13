@@ -7,7 +7,7 @@ import {
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";
 
-export const Withdrawal = (props) => {
+export const Withdrawal = ({ deps }) => {
   let params = useParams();
 
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
@@ -16,11 +16,11 @@ export const Withdrawal = (props) => {
 
   useEffect(() => {
     async function asyncInit() {
-      // init(params.id, props.history.location.state, setDAo, props.statusMsg);
-      await init(params.id, null, setDao, props.statusMsg);
+      // init(params.id, props.history.location.state, setDao, props.statusMsg);
+      await init(params.id, null, setDao, deps.statusMsg);
     }
     asyncInit();
-  }, [params.id, props.statusMsg]);
+  }, [params.id, setDao, deps.statusMsg]);
 
   const view = () => {
     if (dao) {
@@ -29,7 +29,7 @@ export const Withdrawal = (props) => {
           <div className="title">Withdraw Funds from project</div>
           {/* <DaoName dao={dao} /> */}
           <Funds
-            funds={props.funds}
+            funds={deps.funds}
             showWithdrawLink={false}
             daoId={params.id}
             containerClassNameOpt="dao_funds__cont_in_withdraw"
@@ -46,17 +46,17 @@ export const Withdrawal = (props) => {
           />
           <button
             className="button-primary"
-            disabled={props.myAddress === ""}
+            disabled={deps.myAddress === ""}
             onClick={async () => {
               await withdraw(
-                props.myAddress,
-                props.showProgress,
-                props.statusMsg,
-                props.updateMyBalance,
+                deps.myAddress,
+                deps.showProgress,
+                deps.statusMsg,
+                deps.updateMyBalance,
                 params.id,
                 withdrawalAmount,
                 withdrawalDescr,
-                props.updateFunds
+                deps.updateFunds
               );
             }}
           >

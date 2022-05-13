@@ -6,7 +6,7 @@ import { fetchHolderCount } from "../common_functions/stats_common";
 import { ContentTitle } from "../ContentTitle";
 import { init } from "./controller";
 
-export const Stats = ({ statusMsg }) => {
+export const Stats = ({ deps }) => {
   let params = useParams();
 
   const [holderCount, setHolderCount] = useState(null);
@@ -15,10 +15,10 @@ export const Stats = ({ statusMsg }) => {
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading dao id: " + JSON.stringify(params));
-      await init(params.id, setViewDao, statusMsg);
+      await init(params.id, setViewDao, deps.statusMsg);
     }
     asyncInit();
-  }, [params.id, statusMsg]);
+  }, [params.id, deps.statusMsg]);
 
   const dao = useMemo(() => {
     if (viewDao) {
@@ -40,9 +40,14 @@ export const Stats = ({ statusMsg }) => {
 
   useEffect(() => {
     if (sharesAssetId && dao) {
-      fetchHolderCount(statusMsg, sharesAssetId, dao.app_id, setHolderCount);
+      fetchHolderCount(
+        deps.statusMsg,
+        sharesAssetId,
+        dao.app_id,
+        setHolderCount
+      );
     }
-  }, [statusMsg, sharesAssetId, dao]);
+  }, [deps.statusMsg, sharesAssetId, dao]);
 
   return (
     <div>
@@ -51,7 +56,7 @@ export const Stats = ({ statusMsg }) => {
       </div>
       {dao && (
         <SharesDistributionBox
-          statusMsg={statusMsg}
+          deps={deps}
           sharesAssetId={sharesAssetId}
           sharesSupply={sharesSupply}
           holderCount={holderCount}
@@ -59,7 +64,7 @@ export const Stats = ({ statusMsg }) => {
         />
       )}
 
-      <IncomeVsSpendingBox statusMsg={statusMsg} daoId={params.id} />
+      <IncomeVsSpendingBox statusMsg={deps.statusMsg} daoId={params.id} />
     </div>
   );
 };

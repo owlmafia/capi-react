@@ -100,27 +100,37 @@ const App = () => {
           {/* <div>{connectButton()}</div> */}
 
           <BrowserRouter>
-            {routesView(
-              myAddress,
-              setMyAddress,
-              setModal,
-              setShowProgress,
-              statusMsgUpdater,
-              updateMyBalance,
-              myAddressDisplay,
-              myBalance,
-              statusMsg,
-              setMyAddressDisplay,
-              myShares,
-              updateShares,
-              myDividend,
-              updateMyDividend,
-              investmentData,
-              updateInvestmentData,
-              funds,
-              updateFunds,
-              fundsChange
-            )}
+            {routesView({
+              myAddress: myAddress,
+              setMyAddress: setMyAddress,
+
+              myAddressDisplay: myAddressDisplay,
+              setMyAddressDisplay: setMyAddressDisplay,
+
+              setModal: setModal,
+
+              showProgress: (show) => setShowProgress(show),
+
+              statusMsgDisplay: statusMsg,
+              statusMsg: statusMsgUpdater,
+
+              myBalance: myBalance,
+              updateMyBalance: updateMyBalance,
+
+              myShares: myShares,
+              updateMyShares: updateShares,
+
+              myDividend: myDividend,
+              updateMyDividend: updateMyDividend,
+
+              investmentData: investmentData,
+              updateInvestmentData: updateInvestmentData,
+
+              funds: funds,
+              updateFunds: updateFunds,
+
+              fundsChange: fundsChange,
+            })}
           </BrowserRouter>
           {modal && (
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>

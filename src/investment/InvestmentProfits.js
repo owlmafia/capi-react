@@ -6,16 +6,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { init } from "./controller";
 import { retrieveProfits } from "../shared_functions";
 
-export const InvestmentProfits = ({
-  statusMsg,
-  showProgress,
-  myAddress,
-  updateMyShares,
-  updateMyBalance,
-  investmentData,
-  updateInvestmentData,
-  updateFunds,
-}) => {
+export const InvestmentProfits = ({ deps }) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
@@ -24,15 +15,21 @@ export const InvestmentProfits = ({
     async function doInit() {
       await init(
         params.id,
-        myAddress,
-        statusMsg,
+        deps.myAddress,
+        deps.statusMsg,
         setDao,
-        updateInvestmentData,
-        updateMyShares
+        deps.updateInvestmentData,
+        deps.updateMyShares
       );
     }
     doInit();
-  }, [params.id, myAddress, statusMsg, updateInvestmentData, updateMyShares]);
+  }, [
+    params.id,
+    deps.myAddress,
+    deps.statusMsg,
+    deps.updateInvestmentData,
+    deps.updateMyShares,
+  ]);
 
   const view = () => {
     return (
@@ -44,7 +41,7 @@ export const InvestmentProfits = ({
               <div className="subTitle">{"Retrievable profits:"}</div>
               <FundsAssetImg className="fund-asset" />
               <div className="subTitle">
-                {investmentData.investor_claimable_dividend}
+                {deps.investmentData.investor_claimable_dividend}
               </div>
             </div>
             <div className="flex-block flex-column">
@@ -53,23 +50,23 @@ export const InvestmentProfits = ({
                 <FundsAssetImg className="fund-asset opacity-70" />
                 <div className="subTitle retrieved">
                   {" "}
-                  {investmentData.investor_already_retrieved_amount}
+                  {deps.investmentData.investor_already_retrieved_amount}
                 </div>
               </div>
             </div>
           </div>
           <button
             className="button-primary"
-            disabled={investmentData.investor_claimable_dividend === "0"}
+            disabled={deps.investmentData.investor_claimable_dividend === "0"}
             onClick={async () => {
               await retrieveProfits(
-                myAddress,
-                showProgress,
-                statusMsg,
-                updateMyBalance,
+                deps.myAddress,
+                deps.showProgress,
+                deps.statusMsg,
+                deps.updateMyBalance,
                 params.id,
-                updateInvestmentData,
-                updateFunds
+                deps.updateInvestmentData,
+                deps.updateFunds
               );
             }}
           >
@@ -83,7 +80,7 @@ export const InvestmentProfits = ({
   return (
     <div>
       <ContentTitle title={"My investment"} />
-      <div>{dao && investmentData && view()}</div>
+      <div>{dao && deps.investmentData && view()}</div>
     </div>
   );
 };

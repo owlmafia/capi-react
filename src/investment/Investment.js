@@ -7,16 +7,7 @@ import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
 
-export const Investment = ({
-  myAddress,
-  showProgress,
-  statusMsg,
-  investmentData,
-  updateInvestmentData,
-  updateMyShares,
-  updateMyBalance,
-  updateFunds,
-}) => {
+export const Investment = ({ deps }) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
@@ -31,47 +22,44 @@ export const Investment = ({
     async function doInit() {
       await init(
         params.id,
-        myAddress,
-        statusMsg,
+        deps.myAddress,
+        deps.statusMsg,
         setDao,
-        updateInvestmentData,
-        updateMyShares
+        deps.updateInvestmentData,
+        deps.updateMyShares
       );
 
-      if (myAddress) {
-        await updateInvestmentData(params.id, myAddress);
+      if (deps.myAddress) {
+        await deps.updateInvestmentData.call(params.id, deps.myAddress);
       }
     }
     doInit();
-  }, [params.id, myAddress, statusMsg, updateInvestmentData, updateMyShares]);
+  }, [
+    params.id,
+    deps.myAddress,
+    deps.statusMsg,
+    deps.updateInvestmentData,
+    deps.updateMyShares,
+  ]);
 
   useEffect(() => {
-    if (myShareChart.current && investmentData) {
-      const notMyShare = 1 - investmentData.investor_percentage_number;
+    if (myShareChart.current && deps.investmentData) {
+      const notMyShare = 1 - deps.investmentData.investor_percentage_number;
       // the labels are irrelevant here
       const data = {
-        a: investmentData.investor_percentage_number,
+        a: deps.investmentData.investor_percentage_number,
         b: notMyShare,
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [dao, investmentData]);
+  }, [dao, deps.investmentData]);
 
   const userView = () => {
-    if (myAddress && dao && investmentData) {
+    if (deps.myAddress && dao && deps.investmentData) {
       return (
         <div>
           <div className="section_container">
-            <InvestmentProfits
-              statusMsg={statusMsg}
-              showProgress={showProgress}
-              updateMyShares={updateMyShares}
-              updateMyBalance={updateMyBalance}
-              myAddress={myAddress}
-              investmentData={investmentData}
-              updateInvestmentData={updateInvestmentData}
-              updateFunds={updateFunds}
-            />
+            <InvestmentProfits deps={deps} />
 
             <div id="dao_actions_top_bar">
               <p
@@ -105,43 +93,16 @@ export const Investment = ({
                 {"Lock shares"}
               </p>
             </div>
-            {showBuyMoreTab && (
-              <BuyMoreShares
-                statusMsg={statusMsg}
-                showProgress={showProgress}
-                updateMyShares={updateMyShares}
-                updateMyBalance={updateMyBalance}
-                updateFunds={updateFunds}
-                myAddress={myAddress}
-                dao={dao}
-                investmentData={investmentData}
-              />
-            )}
+            {showBuyMoreTab && <BuyMoreShares deps={deps} dao={dao} />}
             {showUnlockTab && (
-              <UnlockShares
-                statusMsg={statusMsg}
-                showProgress={showProgress}
-                myAddress={myAddress}
-                updateMyShares={updateMyShares}
-                updateMyBalance={updateMyBalance}
-                updateInvestmentData={updateInvestmentData}
-                dao={dao}
-                daoId={params.id}
-                investmentData={investmentData}
-              />
+              <UnlockShares deps={deps} dao={dao} daoId={params.id} />
             )}
             {showLockTab && (
               <LockShares
-                statusMsg={statusMsg}
-                showProgress={showProgress}
-                myAddress={myAddress}
-                updateMyShares={updateMyShares}
-                updateMyBalance={updateMyBalance}
-                updateInvestmentData={updateInvestmentData}
+                deps={deps}
                 dao={dao}
                 daoId={params.id}
-                investmentData={investmentData}
-                onLockOpt={updateInvestmentData}
+                onLockOpt={deps.updateInvestmentData}
               />
             )}
           </div>

@@ -28,7 +28,6 @@ export const init = async (
   }
 };
 
-
 export const unlock = async (
   myAddress,
   showProgress,
@@ -63,7 +62,7 @@ export const unlock = async (
 
     statusMsg.success("Shares unlocked");
     showProgress(false);
-    
+
     await updateInvestmentData();
     await updateMyBalance(myAddress);
     await updateMyShares(daoId, myAddress);

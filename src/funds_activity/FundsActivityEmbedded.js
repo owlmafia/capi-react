@@ -6,26 +6,21 @@ import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
 import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
 
-export const FundsActivityEmbedded = ({
-  statusMsg,
-  daoId,
-  funds,
-  fundsChange,
-}) => {
+export const FundsActivityEmbedded = ({ deps, daoId }) => {
   const [activityEntries, setActivityEntries] = useState([]);
   const [dao, setDao] = useState(null);
 
   useEffect(() => {
-    init(statusMsg);
-  }, [statusMsg]);
+    init(deps.statusMsg);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
-    loadFundsActivity(statusMsg, daoId, setActivityEntries, "3");
-  }, [daoId, statusMsg]);
+    loadFundsActivity(deps.statusMsg, daoId, setActivityEntries, "3");
+  }, [daoId, deps.statusMsg]);
 
   useEffect(() => {
-    loadDao(statusMsg, daoId, setDao);
-  }, [daoId, statusMsg]);
+    loadDao(deps.statusMsg, daoId, setDao);
+  }, [daoId, deps.statusMsg]);
 
   const fundsActivity = () => {
     return (
@@ -44,14 +39,14 @@ export const FundsActivityEmbedded = ({
   const view = () => {
     return (
       <div className="first_dao_widget">
-        {funds && (
+        {deps.funds && (
           <div>
             <div>{"Project funds"}</div>
             <div className="funds-assets">
               <FundsAssetImg />
             </div>
-            <div>{funds}</div>
-            <div>{fundsChangeArrow(fundsChange)}</div>
+            <div>{deps.funds}</div>
+            <div>{fundsChangeArrow(deps.fundsChange)}</div>
           </div>
         )}
         {dao && (

@@ -5,16 +5,7 @@ import { LabeledInput } from "../common_comps/LabeledInput";
 import { invest } from "./controller";
 import arrow from "../images/svg/arrow.svg";
 
-export const BuyMoreShares = ({
-  statusMsg,
-  showProgress,
-  myAddress,
-  updateMyShares,
-  updateMyBalance,
-  updateFunds,
-  dao,
-  investmentData,
-}) => {
+export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
 
   const [buySharesAmount, setBuySharesAmount] = useState(null);
@@ -29,18 +20,18 @@ export const BuyMoreShares = ({
           <div className="flex-block">
             <div className="subTitle">{"Available Shares in project"}</div>
             <div className="subTitle">{dao.share_supply}</div>
-            <img className="arrow" src={arrow} alt="arrow"/>
+            <img className="arrow" src={arrow} alt="arrow" />
           </div>
           <div className="chartBlock">
-            <div>{investmentData.available_shares}</div>
+            <div>{deps.investmentData.available_shares}</div>
             <div>{"Not owned"}</div>
           </div>
           <div className="chartBlock">
-            <div>{investmentData.investor_locked_shares}</div>
+            <div>{deps.investmentData.investor_locked_shares}</div>
             <div>{"Your locked shares"}</div>
           </div>
           <div className="chartBlock">
-            <div>{investmentData.investor_unlocked_shares}</div>
+            <div>{deps.investmentData.investor_unlocked_shares}</div>
             <div>{"Your unlocked shares"}</div>
           </div>
           <LabeledInput
@@ -50,32 +41,32 @@ export const BuyMoreShares = ({
             onChange={(input) => setBuySharesAmount(input)}
             errorMsg={buySharesAmountError}
           />
-        <button
-          className="button-primary"
-          disabled={investmentData.available_shares === "0"}
-          onClick={async () => {
-            await invest(
-              myAddress,
-              showProgress,
-              statusMsg,
-              updateMyBalance,
-              params.id,
-              dao,
-              buySharesAmount,
-              updateMyShares,
-              updateFunds
-            );
-          }}
-        >
-          {"Buy shares"}
-        </button>
-        <SharesDistributionChart
-          sharesDistr={[
-            to_pie_chart_slice(investmentData.available_shares),
-            to_pie_chart_slice(investmentData.investor_locked_shares),
-            to_pie_chart_slice(investmentData.investor_unlocked_shares),
-          ]}
-        />
+          <button
+            className="button-primary"
+            disabled={deps.investmentData.available_shares === "0"}
+            onClick={async () => {
+              await invest(
+                deps.myAddress,
+                deps.showProgress,
+                deps.statusMsg,
+                deps.updateMyBalance,
+                params.id,
+                dao,
+                deps.buySharesAmount,
+                deps.updateMyShares,
+                deps.updateFunds
+              );
+            }}
+          >
+            {"Buy shares"}
+          </button>
+          <SharesDistributionChart
+            sharesDistr={[
+              to_pie_chart_slice(deps.investmentData.available_shares),
+              to_pie_chart_slice(deps.investmentData.investor_locked_shares),
+              to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
+            ]}
+          />
         </div>
       </div>
     );
@@ -83,7 +74,7 @@ export const BuyMoreShares = ({
 
   return (
     <div>
-      <div>{dao && investmentData && view()}</div>
+      <div>{dao && deps.investmentData && view()}</div>
     </div>
   );
 };

@@ -4,18 +4,18 @@ import { ContentTitle } from "../ContentTitle";
 import { init, loadFundsActivity } from "./controller";
 import { FundsActivityEntry } from "./FundsActivityEntry";
 
-export const FundsActivity = (props) => {
+export const FundsActivity = ({ deps }) => {
   let params = useParams();
 
   const [activityEntries, setActivityEntries] = useState([]);
 
   useEffect(() => {
-    init(props.statusMsg);
-  }, [props.statusMsg]);
+    init(deps.statusMsg);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
-    loadFundsActivity(props.statusMsg, params.id, setActivityEntries, null);
-  }, [params.id, props.statusMsg]);
+    loadFundsActivity(deps.statusMsg, params.id, setActivityEntries, null);
+  }, [params.id, deps.statusMsg]);
 
   const fundsActivity = () => {
     return (

@@ -2,38 +2,26 @@ import React from "react";
 import { lock } from "./controller";
 import { LockOrUnlockShares } from "../investment/LockOrUnlockShares";
 
-export const LockShares = ({
-  statusMsg,
-  showProgress,
-  myAddress,
-  updateMyShares,
-  updateMyBalance,
-  updateInvestmentData,
-  dao,
-  daoId,
-  investmentData,
-  onLockOpt,
-}) => {
-  console.log("!!! dao: %o", dao);
+export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
   return (
     <LockOrUnlockShares
       dao={dao}
-      investmentData={investmentData}
+      investmentData={deps.investmentData}
       showInput={true}
       title={"Lock shares"}
       inputLabel={"Lock shares"}
       buttonLabel={"Lock shares"}
       onSubmit={async (input) => {
         await lock(
-          myAddress,
-          showProgress,
-          statusMsg,
-          updateMyBalance,
+          deps.myAddress,
+          deps.showProgress,
+          deps.statusMsg,
+          deps.updateMyBalance,
           daoId,
           dao,
           input,
-          updateMyShares,
-          updateInvestmentData,
+          deps.updateMyShares,
+          deps.updateInvestmentData,
           onLockOpt
         );
       }}

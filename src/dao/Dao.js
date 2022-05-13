@@ -7,7 +7,7 @@ import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { init } from "./controller";
 import { updateInvestmentData_ } from "../shared_functions";
 
-export const Dao = (props) => {
+export const Dao = ({ deps }) => {
   let params = useParams();
 
   const [viewDao, setViewDao] = useState(null);
@@ -15,7 +15,7 @@ export const Dao = (props) => {
 
   const [holderCount, setHolderCount] = useState(null);
 
-  console.log("props: " + JSON.stringify(props));
+  console.log("deps: " + JSON.stringify(deps));
 
   const dao = useMemo(() => {
     if (viewDao) {
@@ -25,35 +25,35 @@ export const Dao = (props) => {
 
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewDao, props.statusMsg);
+      await init(params.id, setViewDao, deps.statusMsg);
     }
     asyncInit();
-  }, [params.id, props.statusMsg]);
+  }, [params.id, deps.statusMsg]);
 
   useEffect(() => {
     if (dao) {
       fetchHolderCount(
-        props.statusMsg,
+        deps.statusMsg,
         dao.shares_asset_id,
         dao.app_id,
         setHolderCount
       );
     }
-  }, [props.statusMsg, dao]);
+  }, [deps.statusMsg, dao]);
 
   useEffect(() => {
     async function nestedAsync() {
-      if (props.myAddress) {
+      if (deps.myAddress) {
         await updateInvestmentData_(
-          props.statusMsg,
-          props.myAddress,
+          deps.statusMsg,
+          deps.myAddress,
           params.id,
           setInvestmentData
         );
       }
     }
     nestedAsync();
-  }, [props.statusMsg, props.myAddress, params.id]);
+  }, [deps.statusMsg, deps.myAddress, params.id]);
 
   const sharesAssetId = useMemo(() => {
     if (dao) {
@@ -76,21 +76,21 @@ export const Dao = (props) => {
 
             {investmentData && (
               <InvestEmbedded
-                showProgress={props.showProgress}
-                statusMsg={props.statusMsg}
-                updateMyBalance={props.updateMyBalance}
-                myAddress={props.myAddress}
+                showProgress={deps.showProgress}
+                statusMsg={deps.statusMsg}
+                updateMyBalance={deps.updateMyBalance}
+                myAddress={deps.myAddress}
                 dao={dao}
                 investmentData={investmentData}
-                updateMyShares={props.updateMyShares}
-                myShares={props.myShares}
-                updateFunds={props.updateFunds}
+                updateMyShares={deps.updateMyShares}
+                myShares={deps.myShares}
+                updateFunds={deps.updateFunds}
               />
             )}
 
             {/* <Link
-              disabled={props.myAddress === "" || funds === 0}
-              hidden={viewDao.dao.owner_address !== props.myAddress}
+              disabled={deps.myAddress === "" || funds === 0}
+              hidden={viewDao.dao.owner_address !== deps.myAddress}
               to={"/withdraw/" + params.id}
             >
               <button>{"Withdraw"}</button>
@@ -98,7 +98,7 @@ export const Dao = (props) => {
             <div className="section-spacer" />
             {dao && (
               <SharesDistributionBox
-                statusMsg={props.statusMsg}
+                deps={deps}
                 sharesAssetId={sharesAssetId}
                 sharesSupply={sharesSupply}
                 holderCount={holderCount}
@@ -106,10 +106,7 @@ export const Dao = (props) => {
               />
             )}
 
-            <IncomeVsSpendingBox
-              statusMsg={props.statusMsg}
-              daoId={params.id}
-            />
+            <IncomeVsSpendingBox statusMsg={deps.statusMsg} daoId={params.id} />
           </div>
           <div className="section-spacer" />
         </div>

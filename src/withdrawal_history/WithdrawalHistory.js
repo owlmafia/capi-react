@@ -4,7 +4,7 @@ import { DaoName } from "../ContentTitle";
 import { WithdrawalEntry } from "../Withdrawal";
 import { init, loadWithdrawals } from "./controller";
 
-export const WithdrawalHistory = (props) => {
+export const WithdrawalHistory = ({ deps }) => {
   let params = useParams();
 
   const [withdrawals, setWithdrawals] = useState([]);
@@ -13,20 +13,20 @@ export const WithdrawalHistory = (props) => {
   useEffect(() => {
     // TODO pass cached dao (props.history.location.state)? not sure this is still needed, with the new navigation
     // init(params.id, props.history.location.state, setDao, props.statusMsg);
-    init(params.id, null, setDao, props.statusMsg);
+    init(params.id, null, deps.setDao, deps.statusMsg);
     // }, [props.history.location.state, params.id, props.statusMsg]);
-  }, [params.id, props.statusMsg]);
+  }, [params.id, deps.setDao, deps.statusMsg]);
 
   useEffect(() => {
-    if (props.myAddress) {
+    if (deps.myAddress) {
       loadWithdrawals(
-        props.statusMsg,
+        deps.statusMsg,
         params.id,
-        props.myAddress,
+        deps.myAddress,
         setWithdrawals
       );
     }
-  }, [params.id, props.statusMsg, props.myAddress]);
+  }, [params.id, deps.statusMsg, deps.myAddress]);
 
   const withdrawalsHistory = () => {
     return (

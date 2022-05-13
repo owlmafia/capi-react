@@ -7,7 +7,7 @@ import green from "../../images/svg/green-arrow.svg";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
-  statusMsg,
+  deps,
   sharesAssetId,
   sharesSupply,
   appId,
@@ -26,7 +26,7 @@ export const SharesDistributionBox = ({
     async function fetchData() {
       if (sharesAssetId && sharesSupply) {
         const sharesDistr = await fetchSharesDistribution(
-          statusMsg,
+          deps.statusMsg,
           sharesAssetId,
           sharesSupply,
           appId
@@ -35,7 +35,7 @@ export const SharesDistributionBox = ({
       }
     }
     fetchData();
-  }, [statusMsg, sharesAssetId, sharesSupply, appId]);
+  }, [deps.statusMsg, sharesAssetId, sharesSupply, appId]);
 
   useEffect(() => {
     const showAll = () => {
@@ -61,7 +61,7 @@ export const SharesDistributionBox = ({
       setEntries(filterHolders(startIndex));
     }
   }, [
-    statusMsg,
+    deps.statusMsg,
     sharesAssetId,
     sharesDistr,
     showMoreSelected,

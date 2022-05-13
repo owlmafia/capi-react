@@ -10,7 +10,7 @@ import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { connectWalletAndUpdate } from "../shared_functions";
 
-export const CreateDao = (props) => {
+export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
   const [daoDescr, setDaoDescr] = useState(
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -121,21 +121,21 @@ export const CreateDao = (props) => {
           }
           onClick={async () => {
             // connect wallet if not connected yet
-            var myAddress = props.myAddress;
+            var myAddress = deps.myAddress;
             if (myAddress === "") {
               myAddress = await connectWalletAndUpdate(
-                props.statusMsg,
-                props.setMyAddress,
-                props.setMyAddressDisplay,
-                props.updateMyBalance
+                deps.statusMsg,
+                deps.setMyAddress,
+                deps.setMyAddressDisplay,
+                deps.updateMyBalance
               );
             }
 
             await createDao(
               myAddress,
-              props.showProgress,
-              props.statusMsg,
-              props.updateMyBalance,
+              deps.showProgress,
+              deps.statusMsg,
+              deps.updateMyBalance,
 
               daoName,
               daoDescr,

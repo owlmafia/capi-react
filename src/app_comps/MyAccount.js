@@ -5,61 +5,21 @@ import { connectWalletAndUpdate, retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
 
 export const MyAccount = ({
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  updateMyBalance,
-  statusMsgUpdater,
+  deps,
   // optional: if set, shows "my shares"
   daoId,
-  myDividend,
-  showProgress,
-  updateInvestmentData,
-  updateFunds,
 }) => {
   return (
     <div className="my-account-container">
       <div className="text">My Algo wallet</div>
-      {myAddressView(
-        statusMsgUpdater,
-        myAddress,
-        setMyAddress,
-        myAddressDisplay,
-        myBalance,
-        myDividend,
-        daoId,
-        updateMyBalance,
-        showProgress,
-        updateInvestmentData,
-        updateFunds
-      )}
-      {connectButton(
-        myAddress,
-        setMyAddress,
-        setMyAddressDisplay,
-        updateMyBalance,
-        statusMsgUpdater
-      )}
+      {myAddressView(deps, daoId)}
+      {connectButton(deps)}
     </div>
   );
 };
 
-const myAddressView = (
-  statusMsg,
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  myBalance,
-  myDividend,
-  daoId,
-  updateMyBalance,
-  showProgress,
-  updateInvestmentData,
-  updateFunds
-) => {
-  if (myAddress !== "") {
+const myAddressView = (deps, daoId) => {
+  if (deps.myAddress !== "") {
     return (
       <div id="user_data">
         <div className="my_address">
@@ -67,38 +27,30 @@ const myAddressView = (
             <CopyPasteHtml
               element={
                 <a
-                  href={"https://testnet.algoexplorer.io/address/" + myAddress}
+                  href={
+                    "https://testnet.algoexplorer.io/address/" + deps.myAddress
+                  }
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {myAddressDisplay}
+                  {deps.myAddressDisplay}
                 </a>
               }
-              copyText={myAddress}
+              copyText={deps.myAddress}
             />
           </div>
           <div id="my_account_my_balance__balance">
             <FundsAssetImg />
-            <div>{myBalance.balance_funds_asset}</div>
+            <div>{deps.myBalance.balance_funds_asset}</div>
             <img
               className="arrow"
               src={arrow}
               alt="arrow"
-              onClick={() => setMyAddress("")}
+              onClick={() => deps.setMyAddress("")}
             />
           </div>
         </div>
-        {myDividend &&
-          dividendSection(
-            showProgress,
-            myAddress,
-            statusMsg,
-            updateMyBalance,
-            daoId,
-            myDividend,
-            updateInvestmentData,
-            updateFunds
-          )}
+        {deps.myDividend && dividendSection(deps, daoId)}
       </div>
     );
   } else {
@@ -106,30 +58,21 @@ const myAddressView = (
   }
 };
 
-const dividendSection = (
-  showProgress,
-  myAddress,
-  statusMsg,
-  updateMyBalance,
-  daoId,
-  dividend,
-  updateInvestmentData,
-  updateFunds
-) => {
+const dividendSection = (deps, daoId) => {
   return (
     <div>
-      <div>{"Claimable dividend: " + dividend}</div>
+      <div>{"Claimable dividend: " + deps.dividend}</div>
       <button
         className="button-primary full-width-btn"
         onClick={async () => {
           await retrieveProfits(
-            myAddress,
-            showProgress,
-            statusMsg,
-            updateMyBalance,
+            deps.myAddress,
+            deps.showProgress,
+            deps.statusMsg,
+            deps.updateMyBalance,
             daoId,
-            updateInvestmentData,
-            updateFunds
+            deps.updateInvestmentData,
+            deps.updateFunds
           );
         }}
       >
@@ -139,23 +82,17 @@ const dividendSection = (
   );
 };
 
-const connectButton = (
-  myAddress,
-  setMyAddress,
-  setMyAddressDisplay,
-  updateMyBalance,
-  statusMsg
-) => {
-  if (myAddress === "") {
+const connectButton = (deps) => {
+  if (deps.myAddress === "") {
     return (
       <button
         className="button-primary full-width-btn"
         onClick={async (event) => {
           await connectWalletAndUpdate(
-            statusMsg,
-            setMyAddress,
-            setMyAddressDisplay,
-            updateMyBalance
+            deps.statusMsg,
+            deps.setMyAddress,
+            deps.setMyAddressDisplay,
+            deps.updateMyBalance
           );
         }}
       >

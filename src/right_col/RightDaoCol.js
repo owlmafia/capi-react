@@ -4,81 +4,47 @@ import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { init } from "./controller";
 import { MyAccount } from "../app_comps/MyAccount";
 
-export const RightDaoCol = ({
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  updateMyBalance,
-  statusMsgUpdater,
-  updateMyShares,
-  myDividend,
-  updateMyDividend,
-  showProgress,
-  updateInvestmentData,
-  funds,
-  updateFunds,
-  fundsChange,
-}) => {
+export const RightDaoCol = ({ deps }) => {
   let params = useParams();
 
   useEffect(() => {
     async function asyncInit() {
-      await init(statusMsgUpdater);
+      await init(deps.statusMsg);
     }
     asyncInit();
-  }, [statusMsgUpdater]);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncFn() {
-      updateMyShares(params.id, myAddress);
+      await deps.updateMyShares.call(params.id, deps.myAddress);
     }
-    if (myAddress) {
+    if (deps.myAddress) {
       asyncFn();
     }
-  }, [params.id, myAddress, updateMyShares]);
+  }, [params.id, deps.myAddress, deps.updateMyShares]);
 
   useEffect(() => {
     async function asyncFn() {
-      updateMyDividend(params.id, myAddress);
+      deps.updateMyDividend.call(params.id, deps.myAddress);
     }
-    if (myAddress) {
+    if (deps.myAddress) {
       asyncFn();
     }
-  }, [params.id, myAddress, updateMyDividend]);
+  }, [params.id, deps.myAddress, deps.updateMyDividend]);
 
   useEffect(() => {
     async function asyncFn() {
-      updateFunds(params.id, myAddress);
+      deps.updateFunds.call(params.id, deps.myAddress);
     }
-    if (myAddress) {
+    if (deps.myAddress) {
       asyncFn();
     }
-  }, [params.id, myAddress, updateFunds]);
+  }, [params.id, deps.myAddress, deps.updateFunds]);
 
   return (
     <div id="rightcol">
-      <MyAccount
-        myAddress={myAddress}
-        setMyAddress={setMyAddress}
-        myAddressDisplay={myAddressDisplay}
-        setMyAddressDisplay={setMyAddressDisplay}
-        myBalance={myBalance}
-        updateMyBalance={updateMyBalance}
-        statusMsgUpdater={statusMsgUpdater}
-        daoId={params.id}
-        myDividend={myDividend}
-        showProgress={showProgress}
-        updateInvestmentData={updateInvestmentData}
-        updateFunds={updateFunds}
-      />
-      <FundsActivityEmbedded
-        statusMsg={statusMsgUpdater}
-        daoId={params.id}
-        funds={funds}
-        fundsChange={fundsChange}
-      />
+      <MyAccount deps={deps} daoId={params.id} />
+      <FundsActivityEmbedded deps={deps} daoId={params.id} />
     </div>
   );
 };

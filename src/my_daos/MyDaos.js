@@ -3,18 +3,18 @@ import { init, loadMyDaos } from "./controller";
 import { MyDaoItem } from "./MyDaoItem";
 import { ContentTitle } from "../ContentTitle";
 
-export const MyDaos = (props) => {
+export const MyDaos = ({ deps }) => {
   const [myDaos, setMyDaos] = useState([]);
 
   useEffect(() => {
-    init(props.statusMsg);
-  }, [props.statusMsg]);
+    init(deps.statusMsg);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
-    if (props.myAddress) {
-      loadMyDaos(props.statusMsg, props.myAddress, setMyDaos);
+    if (deps.myAddress) {
+      loadMyDaos(deps.statusMsg, deps.myAddress, setMyDaos);
     }
-  }, [props.statusMsg, props.myAddress]);
+  }, [deps.statusMsg, deps.myAddress]);
 
   const myDaosView = () => {
     return (

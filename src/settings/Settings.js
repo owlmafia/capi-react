@@ -4,26 +4,26 @@ import { ContentTitle } from "../ContentTitle";
 import { init, checkForUpdates, updateApp } from "./controller";
 import { UpdateDaoData } from "./UpdateDaoData";
 
-export const Settings = ({ statusMsg, myAddress, showProgress }) => {
+export const Settings = ({ deps }) => {
   let params = useParams();
 
   const [versionData, setVersionData] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
-      await init(statusMsg);
+      await init(deps.statusMsg);
     }
     asyncInit();
-  }, [statusMsg]);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncInit() {
       if (params.id) {
-        await checkForUpdates(statusMsg, params.id, setVersionData);
+        await checkForUpdates(deps.statusMsg, params.id, setVersionData);
       }
     }
     asyncInit();
-  }, [statusMsg, params.id]);
+  }, [deps.statusMsg, params.id]);
 
   const appVersionView = () => {
     return (
@@ -53,21 +53,21 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
                 updateData.new_approval_version,
                 updateData.new_clear_version
               )}
-              <button
-            className="button-primary"
-            onClick={() =>
-              updateApp(
-                statusMsg,
-                showProgress,
-                params.id,
-                myAddress,
-                versionData.update_data.new_approval_version,
-                versionData.update_data.new_clear_version
-              )
-            }
-          >
-            {"Update"}
-          </button>
+            <button
+              className="button-primary"
+              onClick={() =>
+                updateApp(
+                  deps.statusMsg,
+                  deps.showProgress,
+                  params.id,
+                  deps.myAddress,
+                  versionData.update_data.new_approval_version,
+                  versionData.update_data.new_clear_version
+                )
+              }
+            >
+              {"Update"}
+            </button>
           </div>
         </div>
       );
@@ -78,10 +78,13 @@ export const Settings = ({ statusMsg, myAddress, showProgress }) => {
 
   const body = () => {
     return (
-      myAddress && (
+      deps.myAddress && (
         <div>
           {appVersionView()}
-          <UpdateDaoData statusMsg={statusMsg} showProgress={showProgress} />
+          <UpdateDaoData
+            statusMsg={deps.statusMsg}
+            showProgress={deps.showProgress}
+          />
         </div>
       )
     );

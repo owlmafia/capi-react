@@ -11,92 +11,34 @@ import twitter from "../images/svg/twitter.svg";
 import share from "../images/svg/share.svg";
 import Modal from "../Modal";
 
-export const Wireframe = ({
-  isGlobal,
-  statusMsg,
-
-  myAddress,
-  setMyAddress,
-  myAddressDisplay,
-  setMyAddressDisplay,
-  myBalance,
-  updateMyBalance,
-  statusMsgUpdater,
-
-  myShares,
-  updateMyShares,
-  myDividend,
-  updateMyDividend,
-  showProgress,
-  updateInvestmentData,
-  funds,
-  updateFunds,
-  fundsChange,
-}) => {
+export const Wireframe = ({ isGlobal, deps }) => {
   let params = useParams();
   const [dao, setDao] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
       if (params.id) {
-        await initWithDaoId(params.id, setDao, statusMsgUpdater);
+        await initWithDaoId(params.id, setDao, deps.statusMsg);
       } else {
-        await init(statusMsgUpdater);
+        await init(deps.statusMsg);
       }
     }
     asyncInit();
-  }, [params.id, statusMsgUpdater]);
+  }, [params.id, deps.statusMsg]);
 
   const sideBar = () => {
     if (isGlobal) {
       return <SideBar />;
     } else {
-      return (
-        <SideBarDao
-          myAddress={myAddress}
-          statusMsgUpdater={statusMsgUpdater}
-          myShares={myShares}
-          updateMyShares={updateMyShares}
-        />
-      );
+      return <SideBarDao deps={deps} />;
     }
   };
 
   const rightCol = () => {
     if (isGlobal) {
-      //   return null;
-      return (
-        <RightCol
-          myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          updateMyBalance={updateMyBalance}
-          statusMsgUpdater={statusMsgUpdater}
-          updateMyShares={updateMyShares}
-        />
-      );
+      return <RightCol deps={deps} />;
     } else {
-      return (
-        <RightDaoCol
-          myAddress={myAddress}
-          setMyAddress={setMyAddress}
-          myAddressDisplay={myAddressDisplay}
-          setMyAddressDisplay={setMyAddressDisplay}
-          myBalance={myBalance}
-          updateMyBalance={updateMyBalance}
-          statusMsgUpdater={statusMsgUpdater}
-          updateMyShares={updateMyShares}
-          myDividend={myDividend}
-          updateMyDividend={updateMyDividend}
-          showProgress={showProgress}
-          updateInvestmentData={updateInvestmentData}
-          funds={funds}
-          updateFunds={updateFunds}
-          fundsChange={fundsChange}
-        />
-      );
+      return <RightDaoCol deps={deps} />;
     }
   };
 
@@ -111,12 +53,7 @@ export const Wireframe = ({
       </div>
       {sideBar()}
       <div id="content">
-        {statusMsg && (
-          <StatusMsgView
-            statusMsgUpdater={statusMsgUpdater}
-            statusMsg={statusMsg}
-          />
-        )}
+        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
         <Outlet />
       </div>
@@ -164,7 +101,12 @@ const DaoTop = ({ dao }) => {
 const logoView = (dao) => {
   return (
     dao.image_url && (
-      <img id="banner_img" class="content-img" src={dao.image_url ?? ""} alt="Project banner" />
+      <img
+        id="banner_img"
+        class="content-img"
+        src={dao.image_url ?? ""}
+        alt="Project banner"
+      />
     )
   );
 };
