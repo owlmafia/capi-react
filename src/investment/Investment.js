@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import renderPieChart from "../charts/renderPieChart";
 import { BuyMoreShares } from "./BuyMoreShares";
@@ -7,7 +7,16 @@ import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
 
-export const Investment = (props) => {
+export const Investment = ({
+  myAddress,
+  showProgress,
+  statusMsg,
+  investmentData,
+  updateInvestmentData,
+  updateMyShares,
+  updateMyBalance,
+  updateFunds,
+}) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
@@ -22,52 +31,46 @@ export const Investment = (props) => {
     async function doInit() {
       await init(
         params.id,
-        props.myAddress,
-        props.statusMsg,
+        myAddress,
+        statusMsg,
         setDao,
-        props.updateInvestmentData,
-        props.updateMyShares
+        updateInvestmentData,
+        updateMyShares
       );
 
-      if (props.myAddress) {
-        await props.updateInvestmentData(params.id, props.myAddress);
+      if (myAddress) {
+        await updateInvestmentData(params.id, myAddress);
       }
     }
     doInit();
-  }, [
-    params.id,
-    props.myAddress,
-    props.statusMsg,
-    props.updateInvestmentData,
-    props.updateMyShares,
-  ]);
+  }, [params.id, myAddress, statusMsg, updateInvestmentData, updateMyShares]);
 
   useEffect(() => {
-    if (myShareChart.current && props.investmentData) {
-      const notMyShare = 1 - props.investmentData.investor_percentage_number;
+    if (myShareChart.current && investmentData) {
+      const notMyShare = 1 - investmentData.investor_percentage_number;
       // the labels are irrelevant here
       const data = {
-        a: props.investmentData.investor_percentage_number,
+        a: investmentData.investor_percentage_number,
         b: notMyShare,
       };
       renderPieChart(myShareChart.current, data, (d) => d[1]);
     }
-  }, [dao, props.investmentData]);
+  }, [dao, investmentData]);
 
   const userView = () => {
-    if (props.myAddress && dao && props.investmentData) {
+    if (myAddress && dao && investmentData) {
       return (
         <div>
           <div className="section_container">
             <InvestmentProfits
-              statusMsg={props.statusMsg}
-              showProgress={props.showProgress}
-              updateMyShares={props.updateMyShares}
-              updateMyBalance={props.updateMyBalance}
-              myAddress={props.myAddress}
-              investmentData={props.investmentData}
-              updateInvestmentData={props.updateInvestmentData}
-              updateFunds={props.updateFunds}
+              statusMsg={statusMsg}
+              showProgress={showProgress}
+              updateMyShares={updateMyShares}
+              updateMyBalance={updateMyBalance}
+              myAddress={myAddress}
+              investmentData={investmentData}
+              updateInvestmentData={updateInvestmentData}
+              updateFunds={updateFunds}
             />
 
             <div id="dao_actions_top_bar">
@@ -104,41 +107,41 @@ export const Investment = (props) => {
             </div>
             {showBuyMoreTab && (
               <BuyMoreShares
-                statusMsg={props.statusMsg}
-                showProgress={props.showProgress}
-                updateMyShares={props.updateMyShares}
-                updateMyBalance={props.updateMyBalance}
-                updateFunds={props.updateFunds}
-                myAddress={props.myAddress}
+                statusMsg={statusMsg}
+                showProgress={showProgress}
+                updateMyShares={updateMyShares}
+                updateMyBalance={updateMyBalance}
+                updateFunds={updateFunds}
+                myAddress={myAddress}
                 dao={dao}
-                investmentData={props.investmentData}
+                investmentData={investmentData}
               />
             )}
             {showUnlockTab && (
               <UnlockShares
-                statusMsg={props.statusMsg}
-                showProgress={props.showProgress}
-                myAddress={props.myAddress}
-                updateMyShares={props.updateMyShares}
-                updateMyBalance={props.updateMyBalance}
-                updateInvestmentData={props.updateInvestmentData}
+                statusMsg={statusMsg}
+                showProgress={showProgress}
+                myAddress={myAddress}
+                updateMyShares={updateMyShares}
+                updateMyBalance={updateMyBalance}
+                updateInvestmentData={updateInvestmentData}
                 dao={dao}
                 daoId={params.id}
-                investmentData={props.investmentData}
+                investmentData={investmentData}
               />
             )}
             {showLockTab && (
               <LockShares
-                statusMsg={props.statusMsg}
-                showProgress={props.showProgress}
-                myAddress={props.myAddress}
-                updateMyShares={props.updateMyShares}
-                updateMyBalance={props.updateMyBalance}
-                updateInvestmentData={props.updateInvestmentData}
+                statusMsg={statusMsg}
+                showProgress={showProgress}
+                myAddress={myAddress}
+                updateMyShares={updateMyShares}
+                updateMyBalance={updateMyBalance}
+                updateInvestmentData={updateInvestmentData}
                 dao={dao}
                 daoId={params.id}
-                investmentData={props.investmentData}
-                onLockOpt={props.updateInvestmentData}
+                investmentData={investmentData}
+                onLockOpt={updateInvestmentData}
               />
             )}
           </div>

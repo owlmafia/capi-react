@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import arrow from "../images/svg/arrow.svg";
@@ -14,8 +13,6 @@ export const LockOrUnlockShares = ({
   // parameter: input (can be null if there's no input element or input text)
   onSubmit,
 }) => {
-  let params = useParams();
-
   const [input, setInput] = useState(null);
   // TODO show error
   const [inputError, setInputError] = useState(null);

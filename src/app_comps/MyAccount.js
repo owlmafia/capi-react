@@ -1,12 +1,7 @@
 import React from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import myalgo from "../images/svg/myalgo.svg";
 import arrow from "../images/svg/arrow-right.svg";
-import {
-  connectWalletAndUpdate,
-  retrieveProfits,
-  shortedAddress,
-} from "../shared_functions";
+import { connectWalletAndUpdate, retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
 
 export const MyAccount = ({

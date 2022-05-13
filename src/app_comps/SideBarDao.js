@@ -8,7 +8,7 @@ import arrows from "../images/sidebar/funds-activity.svg";
 import settings from "../images/sidebar/settings.svg";
 import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
-import SideBarItem from "./SiteBarItem";
+import SideBarItem from "./SideBarItem";
 
 export const SideBarDao = ({
   myAddress,

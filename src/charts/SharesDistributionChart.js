@@ -16,7 +16,11 @@ export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
         }
       );
     }
-  }, [chart.current]);
+  }, [
+    //   chart.current,
+    onAddressSelected,
+    sharesDistr,
+  ]);
 
   return <svg className="pie_chart__svg" ref={chart} />;
 };

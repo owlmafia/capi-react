@@ -37,24 +37,26 @@ export const SharesDistributionBox = ({
     fetchData();
   }, [statusMsg, sharesAssetId, sharesSupply, appId]);
 
-  const showAll = () => {
-    return showMoreSelected || sharesDistr.length <= entries_small_count;
-  };
-
-  const filterHolders = (startIndex) => {
-    let min = Math.min(sharesDistr.length, entries_small_count);
-    const holders = sharesDistr.slice(startIndex, startIndex + min);
-    return holders;
-  };
-
   useEffect(() => {
+    const showAll = () => {
+      return showMoreSelected || sharesDistr.length <= entries_small_count;
+    };
+
+    const filterHolders = (startIndex) => {
+      let min = Math.min(sharesDistr.length, entries_small_count);
+      const holders = sharesDistr.slice(startIndex, startIndex + min);
+      return holders;
+    };
+
     if (showAll()) {
       setEntries(sharesDistr);
     } else {
       // collapsed
       var startIndex = 0;
       if (selectedAddress) {
-        startIndex = sharesDistr.findIndex((d) => d.address == selectedAddress);
+        startIndex = sharesDistr.findIndex(
+          (d) => d.address === selectedAddress
+        );
       }
       setEntries(filterHolders(startIndex));
     }
@@ -88,7 +90,8 @@ export const SharesDistributionBox = ({
     if (sharesDistr.length > 0) {
       return (
         <div className="holder_list_container">
-          <div className="sub-title">Investors {entries.length}
+          <div className="sub-title">
+            Investors {entries.length}
             <img src={green} alt="arrow" />
           </div>
           {entries.map((entry) => {
@@ -114,8 +117,7 @@ export const SharesDistributionBox = ({
       return (
         <div className="investors-container">
           <div className="d-flex flex-column flex-wrap">
-            <div className="sub-title">Available Shares 1200
-            </div>
+            <div className="sub-title">Available Shares 1200</div>
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
               <div className="ft-color-black">Unlocked Share</div>
@@ -129,7 +131,7 @@ export const SharesDistributionBox = ({
             sharesDistr={sharesDistr}
             onAddressSelected={(address) => {
               const addressIndex = sharesDistr.findIndex(
-                (d) => d.address == address
+                (d) => d.address === address
               );
               // toggle selected state
               let newSelected = !sharesDistr[addressIndex].isSelected;

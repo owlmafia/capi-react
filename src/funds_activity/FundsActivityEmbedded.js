@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { init, loadFundsActivity, loadDao } from "./controller";
-import { FundsActivityEntry } from "./FundsActivityEntry";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
@@ -29,7 +28,7 @@ export const FundsActivityEmbedded = ({
 
   useEffect(() => {
     loadDao(statusMsg, daoId, setDao);
-  }, [daoId]);
+  }, [daoId, statusMsg]);
 
   const fundsActivity = () => {
     return (

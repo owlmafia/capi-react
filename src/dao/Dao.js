@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
@@ -41,15 +41,18 @@ export const Dao = (props) => {
     }
   }, [props.statusMsg, dao]);
 
-  useEffect(async () => {
-    if (props.myAddress) {
-      await updateInvestmentData_(
-        props.statusMsg,
-        props.myAddress,
-        params.id,
-        setInvestmentData
-      );
+  useEffect(() => {
+    async function nestedAsync() {
+      if (props.myAddress) {
+        await updateInvestmentData_(
+          props.statusMsg,
+          props.myAddress,
+          params.id,
+          setInvestmentData
+        );
+      }
     }
+    nestedAsync();
   }, [props.statusMsg, props.myAddress, params.id]);
 
   const sharesAssetId = useMemo(() => {
@@ -63,14 +66,6 @@ export const Dao = (props) => {
       return dao.share_supply;
     }
   }, [dao]);
-
-  const actions_tabs_classes = (tabIsShowing) => {
-    var clazz = "link_button";
-    if (tabIsShowing) {
-      clazz += " dao_action_tab_item__sel";
-    }
-    return clazz;
-  };
 
   const daoView = () => {
     if (viewDao) {

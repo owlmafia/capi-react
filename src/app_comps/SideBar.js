@@ -1,4 +1,4 @@
-import SideBarItem from "./SiteBarItem";
+import SideBarItem from "./SideBarItem";
 import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
 
