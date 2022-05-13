@@ -10,28 +10,23 @@ import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
 import SideBarItem from "./SideBarItem";
 
-export const SideBarDao = ({
-  myAddress,
-  statusMsgUpdater,
-  myShares,
-  updateMyShares,
-}) => {
+export const SideBarDao = ({ deps }) => {
   let params = useParams();
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id);
+      await init(deps.statusMsg);
     }
     asyncInit();
-  }, [params.id, statusMsgUpdater]);
+  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncFn() {
-      updateMyShares(params.id, myAddress);
+      deps.updateMyShares.call(params.id, deps.myAddress);
     }
-    if (myAddress) {
+    if (deps.myAddress) {
       asyncFn();
     }
-  }, [params.id, myAddress, updateMyShares]);
+  }, [params.id, deps.myAddress, deps.updateMyShares]);
 
   return (
     <div>
@@ -43,7 +38,7 @@ export const SideBarDao = ({
       />
       <SideBarItem imageSrc={home} route="" label="Project Home" />
       <SideBarItem imageSrc={stats} route="stats" label="Stats" />
-      {myShares && myShares.total > 0 && (
+      {deps.myShares && deps.myShares.total > 0 && (
         <SideBarItem
           imageSrc={funds}
           route="investment"
