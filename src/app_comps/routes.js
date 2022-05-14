@@ -26,11 +26,6 @@ export const routesView = (deps) => {
           <Route exact path="withdraw" element={<Withdrawal deps={deps} />} />
           <Route
             exact
-            path="withdrawal_history"
-            element={<WithdrawalHistory deps={deps} />}
-          />
-          <Route
-            exact
             path="funds_activity"
             element={<FundsActivity deps={deps} />}
           />
