@@ -21,6 +21,9 @@ export const SideBarDao = ({ deps }) => {
     }
   }, [params.id, deps.myAddress, deps.updateMyShares]);
 
+  const iHaveShares = deps.myShares && deps.myShares.total > 0;
+  const iAmDaoOwner = iAmDaoOwner_(deps.dao, deps.myAddress);
+
   return (
     <div className="sidebar-container">
       <SideBarItem imageSrc={create} route="/" label="Create" />
@@ -31,20 +34,29 @@ export const SideBarDao = ({ deps }) => {
       />
       <SideBarItem imageSrc={home} route="" label="Project Home" />
       <SideBarItem imageSrc={stats} route="stats" label="Stats" />
-      {deps.myShares && deps.myShares.total > 0 && (
+      {iHaveShares && (
         <SideBarItem
           imageSrc={funds}
           route="investment"
           label="My Investment"
         />
       )}
-      <SideBarItem imageSrc={funds} route="withdraw" label="Withdraw" />
+      {iAmDaoOwner && (
+        <SideBarItem imageSrc={funds} route="withdraw" label="Withdraw" />
+      )}
       <SideBarItem
         imageSrc={arrows}
         route="funds_activity"
         label="Funds activity"
       />
-      <SideBarItem imageSrc={settings} route="settings" label="Settings" />
+      {iAmDaoOwner && (
+        <SideBarItem imageSrc={settings} route="settings" label="Settings" />
+      )}
     </div>
   );
+};
+
+const iAmDaoOwner_ = (dao, myAddress) => {
+  return dao && myAddress && dao.creator_address === myAddress;
+  // return true; // see owner items / views in mock
 };
