@@ -25,7 +25,11 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
-              <CompactFundsActivityEntry entry={entry} showDescr={false} />
+              <CompactFundsActivityEntry
+                entry={entry}
+                showDescr={false}
+                key={entry.tx_id}
+              />
             ))}
         </div>
       );

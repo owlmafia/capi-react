@@ -102,7 +102,7 @@ const logoView = (dao) => {
     dao.image_url && (
       <img
         id="banner_img"
-        class="content-img"
+        className="content-img"
         src={dao.image_url ?? ""}
         alt="Project banner"
       />

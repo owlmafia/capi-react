@@ -20,7 +20,11 @@ export const FundsActivity = ({ deps }) => {
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
-              <FundsActivityEntry entry={entry} showDescr={true} />
+              <FundsActivityEntry
+                entry={entry}
+                showDescr={true}
+                key={entry.tx_id}
+              />
             ))}
         </div>
       );
