@@ -5,6 +5,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
 import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
+import Progress from "../app_comps/Progress";
 
 export const FundsActivityEmbedded = ({ deps, daoId }) => {
   const [activityEntries, setActivityEntries] = useState([]);
@@ -23,17 +24,18 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
   }, [daoId, deps.statusMsg]);
 
   const fundsActivity = () => {
-    return (
-      activityEntries &&
-      activityEntries.length > 0 && (
+    if (activityEntries && activityEntries.length > 0) {
+      return (
         <div>
           {activityEntries &&
             activityEntries.map((entry) => (
               <CompactFundsActivityEntry entry={entry} showDescr={false} />
             ))}
         </div>
-      )
-    );
+      );
+    } else {
+      return <Progress />;
+    }
   };
 
   const view = () => {

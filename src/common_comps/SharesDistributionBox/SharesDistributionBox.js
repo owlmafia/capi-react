@@ -4,6 +4,7 @@ import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
 import green from "../../images/svg/green-arrow.svg";
+import Progress from "../../app_comps/Progress";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -112,7 +113,7 @@ export const SharesDistributionBox = ({
 
   const content = () => {
     if (sharesDistr && sharesDistr.length === 0) {
-      return <div>{"No investors yet"}</div>;
+      return <Progress vCenter={false} />;
     } else {
       return (
         <div className="investors-container">

@@ -6,6 +6,7 @@ import { fetchHolderCount } from "../common_functions/stats_common";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import { init } from "./controller";
 import { updateInvestmentData_ } from "../shared_functions";
+import Progress from "../app_comps/Progress";
 
 export const Dao = ({ deps }) => {
   let params = useParams();
@@ -100,7 +101,7 @@ export const Dao = ({ deps }) => {
         </div>
       );
     } else {
-      return null;
+      return <Progress />;
     }
   };
 

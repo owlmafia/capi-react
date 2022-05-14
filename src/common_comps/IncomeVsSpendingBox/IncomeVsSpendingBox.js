@@ -3,6 +3,7 @@ import { IncomeVsSpendingChart } from "../../charts/IncomeVsSpendingChart";
 import { LabeledBox } from "../LabeledBox";
 import { fetchIncomeVsSpendingChartData } from "./controller";
 import Select from "react-select";
+import Progress from "../../app_comps/Progress";
 
 const barsOptions = [
   { value: "days7", label: "Last 7 days" },
@@ -28,17 +29,23 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
     fetchData();
   }, [statusMsg, daoId, selectedBarsInterval]);
 
-  return (
-    <div className="charts-container">
-      <LabeledBox label={"Income and spending"}>
-        <Select
-          className="charts-select"
-          value={selectedBarsInterval}
-          onChange={setSelectedBarsInterval}
-          options={barsOptions}
-        />
-        <IncomeVsSpendingChart chartData={chartData} />
-      </LabeledBox>
-    </div>
-  );
+  const content = () => {
+    if (chartData) {
+      return (
+        <LabeledBox label={"Income and spending"}>
+          <Select
+            className="charts-select"
+            value={selectedBarsInterval}
+            onChange={setSelectedBarsInterval}
+            options={barsOptions}
+          />
+          <IncomeVsSpendingChart chartData={chartData} />
+        </LabeledBox>
+      );
+    } else {
+      return <Progress />;
+    }
+  };
+
+  return <div className="charts-container">{content()}</div>;
 };
