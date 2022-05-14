@@ -12,7 +12,6 @@ export const Dao = ({ deps }) => {
   let params = useParams();
 
   const [viewDao, setViewDao] = useState(null);
-  const [investmentData, setInvestmentData] = useState(null);
 
   const [holderCount, setHolderCount] = useState(null);
 
@@ -45,16 +44,11 @@ export const Dao = ({ deps }) => {
   useEffect(() => {
     async function nestedAsync() {
       if (deps.myAddress) {
-        await updateInvestmentData_(
-          deps.statusMsg,
-          deps.myAddress,
-          params.id,
-          setInvestmentData
-        );
+        await deps.updateInvestmentData.call(params.id, deps.myAddress);
       }
     }
     nestedAsync();
-  }, [deps.statusMsg, deps.myAddress, params.id]);
+  }, [deps.statusMsg, deps.myAddress, params.id, deps.updateInvestmentData]);
 
   const sharesAssetId = useMemo(() => {
     if (dao) {
@@ -75,7 +69,7 @@ export const Dao = ({ deps }) => {
           <div>
             <div id="dao_description">{viewDao.dao.description}</div>
 
-            {investmentData && <InvestEmbedded deps={deps} dao={dao} />}
+            {deps.investmentData && <InvestEmbedded deps={deps} dao={dao} />}
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}
