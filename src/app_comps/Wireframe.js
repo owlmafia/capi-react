@@ -87,12 +87,12 @@ const DaoTop = ({ dao }) => {
           </div>
         </div>
       </div>
-      {showShareModal && (
+      {showShareModal && dao && (
         <Modal
           title={"Share project"}
           onCloseClick={() => setShowShareModal(false)}
         >
-          <ShareView projectUrl={"https://localhost:3000/123"} />
+          <ShareView projectUrl={projectUrl(dao.app_id)} />
         </Modal>
       )}
     </div>
@@ -110,4 +110,8 @@ const logoView = (dao) => {
       />
     )
   );
+};
+
+const projectUrl = (daoId) => {
+  return window.location.protocol + "//" + window.location.host + "/" + daoId;
 };
