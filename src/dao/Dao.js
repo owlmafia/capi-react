@@ -4,41 +4,32 @@ import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeV
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { fetchHolderCount } from "../common_functions/stats_common";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
-import { updateDao } from "./controller";
 import Progress from "../app_comps/Progress";
 
 export const Dao = ({ deps }) => {
   let params = useParams();
 
-  const [viewDao, setViewDao] = useState(null);
-
   const [holderCount, setHolderCount] = useState(null);
 
   console.log("deps: " + JSON.stringify(deps));
 
-  const dao = useMemo(() => {
-    if (viewDao) {
-      return viewDao.dao;
-    }
-  }, [viewDao]);
-
   useEffect(() => {
     async function asyncInit() {
-      await updateDao(params.id, setViewDao, deps.statusMsg);
+      await deps.updateDao.call(null, params.id);
     }
     asyncInit();
-  }, [params.id, deps.statusMsg]);
+  }, [params.id, deps.statusMsg, deps.updateDao]);
 
   useEffect(() => {
-    if (dao) {
+    if (deps.dao) {
       fetchHolderCount(
         deps.statusMsg,
-        dao.shares_asset_id,
-        dao.app_id,
+        deps.dao.shares_asset_id,
+        deps.dao.app_id,
         setHolderCount
       );
     }
-  }, [deps.statusMsg, dao]);
+  }, [deps.statusMsg, deps.dao]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -50,25 +41,27 @@ export const Dao = ({ deps }) => {
   }, [deps.statusMsg, deps.myAddress, params.id, deps.updateInvestmentData]);
 
   const sharesAssetId = useMemo(() => {
-    if (dao) {
-      return dao.shares_asset_id;
+    if (deps.dao) {
+      return deps.dao.shares_asset_id;
     }
-  }, [dao]);
+  }, [deps.dao]);
 
   const sharesSupply = useMemo(() => {
-    if (dao) {
-      return dao.share_supply;
+    if (deps.dao) {
+      return deps.dao.share_supply;
     }
-  }, [dao]);
+  }, [deps.dao]);
 
   const daoView = () => {
-    if (viewDao) {
+    if (deps.dao) {
       return (
         <div>
           <div>
-            <div id="dao_description">{viewDao.dao.description}</div>
+            <div id="dao_description">{deps.dao.description}</div>
 
-            {deps.investmentData && <InvestEmbedded deps={deps} dao={dao} />}
+            {deps.investmentData && (
+              <InvestEmbedded deps={deps} dao={deps.dao} />
+            )}
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}
@@ -78,13 +71,13 @@ export const Dao = ({ deps }) => {
               <button>{"Withdraw"}</button>
             </Link> */}
             <div className="section-spacer" />
-            {dao && (
+            {deps.dao && (
               <SharesDistributionBox
                 deps={deps}
                 sharesAssetId={sharesAssetId}
                 sharesSupply={sharesSupply}
                 holderCount={holderCount}
-                appId={dao.app_id}
+                appId={deps.dao.app_id}
               />
             )}
 

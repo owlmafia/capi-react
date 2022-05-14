@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
@@ -7,6 +7,7 @@ import {
   updateMyShares,
   updateMyBalance_,
   updateMyDividend_,
+  updateDao_,
   initLog,
 } from "./controller";
 import Modal from "./Modal";
@@ -32,7 +33,24 @@ const App = () => {
 
   const [investmentData, setInvestmentData] = useState(null);
 
+  const [viewDao, setViewDao] = useState(null);
+
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
+
+  const updateMyBalance = useCallback(
+    async (myAddress) => {
+      if (myAddress) {
+        await updateMyBalance_(statusMsgUpdater, myAddress, setMyBalance);
+      }
+    },
+    [statusMsgUpdater]
+  );
+
+  const dao = useMemo(() => {
+    if (viewDao) {
+      return viewDao.dao;
+    }
+  }, [viewDao]);
 
   useEffect(() => {
     async function asyncInit() {
@@ -41,10 +59,10 @@ const App = () => {
     asyncInit();
   }, [statusMsgUpdater]);
 
-  const updateMyBalance = useCallback(
-    async (myAddress) => {
-      if (myAddress) {
-        await updateMyBalance_(statusMsgUpdater, myAddress, setMyBalance);
+  const updateDao = useCallback(
+    async (daoId) => {
+      if (daoId) {
+        await updateDao_(daoId, setViewDao, statusMsgUpdater);
       }
     },
     [statusMsgUpdater]
@@ -138,6 +156,9 @@ const App = () => {
               updateFunds: updateFunds,
 
               fundsChange: fundsChange,
+
+              dao: dao,
+              updateDao: updateDao,
             })}
           </BrowserRouter>
           {modal && (
