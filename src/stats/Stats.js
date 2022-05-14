@@ -2,14 +2,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
-import { fetchHolderCount } from "../common_functions/stats_common";
 import { ContentTitle } from "../ContentTitle";
 import { init } from "./controller";
 
 export const Stats = ({ deps }) => {
   let params = useParams();
 
-  const [holderCount, setHolderCount] = useState(null);
   const [viewDao, setViewDao] = useState(null);
 
   useEffect(() => {
@@ -38,17 +36,6 @@ export const Stats = ({ deps }) => {
     }
   }, [dao]);
 
-  useEffect(() => {
-    if (sharesAssetId && dao) {
-      fetchHolderCount(
-        deps.statusMsg,
-        sharesAssetId,
-        dao.app_id,
-        setHolderCount
-      );
-    }
-  }, [deps.statusMsg, sharesAssetId, dao]);
-
   return (
     <div>
       <div>
@@ -59,7 +46,6 @@ export const Stats = ({ deps }) => {
           deps={deps}
           sharesAssetId={sharesAssetId}
           sharesSupply={sharesSupply}
-          holderCount={holderCount}
           appId={dao.app_id}
         />
       )}

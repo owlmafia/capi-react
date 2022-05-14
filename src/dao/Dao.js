@@ -2,14 +2,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
-import { fetchHolderCount } from "../common_functions/stats_common";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import Progress from "../app_comps/Progress";
 
 export const Dao = ({ deps }) => {
   let params = useParams();
-
-  const [holderCount, setHolderCount] = useState(null);
 
   console.log("deps: " + JSON.stringify(deps));
 
@@ -19,17 +16,6 @@ export const Dao = ({ deps }) => {
     }
     asyncInit();
   }, [params.id, deps.statusMsg, deps.updateDao]);
-
-  useEffect(() => {
-    if (deps.dao) {
-      fetchHolderCount(
-        deps.statusMsg,
-        deps.dao.shares_asset_id,
-        deps.dao.app_id,
-        setHolderCount
-      );
-    }
-  }, [deps.statusMsg, deps.dao]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -76,7 +62,6 @@ export const Dao = ({ deps }) => {
                 deps={deps}
                 sharesAssetId={sharesAssetId}
                 sharesSupply={sharesSupply}
-                holderCount={holderCount}
                 appId={deps.dao.app_id}
               />
             )}

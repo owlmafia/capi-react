@@ -12,7 +12,6 @@ export const SharesDistributionBox = ({
   sharesAssetId,
   sharesSupply,
   appId,
-  holderCount,
 }) => {
   const [sharesDistr, setSharesDistr] = useState([]);
   const [showMoreSelected, setShowMoreSelected] = useState(false);
