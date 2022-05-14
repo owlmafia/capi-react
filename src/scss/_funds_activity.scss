@@ -1,8 +1,8 @@
 @import "global_vars";
 
 @mixin amount {
-    font-weight: 600px;
-    font-size: 1.4rem;
+    font-weight: 600;
+    font-size: 1.2rem;
     margin-right: 4px;
 }
 
@@ -10,28 +10,21 @@
     display: flex;
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
-    padding: 30px 16px;
-    align-items: center;
+    padding: 16px;
     margin-bottom: 30px;
     justify-content: space-between;
-    flex-wrap: wrap;
 
     &__amount {
         &__container {
             display: flex;
-            margin-right: 20px;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            width: 25%;
         }
 
-        &__income {
-            @include amount;
-            color: green;
-        }
-
-        &__spending {
-            @include amount;
-            color: red;
+        &__number {
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
         &__logo {
@@ -43,11 +36,40 @@
     &__body {
         display: flex;
         flex-direction: column;
+        width: 55%;
+        gap: 10px;
+
+        .ellipse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #DEE2E2;
+            margin: 0 24px;
+        }
+
+        .description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: $black;
+        }
     }
 
-    &__date {
-        font-weight: 300px;
-        font-size: 0.8rem;
-        color: grey;
+    .details {
+        display: flex;
+        width: 20%;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+
+        .funds_act_entry__date {
+            font-weight: 300px;
+            font-size: 14px;
+            color: #787E82;
+        }
+
+        a {
+            color: $blue-primary;
+            text-decoration: underline;
+        }
     }
 }

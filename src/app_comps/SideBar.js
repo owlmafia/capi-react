@@ -4,7 +4,7 @@ import project from "../images/sidebar/projects.svg";
 
 export const SideBar = () => {
   return (
-    <div>
+    <div className="sidebar-container">
       <SideBarItem imageSrc={create} route="/" label="Create" />
       <SideBarItem
         imageSrc={project}

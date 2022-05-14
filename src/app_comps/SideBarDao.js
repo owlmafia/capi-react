@@ -22,7 +22,7 @@ export const SideBarDao = ({ deps }) => {
   }, [params.id, deps.myAddress, deps.updateMyShares]);
 
   return (
-    <div>
+    <div className="sidebar-container">
       <SideBarItem imageSrc={create} route="/" label="Create" />
       <SideBarItem
         imageSrc={project}
