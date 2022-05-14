@@ -6,7 +6,6 @@ import { MyDaos } from "../my_daos/MyDaos";
 import { Dao } from "../dao/Dao";
 import { Stats } from "../stats/Stats";
 import { Withdrawal } from "../withdraw/Withdraw";
-import { WithdrawalHistory } from "../withdrawal_history/WithdrawalHistory";
 import { NotFound } from "./NotFound";
 import { OuterWireframe } from "./OuterWireframe.js";
 import { Wireframe } from "./Wireframe";
