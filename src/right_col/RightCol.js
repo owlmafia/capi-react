@@ -1,15 +1,6 @@
-import React, { useEffect } from "react";
-import { init } from "./controller";
 import { MyAccount } from "../app_comps/MyAccount";
 
-export const RightCol = ({ deps, statusMsgUpdater }) => {
-  useEffect(() => {
-    async function asyncInit() {
-      await init(statusMsgUpdater);
-    }
-    asyncInit();
-  }, [statusMsgUpdater]);
-
+export const RightCol = ({ deps }) => {
   return (
     <div id="rightcol">
       <MyAccount

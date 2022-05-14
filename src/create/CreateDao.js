@@ -5,7 +5,7 @@ import {
   LabeledInput,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
-import { createDao, init } from "./controller";
+import { createDao } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { connectWalletAndUpdate } from "../shared_functions";
@@ -38,10 +38,6 @@ export const CreateDao = ({ deps }) => {
   const navigate = useNavigate();
 
   const investorsShareChart = useRef(null);
-
-  useEffect(() => {
-    init();
-  }, []);
 
   useEffect(() => {
     if (investorsShareChart.current) {

@@ -1,15 +1,5 @@
 const wasmPromise = import("wasm");
 
-export const init = async (daoId, setViewDao, statusMsg) => {
-  try {
-    const { init_log } = await wasmPromise;
-    await init_log();
-  } catch (e) {
-    statusMsg.error(e);
-  }
-  await updateDao(daoId, setViewDao, statusMsg);
-};
-
 export const updateDao = async (daoId, setViewDao, statusMsg) => {
   try {
     const { bridge_view_dao } = await wasmPromise;

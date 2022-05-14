@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { init, loadFundsActivity, loadDao } from "./controller";
+import { loadFundsActivity, loadDao } from "./controller";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
@@ -10,10 +10,6 @@ import Progress from "../app_comps/Progress";
 export const FundsActivityEmbedded = ({ deps, daoId }) => {
   const [activityEntries, setActivityEntries] = useState([]);
   const [dao, setDao] = useState(null);
-
-  useEffect(() => {
-    init(deps.statusMsg);
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     loadFundsActivity(deps.statusMsg, daoId, setActivityEntries, "3");

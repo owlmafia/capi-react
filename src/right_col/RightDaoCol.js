@@ -1,18 +1,10 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
-import { init } from "./controller";
 import { MyAccount } from "../app_comps/MyAccount";
 
 export const RightDaoCol = ({ deps }) => {
   let params = useParams();
-
-  useEffect(() => {
-    async function asyncInit() {
-      await init(deps.statusMsg);
-    }
-    asyncInit();
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncFn() {

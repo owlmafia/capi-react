@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { init, loadMyDaos } from "./controller";
+import { loadMyDaos } from "./controller";
 import { MyDaoItem } from "./MyDaoItem";
 import { ContentTitle } from "../ContentTitle";
 
 export const MyDaos = ({ deps }) => {
   const [myDaos, setMyDaos] = useState([]);
-
-  useEffect(() => {
-    init(deps.statusMsg);
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     if (deps.myAddress) {

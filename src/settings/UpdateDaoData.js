@@ -4,7 +4,7 @@ import {
   LabeledCurrencyInput,
   LabeledInput,
 } from "../common_comps/LabeledInput";
-import { init, prefillInputs, updateDaoData } from "./controller";
+import { prefillInputs, updateDaoData } from "./controller";
 
 export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   let params = useParams();
@@ -19,13 +19,6 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
 
   const [owner, setOwner] = useState("");
-
-  useEffect(() => {
-    async function asyncInit() {
-      await init(statusMsg);
-    }
-    asyncInit();
-  }, [statusMsg]);
 
   useEffect(() => {
     async function prefill() {

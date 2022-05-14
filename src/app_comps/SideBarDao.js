@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { init } from "./controller";
 import home from "../images/sidebar/home.svg";
 import stats from "../images/sidebar/stats.svg";
 import funds from "../images/sidebar/funds.svg";
@@ -12,12 +11,6 @@ import SideBarItem from "./SideBarItem";
 
 export const SideBarDao = ({ deps }) => {
   let params = useParams();
-  useEffect(() => {
-    async function asyncInit() {
-      await init(deps.statusMsg);
-    }
-    asyncInit();
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncFn() {

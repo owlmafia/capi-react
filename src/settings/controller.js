@@ -2,15 +2,6 @@ import { signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async (statusMsg) => {
-  try {
-    const { init_log } = await wasmPromise;
-    await init_log();
-  } catch (e) {
-    statusMsg.error(e);
-  }
-};
-
 // TODO review (everywhere): we don't wait for init to finish (i.e. init the logs) to call functions like these
 // this might lead to some logs not showing (if it's the first view we load in the app - otherwise we could be affected by log init from a previous view)
 // and can't be added in init after initializing the logs, as it has dependencies (like params.id),

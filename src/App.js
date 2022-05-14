@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
@@ -7,6 +7,7 @@ import {
   updateMyShares,
   updateMyBalance_,
   updateMyDividend_,
+  initLog,
 } from "./controller";
 import Modal from "./Modal";
 import ProgressBar from "./ProgressBar";
@@ -32,6 +33,13 @@ const App = () => {
   const [investmentData, setInvestmentData] = useState(null);
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
+
+  useEffect(() => {
+    async function asyncInit() {
+      await initLog(statusMsgUpdater);
+    }
+    asyncInit();
+  }, [statusMsgUpdater]);
 
   const updateMyBalance = useCallback(
     async (myAddress) => {

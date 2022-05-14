@@ -3,7 +3,7 @@ import { Outlet, useParams } from "react-router-dom";
 import logo from "../images/logo.svg";
 import { RightCol } from "../right_col/RightCol";
 import { RightDaoCol } from "../right_col/RightDaoCol";
-import { init, initWithDaoId } from "./controller";
+import { initWithDaoId } from "./controller";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
@@ -20,8 +20,6 @@ export const Wireframe = ({ isGlobal, deps }) => {
     async function asyncInit() {
       if (params.id) {
         await initWithDaoId(params.id, setDao, deps.statusMsg);
-      } else {
-        await init(deps.statusMsg);
       }
     }
     asyncInit();

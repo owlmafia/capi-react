@@ -4,7 +4,7 @@ import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeV
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { fetchHolderCount } from "../common_functions/stats_common";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
-import { init } from "./controller";
+import { updateDao } from "./controller";
 import Progress from "../app_comps/Progress";
 
 export const Dao = ({ deps }) => {
@@ -24,7 +24,7 @@ export const Dao = ({ deps }) => {
 
   useEffect(() => {
     async function asyncInit() {
-      await init(params.id, setViewDao, deps.statusMsg);
+      await updateDao(params.id, setViewDao, deps.statusMsg);
     }
     asyncInit();
   }, [params.id, deps.statusMsg]);

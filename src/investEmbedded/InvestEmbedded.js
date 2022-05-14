@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FundsAssetImg } from "../images/FundsAssetImg";
-import { handleSharesCountInput, init, invest } from "./controller";
+import { handleSharesCountInput, invest } from "./controller";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -12,10 +12,6 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const [totalPercentage, setProfitPercentage] = useState(
     deps.investmentData.init_profit_percentage
   );
-
-  useEffect(() => {
-    init(deps.statusMsg);
-  }, [deps.statusMsg]);
 
   return (
     <div className="dao_action_active_tab box-container">

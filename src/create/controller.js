@@ -2,11 +2,6 @@ import { signTxs } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-export const init = async () => {
-  const { init_log } = await wasmPromise;
-  await init_log();
-};
-
 export const createDao = async (
   myAddress,
   showProgress,

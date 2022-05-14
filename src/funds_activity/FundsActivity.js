@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ContentTitle } from "../ContentTitle";
-import { init, loadFundsActivity } from "./controller";
+import { loadFundsActivity } from "./controller";
 import { FundsActivityEntry } from "./FundsActivityEntry";
 import Progress from "../app_comps/Progress";
 
@@ -9,10 +9,6 @@ export const FundsActivity = ({ deps }) => {
   let params = useParams();
 
   const [activityEntries, setActivityEntries] = useState([]);
-
-  useEffect(() => {
-    init(deps.statusMsg);
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     loadFundsActivity(deps.statusMsg, params.id, setActivityEntries, null);

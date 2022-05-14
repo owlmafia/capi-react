@@ -1,5 +1,14 @@
 const wasmPromise = import("wasm");
 
+export const initLog = async (statusMsg) => {
+  try {
+    const { init_log } = await wasmPromise;
+    await init_log();
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
 export const updateMyShares = async (
   statusMsg,
   daoId,

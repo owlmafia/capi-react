@@ -11,8 +11,7 @@ export const init = async (
   updateMyShares
 ) => {
   try {
-    const { init_log, bridge_load_dao_user_view } = await wasmPromise;
-    await init_log();
+    const { bridge_load_dao_user_view } = await wasmPromise;
 
     let dao = await bridge_load_dao_user_view(daoId);
     console.log("dao: " + JSON.stringify(dao));

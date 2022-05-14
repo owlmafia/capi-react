@@ -7,8 +7,7 @@ export const fetchHolderCount = async (
   setHolderCount
 ) => {
   try {
-    const { init_log, bridge_holders_count } = await wasmPromise;
-    await init_log();
+    const { bridge_holders_count } = await wasmPromise;
     let res = await bridge_holders_count({
       asset_id: assetId,
       app_id: appId,

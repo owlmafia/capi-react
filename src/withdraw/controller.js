@@ -4,8 +4,7 @@ const wasmPromise = import("wasm");
 
 export const init = async (daoId, daoMaybe, setDao, statusMsg) => {
   try {
-    const { init_log, bridge_load_dao_user_view_with_id } = await wasmPromise;
-    await init_log();
+    const { bridge_load_dao_user_view_with_id } = await wasmPromise;
 
     // if we're loading via URL (instead of another page that passes the dao as parameter), fetch the dao
     var dao = null;

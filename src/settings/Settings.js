@@ -1,20 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ContentTitle } from "../ContentTitle";
-import { init, checkForUpdates, updateApp } from "./controller";
+import { checkForUpdates, updateApp } from "./controller";
 import { UpdateDaoData } from "./UpdateDaoData";
 
 export const Settings = ({ deps }) => {
   let params = useParams();
 
   const [versionData, setVersionData] = useState(null);
-
-  useEffect(() => {
-    async function asyncInit() {
-      await init(deps.statusMsg);
-    }
-    asyncInit();
-  }, [deps.statusMsg]);
 
   useEffect(() => {
     async function asyncInit() {
