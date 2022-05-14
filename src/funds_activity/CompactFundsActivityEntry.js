@@ -9,7 +9,12 @@ export const CompactFundsActivityEntry = ({ entry }) => {
       <AmountView entry={entry} />
       <div className="funds_act_entry__body">
         <div className="funds_act_entry__date">{entry.date}</div>
-        <a className="details" href={entry.tx_link} target="_blank" rel="noreferrer">
+        <a
+          className="details"
+          href={entry.tx_link}
+          target="_blank"
+          rel="noreferrer"
+        >
           {"Details"}
         </a>
       </div>
@@ -18,24 +23,20 @@ export const CompactFundsActivityEntry = ({ entry }) => {
 };
 
 const AmountView = ({ entry }) => {
-  var className;
-  var text = entry.amount;
-  if (entry.is_income === "true") {
-    className = "funds_act_entry__amount__income";
-  } else if (entry.is_income === "false") {
-    className = "funds_act_entry__amount__spending";
-  } else {
-    throw Error("Invalid entry: " + JSON.stringify(entry));
-  }
   return (
     <div className="funds_act_entry__amount__container">
-      <img width="32px" height="32px" src={entry.is_income === "true" ? arrowUp : arrowDown} alt="arrow" />
+      <img
+        width="32px"
+        height="32px"
+        src={entry.is_income === "true" ? arrowUp : arrowDown}
+        alt="arrow"
+      />
       <div className="d-flex flex-column gap-4">
         <div className="ft-color-grey">{entry.address}</div>
         <div className="d-flex gap-4">
           <img width="14px" height="14px" src={funds} alt="funds" />
-          <div className="ft-size-12 ft-weight-600">{text}</div>
-          <div className="ft-size-12" >{entry.type_label}</div>
+          <div className="ft-size-12 ft-weight-600">{entry.amount}</div>
+          <div className="ft-size-12">{entry.type_label}</div>
         </div>
       </div>
     </div>

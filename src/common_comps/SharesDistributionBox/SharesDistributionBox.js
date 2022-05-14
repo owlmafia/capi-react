@@ -116,6 +116,7 @@ export const SharesDistributionBox = ({
           {entries.map((entry) => {
             return (
               <HolderEntry
+                key={entry.label}
                 entry={entry}
                 isSelected={entry.address === selectedAddress}
               />
