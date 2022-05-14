@@ -10,6 +10,7 @@ import { StatusMsgView } from "./StatusMsgView";
 import twitter from "../images/svg/twitter.svg";
 import share from "../images/svg/share.svg";
 import Modal from "../Modal";
+import ShareView from "./ShareView";
 
 export const Wireframe = ({ isGlobal, deps }) => {
   let params = useParams();
@@ -88,10 +89,10 @@ const DaoTop = ({ dao }) => {
       </div>
       {showShareModal && (
         <Modal
-          title={"Share dao"}
+          title={"Share project"}
           onCloseClick={() => setShowShareModal(false)}
         >
-          <div>{"TODO Social media buttons to share this dao"}</div>
+          <ShareView />
         </Modal>
       )}
     </div>
