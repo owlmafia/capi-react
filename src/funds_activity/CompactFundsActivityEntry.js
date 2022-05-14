@@ -1,17 +1,17 @@
 import React from "react";
-import { FundsAssetImg } from "../images/FundsAssetImg";
+import arrowUp from "../images/svg/arrow-up.svg";
+import arrowDown from "../images/svg/arrow-down.svg";
+import funds from "../images/funds.svg";
 
 export const CompactFundsActivityEntry = ({ entry }) => {
   return (
     <div className="funds_act_entry">
       <AmountView entry={entry} />
-      <div>{entry.type_label}</div>
-      <div>{entry.address}</div>
-      <a href={entry.tx_link} target="_blank" rel="noreferrer">
-        {"Details"}
-      </a>
       <div className="funds_act_entry__body">
         <div className="funds_act_entry__date">{entry.date}</div>
+        <a className="details" href={entry.tx_link} target="_blank" rel="noreferrer">
+          {"Details"}
+        </a>
       </div>
     </div>
   );
@@ -29,8 +29,15 @@ const AmountView = ({ entry }) => {
   }
   return (
     <div className="funds_act_entry__amount__container">
-      <FundsAssetImg className="funds_act_entry__amount__logo" />
-      <div className={className}>{text}</div>
+      <img width="32px" height="32px" src={entry.is_income === "true" ? arrowUp : arrowDown} alt="arrow" />
+      <div className="d-flex flex-column gap-4">
+        <div className="ft-color-grey">{entry.address}</div>
+        <div className="d-flex gap-4">
+          <img width="14px" height="14px" src={funds} alt="funds" />
+          <div className="ft-size-12 ft-weight-600">{text}</div>
+          <div className="ft-size-12" >{entry.type_label}</div>
+        </div>
+      </div>
     </div>
   );
 };

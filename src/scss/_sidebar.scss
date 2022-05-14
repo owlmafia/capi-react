@@ -1,22 +1,63 @@
 @import "global_vars";
 
+.sidebar-container {
+    width: 240px;
+    color: $black;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    margin-left: 32px;
+
+    .sidebar-item {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+            width: 20px;
+        }
+
+        a {
+            color: $black;
+            transition: 0.3s;
+        }
+
+        &:hover a,
+        a.menu_active {
+            color: $blue-primary;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        &:hover img {
+            filter: invert(70%) sepia(14%) saturate(980%) hue-rotate(134deg) brightness(94%) contrast(93%);
+        }
+    }
+}
+
 .pro-sidebar {
     color: $black;
     width: 240px !important;
     min-width: 240px !important;
     margin-top: 24px;
+
     .pro-menu a {
         color: $black;
         font-size: 16px;
     }
-    .pro-menu .pro-menu-item > .pro-inner-item {
+
+    .pro-menu .pro-menu-item>.pro-inner-item {
         margin-bottom: 6px;
     }
+
     .pro-menu a:hover,
     .pro-menu-item:hover .pro-icon {
         transition: 0.3s;
         color: $blue-primary;
         font-weight: bold;
+
         img {
             filter: invert(70%) sepia(14%) saturate(980%) hue-rotate(134deg) brightness(94%) contrast(93%);
         }
@@ -27,6 +68,7 @@
     &__container {
         padding: 20px 20px 20px 40px;
     }
+
     &__link {
         color: #adadad;
         font-weight: 300;

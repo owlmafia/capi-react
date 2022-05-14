@@ -10,10 +10,12 @@ button {
     color: $global-white;
     cursor: pointer;
     outline: 0 !important;
+
     &:focus {
         border: none;
         outline: none;
     }
+
     &:disabled {
         cursor: not-allowed;
         pointer-events: all !important;
@@ -31,8 +33,9 @@ button {
 }
 
 .link_button {
+    text-align: center;
     text-decoration-line: underline;
     cursor: pointer;
+    color: $blue-primary;
+    font-weight: 700;
 }
-
-

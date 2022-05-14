@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 const SideBarItem = ({ imageSrc, route, label }) => {
   return (
-    <div>
+    <div className="sidebar-item">
       <img src={imageSrc} alt="Menu icon" />
       <NavLink
         end

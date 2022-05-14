@@ -7,30 +7,30 @@ const ShareView = ({ projectUrl }) => {
   const shareText = "Invest in my project!";
 
   return (
-    <div>
+    <div className="modal-container">
       <div className="social-media-share facebook">
         <a href={facebookLink(projectUrl, shareText)}>
           <img src={facebook} alt="facebook" />
-          <div>Share with Facebook</div>
+          <div className="title">Share with Facebook</div>
         </a>
       </div>
       <div className="social-media-share linkedin">
         <a href={linkedInLink(projectUrl, shareText)}>
           <img src={linkedin} alt="linkedin" />
-          <div>Share with LinkedIn</div>
+          <div className="title">Share with LinkedIn</div>
         </a>
       </div>
       <div className="social-media-share twitter">
         <a href={twitterLink(projectUrl, shareText)}>
           <img src={twitter} alt="twitter" />
-          <div>Share with Twitter</div>
+          <div className="title">Share with Twitter</div>
         </a>
       </div>
       {/*TODO telegram icon*/}
       <div className="social-media-share instagram">
         <a href={telegramLink(projectUrl, shareText)}>
           <img src={instagram} alt="instagram" />
-          <div>Share with Telegram</div>
+          <div className="title">Share with Telegram</div>
         </a>
       </div>
     </div>

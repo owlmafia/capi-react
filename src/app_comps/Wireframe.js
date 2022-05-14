@@ -71,12 +71,12 @@ const DaoTop = ({ dao }) => {
         <div className="social-media-buttons">
           {dao.social_media_url && (
             <a href={dao.social_media_url} target="_blank" rel="noreferrer">
-              <div className="share-icon button__follow">
+              <div className="button__follow share-icon">
                 <img src={twitter} alt="logo-twitter" />
               </div>
             </a>
           )}
-          <div className="share-icon">
+          <div className="button-share share-icon">
             <img
               src={share}
               alt="share-icon"
