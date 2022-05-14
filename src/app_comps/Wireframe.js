@@ -92,7 +92,7 @@ const DaoTop = ({ dao }) => {
           title={"Share project"}
           onCloseClick={() => setShowShareModal(false)}
         >
-          <ShareView />
+          <ShareView projectUrl={"https://localhost:3000/123"} />
         </Modal>
       )}
     </div>
