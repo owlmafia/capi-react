@@ -6,6 +6,7 @@ import { init } from "./controller";
 import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
+import Progress from "../app_comps/Progress";
 
 export const Investment = ({ deps }) => {
   let params = useParams();
@@ -109,7 +110,7 @@ export const Investment = ({ deps }) => {
         </div>
       );
     } else {
-      return null;
+      return <Progress />;
     }
   };
 
@@ -117,7 +118,7 @@ export const Investment = ({ deps }) => {
     if (dao) {
       return <div>{userView()}</div>;
     } else {
-      return null;
+      return <Progress />;
     }
   };
 
