@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { loadMyDaos } from "./controller";
 import { MyDaoItem } from "./MyDaoItem";
 import { ContentTitle } from "../ContentTitle";
+import { MyDaoCreateItem } from "./MyDaoCreateItem";
 
 export const MyDaos = ({ deps }) => {
   const [myDaos, setMyDaos] = useState([]);
@@ -13,15 +14,9 @@ export const MyDaos = ({ deps }) => {
   }, [deps.statusMsg, deps.myAddress]);
 
   const myDaosView = () => {
-    return (
-      myDaos && (
-        <div className="my-daos-container">
-          {myDaos.map((dao) => (
-            <MyDaoItem dao={dao} />
-          ))}
-        </div>
-      )
-    );
+    var elements = myDaos ? myDaos.map((dao) => <MyDaoItem dao={dao} />) : [];
+    elements.push(<MyDaoCreateItem />);
+    return myDaos && <div className="my-daos-container">{elements}</div>;
   };
 
   const view = () => {
