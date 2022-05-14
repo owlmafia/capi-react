@@ -8,7 +8,7 @@ export const RightDaoCol = ({ deps }) => {
 
   useEffect(() => {
     async function asyncFn() {
-      await deps.updateMyShares.call(params.id, deps.myAddress);
+      await deps.updateMyShares.call(null, params.id, deps.myAddress);
     }
     if (deps.myAddress) {
       asyncFn();
@@ -17,7 +17,7 @@ export const RightDaoCol = ({ deps }) => {
 
   useEffect(() => {
     async function asyncFn() {
-      deps.updateMyDividend.call(params.id, deps.myAddress);
+      deps.updateMyDividend.call(null, params.id, deps.myAddress);
     }
     if (deps.myAddress) {
       asyncFn();
@@ -26,7 +26,7 @@ export const RightDaoCol = ({ deps }) => {
 
   useEffect(() => {
     async function asyncFn() {
-      deps.updateFunds.call(params.id, deps.myAddress);
+      deps.updateFunds.call(null, params.id, deps.myAddress);
     }
     if (deps.myAddress) {
       asyncFn();

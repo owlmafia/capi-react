@@ -30,7 +30,7 @@ export const Investment = ({ deps }) => {
       );
 
       if (deps.myAddress) {
-        await deps.updateInvestmentData.call(params.id, deps.myAddress);
+        await deps.updateInvestmentData.call(null, params.id, deps.myAddress);
       }
     }
     doInit();

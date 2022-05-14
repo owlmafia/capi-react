@@ -14,7 +14,7 @@ export const SideBarDao = ({ deps }) => {
 
   useEffect(() => {
     async function asyncFn() {
-      deps.updateMyShares.call(params.id, deps.myAddress);
+      deps.updateMyShares.call(null, params.id, deps.myAddress);
     }
     if (deps.myAddress) {
       asyncFn();

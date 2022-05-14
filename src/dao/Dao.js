@@ -43,7 +43,7 @@ export const Dao = ({ deps }) => {
   useEffect(() => {
     async function nestedAsync() {
       if (deps.myAddress) {
-        await deps.updateInvestmentData.call(params.id, deps.myAddress);
+        await deps.updateInvestmentData.call(null, params.id, deps.myAddress);
       }
     }
     nestedAsync();
