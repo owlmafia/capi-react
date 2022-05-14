@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { handleSharesCountInput, invest } from "./controller";
+import ReactTooltip from "react-tooltip";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -37,6 +38,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
       </div>
       <div className="chartBlock">
         <div>{"Dividend"}</div>
+        <div data-tip="Your share of the project's income, after locking your shares">
+          {"i"}
+        </div>
+        <ReactTooltip />
         <div>{totalPercentage}</div>
       </div>
       <input
