@@ -74,19 +74,7 @@ export const Dao = ({ deps }) => {
           <div>
             <div id="dao_description">{viewDao.dao.description}</div>
 
-            {investmentData && (
-              <InvestEmbedded
-                showProgress={deps.showProgress}
-                statusMsg={deps.statusMsg}
-                updateMyBalance={deps.updateMyBalance}
-                myAddress={deps.myAddress}
-                dao={dao}
-                investmentData={investmentData}
-                updateMyShares={deps.updateMyShares}
-                myShares={deps.myShares}
-                updateFunds={deps.updateFunds}
-              />
-            )}
+            {investmentData && <InvestEmbedded deps={deps} dao={dao} />}
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}

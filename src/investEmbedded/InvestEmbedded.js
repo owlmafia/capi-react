@@ -3,42 +3,34 @@ import { useParams } from "react-router-dom";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import { handleSharesCountInput, init, invest } from "./controller";
 
-export const InvestEmbedded = ({
-  showProgress,
-  statusMsg,
-  updateMyBalance,
-  myAddress,
-  dao,
-  investmentData,
-  updateMyShares,
-  myShares,
-  updateFunds,
-}) => {
+export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
   const [buySharesCount, setBuySharesCount] = useState("1");
-  const [totalCost, setTotalCost] = useState(investmentData.init_share_price);
+  const [totalCost, setTotalCost] = useState(
+    deps.investmentData.init_share_price
+  );
   const [totalPercentage, setProfitPercentage] = useState(
-    investmentData.init_profit_percentage
+    deps.investmentData.init_profit_percentage
   );
 
   useEffect(() => {
-    init(statusMsg);
-  }, [statusMsg]);
+    init(deps.statusMsg);
+  }, [deps.statusMsg]);
 
   return (
     <div className="dao_action_active_tab box-container">
       <div className="title">{"Buy shares"}</div>
       <div className="flex-block">
         <div className="subTitle">{"Available shares: "}</div>
-        <div>{investmentData.available_shares}</div>
+        <div>{deps.investmentData.available_shares}</div>
       </div>
       <div className="chartBlock">
-        <div>{investmentData.investor_locked_shares}</div>
+        <div>{deps.investmentData.investor_locked_shares}</div>
         <div className="circle"></div>
         <div>{"Your locked shares"}</div>
       </div>
       <div className="chartBlock">
-        <div>{investmentData.investor_unlocked_shares}</div>
+        <div>{deps.investmentData.investor_unlocked_shares}</div>
         <div className="circle"></div>
         <div>{"Your unlocked shares"}</div>
       </div>
@@ -58,10 +50,10 @@ export const InvestEmbedded = ({
         value={buySharesCount}
         onChange={(event) => {
           handleSharesCountInput(
-            statusMsg,
+            deps.statusMsg,
             event.target.value,
             dao,
-            investmentData,
+            deps.investmentData,
             setBuySharesCount,
             setTotalCost,
             setProfitPercentage
@@ -69,19 +61,19 @@ export const InvestEmbedded = ({
         }}
       />
       <button
-        disabled={myAddress === ""}
+        disabled={deps.myAddress === ""}
         className="button-primary"
         onClick={async (_) => {
           await invest(
-            myAddress,
-            showProgress,
-            statusMsg,
-            updateMyBalance,
+            deps.myAddress,
+            deps.showProgress,
+            deps.statusMsg,
+            deps.updateMyBalance,
             params.id,
             dao,
             buySharesCount,
-            updateMyShares,
-            updateFunds
+            deps.updateMyShares,
+            deps.updateFunds
           );
         }}
       >
