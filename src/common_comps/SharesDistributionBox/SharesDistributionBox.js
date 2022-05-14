@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
@@ -69,6 +69,25 @@ export const SharesDistributionBox = ({
     selectedAddress,
   ]);
 
+  const onAddressSelected = useCallback(
+    (address) => {
+      const addressIndex = sharesDistr.findIndex((d) => d.address === address);
+      // toggle selected state
+      let newSelected = !sharesDistr[addressIndex].isSelected;
+
+      // clear selection
+      sharesDistr.forEach((share) => (share.isSelected = false));
+      sharesDistr[addressIndex].isSelected = newSelected;
+
+      // set selected address (for address list) - if it was deselected, it's cleared
+      const selection = newSelected ? address : null;
+      setSelectedAddress(selection);
+
+      return newSelected;
+    },
+    [sharesDistr, setSelectedAddress]
+  );
+
   const showMoreOrLessFooter = () => {
     // not enough entries for collapsing: no footer needed
     if (sharesDistr.length <= entries_small_count) {
@@ -130,23 +149,7 @@ export const SharesDistributionBox = ({
           </div>
           <SharesDistributionChart
             sharesDistr={sharesDistr}
-            onAddressSelected={(address) => {
-              const addressIndex = sharesDistr.findIndex(
-                (d) => d.address === address
-              );
-              // toggle selected state
-              let newSelected = !sharesDistr[addressIndex].isSelected;
-
-              // clear selection
-              sharesDistr.forEach((share) => (share.isSelected = false));
-              sharesDistr[addressIndex].isSelected = newSelected;
-
-              // set selected address (for address list) - if it was deselected, it's cleared
-              const selection = newSelected ? address : null;
-              setSelectedAddress(selection);
-
-              return newSelected;
-            }}
+            onAddressSelected={onAddressSelected}
           />
           {holdersListItems()}
         </div>
