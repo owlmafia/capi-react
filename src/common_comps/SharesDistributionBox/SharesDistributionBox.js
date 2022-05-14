@@ -92,7 +92,7 @@ export const SharesDistributionBox = ({
       return (
         <div className="holder_list_container">
           <div className="sub-title">
-            Investors {entries.length}
+            Investors {sharesDistr.length}
             <img src={green} alt="arrow" />
           </div>
           {entries.map((entry) => {
