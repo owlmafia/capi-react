@@ -27,8 +27,8 @@ const entryBody = (entry, isSelected) => {
   }
   return (
     <div className={containerClasses}>
-      <div className="percentage-text">{entry.percentage_formatted}</div>
-      <div>{entry.label}</div>
+      <div className="percentage-text ft-color-black">{entry.percentage_formatted}</div>
+      <div className="ft-color-black">{entry.label}</div>
     </div>
   );
 };

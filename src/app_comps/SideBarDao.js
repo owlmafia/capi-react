@@ -32,8 +32,9 @@ export const SideBarDao = ({ deps }) => {
         route="/my_projects"
         label="My Projects"
       />
+      <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />
-      <SideBarItem imageSrc={stats} route="stats" label="Stats" />
+      <SideBarItem imageSrc={stats} route="stats" label="Statistics" />
       {iHaveShares && (
         <SideBarItem
           imageSrc={funds}
@@ -57,6 +58,6 @@ export const SideBarDao = ({ deps }) => {
 };
 
 const iAmDaoOwner_ = (dao, myAddress) => {
-  return dao && myAddress && dao.creator_address === myAddress;
-  // return true; // see owner items / views in mock
+  // return dao && myAddress && dao.creator_address === myAddress;
+  return true; // see owner items / views in mock
 };

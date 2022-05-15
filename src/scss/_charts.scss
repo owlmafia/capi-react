@@ -43,8 +43,9 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
 .holder_item {
     &__container {
         display: flex;
-        padding: 10px 0px 10px 0px;
+        padding: 6px;
         justify-content: space-between;
+        gap: 10px;
     }
 }
 
@@ -70,7 +71,7 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-.chart_with_legends_container > svg {
+.chart_with_legends_container>svg {
     display: block;
 }
 
@@ -78,35 +79,42 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
     .labeled_box_children {
         padding: 40px;
         position: relative;
+
         .charts-select {
             width: 200px;
             height: 30px;
             position: absolute;
             right: 40px;
         }
+
         .charts-select.css-b62m3t-container {
             .css-1s2u09g-control {
                 cursor: pointer;
                 background-color: #EAECF1;
                 border-radius: 24px;
                 border: none;
+
                 .css-319lph-ValueContainer {
                     overflow: none;
+
                     .css-qc6sy-singleValue {
                         padding: 2px 16px;
                         color: #686777;
                     }
+
                     .css-6j8wv5-Input {
                         height: 30px;
                         padding: 0;
                     }
                 }
+
                 .css-1hb7zxy-IndicatorsContainer {
                     .css-1okebmr-indicatorSeparator {
                         display: none;
                     }
+
                     .css-tlfecz-indicatorContainer {
-                        svg{
+                        svg {
                             fill: #686777;
                         }
                     }

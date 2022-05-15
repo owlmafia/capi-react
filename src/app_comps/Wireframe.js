@@ -65,7 +65,7 @@ const DaoTop = ({ dao }) => {
   const [showShareModal, setShowShareModal] = useState(false);
   return (
     <div>
-      <div className="content-img">{logoView(dao)}</div>
+      <div>{logoView(dao)}</div>
       <div className="title-container">
         <div className="title">Crypticmonster: Unique NFT artworks</div>
         <div className="social-media-buttons">
@@ -100,12 +100,11 @@ const DaoTop = ({ dao }) => {
 const logoView = (dao) => {
   return (
     dao.image_url && (
-      <img
-        id="banner_img"
+      <div
         className="content-img"
-        src={dao.image_url ?? ""}
-        alt="Project banner"
-      />
+        style={{ backgroundImage: `url(${dao.image_url})` }}
+      >
+      </div>
     )
   );
 };

@@ -9,7 +9,7 @@ button {
     border: none;
     color: $global-white;
     cursor: pointer;
-    outline: 0 !important;
+    outline: 0;
 
     &:focus {
         border: none;
@@ -18,7 +18,7 @@ button {
 
     &:disabled {
         cursor: not-allowed;
-        pointer-events: all !important;
+        pointer-events: all;
     }
 }
 
@@ -34,8 +34,12 @@ button {
 
 .link_button {
     text-align: center;
-    text-decoration-line: underline;
     cursor: pointer;
     color: $blue-primary;
     font-weight: 700;
+    margin-top: 16px;
+}
+
+.upload-input {
+    margin-bottom: 30px;
 }

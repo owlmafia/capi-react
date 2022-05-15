@@ -14,7 +14,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
 
   const view = () => {
     return (
-      <div className="box-container">
+      <div className="box-container d-flex">
         <div className="w-60">
           <div className="title">{"Buy more shares"}</div>
           <div className="flex-block">
@@ -23,15 +23,15 @@ export const BuyMoreShares = ({ deps, dao }) => {
             <img className="arrow" src={arrow} alt="arrow" />
           </div>
           <div className="chartBlock">
-            <div>{deps.investmentData.available_shares}</div>
+            <div className="ft-weight-600">{deps.investmentData.available_shares}</div>
             <div>{"Not owned"}</div>
           </div>
           <div className="chartBlock">
-            <div>{deps.investmentData.investor_locked_shares}</div>
+            <div className="ft-weight-600">{deps.investmentData.investor_locked_shares}</div>
             <div>{"Your locked shares"}</div>
           </div>
           <div className="chartBlock">
-            <div>{deps.investmentData.investor_unlocked_shares}</div>
+            <div className="ft-weight-600">{deps.investmentData.investor_unlocked_shares}</div>
             <div>{"Your unlocked shares"}</div>
           </div>
           <LabeledInput
@@ -60,6 +60,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
           >
             {"Buy shares"}
           </button>
+        </div>
+        <div className="shares-chart">
           <SharesDistributionChart
             sharesDistr={[
               to_pie_chart_slice(deps.investmentData.available_shares),

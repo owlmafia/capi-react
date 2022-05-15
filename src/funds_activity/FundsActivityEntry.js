@@ -27,7 +27,6 @@ export const FundsActivityEntry = ({ entry }) => {
 
 const AmountView = ({ entry }) => {
   var className;
-  let numberWidth = 90 + entry.amount.length * 11;
   var text = entry.amount;
   if (entry.is_income === "true") {
     className = "funds_act_entry__amount__number";

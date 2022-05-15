@@ -100,7 +100,7 @@ export const SharesDistributionBox = ({
         className="link_button"
         onClick={() => setShowMoreSelected(showMore)}
       >
-        {showMore ? "Show more" : "Show less"}
+        {showMore ? "See all" : "Show less"}
       </div>
     );
   };
@@ -140,11 +140,13 @@ export const SharesDistributionBox = ({
             <div className="sub-title">Available Shares 1200</div>
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
-              <div className="ft-color-black">Unlocked Share</div>
+              <div className="circle"></div>
+              <div className="ft-color-black ft-size-14">Unlocked Share</div>
             </div>
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
-              <div className="ft-color-black">Your Unlocked Share</div>
+              <div className="circle"></div>
+              <div className="ft-color-black ft-size-14">Your Unlocked Share</div>
             </div>
           </div>
           <SharesDistributionChart

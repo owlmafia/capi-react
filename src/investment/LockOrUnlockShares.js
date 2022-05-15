@@ -19,7 +19,7 @@ export const LockOrUnlockShares = ({
 
   const view = () => {
     return (
-      <div className="box-container">
+      <div className="box-container d-flex">
         <div className="w-60">
           <div className="title">{title}</div>
           <div className="flex-block">
@@ -44,15 +44,15 @@ export const LockOrUnlockShares = ({
               errorMsg={inputError}
             />
           )}
+          <button
+            className="button-primary"
+            onClick={async () => {
+              onSubmit(input);
+            }}
+          >
+            {buttonLabel}
+          </button>
         </div>
-        <button
-          className="button-primary"
-          onClick={async () => {
-            onSubmit(input);
-          }}
-        >
-          {buttonLabel}
-        </button>
         <SharesDistributionChart
           sharesDistr={[
             to_pie_chart_slice(investmentData.investor_locked_shares),
