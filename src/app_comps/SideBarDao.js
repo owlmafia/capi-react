@@ -58,6 +58,6 @@ export const SideBarDao = ({ deps }) => {
 };
 
 const iAmDaoOwner_ = (dao, myAddress) => {
-  // return dao && myAddress && dao.creator_address === myAddress;
-  return true; // see owner items / views in mock
+  return dao && myAddress && dao.creator_address === myAddress;
+  // return true; // see owner items / views in mock
 };
