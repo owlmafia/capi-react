@@ -39,9 +39,8 @@ export const ImageUpload = ({ setImageBytes }) => {
 
   return (
     <form className="" onSubmit={handleSubmitImage}>
-      <input type="file" accept="image/*" onChange={onInputChange} />
+      <input className="upload-input" type="file" accept="image/*" onChange={onInputChange} />
       {inputImg && <ImageCropper updateBlob={updateBlob} inputImg={inputImg} />}
-      <button type="submit">Submit</button>
     </form>
   );
 };

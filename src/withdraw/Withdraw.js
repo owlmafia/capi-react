@@ -11,7 +11,7 @@ export const Withdrawal = ({ deps }) => {
   let params = useParams();
 
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
-  const [withdrawalDescr, setWithdrawalDescr] = useState("foo bar");
+  const [withdrawalDescr, setWithdrawalDescr] = useState("Type the reason");
   const [dao, setDao] = useState(null);
 
   useEffect(() => {

@@ -7,6 +7,8 @@
 #shares_const_container {
     display: flex;
     align-items: center;
+    flex-direction: column;
+    gap: 10px;
 
     svg {
         height: 14px;
@@ -16,42 +18,53 @@
 
 .box-container {
     margin-bottom: 92px;
+
     .flex-block {
         width: auto;
         display: flex;
         gap: 12px;
         margin-bottom: 12px;
+
         .arrow {
             margin-top: -16px;
         }
+
         .subTitle {
             color: $black;
-            font-size: 18px;
             font-weight: 600;
         }
+
         .retrieved {
             color: #686777;
+
             &:nth-child(2) {
                 margin-left: 12px;
             }
         }
+
         .fund-asset {
             width: 22px;
             height: 22px;
         }
     }
+
     .chartBlock {
         display: flex;
         margin-bottom: 16px;
-        margin-top: 20px;
         gap: 40px;
     }
+
     .button-primary {
         width: 236px;
     }
+
     .labeled_input {
         margin-top: 40px;
     }
+
+    .shares-chart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }
-
-

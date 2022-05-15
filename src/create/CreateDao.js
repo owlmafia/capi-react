@@ -69,6 +69,15 @@ export const CreateDao = ({ deps }) => {
           errorMsg={daoDescrError}
         />
         <LabeledInput
+          label={"Primary social media (optional)"}
+          inputValue={socialMediaUrl}
+          onChange={(input) => setSocialMediaUrl(input)}
+          errorMsg={socialMediaUrlError}
+        />
+        <div className="dao-title">Project Cover</div>
+        <ImageUpload setImageBytes={setImageBytes} />
+        <div className="dao-title">Project Funds</div>
+        <LabeledInput
           label={"Share supply"}
           inputValue={shareCount}
           onChange={(input) => setShareCount(input)}
@@ -80,12 +89,6 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />
-        {/* <LabeledInput
-            label={"Share price per unit"}
-            inputValue={sharePrice}
-            onChange={(input) => setSharePrice(input)}
-          /> */}
-
         <LabeledCurrencyInput
           label={"Investor's part:"}
           inputValue={investorsShare}
@@ -98,14 +101,6 @@ export const CreateDao = ({ deps }) => {
           inputValue={sharesForInvestors}
           onChange={(input) => setSharesForInvestors(input)}
           errorMsg={sharesForInvestorsError}
-        />
-
-        <ImageUpload setImageBytes={setImageBytes} />
-        <LabeledInput
-          label={"Primary social media (optional)"}
-          inputValue={socialMediaUrl}
-          onChange={(input) => setSocialMediaUrl(input)}
-          errorMsg={socialMediaUrlError}
         />
         <button
           className="button-primary"

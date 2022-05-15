@@ -1,4 +1,4 @@
-import { FundsAssetImg } from "../images/FundsAssetImg";
+import funds from "../images/funds.svg";
 
 export const LabeledInput = ({
   label,
@@ -29,7 +29,7 @@ export const LabeledCurrencyInput = ({
       <div className="labeled_input__error">{errorMsg}</div>
       <div className="input_with_currency__container">
         {input(inputValue, onChange, placeholder)}
-        <div className="currency-icon"><FundsAssetImg /></div>
+        <img src={funds} alt="funds" />
       </div>
     </div>
   );

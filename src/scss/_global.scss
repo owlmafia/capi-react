@@ -42,11 +42,12 @@ a {
 .box-container {
     background-color: #f5fafb;
     border-radius: $global-border-radius-m;
-    padding: 40px;
+    padding: 32px;
+    position: relative;
 
     .title {
         color: $blue-primary;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: bold;
         margin-bottom: 36px;
     }
@@ -82,11 +83,14 @@ a {
         height: 360px;
         border-radius: $global-border-radius;
         margin-bottom: 36px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     &__title {
         font-weight: 700;
-        font-size: 2rem;
+        font-size: $global-title;
         color: $black;
         margin-bottom: 40px;
         display: flex;
@@ -500,15 +504,6 @@ p {
         display: flex;
         justify-content: space-between;
 
-        .holder_item__container {
-            display: flex;
-            gap: 30px;
-
-            .percentage-text {
-                font-weight: bold;
-            }
-        }
-
         .sub-title {
             font-weight: bold;
             margin-bottom: 36px;
@@ -520,7 +515,7 @@ p {
 
         .flexBlock {
             display: flex;
-            gap: 40px;
+            gap: 20px;
             margin-bottom: 16px;
         }
     }
@@ -587,11 +582,6 @@ p {
 
 .section_container {
     margin-bottom: 20px;
-
-    svg {
-        height: 14px;
-        margin-left: 4px;
-    }
 }
 
 .text_with_currency {
@@ -689,6 +679,12 @@ p {
 
 .mb-5 {
     margin-bottom: 30px;
+}
+
+.selected {
+    transition: all 0.3s;
+    border: 1px solid $global-red-button;
+    border-radius: $global-border-radius;
 }
 
 .circle {

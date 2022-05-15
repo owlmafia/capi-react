@@ -62,9 +62,9 @@ const myAddressView = (deps, daoId) => {
 const dividendSection = (deps, daoId) => {
   return (
     <div>
-      <div>{"Claimable dividend: " + deps.dividend}</div>
+      <div className="mb-5">{"Claimable dividend: " + deps.dividend}</div>
       <button
-        className="button-primary full-width-btn mt-6"
+        className="button-primary full-width-btn"
         onClick={async () => {
           await retrieveProfits(
             deps.myAddress,
@@ -87,7 +87,7 @@ const connectButton = (deps) => {
   if (deps.myAddress === "") {
     return (
       <button
-        className="button-primary full-width-btn mt-6"
+        className="button-primary full-width-btn"
         onClick={async (event) => {
           await connectWalletAndUpdate(
             deps.statusMsg,
