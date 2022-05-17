@@ -4,6 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
+
     .my_dao {
         display: flex;
         gap: 20px;
@@ -14,10 +15,42 @@
         font-weight: bold;
         border-radius: $global-border-radius;
 
+        .img-placeholder {
+            width: 100%;
+            height: 180px;
+            background-image: url('../images/placeholder.svg');
+            border-radius: $global-border-radius;
+            background-size: cover;
+            background-position: center;
+        }
+
         &__involvement_icon {
             width: 100%;
             height: 150px;
             border-radius: $global-border-radius;
         }
+    }
+
+    .my_dao_create_project {
+        height: 180px;
+        border: 2px dashed $global-red-button;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: $global-border-radius;
+
+        img {
+            cursor: pointer;
+        }
+    }
+
+    a {
+        color: black;
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .create-link {
+        text-align: center;
     }
 }

@@ -149,15 +149,17 @@ export const SharesDistributionBox = ({
               <div className="ft-color-black ft-size-14">Your Unlocked Share</div>
             </div>
           </div>
-          <SharesDistributionChart
-            sharesDistr={sharesDistr}
-            onAddressSelected={onAddressSelected}
-          />
+          <div className="pie-chart-container">
+            <SharesDistributionChart
+              sharesDistr={sharesDistr}
+              onAddressSelected={onAddressSelected}
+            />
+          </div>
           {holdersListItems()}
         </div>
       );
     }
   };
 
-  return <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>;
+  return <div id="investors-distribution"><LabeledBox label={"Investors distribution"}>{content()}</LabeledBox></div>;
 };

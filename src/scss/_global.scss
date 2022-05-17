@@ -495,6 +495,10 @@ p {
     margin: 0px;
 }
 
+#investors-distribution .labeled_box_children {
+    padding-bottom: 60px;
+}
+
 .labeled_box_children {
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
@@ -503,6 +507,7 @@ p {
     .investors-container {
         display: flex;
         justify-content: space-between;
+        position: relative;
 
         .sub-title {
             font-weight: bold;
@@ -682,9 +687,9 @@ p {
 }
 
 .selected {
-    transition: all 0.3s;
     border: 1px solid $global-red-button;
     border-radius: $global-border-radius;
+    box-sizing: border-box;
 }
 
 .circle {
