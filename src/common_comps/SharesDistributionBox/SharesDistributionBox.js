@@ -13,7 +13,7 @@ export const SharesDistributionBox = ({
   sharesSupply,
   appId,
 }) => {
-  const [sharesDistr, setSharesDistr] = useState([]);
+  const [sharesDistr, setSharesDistr] = useState(null);
   const [showMoreSelected, setShowMoreSelected] = useState(false);
   // used to highlight the address on the right side
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -39,10 +39,15 @@ export const SharesDistributionBox = ({
 
   useEffect(() => {
     const showAll = () => {
-      return showMoreSelected || sharesDistr.length <= entries_small_count;
+      return (
+        showMoreSelected ||
+        (sharesDistr && sharesDistr.length <= entries_small_count)
+      );
     };
 
     const filterHolders = (startIndex) => {
+      if (!sharesDistr) return null;
+
       let min = Math.min(sharesDistr.length, entries_small_count);
       const holders = sharesDistr.slice(startIndex, startIndex + min);
       return holders;
@@ -89,7 +94,7 @@ export const SharesDistributionBox = ({
 
   const showMoreOrLessFooter = () => {
     // not enough entries for collapsing: no footer needed
-    if (sharesDistr.length <= entries_small_count) {
+    if (sharesDistr && sharesDistr.length <= entries_small_count) {
       return null;
     }
 
@@ -106,7 +111,7 @@ export const SharesDistributionBox = ({
   };
 
   const holdersListItems = () => {
-    if (sharesDistr.length > 0) {
+    if (sharesDistr && sharesDistr.length > 0 && entries) {
       return (
         <div className="holder_list_container">
           <div className="sub-title">
@@ -146,7 +151,9 @@ export const SharesDistributionBox = ({
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
               <div className="circle"></div>
-              <div className="ft-color-black ft-size-14">Your Unlocked Share</div>
+              <div className="ft-color-black ft-size-14">
+                Your Unlocked Share
+              </div>
             </div>
           </div>
           <div className="pie-chart-container">
@@ -161,5 +168,9 @@ export const SharesDistributionBox = ({
     }
   };
 
-  return <div id="investors-distribution"><LabeledBox label={"Investors distribution"}>{content()}</LabeledBox></div>;
+  return (
+    <div id="investors-distribution">
+      <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>
+    </div>
+  );
 };
