@@ -12,9 +12,7 @@ import { connectWalletAndUpdate } from "../shared_functions";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
-  const [daoDescr, setDaoDescr] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  );
+  const [daoDescr, setDaoDescr] = useState("Lorem ipsum dolor sit amet");
   const [shareCount, setShareCount] = useState("100");
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
@@ -23,6 +21,12 @@ export const CreateDao = ({ deps }) => {
   const [socialMediaUrl, setSocialMediaUrl] = useState(
     "https://twitter.com/doesnotexist"
   );
+  // mock data, while we've no UI for this
+  const [minRaiseTarget, setMinRaiseTarget] = useState("0");
+  // mock data, while we've no UI for this
+  // this is a "date in the past", meaning that there's practically no funds raising phase
+  const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] =
+    useState("1652945905");
 
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
@@ -31,6 +35,11 @@ export const CreateDao = ({ deps }) => {
   const [investorsShareError, setInvestorsShareError] = useState("");
   const [sharesForInvestorsError, setSharesForInvestorsError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+  // mock data, while we've no UI for this
+  const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
+
+  const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
+    useState("");
 
   // TODO show this error
   const [imageBytesError, setImageBytesError] = useState("");
@@ -136,6 +145,9 @@ export const CreateDao = ({ deps }) => {
               sharesForInvestors,
               imageBytes,
               socialMediaUrl,
+              minRaiseTarget,
+              minRaiseTargetEndDate,
+
               navigate,
 
               setDaoNameError,
@@ -145,7 +157,9 @@ export const CreateDao = ({ deps }) => {
               setInvestorsShareError,
               setSharesForInvestorsError,
               setImageBytesError,
-              setSocialMediaUrlError
+              setSocialMediaUrlError,
+              setMinRaiseTargetError,
+              setMinRaiseTargetEndDateError
             );
           }}
         >

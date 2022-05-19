@@ -16,6 +16,9 @@ export const createDao = async (
   sharesForInvestors,
   imageBytes,
   socialMediaUrl,
+  minRaiseTarget,
+  minRaiseTargetEndDate,
+
   navigate,
 
   setDaoNameError,
@@ -25,7 +28,9 @@ export const createDao = async (
   setInvestorsShareError,
   setSharesForInvestorsError,
   setLogoUrlError,
-  setSocialMediaUrlError
+  setSocialMediaUrlError,
+  setMinRaiseTargetError,
+  setMinRaiseTargetEndDateError
 ) => {
   const {
     bridge_create_dao_assets_txs,
@@ -52,6 +57,8 @@ export const createDao = async (
         shares_for_investors: sharesForInvestors,
         compressed_image: bytes,
         social_media_url: socialMediaUrl,
+        min_raise_target: minRaiseTarget,
+        min_raise_target_end_date: minRaiseTargetEndDate,
       },
     });
     showProgress(false);
@@ -93,6 +100,8 @@ export const createDao = async (
       setSharesForInvestorsError(toErrorMsg(e.shares_for_investors));
       setLogoUrlError(toErrorMsg(e.logo_url));
       setSocialMediaUrlError(toErrorMsg(e.social_media_url));
+      setMinRaiseTargetError(toErrorMsg(e.min_raise_target));
+      setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
 
       // show a general message additionally, just in case
       statusMsg.error("Please fix the errors");
@@ -138,6 +147,8 @@ const toErrorMsg = (e) => {
       return "Invalid (whole) number format";
     case "not_dec":
       return "Invalid number format";
+    case "not_timestamp":
+      return "Invalid date";
     case "max_fractionals":
       return (
         "Must have less than " +
