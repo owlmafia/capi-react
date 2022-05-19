@@ -1,4 +1,5 @@
 import CopyPasteText from "../common_comps/CopyPastText";
+import close from "../images/svg/close.svg";
 
 export const StatusMsgView = ({ deps }) => {
   let shortMsg = deps.statusMsgDisplay.displayMsg;
@@ -21,6 +22,7 @@ export const StatusMsgView = ({ deps }) => {
       <CopyPasteText text={shortMsg} copyText={deps.statusMsgDisplay.copyMsg} />
 
       <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
+        <img src={close} alt="close" />
         <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.757324 0.757324L9.24261 9.24261" />
           <path d="M0.757395 9.24261L9.24268 0.757324" />

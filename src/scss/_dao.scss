@@ -163,10 +163,28 @@
 
     .button__follow {
         border: 1px solid #55acee;
+
+        &:hover {
+            transition: 0.3s;
+            background-color: #55acee;
+        }
+
+        &:hover img {
+            filter: brightness(0) invert(1);
+        }
     }
 
     .button-share {
         border: 1px solid $blue-primary;
+
+        &:hover {
+            transition: 0.3s;
+            background-color: $blue-primary;
+        }
+
+        &:hover img {
+            filter: brightness(0) invert(1);
+        }
     }
 
     .share-icon {

@@ -46,6 +46,12 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
         padding: 6px;
         justify-content: space-between;
         gap: 10px;
+        width: 160px;
+        box-sizing: border-box;
+
+        .percentage-text {
+            width: 48px;
+        }
     }
 }
 
@@ -71,20 +77,29 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
+.pie-chart-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .chart_with_legends_container>svg {
     display: block;
 }
 
 .charts-container {
     .labeled_box_children {
-        padding: 40px;
+        padding: 30px;
+        padding-bottom: 0;
+        padding-right: 0;
         position: relative;
 
         .charts-select {
             width: 200px;
             height: 30px;
             position: absolute;
-            right: 40px;
+            right: 20px;
         }
 
         .charts-select.css-b62m3t-container {
@@ -100,6 +115,7 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
                     .css-qc6sy-singleValue {
                         padding: 2px 16px;
                         color: #686777;
+                        font-size: 14px;
                     }
 
                     .css-6j8wv5-Input {
