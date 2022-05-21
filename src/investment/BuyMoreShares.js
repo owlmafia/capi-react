@@ -17,7 +17,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
       <div className="box-container d-flex">
         <div className="w-60">
           <div className="title">{"Buy more shares"}</div>
-          <div className="flex-block">
+          <div className="mb-4 flex-block">
             <div className="subTitle">{"Available Shares in project"}</div>
             <div className="subTitle">{dao.share_supply}</div>
             <img className="arrow" src={arrow} alt="arrow" />

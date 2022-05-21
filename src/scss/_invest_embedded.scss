@@ -23,7 +23,6 @@
         width: auto;
         display: flex;
         gap: 12px;
-        margin-bottom: 12px;
 
         .arrow {
             margin-top: -16px;
@@ -31,7 +30,7 @@
 
         .subTitle {
             color: $black;
-            font-weight: 600;
+            font-family: "Gilroy-Bold";
         }
 
         .retrieved {

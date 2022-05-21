@@ -40,6 +40,45 @@ button {
     margin-top: 16px;
 }
 
-.upload-input {
-    margin-bottom: 30px;
+.upload-form {
+    position: relative;
+
+    .upload-container {
+        margin-bottom: 30px;
+        height: 307px;
+        border: 1px dashed $global-border;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        border-radius: 32px;
+
+        .upload-custom {
+            position: relative;
+
+            .file-custom {
+                position: absolute;
+                left: 50%;
+                padding: 12px 16px;
+                border-radius: 32px;
+                transform: translateX(-50%);
+                // z-index: 1;
+                border: 1px solid $global-red-button;
+                color: $global-red-button;
+                background-color: white;
+                font-family: "Gilroy-Bold";
+                cursor: pointer;
+                content: "Upload image";
+            }
+
+            .upload-input {
+                // position: absolute;
+                opacity: 0;
+                z-index: 100;
+                cursor: pointer;
+            }
+        }
+    }
 }
