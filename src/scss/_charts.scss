@@ -34,20 +34,16 @@ $pie_chart_diameter: 280px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-.holder_list_container {
-    .sub-title {
-        font-weight: bold;
-    }
-}
-
 .holder_item {
     &__container {
         display: flex;
-        padding: 6px;
+        padding: 0 6px;
         justify-content: space-between;
         gap: 10px;
         width: 160px;
         box-sizing: border-box;
+        height: 32px;
+        align-items: center;
 
         .percentage-text {
             width: 48px;

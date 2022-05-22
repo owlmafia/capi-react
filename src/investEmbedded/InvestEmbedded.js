@@ -21,23 +21,23 @@ export const InvestEmbedded = ({ deps, dao }) => {
         <div className="d-flex justify-between">
           <div className="available-shares">
             <div className="d-flex gap-10 ft-weight-600">
-              <div className="subTitle">{"Available shares: "}</div>
-              <div>{deps.investmentData.available_shares}</div>
+              <div className="subTitle mb-4">{"Available shares: "}</div>
+              <div className="ft-weight-bold">{deps.investmentData.available_shares}</div>
             </div>
             <div className="d-flex gap-10 align-center">
-              <div className="ft-weight-600">You have:</div>
+              <div className="ft-weight-bold">You have:</div>
               <div>{"Locked shares"}</div>
-              <div className="ft-weight-600">{deps.investmentData.investor_locked_shares}</div>
+              <div className="ft-weight-bold">{deps.investmentData.investor_locked_shares}</div>
               <div className="blue-circle"></div>
               <div>{"Unlocked shares"}</div>
-              <div className="ft-weight-600">{deps.investmentData.investor_unlocked_shares}</div>
+              <div className="ft-weight-bold">{deps.investmentData.investor_unlocked_shares}</div>
             </div>
           </div>
           <div id="shares_const_container">
-            <div className="ft-weight-600">{"Shares cost"}</div>
+            <div className="ft-weight-bold">{"Shares cost"}</div>
             <div className="d-flex">
               <img src={funds} alt="funds" />
-              <div className="one_line_key_val_val">{totalCost}</div>
+              <div className="one_line_key_val_val ft-weight-bold">{totalCost}</div>
             </div>
           </div>
         </div>
