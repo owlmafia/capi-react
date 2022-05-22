@@ -1,5 +1,7 @@
 import CopyPasteText from "../common_comps/CopyPastText";
 import close from "../images/svg/close.svg";
+import error from "../images/svg/error.svg";
+import success from "../images/svg/success.svg";
 
 export const StatusMsgView = ({ deps }) => {
   let shortMsg = deps.statusMsgDisplay.displayMsg;
@@ -19,8 +21,11 @@ export const StatusMsgView = ({ deps }) => {
 
   return (
     <div className={"msg " + className}>
-      <CopyPasteText text={shortMsg} copyText={deps.statusMsgDisplay.copyMsg} />
-
+      <div className="d-flex align-center gap-32">
+        {deps.statusMsgDisplay.type === "error" ? <img className="mr-5" src={error} alt="error" /> : ""}
+        {deps.statusMsgDisplay.type === "success" ? <img className="mr-5" src={success} alt="success" /> : ""}
+        <CopyPasteText text={shortMsg} copyText={deps.statusMsgDisplay.copyMsg} />
+      </div>
       <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
         <img src={close} alt="close" />
         <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">

@@ -14,8 +14,8 @@ const renderPieChart = (
   var width = 300,
     height = 300;
 
-  let outerRadius = (height / 2) * 0.76;
-  let innerRadius = (height / 2) * 0.5;
+  let outerRadius = (height / 2) * 0.82;
+  let innerRadius = (height / 2) * 0.55;
 
   const col = [
     "#4CA5A9",

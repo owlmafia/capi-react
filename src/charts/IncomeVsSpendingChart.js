@@ -6,7 +6,7 @@ export const IncomeVsSpendingChart = ({ chartData }) => {
   const chart = useRef(null);
 
   const colors = useMemo(() => {
-    return ["#6BB9BC", "#DF5C60"];
+    return ["#DE5C62", "#6BB9BC"];
   }, []);
 
   useEffect(() => {

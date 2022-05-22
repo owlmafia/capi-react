@@ -51,6 +51,10 @@
         display: flex;
         margin-bottom: 16px;
         gap: 40px;
+
+        .numbers {
+            width: 60px;
+        }
     }
 
     .button-primary {
