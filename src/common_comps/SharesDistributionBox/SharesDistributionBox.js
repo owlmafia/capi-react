@@ -145,12 +145,12 @@ export const SharesDistributionBox = ({
             <div className="sub-title">Available Shares 1200</div>
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
-              <div className="circle"></div>
+              <div className="circle ml-5 mr-3"></div>
               <div className="ft-color-black ft-size-14">Unlocked Share</div>
             </div>
             <div className="flexBlock">
               <div className="ft-weight-600">15</div>
-              <div className="circle"></div>
+              <div className="circle ml-5 mr-3"></div>
               <div className="ft-color-black ft-size-14">
                 Your Unlocked Share
               </div>

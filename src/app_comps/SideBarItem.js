@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 const SideBarItem = ({ imageSrc, route, label }) => {
   return (
     <div className="sidebar-item">
-      <img src={imageSrc} alt="" />
       <NavLink
         end
         to={route}
@@ -11,6 +10,7 @@ const SideBarItem = ({ imageSrc, route, label }) => {
           isActive ? "menu_active" : "menu_inactive"
         }
       >
+        <img src={imageSrc} alt="" />
         {label}
       </NavLink>
     </div>

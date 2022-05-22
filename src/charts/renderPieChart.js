@@ -14,13 +14,13 @@ const renderPieChart = (
   var width = 300,
     height = 300;
 
-  let outerRadius = (height / 2) * 0.6;
-  let innerRadius = (height / 2) * 0.4;
+  let outerRadius = (height / 2) * 0.76;
+  let innerRadius = (height / 2) * 0.5;
 
   const col = [
-    "#7FB7BB",
-    "#AFD5D6",
-    "#A1CDD0",
+    "#4CA5A9",
+    "#8ECACD",
+    "#8ECACD",
     "#BCDBDF",
     "#C8E3E3",
     "#D9E9EB",
