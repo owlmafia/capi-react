@@ -1,8 +1,15 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  Fragment,
+} from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
+import { useWindowSize } from "./common_hooks/useWindowSize";
 import {
   updateMyShares,
   updateMyBalance_,
@@ -36,6 +43,8 @@ const App = () => {
   const [viewDao, setViewDao] = useState(null);
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
+
+  const windowSize = useWindowSize();
 
   const updateMyBalance = useCallback(
     async (myAddress) => {
@@ -112,6 +121,67 @@ const App = () => {
     [statusMsgUpdater]
   );
 
+  const navigation = () => {
+    return (
+      <BrowserRouter>
+        {routesView({
+          myAddress: myAddress,
+          setMyAddress: setMyAddress,
+
+          myAddressDisplay: myAddressDisplay,
+          setMyAddressDisplay: setMyAddressDisplay,
+
+          setModal: setModal,
+
+          showProgress: (show) => setShowProgress(show),
+
+          statusMsgDisplay: statusMsg,
+          statusMsg: statusMsgUpdater,
+
+          myBalance: myBalance,
+          updateMyBalance: updateMyBalance,
+
+          myShares: myShares,
+          updateMyShares: updateShares,
+
+          myDividend: myDividend,
+          updateMyDividend: updateMyDividend,
+
+          investmentData: investmentData,
+          updateInvestmentData: updateInvestmentData,
+
+          funds: funds,
+          updateFunds: updateFunds,
+
+          fundsChange: fundsChange,
+
+          dao: dao,
+          updateDao: updateDao,
+        })}
+      </BrowserRouter>
+    );
+  };
+
+  const body = () => {
+    return (
+      <Fragment>
+        {showProgress && <ProgressBar />}
+        {/* <div>{connectButton()}</div> */}
+        {navigation()}
+      </Fragment>
+    );
+  };
+
+  const desktopView = () => {
+    console.log("desktop view, width: %o", windowSize.width);
+    return body();
+  };
+
+  const mobileView = () => {
+    console.log("mobile view, width: %o", windowSize.width);
+    return body();
+  };
+
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -122,45 +192,7 @@ const App = () => {
     return (
       <div>
         <div id="container">
-          {showProgress && <ProgressBar />}
-          {/* <div>{connectButton()}</div> */}
-
-          <BrowserRouter>
-            {routesView({
-              myAddress: myAddress,
-              setMyAddress: setMyAddress,
-
-              myAddressDisplay: myAddressDisplay,
-              setMyAddressDisplay: setMyAddressDisplay,
-
-              setModal: setModal,
-
-              showProgress: (show) => setShowProgress(show),
-
-              statusMsgDisplay: statusMsg,
-              statusMsg: statusMsgUpdater,
-
-              myBalance: myBalance,
-              updateMyBalance: updateMyBalance,
-
-              myShares: myShares,
-              updateMyShares: updateShares,
-
-              myDividend: myDividend,
-              updateMyDividend: updateMyDividend,
-
-              investmentData: investmentData,
-              updateInvestmentData: updateInvestmentData,
-
-              funds: funds,
-              updateFunds: updateFunds,
-
-              fundsChange: fundsChange,
-
-              dao: dao,
-              updateDao: updateDao,
-            })}
-          </BrowserRouter>
+          {windowSize.width > 1100 ? desktopView() : mobileView()}
           {modal && (
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>
               {modal.body}
