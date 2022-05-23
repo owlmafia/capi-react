@@ -23,15 +23,15 @@ export const BuyMoreShares = ({ deps, dao }) => {
             <img className="arrow" src={arrow} alt="arrow" />
           </div>
           <div className="chartBlock">
-            <div className="ft-weight-600">{deps.investmentData.available_shares}</div>
+            <div className="numbers ft-weight-600">{deps.investmentData.available_shares}</div>
             <div>{"Not owned"}</div>
           </div>
           <div className="chartBlock">
-            <div className="ft-weight-600">{deps.investmentData.investor_locked_shares}</div>
+            <div className="numbers ft-weight-600">{deps.investmentData.investor_locked_shares}</div>
             <div>{"Your locked shares"}</div>
           </div>
           <div className="chartBlock">
-            <div className="ft-weight-600">{deps.investmentData.investor_unlocked_shares}</div>
+            <div className="numbers ft-weight-600">{deps.investmentData.investor_unlocked_shares}</div>
             <div>{"Your unlocked shares"}</div>
           </div>
           <LabeledInput

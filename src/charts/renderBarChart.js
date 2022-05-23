@@ -3,9 +3,9 @@ import * as d3 from "d3";
 const SUBGROUPARRAY = ["spending", "income"];
 
 const renderBarChart = (svg, flatData, colors) => {
-  const margin = { top: 10, right: 10, bottom: 30, left: 40 },
-    width = 600 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+  const margin = { top: 10, right: 10, bottom: 30, left: 20 },
+    width = 600 - margin.right,
+    height = 280 - margin.top - margin.bottom;
 
   let data = flatData.map((d) => {
     return {
@@ -29,7 +29,7 @@ const renderBarChart = (svg, flatData, colors) => {
     .scaleBand()
     .domain(SUBGROUPARRAY)
     .range([0, x.bandwidth()])
-    .padding([0.25]);
+    .padding([0.05]);
 
   const selected = d3.select(svg);
 

@@ -6,7 +6,7 @@ export const MyDaoItem = ({ dao }) => {
     <div key={dao.url_rel} className="my_dao">
       <Link to={dao.url_rel}>{dao.name}</Link>
       <div className="img-placeholder"></div>
-      {/* {involvementIcons(dao)} */}
+      {involvementIcons(dao)}
     </div>
   );
 };

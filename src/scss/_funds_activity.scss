@@ -13,13 +13,15 @@
     padding: 16px;
     margin-bottom: 30px;
     justify-content: space-between;
+    gap: 20px;
+    overflow: hidden;
 
     &__amount {
         &__container {
             display: flex;
             align-items: center;
             gap: 10px;
-            width: 25%;
+            width: 26%;
         }
 
         &__number {
@@ -36,7 +38,7 @@
     &__body {
         display: flex;
         flex-direction: column;
-        width: 55%;
+        width: 64%;
         gap: 10px;
 
         .ellipse {

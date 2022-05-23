@@ -1,7 +1,8 @@
 @import "global_vars";
 
 #rightcol {
-    width: 300px;
+    width: 23%;
+    min-width: 300px;
 
     .my-account-container {
         border: 1px solid rgb(237, 231, 231);

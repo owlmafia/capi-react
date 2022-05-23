@@ -45,7 +45,7 @@ export const ImageUpload = ({ setImageBytes }) => {
           <label class="file-custom">Upload Image</label>
           <input className="upload-input" type="file" accept="image/*" onChange={onInputChange} />
         </div>
-        <div className="ft-color-black">or Darg and drop here</div>
+        <div className="ft-color-black">or Drag and drop here</div>
       </div>
       {inputImg && <ImageCropper updateBlob={updateBlob} inputImg={inputImg} />}
     </form>
