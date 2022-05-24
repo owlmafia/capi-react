@@ -62,7 +62,7 @@ const myAddressView = (deps, daoId) => {
 const dividendSection = (deps, daoId) => {
   return (
     <div>
-      <div className="mb-5">{"Claimable dividend: " + deps.dividend}</div>
+      <div className="mb-5">{"Claimable dividend: " + deps.myDividend}</div>
       <button
         className="button-primary full-width-btn"
         onClick={async () => {
