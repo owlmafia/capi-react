@@ -3,6 +3,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import arrow from "../images/svg/arrow-right.svg";
 import { connectWalletAndUpdate, retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
+import Progress from "../app_comps/Progress";
 
 export const MyAccount = ({
   deps,
@@ -51,7 +52,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
         </div>
-        {deps.myDividend && dividendSection(deps, daoId)}
+        {dividendSection(deps, daoId)}
       </div>
     );
   } else {
@@ -60,27 +61,31 @@ const myAddressView = (deps, daoId) => {
 };
 
 const dividendSection = (deps, daoId) => {
-  return (
-    <div>
-      <div className="mb-5">{"Claimable dividend: " + deps.myDividend}</div>
-      <button
-        className="button-primary full-width-btn"
-        onClick={async () => {
-          await retrieveProfits(
-            deps.myAddress,
-            deps.showProgress,
-            deps.statusMsg,
-            deps.updateMyBalance,
-            daoId,
-            deps.updateInvestmentData,
-            deps.updateFunds
-          );
-        }}
-      >
-        {"Claim"}
-      </button>
-    </div>
-  );
+  if (deps.myDividend) {
+    return (
+      <div>
+        <div className="mb-5">{"Claimable dividend: " + deps.myDividend}</div>
+        <button
+          className="button-primary full-width-btn"
+          onClick={async () => {
+            await retrieveProfits(
+              deps.myAddress,
+              deps.showProgress,
+              deps.statusMsg,
+              deps.updateMyBalance,
+              daoId,
+              deps.updateInvestmentData,
+              deps.updateFunds
+            );
+          }}
+        >
+          {"Claim"}
+        </button>
+      </div>
+    );
+  } else {
+    return <Progress />;
+  }
 };
 
 const connectButton = (deps) => {
