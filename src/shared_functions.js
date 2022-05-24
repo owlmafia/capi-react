@@ -96,6 +96,7 @@ export const updateFunds_ = async (
     // TODO drain here? is this comment up to date?
     setFunds(viewDao.available_funds);
 
+    // all this (updateFunds_) can be optimized, the implementation of this fetches the dao again (when requesting withdrawals)
     let balance_change_res = await get_balance_change({
       dao_id: daoId,
       customer_escrow: viewDao.dao.customer_escrow_address,

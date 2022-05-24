@@ -62,13 +62,11 @@ export const updateMyDividend_ = async (
   }
 };
 
-export const updateDao_ = async (daoId, setViewDao, statusMsg) => {
+export const updateDao_ = async (daoId, setDao, statusMsg) => {
   try {
-    const { bridge_view_dao } = await wasmPromise;
-    let viewDao = await bridge_view_dao({
-      dao_id: daoId,
-    });
-    setViewDao(viewDao);
+    const { bridge_load_dao_user_view } = await wasmPromise;
+    let dao = await bridge_load_dao_user_view(daoId);
+    setDao(dao);
     // // these are overwritten when draining, so we keep them separate
     // // TODO drain here? is this comment up to date?
     // setFunds(viewDao.available_funds);

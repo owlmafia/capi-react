@@ -40,7 +40,7 @@ const App = () => {
 
   const [investmentData, setInvestmentData] = useState(null);
 
-  const [viewDao, setViewDao] = useState(null);
+  const [dao, setDao] = useState(null);
 
   const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
@@ -55,12 +55,6 @@ const App = () => {
     [statusMsgUpdater]
   );
 
-  const dao = useMemo(() => {
-    if (viewDao) {
-      return viewDao.dao;
-    }
-  }, [viewDao]);
-
   useEffect(() => {
     async function asyncInit() {
       await initLog(statusMsgUpdater);
@@ -71,7 +65,7 @@ const App = () => {
   const updateDao = useCallback(
     async (daoId) => {
       if (daoId) {
-        await updateDao_(daoId, setViewDao, statusMsgUpdater);
+        await updateDao_(daoId, setDao, statusMsgUpdater);
       }
     },
     [statusMsgUpdater]

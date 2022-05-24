@@ -8,21 +8,15 @@ import { init } from "./controller";
 export const Stats = ({ deps }) => {
   let params = useParams();
 
-  const [viewDao, setViewDao] = useState(null);
+  const [dao, setDao] = useState(null);
 
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading dao id: " + JSON.stringify(params));
-      await init(params.id, setViewDao, deps.statusMsg);
+      await init(params.id, setDao, deps.statusMsg);
     }
     asyncInit();
   }, [params.id, deps.statusMsg]);
-
-  const dao = useMemo(() => {
-    if (viewDao) {
-      return viewDao.dao;
-    }
-  }, [viewDao]);
 
   const sharesAssetId = useMemo(() => {
     if (dao) {
