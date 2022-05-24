@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
-import arrow from "../images/svg/arrow.svg";
+// import arrow from "../images/svg/arrow.svg";
 
 export const LockOrUnlockShares = ({
   dao,
@@ -25,7 +25,7 @@ export const LockOrUnlockShares = ({
           <div className="flex-block">
             <div className="subTitle mb-4">{"Available Shares in project"}</div>
             <div className="subTitle">{dao.share_supply}</div>
-            <img className="arrow" src={arrow} alt="arrow" />
+            {/* <img className="arrow" src={arrow} alt="arrow" /> */}
           </div>
           <div className="chartBlock">
             <div>{investmentData.investor_locked_shares}</div>

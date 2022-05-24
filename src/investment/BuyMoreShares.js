@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { invest } from "./controller";
-import arrow from "../images/svg/arrow.svg";
+// import arrow from "../images/svg/arrow.svg";
 
 export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
@@ -20,7 +20,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
           <div className="mb-4 flex-block">
             <div className="subTitle">{"Available Shares in project"}</div>
             <div className="subTitle">{dao.share_supply}</div>
-            <img className="arrow" src={arrow} alt="arrow" />
+            {/* <img className="arrow" src={arrow} alt="arrow" /> */}
           </div>
           <div className="chartBlock">
             <div className="numbers ft-weight-600">{deps.investmentData.available_shares}</div>
