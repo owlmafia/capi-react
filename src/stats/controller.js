@@ -2,8 +2,8 @@ const wasmPromise = import("wasm");
 
 export const init = async (daoId, setDao, statusMsg) => {
   try {
-    const { bridge_load_dao_user_view } = await wasmPromise;
-    let dao = await bridge_load_dao_user_view(daoId);
+    const { bridge_load_dao } = await wasmPromise;
+    let dao = await bridge_load_dao(daoId);
     setDao(dao);
   } catch (e) {
     statusMsg.error(e);
