@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useMemo,
-  Fragment,
-} from "react";
+import React, { useState, useCallback, useEffect, Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
