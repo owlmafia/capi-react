@@ -1,12 +1,15 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import Progress from "../app_comps/Progress";
+import { loadDescription } from "./controller";
 
 export const Dao = ({ deps }) => {
   let params = useParams();
+
+  const [description, setDescription] = useState(null);
 
   console.log("deps: " + JSON.stringify(deps));
 
@@ -26,6 +29,19 @@ export const Dao = ({ deps }) => {
     nestedAsync();
   }, [deps.statusMsg, deps.myAddress, params.id, deps.updateInvestmentData]);
 
+  useEffect(() => {
+    async function fetch() {
+      if (deps.dao) {
+        await loadDescription(
+          deps.statusMsg,
+          deps.dao.description_id,
+          setDescription
+        );
+      }
+    }
+    fetch();
+  }, [deps.statusMsg, deps.dao, setDescription]);
+
   const sharesAssetId = useMemo(() => {
     if (deps.dao) {
       return deps.dao.shares_asset_id;
@@ -43,7 +59,7 @@ export const Dao = ({ deps }) => {
       return (
         <div>
           <div>
-            <div id="dao_description">{deps.dao.description}</div>
+            {description && <div id="dao_description">{description}</div>}
 
             {deps.investmentData && (
               <InvestEmbedded deps={deps} dao={deps.dao} />
