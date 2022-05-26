@@ -10,6 +10,7 @@ button {
     color: $global-white;
     cursor: pointer;
     outline: 0;
+    box-sizing: border-box;
 
     &:focus {
         border: none;
@@ -18,7 +19,7 @@ button {
 
     &:disabled {
         cursor: not-allowed;
-        pointer-events: all;
+        pointer-events: none;
     }
 }
 
@@ -26,6 +27,22 @@ button {
     background-color: $global-red-button;
     color: $global-white;
     font-weight: 700;
+
+    &:hover {
+        background-color: #C6444A;
+        transition: 0.3s;
+    }
+
+    &:active {
+        background-color: #CC3038;
+        transition: 0.3s;
+    }
+
+    &:disabled {
+        background-color: #EAECF1;
+        color: #BCCAC6;
+        pointer-events: none;
+    }
 }
 
 .full-width-btn {
@@ -34,10 +51,53 @@ button {
 
 .link_button {
     text-align: center;
-    cursor: pointer;
+    min-width: 88px;
     color: $blue-primary;
     font-weight: 700;
+    padding: 0 8px;
     margin-top: 16px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    text-decoration: underline;
+    background-color: transparent;
+
+    &:hover {
+        transition: 0.3s;
+        border: 1px solid #6BB9BD;
+    }
+
+    &:active {
+        transition: 0.3s;
+        color: #4CA5A9;
+        border: 1px solid #6BB9BD;
+    }
+
+    &:disabled {
+        color: #BCCAC6;
+        border: 1px solid #BCCAC6;
+    }
+}
+
+.secondary-button {
+    position: absolute;
+    left: 50%;
+    padding: 12px 16px;
+    border-radius: 32px;
+    transform: translateX(-50%);
+    border: 1px solid $global-red-button;
+    color: $global-red-button;
+    background-color: white;
+    font-family: "Gilroy-Bold";
+    cursor: pointer;
+
+    &:hover {
+        background-color: #FFCCCC;
+    }
+
+    &:disabled {
+        color: #BCCAC6;
+        border: 1px solid #BCCAC6;
+    }
 }
 
 .upload-form {
@@ -59,22 +119,10 @@ button {
             position: relative;
 
             .file-custom {
-                position: absolute;
-                left: 50%;
-                padding: 12px 16px;
-                border-radius: 32px;
-                transform: translateX(-50%);
-                // z-index: 1;
-                border: 1px solid $global-red-button;
-                color: $global-red-button;
-                background-color: white;
-                font-family: "Gilroy-Bold";
-                cursor: pointer;
                 content: "Upload image";
             }
 
             .upload-input {
-                // position: absolute;
                 opacity: 0;
                 z-index: 100;
                 cursor: pointer;

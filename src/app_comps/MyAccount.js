@@ -64,7 +64,7 @@ const dividendSection = (deps, daoId) => {
   if (deps.myDividend) {
     return (
       <div>
-        <div className="mb-5">{"Claimable dividend: " + deps.myDividend}</div>
+        <div className="mb-5 ft-weight-600">{"Claimable dividend: " + deps.myDividend}</div>
         <button
           className="button-primary full-width-btn"
           onClick={async () => {

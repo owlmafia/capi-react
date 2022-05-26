@@ -45,10 +45,10 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
       <div className="first_dao_widget">
         {deps.funds && (
           <div className="d-flex flex-column gap-10">
-            <div className="ft-weight-bold">{"Project funds"}</div>
+            <div className="ft-weight-600">{"Project funds"}</div>
             <div className="d-flex align-center gap-10">
               <img src={funds} alt="funds" />
-              <div className="ft-weight-bold">{deps.funds}</div>
+              <div className="ft-weight-600">{deps.funds}</div>
               <div>{fundsChangeArrow(deps.fundsChange)}</div>
             </div>
           </div>
@@ -62,10 +62,10 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
             />
           </div>
         )}
-        <div className="mt-6 ft-weight-bold mb-5">{"Recent funds activity"}</div>
+        <div className="mt-6 ft-weight-600 mb-5">{"Recent funds activity"}</div>
         {fundsActivity()}
         <Link to="funds_activity">
-          <p className="link_button">{"See all"}</p>
+          <button className="link_button">{"See all"}</button>
         </Link>
       </div>
     );

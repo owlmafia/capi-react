@@ -96,7 +96,7 @@
             gap: 16px;
 
             .subTitle {
-                font-family: "Gilroy-Bold";
+                font-weight: 600;
             }
         }
     }
@@ -109,10 +109,6 @@
     }
 
     .label-input-style {
-        padding-left: 20px;
-        height: 64px;
-        box-sizing: border-box;
-        border-radius: 32px;
         margin-bottom: 20px;
     }
 }

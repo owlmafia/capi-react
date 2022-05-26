@@ -42,7 +42,7 @@ export const ImageUpload = ({ setImageBytes }) => {
       <div className="upload-container">
         <div className="ft-color-black">Upload an cover image</div>
         <div className="upload-custom">
-          <label class="file-custom">Upload Image</label>
+          <button class="file-custom secondary-button">Upload Image</button>
           <input className="upload-input" type="file" accept="image/*" onChange={onInputChange} />
         </div>
         <div className="ft-color-black">or Drag and drop here</div>

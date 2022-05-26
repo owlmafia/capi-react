@@ -91,17 +91,26 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
 
         .charts-select {
             width: 200px;
-            height: 30px;
+            // height: 30px;
             position: absolute;
             right: 20px;
+            cursor: pointer;
+            background-color: #EAECF1;
+            border-radius: 24px;
+            border: none;
         }
 
         .charts-select.css-b62m3t-container {
-            .css-1s2u09g-control {
+
+            .css-1s2u09g-control,
+            .css-1pahdxg-control,
+            .css-1f43avz-a11yText-A11yText {
                 cursor: pointer;
                 background-color: #EAECF1;
                 border-radius: 24px;
                 border: none;
+                box-shadow: none;
+                height: 30px;
 
                 .css-319lph-ValueContainer {
                     overflow: none;
@@ -115,6 +124,8 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
                     .css-6j8wv5-Input {
                         height: 30px;
                         padding: 0;
+                        caret-color: transparent;
+                        margin: 0;
                     }
                 }
 
@@ -129,6 +140,10 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
                         }
                     }
                 }
+            }
+
+            .css-2613qy-menu {
+                margin-top: 0;
             }
         }
     }

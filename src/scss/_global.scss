@@ -505,6 +505,7 @@ p {
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
     padding: 30px;
+    box-sizing: border-box;
 
     .investors-container {
         display: flex;
@@ -513,8 +514,8 @@ p {
         max-width: 830px;
 
         .sub-title {
-            font-family: "GIlroy-Bold";
             margin-bottom: 26px;
+            font-weight: 600;
         }
 
         img {
