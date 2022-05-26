@@ -91,13 +91,8 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
 
         .charts-select {
             width: 200px;
-            // height: 30px;
             position: absolute;
             right: 20px;
-            cursor: pointer;
-            background-color: #EAECF1;
-            border-radius: 24px;
-            border: none;
         }
 
         .charts-select.css-b62m3t-container {
