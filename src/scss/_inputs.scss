@@ -8,6 +8,20 @@ input {
     font-size: 16px;
     box-sizing: border-box;
     height: 50px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover,
+    &:active,
+    &:focus {
+        transition: 0.3s;
+        border: 1px solid #686777;
+    }
+
+    &:disabled {
+        color: #DEE2E2;
+        pointer-events: none;
+    }
 }
 
 .labeled_input {
@@ -25,13 +39,17 @@ input {
         color: red;
         margin-bottom: 4px;
     }
+}
 
-    .label-input-style {
-        padding-left: 20px;
-        height: 64px;
-        box-sizing: border-box;
-        border-radius: 32px;
-    }
+.label-input-style {
+    padding-left: 20px;
+    height: 64px;
+    box-sizing: border-box;
+    border-radius: 32px;
+}
+
+.label-input-style.msg_error {
+    border: 1px solid #E84F5F;
 }
 
 .last_input {
@@ -52,7 +70,7 @@ input {
         display: flex;
         gap: 10px;
 
-        > svg {
+        >svg {
             height: 40px;
         }
     }

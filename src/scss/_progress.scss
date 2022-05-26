@@ -6,11 +6,16 @@ body {
 
 .loader {
     position: relative;
-    width: $width;
+    width: 100%;
     height: $width;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+
+    svg {
+        position: absolute;
+        width: $width;
+        height: $width;
+        margin: auto;
+        left: calc((100% - 100px)/2);
+    }
 }
 
 .circular {
@@ -33,15 +38,18 @@ body {
         transform: rotate(360deg);
     }
 }
+
 @keyframes dash {
     0% {
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;
     }
+
     50% {
         stroke-dasharray: 89, 200;
         stroke-dashoffset: -35;
     }
+
     100% {
         stroke-dasharray: 89, 200;
         stroke-dashoffset: -124;
