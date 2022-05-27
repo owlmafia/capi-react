@@ -112,40 +112,43 @@ const App = () => {
   const navigation = () => {
     return (
       <BrowserRouter>
-        {routesView({
-          myAddress: myAddress,
-          setMyAddress: setMyAddress,
+        {routesView(
+          {
+            myAddress: myAddress,
+            setMyAddress: setMyAddress,
 
-          myAddressDisplay: myAddressDisplay,
-          setMyAddressDisplay: setMyAddressDisplay,
+            myAddressDisplay: myAddressDisplay,
+            setMyAddressDisplay: setMyAddressDisplay,
 
-          setModal: setModal,
+            setModal: setModal,
 
-          showProgress: (show) => setShowProgress(show),
+            showProgress: (show) => setShowProgress(show),
 
-          statusMsgDisplay: statusMsg,
-          statusMsg: statusMsgUpdater,
+            statusMsgDisplay: statusMsg,
+            statusMsg: statusMsgUpdater,
 
-          myBalance: myBalance,
-          updateMyBalance: updateMyBalance,
+            myBalance: myBalance,
+            updateMyBalance: updateMyBalance,
 
-          myShares: myShares,
-          updateMyShares: updateShares,
+            myShares: myShares,
+            updateMyShares: updateShares,
 
-          myDividend: myDividend,
-          updateMyDividend: updateMyDividend,
+            myDividend: myDividend,
+            updateMyDividend: updateMyDividend,
 
-          investmentData: investmentData,
-          updateInvestmentData: updateInvestmentData,
+            investmentData: investmentData,
+            updateInvestmentData: updateInvestmentData,
 
-          funds: funds,
-          updateFunds: updateFunds,
+            funds: funds,
+            updateFunds: updateFunds,
 
-          fundsChange: fundsChange,
+            fundsChange: fundsChange,
 
-          dao: dao,
-          updateDao: updateDao,
-        })}
+            dao: dao,
+            updateDao: updateDao,
+          },
+          windowSize.width < 1100
+        )}
       </BrowserRouter>
     );
   };
@@ -160,16 +163,6 @@ const App = () => {
     );
   };
 
-  const desktopView = () => {
-    console.log("desktop view, width: %o", windowSize.width);
-    return body();
-  };
-
-  const mobileView = () => {
-    console.log("mobile view, width: %o", windowSize.width);
-    return body();
-  };
-
   if (isIE) {
     return (
       <div style={{ marginLeft: 20, marginRight: 20, marginTop: 20 }}>
@@ -180,7 +173,7 @@ const App = () => {
     return (
       <div>
         <div id="container">
-          {windowSize.width > 1100 ? desktopView() : mobileView()}
+          {body()}
           {modal && (
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>
               {modal.body}

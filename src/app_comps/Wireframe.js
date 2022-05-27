@@ -1,27 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import logo from "../images/logo.svg";
 import { RightCol } from "../right_col/RightCol";
 import { RightDaoCol } from "../right_col/RightDaoCol";
-import { initWithDaoId } from "./controller";
 import { DaoTop } from "./DaoTop";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
 
-export const Wireframe = ({ isGlobal, deps }) => {
-  let params = useParams();
-  const [dao, setDao] = useState(null);
-
-  useEffect(() => {
-    async function asyncInit() {
-      if (params.id) {
-        await initWithDaoId(params.id, setDao, deps.statusMsg);
-      }
-    }
-    asyncInit();
-  }, [params.id, deps.statusMsg]);
-
+export const Wireframe = ({ isGlobal, deps, dao }) => {
   const sideBar = () => {
     if (isGlobal) {
       return <SideBar />;

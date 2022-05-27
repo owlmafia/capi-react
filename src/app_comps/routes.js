@@ -8,18 +8,32 @@ import { Stats } from "../stats/Stats";
 import { Withdrawal } from "../withdraw/Withdraw";
 import { NotFound } from "./NotFound";
 import { OuterWireframe } from "./OuterWireframe.js";
-import { Wireframe } from "./Wireframe";
 import { Settings } from "../settings/Settings";
+import { WireframeWrapper } from "./WireframeWrapper";
 
-export const routesView = (deps) => {
+export const routesView = (deps, isMobile) => {
   return (
     <Routes>
       <Route path="/" element={<OuterWireframe />}>
-        <Route path="/" element={<Wireframe isGlobal={true} deps={deps} />}>
+        <Route
+          path="/"
+          element={
+            <WireframeWrapper deps={deps} isMobile={isMobile} isGlobal={true} />
+          }
+        >
           <Route path="/" element={<CreateDao deps={deps} />} />
           <Route path="my_projects" element={<MyDaos deps={deps} />} />
         </Route>
-        <Route path=":id" element={<Wireframe isGlobal={false} deps={deps} />}>
+        <Route
+          path=":id"
+          element={
+            <WireframeWrapper
+              deps={deps}
+              isMobile={isMobile}
+              isGlobal={false}
+            />
+          }
+        >
           <Route index element={<Dao deps={deps} />} />
           <Route exact path="investment" element={<Investment deps={deps} />} />
           <Route exact path="withdraw" element={<Withdrawal deps={deps} />} />
