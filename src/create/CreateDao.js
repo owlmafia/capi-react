@@ -71,12 +71,16 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setDaoName(input)}
           errorMsg={daoNameError}
         />
-        <LabeledInput
+        <div className="labeled_input">
+          <div className="labeled_input__label">Description</div>
+          <textarea rows="10" cols="50" value={daoDescr}></textarea>
+        </div>
+        {/* <LabeledInput
           label={"Description"}
           inputValue={daoDescr}
           onChange={(input) => setDaoDescr(input)}
           errorMsg={daoDescrError}
-        />
+        /> */}
         <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
@@ -165,7 +169,7 @@ export const CreateDao = ({ deps }) => {
         >
           {"Create project"}
         </button>
-      </div>
+      </div >
     );
   };
 

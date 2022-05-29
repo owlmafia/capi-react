@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import logo from "../images/logo.svg";
 import { RightCol } from "../right_col/RightCol";
 import { RightDaoCol } from "../right_col/RightDaoCol";
 import { DaoTop } from "./DaoTop";
@@ -30,9 +29,6 @@ export const Wireframe = ({ isGlobal, deps, dao }) => {
 
   return (
     <div id="nav_and_main">
-      <div className="logo-container">
-        <img src={logo} alt="logo" />
-      </div>
       {sideBar()}
       <div id="content">
         {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}

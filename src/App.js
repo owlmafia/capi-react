@@ -147,7 +147,7 @@ const App = () => {
             dao: dao,
             updateDao: updateDao,
           },
-          windowSize.width < 1100
+          windowSize.width < 1330
         )}
       </BrowserRouter>
     );

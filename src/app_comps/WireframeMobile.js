@@ -4,9 +4,10 @@ import { DaoTop } from "./DaoTop";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
-import share from "../images/svg/share.svg";
+import menu from "../images/svg/menu.svg";
 import logo from "../images/logo.svg";
 import { MobileWalletView } from "../right_col/MobileWalletView";
+import wallet from "../images/svg/account.svg";
 
 export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -30,7 +31,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         <Link to="#">
           {/* replace with bars icon */}
           <img
-            src={share}
+            src={menu}
             alt="nav_bars"
             onClick={() => setShowSidebar(!showSidebar)}
           />
@@ -39,7 +40,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
           </div>
           {/* replace with wallet icon */}
           <img
-            src={share}
+            src={wallet}
             alt="wallet"
             onClick={() => setShowWallet(!showWallet)}
           />

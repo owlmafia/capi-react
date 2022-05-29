@@ -34,15 +34,20 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
+.holder_list_container .sub-title {
+    box-sizing: border-box;
+    padding-left: 12px;
+}
+
 .holder_item {
     &__container {
         display: flex;
-        padding: 0 6px;
+        padding: 0 12px;
         gap: 30px;
-        width: 160px;
         box-sizing: border-box;
         height: 32px;
         align-items: center;
+        width: 190px;
 
         .percentage-text {
             width: 48px;
@@ -75,7 +80,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
 .pie-chart-container {
     position: absolute;
     top: -10px;
-    left: 32%;
+    left: 30%;
 }
 
 .chart_with_legends_container>svg {
@@ -141,5 +146,12 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
                 margin-top: 0;
             }
         }
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .chart_legends_container {
+        justify-content: flex-start;
+        padding-left: 120px;
     }
 }

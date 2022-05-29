@@ -7,7 +7,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: 'Gilroy';
+    font-family: 'Gilroy-Medium';
     box-sizing: border-box;
 }
 
@@ -26,18 +26,6 @@ a {
     box-sizing: border-box;
     min-width: 1032px;
     position: relative;
-
-    .logo-container {
-        position: absolute;
-        top: -20px;
-        left: 3%;
-        width: 70px;
-        height: 30px;
-
-        img {
-            width: 100%;
-        }
-    }
 }
 
 .box-container {
@@ -70,6 +58,7 @@ a {
     max-width: 1034px;
 
     .title-container {
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -483,6 +472,7 @@ select {
 
 .labeled_box {
     margin-bottom: 70px;
+    width: 100%;
 }
 
 .labeled_box_label {
@@ -669,6 +659,10 @@ p {
     font-size: 12px;
 }
 
+.ft-size-24 {
+    font-size: 24px;
+}
+
 .gap-10 {
     gap: 10px;
 }
@@ -705,6 +699,10 @@ p {
     margin-bottom: 30px;
 }
 
+.mb-6 {
+    margin-bottom: 40px;
+}
+
 .ft-weight-bold {
     font-family: "Gilroy-Bold";
 }
@@ -727,5 +725,70 @@ p {
         margin-left: 30px;
         height: 32px;
         width: 90px;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    #content {
+        margin-top: 60px;
+        width: calc(100vw - 80px);
+        min-width: auto;
+        max-width: 800px;
+
+        .content-img {
+            height: 240px;
+        }
+
+        .title-container {
+            flex-direction: column;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .profits-by-shares {
+            position: relative;
+            height: 280px;
+            padding: 44px 40px;
+
+            .profits-tab {
+                position: absolute;
+                bottom: 40px;
+                left: 40px;
+            }
+        }
+
+        .box-container {
+            padding: 40px;
+        }
+    }
+
+    #investors-distribution {
+        .labeled_box_children {
+            padding: 44px 40px 40px 40px;
+
+            .investors-container {
+                flex-direction: column;
+                gap: 40px;
+
+                .holder_list_container .sub-title {
+                    padding-left: 0;
+                }
+
+                .holder_item__container {
+                    margin-left: -12px;
+                }
+
+                .pie-chart-container {
+                    left: auto;
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    .modal .modal-content {
+        width: 85%;
+        max-width: auto;
     }
 }

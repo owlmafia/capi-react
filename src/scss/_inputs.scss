@@ -1,6 +1,7 @@
 @import "global_vars";
 
-input {
+input,
+textarea {
     width: 100%;
     border-radius: $button-border-radius;
     border: 1px solid $global-border;
@@ -22,6 +23,18 @@ input {
         color: #DEE2E2;
         pointer-events: none;
     }
+
+    &::placeholder {
+        color: #787E82;
+        font-family: "Gilroy";
+    }
+}
+
+textarea {
+    height: auto;
+    padding: 20px 24px;
+    resize: none;
+    font-family: "Gilroy";
 }
 
 .labeled_input {
