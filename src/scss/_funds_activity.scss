@@ -10,12 +10,12 @@
 .funds_act_entry-tab {
     display: flex;
     border: 1px solid $global-border;
+    border-radius: $global-border-radius;
     padding: 16px;
     margin-bottom: 30px;
     justify-content: space-between;
     gap: 20px;
     overflow: hidden;
-    border-radius: 12px;
 
     &__amount {
         &__container {
