@@ -12,7 +12,6 @@ import {
   initLog,
 } from "./controller";
 import Modal from "./Modal";
-import ProgressBar from "./ProgressBar";
 import { updateInvestmentData_, updateFunds_ } from "./shared_functions";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
@@ -30,7 +29,6 @@ const App = () => {
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
   const [statusMsg, setStatusMsg] = useState(null);
-  const [showProgress, setShowProgress] = useState(false);
 
   const [investmentData, setInvestmentData] = useState(null);
 
@@ -122,8 +120,6 @@ const App = () => {
 
             setModal: setModal,
 
-            showProgress: (show) => setShowProgress(show),
-
             statusMsgDisplay: statusMsg,
             statusMsg: statusMsgUpdater,
 
@@ -156,7 +152,6 @@ const App = () => {
   const body = () => {
     return (
       <Fragment>
-        {showProgress && <ProgressBar />}
         {/* <div>{connectButton()}</div> */}
         {navigation()}
       </Fragment>

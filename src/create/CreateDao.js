@@ -9,6 +9,7 @@ import { createDao } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { connectWalletAndUpdate } from "../shared_functions";
+import { SubmitButton } from "../app_comps/SubmitButton";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -43,6 +44,8 @@ export const CreateDao = ({ deps }) => {
 
   // TODO show this error
   const [imageBytesError, setImageBytesError] = useState("");
+
+  const [submitting, setSubmitting] = useState(false);
 
   const navigate = useNavigate();
 
@@ -114,8 +117,10 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setSharesForInvestors(input)}
           errorMsg={sharesForInvestorsError}
         />
-        <button
-          className="button-primary"
+        <SubmitButton
+          label={"Create project"}
+          className={"button-primary"}
+          isLoading={submitting}
           disabled={
             daoName === "" ||
             shareCount === "" ||
@@ -136,7 +141,7 @@ export const CreateDao = ({ deps }) => {
 
             await createDao(
               myAddress,
-              deps.showProgress,
+              setSubmitting,
               deps.statusMsg,
               deps.updateMyBalance,
 
@@ -165,9 +170,7 @@ export const CreateDao = ({ deps }) => {
               setMinRaiseTargetEndDateError
             );
           }}
-        >
-          {"Create project"}
-        </button>
+        />
       </div>
     );
   };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { invest } from "./controller";
@@ -11,6 +12,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
   const [buySharesAmount, setBuySharesAmount] = useState(null);
   // TODO show error
   const [buySharesAmountError, setBuySharesAmountError] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const view = () => {
     return (
@@ -47,13 +49,15 @@ export const BuyMoreShares = ({ deps, dao }) => {
             onChange={(input) => setBuySharesAmount(input)}
             errorMsg={buySharesAmountError}
           />
-          <button
+          <SubmitButton
+            label={"Buy shares"}
             className="button-primary"
+            isLoading={submitting}
             disabled={deps.investmentData.available_shares === "0"}
             onClick={async () => {
               await invest(
                 deps.myAddress,
-                deps.showProgress,
+                setSubmitting,
                 deps.statusMsg,
                 deps.updateMyBalance,
                 params.id,
@@ -63,9 +67,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 deps.updateFunds
               );
             }}
-          >
-            {"Buy shares"}
-          </button>
+          />
         </div>
         <div className="shares-chart">
           <SharesDistributionChart

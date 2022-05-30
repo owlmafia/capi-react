@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { SubmitButton } from "../app_comps/SubmitButton";
 import { ContentTitle } from "../ContentTitle";
 import { checkForUpdates, updateApp } from "./controller";
 import { UpdateDaoData } from "./UpdateDaoData";
@@ -8,6 +9,7 @@ export const Settings = ({ deps }) => {
   let params = useParams();
 
   const [versionData, setVersionData] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     async function asyncInit() {
@@ -46,21 +48,22 @@ export const Settings = ({ deps }) => {
                 updateData.new_approval_version,
                 updateData.new_clear_version
               )}
-            <button
+
+            <SubmitButton
+              label={"Update"}
               className="button-primary"
-              onClick={() =>
-                updateApp(
+              isLoading={submitting}
+              onClick={async () => {
+                await updateApp(
                   deps.statusMsg,
-                  deps.showProgress,
+                  setSubmitting,
                   params.id,
                   deps.myAddress,
                   versionData.update_data.new_approval_version,
                   versionData.update_data.new_clear_version
-                )
-              }
-            >
-              {"Update"}
-            </button>
+                );
+              }}
+            />
           </div>
         </div>
       );
@@ -74,10 +77,7 @@ export const Settings = ({ deps }) => {
       deps.myAddress && (
         <div>
           {appVersionView()}
-          <UpdateDaoData
-            statusMsg={deps.statusMsg}
-            showProgress={deps.showProgress}
-          />
+          <UpdateDaoData statusMsg={deps.statusMsg} />
         </div>
       )
     );

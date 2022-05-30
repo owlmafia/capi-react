@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { unlock } from "./controller";
 import { LockOrUnlockShares } from "./LockOrUnlockShares";
 
 export const UnlockShares = ({ deps, dao, daoId }) => {
+  const [submitting, setSubmitting] = useState(false);
+
   return (
     <LockOrUnlockShares
       dao={dao}
@@ -11,10 +13,11 @@ export const UnlockShares = ({ deps, dao, daoId }) => {
       showInput={false}
       title={"Unlock shares"}
       buttonLabel={"Unlock shares"}
+      submitting={submitting}
       onSubmit={async () => {
         await unlock(
           deps.myAddress,
-          deps.showProgress,
+          setSubmitting,
           deps.statusMsg,
           deps.updateMyBalance,
           deps.updateMyShares,

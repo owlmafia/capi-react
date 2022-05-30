@@ -55,7 +55,9 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {dao && (
           <div className="d-flex gap-10 w-100 mt-1">
-            <div className="ft-size-14 ft-color-black">{"Project wallet address:"}</div>
+            <div className="ft-size-14 ft-color-black">
+              {"Project wallet address:"}
+            </div>
             <CopyPasteText
               text={shortedAddress(dao.customer_escrow_address)}
               copyText={dao.customer_escrow_address}
@@ -77,9 +79,17 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
 // TODO replace text with icons
 const fundsChangeArrow = (change) => {
   if (change === "up") {
-    return <div><img src={arrowUp} alt="arrow up" /></div>;
+    return (
+      <div>
+        <img src={arrowUp} alt="arrow up" />
+      </div>
+    );
   } else if (change === "down") {
-    return <div><img src={arrowDown} alt="arrow down" /></div>;
+    return (
+      <div>
+        <img src={arrowDown} alt="arrow down" />
+      </div>
+    );
   } else {
     return null;
   }

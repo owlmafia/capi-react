@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 // import arrow from "../images/svg/arrow.svg";
@@ -10,6 +11,7 @@ export const LockOrUnlockShares = ({
   title,
   inputLabel,
   buttonLabel,
+  submitting,
   // parameter: input (can be null if there's no input element or input text)
   onSubmit,
 }) => {
@@ -44,14 +46,14 @@ export const LockOrUnlockShares = ({
               errorMsg={inputError}
             />
           )}
-          <button
+          <SubmitButton
+            label={buttonLabel}
             className="button-primary"
+            isLoading={submitting}
             onClick={async () => {
               onSubmit(input);
             }}
-          >
-            {buttonLabel}
-          </button>
+          />
         </div>
         <SharesDistributionChart
           sharesDistr={[

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
   LabeledInput,
@@ -13,6 +14,7 @@ export const Withdrawal = ({ deps }) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("10");
   const [withdrawalDescr, setWithdrawalDescr] = useState("Type the reason");
   const [dao, setDao] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     async function asyncInit() {
@@ -44,13 +46,16 @@ export const Withdrawal = ({ deps }) => {
             inputValue={withdrawalDescr}
             onChange={(input) => setWithdrawalDescr(input)}
           />
-          <button
+
+          <SubmitButton
+            label={"Withdraw"}
             className="button-primary"
+            isLoading={submitting}
             disabled={deps.myAddress === ""}
             onClick={async () => {
               await withdraw(
                 deps.myAddress,
-                deps.showProgress,
+                setSubmitting,
                 deps.statusMsg,
                 deps.updateMyBalance,
                 params.id,
@@ -59,9 +64,7 @@ export const Withdrawal = ({ deps }) => {
                 deps.updateFunds
               );
             }}
-          >
-            {"Withdraw"}
-          </button>
+          />
         </div>
       );
     } else {

@@ -3,7 +3,6 @@ import { LabeledCurrencyInput } from "../common_comps/LabeledInput";
 import { init, pay } from "./controller";
 
 export const PayEmbedded = ({
-  showProgress,
   statusMsg,
   updateMyBalance,
   myAddress,
@@ -11,6 +10,7 @@ export const PayEmbedded = ({
   updateFunds,
 }) => {
   const [amount, setAmount] = useState("10");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     init(statusMsg);
@@ -23,13 +23,15 @@ export const PayEmbedded = ({
         inputValue={amount}
         onChange={(input) => setAmount(input)}
       />
-      <button
-        disabled={myAddress === ""}
+      <SubmitButton
+        label={"Pay"}
         className="button-primary"
-        onClick={async (_) => {
+        isLoading={submitting}
+        disabled={myAddress === ""}
+        onClick={async () => {
           await pay(
             myAddress,
-            showProgress,
+            setSubmitting,
             statusMsg,
             updateMyBalance,
             dao,
@@ -37,9 +39,7 @@ export const PayEmbedded = ({
             updateFunds
           );
         }}
-      >
-        {"Pay"}
-      </button>
+      />
     </div>
   );
 };

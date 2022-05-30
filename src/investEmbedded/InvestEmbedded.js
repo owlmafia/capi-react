@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import funds from "../images/funds.svg"
+import funds from "../images/funds.svg";
 import { handleSharesCountInput, invest } from "./controller";
 import ReactTooltip from "react-tooltip";
+import { SubmitButton } from "../app_comps/SubmitButton";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -13,6 +14,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const [totalPercentage, setProfitPercentage] = useState(
     deps.investmentData.init_profit_percentage
   );
+  const [submitting, setSubmitting] = useState(false);
 
   return (
     <div className="dao_action_active_tab box-container">
@@ -22,22 +24,30 @@ export const InvestEmbedded = ({ deps, dao }) => {
           <div className="available-shares">
             <div className="d-flex gap-10 ft-weight-600">
               <div className="subTitle mb-4">{"Available shares: "}</div>
-              <div className="ft-weight-600">{deps.investmentData.available_shares}</div>
+              <div className="ft-weight-600">
+                {deps.investmentData.available_shares}
+              </div>
             </div>
             <div className="d-flex gap-10 align-center">
               <div className="ft-weight-600">You have:</div>
               <div>{"Locked shares"}</div>
-              <div className="ft-weight-600">{deps.investmentData.investor_locked_shares}</div>
+              <div className="ft-weight-600">
+                {deps.investmentData.investor_locked_shares}
+              </div>
               <div className="blue-circle"></div>
               <div>{"Unlocked shares"}</div>
-              <div className="ft-weight-600">{deps.investmentData.investor_unlocked_shares}</div>
+              <div className="ft-weight-600">
+                {deps.investmentData.investor_unlocked_shares}
+              </div>
             </div>
           </div>
           <div id="shares_const_container">
             <div className="ft-weight-600">{"Shares cost"}</div>
             <div className="d-flex">
               <img src={funds} alt="funds" />
-              <div className="one_line_key_val_val ft-weight-600">{totalCost}</div>
+              <div className="one_line_key_val_val ft-weight-600">
+                {totalCost}
+              </div>
             </div>
           </div>
         </div>
@@ -67,13 +77,15 @@ export const InvestEmbedded = ({ deps, dao }) => {
           );
         }}
       />
-      <button
+      <SubmitButton
+        label={"Buy shares"}
+        className={"button-primary"}
+        isLoading={submitting}
         disabled={deps.myAddress === ""}
-        className="button-primary"
         onClick={async (_) => {
           await invest(
             deps.myAddress,
-            deps.showProgress,
+            setSubmitting,
             deps.statusMsg,
             deps.updateMyBalance,
             params.id,
@@ -83,9 +95,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
             deps.updateFunds
           );
         }}
-      >
-        {"Buy Shares"}
-      </button>
+      />
     </div>
   );
 };

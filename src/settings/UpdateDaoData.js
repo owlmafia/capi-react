@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
   LabeledInput,
 } from "../common_comps/LabeledInput";
 import { prefillInputs, updateDaoData } from "./controller";
 
-export const UpdateDaoData = ({ statusMsg, showProgress }) => {
+export const UpdateDaoData = ({ statusMsg }) => {
   let params = useParams();
 
   const [daoName, setDaoName] = useState("");
@@ -19,6 +20,7 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
 
   const [owner, setOwner] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     async function prefill() {
@@ -111,10 +113,12 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
           inputValue={owner}
           onChange={(input) => setOwner(input)}
         />
-        <button
+        <SubmitButton
+          label={"Update data"}
           className="button-primary"
-          onClick={() =>
-            updateDaoData(statusMsg, showProgress, {
+          isLoading={submitting}
+          onClick={async () => {
+            updateDaoData(statusMsg, setSubmitting, {
               dao_id: params.id,
               owner: owner,
 
@@ -127,11 +131,9 @@ export const UpdateDaoData = ({ statusMsg, showProgress }) => {
 
               logo_url: logoUrl,
               social_media_url: socialMediaUrl,
-            })
-          }
-        >
-          {"Update data"}
-        </button>
+            });
+          }}
+        />
       </div>
     );
   };

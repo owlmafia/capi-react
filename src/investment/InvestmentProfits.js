@@ -5,11 +5,13 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 // import {updateChainInvestmentData_ as updateInvestmentData_} from "./controller";
 import { init } from "./controller";
 import { retrieveProfits } from "../shared_functions";
+import { SubmitButton } from "../app_comps/SubmitButton";
 
 export const InvestmentProfits = ({ deps }) => {
   let params = useParams();
 
   const [dao, setDao] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     async function doInit() {
@@ -55,13 +57,15 @@ export const InvestmentProfits = ({ deps }) => {
               </div>
             </div>
           </div>
-          <button
+          <SubmitButton
+            label={"Retrieve profits"}
             className="button-primary"
+            isLoading={submitting}
             disabled={deps.investmentData.investor_claimable_dividend === "0"}
             onClick={async () => {
               await retrieveProfits(
                 deps.myAddress,
-                deps.showProgress,
+                setSubmitting,
                 deps.statusMsg,
                 deps.updateMyBalance,
                 params.id,
@@ -69,9 +73,7 @@ export const InvestmentProfits = ({ deps }) => {
                 deps.updateFunds
               );
             }}
-          >
-            {"Retrieve profits"}
-          </button>
+          />
         </div>
       </div>
     );

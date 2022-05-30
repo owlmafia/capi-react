@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import arrow from "../images/svg/arrow-right.svg";
 import { connectWalletAndUpdate, retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
 import Progress from "../app_comps/Progress";
 import close from "../images/svg/close.svg";
+import { SubmitButton } from "./SubmitButton";
 
 export const MyAccount = ({
   deps,
@@ -15,7 +16,13 @@ export const MyAccount = ({
     <div className="my-account-container">
       <div className="d-flex justify-between">
         <div className="text">My Algo wallet</div>
-        <img className="close-icon" width="14" height="14" src={close} alt="close" />
+        <img
+          className="close-icon"
+          width="14"
+          height="14"
+          src={close}
+          alt="close"
+        />
       </div>
       <div className="my-address">
         {myAddressView(deps, daoId)}
@@ -58,7 +65,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
         </div>
-        {dividendSection(deps, daoId)}
+        <DividendSection deps={deps} daoId={daoId} />
       </div>
     );
   } else {
@@ -66,17 +73,23 @@ const myAddressView = (deps, daoId) => {
   }
 };
 
-const dividendSection = (deps, daoId) => {
+const DividendSection = ({ deps, daoId }) => {
+  const [submitting, setSubmitting] = useState(false);
+
   if (deps.myDividend) {
     return (
       <div>
-        <div className="mb-5 ft-weight-600">{"Claimable dividend: " + deps.myDividend}</div>
-        <button
+        <div className="mb-5 ft-weight-600">
+          {"Claimable dividend: " + deps.myDividend}
+        </div>
+        <SubmitButton
+          label={"Claim"}
           className="button-primary full-width-btn"
+          isLoading={submitting}
           onClick={async () => {
             await retrieveProfits(
               deps.myAddress,
-              deps.showProgress,
+              setSubmitting,
               deps.statusMsg,
               deps.updateMyBalance,
               daoId,
@@ -84,9 +97,7 @@ const dividendSection = (deps, daoId) => {
               deps.updateFunds
             );
           }}
-        >
-          {"Claim"}
-        </button>
+        />
       </div>
     );
   } else {
