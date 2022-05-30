@@ -59,7 +59,7 @@ export const FundsActivityEntry = ({ entry }) => {
 
 const AmountView = ({ entry }) => {
   var className;
-  var text = entry.amount;
+  var text = entry.amount_without_fee;
   if (entry.is_income === "true") {
     className = "funds_act_entry__amount__number";
   } else if (entry.is_income === "false") {
