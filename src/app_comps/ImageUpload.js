@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { ImageCropper } from "./ImageCropper";
+import { useDropzone } from "react-dropzone";
+
+const fileReader = new FileReader();
 
 export const ImageUpload = ({ setImageBytes }) => {
   const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState("");
+
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log("accepted files: %o", acceptedFiles);
+    if (acceptedFiles && acceptedFiles.length === 1) {
+      let file = acceptedFiles[0];
+      processFile(file, setInputImg);
+    } else {
+      console.error("Unexpected: acceptedFiles: %o", acceptedFiles);
+    }
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const updateBlob = (blob) => {
     // pass blob up from the ImageCropper component
@@ -15,21 +30,8 @@ export const ImageUpload = ({ setImageBytes }) => {
   };
 
   const onInputChange = (e) => {
-    // convert image file to base64 string
     const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      "load",
-      () => {
-        setInputImg(reader.result);
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    processFile(file, setInputImg);
   };
 
   const handleSubmitImage = (e) => {
@@ -39,11 +41,14 @@ export const ImageUpload = ({ setImageBytes }) => {
 
   return (
     <form className="upload-form" onSubmit={handleSubmitImage}>
-      <div className="upload-container">
+      {/* <div className="upload-container"> */}
+
+      <div {...getRootProps({ className: "upload-container" })}>
         <div className="ft-color-black">Upload an cover image</div>
         <div className="upload-custom">
           <button className="file-custom secondary-button">Upload Image</button>
           <input
+            {...getInputProps()}
             className="upload-input"
             type="file"
             accept="image/*"
@@ -67,3 +72,17 @@ async function blobToArrayBuffer(blob) {
     reader.readAsArrayBuffer(blob);
   });
 }
+
+// convert image file to base64 string and set
+const processFile = (file, setImg) => {
+  fileReader.addEventListener(
+    "load",
+    () => {
+      setImg(fileReader.result);
+    },
+    false
+  );
+  if (file) {
+    fileReader.readAsDataURL(file);
+  }
+};
