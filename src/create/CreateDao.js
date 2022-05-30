@@ -71,12 +71,10 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setDaoName(input)}
           errorMsg={daoNameError}
         />
-        <LabeledInput
-          label={"Description"}
-          inputValue={daoDescr}
-          onChange={(input) => setDaoDescr(input)}
-          errorMsg={daoDescrError}
-        />
+        <div className="labeled_input">
+          <div className="labeled_input__label">Description</div>
+          <textarea rows="10" cols="50" value={daoDescr}></textarea>
+        </div>
         <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}

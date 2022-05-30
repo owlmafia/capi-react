@@ -6,7 +6,8 @@
     margin-right: 4px;
 }
 
-.funds_act_entry {
+.funds_act_entry,
+.funds_act_entry-tab {
     display: flex;
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
@@ -72,6 +73,44 @@
         a {
             color: $blue-primary;
             text-decoration: underline;
+        }
+    }
+}
+
+.funds_act_entry-tab {
+    display: none;
+}
+
+@media only screen and (max-width: 1330px) {
+    .funds_act_entry {
+        display: none;
+    }
+
+    .funds_act_entry-tab {
+        display: flex;
+        position: relative;
+
+        .funds_act_entry__body {
+            padding-left: 74px;
+
+            .funds_act_entry__amount__container {
+                width: auto;
+
+                .arrow {
+                    position: absolute;
+                    left: 16px;
+                    top: 16px;
+                }
+            }
+        }
+
+        .details {
+            width: 120px;
+            justify-content: flex-end;
+
+            .funds_act_entry__date {
+                font-size: 12px;
+            }
         }
     }
 }

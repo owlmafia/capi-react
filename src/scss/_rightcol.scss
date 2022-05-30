@@ -14,9 +14,13 @@
         flex-direction: column;
         gap: 24px;
 
+        .close-icon {
+            display: none;
+        }
+
         .text {
             color: #000000;
-            font-weight: 900;
+            font-family: "Gilroy-Bold";
             font-size: 18px;
         }
     }
@@ -86,5 +90,34 @@
     &__link {
         color: #adadad;
         font-weight: 300;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    #rightcol {
+        width: 100%;
+        min-width: auto;
+        position: fixed;
+        bottom: 0px;
+        z-index: 1000;
+        background-color: white;
+        border-radius: 32px 32px 0 0;
+        border: 1px solid $global-border;
+
+        .my-account-container {
+            border: none;
+
+            .close-icon {
+                display: block;
+            }
+
+            .my-address {
+                width: 50%;
+
+                .button-primary {
+                    width: 295px;
+                }
+            }
+        }
     }
 }

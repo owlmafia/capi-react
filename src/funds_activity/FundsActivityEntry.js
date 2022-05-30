@@ -5,21 +5,41 @@ import funds from "../images/funds.svg";
 
 export const FundsActivityEntry = ({ entry }) => {
   return (
-    <div className="funds_act_entry">
-      <AmountView entry={entry} />
-      <div className="funds_act_entry__body">
-        <div className="d-flex align-center">
-          <div className="ft-weight-600">{entry.address}</div>
-          <div className="ellipse"></div>
-          <div className="ft-color-black ft-size-14">{entry.type_label}</div>
+    <div>
+      <div className="funds_act_entry">
+        <AmountView entry={entry} />
+        <div className="funds_act_entry__body">
+          <div className="d-flex align-center">
+            <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
+            <div className="ellipse"></div>
+            <div className="ft-color-black ft-size-14">{entry.type_label}</div>
+          </div>
+          <div className="description">{entry.description}</div>
         </div>
-        <div className="description">{entry.description}</div>
+        <div className="details">
+          <div className="funds_act_entry__date">{entry.date}</div>
+          <a className="ft-weight-600" href={entry.tx_link} target="_blank" rel="noreferrer">
+            {"Details"}
+          </a>
+        </div>
       </div>
-      <div className="details">
-        <div className="funds_act_entry__date">{entry.date}</div>
-        <a href={entry.tx_link} target="_blank" rel="noreferrer">
-          {"Details"}
-        </a>
+      <div className="funds_act_entry-tab">
+        <div className="funds_act_entry__body">
+          <div className="d-flex align-center">
+            <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
+          </div>
+          <div className="d-flex align-center gap-32">
+            <AmountView entry={entry} />
+            <div className="ft-color-black ft-size-14 ft-color-grey">{entry.type_label}</div>
+          </div>
+          <div className="description">{entry.description}</div>
+        </div>
+        <div className="details">
+          <div className="funds_act_entry__date">{entry.date}</div>
+          <a className="ft-weight-600" href={entry.tx_link} target="_blank" rel="noreferrer">
+            {"Details"}
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -37,7 +57,7 @@ const AmountView = ({ entry }) => {
   }
   return (
     <div className="funds_act_entry__amount__container" >
-      <img width="48px" height="48px" src={entry.is_income === "true" ? arrowUp : arrowDown} alt="arrow" />
+      <img className="arrow" width="48px" height="48px" src={entry.is_income === "true" ? arrowUp : arrowDown} alt="arrow" />
       <img src={funds} alt="funds" />
       <div className={className}>{text}</div>
     </div >

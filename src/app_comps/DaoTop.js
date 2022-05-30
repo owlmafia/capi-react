@@ -30,7 +30,7 @@ export const DaoTop = ({ dao }) => {
       </div>
       {showShareModal && dao && (
         <Modal
-          title={"Share project"}
+          title={"Share at social media"}
           onCloseClick={() => setShowShareModal(false)}
         >
           <ShareView projectUrl={projectUrl(dao.app_id)} />

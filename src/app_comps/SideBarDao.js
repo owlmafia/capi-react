@@ -8,6 +8,7 @@ import settings from "../images/sidebar/settings.svg";
 import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
 import SideBarItem from "./SideBarItem";
+import logo from "../images/logo.svg";
 
 export const SideBarDao = ({ deps }) => {
   let params = useParams();
@@ -26,6 +27,9 @@ export const SideBarDao = ({ deps }) => {
 
   return (
     <div className="sidebar-container">
+      <div className="logo-container">
+        <img src={logo} alt="logo" />
+      </div>
       <SideBarItem imageSrc={create} route="/" label="Create" />
       <SideBarItem
         imageSrc={project}

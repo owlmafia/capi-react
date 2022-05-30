@@ -20,7 +20,9 @@
     }
 
     .dao_action_tab_item__sel {
+        border-radius: 0;
         color: $global-red-button;
+        border: none;
         border-bottom: 2px solid $global-red-button;
     }
 }
@@ -136,6 +138,10 @@
 
 .create-dao-container,
 .update-dao-data {
+    .description {
+        border: 2px solid red;
+    }
+
     .subtitle {
         color: #000000;
         margin-bottom: 48px;

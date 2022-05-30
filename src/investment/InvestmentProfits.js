@@ -34,9 +34,9 @@ export const InvestmentProfits = ({ deps }) => {
   const view = () => {
     return (
       <div>
-        <div className="box-container">
+        <div className="box-container profits-by-shares">
           <div className="title">{"Your profits by shares"}</div>
-          <div className="w-80 d-flex justify-between">
+          <div className="w-80 d-flex justify-between mb-6">
             <div className="flex-block align-center">
               <div className="subTitle">{"Retrievable profits:"}</div>
               <FundsAssetImg className="fund-asset" />
@@ -44,7 +44,7 @@ export const InvestmentProfits = ({ deps }) => {
                 {deps.investmentData.investor_claimable_dividend}
               </div>
             </div>
-            <div className="flex-block flex-column">
+            <div className="flex-block flex-column profits-tab">
               <div className="subTitle retrieved">{"Retrieved profits:"}</div>
               <div className="d-flex">
                 <FundsAssetImg className="fund-asset opacity-70" />
