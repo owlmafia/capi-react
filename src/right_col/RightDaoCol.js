@@ -26,12 +26,10 @@ export const RightDaoCol = ({ deps }) => {
 
   useEffect(() => {
     async function asyncFn() {
-      deps.updateFunds.call(null, params.id, deps.myAddress);
+      deps.updateFunds.call(null, params.id);
     }
-    if (deps.myAddress) {
-      asyncFn();
-    }
-  }, [params.id, deps.myAddress, deps.updateFunds]);
+    asyncFn();
+  }, [params.id, deps.updateFunds]);
 
   return (
     <div id="rightcol">
