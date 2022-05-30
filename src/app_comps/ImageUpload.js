@@ -29,11 +29,6 @@ export const ImageUpload = ({ setImageBytes }) => {
     setBlob(blob);
   };
 
-  const onInputChange = (e) => {
-    const file = e.target.files[0];
-    processFile(file, setInputImg);
-  };
-
   const handleSubmitImage = (e) => {
     e.preventDefault();
     console.log("do something with blob: %o", blob);
@@ -52,7 +47,6 @@ export const ImageUpload = ({ setImageBytes }) => {
             className="upload-input"
             type="file"
             accept="image/*"
-            onChange={onInputChange}
           />
         </div>
         <div className="ft-color-black">or Drag and drop here</div>
