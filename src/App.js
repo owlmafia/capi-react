@@ -110,41 +110,40 @@ const App = () => {
   const navigation = () => {
     return (
       <BrowserRouter>
-        {routesView(
-          {
-            myAddress: myAddress,
-            setMyAddress: setMyAddress,
+        {routesView({
+          myAddress: myAddress,
+          setMyAddress: setMyAddress,
 
-            myAddressDisplay: myAddressDisplay,
-            setMyAddressDisplay: setMyAddressDisplay,
+          myAddressDisplay: myAddressDisplay,
+          setMyAddressDisplay: setMyAddressDisplay,
 
-            setModal: setModal,
+          setModal: setModal,
 
-            statusMsgDisplay: statusMsg,
-            statusMsg: statusMsgUpdater,
+          statusMsgDisplay: statusMsg,
+          statusMsg: statusMsgUpdater,
 
-            myBalance: myBalance,
-            updateMyBalance: updateMyBalance,
+          myBalance: myBalance,
+          updateMyBalance: updateMyBalance,
 
-            myShares: myShares,
-            updateMyShares: updateShares,
+          myShares: myShares,
+          updateMyShares: updateShares,
 
-            myDividend: myDividend,
-            updateMyDividend: updateMyDividend,
+          myDividend: myDividend,
+          updateMyDividend: updateMyDividend,
 
-            investmentData: investmentData,
-            updateInvestmentData: updateInvestmentData,
+          investmentData: investmentData,
+          updateInvestmentData: updateInvestmentData,
 
-            funds: funds,
-            updateFunds: updateFunds,
+          funds: funds,
+          updateFunds: updateFunds,
 
-            fundsChange: fundsChange,
+          fundsChange: fundsChange,
 
-            dao: dao,
-            updateDao: updateDao,
-          },
-          windowSize.width < 1330
-        )}
+          dao: dao,
+          updateDao: updateDao,
+
+          isMobile: windowSize.width < 1330,
+        })}
       </BrowserRouter>
     );
   };

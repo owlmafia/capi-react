@@ -11,28 +11,20 @@ import { OuterWireframe } from "./OuterWireframe.js";
 import { Settings } from "../settings/Settings";
 import { WireframeWrapper } from "./WireframeWrapper";
 
-export const routesView = (deps, isMobile) => {
+export const routesView = (deps) => {
   return (
     <Routes>
       <Route path="/" element={<OuterWireframe />}>
         <Route
           path="/"
-          element={
-            <WireframeWrapper deps={deps} isMobile={isMobile} isGlobal={true} />
-          }
+          element={<WireframeWrapper deps={deps} isGlobal={true} />}
         >
           <Route path="/" element={<CreateDao deps={deps} />} />
           <Route path="my_projects" element={<MyDaos deps={deps} />} />
         </Route>
         <Route
           path=":id"
-          element={
-            <WireframeWrapper
-              deps={deps}
-              isMobile={isMobile}
-              isGlobal={false}
-            />
-          }
+          element={<WireframeWrapper deps={deps} isGlobal={false} />}
         >
           <Route index element={<Dao deps={deps} />} />
           <Route exact path="investment" element={<Investment deps={deps} />} />
