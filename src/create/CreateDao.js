@@ -73,7 +73,12 @@ export const CreateDao = ({ deps }) => {
         />
         <div className="labeled_input">
           <div className="labeled_input__label">Description</div>
-          <textarea rows="10" cols="50" value={daoDescr}></textarea>
+          <textarea
+            rows="10"
+            cols="50"
+            value={daoDescr}
+            onChange={(event) => setDaoDescr(event.target.value)}
+          ></textarea>
         </div>
         <LabeledInput
           label={"Primary social media (optional)"}
