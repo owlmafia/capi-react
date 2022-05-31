@@ -35,7 +35,10 @@ export const ImageUpload = ({ setImageBytes }) => {
   };
 
   return (
-    <form className="upload-form" onSubmit={handleSubmitImage}>
+    <form
+      className={isDragActive ? "upload-form-highlighted" : "upload-form"}
+      onSubmit={handleSubmitImage}
+    >
       {/* <div className="upload-container"> */}
 
       <div {...getRootProps({ className: "upload-container" })}>
