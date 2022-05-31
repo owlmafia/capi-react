@@ -29,18 +29,18 @@ button {
     font-weight: 700;
 
     &:hover {
-        background-color: #C6444A;
+        background-color: #c6444a;
         transition: 0.3s;
     }
 
     &:active {
-        background-color: #CC3038;
+        background-color: #cc3038;
         transition: 0.3s;
     }
 
     &:disabled {
-        background-color: #EAECF1;
-        color: #BCCAC6;
+        background-color: #eaecf1;
+        color: #bccac6;
         pointer-events: none;
     }
 }
@@ -63,18 +63,18 @@ button {
 
     &:hover {
         transition: 0.3s;
-        border: 1px solid #6BB9BD;
+        border: 1px solid #6bb9bd;
     }
 
     &:active {
         transition: 0.3s;
-        color: #4CA5A9;
-        border: 1px solid #6BB9BD;
+        color: #4ca5a9;
+        border: 1px solid #6bb9bd;
     }
 
     &:disabled {
-        color: #BCCAC6;
-        border: 1px solid #BCCAC6;
+        color: #bccac6;
+        border: 1px solid #bccac6;
     }
 }
 
@@ -91,12 +91,12 @@ button {
     cursor: pointer;
 
     &:hover {
-        background-color: #FFCCCC;
+        background-color: #ffcccc;
     }
 
     &:disabled {
-        color: #BCCAC6;
-        border: 1px solid #BCCAC6;
+        color: #bccac6;
+        border: 1px solid #bccac6;
     }
 }
 
