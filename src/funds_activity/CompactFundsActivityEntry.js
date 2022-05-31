@@ -2,6 +2,7 @@ import React from "react";
 import arrowUp from "../images/svg/arrow-up.svg";
 import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
+import ReactTooltip from "react-tooltip";
 
 export const CompactFundsActivityEntry = ({ entry }) => {
   return (
@@ -35,7 +36,12 @@ const AmountView = ({ entry }) => {
         <div className="ft-color-grey">{entry.address}</div>
         <div className="d-flex gap-4">
           <img width="14px" height="14px" src={funds} alt="funds" />
-          <div className="ft-size-12 ft-weight-600">{entry.amount}</div>
+          <div className="ft-size-12 ft-weight-600">
+            <div data-tip={entry.amount_without_fee}>
+              {entry.short_amount_without_fee}
+            </div>
+            <ReactTooltip />
+          </div>
           <div className="ft-size-12">{entry.type_label}</div>
         </div>
       </div>

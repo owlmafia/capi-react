@@ -2,6 +2,7 @@ import React from "react";
 import arrowUp from "../images/svg/arrow-up.svg";
 import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
+import ReactTooltip from "react-tooltip";
 
 export const FundsActivityEntry = ({ entry }) => {
   return (
@@ -59,7 +60,6 @@ export const FundsActivityEntry = ({ entry }) => {
 
 const AmountView = ({ entry }) => {
   var className;
-  var text = entry.amount_without_fee;
   if (entry.is_income === "true") {
     className = "funds_act_entry__amount__number";
   } else if (entry.is_income === "false") {
@@ -76,7 +76,13 @@ const AmountView = ({ entry }) => {
         alt="arrow"
       />
       <img src={funds} alt="funds" />
-      <div className={className}>{text}</div>
+
+      <div className={className}>
+        <div data-tip={entry.amount_without_fee}>
+          {entry.short_amount_without_fee}
+        </div>
+        <ReactTooltip />
+      </div>
     </div>
   );
 };
