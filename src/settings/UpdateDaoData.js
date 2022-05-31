@@ -62,46 +62,15 @@ export const UpdateDaoData = ({ statusMsg }) => {
           inputValue={logoUrl}
           onChange={(input) => setLogoUrl(input)}
         />
-        <div className="info">{"Project Funds"}</div>
-        <LabeledCurrencyInput
-          label={"Share price per unit"}
-          inputValue={sharePrice}
-          onChange={(input) => setSharePrice(input)}
-        />
         <LabeledInput
-          label={"Funds escrow address"}
+          label={"Payments escrow address"}
           inputValue={customerEscrow}
-          onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Funds escrow version"}
-          inputValue={customerEscrowVersion}
-          onChange={(input) => setSocialMediaUrl(input)}
+          onChange={(input) => setCustomerEscrow(input)}
         />
         <LabeledInput
           label={"Payments escrow version"}
-          inputValue={customerEscrow}
-          onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Payments escrow address"}
           inputValue={customerEscrowVersion}
-          onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Investing escrow address"}
-          inputValue={customerEscrow}
-          onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Investing escrow version"}
-          inputValue={customerEscrowVersion}
-          onChange={(input) => setSocialMediaUrl(input)}
-        />
-        <LabeledInput
-          label={"Locking escrow address"}
-          inputValue={customerEscrow}
-          onChange={(input) => setSocialMediaUrl(input)}
+          onChange={(input) => setCustomerEscrowVersion(input)}
         />
         {/* <LabeledInput
           label={"Primary social media (optional)"}
