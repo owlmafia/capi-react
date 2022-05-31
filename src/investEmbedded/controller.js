@@ -1,4 +1,5 @@
 import { signTxs } from "../MyAlgo";
+import { toErrorMsg } from "../validation";
 
 // Note: no locking for the embedded view because there's no design yet
 
@@ -51,7 +52,8 @@ export const invest = async (
   dao,
   buySharesCount,
   updateMyShares,
-  updateFunds
+  updateFunds,
+  setShareAmountError
 ) => {
   try {
     const {
@@ -111,7 +113,13 @@ export const invest = async (
     await updateMyShares(daoId, myAddress);
     await updateFunds(daoId);
   } catch (e) {
-    statusMsg.error(e);
+    if (e.type_identifier === "input_errors") {
+      setShareAmountError(toErrorMsg(e.amount));
+      // show a general message additionally, just in case
+      statusMsg.error("Please fix the errors");
+    } else {
+      statusMsg.error(e);
+    }
     showProgress(false);
   }
 };

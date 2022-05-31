@@ -16,6 +16,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
   );
   const [submitting, setSubmitting] = useState(false);
 
+  const [shareAmountError, setShareAmountError] = useState("");
+
   return (
     <div className="dao_action_active_tab box-container">
       <div className="title">{"Buy Shares in project"}</div>
@@ -60,6 +62,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           <div>{totalPercentage}</div>
         </div>
       </div>
+      <div className="labeled_input__error">{shareAmountError}</div>
       <input
         className="label-input-style mt-1"
         placeholder={"Enter amount of shares"}
@@ -92,7 +95,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
             dao,
             buySharesCount,
             deps.updateMyShares,
-            deps.updateFunds
+            deps.updateFunds,
+            setShareAmountError
           );
         }}
       />
