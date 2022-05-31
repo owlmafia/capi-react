@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import arrowUp from "../images/svg/arrow-up.svg";
 import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
@@ -77,12 +77,22 @@ const AmountView = ({ entry }) => {
       />
       <img src={funds} alt="funds" />
 
-      <div className={className}>
+      <div className={className}>{nestedAmountView(entry)}</div>
+    </div>
+  );
+};
+
+export const nestedAmountView = (entry) => {
+  if (entry.amount_without_fee != entry.short_amount_without_fee) {
+    return (
+      <Fragment>
         <div data-tip={entry.amount_without_fee}>
           {entry.short_amount_without_fee}
         </div>
         <ReactTooltip />
-      </div>
-    </div>
-  );
+      </Fragment>
+    );
+  } else {
+    return entry.short_amount_without_fee;
+  }
 };
