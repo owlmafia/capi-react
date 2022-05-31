@@ -5,7 +5,6 @@ import { useDropzone } from "react-dropzone";
 const fileReader = new FileReader();
 
 export const ImageUpload = ({ setImageBytes }) => {
-  const [blob, setBlob] = useState(null);
   const [inputImg, setInputImg] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
@@ -22,16 +21,12 @@ export const ImageUpload = ({ setImageBytes }) => {
 
   const updateBlob = (blob) => {
     // pass blob up from the ImageCropper component
-
     const bytes = blobToArrayBuffer(blob);
     setImageBytes(bytes);
-    // TODO remove this
-    setBlob(blob);
   };
 
   const handleSubmitImage = (e) => {
     e.preventDefault();
-    console.log("do something with blob: %o", blob);
   };
 
   return (
