@@ -25,7 +25,7 @@ export const prefillInputs = async (
   setDaoName,
   setDaoDescr,
   setSharePrice,
-  setLogoUrl,
+  setImageBytes,
   setSocialMediaUrl,
   setCustomerEscrow,
   setCustomerEscrowVersion,
@@ -39,7 +39,8 @@ export const prefillInputs = async (
     setDaoName(updatableData.project_name);
     setDaoDescr(updatableData.project_desc);
     setSharePrice(updatableData.share_price);
-    setLogoUrl(updatableData.logo_url);
+    // TODO header may not be needed - test without once everything else works, remove if not needed
+    setImageBytes("data:image/png;base64," + updatableData.image_bytes);
     setSocialMediaUrl(updatableData.social_media_url);
     setCustomerEscrow(updatableData.customer_escrow);
     setCustomerEscrowVersion(updatableData.customer_escrow_version);

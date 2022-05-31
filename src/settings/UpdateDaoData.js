@@ -6,6 +6,8 @@ import {
   LabeledInput,
 } from "../common_comps/LabeledInput";
 import { prefillInputs, updateDaoData } from "./controller";
+import { ImageUpload } from "../app_comps/ImageUpload";
+import { toBytesForRust } from "../common_functions/common";
 
 export const UpdateDaoData = ({ statusMsg }) => {
   let params = useParams();
@@ -13,7 +15,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
   const [daoName, setDaoName] = useState("");
   const [daoDescr, setDaoDescr] = useState("");
   const [sharePrice, setSharePrice] = useState("");
-  const [logoUrl, setLogoUrl] = useState("");
+  const [imageBytes, setImageBytes] = useState(null);
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
   const [customerEscrow, setCustomerEscrow] = useState("");
@@ -31,7 +33,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
           setDaoName,
           setDaoDescr,
           setSharePrice,
-          setLogoUrl,
+          setImageBytes,
           setSocialMediaUrl,
           setCustomerEscrow,
           setCustomerEscrowVersion,
@@ -57,10 +59,10 @@ export const UpdateDaoData = ({ statusMsg }) => {
           inputValue={daoDescr}
           onChange={(input) => setDaoDescr(input)}
         />
-        <LabeledInput
-          label={"Logo URL (optional)"}
-          inputValue={logoUrl}
-          onChange={(input) => setLogoUrl(input)}
+        <div className="info">Project Cover</div>
+        <ImageUpload
+          initImageBytes={imageBytes}
+          setImageBytes={setImageBytes}
         />
         <div className="info">{"Payments"}</div>
         <LabeledInput
@@ -100,7 +102,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
               project_desc: daoDescr,
               share_price: sharePrice,
 
-              logo_url: logoUrl,
+              image: toBytesForRust(imageBytes),
               social_media_url: socialMediaUrl,
             });
           }}

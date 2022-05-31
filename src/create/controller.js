@@ -1,3 +1,4 @@
+import { toBytesForRust } from "../common_functions/common";
 import { signTxs } from "../MyAlgo";
 import { toErrorMsg } from "../validation";
 
@@ -42,10 +43,6 @@ export const createDao = async (
   statusMsg.clear();
   showProgress(true);
 
-  const ib = await imageBytes;
-  const typedArray = new Uint8Array(ib);
-  const bytes = [...typedArray];
-
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
       inputs: {
@@ -56,7 +53,7 @@ export const createDao = async (
         share_price: sharePrice,
         investors_share: investorsShare,
         shares_for_investors: sharesForInvestors,
-        compressed_image: bytes,
+        compressed_image: await toBytesForRust(imageBytes),
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate,
