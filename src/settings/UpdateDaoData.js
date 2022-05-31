@@ -62,8 +62,9 @@ export const UpdateDaoData = ({ statusMsg }) => {
           inputValue={logoUrl}
           onChange={(input) => setLogoUrl(input)}
         />
+        <div className="info">{"Payments"}</div>
         <LabeledInput
-          label={"Payments escrow address"}
+          label={"Payments address"}
           inputValue={customerEscrow}
           onChange={(input) => setCustomerEscrow(input)}
         />
@@ -77,6 +78,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
           inputValue={socialMediaUrl}
           onChange={(input) => setSocialMediaUrl(input)}
         /> */}
+        <div className="info">{"Ownership"}</div>
         <LabeledInput
           label={"Project owner"}
           inputValue={owner}
