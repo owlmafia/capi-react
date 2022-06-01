@@ -4,27 +4,13 @@ import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
 
 export const StatusMsgView = ({ deps }) => {
-  let shortMsg = deps.statusMsgDisplay.displayMsg;
-  let maxMsgLength = 200;
-  if (shortMsg.length > maxMsgLength) {
-    shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
-  }
-
-  var className;
-  if (deps.statusMsgDisplay.type === "success") {
-    className = "msg__success";
-  } else if (deps.statusMsgDisplay.type === "error") {
-    className = "msg__error";
-  } else {
-    throw Error("Invalid status msg type: " + deps.statusMsgDisplay.type);
-  }
+  const className = notificationClassName(deps.statusMsgDisplay);
 
   return (
     <div className={"msg " + className}>
       <div className="d-flex align-center gap-32">
-        {deps.statusMsgDisplay.type === "error" ? <img className="mr-5" src={error} alt="error" /> : ""}
-        {deps.statusMsgDisplay.type === "success" ? <img className="mr-5" src={success} alt="success" /> : ""}
-        <CopyPasteText text={shortMsg} copyText={deps.statusMsgDisplay.copyMsg} />
+        {notificationIcon(deps.statusMsgDisplay)}
+        {label(deps.statusMsgDisplay)}
       </div>
       <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
         <img src={close} alt="close" />
@@ -35,6 +21,54 @@ export const StatusMsgView = ({ deps }) => {
       </button>
     </div>
   );
+};
+
+const notificationIcon = (statusMsgDisplay) => {
+  if (statusMsgDisplay.type === "success") {
+    return <img className="mr-5" src={success} alt="success" />;
+  } else if (statusMsgDisplay.type === "error") {
+    return <img className="mr-5" src={error} alt="error" />;
+  } else {
+    throw Error("Invalid notification type: " + statusMsgDisplay.type);
+  }
+};
+
+const notificationClassName = (statusMsgDisplay) => {
+  if (statusMsgDisplay.type === "success") {
+    return "msg__success";
+  } else if (statusMsgDisplay.type === "error") {
+    return "msg__error";
+  } else {
+    throw Error("Invalid notification type: " + statusMsgDisplay.type);
+  }
+};
+
+const label = (statusMsgDisplay) => {
+  if (statusMsgDisplay.type === "success") {
+    return successLabel(statusMsgDisplay);
+  } else if (statusMsgDisplay.type === "error") {
+    return errorLabel(statusMsgDisplay);
+  } else {
+    throw Error("Invalid notification type: " + statusMsgDisplay.type);
+  }
+};
+
+const successLabel = (statusMsgDisplay) => {
+  // For success messages, only displayMsg is set (no need for details like for errors)
+  // it also doesn't have copy paste, as it's not needed for a success message.
+  return <div>{statusMsgDisplay.displayMsg}</div>;
+};
+
+const errorLabel = (statusMsgDisplay) => {
+  // shorten the display message
+  // note that this might shorten friendly errors too, though it's not expected (friendly errors should be written such that they fit in a notification)
+  let shortMsg = statusMsgDisplay.displayMsg;
+  let maxMsgLength = 200;
+  if (shortMsg.length > maxMsgLength) {
+    shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
+  }
+  // copy paste, where copy is the complete original message, which may or may not be equal to the displayed message.
+  return <CopyPasteText text={shortMsg} copyText={statusMsgDisplay.copyMsg} />;
 };
 
 export default StatusMsgView;
