@@ -66,7 +66,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         <div className="mt-6 ft-weight-600 mb-5">{"Recent funds activity"}</div>
         {fundsActivity()}
-        <Link to="funds_activity">
+        <Link className="see-all" to="funds_activity">
           <button className="link_button">{"See all"}</button>
         </Link>
       </div>

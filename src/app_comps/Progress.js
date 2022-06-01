@@ -6,7 +6,7 @@ const Progress = () => {
           className="path"
           cx="50"
           cy="50"
-          r="20"
+          r="16"
           fill="none"
           strokeWidth="5"
           strokeMiterlimit="10"

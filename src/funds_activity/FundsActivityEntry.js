@@ -7,7 +7,7 @@ import ReactTooltip from "react-tooltip";
 export const FundsActivityEntry = ({ entry }) => {
   return (
     <div>
-      <div className="funds_act_entry">
+      <div className="funds_act_entry funds-act-display">
         <AmountView entry={entry} />
         <div className="funds_act_entry__body">
           <div className="d-flex align-center">
@@ -20,7 +20,6 @@ export const FundsActivityEntry = ({ entry }) => {
         <div className="details">
           <div className="funds_act_entry__date">{entry.date}</div>
           <a
-            className="ft-weight-600"
             href={entry.tx_link}
             target="_blank"
             rel="noreferrer"
@@ -45,7 +44,6 @@ export const FundsActivityEntry = ({ entry }) => {
         <div className="details">
           <div className="funds_act_entry__date">{entry.date}</div>
           <a
-            className="ft-weight-600"
             href={entry.tx_link}
             target="_blank"
             rel="noreferrer"
@@ -71,6 +69,7 @@ const AmountView = ({ entry }) => {
     <div className="funds_act_entry__amount__container">
       <img
         width="48px"
+        className="arrow"
         height="48px"
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"

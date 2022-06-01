@@ -14,7 +14,7 @@ export const LabeledInput = ({
   const [showLength, setShowLength] = useState(false);
 
   useEffect(() => {
-    setInputLength(inputValue.length);
+    setInputLength(inputValue?.length);
   }, [inputValue]);
 
   return (
