@@ -1,38 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { ContentTitle } from "../ContentTitle";
-import { checkForUpdates, updateApp } from "./controller";
+import { updateApp } from "./controller";
 import { UpdateDaoData } from "./UpdateDaoData";
 
 export const Settings = ({ deps }) => {
   let params = useParams();
 
-  const [versionData, setVersionData] = useState(null);
   const [submitting, setSubmitting] = useState(false);
-
-  useEffect(() => {
-    async function asyncInit() {
-      if (params.id) {
-        await checkForUpdates(deps.statusMsg, params.id, setVersionData);
-      }
-    }
-    asyncInit();
-  }, [deps.statusMsg, params.id]);
 
   const appVersionView = () => {
     return (
-      versionData && (
+      deps.daoVersion && (
         <div className="section_large_bottom">
           <div>
             {"Current version: " +
               appVersionStr(
-                versionData.current_approval_version,
-                versionData.current_clear_version
+                deps.daoVersion.current_approval_version,
+                deps.daoVersion.current_clear_version
               )}
           </div>
 
-          {updateAppView(versionData.update_data)}
+          {updateAppView(deps.daoVersion.update_data)}
         </div>
       )
     );
@@ -59,8 +49,9 @@ export const Settings = ({ deps }) => {
                   setSubmitting,
                   params.id,
                   deps.myAddress,
-                  versionData.update_data.new_approval_version,
-                  versionData.update_data.new_clear_version
+                  deps.daoVersion.update_data.new_approval_version,
+                  deps.daoVersion.update_data.new_clear_version,
+                  deps.updateDaoVersion
                 );
               }}
             />

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const SideBarItem = ({ imageSrc, route, label }) => {
+const SideBarItem = ({ imageSrc, route, label, showBadge }) => {
   return (
     <div className="sidebar-item">
       <NavLink
@@ -13,6 +13,7 @@ const SideBarItem = ({ imageSrc, route, label }) => {
         <img src={imageSrc} alt="" />
         {label}
       </NavLink>
+      {showBadge && <div>{"TODO badge"}</div>}
     </div>
   );
 };

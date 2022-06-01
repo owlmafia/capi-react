@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
+import { checkForUpdates } from "./common_functions/common";
 import { useWindowSize } from "./common_hooks/useWindowSize";
 import {
   updateMyShares,
@@ -25,6 +26,7 @@ const App = () => {
   const [myDividend, setMyDividend] = useState(null);
   const [funds, setFunds] = useState(null);
   const [fundsChange, setFundsChange] = useState(null);
+  const [daoVersion, setDaoVersion] = useState(null);
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
@@ -107,6 +109,13 @@ const App = () => {
     [statusMsgUpdater]
   );
 
+  const updateDaoVersion = useCallback(
+    async (daoId) => {
+      await checkForUpdates(statusMsgUpdater, daoId, setDaoVersion);
+    },
+    [statusMsgUpdater]
+  );
+
   const navigation = () => {
     return (
       <BrowserRouter>
@@ -141,6 +150,9 @@ const App = () => {
 
           dao: dao,
           updateDao: updateDao,
+
+          daoVersion: daoVersion,
+          updateDaoVersion: updateDaoVersion,
 
           isMobile: windowSize.width < 1330,
         })}

@@ -55,7 +55,12 @@ export const SideBarDao = ({ deps }) => {
         label="Funds activity"
       />
       {iAmDaoOwner && (
-        <SideBarItem imageSrc={settings} route="settings" label="Settings" />
+        <SideBarItem
+          imageSrc={settings}
+          route="settings"
+          label="Settings"
+          showBadge={deps.daoVersion?.update_data}
+        />
       )}
     </div>
   );

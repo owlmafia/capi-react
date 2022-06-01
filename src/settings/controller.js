@@ -2,23 +2,6 @@ import { signTx } from "../MyAlgo";
 
 const wasmPromise = import("wasm");
 
-// TODO review (everywhere): we don't wait for init to finish (i.e. init the logs) to call functions like these
-// this might lead to some logs not showing (if it's the first view we load in the app - otherwise we could be affected by log init from a previous view)
-// and can't be added in init after initializing the logs, as it has dependencies (like params.id),
-// which would mean that the logs are initialized multiple times (when the dependencies change)
-export const checkForUpdates = async (statusMsg, daoId, setVersionData) => {
-  try {
-    const { bridge_check_for_updates } = await wasmPromise;
-    let versionData = await bridge_check_for_updates({ dao_id: daoId });
-
-    if (versionData) {
-      setVersionData(versionData);
-    }
-  } catch (e) {
-    statusMsg.error(e);
-  }
-};
-
 export const prefillInputs = async (
   statusMsg,
   daoId,
@@ -56,7 +39,8 @@ export const updateApp = async (
   daoId,
   owner,
   approvalVersion,
-  clearVersion
+  clearVersion,
+  updateVersion
 ) => {
   try {
     const { bridge_update_app_txs, bridge_submit_update_app } =
@@ -80,6 +64,9 @@ export const updateApp = async (
       tx: updateAppResSigned,
     });
     console.log("submitUpdateAppRes: " + JSON.stringify(submitUpdateAppRes));
+
+    // re-fetch version data to update things that depend on "there's a new version" (e.g. settings badge)
+    updateVersion(daoId);
 
     showProgress(false);
     statusMsg.success("App updated!");
