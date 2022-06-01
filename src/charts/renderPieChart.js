@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const UNUSED = "Not owned";
+const NOT_OWNED = "not_owned";
 const GRAY = "#EBECF1";
 const RED = "#DF5C60";
 
@@ -65,7 +65,7 @@ const renderPieChart = (
     .selectAll()
     .data(data_ready)
     .join("path")
-    .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
+    .attr("fill", (d, i) => colors(d, i, d.data.type_ === NOT_OWNED));
 
   let angleInterpolation = d3.interpolate(pie.startAngle()(), pie.endAngle()());
   updatedChart
@@ -90,7 +90,7 @@ const renderPieChart = (
       .transition()
       .ease(d3.easeLinear)
       .duration(200)
-      .attr("fill", (d, i) => colors(d, i, d.data.label === UNUSED));
+      .attr("fill", (d, i) => colors(d, i, d.data.type_ === NOT_OWNED));
   };
 
   const selectedColorState = (segment) => {
@@ -102,7 +102,7 @@ const renderPieChart = (
   };
 
   function handleOnClick(p, d) {
-    if (d && d.data.label !== UNUSED) {
+    if (d && d.data.type_ !== NOT_OWNED) {
       // this is assumed to update the state somewhere up in the hierarchy
       const select = onSegmentSelected(d.data);
       // update UI for returned select status

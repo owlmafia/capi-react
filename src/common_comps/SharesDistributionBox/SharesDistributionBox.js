@@ -14,6 +14,8 @@ export const SharesDistributionBox = ({
   appId,
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
+  const [notOwnedShares, setNotOwnedShares] = useState(null);
+
   const [showMoreSelected, setShowMoreSelected] = useState(false);
   // used to highlight the address on the right side
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -25,13 +27,14 @@ export const SharesDistributionBox = ({
   useEffect(() => {
     async function fetchData() {
       if (sharesAssetId && sharesSupply) {
-        const sharesDistr = await fetchSharesDistribution(
+        await fetchSharesDistribution(
           deps.statusMsg,
           sharesAssetId,
           sharesSupply,
-          appId
+          appId,
+          setSharesDistr,
+          setNotOwnedShares
         );
-        setSharesDistr(sharesDistr);
       }
     }
     fetchData();
@@ -119,13 +122,19 @@ export const SharesDistributionBox = ({
             <img src={green} alt="arrow" />
           </div>
           {entries.map((entry) => {
-            return (
-              <HolderEntry
-                key={entry.label}
-                entry={entry}
-                isSelected={entry.address === selectedAddress}
-              />
-            );
+            // not owned is shown on the left side, so we remove the entry from the list here
+            // note that we keep it in the original list, because it's also used for the chart, where we show not owned
+            if (entry.type_ == "not_owned") {
+              return null;
+            } else {
+              return (
+                <HolderEntry
+                  key={entry.label}
+                  entry={entry}
+                  isSelected={entry.address === selectedAddress}
+                />
+              );
+            }
           })}
           {showMoreOrLessFooter()}
         </div>
@@ -142,17 +151,15 @@ export const SharesDistributionBox = ({
       return (
         <div className="investors-container">
           <div className="d-flex flex-column flex-wrap">
-            <div className="sub-title">Available Shares 1200</div>
             <div className="flexBlock">
-              <div className="ft-weight-600">15</div>
-              <div className="circle ml-5 mr-3"></div>
-              <div className="ft-color-black ft-size-14">Unlocked Share</div>
+              <div>{"Total shares"}</div>
+              <div>{sharesSupply}</div>
             </div>
             <div className="flexBlock">
-              <div className="ft-weight-600">15</div>
+              <div className="ft-weight-600">{notOwnedShares}</div>
               <div className="circle ml-5 mr-3"></div>
               <div className="ft-color-black ft-size-14">
-                Your Unlocked Share
+                {"Available for sale"}
               </div>
             </div>
           </div>

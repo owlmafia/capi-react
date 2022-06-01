@@ -4,7 +4,9 @@ export const fetchSharesDistribution = async (
   statusMsg,
   assetId,
   assetSupply,
-  appId
+  appId,
+  setSharesDistr,
+  setNotOwnedShares
 ) => {
   try {
     const { bridge_shares_distribution } = await wasmPromise;
@@ -14,9 +16,9 @@ export const fetchSharesDistribution = async (
       app_id: appId,
     });
     console.log("Shares distribution res: " + JSON.stringify(res));
-    return res.holders;
+    setSharesDistr(res.holders);
+    setNotOwnedShares(res.not_owned_shares);
   } catch (e) {
     statusMsg.error(e);
-    return null;
   }
 };
