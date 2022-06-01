@@ -3,6 +3,7 @@ import renderPieChart from "../charts/renderPieChart";
 import {
   LabeledCurrencyInput,
   LabeledInput,
+  LabeledTextArea,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { createDao } from "./controller";
@@ -73,16 +74,15 @@ export const CreateDao = ({ deps }) => {
           inputValue={daoName}
           onChange={(input) => setDaoName(input)}
           errorMsg={daoNameError}
+          maxLength={40} // NOTE: has to match WASM
         />
-        <div className="labeled_input">
-          <div className="labeled_input__label">Description</div>
-          <textarea
-            rows="10"
-            cols="50"
-            value={daoDescr}
-            onChange={(event) => setDaoDescr(event.target.value)}
-          ></textarea>
-        </div>
+        <LabeledTextArea
+          label={"Description"}
+          inputValue={daoDescr}
+          onChange={(input) => setDaoDescr(input)}
+          errorMsg={daoDescrError}
+          maxLength={2000} // NOTE: has to match WASM
+        />
         <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}

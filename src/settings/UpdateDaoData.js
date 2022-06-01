@@ -4,6 +4,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
   LabeledInput,
+  LabeledTextArea,
 } from "../common_comps/LabeledInput";
 import { prefillInputs, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
@@ -53,11 +54,13 @@ export const UpdateDaoData = ({ statusMsg }) => {
           label={"Project name"}
           inputValue={daoName}
           onChange={(input) => setDaoName(input)}
+          maxLength={40} // NOTE: has to match WASM
         />
-        <LabeledInput
+        <LabeledTextArea
           label={"Description"}
           inputValue={daoDescr}
           onChange={(input) => setDaoDescr(input)}
+          maxLength={2000} // NOTE: has to match WASM
         />
         <div className="info">Project Cover</div>
         <ImageUpload
