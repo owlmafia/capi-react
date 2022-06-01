@@ -10,7 +10,7 @@ export const DaoTop = ({ dao }) => {
     <div>
       <div>{logoView(dao)}</div>
       <div className="title-container">
-        <div className="title">Crypticmonster: Unique NFT artworks</div>
+        <div className="title">{dao.name}</div>
         <div className="social-media-buttons">
           {dao.social_media_url && (
             <a href={dao.social_media_url} target="_blank" rel="noreferrer">
