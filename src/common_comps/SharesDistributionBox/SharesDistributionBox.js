@@ -124,7 +124,7 @@ export const SharesDistributionBox = ({
           {entries.map((entry) => {
             // not owned is shown on the left side, so we remove the entry from the list here
             // note that we keep it in the original list, because it's also used for the chart, where we show not owned
-            if (entry.type_ == "not_owned") {
+            if (entry.type_ === "not_owned") {
               return null;
             } else {
               return (

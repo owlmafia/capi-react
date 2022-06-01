@@ -83,7 +83,7 @@ const AmountView = ({ entry }) => {
 };
 
 export const nestedAmountView = (entry) => {
-  if (entry.amount_without_fee != entry.short_amount_without_fee) {
+  if (entry.amount_without_fee !== entry.short_amount_without_fee) {
     return (
       <Fragment>
         <div data-tip={entry.amount_without_fee}>

@@ -2,7 +2,6 @@ import React from "react";
 import arrowUp from "../images/svg/arrow-up.svg";
 import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
-import ReactTooltip from "react-tooltip";
 import { nestedAmountView } from "./FundsActivityEntry";
 
 export const CompactFundsActivityEntry = ({ entry }) => {

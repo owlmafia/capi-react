@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
-import {
-  LabeledCurrencyInput,
-  LabeledInput,
-  LabeledTextArea,
-} from "../common_comps/LabeledInput";
+import { LabeledInput, LabeledTextArea } from "../common_comps/LabeledInput";
 import { prefillInputs, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { toBytesForRust } from "../common_functions/common";
