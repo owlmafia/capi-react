@@ -7,7 +7,7 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    font-family: "Gilroy-Medium";
+    font-family: "Gilroy";
     box-sizing: border-box;
 }
 
@@ -48,6 +48,7 @@ a {
 
 #content {
     width: 57%;
+    margin-left: calc(12.6% + 40px);
     display: inline-block;
     box-sizing: border-box;
     position: relative;
@@ -677,6 +678,7 @@ p {
         width: calc(100vw - 80px);
         min-width: auto;
         max-width: 800px;
+        margin-left: 0;
 
         .content-img {
             height: 240px;

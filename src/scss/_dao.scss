@@ -9,7 +9,6 @@
     .link_button {
         color: #787E82;
         text-decoration: none;
-        font-family: "Gilroy-Bold";
         padding-bottom: 10px;
         cursor: pointer;
         font-size: 18px;
@@ -31,6 +30,8 @@
     width: 80%;
     color: #686777;
     margin-bottom: 60px;
+    font-family: "Gilroy-Light";
+    line-height: 1.5;
 }
 
 #dao_funds {

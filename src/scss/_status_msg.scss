@@ -14,6 +14,8 @@
     top: 16px;
     z-index: 100;
     box-sizing: border-box;
+    animation-name: notification;
+    animation-duration: 0.8s;
 
     &__error {
         background: #FFF2F2;
@@ -31,20 +33,26 @@
         background: transparent;
         border: none;
         position: relative;
-
-        img {
-            position: absolute;
-            top: 0;
-            right: 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 }
 
 .copy_msg {
     font-weight: 600;
+}
+
+@keyframes notification {
+    from {
+        top: 0
+    }
+
+    ;
+
+    to {
+        top: 16px;
+    }
 }
 
 @media only screen and (max-width: 1330px) {
