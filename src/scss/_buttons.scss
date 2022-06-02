@@ -11,6 +11,7 @@ button {
     cursor: pointer;
     outline: 0;
     box-sizing: border-box;
+    position: relative;
 
     &:focus {
         border: none;
@@ -20,6 +21,16 @@ button {
     &:disabled {
         cursor: not-allowed;
         pointer-events: none;
+    }
+
+    .loader {
+        position: static;
+
+        svg {
+            z-index: 300;
+            top: 0 !important;
+            left: calc((100% - 100px)/2);
+        }
     }
 }
 
