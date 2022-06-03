@@ -27,25 +27,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
 
   return (
     <>
-      <div className="mob_nav_bar">
-        <Link to="#">
-          {/* replace with bars icon */}
-          <img
-            src={menu}
-            alt="nav_bars"
-            onClick={() => setShowSidebar(!showSidebar)}
-          />
-          <div className="logo-container">
-            <img src={logo} alt="logo" />
-          </div>
-          {/* replace with wallet icon */}
-          <img
-            src={wallet}
-            alt="wallet"
-            onClick={() => setShowWallet(!showWallet)}
-          />
-        </Link>
-      </div>
+      {mobNavBar(showSidebar, setShowSidebar, showWallet, setShowWallet)}
       {showSidebar && sideBar()}
       {showWallet && <MobileWalletView deps={deps} />}
       <div id="content">
@@ -54,5 +36,29 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         <Outlet />
       </div>
     </>
+  );
+};
+
+const mobNavBar = (showSidebar, setShowSidebar, showWallet, setShowWallet) => {
+  return (
+    <div className="mob_nav_bar">
+      <Link to="#">
+        {/* replace with bars icon */}
+        <img
+          src={menu}
+          alt="nav_bars"
+          onClick={() => setShowSidebar(!showSidebar)}
+        />
+        <div className="logo-container">
+          <img src={logo} alt="logo" />
+        </div>
+        {/* replace with wallet icon */}
+        <img
+          src={wallet}
+          alt="wallet"
+          onClick={() => setShowWallet(!showWallet)}
+        />
+      </Link>
+    </div>
   );
 };
