@@ -36,6 +36,10 @@ const renderPieChart = (
     }
   };
 
+  const segmentClass = (d, i, isGray = false) => {
+    return isGray ? "" : "holder_segment";
+  };
+
   const svg = d3.select(container);
 
   svg.selectAll("*").remove();
@@ -65,7 +69,8 @@ const renderPieChart = (
     .selectAll()
     .data(data_ready)
     .join("path")
-    .attr("fill", (d, i) => colors(d, i, d.data.type_ === NOT_OWNED));
+    .attr("fill", (d, i) => colors(d, i, d.data.type_ === NOT_OWNED))
+    .attr("class", (d, i) => segmentClass(d, i, d.data.type_ === NOT_OWNED));
 
   let angleInterpolation = d3.interpolate(pie.startAngle()(), pie.endAngle()());
   updatedChart

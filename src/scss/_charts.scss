@@ -16,6 +16,10 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     &__svg {
         width: $pie_chart_diameter;
         height: $pie_chart_diameter;
+
+        .holder_segment {
+            cursor: pointer;
+        }
     }
 
     &__centered_text {
