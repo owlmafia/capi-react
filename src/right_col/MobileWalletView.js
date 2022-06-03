@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MyAccountMob } from "../app_comps/MyAccount";
+import { MyAccount } from "../app_comps/MyAccount";
 
 export const MobileWalletView = ({ deps, onClose }) => {
   let params = useParams();
@@ -25,7 +25,7 @@ export const MobileWalletView = ({ deps, onClose }) => {
 
   return (
     <div id="rightcol">
-      <MyAccountMob deps={deps} daoId={params.id} onClose={onClose} />
+      <MyAccount deps={deps} daoId={params.id} onClose={onClose} />
     </div>
   );
 };
