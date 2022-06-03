@@ -62,7 +62,7 @@ export const Dao = ({ deps }) => {
           <div>
             {description && <div id="dao_description">{description}</div>}
 
-            {deps.isMobile && (
+            {deps.size.s4 && (
               <FundsActivityEmbedded deps={deps} daoId={params.id} />
             )}
 

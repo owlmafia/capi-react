@@ -154,7 +154,7 @@ const App = () => {
           daoVersion: daoVersion,
           updateDaoVersion: updateDaoVersion,
 
-          isMobile: windowSize.width < 1330,
+          size: windowSizeClasses(windowSize),
         })}
       </BrowserRouter>
     );
@@ -192,3 +192,24 @@ const App = () => {
 };
 
 export default App;
+
+const SIZE_TABLET_THRESHOLD = 1330;
+const SIZE_PHONE_THRESHOLD = 600;
+
+// returns an object with all size classes, where at least one is expected to be true
+// we use abstract identifiers like "s1", to accomodate possible new cases (phone-landscape, tablet with certain aspect ratio etc.) while keeping naming simple
+const windowSizeClasses = (windowSize) => {
+  const windowWidth = windowSize.width;
+  console.log("Window width updated: " + windowWidth);
+
+  const isTablet =
+    windowWidth <= SIZE_TABLET_THRESHOLD && windowWidth > SIZE_PHONE_THRESHOLD;
+  const isPhone = windowWidth <= SIZE_PHONE_THRESHOLD;
+
+  return {
+    s1: windowWidth > SIZE_TABLET_THRESHOLD, // desktop
+    s2: isTablet,
+    s3: isPhone,
+    s4: isTablet || isPhone, // convenience size, so caller doesn't have to keep writing this
+  };
+};

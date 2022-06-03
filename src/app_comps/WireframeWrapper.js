@@ -19,7 +19,7 @@ export const WireframeWrapper = ({ isGlobal, deps }) => {
     asyncInit();
   }, [params.id, deps.statusMsg]);
 
-  return deps.isMobile ? (
+  return deps.size.s4 ? (
     <WireframeMobile isGlobal={isGlobal} deps={deps} dao={dao} />
   ) : (
     <Wireframe isGlobal={isGlobal} deps={deps} dao={dao} />
