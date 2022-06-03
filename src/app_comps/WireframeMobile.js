@@ -32,6 +32,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         setShowWallet={setShowWallet}
       />
       {showSidebar && sideBar()}
+      {showSidebar && <ContentOverlay setShowSidebar={setShowSidebar} />}
       {showWallet && <MobileWalletView deps={deps} />}
       <div id="content">
         {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
@@ -40,6 +41,10 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
       </div>
     </>
   );
+};
+
+const ContentOverlay = ({ setShowSidebar }) => {
+  return <div id="mob_nav_bar_overlay" onClick={() => setShowSidebar(false)} />;
 };
 
 const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
