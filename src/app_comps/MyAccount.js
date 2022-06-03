@@ -7,22 +7,31 @@ import Progress from "../app_comps/Progress";
 import close from "../images/svg/close.svg";
 import { SubmitButton } from "./SubmitButton";
 
-export const MyAccount = ({
-  deps,
-  // optional: if set, shows "my shares"
-  daoId,
-}) => {
+export const MyAccount = ({ deps, daoId }) => {
+  return myAccountShared(deps, daoId, null);
+};
+
+export const MyAccountMob = ({ deps, daoId, onClose }) => {
+  return myAccountShared(
+    deps,
+    daoId,
+    <img
+      className="close-icon"
+      width="14"
+      height="14"
+      src={close}
+      alt="close"
+      onClick={() => onClose()}
+    />
+  );
+};
+
+const myAccountShared = (deps, daoId, closeView) => {
   return (
     <div className="my-account-container">
       <div className="d-flex justify-between">
         <div className="text">My Algo wallet</div>
-        <img
-          className="close-icon"
-          width="14"
-          height="14"
-          src={close}
-          alt="close"
-        />
+        {closeView}
       </div>
       <div className="my-address">
         {myAddressView(deps, daoId)}

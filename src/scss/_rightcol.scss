@@ -14,10 +14,6 @@
         flex-direction: column;
         gap: 24px;
 
-        .close-icon {
-            display: none;
-        }
-
         .text {
             color: #000000;
             font-family: "Gilroy-Bold";
@@ -112,7 +108,7 @@
             border: none;
 
             .close-icon {
-                display: block;
+                cursor: pointer;
             }
 
             .my-address {
