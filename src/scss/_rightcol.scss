@@ -47,7 +47,7 @@
     }
 }
 
-.my_address>a {
+.my_address > a {
     color: black;
     font-size: 18px;
 }
@@ -99,7 +99,7 @@
         min-width: auto;
         position: fixed;
         bottom: 0px;
-        z-index: 1000;
+        z-index: 10000;
         background-color: white;
         border-radius: 32px 32px 0 0;
         border: 1px solid $global-border;
@@ -127,9 +127,7 @@
 
     @keyframes wallet {
         100% {
-            transform: translateY(0%)
+            transform: translateY(0%);
         }
-
-        ;
     }
 }

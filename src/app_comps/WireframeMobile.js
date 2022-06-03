@@ -25,6 +25,8 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
     return !isGlobal && dao && <DaoTop dao={dao} />;
   };
 
+  const showOverlay = showSidebar || showWallet;
+
   return (
     <>
       <MobNavBar
@@ -32,7 +34,12 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         setShowWallet={setShowWallet}
       />
       {showSidebar && sideBar()}
-      {showSidebar && <ContentOverlay setShowSidebar={setShowSidebar} />}
+      {showOverlay && (
+        <ContentOverlay
+          setShowSidebar={setShowSidebar}
+          setShowWallet={setShowWallet}
+        />
+      )}
       {showWallet && <MobileWalletView deps={deps} />}
       <div id="content">
         {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
@@ -43,8 +50,16 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   );
 };
 
-const ContentOverlay = ({ setShowSidebar }) => {
-  return <div id="mob_nav_bar_overlay" onClick={() => setShowSidebar(false)} />;
+const ContentOverlay = ({ setShowSidebar, setShowWallet }) => {
+  return (
+    <div
+      id="mob_nav_bar_overlay"
+      onClick={() => {
+        setShowSidebar(false);
+        setShowWallet(false);
+      }}
+    />
+  );
 };
 
 const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
