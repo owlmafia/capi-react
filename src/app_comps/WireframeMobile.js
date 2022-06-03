@@ -27,7 +27,10 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
 
   return (
     <>
-      {mobNavBar(showSidebar, setShowSidebar, showWallet, setShowWallet)}
+      <MobNavBar
+        setShowSidebar={setShowSidebar}
+        setShowWallet={setShowWallet}
+      />
       {showSidebar && sideBar()}
       {showWallet && <MobileWalletView deps={deps} />}
       <div id="content">
@@ -39,24 +42,22 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   );
 };
 
-const mobNavBar = (showSidebar, setShowSidebar, showWallet, setShowWallet) => {
+const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
   return (
     <div className="mob_nav_bar">
       <Link to="#">
-        {/* replace with bars icon */}
         <img
           src={menu}
           alt="nav_bars"
-          onClick={() => setShowSidebar(!showSidebar)}
+          onClick={() => setShowSidebar((s) => !s)}
         />
         <div className="logo-container">
           <img src={logo} alt="logo" />
         </div>
-        {/* replace with wallet icon */}
         <img
           src={wallet}
           alt="wallet"
-          onClick={() => setShowWallet(!showWallet)}
+          onClick={() => setShowWallet((s) => !s)}
         />
       </Link>
     </div>
