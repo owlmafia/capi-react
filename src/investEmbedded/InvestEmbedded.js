@@ -22,7 +22,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
     <div className="dao_action_active_tab box-container">
       <div className="title">{"Buy Shares in project"}</div>
       <div className="dao-shares">
-        <div className="d-flex justify-between">
+        <div className="top-block">
           <div className="available-shares">
             <div className="d-flex gap-10 ft-weight-600">
               <div className="subTitle mb-4">{"Available shares: "}</div>
@@ -30,16 +30,20 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 {deps.investmentData.available_shares}
               </div>
             </div>
-            <div className="d-flex gap-10 align-center">
+            <div className="shares-block">
               <div className="ft-weight-600">You have:</div>
-              <div>{"Locked shares"}</div>
-              <div className="ft-weight-600">
-                {deps.investmentData.investor_locked_shares}
+              <div className="shares-item">
+                <div>{"Locked shares"}</div>
+                <div className="ft-weight-600">
+                  {deps.investmentData.investor_locked_shares}
+                </div>
               </div>
               <div className="blue-circle"></div>
-              <div>{"Unlocked shares"}</div>
-              <div className="ft-weight-600">
-                {deps.investmentData.investor_unlocked_shares}
+              <div className="shares-item">
+                <div>{"Unlocked shares"}</div>
+                <div className="ft-weight-600">
+                  {deps.investmentData.investor_unlocked_shares}
+                </div>
               </div>
             </div>
           </div>

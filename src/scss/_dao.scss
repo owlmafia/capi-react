@@ -92,14 +92,30 @@
         gap: 16px;
         margin-bottom: 16px;
 
-        .available-shares {
+        .top-block {
             display: flex;
             justify-content: space-between;
-            flex-direction: column;
-            gap: 16px;
 
-            .subTitle {
-                font-weight: 600;
+            .available-shares {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                gap: 16px;
+
+                .shares-block {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+
+                    .shares-item {
+                        display: flex;
+                        gap: 10px;
+                    }
+                }
+
+                .subTitle {
+                    font-weight: 600;
+                }
             }
         }
     }
@@ -112,7 +128,7 @@
     }
 
     .label-input-style {
-        margin-bottom: 20px;
+        margin-bottom: 32px;
     }
 }
 
@@ -209,5 +225,58 @@
         justify-content: center;
         color: white;
         cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #dao_actions_top_bar {
+        gap: 8px;
+        justify-content: center;
+
+        .link_button {
+            font-size: 12px;
+            min-width: auto;
+        }
+    }
+
+    .dao_action_active_tab.box-container {
+        position: relative;
+        height: 524px;
+
+        .button-primary {
+            width: 100%;
+        }
+
+        .dao-shares {
+            margin-bottom: 40px;
+
+            .top-block {
+                flex-direction: column;
+
+                #shares_const_container {
+                    position: absolute;
+                    bottom: 40px;
+                    left: 50%;
+                    transform: translateX(-50%)
+                }
+
+                .available-shares {
+                    .shares-block {
+                        flex-direction: column;
+                        align-items: flex-start;
+                        gap: 14px;
+
+                        .blue-circle {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #dao_description {
+        width: 100%;
+        margin-bottom: 40px;
     }
 }

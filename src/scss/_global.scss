@@ -34,6 +34,17 @@ a {
     padding: 32px;
     position: relative;
 
+    .shares-mobile {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        #left-block-shares {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
     .title {
         color: $blue-primary;
         font-size: 1.6rem;
@@ -502,6 +513,11 @@ p {
 
         &__amount__container {
             width: 80%;
+
+            .type-label {
+                margin-left: 8px;
+                color: #787E82;
+            }
         }
 
         &__body {
@@ -635,6 +651,10 @@ p {
     margin-top: 32px;
 }
 
+.mt-7 {
+    margin-top: 42px;
+}
+
 .mb-4 {
     margin-bottom: 20px;
 }
@@ -749,5 +769,65 @@ p {
     .modal .modal-content {
         width: 85%;
         max-width: auto;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #content {
+        width: calc(100% - 40px);
+        margin-top: 68px;
+
+        .buy-more-shares.box-container {
+            height: 787px;
+            box-sizing: border-box;
+
+            .shares-mobile {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .shares-chart {
+                position: absolute;
+                top: 260px;
+                left: 50%;
+                transform: translateX(-50%)
+            }
+        }
+
+        .box-container {
+            padding: 40px 20px;
+        }
+
+        .content-img {
+            height: 266px;
+            margin-bottom: 24px;
+        }
+
+        .title-container {
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .labeled_box_label {
+            text-align: center;
+        }
+    }
+
+    #investors-distribution {
+        .investors-container {
+            min-height: 630px;
+            justify-content: space-between;
+
+            .pie-chart-container {
+                top: 100px;
+            }
+
+            .holder_list_container {
+                margin-top: 300px;
+            }
+        }
     }
 }

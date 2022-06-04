@@ -56,7 +56,7 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
             accept="image/*"
           />
         </div>
-        <div className="ft-color-black">or Drag and drop here</div>
+        <div className="ft-color-black mt-7">or Drag and drop here</div>
       </div>
 
       {/* crop image: gets image from inputImg hook, updates it via updateCrop */}

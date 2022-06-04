@@ -14,6 +14,10 @@
         flex-direction: column;
         gap: 24px;
 
+        .close-icon {
+            display: none;
+        }
+
         .text {
             color: #000000;
             font-family: "Gilroy-Bold";
@@ -43,7 +47,7 @@
     }
 }
 
-.my_address > a {
+.my_address>a {
     color: black;
     font-size: 18px;
 }
@@ -106,6 +110,12 @@
 
         .my-account-container {
             border: none;
+            height: 350px;
+            box-sizing: border-box;
+
+            .close-icon {
+                display: block;
+            }
 
             .my-address {
                 width: 50%;
@@ -120,6 +130,32 @@
     @keyframes wallet {
         100% {
             transform: translateY(0%);
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #rightcol {
+        bottom: auto;
+        top: 48px;
+        height: calc(100vh - 48px);
+        border: none;
+        z-index: 1900;
+
+        .my-account-container {
+            .text {
+                font-size: 32px;
+            }
+
+            .my-address {
+                width: 100%;
+            }
+
+            .btn-block {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
         }
     }
 }
