@@ -11,6 +11,8 @@ import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { connectWalletAndUpdate } from "../shared_functions";
 import { SubmitButton } from "../app_comps/SubmitButton";
+import { BuyCurrencyInfoView } from "../buy_currency/BuyCurrencyInfoView";
+import Modal from "../Modal";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -51,6 +53,9 @@ export const CreateDao = ({ deps }) => {
   const navigate = useNavigate();
 
   const investorsShareChart = useRef(null);
+
+  const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
+    useState(false);
 
   useEffect(() => {
     if (investorsShareChart.current) {
@@ -167,7 +172,8 @@ export const CreateDao = ({ deps }) => {
               setImageBytesError,
               setSocialMediaUrlError,
               setMinRaiseTargetError,
-              setMinRaiseTargetEndDateError
+              setMinRaiseTargetEndDateError,
+              setShowBuyCurrencyInfoModal
             );
           }}
         />
@@ -180,6 +186,17 @@ export const CreateDao = ({ deps }) => {
       {" "}
       <ContentTitle title="Create project" />
       {formView()}
+      {showBuyCurrencyInfoModal && (
+        <Modal
+          title={"Top your account"}
+          onCloseClick={() => setShowBuyCurrencyInfoModal(false)}
+        >
+          <BuyCurrencyInfoView
+            deps={deps}
+            closeModal={() => setShowBuyCurrencyInfoModal(false)}
+          />
+        </Modal>
+      )}
     </div>
   );
 };

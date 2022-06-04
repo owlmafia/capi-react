@@ -32,7 +32,8 @@ export const createDao = async (
   setLogoUrlError,
   setSocialMediaUrlError,
   setMinRaiseTargetError,
-  setMinRaiseTargetEndDateError
+  setMinRaiseTargetEndDateError,
+  setShowBuyCurrencyInfoModal
 ) => {
   const {
     bridge_create_dao_assets_txs,
@@ -103,6 +104,8 @@ export const createDao = async (
 
       // show a general message additionally, just in case
       statusMsg.error("Please fix the errors");
+    } else if (e.id === "not_enough_algos") {
+      setShowBuyCurrencyInfoModal(true);
     } else {
       statusMsg.error(e);
     }
