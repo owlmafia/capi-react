@@ -4,7 +4,6 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { invest } from "./controller";
-// import arrow from "../images/svg/arrow.svg";
 
 export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
@@ -18,7 +17,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
     return (
       <div className="buy-more-shares box-container d-flex">
         <div className="w-60 shares-mobile">
-          {/* <div id="left-block-shares"> */}
           <div className="available-shares">
             <div className="title">{"Buy more shares"}</div>
             <div className="mb-4 flex-block">
@@ -44,7 +42,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               <div>{"Your unlocked shares"}</div>
             </div>
           </div>
-          <div className="input-buttons">
+          <div>
             <LabeledInput
               label={"Buy shares"}
               placeholder={"Enter amount of shares"}
@@ -72,60 +70,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
               }}
             />
           </div>
-          {/* </div> */}
-          {/* <div className="available-shares">
-            <div className="title">{"Buy more shares"}</div>
-            <div className="mb-4 flex-block">
-              <div className="subTitle">{"Available Shares in project"}</div>
-              <div className="subTitle">{dao.share_supply}</div>
-            </div>
-            <div className="chartBlock">
-              <div className="numbers ft-weight-600">
-                {deps.investmentData.available_shares}
-              </div>
-              <div>{"Not owned"}</div>
-            </div>
-            <div className="chartBlock">
-              <div className="numbers ft-weight-600">
-                {deps.investmentData.investor_locked_shares}
-              </div>
-              <div>{"Your locked shares"}</div>
-            </div>
-            <div className="chartBlock">
-              <div className="numbers ft-weight-600">
-                {deps.investmentData.investor_unlocked_shares}
-              </div>
-              <div>{"Your unlocked shares"}</div>
-            </div>
-          </div>
-          <div className="input-buttons">
-            <LabeledInput
-              label={"Buy shares"}
-              placeholder={"Enter amount of shares"}
-              inputValue={buySharesAmount}
-              onChange={(input) => setBuySharesAmount(input)}
-              errorMsg={buySharesAmountError}
-            />
-            <SubmitButton
-              label={"Buy shares"}
-              className="button-primary"
-              isLoading={submitting}
-              disabled={deps.investmentData.available_shares === "0"}
-              onClick={async () => {
-                await invest(
-                  deps.myAddress,
-                  setSubmitting,
-                  deps.statusMsg,
-                  deps.updateMyBalance,
-                  params.id,
-                  dao,
-                  deps.buySharesAmount,
-                  deps.updateMyShares,
-                  deps.updateFunds
-                );
-              }}
-            />
-          </div> */}
           <div className="shares-chart">
             <SharesDistributionChart
               sharesDistr={[
