@@ -186,7 +186,7 @@ export const CreateDao = ({ deps }) => {
       {" "}
       <ContentTitle title="Create project" />
       {formView()}
-      {showBuyCurrencyInfoModal && (
+      {showBuyCurrencyInfoModal && deps.myAddress && (
         <Modal
           title={"Top your account"}
           onCloseClick={() => setShowBuyCurrencyInfoModal(false)}

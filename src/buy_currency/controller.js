@@ -1,9 +1,13 @@
 const wasmPromise = import("wasm");
 
-export const startBuyCurrencyFlow = async (statusMsg, closeModal) => {
+export const startBuyCurrencyFlow = async (
+  statusMsg,
+  closeModal,
+  myAddress
+) => {
   try {
     const { bridge_reserve_wyre } = await wasmPromise;
-    const reserveWyreRes = await bridge_reserve_wyre();
+    const reserveWyreRes = await bridge_reserve_wyre({ address: myAddress });
 
     // TODO return only reservation in rust - we don't use url
     openWyreCheckoutDialog(statusMsg, reserveWyreRes.reservation, closeModal);
