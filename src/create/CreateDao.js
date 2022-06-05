@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import renderPieChart from "../charts/renderPieChart";
 import {
   LabeledCurrencyInput,
@@ -9,10 +9,10 @@ import { ContentTitle } from "../ContentTitle";
 import { createDao } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
-import { connectWalletAndUpdate } from "../shared_functions";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyCurrencyInfoView } from "../buy_currency/BuyCurrencyInfoView";
 import Modal from "../Modal";
+import { SelectWallet } from "../wallet/SelectWallet";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -57,6 +57,9 @@ export const CreateDao = ({ deps }) => {
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(false);
 
+  const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
+  const [pendingSubmitDao, setPendingSubmitDao] = useState(false);
+
   useEffect(() => {
     if (investorsShareChart.current) {
       // investors share % expected to be 0-100 (user input)
@@ -69,6 +72,46 @@ export const CreateDao = ({ deps }) => {
     // for now no deps - mutable value doesn't cause a re-render
     //   }, [investorsShare, investorsShareChart.current]);
   });
+
+  useEffect(async () => {
+    if (deps.wallet && pendingSubmitDao && deps.myAddress) {
+      setPendingSubmitDao(false);
+
+      await createDao(
+        deps.myAddress,
+        setSubmitting,
+        deps.statusMsg,
+        deps.updateMyBalance,
+
+        daoName,
+        daoDescr,
+        shareCount,
+        sharePrice,
+        investorsShare,
+        sharesForInvestors,
+        imageBytes,
+        socialMediaUrl,
+        minRaiseTarget,
+        minRaiseTargetEndDate,
+
+        navigate,
+
+        setDaoNameError,
+        setDaoDescrError,
+        setShareCountError,
+        setSharePriceError,
+        setInvestorsShareError,
+        setSharesForInvestorsError,
+        setImageBytesError,
+        setSocialMediaUrlError,
+        setMinRaiseTargetError,
+        setMinRaiseTargetEndDateError,
+        setShowBuyCurrencyInfoModal,
+
+        deps.wallet
+      );
+    }
+  }, [pendingSubmitDao, deps.wallet, deps.myAddress]);
 
   const formView = () => {
     return (
@@ -133,48 +176,15 @@ export const CreateDao = ({ deps }) => {
             investorsShare === ""
           }
           onClick={async () => {
-            // connect wallet if not connected yet
+            // signalize that we want to submit the dao
+            // if other dependencies are already present (connected wallet / address), an effect will trigger submit
+            // if they're not, we start the wallet connection flow next (select wallet modal),
+            // which sets these dependencies when finished, which triggers the effect too
+            setPendingSubmitDao(true);
             var myAddress = deps.myAddress;
             if (myAddress === "") {
-              myAddress = await connectWalletAndUpdate(
-                deps.statusMsg,
-                deps.setMyAddress,
-                deps.setMyAddressDisplay,
-                deps.updateMyBalance
-              );
+              setShowSelectWalletModal(true);
             }
-
-            await createDao(
-              myAddress,
-              setSubmitting,
-              deps.statusMsg,
-              deps.updateMyBalance,
-
-              daoName,
-              daoDescr,
-              shareCount,
-              sharePrice,
-              investorsShare,
-              sharesForInvestors,
-              imageBytes,
-              socialMediaUrl,
-              minRaiseTarget,
-              minRaiseTargetEndDate,
-
-              navigate,
-
-              setDaoNameError,
-              setDaoDescrError,
-              setShareCountError,
-              setSharePriceError,
-              setInvestorsShareError,
-              setSharesForInvestorsError,
-              setImageBytesError,
-              setSocialMediaUrlError,
-              setMinRaiseTargetError,
-              setMinRaiseTargetEndDateError,
-              setShowBuyCurrencyInfoModal
-            );
           }}
         />
       </div>
@@ -194,6 +204,19 @@ export const CreateDao = ({ deps }) => {
           <BuyCurrencyInfoView
             deps={deps}
             closeModal={() => setShowBuyCurrencyInfoModal(false)}
+          />
+        </Modal>
+      )}
+      {showSelectWalletModal && (
+        <Modal
+          title={"Choose a wallet"}
+          onCloseClick={() => setShowSelectWalletModal(false)}
+        >
+          <SelectWallet
+            deps={deps}
+            onConnected={async () => {
+              setShowSelectWalletModal(false);
+            }}
           />
         </Modal>
       )}

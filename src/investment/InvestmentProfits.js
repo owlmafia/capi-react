@@ -70,7 +70,8 @@ export const InvestmentProfits = ({ deps }) => {
                 deps.updateMyBalance,
                 params.id,
                 deps.updateInvestmentData,
-                deps.updateFunds
+                deps.updateFunds,
+                deps.wallet
               );
             }}
           />

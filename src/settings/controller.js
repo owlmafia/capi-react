@@ -1,5 +1,3 @@
-import { signTxs } from "../MyAlgo";
-
 const wasmPromise = import("wasm");
 
 export const prefillInputs = async (
@@ -40,7 +38,8 @@ export const updateApp = async (
   owner,
   approvalVersion,
   clearVersion,
-  updateVersion
+  updateVersion,
+  wallet
 ) => {
   try {
     const { bridge_update_app_txs, bridge_submit_update_app } =
@@ -56,7 +55,7 @@ export const updateApp = async (
     console.log("Update app res: %o", updateAppRes);
     showProgress(false);
 
-    let updateAppResSigned = await signTxs(updateAppRes.to_sign);
+    let updateAppResSigned = await wallet.signTxs(updateAppRes.to_sign);
     console.log("updateAppResSigned: " + JSON.stringify(updateAppResSigned));
 
     showProgress(true);
@@ -75,7 +74,7 @@ export const updateApp = async (
   }
 };
 
-export const updateDaoData = async (statusMsg, showProgress, data) => {
+export const updateDaoData = async (statusMsg, showProgress, data, wallet) => {
   try {
     const { bridge_update_data, bridge_submit_update_dao_data } =
       await wasmPromise;
@@ -85,7 +84,7 @@ export const updateDaoData = async (statusMsg, showProgress, data) => {
     console.log("Update DAO data res: %o", updateDataRes);
     showProgress(false);
 
-    let updateDataResSigned = await signTxs(updateDataRes.to_sign);
+    let updateDataResSigned = await wallet.signTxs(updateDataRes.to_sign);
     console.log("updateDataResSigned: " + JSON.stringify(updateDataResSigned));
 
     showProgress(true);

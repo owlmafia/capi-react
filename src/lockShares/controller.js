@@ -1,5 +1,3 @@
-import { signTxs } from "../MyAlgo";
-
 // Note: no locking for the embedded view because there's no design yet
 
 const wasmPromise = import("wasm");
@@ -14,7 +12,8 @@ export const lock = async (
   lockSharesCount,
   updateMyShares,
   updateInvestmentData,
-  onLockOpt
+  onLockOpt,
+  wallet
 ) => {
   try {
     const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
@@ -32,7 +31,7 @@ export const lock = async (
     var optInToAppsSignedOptional = null;
     if (optInToAppsRes.to_sign != null) {
       showProgress(false);
-      optInToAppsSignedOptional = await signTxs(optInToAppsRes.to_sign);
+      optInToAppsSignedOptional = await wallet.signTxs(optInToAppsRes.to_sign);
     }
     console.log(
       "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
@@ -51,7 +50,7 @@ export const lock = async (
     console.log("lockRes: " + JSON.stringify(lockRes));
     showProgress(false);
 
-    let lockResSigned = await signTxs(lockRes.to_sign);
+    let lockResSigned = await wallet.signTxs(lockRes.to_sign);
     console.log("lockResSigned: " + JSON.stringify(lockResSigned));
 
     showProgress(true);

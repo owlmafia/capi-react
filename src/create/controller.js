@@ -1,5 +1,4 @@
 import { toBytesForRust } from "../common_functions/common";
-import { signTxs } from "../MyAlgo";
 import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
@@ -33,7 +32,9 @@ export const createDao = async (
   setSocialMediaUrlError,
   setMinRaiseTargetError,
   setMinRaiseTargetEndDateError,
-  setShowBuyCurrencyInfoModal
+  setShowBuyCurrencyInfoModal,
+
+  wallet
 ) => {
   const {
     bridge_create_dao_assets_txs,
@@ -42,6 +43,7 @@ export const createDao = async (
   } = await wasmPromise;
 
   statusMsg.clear();
+
   showProgress(true);
 
   try {
@@ -62,7 +64,7 @@ export const createDao = async (
     });
     showProgress(false);
 
-    let createAssetSigned = await signTxs(createDaoAssetsRes.to_sign);
+    let createAssetSigned = await wallet.signTxs(createDaoAssetsRes.to_sign);
     console.log("createAssetSigned: " + JSON.stringify(createAssetSigned));
 
     showProgress(true);
@@ -73,7 +75,7 @@ export const createDao = async (
     console.log("createDaoRes: " + JSON.stringify(createDaoRes));
     showProgress(false);
 
-    let createDaoSigned = await signTxs(createDaoRes.to_sign);
+    let createDaoSigned = await wallet.signTxs(createDaoRes.to_sign);
     console.log("createDaoSigned: " + JSON.stringify(createDaoSigned));
 
     showProgress(true);

@@ -13,7 +13,12 @@ import {
   initLog,
 } from "./controller";
 import Modal from "./Modal";
-import { updateInvestmentData_, updateFunds_ } from "./shared_functions";
+import {
+  updateInvestmentData_,
+  updateFunds_,
+  shortedAddress,
+} from "./shared_functions";
+import OpenWalletModal from "./wallet/OpenWalletModal";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -40,6 +45,11 @@ const App = () => {
 
   const windowSize = useWindowSize();
 
+  const [wallet, setWallet] = useState(null);
+
+  // this is only used when the selected wallet is wallet connect
+  const [wcShowOpenWalletModal, setWcShowOpenWalletModal] = useState(false);
+
   const updateMyBalance = useCallback(
     async (myAddress) => {
       if (myAddress) {
@@ -55,6 +65,22 @@ const App = () => {
     }
     asyncInit();
   }, [statusMsgUpdater]);
+
+  useEffect(() => {
+    if (wallet) {
+      wallet.onPageLoad();
+    }
+  }, [wallet]);
+
+  useEffect(() => {
+    async function nestedAsync() {
+      if (myAddress) {
+        setMyAddressDisplay(shortedAddress(myAddress));
+        await updateMyBalance(myAddress);
+      }
+    }
+    nestedAsync();
+  }, [myAddress]);
 
   const updateDao = useCallback(
     async (daoId) => {
@@ -154,6 +180,11 @@ const App = () => {
           daoVersion: daoVersion,
           updateDaoVersion: updateDaoVersion,
 
+          wallet: wallet,
+          setWallet: setWallet,
+
+          setWcShowOpenWalletModal: setWcShowOpenWalletModal,
+
           size: windowSizeClasses(windowSize),
         })}
       </BrowserRouter>
@@ -184,6 +215,9 @@ const App = () => {
             <Modal title={modal.title} onCloseClick={() => setModal(null)}>
               {modal.body}
             </Modal>
+          )}
+          {wcShowOpenWalletModal && (
+            <OpenWalletModal setShowModal={setWcShowOpenWalletModal} />
           )}
         </div>
       </div>

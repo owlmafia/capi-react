@@ -51,7 +51,8 @@ export const Settings = ({ deps }) => {
                   deps.myAddress,
                   deps.daoVersion.update_data.new_approval_version,
                   deps.daoVersion.update_data.new_clear_version,
-                  deps.updateDaoVersion
+                  deps.updateDaoVersion,
+                  deps.wallet
                 );
               }}
             />
@@ -68,7 +69,7 @@ export const Settings = ({ deps }) => {
       deps.myAddress && (
         <div>
           {appVersionView()}
-          <UpdateDaoData statusMsg={deps.statusMsg} />
+          <UpdateDaoData deps={deps} />
         </div>
       )
     );

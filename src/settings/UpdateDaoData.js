@@ -6,7 +6,7 @@ import { prefillInputs, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { toBytesForRust } from "../common_functions/common";
 
-export const UpdateDaoData = ({ statusMsg }) => {
+export const UpdateDaoData = ({ deps }) => {
   let params = useParams();
 
   const [daoName, setDaoName] = useState("");
@@ -25,7 +25,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
     async function prefill() {
       if (params.id) {
         await prefillInputs(
-          statusMsg,
+          deps.statusMsg,
           params.id,
           setDaoName,
           setDaoDescr,
@@ -39,7 +39,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
       }
     }
     prefill();
-  }, [params.id, statusMsg]);
+  }, [params.id, deps.statusMsg]);
 
   const body = () => {
     return (
@@ -90,20 +90,25 @@ export const UpdateDaoData = ({ statusMsg }) => {
           className="button-primary"
           isLoading={submitting}
           onClick={async () => {
-            updateDaoData(statusMsg, setSubmitting, {
-              dao_id: params.id,
-              owner: owner,
+            updateDaoData(
+              deps.statusMsg,
+              setSubmitting,
+              {
+                dao_id: params.id,
+                owner: owner,
 
-              customer_escrow: customerEscrow,
-              customer_escrow_version: customerEscrowVersion,
+                customer_escrow: customerEscrow,
+                customer_escrow_version: customerEscrowVersion,
 
-              project_name: daoName,
-              project_desc: daoDescr,
-              share_price: sharePrice,
+                project_name: daoName,
+                project_desc: daoDescr,
+                share_price: sharePrice,
 
-              image: await toBytesForRust(imageBytes),
-              social_media_url: socialMediaUrl,
-            });
+                image: await toBytesForRust(imageBytes),
+                social_media_url: socialMediaUrl,
+              },
+              deps.wallet
+            );
           }}
         />
       </div>

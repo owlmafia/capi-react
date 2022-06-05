@@ -65,7 +65,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
                   dao,
                   deps.buySharesAmount,
                   deps.updateMyShares,
-                  deps.updateFunds
+                  deps.updateFunds,
+                  deps.wallet
                 );
               }}
             />
@@ -75,7 +76,9 @@ export const BuyMoreShares = ({ deps, dao }) => {
               sharesDistr={[
                 to_pie_chart_slice(deps.investmentData.available_shares),
                 to_pie_chart_slice(deps.investmentData.investor_locked_shares),
-                to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
+                to_pie_chart_slice(
+                  deps.investmentData.investor_unlocked_shares
+                ),
               ]}
             />
           </div>

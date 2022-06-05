@@ -1,5 +1,3 @@
-import { signTxs } from "../MyAlgo";
-
 const wasmPromise = import("wasm");
 
 export const init = async (daoId, daoMaybe, setDao, statusMsg) => {
@@ -28,7 +26,8 @@ export const withdraw = async (
   daoId,
   withdrawalAmount,
   withdrawalDescr,
-  updateFunds
+  updateFunds,
+  wallet
 ) => {
   try {
     const { bridge_withdraw, bridge_submit_withdraw } = await wasmPromise;
@@ -45,7 +44,7 @@ export const withdraw = async (
     console.log("withdrawRes: " + JSON.stringify(withdrawRes));
     showProgress(false);
 
-    let withdrawResSigned = await signTxs(withdrawRes.to_sign);
+    let withdrawResSigned = await wallet.signTxs(withdrawRes.to_sign);
     console.log("withdrawResSigned: " + withdrawResSigned);
 
     showProgress(true);

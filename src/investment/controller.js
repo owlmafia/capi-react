@@ -1,5 +1,3 @@
-import { signTxs } from "../MyAlgo";
-
 const wasmPromise = import("wasm");
 
 export const init = async (
@@ -35,7 +33,8 @@ export const unlock = async (
   updateMyShares,
   daoId,
   dao,
-  updateInvestmentData
+  updateInvestmentData,
+  wallet
 ) => {
   try {
     const { bridge_unlock, bridge_submit_unlock } = await wasmPromise;
@@ -49,7 +48,7 @@ export const unlock = async (
     console.log("unlockRes: " + JSON.stringify(unlockRes));
     showProgress(false);
 
-    let unlockResSigned = await signTxs(unlockRes.to_sign);
+    let unlockResSigned = await wallet.signTxs(unlockRes.to_sign);
     console.log("unlockResSigned: " + JSON.stringify(unlockResSigned));
 
     showProgress(true);
@@ -80,7 +79,8 @@ export const invest = async (
   dao,
   buySharesCount,
   updateMyShares,
-  updateFunds
+  updateFunds,
+  wallet
 ) => {
   try {
     const {
@@ -101,7 +101,7 @@ export const invest = async (
     var optInToAppsSignedOptional = null;
     if (optInToAppsRes.to_sign != null) {
       showProgress(false);
-      optInToAppsSignedOptional = await signTxs(optInToAppsRes.to_sign);
+      optInToAppsSignedOptional = await wallet.signTxs(optInToAppsRes.to_sign);
     }
     console.log(
       "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
@@ -120,7 +120,7 @@ export const invest = async (
     console.log("buyRes: " + JSON.stringify(buyRes));
     showProgress(false);
 
-    let buySharesSigned = await signTxs(buyRes.to_sign);
+    let buySharesSigned = await wallet.signTxs(buyRes.to_sign);
     console.log("buySharesSigned: " + JSON.stringify(buySharesSigned));
 
     showProgress(true);

@@ -61,7 +61,8 @@ export const Withdrawal = ({ deps }) => {
                 params.id,
                 withdrawalAmount,
                 withdrawalDescr,
-                deps.updateFunds
+                deps.updateFunds,
+                deps.wallet
               );
             }}
           />
