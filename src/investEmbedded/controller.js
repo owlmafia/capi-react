@@ -1,4 +1,3 @@
-import { signTxs } from "../MyAlgo";
 import { toErrorMsg } from "../validation";
 
 // Note: no locking for the embedded view because there's no design yet
@@ -53,7 +52,8 @@ export const invest = async (
   buySharesCount,
   updateMyShares,
   updateFunds,
-  setShareAmountError
+  setShareAmountError,
+  wallet
 ) => {
   try {
     const {
@@ -74,7 +74,7 @@ export const invest = async (
     var optInToAppsSignedOptional = null;
     if (optInToAppsRes.to_sign != null) {
       showProgress(false);
-      optInToAppsSignedOptional = await signTxs(optInToAppsRes.to_sign);
+      optInToAppsSignedOptional = await wallet.signTxs(optInToAppsRes.to_sign);
     }
     console.log(
       "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
@@ -93,7 +93,7 @@ export const invest = async (
     console.log("buyRes: " + JSON.stringify(buyRes));
     showProgress(false);
 
-    let buySharesSigned = await signTxs(buyRes.to_sign);
+    let buySharesSigned = await wallet.signTxs(buyRes.to_sign);
     console.log("buySharesSigned: " + JSON.stringify(buySharesSigned));
 
     showProgress(true);
@@ -120,75 +120,6 @@ export const invest = async (
     } else {
       statusMsg.error(e);
     }
-    showProgress(false);
-  }
-};
-
-export const lock = async (
-  myAddress,
-  showProgress,
-  statusMsg,
-  updateMyBalance,
-  daoId,
-  dao,
-  lockSharesCount,
-  updateMyShares
-) => {
-  try {
-    const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
-      await wasmPromise;
-    statusMsg.clear();
-    ///////////////////////////////////
-    // TODO refactor invest/lock
-    // 1. sign tx for app opt-in
-    showProgress(true);
-    let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
-      app_id: "" + dao.app_id,
-      investor_address: myAddress,
-    });
-    console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
-    var optInToAppsSignedOptional = null;
-    if (optInToAppsRes.to_sign != null) {
-      showProgress(false);
-      optInToAppsSignedOptional = await signTxs(optInToAppsRes.to_sign);
-    }
-    console.log(
-      "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
-    );
-    ///////////////////////////////////
-
-    showProgress(true);
-    // 2. buy the shares (requires app opt-in for local state)
-    // TODO write which local state
-
-    let lockRes = await bridge_lock({
-      dao_id: daoId,
-      investor_address: myAddress,
-    });
-    console.log("lockRes: " + JSON.stringify(lockRes));
-    showProgress(false);
-
-    let lockResSigned = await signTxs(lockRes.to_sign);
-    console.log("lockResSigned: " + JSON.stringify(lockResSigned));
-
-    showProgress(true);
-
-    let submitLockRes = await bridge_submit_lock({
-      app_opt_ins: optInToAppsSignedOptional,
-      txs: lockResSigned,
-    });
-    console.log("submitLockRes: " + JSON.stringify(submitLockRes));
-    showProgress(false);
-
-    await updateMyBalance(myAddress);
-
-    statusMsg.success(
-      "Congratulations! you locked " + lockSharesCount + " shares."
-    );
-
-    updateMyShares(daoId, myAddress);
-  } catch (e) {
-    statusMsg.error(e);
     showProgress(false);
   }
 };

@@ -1,5 +1,3 @@
-import { connectWallet, signTxs } from "./MyAlgo";
-
 const wasmPromise = import("wasm");
 
 export const updateInvestmentData_ = async (
@@ -31,7 +29,8 @@ export const retrieveProfits = async (
   updateMyBalance,
   daoId,
   updateInvestmentData,
-  updateFunds
+  updateFunds,
+  wallet
 ) => {
   try {
     const { bridge_claim, bridge_submit_claim } = await wasmPromise;
@@ -45,7 +44,7 @@ export const retrieveProfits = async (
     console.log("claimRes: " + JSON.stringify(claimRes));
     showProgress(false);
 
-    let claimResSigned = await signTxs(claimRes.to_sign);
+    let claimResSigned = await wallet.signTxs(claimRes.to_sign);
     console.log("claimResSigned: " + JSON.stringify(claimResSigned));
 
     showProgress(true);
@@ -72,6 +71,8 @@ export const retrieveProfits = async (
 };
 
 export const shortedAddress = (address) => {
+  console.log("shortening address: " + address);
+
   const short_chars = 3;
   const leading = address.substring(0, short_chars);
   const trailing = address.substring(address.length - short_chars);
@@ -102,25 +103,6 @@ export const updateFunds_ = async (
       customer_escrow: viewDao.dao.customer_escrow_address,
     });
     setFundsChange(balance_change_res.change);
-  } catch (e) {
-    statusMsg.error(e);
-  }
-};
-
-export const connectWalletAndUpdate = async (
-  statusMsg,
-  setMyAddress,
-  setMyAddressDisplay,
-  updateMyBalance
-) => {
-  try {
-    let address = await connectWallet();
-    setMyAddress(address);
-    setMyAddressDisplay(shortedAddress(address));
-
-    await updateMyBalance(address);
-
-    return address; // in case it's needed for immediate processing
   } catch (e) {
     statusMsg.error(e);
   }

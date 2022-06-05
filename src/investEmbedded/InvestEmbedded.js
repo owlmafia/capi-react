@@ -100,7 +100,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
             buySharesCount,
             deps.updateMyShares,
             deps.updateFunds,
-            setShareAmountError
+            setShareAmountError,
+            deps.wallet
           );
         }}
       />

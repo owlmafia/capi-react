@@ -25,7 +25,8 @@ export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
           input,
           deps.updateMyShares,
           deps.updateInvestmentData,
-          onLockOpt
+          onLockOpt,
+          deps.wallet
         );
       }}
     />

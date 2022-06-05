@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 import arrow from "../images/svg/arrow-right.svg";
-import { connectWalletAndUpdate, retrieveProfits } from "../shared_functions";
+import { retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";
 import Progress from "../app_comps/Progress";
 import { SubmitButton } from "./SubmitButton";
+import { SelectWallet } from "../wallet/SelectWallet";
+import Modal from "../Modal";
 
 export const MyAccount = ({ deps, daoId }) => {
+  const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
+
   return (
     <div className="my-account-container">
       <div className="d-flex justify-between">
@@ -14,8 +18,19 @@ export const MyAccount = ({ deps, daoId }) => {
       </div>
       <div className="my-address">
         {myAddressView(deps, daoId)}
-        {connectButton(deps)}
+        {connectButton(deps, setShowSelectWalletModal)}
       </div>
+      {showSelectWalletModal && (
+        <Modal
+          title={"Choose a wallet"}
+          onCloseClick={() => setShowSelectWalletModal(false)}
+        >
+          <SelectWallet
+            deps={deps}
+            onConnected={() => setShowSelectWalletModal(false)}
+          />
+        </Modal>
+      )}
     </div>
   );
 };
@@ -49,7 +64,7 @@ const myAddressView = (deps, daoId) => {
               className="arrow"
               src={arrow}
               alt="arrow"
-              onClick={() => deps.setMyAddress("")}
+              onClick={async () => await disconnect()}
             />
           </div>
         </div>
@@ -83,7 +98,8 @@ const DividendSection = ({ deps, daoId }) => {
                 deps.updateMyBalance,
                 daoId,
                 deps.updateInvestmentData,
-                deps.updateFunds
+                deps.updateFunds,
+                deps.wallet
               );
             }}
           />
@@ -95,18 +111,13 @@ const DividendSection = ({ deps, daoId }) => {
   }
 };
 
-const connectButton = (deps) => {
+const connectButton = (deps, setShowSelectWalletModal) => {
   if (deps.myAddress === "") {
     return (
       <button
         className="button-primary full-width-btn"
         onClick={async (event) => {
-          await connectWalletAndUpdate(
-            deps.statusMsg,
-            deps.setMyAddress,
-            deps.setMyAddressDisplay,
-            deps.updateMyBalance
-          );
+          setShowSelectWalletModal(true);
         }}
       >
         {"Connect My Algo wallet"}
@@ -114,5 +125,14 @@ const connectButton = (deps) => {
     );
   } else {
     return null;
+  }
+};
+
+const disconnect = async (deps) => {
+  try {
+    await deps.wallet.disconnect();
+    deps.setMyAddress("");
+  } catch (e) {
+    deps.statusMsg.error(e);
   }
 };

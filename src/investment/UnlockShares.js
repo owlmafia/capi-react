@@ -23,7 +23,8 @@ export const UnlockShares = ({ deps, dao, daoId }) => {
           deps.updateMyShares,
           daoId,
           dao,
-          deps.updateInvestmentData
+          deps.updateInvestmentData,
+          deps.wallet
         );
       }}
     />
