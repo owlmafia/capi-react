@@ -15,7 +15,6 @@
     margin-bottom: 30px;
     justify-content: space-between;
     gap: 20px;
-    overflow: hidden;
 
     &__amount {
         &__container {
@@ -121,22 +120,78 @@
 }
 
 @media only screen and (max-width: 650px) {
-    .funds_act_entry__amount__container {
-        gap: 4px;
+    .funds_act_entry-tab {
+        display: flex;
+        position: relative;
+        box-sizing: border-box;
+        padding: 20px;
 
-        .arrow-icon {
-            width: 16px;
-            height: 16px;
-            margin-top: 22px;
+        .details {
+            width: auto;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            height: calc(100% - 40px);
+            justify-content: space-between;
+
+            .funds_act_entry__date {
+                font-size: 12px;
+                width: 100px;
+            }
         }
 
-        .address {
-            margin-left: -28px;
+        .funds_act_entry__body {
+            padding-left: 32px;
+            width: 100%;
+
+            .order-2 {
+                order: 2;
+            }
+
+            .order-1 {
+                order: 1;
+            }
+
+            .order-3 {
+                order: 3;
+            }
+
+            .description {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .status {
+                position: absolute;
+                top: 55px;
+                left: 124px;
+            }
+
+            .funds_act_entry__amount__container {
+                gap: 4px;
+
+                .arrow-icon {
+                    width: 16px;
+                    height: 16px;
+                    margin-top: 22px;
+                }
+
+                .funds-arrow-icon {
+                    width: 24px;
+                    height: 24px;
+                    top: 20px;
+                }
+
+                .address {
+                    margin-left: -28px;
+                }
+            }
         }
 
-        .type-label {
-            color: #787E82;
-            margin-left: 8px;
+        .arrow {
+            position: absolute;
+            left: 16px;
+            top: 16px;
         }
     }
 }

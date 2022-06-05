@@ -87,7 +87,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     left: 30%;
 }
 
-.chart_with_legends_container > svg {
+.chart_with_legends_container>svg {
     display: block;
 }
 
@@ -105,6 +105,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         }
 
         .charts-select.css-b62m3t-container {
+
             .css-1s2u09g-control,
             .css-1pahdxg-control,
             .css-1f43avz-a11yText-A11yText {
@@ -156,5 +157,14 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     .chart_legends_container {
         justify-content: flex-start;
         padding-left: 120px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .chart_legends_container {
+        padding-left: 0;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 32px;
     }
 }

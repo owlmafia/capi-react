@@ -3,6 +3,8 @@
 #rightcol {
     width: 23%;
     min-width: 300px;
+    height: 100vh;
+    overflow-y: scroll;
 
     .my-account-container {
         border: 1px solid rgb(237, 231, 231);
@@ -141,6 +143,7 @@
         height: calc(100vh - 48px);
         border: none;
         z-index: 1900;
+        transform: translateY(-50%);
 
         .my-account-container {
             .text {
@@ -156,6 +159,12 @@
                 display: flex;
                 justify-content: center;
             }
+        }
+    }
+
+    @keyframes wallet {
+        100% {
+            transform: translateY(0%);
         }
     }
 }

@@ -30,16 +30,16 @@ export const FundsActivityEntry = ({ entry }) => {
       </div>
       <div className="funds_act_entry-tab">
         <div className="funds_act_entry__body">
-          <div className="d-flex align-center">
+          <div className="d-flex align-center order-2">
             <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
           </div>
-          <div className="d-flex align-center gap-32">
+          <div className="d-flex align-center gap-32 order-1">
             <AmountView entry={entry} />
-            <div className="ft-color-black ft-size-14 ft-color-grey">
+            <div className="ft-color-black ft-size-14 ft-color-grey status">
               {entry.type_label}
             </div>
           </div>
-          <div className="description">{entry.description}</div>
+          <div className="description order-3">{entry.description}</div>
         </div>
         <div className="details">
           <div className="funds_act_entry__date">{entry.date}</div>
@@ -68,9 +68,7 @@ const AmountView = ({ entry }) => {
   return (
     <div className="funds_act_entry__amount__container">
       <img
-        width="48px"
-        className="arrow"
-        height="48px"
+        className="arrow funds-arrow-icon"
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"
       />

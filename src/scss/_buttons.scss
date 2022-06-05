@@ -101,6 +101,7 @@ button {
     cursor: pointer;
 
     &:hover {
+        transition: 0.3s;
         background-color: #ffcccc;
     }
 
