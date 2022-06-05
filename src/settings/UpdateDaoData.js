@@ -101,7 +101,7 @@ export const UpdateDaoData = ({ statusMsg }) => {
               project_desc: daoDescr,
               share_price: sharePrice,
 
-              image: toBytesForRust(imageBytes),
+              image: await toBytesForRust(imageBytes),
               social_media_url: socialMediaUrl,
             });
           }}

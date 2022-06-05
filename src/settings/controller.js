@@ -91,6 +91,7 @@ export const updateDaoData = async (statusMsg, showProgress, data) => {
     showProgress(true);
     let submitUpdateDaoDataRes = await bridge_submit_update_dao_data({
       tx: updateDataResSigned,
+      pt: updateDataRes.pt, // passthrough
     });
     console.log(
       "submitUpdateDaoDataRes: " + JSON.stringify(submitUpdateDaoDataRes)
