@@ -15,12 +15,6 @@ export const connectWallet = async () => {
   }
 };
 
-// Sign multiple txs (returns single signed tx)
-export const signTx = async (tx) => {
-  let signedTx = await myAlgoWallet.signTransaction(tx);
-  return toTxForRust(signedTx);
-};
-
 // Sign multiple txs (returns signed txs array)
 export const signTxs = async (tx) => {
   let signedTxs = await myAlgoWallet.signTransaction(tx);
