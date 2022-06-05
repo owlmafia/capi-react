@@ -23,6 +23,11 @@
             align-items: center;
             gap: 10px;
             width: 26%;
+
+            .arrow-icon {
+                width: 32px;
+                height: 32px;
+            }
         }
 
         &__number {
@@ -111,6 +116,27 @@
             .funds_act_entry__date {
                 font-size: 12px;
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .funds_act_entry__amount__container {
+        gap: 4px;
+
+        .arrow-icon {
+            width: 16px;
+            height: 16px;
+            margin-top: 22px;
+        }
+
+        .address {
+            margin-left: -28px;
+        }
+
+        .type-label {
+            color: #787E82;
+            margin-left: 8px;
         }
     }
 }

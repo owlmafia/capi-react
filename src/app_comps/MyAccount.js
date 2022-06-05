@@ -70,22 +70,24 @@ const DividendSection = ({ deps, daoId }) => {
         <div className="mb-5 ft-weight-600">
           {"Claimable dividend: " + deps.myDividend}
         </div>
-        <SubmitButton
-          label={"Claim"}
-          className="button-primary full-width-btn"
-          isLoading={submitting}
-          onClick={async () => {
-            await retrieveProfits(
-              deps.myAddress,
-              setSubmitting,
-              deps.statusMsg,
-              deps.updateMyBalance,
-              daoId,
-              deps.updateInvestmentData,
-              deps.updateFunds
-            );
-          }}
-        />
+        <div className="btn-block">
+          <SubmitButton
+            label={"Claim"}
+            className="button-primary full-width-btn"
+            isLoading={submitting}
+            onClick={async () => {
+              await retrieveProfits(
+                deps.myAddress,
+                setSubmitting,
+                deps.statusMsg,
+                deps.updateMyBalance,
+                daoId,
+                deps.updateInvestmentData,
+                deps.updateFunds
+              );
+            }}
+          />
+        </div>
       </div>
     );
   } else {
