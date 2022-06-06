@@ -19,6 +19,7 @@ import {
   shortedAddress,
 } from "./shared_functions";
 import OpenWalletModal from "./wallet/OpenWalletModal";
+import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -67,10 +68,13 @@ const App = () => {
   }, [statusMsgUpdater]);
 
   useEffect(() => {
-    if (wallet) {
-      wallet.onPageLoad();
-    }
-  }, [wallet]);
+    initWcWalletIfAvailable(
+      statusMsgUpdater,
+      setMyAddress,
+      setWallet,
+      setWcShowOpenWalletModal
+    );
+  }, []);
 
   useEffect(() => {
     async function nestedAsync() {

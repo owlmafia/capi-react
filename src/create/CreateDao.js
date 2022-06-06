@@ -58,7 +58,7 @@ export const CreateDao = ({ deps }) => {
     useState(false);
 
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
-  const [pendingSubmitDao, setPendingSubmitDao] = useState(false);
+  const [pendingSubmitDao, setSubmitDaoIntent] = useState(false);
 
   useEffect(() => {
     if (investorsShareChart.current) {
@@ -75,7 +75,7 @@ export const CreateDao = ({ deps }) => {
 
   useEffect(async () => {
     if (deps.wallet && pendingSubmitDao && deps.myAddress) {
-      setPendingSubmitDao(false);
+      setSubmitDaoIntent(false);
 
       await createDao(
         deps.myAddress,
@@ -180,7 +180,7 @@ export const CreateDao = ({ deps }) => {
             // if other dependencies are already present (connected wallet / address), an effect will trigger submit
             // if they're not, we start the wallet connection flow next (select wallet modal),
             // which sets these dependencies when finished, which triggers the effect too
-            setPendingSubmitDao(true);
+            setSubmitDaoIntent(true);
             var myAddress = deps.myAddress;
             if (myAddress === "") {
               setShowSelectWalletModal(true);

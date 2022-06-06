@@ -2,6 +2,23 @@ import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "algorand-walletconnect-qrcode-modal";
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
 
+export function initWcWalletIfAvailable(
+  statusMsg,
+  setMyAddress,
+  setWallet,
+  setWcShowOpenWalletModal
+) {
+  const wallet = createWcWallet(
+    statusMsg,
+    setMyAddress,
+    setWcShowOpenWalletModal
+  );
+  if (wallet.isConnected) {
+    wallet.initSession();
+    setWallet(wallet);
+  }
+}
+
 // Note: the wallet connect and my algo wallets share the same "interface"
 export function createWcWallet(
   statusMsg,
@@ -24,7 +41,7 @@ export function createWcWallet(
       if (!connector.connected) {
         await connector.createSession();
       }
-      return onConnectorConnected(connector, onAddressUpdate, onDisconnect);
+      return initSession();
     } catch (e) {
       statusMsg.error(e);
     }
@@ -42,11 +59,23 @@ export function createWcWallet(
   function onPageLoad() {
     try {
       if (connector.connected) {
-        onConnectorConnected(connector, onAddressUpdate, onDisconnect);
+        initSession();
       }
     } catch (e) {
       statusMsg.error(e);
     }
+  }
+
+  function initSession() {
+    try {
+      onConnectorConnected(connector, onAddressUpdate, onDisconnect);
+    } catch (e) {
+      statusMsg.error(e);
+    }
+  }
+
+  function isConnected() {
+    return connector.connected;
   }
 
   async function signTxs(toSign) {
@@ -64,6 +93,11 @@ export function createWcWallet(
     disconnect,
     onPageLoad,
     signTxs,
+
+    // these functions are wallet connect specific (and only used in this file)
+    // wallet connect preserves the connection between reloads, and they're needed to init the session
+    isConnected,
+    initSession,
   };
 }
 
