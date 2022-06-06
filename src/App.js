@@ -74,7 +74,7 @@ const App = () => {
       setWallet,
       setWcShowOpenWalletModal
     );
-  }, []);
+  }, [statusMsgUpdater]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -84,7 +84,7 @@ const App = () => {
       }
     }
     nestedAsync();
-  }, [myAddress]);
+  }, [myAddress, updateMyBalance]);
 
   const updateDao = useCallback(
     async (daoId) => {

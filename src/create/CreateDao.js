@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import renderPieChart from "../charts/renderPieChart";
 import {
   LabeledCurrencyInput,
@@ -73,44 +73,50 @@ export const CreateDao = ({ deps }) => {
     //   }, [investorsShare, investorsShareChart.current]);
   });
 
-  useEffect(async () => {
-    if (deps.wallet && pendingSubmitDao && deps.myAddress) {
-      setSubmitDaoIntent(false);
+  useEffect(() => {
+    async function nestedAsync() {
+      if (deps.wallet && pendingSubmitDao && deps.myAddress) {
+        setSubmitDaoIntent(false);
 
-      await createDao(
-        deps.myAddress,
-        setSubmitting,
-        deps.statusMsg,
-        deps.updateMyBalance,
+        await createDao(
+          deps.myAddress,
+          setSubmitting,
+          deps.statusMsg,
+          deps.updateMyBalance,
 
-        daoName,
-        daoDescr,
-        shareCount,
-        sharePrice,
-        investorsShare,
-        sharesForInvestors,
-        imageBytes,
-        socialMediaUrl,
-        minRaiseTarget,
-        minRaiseTargetEndDate,
+          daoName,
+          daoDescr,
+          shareCount,
+          sharePrice,
+          investorsShare,
+          sharesForInvestors,
+          imageBytes,
+          socialMediaUrl,
+          minRaiseTarget,
+          minRaiseTargetEndDate,
 
-        navigate,
+          navigate,
 
-        setDaoNameError,
-        setDaoDescrError,
-        setShareCountError,
-        setSharePriceError,
-        setInvestorsShareError,
-        setSharesForInvestorsError,
-        setImageBytesError,
-        setSocialMediaUrlError,
-        setMinRaiseTargetError,
-        setMinRaiseTargetEndDateError,
-        setShowBuyCurrencyInfoModal,
+          setDaoNameError,
+          setDaoDescrError,
+          setShareCountError,
+          setSharePriceError,
+          setInvestorsShareError,
+          setSharesForInvestorsError,
+          setImageBytesError,
+          setSocialMediaUrlError,
+          setMinRaiseTargetError,
+          setMinRaiseTargetEndDateError,
+          setShowBuyCurrencyInfoModal,
 
-        deps.wallet
-      );
+          deps.wallet
+        );
+      }
     }
+    nestedAsync();
+    // TODO warning about missing deps here - we *don't* want to trigger this effect when inputs change,
+    // we want to send whatever is in the form when user submits - so we care only about the conditions that trigger submit
+    // suppress lint? are we approaching this incorrectly?
   }, [pendingSubmitDao, deps.wallet, deps.myAddress]);
 
   const formView = () => {
