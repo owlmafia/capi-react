@@ -14,7 +14,7 @@ export const MyAccount = ({ deps, daoId }) => {
   return (
     <div className="my-account-container">
       <div className="d-flex justify-between">
-        <div className="text">My Algo wallet</div>
+        <div className="text">Wallet</div>
       </div>
       <div className="my-address">
         {myAddressView(deps, daoId)}
@@ -120,7 +120,7 @@ const connectButton = (deps, setShowSelectWalletModal) => {
           setShowSelectWalletModal(true);
         }}
       >
-        {"Connect My Algo wallet"}
+        {"Connect wallet"}
       </button>
     );
   } else {
