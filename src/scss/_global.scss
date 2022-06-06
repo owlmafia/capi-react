@@ -63,6 +63,8 @@ a {
     padding-bottom: 50px;
     min-width: 600px;
     max-width: 1034px;
+    height: 100vh;
+    overflow-y: scroll;
 
     .title-container {
         width: 100%;
@@ -505,6 +507,7 @@ p {
         margin-bottom: 26px;
         border: none;
         border-radius: 0;
+        position: relative;
 
         &__amount__container {
             width: 80%;
@@ -516,8 +519,13 @@ p {
         }
 
         &__body {
+            position: absolute;
+            top: 0;
+            right: 0;
             display: flex;
             align-items: flex-end;
+            gap: 6px;
+            justify-content: space-between;
         }
 
         &__date {
@@ -788,7 +796,7 @@ p {
                 position: absolute;
                 top: 260px;
                 left: 50%;
-                transform: translateX(-50%)
+                transform: translateX(-50%);
             }
         }
 
@@ -812,16 +820,21 @@ p {
     }
 
     #investors-distribution {
-        .investors-container {
-            min-height: 630px;
-            justify-content: space-between;
+        .labeled_box_children {
+            .investors-container {
+                min-height: 630px;
+                justify-content: space-between;
 
-            .pie-chart-container {
-                top: 100px;
-            }
+                .pie-chart-container {
+                    top: 100px;
+                    left: 50%;
+                    right: auto;
+                    transform: translateX(-50%);
+                }
 
-            .holder_list_container {
-                margin-top: 300px;
+                .holder_list_container {
+                    margin-top: 300px;
+                }
             }
         }
     }

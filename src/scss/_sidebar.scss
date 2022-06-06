@@ -9,10 +9,11 @@
     position: fixed;
     height: 100vh;
     margin-right: 80px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
 
     .settings {
-        margin-top: 150px;
-        margin-bottom: 30px;
+        margin-top: calc(100% - 20px);
     }
 
     .logo-container {
@@ -118,6 +119,7 @@
         animation-duration: 0.6s;
         transform: translateX(-100%);
         animation-fill-mode: forwards;
+        overflow-y: hidden;
 
         .dividing-line {
             width: 100%;
@@ -144,7 +146,7 @@
 
     .sidebar-container {
         width: 100%;
-        top: 68px;
+        top: 66px;
         padding: 20px;
         z-index: 1900;
         box-sizing: border-box;
