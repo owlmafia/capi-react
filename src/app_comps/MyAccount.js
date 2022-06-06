@@ -64,7 +64,7 @@ const myAddressView = (deps, daoId) => {
               className="arrow"
               src={arrow}
               alt="arrow"
-              onClick={async () => await disconnect()}
+              onClick={async () => await disconnect(deps)}
             />
           </div>
         </div>
