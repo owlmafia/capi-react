@@ -106,8 +106,11 @@ const DividendSection = ({ deps, daoId }) => {
         </div>
       </div>
     );
-  } else {
+  } else if (daoId) {
+    // we're on a dao page: waiting for dividend to be fetched
     return <Progress />;
+  } else {
+    return null;
   }
 };
 
