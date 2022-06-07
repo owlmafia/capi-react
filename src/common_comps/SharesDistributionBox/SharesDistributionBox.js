@@ -128,7 +128,8 @@ export const SharesDistributionBox = ({
         <div className="holder_list_container">
           <div className="sub-title">
             Investors {sharesDistr.length}
-            <img src={green} alt="arrow" />
+            {/* disabled for now - no functionality for this arrow */}
+            {/* <img src={green} alt="arrow" /> */}
           </div>
           {entries.map((entry) => {
             // not owned is shown on the left side, so we remove the entry from the list here
