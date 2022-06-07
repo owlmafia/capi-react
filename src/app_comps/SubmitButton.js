@@ -1,4 +1,4 @@
-import Progress from "../app_comps/Progress";
+import Progress from "./Progress";
 
 export const SubmitButton = ({
   label,
