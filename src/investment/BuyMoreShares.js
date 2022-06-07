@@ -21,7 +21,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
           <div className="available-shares">
             <div className="title">{"Buy more shares"}</div>
             <div className="mb-4 flex-block">
-              <div className="subTitle">{"Available Shares in project"}</div>
+              <div className="subTitle">{"Share supply"}</div>
               <div className="subTitle">{dao.share_supply}</div>
             </div>
             <div className="chartBlock">

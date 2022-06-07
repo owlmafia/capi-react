@@ -20,7 +20,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   return (
     <div className="dao_action_active_tab box-container">
-      <div className="title">{"Buy Shares in project"}</div>
+      <div className="title">{"Buy Shares"}</div>
       <div className="dao-shares">
         <div className="top-block">
           <div className="available-shares">
