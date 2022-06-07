@@ -62,6 +62,7 @@ export const LabeledCurrencyInput = ({
   );
 };
 
+// onFocusToggle: optional: pass to be called when the input gains or loses focus
 const input = (inputValue, onChange, placeholder, onFocusToggle) => {
   return (
     <input
@@ -73,10 +74,14 @@ const input = (inputValue, onChange, placeholder, onFocusToggle) => {
         onChange(event.target.value);
       }}
       onFocus={(e) => {
-        onFocusToggle(true);
+        if (onFocusToggle) {
+          onFocusToggle(true);
+        }
       }}
       onBlur={(e) => {
-        onFocusToggle(false);
+        if (onFocusToggle) {
+          onFocusToggle(false);
+        }
       }}
     />
   );
