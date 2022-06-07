@@ -9,7 +9,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 export const FundsActivity = ({ deps }) => {
   let params = useParams();
 
-  const [activityEntries, setActivityEntries] = useState([]);
+  const [activityEntries, setActivityEntries] = useState(null);
 
   useEffect(() => {
     loadFundsActivity(deps.statusMsg, params.id, setActivityEntries, null);
