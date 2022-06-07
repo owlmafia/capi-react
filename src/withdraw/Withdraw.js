@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
@@ -69,7 +70,7 @@ export const Withdrawal = ({ deps }) => {
         </div>
       );
     } else {
-      return null;
+      return <Progress />;
     }
   };
 

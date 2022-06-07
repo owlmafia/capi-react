@@ -6,6 +6,7 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 import { init } from "./controller";
 import { retrieveProfits } from "../shared_functions";
 import { SubmitButton } from "../app_comps/SubmitButton";
+import Progress from "../app_comps/Progress";
 
 export const InvestmentProfits = ({ deps }) => {
   let params = useParams();
@@ -34,56 +35,60 @@ export const InvestmentProfits = ({ deps }) => {
   ]);
 
   const view = () => {
-    return (
-      <div>
-        <div className="box-container profits-by-shares">
-          <div className="title">{"Your profits by shares"}</div>
-          <div className="w-80 d-flex justify-between mb-6">
-            <div className="flex-block align-center">
-              <div className="subTitle">{"Retrievable profits:"}</div>
-              <FundsAssetImg className="fund-asset" />
-              <div className="subTitle">
-                {deps.investmentData.investor_claimable_dividend}
+    if (dao && deps.investmentData) {
+      return (
+        <div>
+          <div className="box-container profits-by-shares">
+            <div className="title">{"Your profits by shares"}</div>
+            <div className="w-80 d-flex justify-between mb-6">
+              <div className="flex-block align-center">
+                <div className="subTitle">{"Retrievable profits:"}</div>
+                <FundsAssetImg className="fund-asset" />
+                <div className="subTitle">
+                  {deps.investmentData.investor_claimable_dividend}
+                </div>
               </div>
-            </div>
-            <div className="flex-block flex-column profits-tab">
-              <div className="subTitle retrieved">{"Retrieved profits:"}</div>
-              <div className="d-flex">
-                <FundsAssetImg className="fund-asset opacity-70" />
-                <div className="subTitle retrieved">
-                  {" "}
-                  {deps.investmentData.investor_already_retrieved_amount}
+              <div className="flex-block flex-column profits-tab">
+                <div className="subTitle retrieved">{"Retrieved profits:"}</div>
+                <div className="d-flex">
+                  <FundsAssetImg className="fund-asset opacity-70" />
+                  <div className="subTitle retrieved">
+                    {" "}
+                    {deps.investmentData.investor_already_retrieved_amount}
+                  </div>
                 </div>
               </div>
             </div>
+            <SubmitButton
+              label={"Retrieve profits"}
+              className="button-primary"
+              isLoading={submitting}
+              disabled={deps.investmentData.investor_claimable_dividend === "0"}
+              onClick={async () => {
+                await retrieveProfits(
+                  deps.myAddress,
+                  setSubmitting,
+                  deps.statusMsg,
+                  deps.updateMyBalance,
+                  params.id,
+                  deps.updateInvestmentData,
+                  deps.updateFunds,
+                  deps.wallet
+                );
+              }}
+            />
           </div>
-          <SubmitButton
-            label={"Retrieve profits"}
-            className="button-primary"
-            isLoading={submitting}
-            disabled={deps.investmentData.investor_claimable_dividend === "0"}
-            onClick={async () => {
-              await retrieveProfits(
-                deps.myAddress,
-                setSubmitting,
-                deps.statusMsg,
-                deps.updateMyBalance,
-                params.id,
-                deps.updateInvestmentData,
-                deps.updateFunds,
-                deps.wallet
-              );
-            }}
-          />
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <Progress />;
+    }
   };
 
   return (
     <div>
       <ContentTitle title={"My investment"} />
-      <div>{dao && deps.investmentData && view()}</div>
+      <div>{view()}</div>
     </div>
   );
 };
