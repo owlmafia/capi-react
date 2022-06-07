@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
+import { pieChartColors } from "../common_functions/common";
 import { invest } from "./controller";
 
 export const BuyMoreShares = ({ deps, dao }) => {
@@ -80,6 +81,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                   deps.investmentData.investor_unlocked_shares
                 ),
               ]}
+              col={pieChartColors()}
             />
           </div>
         </div>

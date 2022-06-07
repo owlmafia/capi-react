@@ -16,7 +16,16 @@ export const fetchSharesDistribution = async (
       app_id: appId,
     });
     console.log("Shares distribution res: " + JSON.stringify(res));
-    setSharesDistr(res.holders);
+
+    // remember original index to get chart segment color
+    // we need this, because the displayed entries are filtered ("show less" state)
+    // so their indices don't correspond to the chart (which displays all the holders)
+    const holdersWithIndex = res.holders.map((holder, index) => {
+      holder.originalIndex = index;
+      return holder;
+    });
+
+    setSharesDistr(holdersWithIndex);
     setNotOwnedShares(res.not_owned_shares);
   } catch (e) {
     statusMsg.error(e);

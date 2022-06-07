@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
+import { pieChartColors } from "../common_functions/common";
 // import arrow from "../images/svg/arrow.svg";
 
 export const LockOrUnlockShares = ({
@@ -60,6 +61,7 @@ export const LockOrUnlockShares = ({
             to_pie_chart_slice(investmentData.investor_locked_shares),
             to_pie_chart_slice(investmentData.investor_unlocked_shares),
           ]}
+          col={pieChartColors()}
         />
       </div>
     );

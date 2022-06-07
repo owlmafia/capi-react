@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from "react";
 import renderPieChart from "./renderPieChart";
 
 // onAddressSelected has to return selected status, to highlight the segment
-export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
+export const SharesDistributionChart = ({
+  sharesDistr,
+  onAddressSelected,
+  col,
+}) => {
   const chart = useRef(null);
 
   useEffect(() => {
@@ -13,7 +17,8 @@ export const SharesDistributionChart = ({ sharesDistr, onAddressSelected }) => {
         (d) => d.percentage_number,
         (d) => {
           return onAddressSelected(d.address);
-        }
+        },
+        col
       );
     }
   }, [onAddressSelected, sharesDistr]);

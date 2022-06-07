@@ -9,7 +9,8 @@ const renderPieChart = (
   container,
   data,
   dataNumberSelector,
-  onSegmentSelected
+  onSegmentSelected,
+  col
 ) => {
   var width = 300,
     height = 300;
@@ -17,22 +18,11 @@ const renderPieChart = (
   let outerRadius = (height / 2) * 0.82;
   let innerRadius = (height / 2) * 0.55;
 
-  const col = [
-    "#4CA5A9",
-    "#8ECACD",
-    "#8ECACD",
-    "#BCDBDF",
-    "#C8E3E3",
-    "#D9E9EB",
-    "#E4F0F1",
-    "#F1F8F8",
-  ];
-
   const colors = (d, i, isGray = false) => {
     if (d && d.data.isSelected) {
       return RED;
     } else {
-      return isGray ? GRAY : col[Math.round(i % 8)];
+      return isGray ? GRAY : col[Math.round(i % col.length)];
     }
   };
 

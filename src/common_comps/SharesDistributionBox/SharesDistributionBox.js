@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
 import green from "../../images/svg/green-arrow.svg";
 import Progress from "../../app_comps/Progress";
+import { pieChartColors } from "../../common_functions/common";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -76,6 +77,14 @@ export const SharesDistributionBox = ({
     selectedAddress,
   ]);
 
+  const col = useMemo(() => {
+    return pieChartColors();
+  }, []);
+
+  const color = (index) => {
+    return col[Math.round(index % col.length)];
+  };
+
   const onAddressSelected = useCallback(
     (address) => {
       const addressIndex = sharesDistr.findIndex((d) => d.address === address);
@@ -132,6 +141,8 @@ export const SharesDistributionBox = ({
                   key={entry.label}
                   entry={entry}
                   isSelected={entry.address === selectedAddress}
+                  // use original index (not filtered holders) to get chart segment color
+                  col={color(entry.originalIndex)}
                 />
               );
             }
@@ -167,6 +178,7 @@ export const SharesDistributionBox = ({
             <SharesDistributionChart
               sharesDistr={sharesDistr}
               onAddressSelected={onAddressSelected}
+              col={col}
             />
           </div>
           {holdersListItems()}
