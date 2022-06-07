@@ -158,14 +158,14 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />
-        <LabeledCurrencyInput
+        <LabeledInput
           label={"Investor's part:"}
           inputValue={investorsShare}
           onChange={(input) => setInvestorsShare(input)}
           errorMsg={investorsShareError}
           placeholder="Investor's part in %"
         />
-        <LabeledCurrencyInput
+        <LabeledInput
           label={"Shares for investors"}
           inputValue={sharesForInvestors}
           onChange={(input) => setSharesForInvestors(input)}
