@@ -13,7 +13,7 @@ export function initWcWalletIfAvailable(
     setMyAddress,
     setWcShowOpenWalletModal
   );
-  if (wallet.isConnected) {
+  if (wallet.isConnected()) {
     wallet.initSession();
     setWallet(wallet);
   }
