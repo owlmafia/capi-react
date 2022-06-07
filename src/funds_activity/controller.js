@@ -15,7 +15,8 @@ export const loadFundsActivity = async (
     });
     console.log("fundsActivityRes: " + JSON.stringify(fundsActivityRes));
 
-    setActivityEntries(fundsActivityRes.entries);
+    // setActivityEntries(fundsActivityRes.entries);
+    setActivityEntries([]);
   } catch (e) {
     statusMsg.error(e);
   }
