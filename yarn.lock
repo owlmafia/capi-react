@@ -2270,7 +2270,7 @@
     "@walletconnect/window-metadata" "1.0.0"
     "detect-browser" "5.2.0"
 
-"@walletconnect/client@^1.6.6":
+"@walletconnect/client@^1.7.8":
   "integrity" "sha512-pBroM6jZAaUM0SoXJZg5U7aPTiU3ljQAw3Xh/i2pxFDeN/oPKao7husZ5rdxS5xuGSV6YpqqRb0RxW1IeoR2Pg=="
   "resolved" "https://registry.npmjs.org/@walletconnect/client/-/client-1.7.8.tgz"
   "version" "1.7.8"
