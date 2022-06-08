@@ -8,6 +8,7 @@ import {
 } from "./controller";
 import ReactTooltip from "react-tooltip";
 import { SubmitButton } from "../app_comps/SubmitButton";
+import { SelectWalletModal } from "../wallet/SelectWalletModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -18,6 +19,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const [submitting, setSubmitting] = useState(false);
 
   const [shareAmountError, setShareAmountError] = useState("");
+
+  const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
+  const [buyIntent, setBuyIntent] = useState(false);
 
   useEffect(() => {
     fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
@@ -38,6 +42,32 @@ export const InvestEmbedded = ({ deps, dao }) => {
     }
     nestedAsync();
   }, [deps.statusMsg, params.id, buySharesCount, availableShares, dao]);
+
+  useEffect(() => {
+    async function nestedAsync() {
+      if (deps.wallet && buyIntent && deps.myAddress) {
+        setBuyIntent(false);
+
+        await invest(
+          deps.myAddress,
+          setSubmitting,
+          deps.statusMsg,
+          deps.updateMyBalance,
+          params.id,
+          dao,
+          buySharesCount,
+          deps.updateMyShares,
+          deps.updateFunds,
+          setShareAmountError,
+          deps.wallet
+        );
+      }
+    }
+    nestedAsync();
+    // TODO warning about missing deps here - we *don't* want to trigger this effect when inputs change,
+    // we want to send whatever is in the form when user submits - so we care only about the conditions that trigger submit
+    // suppress lint? are we approaching this incorrectly?
+  }, [buyIntent, deps.wallet, deps.myAddress]);
 
   const view = () => {
     return (
@@ -103,23 +133,20 @@ export const InvestEmbedded = ({ deps, dao }) => {
           label={"Buy shares"}
           className={"button-primary"}
           isLoading={submitting}
-          disabled={deps.myAddress === ""}
           onClick={async (_) => {
-            await invest(
-              deps.myAddress,
-              setSubmitting,
-              deps.statusMsg,
-              deps.updateMyBalance,
-              params.id,
-              dao,
-              buySharesCount,
-              deps.updateMyShares,
-              deps.updateFunds,
-              setShareAmountError,
-              deps.wallet
-            );
+            setBuyIntent(true);
+            var myAddress = deps.myAddress;
+            if (myAddress === "") {
+              setShowSelectWalletModal(true);
+            }
           }}
         />
+        {showSelectWalletModal && (
+          <SelectWalletModal
+            deps={deps}
+            setShowModal={setShowSelectWalletModal}
+          />
+        )}
       </div>
     );
   };

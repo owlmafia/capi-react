@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyCurrencyInfoView } from "../buy_currency/BuyCurrencyInfoView";
 import Modal from "../Modal";
-import { SelectWallet } from "../wallet/SelectWallet";
+import { SelectWalletModal } from "../wallet/SelectWalletModal";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -214,17 +214,10 @@ export const CreateDao = ({ deps }) => {
         </Modal>
       )}
       {showSelectWalletModal && (
-        <Modal
-          title={"Choose a wallet"}
-          onCloseClick={() => setShowSelectWalletModal(false)}
-        >
-          <SelectWallet
-            deps={deps}
-            onConnected={async () => {
-              setShowSelectWalletModal(false);
-            }}
-          />
-        </Modal>
+        <SelectWalletModal
+          deps={deps}
+          setShowModal={setShowSelectWalletModal}
+        />
       )}
     </div>
   );
