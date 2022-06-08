@@ -66,9 +66,7 @@ export const Dao = ({ deps }) => {
               <FundsActivityEmbedded deps={deps} daoId={params.id} />
             )}
 
-            {deps.investmentData && (
-              <InvestEmbedded deps={deps} dao={deps.dao} />
-            )}
+            <InvestEmbedded deps={deps} dao={deps.dao} />
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}

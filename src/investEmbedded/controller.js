@@ -4,39 +4,49 @@ import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
 
-export const handleSharesCountInput = async (
+export const fetchAvailableShares = async (
+  statusMsg,
+  daoId,
+  setAvailableShares
+) => {
+  try {
+    const { bridge_load_available_shares } = await wasmPromise;
+    let res = await bridge_load_available_shares({
+      dao_id: daoId,
+    });
+    console.log("??? available shares res: %o", res);
+    setAvailableShares(res.available_shares);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
+export const updateTotalPriceAndPercentage = async (
   statusMsg,
   shareCountInput,
   dao,
-  investmentData,
-  setBuySharesCount,
+  availableShares,
   setBuySharesTotalPrice,
   setProfitPercentage
 ) => {
   try {
     const { bridge_calculate_shares_price } = await wasmPromise;
 
-    // populate input
-    setBuySharesCount(shareCountInput);
+    // UX - if user empties the field, we want to continue showing price / percentage for 1 share
+    const shareCount = shareCountInput === "" ? "1" : shareCountInput;
 
-    if (shareCountInput === "") {
-      setBuySharesTotalPrice(investmentData.init_share_price);
-      setProfitPercentage(investmentData.init_profit_percentage);
-    } else {
-      let res = await bridge_calculate_shares_price({
-        shares_amount: shareCountInput,
-        available_shares: investmentData.available_shares,
-        share_supply: dao.share_supply,
-        investors_share: dao.investors_share,
-        share_price: dao.share_price,
-        share_specs_msg_pack: investmentData.share_specs_msg_pack,
-      });
+    let res = await bridge_calculate_shares_price({
+      shares_amount: shareCount,
+      available_shares: availableShares,
+      share_supply: dao.share_supply,
+      investors_share: dao.investors_share,
+      share_price: dao.share_price,
+    });
 
-      console.log("res: %o", res);
+    console.log("res: %o", res);
 
-      setBuySharesTotalPrice(res.total_price);
-      setProfitPercentage(res.profit_percentage);
-    }
+    setBuySharesTotalPrice(res.total_price);
+    setProfitPercentage(res.profit_percentage);
   } catch (e) {
     statusMsg.error(e);
   }
