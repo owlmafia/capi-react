@@ -10,7 +10,7 @@ import project from "../images/sidebar/projects.svg";
 import SideBarItem from "./SideBarItem";
 import logo from "../images/logo.svg";
 
-export const SideBarDao = ({ deps }) => {
+export const SideBarDao = ({ deps, containerClass }) => {
   let params = useParams();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export const SideBarDao = ({ deps }) => {
   const iAmDaoOwner = iAmDaoOwner_(deps.dao, deps.myAddress);
 
   return (
-    <div className="sidebar-container">
+    <div className={containerClass}>
       <div className="logo-container">
         <img src={logo} alt="logo" />
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { DaoTop } from "./DaoTop";
 import { SideBar } from "./SideBar";
@@ -13,11 +13,19 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
 
+  const sideMenuClass = useMemo(() => {
+    if (showSidebar) {
+      return "sidebar-container";
+    } else {
+      return "sidebar-container-closing";
+    }
+  }, [showSidebar]);
+
   const sideBar = () => {
     if (isGlobal) {
-      return <SideBar />;
+      return <SideBar containerClass={sideMenuClass} />;
     } else {
-      return <SideBarDao deps={deps} />;
+      return <SideBarDao deps={deps} containerClass={sideMenuClass} />;
     }
   };
 
@@ -33,7 +41,9 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         setShowSidebar={setShowSidebar}
         setShowWallet={setShowWallet}
       />
-      {showSidebar && sideBar()}
+      {/* now it's always shown */}
+      {/* {showSidebar && sideBar()} */}
+      {sideBar()}
       {showOverlay && (
         <ContentOverlay
           setShowSidebar={setShowSidebar}

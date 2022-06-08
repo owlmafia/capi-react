@@ -9,9 +9,9 @@ import { StatusMsgView } from "./StatusMsgView";
 export const Wireframe = ({ isGlobal, deps, dao }) => {
   const sideBar = () => {
     if (isGlobal) {
-      return <SideBar />;
+      return <SideBar containerClass={"sidebar-container"} />;
     } else {
-      return <SideBarDao deps={deps} />;
+      return <SideBarDao deps={deps} containerClass={"sidebar-container"} />;
     }
   };
 

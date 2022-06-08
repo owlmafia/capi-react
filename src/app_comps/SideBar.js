@@ -3,9 +3,9 @@ import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
 import logo from "../images/logo.svg";
 
-export const SideBar = () => {
+export const SideBar = ({ containerClass }) => {
   return (
-    <div className="sidebar-container">
+    <div className={containerClass}>
       <div className="logo-container">
         <img src={logo} alt="logo" />
       </div>
