@@ -1,23 +1,21 @@
 const wasmPromise = import("wasm");
 
-export const startBuyCurrencyFlow = async (
-  statusMsg,
-  closeModal,
-  myAddress
-) => {
+export const startBuyCurrencyFlow = async (deps, closeModal) => {
   try {
     const { bridge_reserve_wyre } = await wasmPromise;
-    const reserveWyreRes = await bridge_reserve_wyre({ address: myAddress });
+    const reserveWyreRes = await bridge_reserve_wyre({
+      address: deps.myAddress,
+    });
 
     // TODO return only reservation in rust - we don't use url
-    openWyreCheckoutDialog(statusMsg, reserveWyreRes.reservation, closeModal);
+    openWyreCheckoutDialog(deps, reserveWyreRes.reservation, closeModal);
   } catch (e) {
-    statusMsg.error(e);
+    deps.statusMsg.error(e);
   }
 };
 
 // see https://docs.sendwyre.com/docs/checkout-hosted-dialog
-const openWyreCheckoutDialog = (statusMsg, reservation, closeModal) => {
+const openWyreCheckoutDialog = (deps, reservation, closeModal) => {
   const Wyre = window.Wyre;
 
   // debit card popup
@@ -34,6 +32,9 @@ const openWyreCheckoutDialog = (statusMsg, reservation, closeModal) => {
 
   widget.on("paymentSuccess", function (e) {
     console.log("paymentSuccess", e);
+    deps.statusMsg.success("Account funded");
+    // note that we don't refresh the view as it doesn't show algos
+    // will do when we buy stables
   });
 
   widget.open();

@@ -24,9 +24,7 @@ export const BuyCurrencyInfoView = ({ deps, closeModal }) => {
         <SubmitButton
           label={"Continue"}
           className="button-primary full-width-btn"
-          onClick={async () =>
-            startBuyCurrencyFlow(deps.statusMsg, closeModal, deps.myAddress)
-          } // close this modal (wyre modal is not open)
+          onClick={async () => startBuyCurrencyFlow(deps, closeModal)}
         />
         <SubmitButton
           label={"Cancel"}
