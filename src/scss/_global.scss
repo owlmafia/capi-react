@@ -273,8 +273,6 @@ select {
         }
 
         .modal-body {
-            // overflow-y: scroll;
-            // scrollbar-width: none;
 
             .modal-container {
                 display: flex;
@@ -328,14 +326,6 @@ select {
                 }
             }
         }
-
-        // .modal-body::-webkit-scrollbar {
-        //     width: 4px;
-        // }
-
-        // .modal-body::-webkit-scrollbar-thumb {
-        //     background: #888;
-        // }
     }
 
     .modal-content-size {
