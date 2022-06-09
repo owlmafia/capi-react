@@ -25,7 +25,7 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
     } catch (e) {
       msg += "\n+Error mapping to friendly error: " + (e + "");
     }
-    console.error(msg);
+    console.error("Error notification: %o", msg);
     setStatusMsg({ displayMsg: displayMsg, copyMsg: msg, type: "error" });
   },
 
