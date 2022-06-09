@@ -1,14 +1,13 @@
 @import "global_vars";
 
 .sidebar-container {
-    width: 230px;
+    width: 200px;
     color: $black;
     display: flex;
     flex-direction: column;
     gap: 34px;
     position: fixed;
     height: 100vh;
-    margin-right: 80px;
     padding-bottom: 30px;
     box-sizing: border-box;
 
@@ -104,8 +103,9 @@
 }
 
 @media only screen and (max-width: 1330px) {
+
     .sidebar-container {
-        width: 230px;
+        width: 250px;
         height: 100vh;
         position: fixed;
         top: 0;
@@ -115,11 +115,6 @@
         padding: 16px 50px;
         padding-top: 50px;
         backdrop-filter: brightness(60%);
-        animation-name: sidebar;
-        animation-duration: 0.6s;
-        transform: translateX(-100%);
-        animation-fill-mode: forwards;
-        overflow-y: hidden;
 
         .dividing-line {
             width: 100%;
@@ -132,9 +127,31 @@
         }
     }
 
+    .sidebar-container {
+        animation-name: sidebar;
+        animation-duration: 0.6s;
+        transform: translateX(-100%);
+        animation-fill-mode: forwards;
+        overflow-y: hidden;
+    }
+
+    .sidebar-container-closing {
+        animation-name: sidebarClosing;
+        animation-duration: 0.6s;
+        transform: translateX(0%);
+        animation-fill-mode: forwards;
+        overflow-y: hidden;
+    }
+
     @keyframes sidebar {
         100% {
             transform: translateX(0%);
+        }
+    }
+
+    @keyframes sidebarClosing {
+        100% {
+            transform: translateX(-100%);
         }
     }
 }

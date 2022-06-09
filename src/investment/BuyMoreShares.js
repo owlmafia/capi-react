@@ -72,18 +72,18 @@ export const BuyMoreShares = ({ deps, dao }) => {
               }}
             />
           </div>
-          <div className="shares-chart">
-            <SharesDistributionChart
-              sharesDistr={[
-                to_pie_chart_slice(deps.investmentData.available_shares),
-                to_pie_chart_slice(deps.investmentData.investor_locked_shares),
-                to_pie_chart_slice(
-                  deps.investmentData.investor_unlocked_shares
-                ),
-              ]}
-              col={pieChartColors()}
-            />
-          </div>
+        </div>
+        <div className="shares-chart">
+          <SharesDistributionChart
+            sharesDistr={[
+              to_pie_chart_slice(deps.investmentData.available_shares),
+              to_pie_chart_slice(deps.investmentData.investor_locked_shares),
+              to_pie_chart_slice(
+                deps.investmentData.investor_unlocked_shares
+              ),
+            ]}
+            col={pieChartColors()}
+          />
         </div>
       </div>
     );

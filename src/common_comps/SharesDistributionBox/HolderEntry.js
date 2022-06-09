@@ -30,9 +30,11 @@ const entryBody = (entry, isSelected, col) => {
       <div className="percentage-text ft-color-black ft-weight-600">
         {entry.percentage_formatted}
       </div>
-      <svg class="holder_circle">
-        <circle cx="0" cy="0" r="10" fill={col} />
-      </svg>
+      <div>
+        <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="8" cy="8.5" r="8" fill={col} />
+        </svg>
+      </div>
       <div className="ft-color-black">{entry.label}</div>
     </div>
   );

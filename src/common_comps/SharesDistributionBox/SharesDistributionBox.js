@@ -3,7 +3,6 @@ import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
 import { fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
-import green from "../../images/svg/green-arrow.svg";
 import Progress from "../../app_comps/Progress";
 import { pieChartColors } from "../../common_functions/common";
 

@@ -17,7 +17,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
     if (showSidebar) {
       return "sidebar-container";
     } else {
-      return "sidebar-container-closing";
+      return "sidebar-container sidebar-container-closing";
     }
   }, [showSidebar]);
 
