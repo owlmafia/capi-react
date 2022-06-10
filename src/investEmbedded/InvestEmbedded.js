@@ -9,11 +9,13 @@ import {
 import ReactTooltip from "react-tooltip";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
+import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
   const [buySharesCount, setBuySharesCount] = useState("1");
   const [totalCost, setTotalCost] = useState(null);
+  const [totalCostNumber, setTotalCostNumber] = useState(null);
   const [availableShares, setAvailableShares] = useState(null);
   const [totalPercentage, setProfitPercentage] = useState(null);
   const [submitting, setSubmitting] = useState(false);
@@ -22,6 +24,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [buyIntent, setBuyIntent] = useState(false);
+
+  // show modal carries an object here, to pass details
+  const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
+    useState(null);
 
   useEffect(() => {
     fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
@@ -36,6 +42,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           dao,
           availableShares,
           setTotalCost,
+          setTotalCostNumber,
           setProfitPercentage
         );
       }
@@ -59,7 +66,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
           deps.updateMyShares,
           deps.updateFunds,
           setShareAmountError,
-          deps.wallet
+          deps.wallet,
+          setShowBuyCurrencyInfoModal,
+          totalCostNumber
         );
       }
     }
@@ -145,6 +154,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
           <SelectWalletModal
             deps={deps}
             setShowModal={setShowSelectWalletModal}
+          />
+        )}
+        {showBuyCurrencyInfoModal && deps.myAddress && (
+          <BuyFundsAssetModal
+            deps={deps}
+            amount={showBuyCurrencyInfoModal.amount}
+            closeModal={() => setShowBuyCurrencyInfoModal(null)}
           />
         )}
       </div>

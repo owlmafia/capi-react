@@ -14,7 +14,6 @@ export const fetchAvailableShares = async (
     let res = await bridge_load_available_shares({
       dao_id: daoId,
     });
-    console.log("??? available shares res: %o", res);
     setAvailableShares(res.available_shares);
   } catch (e) {
     statusMsg.error(e);
@@ -27,6 +26,7 @@ export const updateTotalPriceAndPercentage = async (
   dao,
   availableShares,
   setBuySharesTotalPrice,
+  setBuySharesTotalPriceNumber,
   setProfitPercentage
 ) => {
   try {
@@ -46,6 +46,7 @@ export const updateTotalPriceAndPercentage = async (
     console.log("res: %o", res);
 
     setBuySharesTotalPrice(res.total_price);
+    setBuySharesTotalPriceNumber(res.total_price_number);
     setProfitPercentage(res.profit_percentage);
   } catch (e) {
     statusMsg.error(e);
@@ -63,7 +64,9 @@ export const invest = async (
   updateMyShares,
   updateFunds,
   setShareAmountError,
-  wallet
+  wallet,
+  setShowBuyCurrencyInfoModal,
+  totalCostNumber
 ) => {
   try {
     const {
@@ -108,6 +111,8 @@ export const invest = async (
 
     showProgress(true);
     let submitBuySharesRes = await bridge_submit_buy_shares({
+      investor_address: myAddress,
+      buy_total_cost: totalCostNumber,
       txs: buySharesSigned,
       pt: buyRes.pt,
     });
@@ -127,6 +132,8 @@ export const invest = async (
       setShareAmountError(toErrorMsg(e.amount));
       // show a general message additionally, just in case
       statusMsg.error("Please fix the errors");
+    } else if (e.id === "not_enough_funds_asset") {
+      setShowBuyCurrencyInfoModal({ amount: e.details });
     } else {
       statusMsg.error(e);
     }

@@ -1,10 +1,17 @@
 const wasmPromise = import("wasm");
 
-export const startBuyCurrencyFlow = async (deps, closeModal) => {
+export const startBuyCurrencyFlow = async (
+  deps,
+  dstCurrency,
+  dstAmount,
+  closeModal
+) => {
   try {
     const { bridge_reserve_wyre } = await wasmPromise;
     const reserveWyreRes = await bridge_reserve_wyre({
       address: deps.myAddress,
+      dst_currency: dstCurrency,
+      dst_amount: dstAmount,
     });
 
     // TODO return only reservation in rust - we don't use url

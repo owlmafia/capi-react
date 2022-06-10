@@ -10,9 +10,8 @@ import { createDao } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
-import { BuyCurrencyInfoView } from "../buy_currency/BuyCurrencyInfoView";
-import Modal from "../Modal";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
+import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -56,7 +55,6 @@ export const CreateDao = ({ deps }) => {
 
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(false);
-
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [pendingSubmitDao, setSubmitDaoIntent] = useState(false);
 
@@ -108,7 +106,6 @@ export const CreateDao = ({ deps }) => {
           setMinRaiseTargetError,
           setMinRaiseTargetEndDateError,
           setShowBuyCurrencyInfoModal,
-
           deps.wallet
         );
       }
@@ -202,16 +199,11 @@ export const CreateDao = ({ deps }) => {
       {" "}
       <ContentTitle title="Create project" />
       {formView()}
-      {showBuyCurrencyInfoModal && deps.myAddress && (
-        <Modal
-          title={"Top your account"}
-          onCloseClick={() => setShowBuyCurrencyInfoModal(false)}
-        >
-          <BuyCurrencyInfoView
-            deps={deps}
-            closeModal={() => setShowBuyCurrencyInfoModal(false)}
-          />
-        </Modal>
+      {showBuyCurrencyInfoModal && (
+        <BuyAlgosModal
+          deps={deps}
+          closeModal={() => setShowBuyCurrencyInfoModal(false)}
+        />
       )}
       {showSelectWalletModal && (
         <SelectWalletModal
