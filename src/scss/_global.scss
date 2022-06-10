@@ -34,12 +34,6 @@ a {
     padding: 32px;
     position: relative;
 
-    .shares-mobile {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
     .title {
         color: $blue-primary;
         font-size: 1.6rem;
@@ -54,22 +48,21 @@ a {
 
 #content {
     width: 57%;
-    margin-left: calc(12.6% + 40px);
+    margin-left: 230px;
     display: inline-block;
     box-sizing: border-box;
     position: relative;
     background-color: white;
-    border-radius: 20px;
     padding-bottom: 50px;
     min-width: 600px;
     max-width: 1034px;
     height: 100vh;
     overflow-y: scroll;
+    z-index: 2;
 
     .title-container {
         width: 100%;
         display: flex;
-        align-items: center;
         justify-content: space-between;
         margin-bottom: 32px;
 
@@ -280,8 +273,6 @@ select {
         }
 
         .modal-body {
-            overflow-y: scroll;
-            scrollbar-width: none;
 
             .modal-container {
                 display: flex;
@@ -334,14 +325,6 @@ select {
                     background-color: #5865f2;
                 }
             }
-        }
-
-        .modal-body::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .modal-body::-webkit-scrollbar-thumb {
-            background: #888;
         }
     }
 
@@ -659,7 +642,7 @@ p {
 }
 
 .mb-4 {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 
 .mb-5 {
@@ -702,6 +685,7 @@ p {
         min-width: auto;
         max-width: 800px;
         margin-left: 0;
+        height: auto;
 
         .content-img {
             height: 240px;

@@ -7,8 +7,8 @@ export const SelectWallet = ({ deps, onConnected }) => {
     <div>
       <div>
         <SubmitButton
-          label={"WalletConnect"}
-          className="button-primary full-width-btn"
+          label={"Wallet Connect"}
+          className="button-primary full-width-btn mb-4"
           onClick={async () =>
             selectWallet(
               deps,

@@ -51,7 +51,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         box-sizing: border-box;
         height: 32px;
         align-items: center;
-        width: 190px;
+        width: 220px;
 
         .percentage-text {
             width: 48px;
@@ -87,7 +87,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     left: 30%;
 }
 
-.chart_with_legends_container > svg {
+.chart_with_legends_container>svg {
     display: block;
 }
 
@@ -105,6 +105,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         }
 
         .charts-select.css-b62m3t-container {
+
             .css-1s2u09g-control,
             .css-1pahdxg-control,
             .css-1f43avz-a11yText-A11yText {
@@ -166,9 +167,4 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         gap: 12px;
         margin-bottom: 32px;
     }
-}
-
-.holder_circle {
-    width: 10px;
-    height: 10px;
 }

@@ -23,5 +23,5 @@ const involvementIcons = (dao) => {
 };
 
 const involvementIcon = (src, alt) => {
-  return <img className="my_dao__involvement_icon" src={src} alt={alt} />;
+  return <img className="my_dao__involvement_icon img-placeholder" src={src} alt={alt} />;
 };

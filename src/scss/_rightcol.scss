@@ -1,7 +1,7 @@
 @import "global_vars";
 
 #rightcol {
-    width: 23%;
+    width: 24%;
     min-width: 300px;
     height: 100vh;
     overflow-y: scroll;
@@ -131,7 +131,7 @@
 
     @keyframes wallet {
         100% {
-            transform: translateY(0%);
+            transform: translateY(70%);
         }
     }
 }
@@ -144,8 +144,11 @@
         border: none;
         z-index: 1900;
         transform: translateY(-50%);
+        border-radius: 0;
 
         .my-account-container {
+            border-radius: 0;
+
             .text {
                 font-size: 32px;
             }
