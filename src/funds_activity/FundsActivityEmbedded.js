@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { loadFundsActivity, loadDao } from "./controller";
 import funds from "../images/funds.svg";
-import arrowUp from "../images/svg/green-arrow.svg";
-import arrowDown from "../images/svg/arrow.svg";
-import { shortedAddress } from "../shared_functions";
+import { changeArrow, shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
 import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
 import Progress from "../app_comps/Progress";
@@ -53,7 +51,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
             <div className="d-flex align-center gap-10">
               <img src={funds} alt="funds" />
               <div className="ft-weight-600">{deps.funds}</div>
-              <div>{fundsChangeArrow(deps.fundsChange)}</div>
+              <div>{changeArrow(deps.fundsChange)}</div>
             </div>
           </div>
         )}
@@ -84,23 +82,4 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
   };
 
   return <div>{view()}</div>;
-};
-
-// TODO replace text with icons
-const fundsChangeArrow = (change) => {
-  if (change === "up") {
-    return (
-      <div>
-        <img src={arrowUp} alt="arrow up" />
-      </div>
-    );
-  } else if (change === "down") {
-    return (
-      <div>
-        <img src={arrowDown} alt="arrow down" />
-      </div>
-    );
-  } else {
-    return null;
-  }
 };

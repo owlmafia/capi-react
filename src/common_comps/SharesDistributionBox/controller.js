@@ -31,3 +31,23 @@ export const fetchSharesDistribution = async (
     statusMsg.error(e);
   }
 };
+
+export const fetchHoldersChange = async (
+  statusMsg,
+  assetId,
+  appId,
+  setHoldersChange
+) => {
+  try {
+    const { bridge_holders_change } = await wasmPromise;
+    let res = await bridge_holders_change({
+      asset_id: assetId,
+      app_id: appId,
+    });
+    console.log("Holders change res: " + JSON.stringify(res));
+
+    setHoldersChange(res.change);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};

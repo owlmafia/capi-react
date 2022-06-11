@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
-import { fetchSharesDistribution } from "./controller";
+import { fetchHoldersChange, fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
 import Progress from "../../app_comps/Progress";
 import { pieChartColors } from "../../common_functions/common";
+import { changeArrow } from "../../shared_functions";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -15,6 +16,7 @@ export const SharesDistributionBox = ({
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
   const [notOwnedShares, setNotOwnedShares] = useState(null);
+  const [holdersChange, setHoldersChange] = useState(null);
 
   const [showMoreSelected, setShowMoreSelected] = useState(false);
   // used to highlight the address on the right side
@@ -76,6 +78,20 @@ export const SharesDistributionBox = ({
     selectedAddress,
   ]);
 
+  useEffect(() => {
+    async function nestedAsync() {
+      if (appId) {
+        await fetchHoldersChange(
+          deps.statusMsg,
+          sharesAssetId,
+          appId,
+          setHoldersChange
+        );
+      }
+    }
+    nestedAsync();
+  }, [deps.statusMsg, sharesAssetId, appId]);
+
   const col = useMemo(() => {
     return pieChartColors();
   }, []);
@@ -127,8 +143,7 @@ export const SharesDistributionBox = ({
         <div className="holder_list_container">
           <div className="sub-title">
             Investors {sharesDistr.length}
-            {/* disabled for now - no functionality for this arrow */}
-            {/* <img src={green} alt="arrow" /> */}
+            <div>{changeArrow(deps.fundsChange)}</div>
           </div>
           {entries.map((entry) => {
             // not owned is shown on the left side, so we remove the entry from the list here

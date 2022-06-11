@@ -1,3 +1,6 @@
+import arrowUp from "./images/svg/green-arrow.svg";
+import arrowDown from "./images/svg/arrow.svg";
+
 const wasmPromise = import("wasm");
 
 export const updateInvestmentData_ = async (
@@ -105,5 +108,23 @@ export const updateFunds_ = async (
     setFundsChange(balance_change_res.change);
   } catch (e) {
     statusMsg.error(e);
+  }
+};
+
+export const changeArrow = (change) => {
+  if (change === "up") {
+    return (
+      <div>
+        <img src={arrowUp} alt="arrow up" />
+      </div>
+    );
+  } else if (change === "down") {
+    return (
+      <div>
+        <img src={arrowDown} alt="arrow down" />
+      </div>
+    );
+  } else {
+    return null;
   }
 };
