@@ -25,10 +25,9 @@ export const LockOrUnlockShares = ({
       <div className="box-container d-flex">
         <div className="w-60">
           <div className="title">{title}</div>
-          <div className="flex-block">
-            <div className="subTitle">{"Share supply"}</div>
+          <div className="chartBlock">
+            <div className="subTitle ft-weight-600">{"Available Shares in project"}</div>
             <div className="subTitle">{dao.share_supply}</div>
-            {/* <img className="arrow" src={arrow} alt="arrow" /> */}
           </div>
           <div className="chartBlock">
             <div>{investmentData.investor_locked_shares}</div>

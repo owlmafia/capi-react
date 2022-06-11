@@ -6,6 +6,25 @@
     margin-right: 4px;
 }
 
+.no-activity {
+    width: 230px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    margin-top: 120px;
+
+    .title {
+        color: #DEE2E2;
+        font-family: 700;
+        font-size: 32px;
+    }
+
+    .button-primary {
+        width: 100%;
+    }
+}
+
 .funds_act_entry,
 .funds_act_entry-tab {
     display: flex;
