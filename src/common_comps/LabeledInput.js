@@ -43,10 +43,6 @@ export const LabeledInput = ({
           setShowLength(focus);
         }
       )}
-      {/* <InputLength length={inputLength} maxLength={maxLength} />
-      {showLength && maxLength && (
-        <InputLength length={inputLength} maxLength={maxLength} />
-      )} */}
     </div>
   );
 };
@@ -142,9 +138,6 @@ export const LabeledTextArea = ({
           setShowLength(false);
         }}
       />
-      {/* {showLength && maxLength && (
-        <InputLength length={inputLength} maxLength={maxLength} />
-      )} */}
     </div>
   );
 };
