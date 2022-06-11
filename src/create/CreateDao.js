@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
+import info from "../images/svg/info.svg";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -30,7 +31,6 @@ export const CreateDao = ({ deps }) => {
   // this is a "date in the past", meaning that there's practically no funds raising phase
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] =
     useState("1652945905");
-
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
   const [shareCountError, setShareCountError] = useState("");
@@ -157,6 +157,7 @@ export const CreateDao = ({ deps }) => {
         />
         <LabeledInput
           label={"Investor's part:"}
+          icon={info}
           inputValue={investorsShare}
           onChange={(input) => setInvestorsShare(input)}
           errorMsg={investorsShareError}

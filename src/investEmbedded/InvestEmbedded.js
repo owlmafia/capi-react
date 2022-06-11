@@ -10,6 +10,7 @@ import ReactTooltip from "react-tooltip";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
+import info from "../images/svg/info.svg";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -80,37 +81,47 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const view = () => {
     return (
-      <div className="dao_action_active_tab box-container">
-        <div className="title">{"Buy Shares"}</div>
-        <div className="dao-shares">
-          <div className="top-block">
-            <div className="available-shares">
-              <div className="d-flex gap-10 ft-weight-600">
-                <div className="subTitle mb-4">{"Available shares: "}</div>
-                <div className="ft-weight-600">{availableShares}</div>
-              </div>
-              {deps.investmentData && (
-                <div className="shares-block">
-                  <div className="ft-weight-600">You have:</div>
-                  <div className="shares-item">
-                    <div>{"Locked shares"}</div>
-                    <div className="ft-weight-600">
-                      {deps.investmentData.investor_locked_shares}
-                    </div>
-                  </div>
-                  <div className="blue-circle"></div>
-                  <div className="shares-item">
-                    <div>{"Unlocked shares"}</div>
-                    <div className="ft-weight-600">
-                      {deps.investmentData.investor_unlocked_shares}
-                    </div>
-                  </div>
+      <div>
+        <div className="labeled_box_label">Investitions</div>
+        <div className="dao_action_active_tab box-container">
+          <div className="title">{"Buy Shares in project"}</div>
+          <div className="dao-shares">
+            <div className="top-block">
+              <div className="available-shares">
+                <div className="d-flex gap-10 ft-weight-600">
+                  <div className="subTitle mb-4">{"Available shares: "}</div>
+                  <div className="ft-weight-600">{availableShares}</div>
                 </div>
-              )}
+                {deps.investmentData && (
+                  <div className="shares-block">
+                    <div className="ft-weight-600">You have:</div>
+                    <div className="shares-item">
+                      <div>{"Locked shares:"}</div>
+                      <div className="ft-weight-600">
+                        {deps.investmentData.investor_locked_shares}
+                      </div>
+                    </div>
+                    <div className="blue-circle"></div>
+                    <div className="shares-item">
+                      <div>{"Unlocked shares:"}</div>
+                      <div className="ft-weight-600">
+                        {deps.investmentData.investor_unlocked_shares}
+                      </div>
+                    </div>
+                    <div className="blue-circle"></div>
+                    <div className="d-flex gap-10 align-center">
+                      <div>{"Dividend"}</div>
+                      <div data-tip="Your share of the project's income, after locking your shares"></div>
+                      <ReactTooltip />
+                      <div>{totalPercentage}</div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div id="shares_const_container">
               <div className="ft-weight-600">{"Shares cost"}</div>
-              <div className="d-flex">
+              <div className="d-flex gap-10">
                 <img src={funds} alt="funds" />
                 <div className="one_line_key_val_val ft-weight-600">
                   {totalCost}
@@ -118,51 +129,59 @@ export const InvestEmbedded = ({ deps, dao }) => {
               </div>
             </div>
           </div>
-          <div className="d-flex gap-10 align-center">
-            <div>{"Dividend"}</div>
-            <div data-tip="Your share of the project's income, after locking your shares">
-              <div className="blue-circle"></div>
+          <div className="d-flex">
+            <div className="w-80">
+              <div className="labeled_input__error">{shareAmountError}</div>
+              <input
+                className="w-80 label-input-style mt-1"
+                placeholder={"Enter amount of shares"}
+                size="30"
+                value={buySharesCount}
+                onChange={
+                  (event) => setBuySharesCount(event.target.value)
+                  // onSharesInput(event.target.value)
+                }
+              />
             </div>
-            <ReactTooltip />
-            <div>{totalPercentage}</div>
+            <div id="retrieved-profits">
+              <div className="ft-weight-600 d-flex align-center gap-10">
+                {"Retrievable profits"}
+                <img src={info} alt="info" />
+              </div>
+              <div className="d-flex gap-10">
+                <img src={funds} alt="funds" />
+                <div className="one_line_key_val_val ft-weight-600">
+                  {totalCost}
+                </div>
+              </div>
+            </div>
           </div>
+          <SubmitButton
+            label={"Buy shares"}
+            className={"button-primary"}
+            isLoading={submitting}
+            onClick={async (_) => {
+              setBuyIntent(true);
+              var myAddress = deps.myAddress;
+              if (myAddress === "") {
+                setShowSelectWalletModal(true);
+              }
+            }}
+          />
+          {showSelectWalletModal && (
+            <SelectWalletModal
+              deps={deps}
+              setShowModal={setShowSelectWalletModal}
+            />
+          )}
+          {showBuyCurrencyInfoModal && deps.myAddress && (
+            <BuyFundsAssetModal
+              deps={deps}
+              amount={showBuyCurrencyInfoModal.amount}
+              closeModal={() => setShowBuyCurrencyInfoModal(null)}
+            />
+          )}
         </div>
-        <div className="labeled_input__error">{shareAmountError}</div>
-        <input
-          className="label-input-style mt-1"
-          placeholder={"Enter amount of shares"}
-          size="30"
-          value={buySharesCount}
-          onChange={
-            (event) => setBuySharesCount(event.target.value)
-            // onSharesInput(event.target.value)
-          }
-        />
-        <SubmitButton
-          label={"Buy shares"}
-          className={"button-primary"}
-          isLoading={submitting}
-          onClick={async (_) => {
-            setBuyIntent(true);
-            var myAddress = deps.myAddress;
-            if (myAddress === "") {
-              setShowSelectWalletModal(true);
-            }
-          }}
-        />
-        {showSelectWalletModal && (
-          <SelectWalletModal
-            deps={deps}
-            setShowModal={setShowSelectWalletModal}
-          />
-        )}
-        {showBuyCurrencyInfoModal && deps.myAddress && (
-          <BuyFundsAssetModal
-            deps={deps}
-            amount={showBuyCurrencyInfoModal.amount}
-            closeModal={() => setShowBuyCurrencyInfoModal(null)}
-          />
-        )}
       </div>
     );
   };

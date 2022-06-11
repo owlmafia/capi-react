@@ -52,16 +52,18 @@ export const FundsActivity = ({ deps }) => {
 
 const NoActivityView = ({ daoId }) => {
   return (
-    <div>
-      <div>{"No activity yet"}</div>
-      <div>{"Let's make some investments!"}</div>
-      <Link className="see-all" to={"/" + daoId}>
-        <SubmitButton
-          label={"Buy shares"}
-          className="button-primary"
-          onClick={async () => {}}
-        />
-      </Link>
+    <div className="d-flex w-100 justify-center">
+      <div className="no-activity">
+        <div className="title mb-1">{"No activity yet"}</div>
+        <div className="ft-weight-600 ft-color-black">{"Let's make some investments!"}</div>
+        <Link className="see-all full-width-btn" to={"/" + daoId}>
+          <SubmitButton
+            label={"Buy shares"}
+            className="button-primary full-width-btn"
+            onClick={async () => { }}
+          />
+        </Link>
+      </div>
     </div>
   );
 };

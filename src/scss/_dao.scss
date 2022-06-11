@@ -88,24 +88,31 @@
 
     .dao-shares {
         display: flex;
-        flex-direction: column;
-        gap: 16px;
-        margin-bottom: 16px;
+        margin-bottom: 48px;
+        flex-wrap: wrap;
 
         .top-block {
+            width: 80%;
             display: flex;
             justify-content: space-between;
+
+            .blue-circle {
+                width: 8px;
+                height: 8px;
+                background-color: $blue-primary;
+                border-radius: 50%;
+            }
 
             .available-shares {
                 display: flex;
                 justify-content: space-between;
                 flex-direction: column;
-                gap: 16px;
 
                 .shares-block {
                     display: flex;
                     gap: 10px;
                     align-items: center;
+                    flex-wrap: wrap;
 
                     .shares-item {
                         display: flex;
@@ -118,13 +125,6 @@
                 }
             }
         }
-    }
-
-    .blue-circle {
-        width: 8px;
-        height: 8px;
-        background-color: $blue-primary;
-        border-radius: 50%;
     }
 
     .label-input-style {

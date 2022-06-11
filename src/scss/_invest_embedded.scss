@@ -4,11 +4,11 @@
     width: 100px;
 }
 
-#shares_const_container {
+#shares_const_container,
+#retrieved-profits {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 
     svg {
         height: 14px;

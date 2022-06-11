@@ -9,6 +9,7 @@ export const LabeledInput = ({
   placeholder,
   errorMsg,
   maxLength,
+  icon
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
@@ -19,7 +20,17 @@ export const LabeledInput = ({
 
   return (
     <div className="labeled_input">
-      <div className="labeled_input__label">{label}</div>
+      <div className="labeled_input__label d-flex align-center w-94 justify-between">
+        <div className="d-flex align-center gap-10">
+          <div>{label}</div>
+          {icon ? <img src={icon} alt="icon" /> : ""}
+        </div>
+        <div>
+          {showLength && maxLength && (
+            <InputLength length={inputLength} maxLength={maxLength} />
+          )}
+        </div>
+      </div>
       <div className="labeled_input__error">{errorMsg}</div>
       {input(
         inputValue,
@@ -31,9 +42,6 @@ export const LabeledInput = ({
         (focus) => {
           setShowLength(focus);
         }
-      )}
-      {showLength && maxLength && (
-        <InputLength length={inputLength} maxLength={maxLength} />
       )}
     </div>
   );
@@ -104,7 +112,14 @@ export const LabeledTextArea = ({
 
   return (
     <div className="labeled_input">
-      <div className="labeled_input__label">{label}</div>
+      <div className="labeled_input__label d-flex align-center w-94 justify-between">
+        {label}
+        <div>
+          {showLength && maxLength && (
+            <InputLength length={inputLength} maxLength={maxLength} />
+          )}
+        </div>
+      </div>
       <div className="labeled_input__error">{errorMsg}</div>
       <textarea
         rows="10"
@@ -123,9 +138,6 @@ export const LabeledTextArea = ({
           setShowLength(false);
         }}
       />
-      {showLength && maxLength && (
-        <InputLength length={inputLength} maxLength={maxLength} />
-      )}
     </div>
   );
 };
