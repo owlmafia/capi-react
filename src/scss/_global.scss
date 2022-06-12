@@ -423,6 +423,7 @@ p {
 #investors-distribution .labeled_box_children {
     padding: 36px 3.8%;
     padding-bottom: 150px;
+    min-height: 380px;
 }
 
 .labeled_box_children {
@@ -516,13 +517,13 @@ p {
 
         &__date {
             color: #787e82;
-            font-size: 12px;
+            font-size: 13px;
         }
 
         .details {
             color: #6bb9bd;
             text-decoration: underline;
-            width: 100%;
+            width: auto;
         }
     }
 }
@@ -721,6 +722,7 @@ p {
         max-width: 800px;
         margin-left: 0;
         height: auto;
+        overflow-y: auto;
 
         .content-img {
             height: 240px;
