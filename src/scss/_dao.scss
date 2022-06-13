@@ -240,15 +240,26 @@
     }
 
     .dao_action_active_tab.box-container {
+        flex-wrap: wrap;
         position: relative;
-        height: 524px;
+
+        #shares_const_container {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%)
+        }
 
         .button-primary {
             width: 100%;
         }
 
+        .label-input-style {
+            width: 100%;
+        }
+
         .dao-shares {
-            margin-bottom: 40px;
+            margin-bottom: 0;
 
             .top-block {
                 flex-direction: column;

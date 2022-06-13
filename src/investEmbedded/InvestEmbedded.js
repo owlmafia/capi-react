@@ -129,7 +129,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
               </div>
             </div>
           </div>
-          <div className="d-flex">
+          <div className="d-flex mobile-input-block">
             <div className="w-80">
               <div className="labeled_input__error">{shareAmountError}</div>
               <input

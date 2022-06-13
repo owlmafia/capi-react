@@ -114,7 +114,6 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
                 border-radius: 24px;
                 border: none;
                 box-shadow: none;
-                height: 30px;
 
                 .css-319lph-ValueContainer {
                     overflow: none;
@@ -125,7 +124,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
                         font-size: 14px;
                     }
 
-                    .css-6j8wv5-Input {
+                    .css-6j8wv5-Input input {
                         height: 30px;
                         padding: 0;
                         caret-color: transparent;
