@@ -171,41 +171,39 @@ export const SharesDistributionBox = ({
   };
 
   const content = () => {
-    if (sharesDistr && sharesDistr.length === 0) {
+    if ((sharesDistr && sharesDistr.length === 0) || entries === null) {
       return <Progress vCenter={false} />;
     } else {
       return (
-        <div className="investors-container">
-          <div className="d-flex flex-column flex-wrap">
-            <div className="flexBlock">
-              <div className="mr-3 sub-title">{"Total shares"}</div>
-              <div>{sharesSupply}</div>
-            </div>
-            <div className="flexBlock">
-              <div className="ft-weight-600">{notOwnedShares}</div>
-              <div className="circle ml-5 mr-3"></div>
-              <div className="ft-color-black ft-size-14">
-                {"Available for sale"}
+        <LabeledBox label={"Investor distribution"}>
+          <div className="investors-container">
+            <div className="d-flex flex-column flex-wrap">
+              <div className="flexBlock">
+                <div className="mr-3 sub-title">{"Total shares"}</div>
+                <div>{sharesSupply}</div>
+              </div>
+              <div className="flexBlock">
+                <div className="ft-weight-600">{notOwnedShares}</div>
+                <div className="circle ml-5 mr-3"></div>
+                <div className="ft-color-black ft-size-14">
+                  {"Available for sale"}
+                </div>
               </div>
             </div>
+            <div className="pie-chart-container">
+              <SharesDistributionChart
+                sharesDistr={sharesDistr}
+                onAddressSelected={onAddressSelected}
+                col={col}
+                animated={true}
+              />
+            </div>
+            {holdersListItems()}
           </div>
-          <div className="pie-chart-container">
-            <SharesDistributionChart
-              sharesDistr={sharesDistr}
-              onAddressSelected={onAddressSelected}
-              col={col}
-              animated={true}
-            />
-          </div>
-          {holdersListItems()}
-        </div>
+        </LabeledBox>
       );
     }
   };
 
-  return (
-    <div id="investors-distribution">
-      <LabeledBox label={"Investor distribution"}>{content()}</LabeledBox>
-    </div>
-  );
+  return <div id="investors-distribution">{content()}</div>;
 };
