@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactTooltip from "react-tooltip";
+import { SubmitButton } from "../app_comps/SubmitButton";
+import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
+import info from "../images/svg/info.svg";
+import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import {
   fetchAvailableShares,
   invest,
   updateTotalPriceAndPercentage,
 } from "./controller";
-import ReactTooltip from "react-tooltip";
-import { SubmitButton } from "../app_comps/SubmitButton";
-import { SelectWalletModal } from "../wallet/SelectWalletModal";
-import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
-import info from "../images/svg/info.svg";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -116,17 +116,17 @@ export const InvestEmbedded = ({ deps, dao }) => {
                     </div>
                     <div className="blue-circle"></div>
                     <div className="d-flex gap-10 align-center">
-                      <div>{"Dividend"}</div>
+                      <div>{"Share:"}</div>
                       <div data-tip="Your share of the project's income, after locking your shares"></div>
                       <ReactTooltip />
-                      <div>{totalPercentage}</div>
+                      <div>{deps.investmentData.investor_share}</div>
                     </div>
                   </div>
                 )}
               </div>
             </div>
             <div id="shares_const_container">
-              <div className="ft-weight-600">{"Share price"}</div>
+              <div className="ft-weight-600">{"Total price"}</div>
               <div className="d-flex gap-10">
                 <img src={funds} alt="funds" />
                 <div className="one_line_key_val_val ft-weight-600">
@@ -151,12 +151,12 @@ export const InvestEmbedded = ({ deps, dao }) => {
             </div>
             <div id="retrieved-profits">
               <div className="ft-weight-600 d-flex align-center gap-10">
-                {"Expected dividend"}
+                {"Expected share"}
                 <img src={info} alt="info" />
               </div>
               <div className="d-flex gap-10">
                 <div className="one_line_key_val_val ft-weight-600">
-                  {totalCost}
+                  {totalPercentage}
                 </div>
               </div>
             </div>
