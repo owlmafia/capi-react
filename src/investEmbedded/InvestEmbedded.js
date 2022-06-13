@@ -89,14 +89,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const view = () => {
     return (
       <div>
-        <div className="labeled_box_label">Investitions</div>
         <div className="dao_action_active_tab box-container">
-          <div className="title">{"Buy Shares in project"}</div>
+          <div className="title">{"Buy Shares"}</div>
           <div className="dao-shares">
             <div className="top-block">
               <div className="available-shares">
                 <div className="d-flex gap-10 ft-weight-600">
-                  <div className="subTitle mb-4">{"Available shares: "}</div>
+                  <div className="subTitle mb-4">{"Available: "}</div>
                   <div className="ft-weight-600">{availableShares}</div>
                 </div>
                 {deps.investmentData && (
@@ -127,7 +126,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
               </div>
             </div>
             <div id="shares_const_container">
-              <div className="ft-weight-600">{"Shares cost"}</div>
+              <div className="ft-weight-600">{"Share price"}</div>
               <div className="d-flex gap-10">
                 <img src={funds} alt="funds" />
                 <div className="one_line_key_val_val ft-weight-600">
@@ -152,11 +151,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
             </div>
             <div id="retrieved-profits">
               <div className="ft-weight-600 d-flex align-center gap-10">
-                {"Retrievable profits"}
+                {"Expected dividend"}
                 <img src={info} alt="info" />
               </div>
               <div className="d-flex gap-10">
-                <img src={funds} alt="funds" />
                 <div className="one_line_key_val_val ft-weight-600">
                   {totalCost}
                 </div>

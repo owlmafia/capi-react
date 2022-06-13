@@ -205,7 +205,7 @@ export const SharesDistributionBox = ({
 
   return (
     <div id="investors-distribution">
-      <LabeledBox label={"Investors distribution"}>{content()}</LabeledBox>
+      <LabeledBox label={"Investor distribution"}>{content()}</LabeledBox>
     </div>
   );
 };
