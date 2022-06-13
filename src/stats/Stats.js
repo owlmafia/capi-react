@@ -32,9 +32,6 @@ export const Stats = ({ deps }) => {
 
   return (
     <div>
-      <div>
-        <ContentTitle title={"Stats"} />
-      </div>
       {dao && (
         <SharesDistributionBox
           deps={deps}
