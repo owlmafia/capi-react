@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import renderPieChart from "../charts/renderPieChart";
 import { BuyMoreShares } from "./BuyMoreShares";
 import { init } from "./controller";
 import { InvestmentProfits } from "./InvestmentProfits";
@@ -42,18 +41,6 @@ export const Investment = ({ deps }) => {
     deps.updateInvestmentData,
     deps.updateMyShares,
   ]);
-
-  useEffect(() => {
-    if (myShareChart.current && deps.investmentData) {
-      const notMyShare = 1 - deps.investmentData.investor_percentage_number;
-      // the labels are irrelevant here
-      const data = {
-        a: deps.investmentData.investor_percentage_number,
-        b: notMyShare,
-      };
-      renderPieChart(myShareChart.current, data, (d) => d[1]);
-    }
-  }, [dao, deps.investmentData]);
 
   const userView = () => {
     if (deps.myAddress && dao && deps.investmentData) {

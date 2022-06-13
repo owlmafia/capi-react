@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import renderPieChart from "../charts/renderPieChart";
 import {
   LabeledCurrencyInput,
   LabeledInput,
@@ -51,25 +50,10 @@ export const CreateDao = ({ deps }) => {
 
   const navigate = useNavigate();
 
-  const investorsShareChart = useRef(null);
-
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(false);
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [pendingSubmitDao, setSubmitDaoIntent] = useState(false);
-
-  useEffect(() => {
-    if (investorsShareChart.current) {
-      // investors share % expected to be 0-100 (user input)
-      // note that this text currently isn't validated and can be anything - the d3 chart shows the last valid data, no errors.
-      const nonInvestorsShare = 100 - investorsShare;
-      // the labels are irrelevant here
-      const data = { a: investorsShare, b: nonInvestorsShare };
-      renderPieChart(investorsShareChart.current, data, (d) => d[1]);
-    }
-    // for now no deps - mutable value doesn't cause a re-render
-    //   }, [investorsShare, investorsShareChart.current]);
-  });
 
   useEffect(() => {
     async function nestedAsync() {
