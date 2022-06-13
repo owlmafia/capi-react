@@ -1,4 +1,4 @@
-/// field-specific error -> error message
+/// field validation error -> error message
 export const toErrorMsg = (e) => {
   // if the field-specific error is null, there's no error so there's no error message
   if (!e) {

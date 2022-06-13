@@ -1,5 +1,7 @@
 // Note: no locking for the embedded view because there's no design yet
 
+import { toErrorMsg } from "../validation";
+
 const wasmPromise = import("wasm");
 
 export const lock = async (
@@ -13,7 +15,8 @@ export const lock = async (
   updateMyShares,
   updateInvestmentData,
   onLockOpt,
-  wallet
+  wallet,
+  setInputError
 ) => {
   try {
     const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
@@ -74,7 +77,12 @@ export const lock = async (
       onLockOpt();
     }
   } catch (e) {
-    statusMsg.error(e);
+    if (e.id === "validation") {
+      console.error("%o", e);
+      setInputError(toErrorMsg(e.details));
+    } else {
+      statusMsg.error(e);
+    }
     showProgress(false);
   }
 };

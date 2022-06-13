@@ -14,7 +14,7 @@ export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
       inputLabel={"Lock shares"}
       buttonLabel={"Lock shares"}
       submitting={submitting}
-      onSubmit={async (input) => {
+      onSubmit={async (input, setInputError) => {
         await lock(
           deps.myAddress,
           setSubmitting,
@@ -26,7 +26,8 @@ export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
           deps.updateMyShares,
           deps.updateInvestmentData,
           onLockOpt,
-          deps.wallet
+          deps.wallet,
+          setInputError
         );
       }}
     />

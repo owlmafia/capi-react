@@ -17,7 +17,6 @@ export const LockOrUnlockShares = ({
   onSubmit,
 }) => {
   const [input, setInput] = useState(null);
-  // TODO show error
   const [inputError, setInputError] = useState(null);
 
   const view = () => {
@@ -51,7 +50,7 @@ export const LockOrUnlockShares = ({
             className="button-primary"
             isLoading={submitting}
             onClick={async () => {
-              onSubmit(input);
+              onSubmit(input, setInputError);
             }}
           />
         </div>
