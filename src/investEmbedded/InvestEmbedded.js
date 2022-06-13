@@ -37,15 +37,22 @@ export const InvestEmbedded = ({ deps, dao }) => {
   useEffect(() => {
     async function nestedAsync() {
       if (availableShares) {
-        updateTotalPriceAndPercentage(
-          deps.statusMsg,
-          buySharesCount,
-          dao,
-          availableShares,
-          setTotalCost,
-          setTotalCostNumber,
-          setProfitPercentage
-        );
+        if (buySharesCount) {
+          updateTotalPriceAndPercentage(
+            deps.statusMsg,
+            buySharesCount,
+            dao,
+            availableShares,
+            setTotalCost,
+            setTotalCostNumber,
+            setProfitPercentage
+          );
+        } else {
+          // no input: clear fields
+          setTotalCost(null);
+          setTotalCostNumber(null);
+          setProfitPercentage(null);
+        }
       }
     }
     nestedAsync();

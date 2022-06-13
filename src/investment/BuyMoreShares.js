@@ -1,18 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
+import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
 import { pieChartColors } from "../common_functions/common";
-import { invest } from "./controller";
+import {
+  fetchAvailableShares,
+  invest,
+  updateTotalPriceAndPercentage,
+} from "../investEmbedded/controller";
 
 export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
 
-  const [buySharesAmount, setBuySharesAmount] = useState(null);
-  // TODO show error
+  const [buySharesCount, setBuySharesCount] = useState(null);
+
   const [buySharesAmountError, setBuySharesAmountError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+
+  const [totalCostNumber, setTotalCostNumber] = useState(null);
+  const [availableShares, setAvailableShares] = useState(null);
+  // these 2 are not used currently - copied from InvestEmbedded, which has basically the same functionality but a different UI
+  // may be used in the future
+  const [_totalCost, setTotalCost] = useState(null);
+  const [_totalPercentage, setProfitPercentage] = useState(null);
+
+  const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
+    useState(null);
+
+  useEffect(() => {
+    fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
+  }, [deps.statusMsg, params.id]);
+
+  useEffect(() => {
+    async function nestedAsync() {
+      if (availableShares && buySharesCount) {
+        updateTotalPriceAndPercentage(
+          deps.statusMsg,
+          buySharesCount,
+          dao,
+          availableShares,
+          setTotalCost,
+          setTotalCostNumber,
+          setProfitPercentage
+        );
+      }
+    }
+    nestedAsync();
+  }, [deps.statusMsg, params.id, buySharesCount, availableShares, dao]);
 
   const view = () => {
     return (
@@ -47,8 +83,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
             <LabeledInput
               label={"Buy shares"}
               placeholder={"Enter amount of shares"}
-              inputValue={buySharesAmount}
-              onChange={(input) => setBuySharesAmount(input)}
+              inputValue={buySharesCount}
+              onChange={(input) => setBuySharesCount(input)}
               errorMsg={buySharesAmountError}
             />
             <SubmitButton
@@ -64,10 +100,13 @@ export const BuyMoreShares = ({ deps, dao }) => {
                   deps.updateMyBalance,
                   params.id,
                   dao,
-                  deps.buySharesAmount,
+                  buySharesCount,
                   deps.updateMyShares,
                   deps.updateFunds,
-                  deps.wallet
+                  setBuySharesAmountError,
+                  deps.wallet,
+                  setShowBuyCurrencyInfoModal,
+                  totalCostNumber
                 );
               }}
             />
@@ -78,13 +117,18 @@ export const BuyMoreShares = ({ deps, dao }) => {
             sharesDistr={[
               to_pie_chart_slice(deps.investmentData.available_shares),
               to_pie_chart_slice(deps.investmentData.investor_locked_shares),
-              to_pie_chart_slice(
-                deps.investmentData.investor_unlocked_shares
-              ),
+              to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
             ]}
             col={pieChartColors()}
           />
         </div>
+        {showBuyCurrencyInfoModal && deps.myAddress && (
+          <BuyFundsAssetModal
+            deps={deps}
+            amount={showBuyCurrencyInfoModal.amount}
+            closeModal={() => setShowBuyCurrencyInfoModal(null)}
+          />
+        )}
       </div>
     );
   };

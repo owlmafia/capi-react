@@ -21,8 +21,8 @@ export const fetchAvailableShares = async (
 };
 
 export const updateTotalPriceAndPercentage = async (
-  statusMsg,
-  shareCountInput,
+  _statusMsg,
+  shareCount,
   dao,
   availableShares,
   setBuySharesTotalPrice,
@@ -31,9 +31,6 @@ export const updateTotalPriceAndPercentage = async (
 ) => {
   try {
     const { bridge_calculate_shares_price } = await wasmPromise;
-
-    // UX - if user empties the field, we want to continue showing price / percentage for 1 share
-    const shareCount = shareCountInput === "" ? "1" : shareCountInput;
 
     let res = await bridge_calculate_shares_price({
       shares_amount: shareCount,
@@ -49,7 +46,9 @@ export const updateTotalPriceAndPercentage = async (
     setBuySharesTotalPriceNumber(res.total_price_number);
     setProfitPercentage(res.profit_percentage);
   } catch (e) {
-    statusMsg.error(e);
+    // for now disabled - we don't want to show validation messages while typing, to be consistent with other inputs
+    // statusMsg.error(e);
+    console.error("updateTotalPriceAndPercentage error (ignored): %o", e);
   }
 };
 
