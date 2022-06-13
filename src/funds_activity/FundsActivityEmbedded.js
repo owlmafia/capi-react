@@ -42,7 +42,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
     }
   };
 
-  const view = () => {
+  const box = () => {
     return (
       <div className="first_dao_widget">
         {deps.funds && (
@@ -79,6 +79,14 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
       </div>
     );
+  };
+
+  const view = () => {
+    if (deps.funds || dao || (activityEntries && activityEntries.length > 0)) {
+      return box();
+    } else {
+      return null;
+    }
   };
 
   return <div>{view()}</div>;
