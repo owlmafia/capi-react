@@ -120,6 +120,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
             ]}
             col={pieChartColors()}
+            animated={false}
           />
         </div>
         {showBuyCurrencyInfoModal && deps.myAddress && (

@@ -10,7 +10,8 @@ const renderPieChart = (
   data,
   dataNumberSelector,
   onSegmentSelected,
-  col
+  col,
+  animated
 ) => {
   var width = 300,
     height = 300;
@@ -63,22 +64,29 @@ const renderPieChart = (
     .attr("class", (d, i) => segmentClass(d, i, d.data.type_ === NOT_OWNED));
 
   let angleInterpolation = d3.interpolate(pie.startAngle()(), pie.endAngle()());
-  updatedChart
-    .transition()
-    .ease(d3.easeLinear)
-    .duration(2000)
-    .attrTween("d", (d) => {
-      let originalEnd = d.endAngle;
-      return (t) => {
-        let currentAngle = angleInterpolation(t);
-        if (currentAngle < d.startAngle) {
-          return "";
-        }
-        d.endAngle = Math.min(currentAngle, originalEnd);
 
-        return arc(d);
-      };
+  if (animated) {
+    updatedChart
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(2000)
+      .attrTween("d", (d) => {
+        let originalEnd = d.endAngle;
+        return (t) => {
+          let currentAngle = angleInterpolation(t);
+          if (currentAngle < d.startAngle) {
+            return "";
+          }
+          d.endAngle = Math.min(currentAngle, originalEnd);
+
+          return arc(d);
+        };
+      });
+  } else {
+    updatedChart.attr("d", (d) => {
+      return arc(d);
     });
+  }
 
   const defaultColorsState = () => {
     updatedChart

@@ -6,6 +6,7 @@ export const SharesDistributionChart = ({
   sharesDistr,
   onAddressSelected,
   col,
+  animated,
 }) => {
   const chart = useRef(null);
 
@@ -18,7 +19,8 @@ export const SharesDistributionChart = ({
         (d) => {
           return onAddressSelected(d.address);
         },
-        col
+        col,
+        animated
       );
     }
   }, [onAddressSelected, sharesDistr]);

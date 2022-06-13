@@ -194,6 +194,7 @@ export const SharesDistributionBox = ({
               sharesDistr={sharesDistr}
               onAddressSelected={onAddressSelected}
               col={col}
+              animated={true}
             />
           </div>
           {holdersListItems()}
