@@ -25,7 +25,6 @@ export const pieChartColors = () => {
   return [
     "#4CA5A9",
     "#8ECACD",
-    "#8ECACD",
     "#BCDBDF",
     "#C8E3E3",
     "#D9E9EB",
