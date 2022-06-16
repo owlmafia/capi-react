@@ -1,4 +1,6 @@
-import CopyPasteText from "../common_comps/CopyPastText";
+import CopyPasteText, {
+  CopyPasteCompleteText,
+} from "../common_comps/CopyPastText";
 import close from "../images/svg/close.svg";
 import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
@@ -51,8 +53,13 @@ const label = (statusMsgDisplay) => {
 
 const successLabel = (statusMsgDisplay) => {
   // For success messages, only displayMsg is set (no need for details like for errors)
-  // it also doesn't have copy paste, as it's not needed for a success message.
-  return <div>{statusMsgDisplay.displayMsg}</div>;
+  return (
+    <CopyPasteText
+      text={statusMsgDisplay.displayMsg}
+      copyText={statusMsgDisplay.displayMsg}
+      hideIcon={true}
+    />
+  );
 };
 
 const errorLabel = (statusMsgDisplay) => {
@@ -64,7 +71,12 @@ const errorLabel = (statusMsgDisplay) => {
     shortMsg = shortMsg.substring(0, maxMsgLength) + "...";
   }
   // copy paste, where copy is the complete original message, which may or may not be equal to the displayed message.
-  return <CopyPasteText text={shortMsg} copyText={statusMsgDisplay.copyMsg} />;
+  return (
+    <CopyPasteCompleteText
+      text={shortMsg}
+      copyText={statusMsgDisplay.copyMsg}
+    />
+  );
 };
 
 export default StatusMsgView;

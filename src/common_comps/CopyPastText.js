@@ -40,3 +40,22 @@ export const CopyPasteHtml = ({ element, copyText }) => {
     </CopyToClipboard>
   );
 };
+
+export const CopyPasteCompleteText = ({ text, copyText: copyTextOpt }) => {
+  return (
+    <CopyPasteCompleteHtml
+      element={<div className="ft-color-black">{text}</div>}
+      copyText={copyTextOpt ?? text}
+    />
+  );
+};
+
+export const CopyPasteCompleteHtml = ({ element, copyText }) => {
+  return (
+    <CopyToClipboard text={copyText}>
+      <div className="copyable d-flex gap-10">
+        <span>{element}</span>
+      </div>
+    </CopyToClipboard>
+  );
+};

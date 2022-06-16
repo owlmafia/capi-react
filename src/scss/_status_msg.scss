@@ -1,5 +1,4 @@
 .msg {
-    cursor: pointer;
     opacity: 1;
     width: 53.6vw;
     max-width: 1034px;
@@ -37,6 +36,10 @@
         align-items: center;
         justify-content: flex-end;
     }
+}
+
+.copyable {
+    cursor: pointer;
 }
 
 .copy_msg {
