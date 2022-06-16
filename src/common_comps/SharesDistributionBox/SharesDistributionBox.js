@@ -138,7 +138,7 @@ export const SharesDistributionBox = ({
   };
 
   const holdersListItems = () => {
-    if (sharesDistr && sharesDistr.length > 0 && entries) {
+    if (sharesDistr && entries) {
       return (
         <div className="holder_list_container">
           <div className="sub-title">
@@ -171,7 +171,7 @@ export const SharesDistributionBox = ({
   };
 
   const content = () => {
-    if ((sharesDistr && sharesDistr.length === 0) || entries === null) {
+    if (entries === null) {
       return <Progress vCenter={false} />;
     } else {
       return (
