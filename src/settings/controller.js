@@ -9,8 +9,7 @@ export const prefillInputs = async (
   setImageBytes,
   setSocialMediaUrl,
   setCustomerEscrow,
-  setCustomerEscrowVersion,
-  setOwner
+  setCustomerEscrowVersion
 ) => {
   try {
     const { bridge_updatable_data } = await wasmPromise;
@@ -25,7 +24,6 @@ export const prefillInputs = async (
     setSocialMediaUrl(updatableData.social_media_url);
     setCustomerEscrow(updatableData.customer_escrow);
     setCustomerEscrowVersion(updatableData.customer_escrow_version);
-    setOwner(updatableData.owner);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -97,6 +95,44 @@ export const updateDaoData = async (statusMsg, showProgress, data, wallet) => {
     );
 
     statusMsg.success("Dao data updated!");
+    showProgress(false);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};
+
+export const rekeyOwner = async (
+  statusMsg,
+  showProgress,
+  daoId,
+  authAddress,
+  wallet
+) => {
+  try {
+    const { bridge_rekey_owner, bridge_submit_rekey_owner } = await wasmPromise;
+
+    showProgress(true);
+    let rekeyRes = await bridge_rekey_owner({
+      dao_id: daoId,
+      auth_address: authAddress,
+    });
+    console.log("rekeyRes: %o", rekeyRes);
+    showProgress(false);
+
+    let rekeySigned = await wallet.signTxs(rekeyRes.to_sign);
+    console.log("rekeySigned: " + JSON.stringify(rekeySigned));
+
+    showProgress(true);
+    let submitRekeyRes = await bridge_submit_rekey_owner({
+      txs: rekeySigned,
+    });
+    console.log("submitRekeyRes: " + JSON.stringify(submitRekeyRes));
+
+    statusMsg.success(
+      "Owner rekeyed to: " +
+        authAddress +
+        ". Please login with this account to be able to sign transactions."
+    );
     showProgress(false);
   } catch (e) {
     statusMsg.error(e);

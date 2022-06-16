@@ -7,7 +7,7 @@
     margin-bottom: 30px;
 
     .link_button {
-        color: #787E82;
+        color: #787e82;
         text-decoration: none;
         padding-bottom: 10px;
         cursor: pointer;
@@ -185,6 +185,10 @@
     }
 }
 
+.settings-space {
+    margin-top: 60px;
+}
+
 .social-media-buttons {
     display: flex;
     gap: 16px;
@@ -247,7 +251,7 @@
             position: absolute;
             bottom: 40px;
             left: 50%;
-            transform: translateX(-50%)
+            transform: translateX(-50%);
         }
 
         .button-primary {
@@ -268,7 +272,7 @@
                     position: absolute;
                     bottom: 40px;
                     left: 50%;
-                    transform: translateX(-50%)
+                    transform: translateX(-50%);
                 }
 
                 .available-shares {

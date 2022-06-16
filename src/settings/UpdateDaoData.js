@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { LabeledInput, LabeledTextArea } from "../common_comps/LabeledInput";
-import { prefillInputs, updateDaoData } from "./controller";
+import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { toBytesForRust } from "../common_functions/common";
 
@@ -18,7 +18,7 @@ export const UpdateDaoData = ({ deps }) => {
   const [customerEscrow, setCustomerEscrow] = useState("");
   const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
 
-  const [owner, setOwner] = useState("");
+  const [rekeyAuthAddress, setRekeyAuthAddress] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -33,8 +33,7 @@ export const UpdateDaoData = ({ deps }) => {
           setImageBytes,
           setSocialMediaUrl,
           setCustomerEscrow,
-          setCustomerEscrowVersion,
-          setOwner
+          setCustomerEscrowVersion
         );
       }
     }
@@ -79,12 +78,6 @@ export const UpdateDaoData = ({ deps }) => {
           inputValue={socialMediaUrl}
           onChange={(input) => setSocialMediaUrl(input)}
         /> */}
-        <div className="info">{"Ownership"}</div>
-        <LabeledInput
-          label={"Project owner"}
-          inputValue={owner}
-          onChange={(input) => setOwner(input)}
-        />
         <SubmitButton
           label={"Update data"}
           className="button-primary"
@@ -95,7 +88,6 @@ export const UpdateDaoData = ({ deps }) => {
               setSubmitting,
               {
                 dao_id: params.id,
-                owner: owner,
 
                 customer_escrow: customerEscrow,
                 customer_escrow_version: customerEscrowVersion,
@@ -107,6 +99,26 @@ export const UpdateDaoData = ({ deps }) => {
                 image: await toBytesForRust(imageBytes),
                 social_media_url: socialMediaUrl,
               },
+              deps.wallet
+            );
+          }}
+        />
+        <div className="subtitle settings-space">{"Ownership"}</div>
+        <LabeledInput
+          label={"Rekey owner to:"}
+          inputValue={rekeyAuthAddress}
+          onChange={(input) => setRekeyAuthAddress(input)}
+        />
+        <SubmitButton
+          label={"Rekey owner"}
+          className="button-primary"
+          isLoading={submitting}
+          onClick={async () => {
+            rekeyOwner(
+              deps.statusMsg,
+              setSubmitting,
+              params.id,
+              rekeyAuthAddress,
               deps.wallet
             );
           }}
