@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/core": "^7.15.0",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
-    "@randlabs/myalgo-connect": "^1.1.0",
+    "@randlabs/myalgo-connect": "^1.2.0",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
