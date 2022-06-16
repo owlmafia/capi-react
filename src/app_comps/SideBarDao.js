@@ -54,16 +54,14 @@ export const SideBarDao = ({ deps, containerClass }) => {
         route="funds_activity"
         label="Funds activity"
       />
-      <div className="settings">
-        {iAmDaoOwner && (
-          <SideBarItem
-            imageSrc={settings}
-            route="settings"
-            label="Project settings"
-            showBadge={deps.daoVersion?.update_data}
-          />
-        )}
-      </div>
+      {iAmDaoOwner && (
+        <SideBarItem
+          imageSrc={settings}
+          route="settings"
+          label="Project settings"
+          showBadge={deps.daoVersion?.update_data}
+        />
+      )}
     </div>
   );
 };

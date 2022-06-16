@@ -36,7 +36,7 @@ a {
 
     .title {
         color: $blue-primary;
-        font-size: 1.6rem;
+        font-size: 32px;
         font-family: "Gilroy-Bold";
         margin-bottom: 36px;
     }
@@ -56,8 +56,6 @@ a {
     padding-bottom: 50px;
     min-width: 600px;
     max-width: 1034px;
-    height: 100vh;
-    overflow-y: scroll;
     z-index: 2;
     padding-right: 4px;
 
@@ -362,7 +360,7 @@ select {
 }
 
 .subtitle {
-    font-size: 1.2em;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
 }
@@ -443,6 +441,7 @@ p {
             align-items: center;
             margin-bottom: 26px;
             font-weight: 600;
+            font-size: 18px;
         }
 
         img {
@@ -609,6 +608,14 @@ p {
     color: #686777;
 }
 
+.ft-size-18 {
+    font-size: 18px;
+}
+
+.w-100-p {
+    width: 100px;
+}
+
 .ft-size-14 {
     font-size: 14px;
 }
@@ -647,6 +654,10 @@ p {
 
 .mr-3 {
     margin-right: 16px;
+}
+
+.mr-2 {
+    margin-right: 10px;
 }
 
 .mt-6 {
@@ -696,22 +707,6 @@ p {
         height: 32px;
         width: 90px;
     }
-}
-
-::-webkit-scrollbar {
-    width: 4px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #b6b9b9;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
 
 @media only screen and (max-width: 1330px) {
