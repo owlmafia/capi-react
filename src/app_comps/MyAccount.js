@@ -7,6 +7,7 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "./SubmitButton";
 import { SelectWallet } from "../wallet/SelectWallet";
 import Modal from "../Modal";
+import funds from "../images/funds.svg";
 
 export const MyAccount = ({ deps, daoId }) => {
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
@@ -58,7 +59,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
           <div id="my_account_my_balance__balance">
-            <FundsAssetImg />
+            <img className="mr-2" src={funds} alt="funds" />
             <div>{deps.myBalance.balance_funds_asset}</div>
             <img
               className="arrow"
@@ -81,11 +82,15 @@ const DividendSection = ({ deps, daoId }) => {
 
   if (deps.myDividend) {
     return (
-      <div>
-        <div className="mb-5 ft-weight-600">
-          {"Claimable dividend: " + deps.myDividend}
+      <div className="d-flex flex-column">
+        <div className="mb-5 ft-weight-600 ft-size-18 d-flex align-center justify-between">
+          {"Claimable dividend: "}
+          <div className="w-100-p d-flex align-center gap-10">
+            <img src={funds} alt="funds" />
+            {deps.myDividend}
+          </div>
         </div>
-        <div className="btn-block">
+        <div className="btn-block w-100">
           <SubmitButton
             label={"Claim"}
             className="button-primary full-width-btn"

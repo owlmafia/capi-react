@@ -47,17 +47,17 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
       <div className="first_dao_widget">
         {deps.funds && (
           <div className="d-flex flex-column gap-10">
-            <div className="ft-weight-600">{"Project funds"}</div>
+            <div className="ft-weight-600 ft-size-18">{"Project funds"}</div>
             <div className="d-flex align-center gap-10">
               <img src={funds} alt="funds" />
-              <div className="ft-weight-600">{deps.funds}</div>
+              <div className="ft-weight-600 ft-size-24">{deps.funds}</div>
               <div>{changeArrow(deps.fundsChange)}</div>
             </div>
           </div>
         )}
         {dao && (
           <div className="d-flex gap-10 w-100 mt-1">
-            <div className="ft-size-14 ft-color-black">
+            <div className="ft-color-black">
               {"Project wallet address:"}
             </div>
             <CopyPasteText
@@ -68,7 +68,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {activityEntries && activityEntries.length > 0 && (
           <div>
-            <div className="mt-6 ft-weight-600 mb-5">
+            <div className="mt-6 ft-weight-600 mb-5 ft-size-18">
               {"Recent funds activity"}
             </div>
             {fundsActivity()}

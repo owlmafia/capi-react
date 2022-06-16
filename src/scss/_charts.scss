@@ -51,10 +51,10 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         box-sizing: border-box;
         height: 32px;
         align-items: center;
-        width: 220px;
+        width: 240px;
 
         .percentage-text {
-            width: 48px;
+            width: 50px;
         }
     }
 }
@@ -76,8 +76,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     }
 
     &__text {
-        font-size: 0.8rem;
-        font-weight: 300;
+        font-weight: 400;
     }
 }
 

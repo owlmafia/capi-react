@@ -185,7 +185,7 @@ export const SharesDistributionBox = ({
               <div className="flexBlock">
                 <div className="ft-weight-600">{notOwnedShares}</div>
                 <div className="circle ml-5 mr-3"></div>
-                <div className="ft-color-black ft-size-14">
+                <div className="ft-color-black">
                   {"Available for sale"}
                 </div>
               </div>
