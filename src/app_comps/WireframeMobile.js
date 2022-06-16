@@ -21,6 +21,14 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
     }
   }, [showSidebar]);
 
+  const rightColClass = useMemo(() => {
+    if (showWallet) {
+      return "rightcol";
+    } else {
+      return "rightcol rightcol-closing";
+    }
+  }, [showWallet]);
+
   const sideBar = () => {
     if (isGlobal) {
       return <SideBar containerClass={sideMenuClass} />;
@@ -51,7 +59,11 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         />
       )}
       {showWallet && (
-        <MobileWalletView deps={deps} onClose={() => setShowWallet(false)} />
+        <MobileWalletView
+          deps={deps}
+          containerClass={rightColClass}
+          onClose={() => setShowWallet(false)}
+        />
       )}
       <div id="content">
         {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
