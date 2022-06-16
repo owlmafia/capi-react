@@ -1,22 +1,21 @@
-import CopyPasteText, {
-  CopyPasteCompleteText,
-} from "../common_comps/CopyPastText";
+import { CopyPasteCompleteText } from "../common_comps/CopyPastText";
 import close from "../images/svg/close.svg";
 import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
 
 export const StatusMsgView = ({ deps }) => {
   const className = notificationClassName(deps.statusMsgDisplay);
-
   return (
     <div className={"msg " + className}>
       <div className="d-flex align-center gap-32">
         {notificationIcon(deps.statusMsgDisplay)}
-        {label(deps.statusMsgDisplay)}
+        {label(deps.statusMsg, deps.statusMsgDisplay)}
       </div>
-      <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
-        <img src={close} alt="close" />
-      </button>
+      {!deps.statusMsgDisplay.hideClose && (
+        <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
+          <img src={close} alt="close" />
+        </button>
+      )}
     </div>
   );
 };
@@ -41,9 +40,9 @@ const notificationClassName = (statusMsgDisplay) => {
   }
 };
 
-const label = (statusMsgDisplay) => {
+const label = (statusMsg, statusMsgDisplay) => {
   if (statusMsgDisplay.type === "success") {
-    return successLabel(statusMsgDisplay);
+    return successLabel(statusMsg, statusMsgDisplay);
   } else if (statusMsgDisplay.type === "error") {
     return errorLabel(statusMsgDisplay);
   } else {
@@ -51,13 +50,14 @@ const label = (statusMsgDisplay) => {
   }
 };
 
-const successLabel = (statusMsgDisplay) => {
+const successLabel = (statusMsg, statusMsgDisplay) => {
   // For success messages, only displayMsg is set (no need for details like for errors)
   return (
-    <CopyPasteText
+    <CopyPasteCompleteText
       text={statusMsgDisplay.displayMsg}
       copyText={statusMsgDisplay.displayMsg}
       hideIcon={true}
+      statusMsg={statusMsg}
     />
   );
 };

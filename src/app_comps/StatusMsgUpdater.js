@@ -2,10 +2,10 @@ import { toFriendlyError } from "./friendlyErrors";
 
 export const StatusMsgUpdater = (setStatusMsg) => ({
   // Display text as a success notification
-  success(msg) {
+  success(msg, hideClose) {
     msg = msg + "";
     console.log(msg);
-    setStatusMsg({ displayMsg: msg, type: "success" });
+    setStatusMsg({ displayMsg: msg, type: "success", hideClose: hideClose });
   },
 
   // Displays text as error notification,
@@ -13,7 +13,7 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
   // allows copy paste
   // if friendly error, the copy paste text corresponds to the original (not friendly) text
   // if not friendly error, the copy paste text is equal to the displayed text
-  error(msg) {
+  error(msg, hideClose) {
     msg = msg + "";
     var displayMsg = msg;
     try {
@@ -26,7 +26,12 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
       msg += "\n+Error mapping to friendly error: " + (e + "");
     }
     console.error("Error notification: %o", msg);
-    setStatusMsg({ displayMsg: displayMsg, copyMsg: msg, type: "error" });
+    setStatusMsg({
+      displayMsg: displayMsg,
+      copyMsg: msg,
+      type: "error",
+      hideClose: hideClose,
+    });
   },
 
   clear() {

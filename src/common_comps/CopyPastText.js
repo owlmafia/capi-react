@@ -3,25 +3,31 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import myalgo from "../images/svg/myalgo.svg";
 // import checkmark from "../images/svg/checkmark.svg";
 
-const CopyPasteText = ({ text, copyText: copyTextOpt }) => {
+const CopyPasteText = ({ statusMsg, text, copyText: copyTextOpt, copyMsg }) => {
   return (
     <CopyPasteHtml
       element={<div className="ft-color-black">{text}</div>}
       copyText={copyTextOpt ?? text}
+      statusMsg={statusMsg}
+      copyMsg={copyMsg}
     />
   );
 };
 
 export default CopyPasteText;
 
-export const CopyPasteHtml = ({ element, copyText }) => {
-  const [isCopied, setIsCopied] = useState(false);
+export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
+  const [isCopied, _setIsCopied] = useState(false);
 
   const onCopy = () => {
-    setIsCopied(true);
+    if (copyMsg) {
+      statusMsg.success(copyMsg, true);
+    }
+    // setIsCopied(true);
     setTimeout(() => {
-      setIsCopied(false);
-    }, 1000);
+      statusMsg.clear();
+      //   setIsCopied(false);
+    }, 1500);
   };
 
   return (

@@ -55,6 +55,7 @@ const myAddressView = (deps, daoId) => {
                 </a>
               }
               copyText={deps.myAddress}
+              statusMsg={deps.statusMsg}
             />
           </div>
           <div id="my_account_my_balance__balance">

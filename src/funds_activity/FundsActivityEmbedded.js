@@ -63,6 +63,8 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
             <CopyPasteText
               text={shortedAddress(dao.customer_escrow_address)}
               copyText={dao.customer_escrow_address}
+              statusMsg={deps.statusMsg}
+              copyMsg={"Address copied to clipboard"}
             />
           </div>
         )}
