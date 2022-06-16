@@ -17,15 +17,15 @@
     animation-duration: 0.8s;
 
     &__error {
-        background: #FFF2F2;
+        background: #fff2f2;
     }
 
     &__success {
-        background: #EEFDF6;
+        background: #eefdf6;
     }
 
     &__warning {
-        background: #FFFDF1;
+        background: #fffdf1;
     }
 
     &__close {
@@ -48,10 +48,8 @@
 
 @keyframes notification {
     from {
-        top: 0
+        top: 0;
     }
-
-    ;
 
     to {
         top: 16px;
@@ -69,6 +67,6 @@
 @media only screen and (max-width: 650px) {
     .msg {
         z-index: 2100;
-        width: calc(100vw - 40px)
+        width: calc(100vw - 40px);
     }
 }
