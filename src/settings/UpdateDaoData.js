@@ -21,6 +21,15 @@ export const UpdateDaoData = ({ deps }) => {
   const [rekeyAuthAddress, setRekeyAuthAddress] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  const [daoNameError, setDaoNameError] = useState("");
+  const [daoDescrError, setDaoDescrError] = useState("");
+  const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+  const [imageError, setImageError] = useState("");
+  const [escrowAddressError, setEscrowAddressError] = useState("");
+  const [escrowVersionError, setEscrowVersionError] = useState("");
+
+  const [rekeyAddressError, setRekeyAddressError] = useState("");
+
   useEffect(() => {
     async function prefill() {
       if (params.id) {
@@ -50,12 +59,14 @@ export const UpdateDaoData = ({ deps }) => {
           inputValue={daoName}
           onChange={(input) => setDaoName(input)}
           maxLength={40} // NOTE: has to match WASM
+          errorMsg={daoNameError}
         />
         <LabeledTextArea
           label={"Description"}
           inputValue={daoDescr}
           onChange={(input) => setDaoDescr(input)}
           maxLength={2000} // NOTE: has to match WASM
+          errorMsg={daoDescrError}
         />
         <div className="info">Project Cover</div>
         <ImageUpload
@@ -67,16 +78,19 @@ export const UpdateDaoData = ({ deps }) => {
           label={"Payments address"}
           inputValue={customerEscrow}
           onChange={(input) => setCustomerEscrow(input)}
+          errorMsg={escrowAddressError}
         />
         <LabeledInput
           label={"Payments escrow version"}
           inputValue={customerEscrowVersion}
           onChange={(input) => setCustomerEscrowVersion(input)}
+          errorMsg={escrowVersionError}
         />
         {/* <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
           onChange={(input) => setSocialMediaUrl(input)}
+          errorMsg={socialMediaUrlError}
         /> */}
         <SubmitButton
           label={"Update data"}
@@ -96,10 +110,18 @@ export const UpdateDaoData = ({ deps }) => {
                 project_desc: daoDescr,
                 share_price: sharePrice,
 
+                owner: deps.myAddress,
+
                 image: await toBytesForRust(imageBytes),
                 social_media_url: socialMediaUrl,
               },
-              deps.wallet
+              deps.wallet,
+              setDaoNameError,
+              setDaoDescrError,
+              setImageError,
+              setSocialMediaUrlError,
+              setEscrowAddressError,
+              setEscrowVersionError
             );
           }}
         />
@@ -108,6 +130,7 @@ export const UpdateDaoData = ({ deps }) => {
           label={"Rekey owner to:"}
           inputValue={rekeyAuthAddress}
           onChange={(input) => setRekeyAuthAddress(input)}
+          errorMsg={rekeyAddressError}
         />
         <SubmitButton
           label={"Rekey owner"}
@@ -119,7 +142,8 @@ export const UpdateDaoData = ({ deps }) => {
               setSubmitting,
               params.id,
               rekeyAuthAddress,
-              deps.wallet
+              deps.wallet,
+              setRekeyAddressError
             );
           }}
         />

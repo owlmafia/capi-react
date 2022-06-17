@@ -1,3 +1,5 @@
+import { toErrorMsg } from "../validation";
+
 const wasmPromise = import("wasm");
 
 export const prefillInputs = async (
@@ -72,7 +74,18 @@ export const updateApp = async (
   }
 };
 
-export const updateDaoData = async (statusMsg, showProgress, data, wallet) => {
+export const updateDaoData = async (
+  statusMsg,
+  showProgress,
+  data,
+  wallet,
+  setDaoNameError,
+  setDaoDescrError,
+  setImageError,
+  setSocialMediaUrlError,
+  setEscrowAddressError,
+  setEscrowVersionError
+) => {
   try {
     const { bridge_update_data, bridge_submit_update_dao_data } =
       await wasmPromise;
@@ -97,7 +110,20 @@ export const updateDaoData = async (statusMsg, showProgress, data, wallet) => {
     statusMsg.success("Dao data updated!");
     showProgress(false);
   } catch (e) {
-    statusMsg.error(e);
+    if (e.id === "validations") {
+      let details = e.details;
+      setDaoNameError(toErrorMsg(details.name));
+      setDaoDescrError(toErrorMsg(details.description));
+      setImageError(toErrorMsg(details.image));
+      setSocialMediaUrlError(toErrorMsg(details.social_media_url));
+      setEscrowAddressError(toErrorMsg(details.payment_address));
+      setEscrowVersionError(toErrorMsg(details.payment_version));
+
+      statusMsg.error("Please fix the errors");
+    } else {
+      statusMsg.error(e);
+    }
+    showProgress(false);
   }
 };
 
@@ -106,7 +132,8 @@ export const rekeyOwner = async (
   showProgress,
   daoId,
   authAddress,
-  wallet
+  wallet,
+  setInputError
 ) => {
   try {
     const { bridge_rekey_owner, bridge_submit_rekey_owner } = await wasmPromise;
@@ -135,6 +162,12 @@ export const rekeyOwner = async (
     );
     showProgress(false);
   } catch (e) {
-    statusMsg.error(e);
+    if (e.id === "validation") {
+      console.error("%o", e);
+      setInputError(toErrorMsg(e.details));
+    } else {
+      statusMsg.error(e);
+    }
+    showProgress(false);
   }
 };
