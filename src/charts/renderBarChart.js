@@ -99,7 +99,7 @@ const renderBarChart = (svg, flatData, colors) => {
   // for rounded corners at the tip
   const [rx, ry] = [4, 4];
 
-  // adds the rounded corner on the top of each bars
+  // display bars
   selected
     .append("g")
     .selectAll("g")
@@ -118,36 +118,42 @@ const renderBarChart = (svg, flatData, colors) => {
     .enter()
     .append("path")
     .attr("class", "bars")
-    .attr(
-      "d",
-      (item) =>
-        `
-      M${subGroup(item.key)},${y(0)}
-      a${rx},${ry} 0 0 1 ${rx},${-ry}
-      h${subGroup.bandwidth() - 2 * rx}
-      a${rx},${ry} 0 0 1 ${rx},${ry}
-      v${0}
-      h${-subGroup.bandwidth()}Z
-    `
-    )
+    .attr("d", (item) => barShape(item, rx, ry, subGroup, y(0), 0))
     .transition()
     .ease(d3.easeLinear)
     .duration(800)
     .attr("d", (item) =>
-      item.value
-        ? `
-      M${subGroup(item.key)},${y(item.value) + ry}
-      a${rx},${ry} 0 0 1 ${rx},${-ry}
-      h${subGroup.bandwidth() - 2 * rx}
-      a${rx},${ry} 0 0 1 ${rx},${ry}
-      v${height - y(item.value) - ry - margin.bottom}
-      h${-subGroup.bandwidth()}Z
-    `
-        : ``
+      barShape(
+        item,
+        rx,
+        ry,
+        subGroup,
+        y(item.value) + ry,
+        height - y(item.value) - ry - margin.bottom
+      )
     )
-
     .attr("fill", function (d) {
       return colorsRange(d.key);
     });
 };
 export default renderBarChart;
+
+// params
+// item: domain item
+// rx: radius x (rounded corners)
+// ry: radius y (rounded corners)
+// subGroup
+// top: render units
+// bottom: render units
+const barShape = (item, rx, ry, subGroup, top, bottom) => {
+  return item.value
+    ? `
+    M${subGroup(item.key)},${top}
+    a${rx},${ry} 0 0 1 ${rx},${-ry}
+    h${subGroup.bandwidth() - 2 * rx}
+    a${rx},${ry} 0 0 1 ${rx},${ry}
+    v${bottom}
+    h${-subGroup.bandwidth()}Z
+  `
+    : ``;
+};
