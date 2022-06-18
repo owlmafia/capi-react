@@ -140,7 +140,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
               <div className="labeled_input__error">{shareAmountError}</div>
               <input
                 className="w-80 label-input-style mt-1"
-                placeholder={"Enter amount of shares"}
+                placeholder={"Enter amount"}
                 size="30"
                 value={buySharesCount}
                 onChange={
@@ -162,7 +162,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
             </div>
           </div>
           <SubmitButton
-            label={"Buy shares"}
+            label={"Buy"}
             className={"button-primary"}
             isLoading={submitting}
             onClick={async (_) => {

@@ -12,7 +12,7 @@ export const UnlockShares = ({ deps, dao, daoId }) => {
       // currently we allow only to unlock all the shares
       showInput={false}
       title={"Unlock shares"}
-      buttonLabel={"Unlock shares"}
+      buttonLabel={"Unlock"}
       submitting={submitting}
       onSubmit={async () => {
         await unlock(

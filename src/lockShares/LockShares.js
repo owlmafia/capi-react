@@ -12,7 +12,7 @@ export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
       showInput={true}
       title={"Lock shares"}
       inputLabel={"Lock shares"}
-      buttonLabel={"Lock shares"}
+      buttonLabel={"Lock"}
       submitting={submitting}
       onSubmit={async (input, setInputError) => {
         await lock(

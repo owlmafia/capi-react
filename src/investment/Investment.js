@@ -58,7 +58,7 @@ export const Investment = ({ deps }) => {
                   setShowBuyMoreTab((current) => !current);
                 }}
               >
-                {"Buy more shares"}
+                {"Buy more"}
               </p>
               <p
                 className={actions_tabs_classes(showUnlockTab)}
@@ -68,7 +68,7 @@ export const Investment = ({ deps }) => {
                   setShowUnlockTab((current) => !current);
                 }}
               >
-                {"Unlock shares"}
+                {"Unlock"}
               </p>
               <p
                 className={actions_tabs_classes(showLockTab)}
@@ -78,7 +78,7 @@ export const Investment = ({ deps }) => {
                   setShowLockTab((current) => !current);
                 }}
               >
-                {"Lock shares"}
+                {"Lock"}
               </p>
             </div>
             {showBuyMoreTab && <BuyMoreShares deps={deps} dao={dao} />}

@@ -82,13 +82,13 @@ export const BuyMoreShares = ({ deps, dao }) => {
           <div>
             <LabeledInput
               label={"Buy shares"}
-              placeholder={"Enter amount of shares"}
+              placeholder={"Enter amount"}
               inputValue={buySharesCount}
               onChange={(input) => setBuySharesCount(input)}
               errorMsg={buySharesAmountError}
             />
             <SubmitButton
-              label={"Buy shares"}
+              label={"Buy"}
               className="button-primary"
               isLoading={submitting}
               disabled={deps.investmentData.available_shares === "0"}

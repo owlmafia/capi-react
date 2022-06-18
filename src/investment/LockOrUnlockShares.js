@@ -41,7 +41,7 @@ export const LockOrUnlockShares = ({
           {showInput && (
             <LabeledInput
               label={inputLabel}
-              placeholder={"Enter amount of shares"}
+              placeholder={"Enter amount"}
               inputValue={input}
               onChange={(input) => setInput(input)}
               errorMsg={inputError}

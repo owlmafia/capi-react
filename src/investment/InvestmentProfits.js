@@ -39,17 +39,17 @@ export const InvestmentProfits = ({ deps }) => {
       return (
         <div>
           <div className="box-container profits-by-shares">
-            <div className="title">{"Your profits by shares"}</div>
+            <div className="title">{"Your profits"}</div>
             <div className="w-80 d-flex justify-between mb-6">
               <div className="flex-block align-center">
-                <div className="subTitle">{"Retrievable profits:"}</div>
+                <div className="subTitle">{"Retrievable:"}</div>
                 <FundsAssetImg className="fund-asset" />
                 <div className="subTitle">
                   {deps.investmentData.investor_claimable_dividend}
                 </div>
               </div>
               <div className="flex-block flex-column profits-tab">
-                <div className="subTitle retrieved">{"Retrieved profits:"}</div>
+                <div className="subTitle retrieved">{"Retrieved:"}</div>
                 <div className="d-flex">
                   <FundsAssetImg className="fund-asset opacity-70" />
                   <div className="subTitle retrieved">
