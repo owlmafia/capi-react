@@ -1,18 +1,34 @@
+import { useState } from "react";
 import { CopyPasteCompleteText } from "../common_comps/CopyPastText";
 import close from "../images/svg/close.svg";
 import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
 
-export const StatusMsgView = ({ deps, containerClass }) => {
-  const className = notificationClassName(deps.statusMsgDisplay);
+export const StatusMsgView = ({ deps }) => {
+  const [closing, setClosing] = useState(false);
+
+  const notificationTypeClass = notificationClassName(deps.statusMsgDisplay);
+
+  const onCloseClick = () => {
+    setClosing(true);
+    setTimeout(() => {
+      deps.statusMsg.clear();
+    }, 1500);
+  };
+
+  var classNames = "msg " + notificationTypeClass;
+  if (closing) {
+    classNames += " " + "msg-close";
+  }
+
   return (
-    <div className={containerClass + " " + className}>
+    <div className={classNames}>
       <div className="d-flex align-center gap-32">
         {notificationIcon(deps.statusMsgDisplay)}
         {label(deps.statusMsg, deps.statusMsgDisplay)}
       </div>
       {!deps.statusMsgDisplay.hideClose && (
-        <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
+        <button className="msg__close" onClick={() => onCloseClick()}>
           <img src={close} alt="close" />
         </button>
       )}

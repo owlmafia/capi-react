@@ -9,7 +9,7 @@ import logo from "../images/logo.svg";
 import { MobileWalletView } from "../right_col/MobileWalletView";
 import wallet from "../images/svg/account.svg";
 
-export const WireframeMobile = ({ isGlobal, deps, dao, statusMsgClass }) => {
+export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
 
@@ -66,9 +66,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao, statusMsgClass }) => {
         />
       )}
       <div id="content">
-        {deps.statusMsgDisplay && (
-          <StatusMsgView deps={deps} containerClass={statusMsgClass} />
-        )}
+        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
         <Outlet />
       </div>
