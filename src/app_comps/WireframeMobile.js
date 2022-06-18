@@ -58,13 +58,11 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
           setShowWallet={setShowWallet}
         />
       )}
-      {showWallet && (
-        <MobileWalletView
-          deps={deps}
-          containerClass={rightColClass}
-          onClose={() => setShowWallet(false)}
-        />
-      )}
+      <MobileWalletView
+        deps={deps}
+        containerClass={rightColClass}
+        onClose={() => setShowWallet(false)}
+      />
       <div id="content">
         {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
