@@ -6,7 +6,7 @@ import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
 import { StatusMsgView } from "./StatusMsgView";
 
-export const Wireframe = ({ isGlobal, deps, dao }) => {
+export const Wireframe = ({ isGlobal, deps, dao, statusMsgClass }) => {
   const sideBar = () => {
     if (isGlobal) {
       return <SideBar containerClass={"sidebar-container"} />;
@@ -31,7 +31,9 @@ export const Wireframe = ({ isGlobal, deps, dao }) => {
     <div id="nav_and_main">
       {sideBar()}
       <div id="content">
-        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
+        {deps.statusMsgDisplay && (
+          <StatusMsgView deps={deps} containerClass={statusMsgClass} />
+        )}
         {daoTop()}
         <Outlet />
       </div>

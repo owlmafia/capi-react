@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { initWithDaoId } from "./controller";
 import { Wireframe } from "./Wireframe";
@@ -9,6 +9,14 @@ export const WireframeWrapper = ({ isGlobal, deps }) => {
   const [dao, setDao] = useState(null);
 
   let location = useLocation();
+
+  const statusMsgClass = useMemo(() => {
+    if (deps.statusMsgDisplay) {
+      return "msg-open";
+    } else {
+      return "msg-close";
+    }
+  }, [deps.statusMsgDisplay]);
 
   useEffect(() => {
     async function asyncInit() {
@@ -25,8 +33,18 @@ export const WireframeWrapper = ({ isGlobal, deps }) => {
   }, [location]);
 
   return deps.size.s4 ? (
-    <WireframeMobile isGlobal={isGlobal} deps={deps} dao={dao} />
+    <WireframeMobile
+      isGlobal={isGlobal}
+      deps={deps}
+      dao={dao}
+      statusMsgClass={statusMsgClass}
+    />
   ) : (
-    <Wireframe isGlobal={isGlobal} deps={deps} dao={dao} />
+    <Wireframe
+      isGlobal={isGlobal}
+      deps={deps}
+      dao={dao}
+      statusMsgClass={statusMsgClass}
+    />
   );
 };

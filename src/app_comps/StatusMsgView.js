@@ -3,10 +3,10 @@ import close from "../images/svg/close.svg";
 import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
 
-export const StatusMsgView = ({ deps }) => {
+export const StatusMsgView = ({ deps, containerClass }) => {
   const className = notificationClassName(deps.statusMsgDisplay);
   return (
-    <div className={"msg " + className}>
+    <div className={containerClass + " " + className}>
       <div className="d-flex align-center gap-32">
         {notificationIcon(deps.statusMsgDisplay)}
         {label(deps.statusMsg, deps.statusMsgDisplay)}
