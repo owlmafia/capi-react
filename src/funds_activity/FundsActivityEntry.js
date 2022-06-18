@@ -4,6 +4,7 @@ import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
 import ReactTooltip from "react-tooltip";
 
+// TODO mobile views via react (size classes), not css
 export const FundsActivityEntry = ({ entry }) => {
   return (
     <div>
