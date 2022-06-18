@@ -12,7 +12,7 @@ export const WireframeWrapper = ({ isGlobal, deps }) => {
 
   const statusMsgClass = useMemo(() => {
     if (deps.statusMsgDisplay) {
-      return "msg-open";
+      return "msg msg-open";
     } else {
       return "msg-close";
     }

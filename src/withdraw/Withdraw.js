@@ -4,10 +4,11 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
-  LabeledInput,
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";
+import pencil from "../images/svg/pencil.svg";
+import funds from "../images/funds.svg";
 
 export const Withdrawal = ({ deps }) => {
   let params = useParams();
@@ -40,10 +41,12 @@ export const Withdrawal = ({ deps }) => {
           <LabeledCurrencyInput
             label={"How much?"}
             inputValue={withdrawalAmount}
+            img={funds}
             onChange={(input) => setWithdrawalAmount(input)}
           />
-          <LabeledInput
+          <LabeledCurrencyInput
             label={"For what?"}
+            img={pencil}
             inputValue={withdrawalDescr}
             onChange={(input) => setWithdrawalDescr(input)}
           />

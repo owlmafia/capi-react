@@ -56,9 +56,9 @@ export const BuyMoreShares = ({ deps, dao }) => {
         <div className="w-60 shares-mobile">
           <div className="available-shares">
             <div className="title">{"Buy more shares"}</div>
-            <div className="mb-4 flex-block">
+            <div className="mb-4 flex-block align-center">
               <div className="subTitle">{"Share supply"}</div>
-              <div className="subTitle">{dao.share_supply}</div>
+              <div className="ft-weight-600 ft-size-24">{dao.share_supply}</div>
             </div>
             <div className="chartBlock">
               <div className="numbers ft-weight-600">

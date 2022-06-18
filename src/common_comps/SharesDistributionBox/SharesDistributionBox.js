@@ -180,7 +180,7 @@ export const SharesDistributionBox = ({
             <div className="d-flex flex-column flex-wrap">
               <div className="flexBlock">
                 <div className="mr-3 sub-title">{"Total shares"}</div>
-                <div>{sharesSupply}</div>
+                <div className="ft-size-18 ft-weight-600">{sharesSupply}</div>
               </div>
               <div className="flexBlock">
                 <div className="ft-weight-600">{notOwnedShares}</div>
