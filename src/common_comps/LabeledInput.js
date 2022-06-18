@@ -9,8 +9,7 @@ export const LabeledInput = ({
   placeholder,
   errorMsg,
   maxLength,
-  icon,
-  img
+  icon
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
