@@ -6,22 +6,26 @@ export function createMyAlgoWallet(statusMsg, setMyAddress) {
 
   // returns address, if needed for immediate use
   async function connect() {
-    const accounts = await wallet.connect();
-    const addresses = accounts.map((account) => account.address);
+    try {
+      const accounts = await wallet.connect();
+      const addresses = accounts.map((account) => account.address);
 
-    var selectedAddress = null;
+      var selectedAddress = null;
 
-    if (addresses.length === 0) {
-      throw new Error("Please select an address.");
-    } else if (addresses.length > 1) {
-      throw new Error("Please select only one address.");
-    } else {
-      const address = addresses[0];
-      setMyAddress(address);
-      selectedAddress = address;
+      if (addresses.length === 0) {
+        throw new Error("Please select an address.");
+      } else if (addresses.length > 1) {
+        throw new Error("Please select only one address.");
+      } else {
+        const address = addresses[0];
+        setMyAddress(address);
+        selectedAddress = address;
+      }
+
+      return selectedAddress;
+    } catch (e) {
+      statusMsg.error(e);
     }
-
-    return selectedAddress;
   }
 
   function disconnect() {}
