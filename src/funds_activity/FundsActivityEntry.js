@@ -13,17 +13,15 @@ export const FundsActivityEntry = ({ entry }) => {
           <div className="d-flex align-center">
             <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
             <div className="ellipse"></div>
-            <div className="ft-color-black ft-size-14">{entry.type_label}</div>
+            <div className="ft-color-black ft-size-14">
+              {fundsActivityEntryLabel(entry)}
+            </div>
           </div>
           <div className="description">{entry.description}</div>
         </div>
         <div className="details">
           <div className="funds_act_entry__date">{entry.date}</div>
-          <a
-            href={entry.tx_link}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={entry.tx_link} target="_blank" rel="noreferrer">
             {"Details"}
           </a>
         </div>
@@ -36,24 +34,28 @@ export const FundsActivityEntry = ({ entry }) => {
           <div className="d-flex align-center gap-32 order-1">
             <AmountView entry={entry} />
             <div className="ft-color-black ft-size-14 ft-color-grey status">
-              {entry.type_label}
+              {fundsActivityEntryLabel(entry)}
             </div>
           </div>
           <div className="description order-3">{entry.description}</div>
         </div>
         <div className="details">
           <div className="funds_act_entry__date">{entry.date}</div>
-          <a
-            href={entry.tx_link}
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={entry.tx_link} target="_blank" rel="noreferrer">
             {"Details"}
           </a>
         </div>
       </div>
     </div>
   );
+};
+
+export const fundsActivityEntryLabel = (entry) => {
+  if (entry.is_income === "true") {
+    return "Income";
+  } else {
+    return "Withdrawal";
+  }
 };
 
 const AmountView = ({ entry }) => {

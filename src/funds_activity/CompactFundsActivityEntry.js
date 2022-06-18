@@ -2,7 +2,10 @@ import React from "react";
 import arrowUp from "../images/svg/arrow-up.svg";
 import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
-import { nestedAmountView } from "./FundsActivityEntry";
+import {
+  fundsActivityEntryLabel,
+  nestedAmountView,
+} from "./FundsActivityEntry";
 
 export const CompactFundsActivityEntry = ({ entry }) => {
   return (
@@ -38,7 +41,9 @@ const AmountView = ({ entry }) => {
           <div className="ft-size-14 ft-weight-600">
             {nestedAmountView(entry)}
           </div>
-          <div className="ft-size-14 type-label">{entry.type_label}</div>
+          <div className="ft-size-14 type-label">
+            {fundsActivityEntryLabel(entry)}
+          </div>
         </div>
       </div>
     </div>
