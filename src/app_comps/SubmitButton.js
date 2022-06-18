@@ -1,4 +1,3 @@
-import Progress from "./Progress";
 
 export const SubmitButton = ({
   label,
@@ -31,7 +30,19 @@ const button = (label, disabled, className, onClick) => {
 const loadingButton = (className) => {
   return (
     <button className={className}>
-      <Progress />
+      <div>
+        <svg className="btn-loader">
+          <circle
+            className="path-btn"
+            cx="50"
+            cy="50"
+            r="16"
+            fill="none"
+            strokeWidth="5"
+            strokeMiterlimit="10"
+          ></circle>
+        </svg>
+      </div>
     </button>
   );
 };

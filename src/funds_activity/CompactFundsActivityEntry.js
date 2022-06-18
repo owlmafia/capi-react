@@ -35,10 +35,10 @@ const AmountView = ({ entry }) => {
         alt="arrow"
       />
       <div className="d-flex flex-column gap-4">
-        <div className="ft-color-grey address">{entry.address}</div>
-        <div className="d-flex gap-4">
+        <div className="ft-color-grey ft-size-18 address">{entry.address}</div>
+        <div className="d-flex gap-4 align-center">
           <img width="14px" height="14px" src={funds} alt="funds" />
-          <div className="ft-size-14 ft-weight-600">
+          <div className="ft-weight-600">
             {nestedAmountView(entry)}
           </div>
           <div className="ft-size-14 type-label">

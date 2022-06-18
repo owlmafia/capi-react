@@ -1,9 +1,7 @@
 .msg {
     opacity: 1;
-    width: 53.6vw;
+    width: 55vw;
     max-width: 1034px;
-    border-radius: 24px;
-    height: 100px;
     display: flex;
     align-items: center;
     font-size: 16px;
@@ -15,6 +13,8 @@
     box-sizing: border-box;
     animation-name: notification;
     animation-duration: 0.8s;
+    height: 120px;
+    border-radius: 24px;
 
     &__error {
         background: #fff2f2;
@@ -38,6 +38,11 @@
     }
 }
 
+.msg-close {
+    animation-name: closeAnimation;
+    animation-duration: 0.8s;
+}
+
 .copyable {
     font-size: 18px;
     cursor: pointer;
@@ -49,13 +54,24 @@
 
 @keyframes notification {
     from {
-        top: 0;
+        height: 0px;
     }
 
     to {
-        top: 16px;
+        height: 120px;
     }
 }
+
+@keyframes closeAnimation {
+    from {
+        height: 120px;
+    }
+
+    to {
+        height: 0px;
+    }
+}
+
 
 @media only screen and (max-width: 1330px) {
     .msg {

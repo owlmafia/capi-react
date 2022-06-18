@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FundsAssetImg } from "../images/FundsAssetImg";
 import arrow from "../images/svg/arrow-right.svg";
 import { retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "../common_comps/CopyPastText";

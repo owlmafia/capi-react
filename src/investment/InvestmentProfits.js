@@ -40,7 +40,7 @@ export const InvestmentProfits = ({ deps }) => {
         <div>
           <div className="box-container profits-by-shares">
             <div className="title">{"Your profits"}</div>
-            <div className="w-80 d-flex justify-between mb-6">
+            <div className="w-80 d-flex justify-between mb-36">
               <div className="flex-block align-center">
                 <div className="subTitle">{"Retrievable:"}</div>
                 <FundsAssetImg className="fund-asset" />

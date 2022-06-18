@@ -73,13 +73,11 @@ button {
 
     &:hover {
         transition: 0.3s;
-        border: 1px solid #6bb9bd;
     }
 
     &:active {
         transition: 0.3s;
         color: #4ca5a9;
-        border: 1px solid #6bb9bd;
     }
 
     &:disabled {
@@ -125,6 +123,12 @@ button {
         gap: 16px;
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%23DEE2E2FF' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
         border-radius: 32px;
+
+        &:hover {
+            transition: 0.3s;
+            background-color: #F5FAFB;
+            cursor: pointer;
+        }
 
         .upload-custom {
             position: relative;

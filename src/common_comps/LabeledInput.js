@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import funds from "../images/funds.svg";
+import error from "../images/svg/error.svg";
 
 export const LabeledInput = ({
   label,
@@ -31,7 +31,6 @@ export const LabeledInput = ({
           )}
         </div>
       </div>
-      <div className="labeled_input__error">{errorMsg}</div>
       {input(
         inputValue,
         (input) => {
@@ -43,6 +42,10 @@ export const LabeledInput = ({
           setShowLength(focus);
         }
       )}
+      <div className="labeled_input__error">
+        {errorMsg ? <img src={error} alt="error" /> : ""}
+        {errorMsg}
+      </div>
     </div>
   );
 };
@@ -57,14 +60,18 @@ export const LabeledCurrencyInput = ({
   onChange,
   placeholder,
   errorMsg,
+  img
 }) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
-      <div className="labeled_input__error">{errorMsg}</div>
       <div className="input_with_currency__container">
         {input(inputValue, onChange, placeholder)}
-        <img src={funds} alt="funds" />
+        <img src={img} alt="img" />
+      </div>
+      <div className="labeled_input__error">
+        {errorMsg ? <img src={error} alt="error" /> : ""}
+        {errorMsg}
       </div>
     </div>
   );

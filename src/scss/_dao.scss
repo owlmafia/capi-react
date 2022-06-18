@@ -13,6 +13,10 @@
         cursor: pointer;
         font-size: 24px;
         font-weight: 700;
+
+        &:hover {
+            color: #C6444A;
+        }
     }
 
     .numbers {
@@ -157,6 +161,10 @@
 
 .create-dao-container,
 .update-dao-data {
+    .button-primary {
+        width: 236px;
+    }
+
     .description {
         border: 2px solid red;
     }

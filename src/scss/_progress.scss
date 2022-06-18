@@ -7,7 +7,7 @@ body {
 .loader {
     position: relative;
     width: 100%;
-    height: $width;
+    height: 100%;
 
     svg {
         position: absolute;
@@ -31,6 +31,22 @@ body {
     stroke: rgb(106, 204, 204);
     animation: dash 1.5s ease-in-out infinite;
     stroke-linecap: round;
+}
+
+.btn-loader {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 50px;
+    top: -26px;
+    left: 30%;
+
+    .path-btn {
+        stroke-dashoffset: 0;
+        stroke: #DEE2E2;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+    }
 }
 
 @keyframes rotate {

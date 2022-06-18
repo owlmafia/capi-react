@@ -50,7 +50,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
             <div className="ft-weight-600 ft-size-18">{"Project funds"}</div>
             <div className="d-flex align-center gap-10">
               <img src={funds} alt="funds" />
-              <div className="ft-weight-600 ft-size-24">{deps.funds}</div>
+              <div className="ft-weight-700 ft-size-24">{deps.funds}</div>
               <div>{changeArrow(deps.fundsChange)}</div>
             </div>
           </div>
@@ -74,7 +74,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
               {"Recent funds activity"}
             </div>
             {fundsActivity()}
-            <Link className="see-all" to="funds_activity">
+            <Link className="see-all d-flex justify-center" to="funds_activity">
               <button className="link_button">{"See all"}</button>
             </Link>
           </div>

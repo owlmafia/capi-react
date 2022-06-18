@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
-import { ContentTitle } from "../ContentTitle";
 import { init } from "./controller";
 
 export const Stats = ({ deps }) => {

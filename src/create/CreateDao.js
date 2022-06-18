@@ -12,6 +12,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import info from "../images/svg/info.svg";
+import funds from "../images/funds.svg";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -136,6 +137,7 @@ export const CreateDao = ({ deps }) => {
         <LabeledCurrencyInput
           label={"Share price per unit"}
           inputValue={sharePrice}
+          img={funds}
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />
