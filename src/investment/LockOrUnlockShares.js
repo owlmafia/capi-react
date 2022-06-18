@@ -63,6 +63,7 @@ export const LockOrUnlockShares = ({
           ]}
           col={pieChartColors()}
           animated={false}
+          disableClick={true}
         />
       </div>
     );

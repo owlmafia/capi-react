@@ -11,7 +11,8 @@ const renderPieChart = (
   dataNumberSelector,
   onSegmentSelected,
   col,
-  animated
+  animated,
+  disableClick
 ) => {
   var width = 300,
     height = 300;
@@ -28,7 +29,7 @@ const renderPieChart = (
   };
 
   const segmentClass = (d, i, isGray = false) => {
-    return isGray ? "" : "holder_segment";
+    return isGray || disableClick ? "" : "clickable_pie_segment";
   };
 
   const svg = d3.select(container);
@@ -105,6 +106,9 @@ const renderPieChart = (
   };
 
   function handleOnClick(p, d) {
+    if (disableClick) return;
+
+    // should be improved: coupling here with the holders distribution data ("not owned" only makes sense there)
     if (d && d.data.type_ !== NOT_OWNED) {
       // this is assumed to update the state somewhere up in the hierarchy
       const select = onSegmentSelected(d.data);

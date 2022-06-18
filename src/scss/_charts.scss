@@ -17,7 +17,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         width: $pie_chart_diameter;
         height: $pie_chart_diameter;
 
-        .holder_segment {
+        .clickable_pie_segment {
             cursor: pointer;
         }
     }

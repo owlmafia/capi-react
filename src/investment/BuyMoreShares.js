@@ -121,6 +121,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
             ]}
             col={pieChartColors()}
             animated={false}
+            disableClick={true}
           />
         </div>
         {showBuyCurrencyInfoModal && deps.myAddress && (
