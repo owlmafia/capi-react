@@ -13,6 +13,7 @@
         cursor: pointer;
         font-size: 24px;
         font-weight: 700;
+        border-bottom: 2px solid transparent;
 
         &:hover {
             color: #C6444A;
@@ -26,7 +27,6 @@
     .dao_action_tab_item__sel {
         border-radius: 0;
         color: $global-red-button;
-        border: none;
         border-bottom: 2px solid $global-red-button;
     }
 }
@@ -35,7 +35,6 @@
     width: 80%;
     color: #686777;
     margin-bottom: 60px;
-    font-family: "Gilroy-Light";
     line-height: 1.5;
 }
 
@@ -261,12 +260,14 @@
         #shares_const_container {
             position: absolute;
             bottom: 40px;
-            left: 50%;
             transform: translateX(-50%);
+            bottom: 23%;
+            right: 0;
         }
 
         .button-primary {
             width: 100%;
+            margin-top: 20px;
         }
 
         .label-input-style {
@@ -298,6 +299,10 @@
                     }
                 }
             }
+        }
+
+        .mobile-input-block {
+            flex-wrap: wrap;
         }
     }
 
