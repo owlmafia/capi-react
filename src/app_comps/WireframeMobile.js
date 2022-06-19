@@ -25,7 +25,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
     if (showWallet) {
       return "rightcol";
     } else {
-      return "rightcol rightcol-closing";
+      return "rightcol-closing";
     }
   }, [showWallet]);
 

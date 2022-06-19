@@ -26,6 +26,22 @@
     }
 
     .sidebar-item {
+        display: flex;
+        align-items: center;
+
+        .settings-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: $global-red-button;
+            font-size: 8px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
         cursor: pointer;
 
         img {

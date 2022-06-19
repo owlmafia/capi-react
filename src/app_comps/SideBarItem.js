@@ -13,7 +13,7 @@ const SideBarItem = ({ imageSrc, route, label, showBadge }) => {
         <img src={imageSrc} alt="" />
         {label}
       </NavLink>
-      {showBadge && <div>{""}</div>}
+      {showBadge && <div className="settings-dot">{"1"}</div>}
     </div>
   );
 };

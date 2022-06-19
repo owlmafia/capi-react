@@ -9,6 +9,7 @@ body {
     padding: 0;
     font-family: "Gilroy";
     box-sizing: border-box;
+    color: $black;
 }
 
 a {
@@ -58,6 +59,7 @@ a {
     max-width: 1034px;
     z-index: 2;
     padding-right: 4px;
+    justify-content: center;
 
     .title-container {
         width: 100%;
@@ -67,7 +69,7 @@ a {
 
         .title {
             font-size: $global-title;
-            font-family: "Gilroy-Bold";
+            font-weight: 700;
         }
     }
 
@@ -82,7 +84,7 @@ a {
     }
 
     &__title {
-        font-family: "Gilroy-Bold";
+        font-weight: 700;
         font-size: $global-title;
         color: $black;
         margin-bottom: 40px;
@@ -424,7 +426,7 @@ select {
 }
 
 .labeled_box_label {
-    font-family: "Gilroy-Bold";
+    font-weight: 700;
     font-size: $global-title;
     margin-bottom: 40px;
     color: $black;
@@ -709,7 +711,7 @@ p {
 }
 
 .ft-weight-bold {
-    font-family: "Gilroy-Bold";
+    font-weight: 700;
 }
 
 .selected {

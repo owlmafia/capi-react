@@ -1,6 +1,7 @@
 @import "global_vars";
 
-#rightcol {
+#rightcol,
+#rightcol-closing {
     width: 24%;
     min-width: 300px;
     height: 100vh;
@@ -96,7 +97,9 @@
 }
 
 @media only screen and (max-width: 1330px) {
-    #rightcol {
+
+    #rightcol,
+    #rightcol-closing {
         width: 100%;
         min-width: auto;
         position: fixed;
@@ -130,28 +133,30 @@
         }
     }
 
-    .rightcol-closing {
-        transform: translateY(-100%);
-        animation-name: wallet;
+    #rightcol-closing {
+        transform: translateY(60%);
+        animation-name: walletClose;
         animation-duration: 0.6s;
         animation-fill-mode: forwards;
     }
 
     @keyframes wallet {
         100% {
-            transform: translateY(70%);
+            transform: translateY(60%);
         }
     }
 
     @keyframes walletClose {
         100% {
-            transform: translateY(70%);
+            transform: translateY(100%);
         }
     }
 }
 
 @media only screen and (max-width: 650px) {
-    #rightcol {
+
+    #rightcol,
+    #rightcol-closing {
         bottom: auto;
         top: 48px;
         height: calc(100vh - 48px);
@@ -186,6 +191,12 @@
     @keyframes wallet {
         100% {
             transform: translateX(0%);
+        }
+    }
+
+    @keyframes walletClose {
+        100% {
+            transform: translateX(100%);
         }
     }
 }

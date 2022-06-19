@@ -13,7 +13,7 @@ export const StatusMsgView = ({ deps }) => {
     setClosing(true);
     setTimeout(() => {
       deps.statusMsg.clear();
-    }, 1500);
+    }, 600);
   };
 
   var classNames = "msg " + notificationTypeClass;
@@ -22,16 +22,18 @@ export const StatusMsgView = ({ deps }) => {
   }
 
   return (
-    <div className={classNames}>
-      <div className="d-flex align-center gap-32">
-        {notificationIcon(deps.statusMsgDisplay)}
-        {label(deps.statusMsg, deps.statusMsgDisplay)}
+    <div className='msg-container'>
+      <div className={classNames}>
+        <div className="d-flex align-center gap-32">
+          {notificationIcon(deps.statusMsgDisplay)}
+          {label(deps.statusMsg, deps.statusMsgDisplay)}
+        </div>
+        {!deps.statusMsgDisplay.hideClose && (
+          <button className="msg__close" onClick={() => onCloseClick()}>
+            <img src={close} alt="close" />
+          </button>
+        )}
       </div>
-      {!deps.statusMsgDisplay.hideClose && (
-        <button className="msg__close" onClick={() => onCloseClick()}>
-          <img src={close} alt="close" />
-        </button>
-      )}
     </div>
   );
 };

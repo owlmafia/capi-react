@@ -13,6 +13,11 @@
     .container,
     .reactEasyCrop_Container {
         border-radius: $global-border-radius;
+
+        .reactEasyCrop_Image {
+            width: 100%;
+            max-height: auto;
+        }
     }
 
     img {
