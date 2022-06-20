@@ -32,3 +32,5 @@ export const pieChartColors = () => {
     "#F1F8F8",
   ];
 };
+
+export const PIE_CHART_GRAY = "#EBECF1";

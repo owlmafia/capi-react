@@ -4,7 +4,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledInput } from "../common_comps/LabeledInput";
-import { pieChartColors } from "../common_functions/common";
+import { pieChartColors, PIE_CHART_GRAY } from "../common_functions/common";
 import {
   fetchAvailableShares,
   invest,
@@ -61,10 +61,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
               <div className="ft-weight-600 ft-size-24">{dao.share_supply}</div>
             </div>
             <div className="chartBlock">
-              <div className="numbers ft-weight-600">
-                {deps.investmentData.available_shares}
-              </div>
-              <div>{"Not owned"}</div>
+              <div className="numbers ft-weight-600">{availableShares}</div>
+              <div>{"Available"}</div>
             </div>
             <div className="chartBlock">
               <div className="numbers ft-weight-600">
@@ -115,11 +113,14 @@ export const BuyMoreShares = ({ deps, dao }) => {
         <div className="shares-chart">
           <SharesDistributionChart
             sharesDistr={[
-              to_pie_chart_slice(deps.investmentData.available_shares),
+              to_pie_chart_slice(availableShares),
               to_pie_chart_slice(deps.investmentData.investor_locked_shares),
               to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
             ]}
-            col={pieChartColors()}
+            // we want to show available shares in gray and it's the first segment, so we prepend gray to the colors
+            // note that this is inconsistent with how it's shown on investors distribution (using NOT_OWNED segment type)
+            // we should refactor this (maybe create a generic "gray" segment type)
+            col={[PIE_CHART_GRAY].concat(pieChartColors())}
             animated={false}
             disableClick={true}
           />
@@ -137,7 +138,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
 
   return (
     <div>
-      <div>{dao && deps.investmentData && view()}</div>
+      <div>{dao && deps.investmentData && availableShares && view()}</div>
     </div>
   );
 };

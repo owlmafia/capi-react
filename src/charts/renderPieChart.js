@@ -1,7 +1,7 @@
 import * as d3 from "d3";
+import { PIE_CHART_GRAY } from "../common_functions/common";
 
 const NOT_OWNED = "not_owned";
-const GRAY = "#EBECF1";
 const RED = "#DF5C60";
 
 // onSegmentSelected has to return selected status, to highlight the segment
@@ -24,7 +24,7 @@ const renderPieChart = (
     if (d && d.data.isSelected) {
       return RED;
     } else {
-      return isGray ? GRAY : col[Math.round(i % col.length)];
+      return isGray ? PIE_CHART_GRAY : col[Math.round(i % col.length)];
     }
   };
 
@@ -54,7 +54,7 @@ const renderPieChart = (
 
   chart
     .append("path")
-    .attr("fill", GRAY)
+    .attr("fill", PIE_CHART_GRAY)
     .attr("d", arc({ startAngle: 0, endAngle: 2 * Math.PI }));
 
   const updatedChart = chart
