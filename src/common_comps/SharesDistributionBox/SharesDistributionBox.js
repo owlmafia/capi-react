@@ -142,7 +142,8 @@ export const SharesDistributionBox = ({
       return (
         <div className="holder_list_container">
           <div className="sub-title">
-            Investors {sharesDistr.length}
+            <span>{"Investors"}</span>
+            <span className="ft-weight-700">{sharesDistr.length}</span>
             <div>{changeArrow(deps.fundsChange)}</div>
           </div>
           {entries.map((entry) => {
@@ -180,14 +181,12 @@ export const SharesDistributionBox = ({
             <div className="d-flex flex-column flex-wrap">
               <div className="flexBlock">
                 <div className="mr-3 sub-title">{"Total shares"}</div>
-                <div className="ft-size-18 ft-weight-600">{sharesSupply}</div>
+                <div className="ft-size-18 ft-weight-700">{sharesSupply}</div>
               </div>
               <div className="flexBlock">
                 <div className="ft-weight-600">{notOwnedShares}</div>
                 <div className="circle ml-5 mr-3"></div>
-                <div className="ft-color-black">
-                  {"Available for sale"}
-                </div>
+                <div className="ft-color-black">{"Available for sale"}</div>
               </div>
             </div>
             <div className="pie-chart-container">
