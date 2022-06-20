@@ -16,21 +16,25 @@
 @use "scss/progress";
 
 @font-face {
-    font-family: 'Gilroy';
-    src: local('Gilroy'), url(./fonts/gilroy_regular.woff) format('truetype');
+    font-family: "Gilroy";
+    weight: 400;
+    src: local("Gilroy"), url(./fonts/gilroy_regular.woff) format("truetype");
 }
 
-// @font-face {
-//     font-family: 'Gilroy-Bold';
-//     src: local('Gilroy-Bold'), url(./fonts/Gilroy-Semibold.woff2) format('truetype');
-// }
+@font-face {
+    font-family: "Gilroy";
+    font-weight: 700;
+    src: local("Gilroy-Bold"), url(./fonts/Gilroy-Semibold.woff2) format("truetype");
+}
 
-// @font-face {
-//     font-family: 'Gilroy-Medium';
-//     src: local('Gilroy-Medium'), url(./fonts/Gilroy-Medium.woff2) format('truetype');
-// }
+@font-face {
+    font-family: "Gilroy";
+    font-weight: 600;
+    src: local("Gilroy-Medium"), url(./fonts/Gilroy-Medium.woff2) format("truetype");
+}
 
-// @font-face {
-//     font-family: 'Gilroy-Light';
-//     src: local('Gilroy-Light'), url(./fonts/Gilroy-Light.otf) format('truetype');
-// }
+@font-face {
+    font-family: "Gilroy";
+    weight: 300;
+    src: local("Gilroy-Light"), url(./fonts/Gilroy-Light.otf) format("truetype");
+}
