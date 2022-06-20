@@ -25,9 +25,7 @@ export const LockOrUnlockShares = ({
         <div className="w-60">
           <div className="title">{title}</div>
           <div className="chartBlock">
-            <div className="subTitle ft-weight-600">
-              {"Available Shares in project"}
-            </div>
+            <div className="subTitle ft-weight-600">{"Share supply"}</div>
             <div className="subTitle">{dao.share_supply}</div>
           </div>
           <div className="chartBlock">
