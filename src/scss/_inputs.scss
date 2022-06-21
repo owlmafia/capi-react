@@ -3,13 +3,12 @@
 input,
 textarea {
     width: 100%;
-    border-radius: $button-border-radius;
+    border-radius: 32px;
     border: 1px solid $global-border;
-    padding: 10px 15px;
+    padding: 19px 24px;
+    line-height: 24px;
     font-size: 16px;
     box-sizing: border-box;
-    height: 50px;
-    cursor: pointer;
     outline: none;
 
     &:hover,
@@ -38,7 +37,7 @@ textarea {
 }
 
 .labeled_input {
-    margin-bottom: 32px;
+    margin-bottom: 30px;
 
     &__label {
         color: $black;
@@ -59,10 +58,7 @@ textarea {
 }
 
 .label-input-style {
-    padding-left: 20px;
-    height: 64px;
-    box-sizing: border-box;
-    border-radius: 32px;
+    font-family: "Gilroy", sans-serif;
 }
 
 .msg_error {

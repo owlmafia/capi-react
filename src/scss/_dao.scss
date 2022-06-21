@@ -160,9 +160,6 @@
 
 .create-dao-container,
 .update-dao-data {
-    .button-primary {
-        width: 236px;
-    }
 
     .description {
         border: 2px solid red;
@@ -177,19 +174,20 @@
     .info {
         color: #686777;
         font-weight: bold;
+        font-size: 24px;
         margin-bottom: 40px;
     }
 
     .dao-title {
-        font-size: 18px;
-        color: rgb(119, 111, 111);
+        font-size: 24px;
+        color: #787E82;
         font-weight: bold;
         margin-bottom: 40px;
     }
 
     .labeled_input {
         .labeled_input__label {
-            margin-left: 20px;
+            margin-left: 24px;
             margin-bottom: 8px;
         }
     }

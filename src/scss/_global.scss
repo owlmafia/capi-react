@@ -22,7 +22,6 @@ a {
     max-width: 1920px;
     margin: auto;
     margin-top: 60px;
-    justify-content: space-between;
     padding: 0 3%;
     box-sizing: border-box;
     min-width: 1032px;
@@ -48,17 +47,13 @@ a {
 }
 
 #content {
-    width: 55vw;
-    margin-left: 230px;
+    width: 100%;
     display: inline-block;
     box-sizing: border-box;
     position: relative;
     background-color: white;
-    padding-bottom: 50px;
-    min-width: 600px;
-    max-width: 1034px;
+    padding: 0 40px 50px 80px;
     z-index: 2;
-    padding-right: 4px;
     justify-content: center;
 
     .title-container {
@@ -86,8 +81,7 @@ a {
     &__title {
         font-weight: 700;
         font-size: $global-title;
-        color: $black;
-        margin-bottom: 40px;
+        color: #000;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -559,6 +553,9 @@ p {
 }
 
 .section_large_bottom {
+    color: #686777;
+    font-weight: 600;
+    font-size: 18px;
     margin-bottom: 40px;
 }
 
@@ -614,6 +611,10 @@ p {
     opacity: 0.7;
 }
 
+.opacity-50 {
+    opacity: 0.5;
+}
+
 .ft-weight-600 {
     font-weight: 600;
 }
@@ -666,50 +667,6 @@ p {
     gap: 4px;
 }
 
-.mt-1 {
-    margin-top: 6px;
-}
-
-.ml-5 {
-    margin-left: 24px;
-}
-
-.mr-3 {
-    margin-right: 16px;
-}
-
-.mr-2 {
-    margin-right: 10px;
-}
-
-.mt-6 {
-    margin-top: 32px;
-}
-
-.mt-7 {
-    margin-top: 42px;
-}
-
-.mb-1 {
-    margin-bottom: 6px;
-}
-
-.mb-4 {
-    margin-bottom: 24px;
-}
-
-.mb-5 {
-    margin-bottom: 30px;
-}
-
-.mb-36 {
-    margin-bottom: 36px;
-}
-
-.mb-6 {
-    margin-bottom: 40px;
-}
-
 .ft-weight-bold {
     font-weight: 700;
 }
@@ -730,20 +687,14 @@ p {
 #update-app {
     .button-primary {
         margin-left: 30px;
-        height: 32px;
-        width: 90px;
     }
 }
 
 @media only screen and (max-width: 1330px) {
     #content {
         margin-top: 60px;
-        width: calc(100vw - 80px);
-        min-width: auto;
+        padding: 0 40px;
         max-width: 800px;
-        margin-left: 0;
-        height: auto;
-        overflow-y: auto;
 
         .content-img {
             height: 240px;
@@ -819,7 +770,7 @@ p {
 
 @media only screen and (max-width: 650px) {
     #content {
-        width: calc(100% - 40px);
+        padding: 0 20px;
         margin-top: 68px;
 
         .buy-more-shares.box-container {
