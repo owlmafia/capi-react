@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef } from "react";
 import { ChartLegends } from "./ChartLegends";
 import renderBarChart from "./renderBarChart";
 
-export const IncomeVsSpendingChart = ({ chartData }) => {
+export const IncomeVsSpendingChart = ({ chartData, interval }) => {
   const chart = useRef(null);
 
   const colors = useMemo(() => {
@@ -11,7 +11,7 @@ export const IncomeVsSpendingChart = ({ chartData }) => {
 
   useEffect(() => {
     if (chartData && chart.current) {
-      renderBarChart(chart.current, chartData.points, colors);
+      renderBarChart(chart.current, chartData.points, colors, interval);
     }
   }, [chartData, colors]);
 

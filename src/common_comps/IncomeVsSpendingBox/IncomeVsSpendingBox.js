@@ -39,7 +39,10 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
             onChange={setSelectedBarsInterval}
             options={barsOptions}
           />
-          <IncomeVsSpendingChart chartData={chartData} />
+          <IncomeVsSpendingChart
+            chartData={chartData}
+            interval={selectedBarsInterval.value}
+          />
         </LabeledBox>
       );
     } else {
