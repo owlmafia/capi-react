@@ -410,10 +410,6 @@ select {
     color: gray;
 }
 
-#user-data {
-    margin-bottom: 16px;
-}
-
 .labeled_box {
     margin-bottom: 70px;
     width: 100%;
@@ -471,7 +467,7 @@ p {
     margin-top: 40px;
     border: 1px solid $global-border;
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
 
     .labeled_box {
@@ -518,11 +514,11 @@ p {
 
         &__body {
             position: absolute;
-            top: 0;
+            top: 5px;
             right: 0;
             display: flex;
             align-items: flex-end;
-            gap: 6px;
+            gap: 8px;
             justify-content: space-between;
         }
 
@@ -535,6 +531,7 @@ p {
             color: #6bb9bd;
             text-decoration: underline;
             width: auto;
+            font-weight: 600;
         }
     }
 }
@@ -575,6 +572,11 @@ p {
     justify-content: center;
 }
 
+.s-14 {
+    width: 14px;
+    height: 14px;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -613,6 +615,10 @@ p {
 
 .opacity-50 {
     opacity: 0.5;
+}
+
+.ft-weight-500 {
+    font-weight: 500;
 }
 
 .ft-weight-600 {
@@ -657,6 +663,10 @@ p {
 
 .gap-20 {
     gap: 20px;
+}
+
+.gap-24 {
+    gap: 24px;
 }
 
 .gap-32 {

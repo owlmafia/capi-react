@@ -2,12 +2,12 @@
 
 #rightcol,
 #rightcol-closing {
-    width: 300px;
+    width: 420px;
     flex-shrink: 0;
     
     .my-account-container {
         border: 1px solid rgb(237, 231, 231);
-        padding: 24px;
+        padding: 40px;
         border-radius: $global-border-radius;
         height: auto;
         box-sizing: border-box;
@@ -28,7 +28,6 @@
 }
 
 .my_address {
-    margin-top: 8px;
     margin-bottom: 24px;
     display: flex;
     justify-content: space-between;
@@ -54,7 +53,6 @@
 }
 
 #user_data {
-    margin-bottom: 16px;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -75,10 +73,7 @@
         display: flex;
         align-items: center;
         font-weight: 600;
-
-        svg {
-            height: 14px;
-        }
+        width: 100px;
     }
 }
 
