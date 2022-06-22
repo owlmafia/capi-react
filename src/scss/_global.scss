@@ -131,11 +131,6 @@ select {
     justify-content: center;
 }
 
-#container * {
-    word-break: break-word;
-    // recet text-align: center in container to center the main content
-}
-
 .input-row input {
     margin-right: 5px;
 }
@@ -631,6 +626,10 @@ p {
 
 .ft-color-black {
     color: $black;
+}
+
+.ft-color-black-000 {
+    color: $black-000;
 }
 
 .ft-color-grey {

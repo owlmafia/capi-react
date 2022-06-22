@@ -30,31 +30,35 @@
     display: flex;
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
-    padding: 16px;
+    padding: 24px;
     margin-bottom: 30px;
     justify-content: space-between;
-    gap: 20px;
 
     &__amount {
         &__container {
             display: flex;
             align-items: center;
-            gap: 16px;
-            width: 26%;
+            min-width: 180px;
 
             .address {
                 font-size: 18px;
             }
 
+            .arrow {
+                margin-right: 16px;
+            }
+
             .arrow-icon {
+                margin-right: 16px;
                 width: 48px;
                 height: 48px;
             }
         }
 
         &__number {
+            margin-left: 9px;
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
         }
 
         &__logo {
@@ -92,12 +96,12 @@
         gap: 10px;
 
         .funds_act_entry__date {
-            font-weight: 300px;
-            font-size: 14px;
+            font-size: 13px;
             color: #787E82;
         }
 
         a {
+            font-weight: 600;
             color: $blue-primary;
             text-decoration: underline;
         }
@@ -114,21 +118,29 @@
     }
 
     .funds_act_entry-tab {
+        padding: 20px;
         display: flex;
         position: relative;
 
         .funds_act_entry__body {
-            padding-left: 70px;
+            padding-left: 65px;
 
             .funds_act_entry__amount__container {
-                width: auto;
+                min-width: 80px;
+
+                .funds-dollar-icon {
+                    width: 14px;
+                    height: 14px;
+                }
             }
         }
 
         .arrow {
             position: absolute;
-            left: 16px;
-            top: 16px;
+            width: 48px;
+            height: 48px;
+            left: 20px;
+            top: 20px;
         }
 
         .details {
@@ -186,8 +198,8 @@
 
             .status {
                 position: absolute;
-                top: 55px;
-                left: 124px;
+                top: 56px;
+                left: 134px;
             }
 
             .funds_act_entry__amount__container {
@@ -208,13 +220,20 @@
                 .address {
                     margin-left: -28px;
                 }
+
+                .funds-dollar-icon {
+                    width: 14px;
+                    height: 14px;
+                }
             }
         }
 
         .arrow {
             position: absolute;
-            left: 16px;
-            top: 16px;
+            width: 24px;
+            height: 24px;
+            left: 20px;
+            top: 20px;
         }
     }
 }
