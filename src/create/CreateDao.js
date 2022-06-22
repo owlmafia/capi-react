@@ -13,6 +13,7 @@ import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import info from "../images/svg/info.svg";
 import funds from "../images/funds.svg";
+import link from "../images/svg/link.svg";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -104,7 +105,7 @@ export const CreateDao = ({ deps }) => {
   const formView = () => {
     return (
       <div className="create-dao-container">
-        <div className="dao-title">Project Info</div>
+        <div className="dao-title mt-80">Project Info</div>
         <LabeledInput
           label={"Project name"}
           inputValue={daoName}
@@ -119,15 +120,16 @@ export const CreateDao = ({ deps }) => {
           errorMsg={daoDescrError}
           maxLength={2000} // NOTE: has to match WASM
         />
-        <LabeledInput
+        <LabeledCurrencyInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
+          img={link}
           onChange={(input) => setSocialMediaUrl(input)}
           errorMsg={socialMediaUrlError}
         />
-        <div className="dao-title">Project Cover</div>
+        <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
-        <div className="dao-title">Project Funds</div>
+        <div className="dao-title mt-60">Project Funds</div>
         <LabeledInput
           label={"Share supply"}
           inputValue={shareCount}

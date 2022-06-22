@@ -16,7 +16,7 @@ export const MyDaos = ({ deps }) => {
   const myDaosView = () => {
     var elements = myDaos ? myDaos.map((dao) => <MyDaoItem dao={dao} />) : [];
     elements.push(<MyDaoCreateItem />);
-    return myDaos && <div className="my-daos-container">{elements}</div>;
+    return myDaos && <div className="my-daos-container mt-40">{elements}</div>;
   };
 
   const view = () => {
