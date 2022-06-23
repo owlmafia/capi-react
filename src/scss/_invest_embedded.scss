@@ -50,8 +50,9 @@
 
     .chartBlock {
         display: flex;
+        align-items: center;
         margin-bottom: 16px;
-        gap: 40px;
+        gap: 12px;
 
         .numbers {
             width: 60px;
