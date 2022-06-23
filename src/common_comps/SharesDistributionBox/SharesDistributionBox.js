@@ -182,7 +182,7 @@ export const SharesDistributionBox = ({
             <div className="d-flex flex-column">
               <div className="d-flex flex-column flex-wrap">
                 <div className="flexBlock">
-                  <div className="mr-12 ft-size-18 ft-weight-600">{"Total shares"}</div>
+                  <div className="mr-12 ft-size-18 ft-weight-600 nowrap">{"Total shares"}</div>
                   <div className="ft-size-24 ft-weight-700">{sharesSupply}</div>
                   <div>
                   <img src={redArrow} alt="redArrow" />
@@ -211,5 +211,5 @@ export const SharesDistributionBox = ({
     }
   };
 
-  return <div id="investors-distribution">{content()}</div>;
+  return <div className="mt-80" id="investors-distribution">{content()}</div>;
 };
