@@ -93,9 +93,7 @@ const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
           alt="nav_bars"
           onClick={() => setShowSidebar((s) => !s)}
         />
-        <div className="logo-container">
-          <img src={logo} alt="logo" />
-        </div>
+        <img src={logo} alt="logo" />
         <img
           src={wallet}
           alt="wallet"
