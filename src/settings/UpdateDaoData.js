@@ -134,7 +134,7 @@ export const UpdateDaoData = ({ deps }) => {
         />
         <SubmitButton
           label={"Rekey owner"}
-          className="button-primary"
+          className="button-primary mb-7"
           isLoading={submitting}
           onClick={async () => {
             rekeyOwner(
