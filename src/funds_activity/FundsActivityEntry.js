@@ -12,7 +12,7 @@ export const FundsActivityEntry = ({ entry }) => {
         <AmountView entry={entry} />
         <div className="funds_act_entry__body">
           <div className="d-flex align-center">
-            <div className="ft-weight-600 ft-color-black-000">{entry.address}</div>
+            <div className="ft-weight-500 ft-size-18 ft-color-black-000">{entry.address}</div>
             <div className="ellipse"></div>
             <div className="ft-color-black ft-size-14">
               {fundsActivityEntryLabel(entry)}
@@ -30,7 +30,7 @@ export const FundsActivityEntry = ({ entry }) => {
       <div className="funds_act_entry-tab">
         <div className="funds_act_entry__body">
           <div className="d-flex align-center order-2">
-            <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
+            <div className="ft-weight-500 ft-size-18 ft-color-grey">{entry.address}</div>
           </div>
           <div className="d-flex align-center gap-32 order-1">
             <AmountView entry={entry} />
