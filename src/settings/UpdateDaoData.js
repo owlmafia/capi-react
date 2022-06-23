@@ -15,9 +15,6 @@ export const UpdateDaoData = ({ deps }) => {
   const [imageBytes, setImageBytes] = useState(null);
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
 
-  const [customerEscrow, setCustomerEscrow] = useState("");
-  const [customerEscrowVersion, setCustomerEscrowVersion] = useState("");
-
   const [rekeyAuthAddress, setRekeyAuthAddress] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -25,8 +22,6 @@ export const UpdateDaoData = ({ deps }) => {
   const [daoDescrError, setDaoDescrError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
   const [imageError, setImageError] = useState("");
-  const [escrowAddressError, setEscrowAddressError] = useState("");
-  const [escrowVersionError, setEscrowVersionError] = useState("");
 
   const [rekeyAddressError, setRekeyAddressError] = useState("");
 
@@ -40,9 +35,7 @@ export const UpdateDaoData = ({ deps }) => {
           setDaoDescr,
           setSharePrice,
           setImageBytes,
-          setSocialMediaUrl,
-          setCustomerEscrow,
-          setCustomerEscrowVersion
+          setSocialMediaUrl
         );
       }
     }
@@ -73,19 +66,6 @@ export const UpdateDaoData = ({ deps }) => {
           initImageBytes={imageBytes}
           setImageBytes={setImageBytes}
         />
-        <div className="info">{"Payments"}</div>
-        <LabeledInput
-          label={"Payments address"}
-          inputValue={customerEscrow}
-          onChange={(input) => setCustomerEscrow(input)}
-          errorMsg={escrowAddressError}
-        />
-        <LabeledInput
-          label={"Payments escrow version"}
-          inputValue={customerEscrowVersion}
-          onChange={(input) => setCustomerEscrowVersion(input)}
-          errorMsg={escrowVersionError}
-        />
         {/* <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
@@ -103,9 +83,6 @@ export const UpdateDaoData = ({ deps }) => {
               {
                 dao_id: params.id,
 
-                customer_escrow: customerEscrow,
-                customer_escrow_version: customerEscrowVersion,
-
                 project_name: daoName,
                 project_desc: daoDescr,
                 share_price: sharePrice,
@@ -119,9 +96,7 @@ export const UpdateDaoData = ({ deps }) => {
               setDaoNameError,
               setDaoDescrError,
               setImageError,
-              setSocialMediaUrlError,
-              setEscrowAddressError,
-              setEscrowVersionError
+              setSocialMediaUrlError
             );
           }}
         />

@@ -57,12 +57,10 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {dao && (
           <div className="d-flex gap-24 align-center w-100 mt-1">
-            <div className="ft-color-black">
-              {"Project wallet address:"}
-            </div>
+            <div className="ft-color-black">{"Project wallet address:"}</div>
             <CopyPasteText
-              text={shortedAddress(dao.customer_escrow_address)}
-              copyText={dao.customer_escrow_address}
+              text={shortedAddress(dao.app_address)}
+              copyText={dao.app_address}
               statusMsg={deps.statusMsg}
               copyMsg={"Address copied to clipboard"}
             />

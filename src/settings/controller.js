@@ -9,9 +9,7 @@ export const prefillInputs = async (
   setDaoDescr,
   setSharePrice,
   setImageBytes,
-  setSocialMediaUrl,
-  setCustomerEscrow,
-  setCustomerEscrowVersion
+  setSocialMediaUrl
 ) => {
   try {
     const { bridge_updatable_data } = await wasmPromise;
@@ -24,8 +22,6 @@ export const prefillInputs = async (
     // TODO header may not be needed - test without once everything else works, remove if not needed
     setImageBytes("data:image/png;base64," + updatableData.image_bytes);
     setSocialMediaUrl(updatableData.social_media_url);
-    setCustomerEscrow(updatableData.customer_escrow);
-    setCustomerEscrowVersion(updatableData.customer_escrow_version);
   } catch (e) {
     statusMsg.error(e);
   }
@@ -82,9 +78,7 @@ export const updateDaoData = async (
   setDaoNameError,
   setDaoDescrError,
   setImageError,
-  setSocialMediaUrlError,
-  setEscrowAddressError,
-  setEscrowVersionError
+  setSocialMediaUrlError
 ) => {
   try {
     const { bridge_update_data, bridge_submit_update_dao_data } =
@@ -116,8 +110,6 @@ export const updateDaoData = async (
       setDaoDescrError(toErrorMsg(details.description));
       setImageError(toErrorMsg(details.image));
       setSocialMediaUrlError(toErrorMsg(details.social_media_url));
-      setEscrowAddressError(toErrorMsg(details.payment_address));
-      setEscrowVersionError(toErrorMsg(details.payment_version));
 
       statusMsg.error("Please fix the errors");
     } else {
