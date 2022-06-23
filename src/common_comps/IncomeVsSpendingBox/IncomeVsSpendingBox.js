@@ -50,5 +50,5 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
     }
   };
 
-  return <div className="charts-container">{content()}</div>;
+  return <div className="charts-container mt-80">{content()}</div>;
 };
