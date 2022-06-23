@@ -421,14 +421,10 @@ p {
     margin: 0px;
 }
 
-#investors-distribution .labeled_box_children {
-    padding: 36px 3.8%;
-}
-
 .labeled_box_children {
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
-    padding: 30px;
+    padding: 45px 40px 40px;
     box-sizing: border-box;
 
     .investors-container {
