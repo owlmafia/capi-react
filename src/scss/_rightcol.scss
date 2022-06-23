@@ -126,7 +126,7 @@
     }
 
     #rightcol-closing {
-        transform: translateY(60%);
+        transform: translateY(0%);
         animation-name: walletClose;
         animation-duration: 0.6s;
         animation-fill-mode: forwards;
@@ -134,7 +134,7 @@
 
     @keyframes wallet {
         100% {
-            transform: translateY(60%);
+            transform: translateY(0%);
         }
     }
 
