@@ -52,10 +52,11 @@
         display: flex;
         align-items: center;
         margin-bottom: 16px;
-        gap: 12px;
+        gap: 16px;
 
         .numbers {
             width: 60px;
+            flex-shrink: 0;
         }
     }
 

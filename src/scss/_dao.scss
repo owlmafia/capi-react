@@ -243,12 +243,6 @@
 @media only screen and (max-width: 650px) {
     #dao_actions_top_bar {
         gap: 8px;
-        justify-content: center;
-
-        .link_button {
-            font-size: 12px;
-            min-width: auto;
-        }
     }
 
     .dao_action_active_tab.box-container {

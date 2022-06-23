@@ -66,33 +66,33 @@ export const BuyMoreShares = ({ deps, dao }) => {
             </div>
             <div className="chartBlock">
               <div className="numbers ft-size-18 ft-weight-600">{availableShares}</div>
-              {/* <div className="h-16">
+              <div className="h-16">
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="8" cy="8.5" r="8" fill={col} />
+                  <circle cx="8" cy="8.5" r="8" fill="#DEE2E2" />
                 </svg>
-              </div> */}
+              </div>
               <div>{"Available"}</div>
             </div>
             <div className="chartBlock">
               <div className="numbers ft-size-18 ft-weight-600">
                 {deps.investmentData.investor_locked_shares}
               </div>
-              {/* <div className="h-16">
+              <div className="h-16">
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="8" cy="8.5" r="8" fill={col} />
+                  <circle cx="8" cy="8.5" r="8" fill="#8ECACD" />
                 </svg>
-              </div> */}
+              </div>
               <div>{"Your locked shares"}</div>
             </div>
             <div className="chartBlock">
               <div className="numbers ft-size-18 ft-weight-600">
                 {deps.investmentData.investor_unlocked_shares}
               </div>
-              {/* <div className="h-16">
+              <div className="h-16">
                 <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="8" cy="8.5" r="8" fill={col} />
+                  <circle cx="8" cy="8.5" r="8" fill="#6BB9BD" />
                 </svg>
-              </div> */}
+              </div>
               <div>{"Your unlocked shares"}</div>
             </div>
           </div>
