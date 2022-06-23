@@ -89,7 +89,7 @@ export const updateFunds_ = async (
   statusMsg
 ) => {
   /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the dao.
-  /// TODO: optimize: fetch only the funds (probably pass escrows/dao as inputs), so request is quicker.
+  /// TODO: optimize: fetch only the funds (probably pass dao as input), so request is quicker.
   try {
     const { bridge_view_dao, get_balance_change } = await wasmPromise;
     let viewDao = await bridge_view_dao({
@@ -103,7 +103,6 @@ export const updateFunds_ = async (
     // all this (updateFunds_) can be optimized, the implementation of this fetches the dao again (when requesting withdrawals)
     let balance_change_res = await get_balance_change({
       dao_id: daoId,
-      customer_escrow: viewDao.dao.customer_escrow_address,
     });
     setFundsChange(balance_change_res.change);
   } catch (e) {

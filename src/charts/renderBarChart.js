@@ -117,7 +117,7 @@ const renderBarChart = (svg, flatData, colors, format) => {
   const colorsRange = d3.scaleOrdinal().domain(SUBGROUPARRAY).range(colors);
 
   // for rounded corners at the tip
-  const [rx, ry] = [4, 4];
+  const [rx, ry] = [subGroup.bandwidth() / 4, subGroup.bandwidth() / 4];
 
   // adds the rounded corner on the top of each bars
   selected
