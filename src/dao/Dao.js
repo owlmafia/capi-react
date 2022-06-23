@@ -75,7 +75,6 @@ export const Dao = ({ deps }) => {
             >
               <button>{"Withdraw"}</button>
             </Link> */}
-            <div className="section-spacer" />
             {deps.dao && (
               <SharesDistributionBox
                 deps={deps}
