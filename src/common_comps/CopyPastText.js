@@ -6,7 +6,7 @@ import myalgo from "../images/svg/myalgo.svg";
 const CopyPasteText = ({ statusMsg, text, copyText: copyTextOpt, copyMsg }) => {
   return (
     <CopyPasteHtml
-      element={<div className="ft-color-black">{text}</div>}
+      element={<div className="ft-color-black ft-weight-500">{text}</div>}
       copyText={copyTextOpt ?? text}
       statusMsg={statusMsg}
       copyMsg={copyMsg}

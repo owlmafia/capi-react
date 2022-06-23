@@ -5,6 +5,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
 import info from "../images/svg/info.svg";
+import greenArrow from "../images/svg/green-arrow.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import {
   fetchAvailableShares,
@@ -96,21 +97,21 @@ export const InvestEmbedded = ({ deps, dao }) => {
               <div className="available-shares">
                 <div className="d-flex gap-10">
                   <div className="subTitle mb-4">{"Available: "}</div>
-                  <div className="ft-weight-600">{availableShares}</div>
+                  <div className="ft-weight-600 ft-size-18">{availableShares}</div>
                 </div>
                 {deps.investmentData && (
                   <div className="shares-block">
-                    <div className="ft-weight-600">You have:</div>
+                    <div className="ft-weight-600 ft-size-18">You have:</div>
                     <div className="shares-item">
                       <div>{"Locked shares:"}</div>
-                      <div className="ft-weight-600">
+                      <div className="ft-weight-700">
                         {deps.investmentData.investor_locked_shares}
                       </div>
                     </div>
                     <div className="blue-circle"></div>
                     <div className="shares-item">
                       <div>{"Unlocked shares:"}</div>
-                      <div className="ft-weight-600">
+                      <div className="ft-weight-700">
                         {deps.investmentData.investor_unlocked_shares}
                       </div>
                     </div>
@@ -126,10 +127,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
               </div>
             </div>
             <div id="shares_const_container">
-              <div className="ft-weight-600">{"Total price"}</div>
+              <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
               <div className="d-flex gap-10">
                 <img src={funds} alt="funds" />
-                <div className="one_line_key_val_val ft-weight-600">
+                <div className="one_line_key_val_val ft-weight-700 ft-color-black-000">
                   {totalCost}
                 </div>
               </div>
@@ -150,12 +151,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
               />
             </div>
             <div id="retrieved-profits">
-              <div className="ft-weight-600 d-flex align-center gap-10">
+              <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18">
                 {"Expected share"}
                 <img src={info} alt="info" />
               </div>
               <div className="d-flex gap-10">
-                <div className="one_line_key_val_val ft-weight-600">
+              <img src={greenArrow} alt="greenArrow" />
+                <div className="one_line_key_val_val ft-weight-700 ft-color-black-000">
                   {totalPercentage}
                 </div>
               </div>

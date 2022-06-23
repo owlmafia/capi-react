@@ -56,7 +56,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
           </div>
         )}
         {dao && (
-          <div className="d-flex gap-10 w-100 mt-1">
+          <div className="d-flex gap-24 align-center w-100 mt-1">
             <div className="ft-color-black">
               {"Project wallet address:"}
             </div>

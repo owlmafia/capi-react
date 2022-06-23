@@ -1,4 +1,4 @@
-$pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
+$pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
 .chart {
     &__title {
@@ -8,9 +8,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
 
 .pie_chart {
     &__container {
-        position: relative;
-        width: $pie_chart_diameter;
-        height: $pie_chart_diameter;
+        max-width: 300px;
     }
 
     &__svg {
@@ -46,7 +44,6 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
 .holder_item {
     &__container {
         display: flex;
-        padding: 0 12px;
         gap: 30px;
         box-sizing: border-box;
         height: 32px;
@@ -54,7 +51,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
         width: 240px;
 
         .percentage-text {
-            width: 50px;
+            width: 55px;
         }
     }
 }
@@ -80,12 +77,6 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-.pie-chart-container {
-    position: absolute;
-    top: -10px;
-    left: 30%;
-}
-
 .chart_with_legends_container>svg {
     display: block;
 }
@@ -101,6 +92,7 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
             width: 200px;
             position: absolute;
             right: 20px;
+            top: 20px;
         }
 
         .charts-select.css-b62m3t-container {
@@ -151,10 +143,10 @@ $pie_chart_diameter: 300px; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1440px) {
     .chart_legends_container {
         justify-content: flex-start;
-        padding-left: 120px;
+        padding-left: 60px;
     }
 }
 

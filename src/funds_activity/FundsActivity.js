@@ -40,7 +40,7 @@ export const FundsActivity = ({ deps }) => {
 
   const view = () => {
     return (
-      <div>
+      <div className="mt-80">
         <ContentTitle title={"Funds activity"} />
         <div className="mt-40">{fundsActivity()}</div>
       </div>

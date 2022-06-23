@@ -49,7 +49,7 @@ const myAddressView = (deps, daoId) => {
                   }
                   target="_blank"
                   rel="noreferrer"
-                  className="ft-color-black ft-weight-600"
+                  className="ft-color-black ft-weight-500"
                 >
                   {deps.myAddressDisplay}
                 </a>
@@ -59,7 +59,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
           <div id="my_account_my_balance__balance">
-            <img className="mr-2" src={funds} alt="funds" />
+            <img className="mr-2 s-14" src={funds} alt="funds" />
             <div>{deps.myBalance.balance_funds_asset}</div>
             <img
               className="arrow"
@@ -83,10 +83,10 @@ const DividendSection = ({ deps, daoId }) => {
   if (deps.myDividend) {
     return (
       <div className="d-flex flex-column">
-        <div className="mb-5 ft-weight-600 ft-size-18 d-flex align-center justify-between">
+        <div className="mb-32 ft-weight-600 ft-size-18 d-flex align-center justify-between">
           {"Claimable dividend: "}
           <div className="w-100-p d-flex align-center gap-10">
-            <img src={funds} alt="funds" />
+            <img className="s-14" src={funds} alt="funds" />
             {deps.myDividend}
           </div>
         </div>

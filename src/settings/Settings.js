@@ -14,7 +14,7 @@ export const Settings = ({ deps }) => {
     return (
       deps.daoVersion && (
         <div className="section_large_bottom">
-          <div>
+          <div className="mt-24">
             {"Current version: " +
               appVersionStr(
                 deps.daoVersion.current_approval_version,

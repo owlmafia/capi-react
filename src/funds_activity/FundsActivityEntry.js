@@ -12,7 +12,7 @@ export const FundsActivityEntry = ({ entry }) => {
         <AmountView entry={entry} />
         <div className="funds_act_entry__body">
           <div className="d-flex align-center">
-            <div className="ft-weight-600 ft-color-grey">{entry.address}</div>
+            <div className="ft-weight-600 ft-color-black-000">{entry.address}</div>
             <div className="ellipse"></div>
             <div className="ft-color-black ft-size-14">
               {fundsActivityEntryLabel(entry)}
@@ -75,7 +75,7 @@ const AmountView = ({ entry }) => {
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"
       />
-      <img src={funds} alt="funds" />
+      <img className="funds-dollar-icon" src={funds} alt="funds" />
 
       <div className={className}>{nestedAmountView(entry)}</div>
     </div>

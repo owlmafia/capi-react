@@ -21,16 +21,16 @@ const notOwnedEntry = (entry, isSelected) => {
 };
 
 const entryBody = (entry, isSelected, col) => {
-  var containerClasses = "holder_item__container";
+  var containerClasses = "holder_item__container mb-16";
   if (isSelected) {
     containerClasses = containerClasses + " selected";
   }
   return (
     <div className={containerClasses}>
-      <div className="percentage-text ft-color-black ft-weight-600">
+      <div className="percentage-text ft-color-black ft-size-18 ft-weight-600">
         {entry.percentage_formatted}
       </div>
-      <div>
+      <div className="h-16">
         <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="8" cy="8.5" r="8" fill={col} />
         </svg>

@@ -131,11 +131,6 @@ select {
     justify-content: center;
 }
 
-#container * {
-    word-break: break-word;
-    // recet text-align: center in container to center the main content
-}
-
 .input-row input {
     margin-right: 5px;
 }
@@ -410,10 +405,6 @@ select {
     color: gray;
 }
 
-#user-data {
-    margin-bottom: 16px;
-}
-
 .labeled_box {
     margin-bottom: 70px;
     width: 100%;
@@ -430,16 +421,10 @@ p {
     margin: 0px;
 }
 
-#investors-distribution .labeled_box_children {
-    padding: 36px 3.8%;
-    padding-bottom: 150px;
-    min-height: 380px;
-}
-
 .labeled_box_children {
     border: 1px solid $global-border;
     border-radius: $global-border-radius;
-    padding: 30px;
+    padding: 40px;
     box-sizing: border-box;
 
     .investors-container {
@@ -447,6 +432,7 @@ p {
         justify-content: space-between;
         position: relative;
         max-width: 830px;
+        align-items: flex-start;
 
         .sub-title {
             display: flex;
@@ -462,7 +448,8 @@ p {
 
         .flexBlock {
             display: flex;
-            padding: 8px 0;
+            align-items: center;
+            margin-bottom: 37px;
         }
     }
 }
@@ -471,7 +458,7 @@ p {
     margin-top: 40px;
     border: 1px solid $global-border;
     border-radius: 20px;
-    padding: 20px;
+    padding: 40px;
     box-sizing: border-box;
 
     .labeled_box {
@@ -518,11 +505,11 @@ p {
 
         &__body {
             position: absolute;
-            top: 0;
+            top: 5px;
             right: 0;
             display: flex;
             align-items: flex-end;
-            gap: 6px;
+            gap: 8px;
             justify-content: space-between;
         }
 
@@ -535,6 +522,7 @@ p {
             color: #6bb9bd;
             text-decoration: underline;
             width: auto;
+            font-weight: 600;
         }
     }
 }
@@ -575,6 +563,11 @@ p {
     justify-content: center;
 }
 
+.s-14 {
+    width: 14px;
+    height: 14px;
+}
+
 .w-100 {
     width: 100%;
 }
@@ -595,12 +588,20 @@ p {
     width: 25%;
 }
 
+.h-16 {
+    height: 16px;
+}
+
 .flex-wrap {
     flex-wrap: wrap;
 }
 
 .flex-column {
     flex-direction: column;
+}
+
+.nowrap {
+    white-space: nowrap;
 }
 
 .align-start {
@@ -615,6 +616,10 @@ p {
     opacity: 0.5;
 }
 
+.ft-weight-500 {
+    font-weight: 500;
+}
+
 .ft-weight-600 {
     font-weight: 600;
 }
@@ -625,6 +630,10 @@ p {
 
 .ft-color-black {
     color: $black;
+}
+
+.ft-color-black-000 {
+    color: $black-000;
 }
 
 .ft-color-grey {
@@ -657,6 +666,10 @@ p {
 
 .gap-20 {
     gap: 20px;
+}
+
+.gap-24 {
+    gap: 24px;
 }
 
 .gap-32 {
@@ -743,20 +756,8 @@ p {
             padding: 44px 40px 40px 40px;
 
             .investors-container {
-                flex-direction: column;
-                gap: 40px;
-
                 .holder_list_container .sub-title {
                     padding-left: 0;
-                }
-
-                .holder_item__container {
-                    margin-left: -12px;
-                }
-
-                .pie-chart-container {
-                    left: auto;
-                    right: 0;
                 }
             }
         }
@@ -815,20 +816,38 @@ p {
     #investors-distribution {
         .labeled_box_children {
             .investors-container {
-                min-height: 630px;
+                flex-direction: column;
                 justify-content: space-between;
-
-                .pie-chart-container {
-                    top: 100px;
-                    left: 50%;
-                    right: auto;
-                    transform: translateX(-50%);
-                }
-
-                .holder_list_container {
-                    margin-top: 300px;
-                }
             }
         }
+    }
+}
+
+.d-none {
+    display: none;
+}
+
+$tablet_bp: 1440px;
+$mobile_bp: 650px;
+
+@media only screen and (max-width: $mobile_bp) {
+    .d-mobile-block {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: $tablet_bp) {
+    .d-desktop-block {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: $mobile_bp) and (max-width: $tablet_bp) {
+    .d-tablet-none {
+        display: none;
+    }
+
+    .d-tablet-block {
+        display: block;
     }
 }

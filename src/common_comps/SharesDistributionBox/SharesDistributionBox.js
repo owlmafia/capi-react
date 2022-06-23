@@ -6,6 +6,7 @@ import { HolderEntry } from "./HolderEntry";
 import Progress from "../../app_comps/Progress";
 import { pieChartColors } from "../../common_functions/common";
 import { changeArrow } from "../../shared_functions";
+import redArrow from "../../images/svg/arrow.svg";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -141,9 +142,9 @@ export const SharesDistributionBox = ({
     if (sharesDistr && entries) {
       return (
         <div className="holder_list_container">
-          <div className="sub-title">
-            <span>{"Investors"}</span>
-            <span className="ft-weight-700">{sharesDistr.length}</span>
+          <div className="flexBlock">
+            <span className="ft-size-18 ft-weight-600 mr-12">{"Investors"}</span>
+            <span className="ft-size-24 ft-weight-700">{sharesDistr.length}</span>
             <div>{changeArrow(deps.fundsChange)}</div>
           </div>
           {entries.map((entry) => {
@@ -178,18 +179,24 @@ export const SharesDistributionBox = ({
       return (
         <LabeledBox label={"Investor distribution"}>
           <div className="investors-container">
-            <div className="d-flex flex-column flex-wrap">
-              <div className="flexBlock">
-                <div className="mr-3 sub-title">{"Total shares"}</div>
-                <div className="ft-size-18 ft-weight-700">{sharesSupply}</div>
+            <div className="d-flex flex-column">
+              <div className="d-flex flex-column flex-wrap">
+                <div className="flexBlock">
+                  <div className="mr-12 ft-size-18 ft-weight-600 nowrap">{"Total shares"}</div>
+                  <div className="ft-size-24 ft-weight-700">{sharesSupply}</div>
+                  <div>
+                  <img src={redArrow} alt="redArrow" />
+                  </div>
+                </div>
+                <div className="flexBlock">
+                  <div className="ft-size-18 ft-weight-600">{notOwnedShares}</div>
+                  <div className="circle ml-5 mr-3"></div>
+                  <div className="ft-color-black">{"Available for sale"}</div>
+                </div>
               </div>
-              <div className="flexBlock">
-                <div className="ft-weight-600">{notOwnedShares}</div>
-                <div className="circle ml-5 mr-3"></div>
-                <div className="ft-color-black">{"Available for sale"}</div>
-              </div>
+              <div className="d-none d-tablet-block">{holdersListItems()}</div>
             </div>
-            <div className="pie-chart-container">
+            <div className="pie_chart__container">
               <SharesDistributionChart
                 sharesDistr={sharesDistr}
                 onAddressSelected={onAddressSelected}
@@ -197,12 +204,12 @@ export const SharesDistributionBox = ({
                 animated={true}
               />
             </div>
-            {holdersListItems()}
+            <div className="d-tablet-none">{holdersListItems()}</div>
           </div>
         </LabeledBox>
       );
     }
   };
 
-  return <div id="investors-distribution">{content()}</div>;
+  return <div className="mt-80" id="investors-distribution">{content()}</div>;
 };
