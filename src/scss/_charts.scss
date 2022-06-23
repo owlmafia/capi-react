@@ -142,10 +142,10 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1440px) {
     .chart_legends_container {
         justify-content: flex-start;
-        padding-left: 120px;
+        padding-left: 60px;
     }
 }
 
