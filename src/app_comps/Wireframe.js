@@ -29,9 +29,9 @@ export const Wireframe = ({ isGlobal, deps, dao }) => {
 
   return (
     <div id="nav_and_main">
+      {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
       {sideBar()}
       <div id="content">
-        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
         <Outlet />
       </div>

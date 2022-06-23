@@ -51,6 +51,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
       />
       {/* now it's always shown */}
       {/* {showSidebar && sideBar()} */}
+      {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
       {sideBar()}
       {showOverlay && (
         <ContentOverlay
@@ -64,7 +65,6 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         onClose={() => setShowWallet(false)}
       />
       <div id="content">
-        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
         <Outlet />
       </div>
