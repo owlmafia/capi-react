@@ -834,6 +834,10 @@ $mobile_bp: 650px;
     .d-mobile-block {
         display: block;
     }
+
+    .d-mobile-none {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: $tablet_bp) {
