@@ -436,6 +436,7 @@ p {
         justify-content: space-between;
         position: relative;
         max-width: 830px;
+        align-items: flex-start;
 
         .sub-title {
             display: flex;
