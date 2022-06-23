@@ -23,12 +23,8 @@ button {
     }
 
     .loader {
-        position: static;
-
         svg {
             z-index: 300;
-            top: 0 !important;
-            left: calc((100% - 100px)/2);
         }
     }
 }
