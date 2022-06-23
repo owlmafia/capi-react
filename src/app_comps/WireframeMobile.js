@@ -87,19 +87,19 @@ const ContentOverlay = ({ setShowSidebar, setShowWallet }) => {
 const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
   return (
     <div className="mob_nav_bar">
+      <img
+        src={menu}
+        alt="nav_bars"
+        onClick={() => setShowSidebar((s) => !s)}
+      />
       <Link to="#">
-        <img
-          src={menu}
-          alt="nav_bars"
-          onClick={() => setShowSidebar((s) => !s)}
-        />
         <img src={logo} alt="logo" />
-        <img
-          src={wallet}
-          alt="wallet"
-          onClick={() => setShowWallet((s) => !s)}
-        />
       </Link>
+      <img
+        src={wallet}
+        alt="wallet"
+        onClick={() => setShowWallet((s) => !s)}
+      />
     </div>
   );
 };

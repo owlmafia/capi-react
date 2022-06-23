@@ -95,12 +95,15 @@
     padding: 0 42px;
     box-sizing: border-box;
     z-index: 2000;
+    justify-content: space-between;
 
     a {
-        width: 100%;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+    }
+
+    img {
+        cursor: pointer;
     }
 }
 
@@ -127,8 +130,7 @@
         left: 0;
         z-index: 10000;
         background-color: white;
-        padding: 16px 50px;
-        padding-top: 50px;
+        padding: 16px 40px;
         backdrop-filter: brightness(60%);
 
         .dividing-line {
