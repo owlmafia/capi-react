@@ -35,7 +35,7 @@ const renderPieChart = (
   const svg = d3.select(container);
 
   svg.selectAll("*").remove();
-  svg.attr('viewBox', `0 0 ${width} ${height}`)
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
 
   const chart = svg
     .append("g")

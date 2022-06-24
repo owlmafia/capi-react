@@ -95,11 +95,7 @@ const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
       <Link to="#">
         <img src={logo} alt="logo" />
       </Link>
-      <img
-        src={wallet}
-        alt="wallet"
-        onClick={() => setShowWallet((s) => !s)}
-      />
+      <img src={wallet} alt="wallet" onClick={() => setShowWallet((s) => !s)} />
     </div>
   );
 };

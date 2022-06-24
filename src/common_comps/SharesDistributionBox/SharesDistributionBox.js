@@ -142,8 +142,12 @@ export const SharesDistributionBox = ({
       return (
         <div className="holder_list_container">
           <div className="flexBlock">
-            <span className="ft-size-18 ft-weight-600 mr-12">{"Investors"}</span>
-            <span className="ft-size-24 ft-weight-700">{sharesDistr.length}</span>
+            <span className="ft-size-18 ft-weight-600 mr-12">
+              {"Investors"}
+            </span>
+            <span className="ft-size-24 ft-weight-700">
+              {sharesDistr.length}
+            </span>
             <div>{changeArrow(deps.fundsChange)}</div>
           </div>
           {entries.map((entry) => {
@@ -181,13 +185,16 @@ export const SharesDistributionBox = ({
             <div className="d-flex flex-column">
               <div className="d-flex flex-column flex-wrap">
                 <div className="flexBlock">
-                  <div className="mr-12 ft-size-18 ft-weight-600 nowrap">{"Total shares"}</div>
-                  <div className="ft-size-24 ft-weight-700">{sharesSupply}</div>
-                  <div>
+                  <div className="mr-12 ft-size-18 ft-weight-600 nowrap">
+                    {"Total shares"}
                   </div>
+                  <div className="ft-size-24 ft-weight-700">{sharesSupply}</div>
+                  <div></div>
                 </div>
                 <div className="d-flex align-center">
-                  <div className="ft-size-18 ft-weight-600">{notOwnedShares}</div>
+                  <div className="ft-size-18 ft-weight-600">
+                    {notOwnedShares}
+                  </div>
                   <div className="circle ml-5 mr-3"></div>
                   <div className="ft-color-black">{"Available for sale"}</div>
                 </div>
@@ -209,5 +216,9 @@ export const SharesDistributionBox = ({
     }
   };
 
-  return <div className="mt-80" id="investors-distribution">{content()}</div>;
+  return (
+    <div className="mt-80" id="investors-distribution">
+      {content()}
+    </div>
+  );
 };

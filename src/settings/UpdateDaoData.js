@@ -45,7 +45,9 @@ export const UpdateDaoData = ({ deps }) => {
   const body = () => {
     return (
       <div className="update-dao-data">
-        <div className="ft-size-32 ft-weight-700 mt-80 mb-48">{"Update project data"}</div>
+        <div className="ft-size-32 ft-weight-700 mt-80 mb-48">
+          {"Update project data"}
+        </div>
         <div className="info">{"Project Info"}</div>
         <LabeledInput
           label={"Project name"}

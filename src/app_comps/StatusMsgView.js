@@ -22,7 +22,7 @@ export const StatusMsgView = ({ deps }) => {
   }
 
   return (
-    <div className='msg-container'>
+    <div className="msg-container">
       <div className={classNames}>
         <div className="d-flex align-center gap-32">
           {notificationIcon(deps.statusMsgDisplay)}

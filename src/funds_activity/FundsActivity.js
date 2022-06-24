@@ -55,12 +55,14 @@ const NoActivityView = ({ daoId }) => {
     <div className="d-flex w-100 justify-center">
       <div className="no-activity">
         <div className="title mb-1">{"No activity yet"}</div>
-        <div className="ft-weight-600 ft-color-black">{"Let's make some investments!"}</div>
+        <div className="ft-weight-600 ft-color-black">
+          {"Let's make some investments!"}
+        </div>
         <Link className="see-all full-width-btn" to={"/" + daoId}>
           <SubmitButton
             label={"Buy shares"}
             className="button-primary full-width-btn"
-            onClick={async () => { }}
+            onClick={async () => {}}
           />
         </Link>
       </div>
