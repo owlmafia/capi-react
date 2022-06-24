@@ -133,6 +133,10 @@
                     height: 14px;
                 }
             }
+
+            .funds_act_entry__amount__number {
+                margin-left: 5px;
+            }
         }
 
         .arrow {
@@ -176,7 +180,7 @@
         }
 
         .funds_act_entry__body {
-            padding-left: 32px;
+            padding-left: 40px;
             width: 100%;
 
             .order-2 {
@@ -198,12 +202,12 @@
 
             .status {
                 position: absolute;
-                top: 56px;
-                left: 134px;
+                top: 57px;
+                left: 150px;
             }
 
             .funds_act_entry__amount__container {
-                gap: 4px;
+                gap: 5px;
 
                 .arrow-icon {
                     width: 16px;
@@ -225,6 +229,10 @@
                     width: 14px;
                     height: 14px;
                 }
+            }
+
+            .funds_act_entry__amount__number {
+                margin-left: 0;
             }
         }
 

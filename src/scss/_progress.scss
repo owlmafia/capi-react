@@ -8,13 +8,11 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
+    text-align: center;
 
     svg {
-        position: absolute;
         width: $width;
         height: $width;
-        margin: auto;
-        left: calc((100% - 100px)/2);
     }
 }
 

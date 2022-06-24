@@ -51,6 +51,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
       />
       {/* now it's always shown */}
       {/* {showSidebar && sideBar()} */}
+      {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
       {sideBar()}
       {showOverlay && (
         <ContentOverlay
@@ -64,7 +65,6 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
         onClose={() => setShowWallet(false)}
       />
       <div id="content">
-        {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
         {daoTop()}
         <Outlet />
       </div>
@@ -87,21 +87,19 @@ const ContentOverlay = ({ setShowSidebar, setShowWallet }) => {
 const MobNavBar = ({ setShowSidebar, setShowWallet }) => {
   return (
     <div className="mob_nav_bar">
+      <img
+        src={menu}
+        alt="nav_bars"
+        onClick={() => setShowSidebar((s) => !s)}
+      />
       <Link to="#">
-        <img
-          src={menu}
-          alt="nav_bars"
-          onClick={() => setShowSidebar((s) => !s)}
-        />
-        <div className="logo-container">
-          <img src={logo} alt="logo" />
-        </div>
-        <img
-          src={wallet}
-          alt="wallet"
-          onClick={() => setShowWallet((s) => !s)}
-        />
+        <img src={logo} alt="logo" />
       </Link>
+      <img
+        src={wallet}
+        alt="wallet"
+        onClick={() => setShowWallet((s) => !s)}
+      />
     </div>
   );
 };

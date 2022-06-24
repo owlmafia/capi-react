@@ -87,18 +87,23 @@
 .mob_nav_bar {
     background-color: white;
     width: 100%;
+    display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     height: 60px;
-    padding: 16px 42px;
+    padding: 0 42px;
     box-sizing: border-box;
     z-index: 2000;
+    justify-content: space-between;
 
     a {
-        width: 100%;
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+    }
+
+    img {
+        cursor: pointer;
     }
 }
 
@@ -125,8 +130,7 @@
         left: 0;
         z-index: 10000;
         background-color: white;
-        padding: 16px 50px;
-        padding-top: 50px;
+        padding: 16px 40px;
         backdrop-filter: brightness(60%);
 
         .dividing-line {
@@ -142,7 +146,7 @@
 
     .sidebar-container {
         animation-name: sidebar;
-        animation-duration: 0.6s;
+        animation-duration: 0.3s;
         transform: translateX(-100%);
         animation-fill-mode: forwards;
         overflow-y: hidden;
@@ -150,7 +154,7 @@
 
     .sidebar-container-closing {
         animation-name: sidebarClosing;
-        animation-duration: 0.6s;
+        animation-duration: 0.3s;
         transform: translateX(0%);
         animation-fill-mode: forwards;
         overflow-y: hidden;
@@ -171,12 +175,12 @@
 
 @media only screen and (max-width: 650px) {
     .mob_nav_bar {
-        height: 48px;
+        height: 68px;
     }
 
     .sidebar-container {
         width: 100%;
-        top: 66px;
+        top: 68px;
         padding: 20px;
         z-index: 1900;
         box-sizing: border-box;

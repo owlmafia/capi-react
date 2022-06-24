@@ -45,7 +45,7 @@ export const UpdateDaoData = ({ deps }) => {
   const body = () => {
     return (
       <div className="update-dao-data">
-        <div className="subtitle">{"Update project data"}</div>
+        <div className="ft-size-32 ft-weight-700 mt-80 mb-48">{"Update project data"}</div>
         <div className="info">{"Project Info"}</div>
         <LabeledInput
           label={"Project name"}
@@ -109,7 +109,7 @@ export const UpdateDaoData = ({ deps }) => {
         />
         <SubmitButton
           label={"Rekey owner"}
-          className="button-primary"
+          className="button-primary mb-7"
           isLoading={submitting}
           onClick={async () => {
             rekeyOwner(

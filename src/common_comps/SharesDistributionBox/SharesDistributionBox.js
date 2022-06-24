@@ -188,7 +188,7 @@ export const SharesDistributionBox = ({
                   <img src={redArrow} alt="redArrow" />
                   </div>
                 </div>
-                <div className="flexBlock">
+                <div className="d-flex align-center">
                   <div className="ft-size-18 ft-weight-600">{notOwnedShares}</div>
                   <div className="circle ml-5 mr-3"></div>
                   <div className="ft-color-black">{"Available for sale"}</div>

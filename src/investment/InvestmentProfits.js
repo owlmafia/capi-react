@@ -40,26 +40,16 @@ export const InvestmentProfits = ({ deps }) => {
         <div>
           <div className="box-container profits-by-shares">
             <div className="title">{"Your profits"}</div>
-            <div className="w-80 d-flex justify-between mb-36">
-              <div className="flex-block align-center">
-                <div className="subTitle">{"Retrievable:"}</div>
-                <FundsAssetImg className="fund-asset" />
-                <div className="subTitle">
-                  {deps.investmentData.investor_claimable_dividend}
-                </div>
-              </div>
-              <div className="flex-block flex-column profits-tab">
-                <div className="subTitle retrieved">{"Retrieved:"}</div>
-                <div className="d-flex">
-                  <FundsAssetImg className="fund-asset opacity-70" />
-                  <div className="subTitle retrieved">
-                    {" "}
-                    {deps.investmentData.investor_already_retrieved_amount}
+            <div className="d-flex d-tablet-flex-column justify-between">
+              <div className="flex-block flex-column align-start">
+                <div className="flex-block align-center mb-4">
+                  <div className="ft-size-18 ft-weight-600">{"Retrievable:"}</div>
+                  <FundsAssetImg className="fund-asset" />
+                  <div className="ft-size-24 ft-weight-700">
+                    {deps.investmentData.investor_claimable_dividend}
                   </div>
                 </div>
-              </div>
-            </div>
-            <SubmitButton
+                <SubmitButton
               label={"Retrieve"}
               className="button-primary"
               isLoading={submitting}
@@ -76,7 +66,19 @@ export const InvestmentProfits = ({ deps }) => {
                   deps.wallet
                 );
               }}
-            />
+              />
+              </div>
+              <div className="flex-block flex-column profits-tab mr-60">
+                <div className="ft-size-18 ft-weight-600 retrieved">{"Retrieved:"}</div>
+                <div className="d-flex align-center">
+                  <FundsAssetImg className="fund-asset opacity-50" />
+                  <div className="ft-size-24 ft-weight-700 retrieved">
+                    {" "}
+                    {deps.investmentData.investor_already_retrieved_amount}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       );

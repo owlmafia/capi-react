@@ -92,89 +92,93 @@ export const InvestEmbedded = ({ deps, dao }) => {
       <div>
         <div className="dao_action_active_tab box-container">
           <div className="title">{"Buy Shares"}</div>
-          <div className="dao-shares">
-            <div className="top-block">
-              <div className="available-shares">
-                <div className="d-flex gap-10">
-                  <div className="subTitle mb-4">{"Available: "}</div>
-                  <div className="ft-weight-600 ft-size-18">{availableShares}</div>
-                </div>
-                {deps.investmentData && (
-                  <div className="shares-block">
-                    <div className="ft-weight-600 ft-size-18">You have:</div>
-                    <div className="shares-item">
-                      <div>{"Locked shares:"}</div>
-                      <div className="ft-weight-700">
-                        {deps.investmentData.investor_locked_shares}
-                      </div>
-                    </div>
-                    <div className="blue-circle"></div>
-                    <div className="shares-item">
-                      <div>{"Unlocked shares:"}</div>
-                      <div className="ft-weight-700">
-                        {deps.investmentData.investor_unlocked_shares}
-                      </div>
-                    </div>
-                    <div className="blue-circle"></div>
-                    <div className="d-flex gap-10 align-center">
-                      <div>{"Share:"}</div>
-                      <div data-tip="Your share of the project's income, after locking your shares"></div>
-                      <ReactTooltip />
-                      <div>{deps.investmentData.investor_share}</div>
-                    </div>
+          <div className="buy-shares-content">
+            <div className="dao-shares buy-shares-left-col">
+              <div className="top-block">
+                <div className="available-shares">
+                  <div className="d-flex gap-10">
+                    <div className="subTitle mb-4">{"Available: "}</div>
+                    <div className="ft-weight-600 ft-size-18">{availableShares}</div>
                   </div>
-                )}
-              </div>
-            </div>
-            <div id="shares_const_container">
-              <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
-              <div className="d-flex gap-10">
-                <img src={funds} alt="funds" />
-                <div className="one_line_key_val_val ft-weight-700 ft-color-black-000">
-                  {totalCost}
+                  {deps.investmentData && (
+                    <div className="shares-block">
+                      <div className="ft-weight-600 ft-size-18">You have:</div>
+                      <div className="shares-item">
+                        <div>{"Locked shares:"}</div>
+                        <div className="ft-weight-700">
+                          {deps.investmentData.investor_locked_shares}
+                        </div>
+                      </div>
+                      <div className="blue-circle"></div>
+                      <div className="shares-item">
+                        <div>{"Unlocked shares:"}</div>
+                        <div className="ft-weight-700">
+                          {deps.investmentData.investor_unlocked_shares}
+                        </div>
+                      </div>
+                      <div className="blue-circle"></div>
+                      <div className="d-flex gap-10 align-center">
+                        <div>{"Share:"}</div>
+                        <div data-tip="Your share of the project's income, after locking your shares"></div>
+                        <ReactTooltip />
+                        <div>{deps.investmentData.investor_share}</div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="d-flex mobile-input-block">
-            <div className="w-80">
-              <div className="labeled_input__error">{shareAmountError}</div>
-              <input
-                className="w-80 label-input-style mt-1"
-                placeholder={"Enter amount"}
-                size="30"
-                value={buySharesCount}
-                onChange={
-                  (event) => setBuySharesCount(event.target.value)
-                  // onSharesInput(event.target.value)
+              <div className="w-80">
+                <div className="labeled_input__error w-100">{shareAmountError}</div>
+                <input
+                  className="w-80 label-input-style mt-1"
+                  placeholder={"Enter amount"}
+                  size="30"
+                  value={buySharesCount}
+                  onChange={
+                    (event) => setBuySharesCount(event.target.value)
+                    // onSharesInput(event.target.value)
+                  }
+                />
+              </div>
+              <SubmitButton
+              label={"Buy"}
+              className={"button-primary"}
+              isLoading={submitting}
+              onClick={async (_) => {
+                setBuyIntent(true);
+                var myAddress = deps.myAddress;
+                if (myAddress === "") {
+                  setShowSelectWalletModal(true);
                 }
+              }}
               />
             </div>
-            <div id="retrieved-profits">
-              <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18">
-                {"Expected share"}
-                <img src={info} alt="info" />
+            <div className="buy-shares-right-col">
+              <div id="shares_const_container">
+                  <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
+                  <div className="d-flex gap-10">
+                    <img src={funds} alt="funds" />
+                    <div className="ft-weight-700 ft-size-24 ft-color-black-000">
+                      {totalCost}
+                    </div>
+                  </div>
               </div>
-              <div className="d-flex gap-10">
-              <img src={greenArrow} alt="greenArrow" />
-                <div className="one_line_key_val_val ft-weight-700 ft-color-black-000">
-                  {totalPercentage}
+              <div className="d-flex mobile-input-block">
+                <div id="retrieved-profits">
+                  <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18">
+                    {"Expected share"}
+                    <img src={info} alt="info" />
+                  </div>
+                  <div className="d-flex gap-10">
+                  <img src={greenArrow} alt="greenArrow" />
+                    <div className="ft-weight-700 ft-size-24 ft-color-black-000">
+                      {totalPercentage}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <SubmitButton
-            label={"Buy"}
-            className={"button-primary"}
-            isLoading={submitting}
-            onClick={async (_) => {
-              setBuyIntent(true);
-              var myAddress = deps.myAddress;
-              if (myAddress === "") {
-                setShowSelectWalletModal(true);
-              }
-            }}
-          />
           {showSelectWalletModal && (
             <SelectWalletModal
               deps={deps}

@@ -50,16 +50,25 @@
 
     .chartBlock {
         display: flex;
+        align-items: center;
         margin-bottom: 16px;
-        gap: 40px;
+        gap: 16px;
 
         .numbers {
             width: 60px;
+            flex-shrink: 0;
         }
     }
 
     .button-primary {
         width: 236px;
+    }
+
+    @media only screen and (max-width: 650px) {
+    
+        .button-primary {
+            width: 100%;
+        }
     }
 
     .labeled_input {

@@ -1,7 +1,11 @@
 .msg-container {
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
+    z-index: 3000;
 
     .msg {
         width: auto;
@@ -18,7 +22,7 @@
         z-index: 100;
         box-sizing: border-box;
         animation-name: notification;
-        animation-duration: 1s;
+        animation-duration: 0.5s;
         height: 120px;
         gap: 50px;
         border-radius: 24px;
@@ -49,7 +53,7 @@
 
     .msg-close {
         animation-name: closeAnimation;
-        animation-duration: 0.8s;
+        animation-duration: 0.4s;
     }
 }
 
@@ -85,10 +89,8 @@
 
 @media only screen and (max-width: 1330px) {
     .msg-container {
-        max-width: 800px;
-
         .msg {
-            top: 60px;
+            top: 16px;
         }
     }
 }
