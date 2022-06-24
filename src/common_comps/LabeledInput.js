@@ -9,7 +9,7 @@ export const LabeledInput = ({
   placeholder,
   errorMsg,
   maxLength,
-  icon
+  icon,
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
@@ -33,6 +33,7 @@ export const LabeledInput = ({
       </div>
       {input(
         inputValue,
+        "text",
         (input) => {
           setInputLength(input.length);
           onChange(input);
@@ -60,30 +61,54 @@ export const LabeledCurrencyInput = ({
   onChange,
   placeholder,
   errorMsg,
-  img
+  img,
 }) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
       <div className="input_with_currency__container">
-        {input(inputValue, onChange, placeholder)}
+        {input(inputValue, "number", onChange, placeholder)}
         <img src={img} alt="img" />
       </div>
-      <div className="labeled_input__error">
-        {errorMsg ? <img src={error} alt="error" /> : ""}
-        {errorMsg}
-      </div>
+      <ValidationMsg errorMsg={errorMsg} />
+    </div>
+  );
+};
+
+export const LabeledAmountInput = ({
+  label,
+  inputValue,
+  onChange,
+  placeholder,
+  errorMsg,
+}) => {
+  return (
+    <div className="labeled_input">
+      <div className="labeled_input__label">{label}</div>
+      {input(inputValue, "number", onChange, placeholder)}
+      <ValidationMsg errorMsg={errorMsg} />
+    </div>
+  );
+};
+
+export const ValidationMsg = ({ errorMsg }) => {
+  return (
+    <div className="labeled_input__error">
+      {errorMsg ? <img src={error} alt="error" /> : ""}
+      {errorMsg}
     </div>
   );
 };
 
 // onFocusToggle: optional: pass to be called when the input gains or loses focus
-const input = (inputValue, onChange, placeholder, onFocusToggle) => {
+const input = (inputValue, type, onChange, placeholder, onFocusToggle) => {
   return (
     <input
       className="label-input-style"
       placeholder={placeholder}
       size="30"
+      type={type}
+      min="0" // only active if type is number
       value={inputValue}
       onChange={(event) => {
         onChange(event.target.value);

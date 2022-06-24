@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  LabeledAmountInput,
   LabeledCurrencyInput,
   LabeledInput,
   LabeledTextArea,
@@ -130,7 +131,7 @@ export const CreateDao = ({ deps }) => {
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
         <div className="dao-title mt-60">Project Funds</div>
-        <LabeledInput
+        <LabeledAmountInput
           label={"Share supply"}
           inputValue={shareCount}
           onChange={(input) => setShareCount(input)}
@@ -143,7 +144,7 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />
-        <LabeledInput
+        <LabeledAmountInput
           label={"Investor's part:"}
           icon={info}
           inputValue={investorsShare}
@@ -151,7 +152,7 @@ export const CreateDao = ({ deps }) => {
           errorMsg={investorsShareError}
           placeholder="Investor's part in %"
         />
-        <LabeledInput
+        <LabeledAmountInput
           label={"Shares for investors"}
           inputValue={sharesForInvestors}
           onChange={(input) => setSharesForInvestors(input)}

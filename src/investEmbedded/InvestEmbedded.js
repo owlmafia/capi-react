@@ -12,6 +12,7 @@ import {
   invest,
   updateTotalPriceAndPercentage,
 } from "./controller";
+import { triggerIfNumber } from "../common_functions/common";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -98,7 +99,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div className="available-shares">
                   <div className="d-flex gap-10">
                     <div className="subTitle mb-4">{"Available: "}</div>
-                    <div className="ft-weight-600 ft-size-18">{availableShares}</div>
+                    <div className="ft-weight-600 ft-size-18">
+                      {availableShares}
+                    </div>
                   </div>
                   {deps.investmentData && (
                     <div className="shares-block">
@@ -128,40 +131,41 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 </div>
               </div>
               <div className="w-80">
-                <div className="labeled_input__error w-100">{shareAmountError}</div>
+                <div className="labeled_input__error w-100">
+                  {shareAmountError}
+                </div>
                 <input
                   className="w-80 label-input-style mt-1"
                   placeholder={"Enter amount"}
                   size="30"
+                  type="number"
+                  min="0"
                   value={buySharesCount}
-                  onChange={
-                    (event) => setBuySharesCount(event.target.value)
-                    // onSharesInput(event.target.value)
-                  }
+                  onChange={(event) => setBuySharesCount(event.target.value)}
                 />
               </div>
               <SubmitButton
-              label={"Buy"}
-              className={"button-primary"}
-              isLoading={submitting}
-              onClick={async (_) => {
-                setBuyIntent(true);
-                var myAddress = deps.myAddress;
-                if (myAddress === "") {
-                  setShowSelectWalletModal(true);
-                }
-              }}
+                label={"Buy"}
+                className={"button-primary"}
+                isLoading={submitting}
+                onClick={async (_) => {
+                  setBuyIntent(true);
+                  var myAddress = deps.myAddress;
+                  if (myAddress === "") {
+                    setShowSelectWalletModal(true);
+                  }
+                }}
               />
             </div>
             <div className="buy-shares-right-col">
               <div id="shares_const_container">
-                  <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
-                  <div className="d-flex gap-10">
-                    <img src={funds} alt="funds" />
-                    <div className="ft-weight-700 ft-size-24 ft-color-black-000">
-                      {totalCost}
-                    </div>
+                <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
+                <div className="d-flex gap-10">
+                  <img src={funds} alt="funds" />
+                  <div className="ft-weight-700 ft-size-24 ft-color-black-000">
+                    {totalCost}
                   </div>
+                </div>
               </div>
               <div className="d-flex mobile-input-block">
                 <div id="retrieved-profits">
@@ -170,7 +174,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                     <img src={info} alt="info" />
                   </div>
                   <div className="d-flex gap-10">
-                  <img src={greenArrow} alt="greenArrow" />
+                    <img src={greenArrow} alt="greenArrow" />
                     <div className="ft-weight-700 ft-size-24 ft-color-black-000">
                       {totalPercentage}
                     </div>
