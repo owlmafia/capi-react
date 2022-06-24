@@ -34,3 +34,9 @@ npm start --debug
 ```
 
 Navigate to http://localhost:3000 in your browser.
+
+## Autoformat project
+
+```
+npm run pretty
+```
