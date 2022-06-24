@@ -128,14 +128,12 @@ export const SharesDistributionBox = ({
     // since we discarded not enough entries case, showMore: true -> "show more", showMore: false -> "show less"
     let showMore = !showMoreSelected;
     return (
-      <div className="d-flex w-100 justify-center">
         <button
-          className="link_button"
+          className="link_button ml-36"
           onClick={() => setShowMoreSelected(showMore)}
         >
           {showMore ? "See all" : "Show less"}
         </button>
-      </div>
     );
   };
 

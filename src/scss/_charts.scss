@@ -41,10 +41,6 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     padding-left: 12px;
 }
 
-.holder_list_container .flexBlock {
-    padding-left: 16px;
-}
-
 .holder_item {
     &__container {
         display: flex;
@@ -52,7 +48,7 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
         box-sizing: border-box;
         height: 32px;
         align-items: center;
-        margin-bottom: 12px;
+        margin: 0 0 12px -16px;
         padding: 8px 16px;
 
         .percentage-text {
@@ -161,5 +157,11 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
         flex-direction: column;
         gap: 12px;
         margin-bottom: 32px;
+    }
+
+    .pie_chart {
+        &__container {
+            align-self: center;
+        }
     }
 }
