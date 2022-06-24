@@ -5,7 +5,6 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
 import info from "../images/svg/info.svg";
-import greenArrow from "../images/svg/green-arrow.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import {
   fetchAvailableShares,
@@ -174,7 +173,6 @@ export const InvestEmbedded = ({ deps, dao }) => {
                     <img src={info} alt="info" />
                   </div>
                   <div className="d-flex gap-10">
-                    <img src={greenArrow} alt="greenArrow" />
                     <div className="ft-weight-700 ft-size-24 ft-color-black-000">
                       {totalPercentage}
                     </div>

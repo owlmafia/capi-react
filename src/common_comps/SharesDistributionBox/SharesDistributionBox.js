@@ -6,7 +6,6 @@ import { HolderEntry } from "./HolderEntry";
 import Progress from "../../app_comps/Progress";
 import { pieChartColors } from "../../common_functions/common";
 import { changeArrow } from "../../shared_functions";
-import redArrow from "../../images/svg/arrow.svg";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({
@@ -185,7 +184,6 @@ export const SharesDistributionBox = ({
                   <div className="mr-12 ft-size-18 ft-weight-600 nowrap">{"Total shares"}</div>
                   <div className="ft-size-24 ft-weight-700">{sharesSupply}</div>
                   <div>
-                  <img src={redArrow} alt="redArrow" />
                   </div>
                 </div>
                 <div className="d-flex align-center">
