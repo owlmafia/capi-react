@@ -41,14 +41,19 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     padding-left: 12px;
 }
 
+.holder_list_container .flexBlock {
+    padding-left: 16px;
+}
+
 .holder_item {
     &__container {
         display: flex;
-        gap: 30px;
+        gap: 16px;
         box-sizing: border-box;
         height: 32px;
         align-items: center;
         margin-bottom: 12px;
+        padding: 8px 16px;
 
         .percentage-text {
             width: 55px;
