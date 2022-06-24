@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, Fragment } from "react";
+import ReactTooltip from "react-tooltip";
+import info from "../images/svg/info.svg";
 import error from "../images/svg/error.svg";
 
 export const LabeledInput = ({
@@ -9,7 +10,7 @@ export const LabeledInput = ({
   placeholder,
   errorMsg,
   maxLength,
-  icon,
+  info,
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
@@ -23,7 +24,7 @@ export const LabeledInput = ({
       <div className="labeled_input__label d-flex align-center w-94 justify-between">
         <div className="d-flex align-center gap-10">
           <div>{label}</div>
-          {icon ? <img src={icon} alt="icon" /> : ""}
+          {info && <InfoView info={info} />}
         </div>
         <div>
           {showLength && maxLength && (
@@ -51,6 +52,17 @@ export const LabeledInput = ({
   );
 };
 
+const InfoView = ({ info: infoText }) => {
+  return (
+    <Fragment>
+      <div data-tip={infoText}>
+        <img src={info} alt="info" />
+      </div>
+      <ReactTooltip />
+    </Fragment>
+  );
+};
+
 const InputLength = ({ length, maxLength }) => {
   return <div>{maxLength - length}</div>;
 };
@@ -62,10 +74,12 @@ export const LabeledCurrencyInput = ({
   placeholder,
   errorMsg,
   img,
+  info,
 }) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
+      {info && <InfoView info={info} />}
       <div className="input_with_currency__container">
         {input(inputValue, "number", onChange, placeholder)}
         <img src={img} alt="img" />
@@ -81,10 +95,12 @@ export const LabeledAmountInput = ({
   onChange,
   placeholder,
   errorMsg,
+  info,
 }) => {
   return (
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
+      {info && <InfoView info={info} />}
       {input(inputValue, "number", onChange, placeholder)}
       <ValidationMsg errorMsg={errorMsg} />
     </div>

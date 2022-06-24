@@ -146,7 +146,7 @@ export const CreateDao = ({ deps }) => {
         />
         <LabeledAmountInput
           label={"Investor's part:"}
-          icon={info}
+          info={"Percentage of income directed to investors"}
           inputValue={investorsShare}
           onChange={(input) => setInvestorsShare(input)}
           errorMsg={investorsShareError}
