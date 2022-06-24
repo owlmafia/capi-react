@@ -43,33 +43,39 @@ export const InvestmentProfits = ({ deps }) => {
             <div className="d-flex d-tablet-flex-column justify-between">
               <div className="flex-block flex-column align-start">
                 <div className="flex-block align-center mb-4">
-                  <div className="ft-size-18 ft-weight-600">{"Retrievable:"}</div>
+                  <div className="ft-size-18 ft-weight-600">
+                    {"Retrievable:"}
+                  </div>
                   <FundsAssetImg className="fund-asset" />
                   <div className="ft-size-24 ft-weight-700">
                     {deps.investmentData.investor_claimable_dividend}
                   </div>
                 </div>
                 <SubmitButton
-              label={"Retrieve"}
-              className="button-primary"
-              isLoading={submitting}
-              disabled={deps.investmentData.investor_claimable_dividend === "0"}
-              onClick={async () => {
-                await retrieveProfits(
-                  deps.myAddress,
-                  setSubmitting,
-                  deps.statusMsg,
-                  deps.updateMyBalance,
-                  params.id,
-                  deps.updateInvestmentData,
-                  deps.updateFunds,
-                  deps.wallet
-                );
-              }}
-              />
+                  label={"Retrieve"}
+                  className="button-primary"
+                  isLoading={submitting}
+                  disabled={
+                    deps.investmentData.investor_claimable_dividend === "0"
+                  }
+                  onClick={async () => {
+                    await retrieveProfits(
+                      deps.myAddress,
+                      setSubmitting,
+                      deps.statusMsg,
+                      deps.updateMyBalance,
+                      params.id,
+                      deps.updateInvestmentData,
+                      deps.updateFunds,
+                      deps.wallet
+                    );
+                  }}
+                />
               </div>
               <div className="flex-block flex-column profits-tab mr-60">
-                <div className="ft-size-18 ft-weight-600 retrieved">{"Retrieved:"}</div>
+                <div className="ft-size-18 ft-weight-600 retrieved">
+                  {"Retrieved:"}
+                </div>
                 <div className="d-flex align-center">
                   <FundsAssetImg className="fund-asset opacity-50" />
                   <div className="ft-size-24 ft-weight-700 retrieved">
