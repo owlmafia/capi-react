@@ -21,7 +21,7 @@ const notOwnedEntry = (entry, isSelected) => {
 };
 
 const entryBody = (entry, isSelected, col) => {
-  var containerClasses = "holder_item__container mb-16";
+  var containerClasses = "holder_item__container";
   if (isSelected) {
     containerClasses = containerClasses + " selected";
   }
