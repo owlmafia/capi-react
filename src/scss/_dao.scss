@@ -240,66 +240,41 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
-    #dao_actions_top_bar {
-        gap: 8px;
-    }
+.buy-shares-content {
+    display: flex;
 
-    .dao_action_active_tab.box-container {
-        flex-wrap: wrap;
-        position: relative;
-
-        #shares_const_container {
-            position: absolute;
-            bottom: 40px;
-            transform: translateX(-50%);
-            bottom: 23%;
-            right: 0;
-        }
-
-        .button-primary {
-            width: 100%;
-            margin-top: 20px;
-        }
-
-        .label-input-style {
-            width: 100%;
-        }
-
-        .dao-shares {
-            margin-bottom: 0;
-
-            .top-block {
-                flex-direction: column;
-
-                #shares_const_container {
-                    position: absolute;
-                    bottom: 40px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                }
-
-                .available-shares {
-                    .shares-block {
-                        flex-direction: column;
-                        align-items: flex-start;
-                        gap: 14px;
-
-                        .blue-circle {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-
-        .mobile-input-block {
-            flex-wrap: wrap;
-        }
-    }
-
-    #dao_description {
-        width: 100%;
-        margin-bottom: 40px;
+    .buy-shares-right-col {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
     }
 }
+
+
+@media only screen and (max-width: 1330px) {
+    .buy-shares-content {
+        flex-direction: column;
+
+        .buy-shares-right-col {
+            flex-direction: row;
+            gap: 130px;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .buy-shares-content {
+        
+        .buy-shares-right-col {
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+    
+            #shares_const_container, 
+            #retrieved-profits {
+                align-items: center;
+            }
+        }
+    }
+}
+
