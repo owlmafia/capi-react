@@ -4,6 +4,7 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
+  LabeledInput,
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";
@@ -44,7 +45,7 @@ export const Withdrawal = ({ deps }) => {
             img={funds}
             onChange={(input) => setWithdrawalAmount(input)}
           />
-          <LabeledCurrencyInput
+          <LabeledInput
             label={"For what?"}
             img={pencil}
             inputValue={withdrawalDescr}
