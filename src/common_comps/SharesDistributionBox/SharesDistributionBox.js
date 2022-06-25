@@ -148,7 +148,7 @@ export const SharesDistributionBox = ({
             <span className="ft-size-24 ft-weight-700">
               {sharesDistr.length}
             </span>
-            <div>{changeArrow(deps.fundsChange)}</div>
+            <div>{changeArrow(holdersChange)}</div>
           </div>
           {entries.map((entry) => {
             // not owned is shown on the left side, so we remove the entry from the list here
