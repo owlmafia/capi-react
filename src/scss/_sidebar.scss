@@ -30,6 +30,7 @@
     .sidebar-item {
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         .settings-dot {
             width: 12px;
@@ -44,7 +45,6 @@
             margin-left: 10px;
         }
 
-        cursor: pointer;
 
         img {
             width: 20px;
@@ -55,14 +55,13 @@
             gap: 12px;
             align-items: center;
             color: $black;
-            transition: 0.3s;
         }
 
         &:hover a,
         a.menu_active {
             color: $blue-primary;
-            font-weight: 600;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: 0.2s;
         }
 
         &:hover img,
