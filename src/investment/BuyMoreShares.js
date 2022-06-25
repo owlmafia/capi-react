@@ -54,71 +54,88 @@ export const BuyMoreShares = ({ deps, dao }) => {
   const view = () => {
     return (
       <div className="buy-more-shares box-container d-flex">
-        <div className="w-60 shares-mobile">
+        <div className="shares-mobile">
           <div className="available-shares">
-            <div className="title nowrap">{"Buy more shares"}</div>
-            <div className="mb-4 flex-block align-center">
-              <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
-              <div className="ft-weight-700 ft-size-24 color-black-000">
-                {dao.share_supply}
+            <div>
+              <div className="title nowrap">{"Buy more shares"}</div>
+              <div className="mb-4 flex-block align-center">
+                <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
+                <div className="ft-weight-700 ft-size-24 color-black-000">
+                  {dao.share_supply}
+                </div>
+                <div>
+                  <img src={redArrow} alt="redArrow" />
+                </div>
               </div>
-              <div>
-                <img src={redArrow} alt="redArrow" />
+              <div className="chartBlock">
+                <div className="numbers ft-size-18 ft-weight-600">
+                  {availableShares}
+                </div>
+                <div className="h-16">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="8" cy="8.5" r="8" fill="#DEE2E2" />
+                  </svg>
+                </div>
+                <div>{"Available"}</div>
+              </div>
+              <div className="chartBlock">
+                <div className="numbers ft-size-18 ft-weight-600">
+                  {deps.investmentData.investor_locked_shares}
+                </div>
+                <div className="h-16">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="8" cy="8.5" r="8" fill="#8ECACD" />
+                  </svg>
+                </div>
+                <div>{"Your locked shares"}</div>
+              </div>
+              <div className="chartBlock">
+                <div className="numbers ft-size-18 ft-weight-600">
+                  {deps.investmentData.investor_unlocked_shares}
+                </div>
+                <div className="h-16">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="8" cy="8.5" r="8" fill="#6BB9BD" />
+                  </svg>
+                </div>
+                <div>{"Your unlocked shares"}</div>
               </div>
             </div>
-            <div className="chartBlock">
-              <div className="numbers ft-size-18 ft-weight-600">
-                {availableShares}
-              </div>
-              <div className="h-16">
-                <svg
-                  width="16"
-                  height="17"
-                  viewBox="0 0 16 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8.5" r="8" fill="#DEE2E2" />
-                </svg>
-              </div>
-              <div>{"Available"}</div>
-            </div>
-            <div className="chartBlock">
-              <div className="numbers ft-size-18 ft-weight-600">
-                {deps.investmentData.investor_locked_shares}
-              </div>
-              <div className="h-16">
-                <svg
-                  width="16"
-                  height="17"
-                  viewBox="0 0 16 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8.5" r="8" fill="#8ECACD" />
-                </svg>
-              </div>
-              <div>{"Your locked shares"}</div>
-            </div>
-            <div className="chartBlock">
-              <div className="numbers ft-size-18 ft-weight-600">
-                {deps.investmentData.investor_unlocked_shares}
-              </div>
-              <div className="h-16">
-                <svg
-                  width="16"
-                  height="17"
-                  viewBox="0 0 16 17"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle cx="8" cy="8.5" r="8" fill="#6BB9BD" />
-                </svg>
-              </div>
-              <div>{"Your unlocked shares"}</div>
-            </div>
+            <div className="shares-chart d-desktop-none">
+          <SharesDistributionChart
+            sharesDistr={[
+              to_pie_chart_slice(availableShares),
+              to_pie_chart_slice(deps.investmentData.investor_locked_shares),
+              to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
+            ]}
+            // we want to show available shares in gray and it's the first segment, so we prepend gray to the colors
+            // note that this is inconsistent with how it's shown on investors distribution (using NOT_OWNED segment type)
+            // we should refactor this (maybe create a generic "gray" segment type)
+            col={[PIE_CHART_GRAY].concat(pieChartColors())}
+            animated={false}
+            disableClick={true}
+          />
           </div>
-          <div>
+          </div>
+          <div className="buy-shares-input">
             <LabeledAmountInput
               label={"Buy shares"}
               placeholder={"Enter amount"}
@@ -151,7 +168,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
             />
           </div>
         </div>
-        <div className="shares-chart">
+        <div className="shares-chart d-tablet-mobile-none">
           <SharesDistributionChart
             sharesDistr={[
               to_pie_chart_slice(availableShares),

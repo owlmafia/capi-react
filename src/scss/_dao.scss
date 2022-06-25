@@ -92,13 +92,11 @@
 
     .dao-shares {
         display: flex;
-        margin-bottom: 48px;
+        flex-direction: column;
         flex-wrap: wrap;
 
         .top-block {
-            width: 80%;
-            display: flex;
-            justify-content: space-between;
+            margin-bottom: 48px;
 
             .blue-circle {
                 width: 8px;
@@ -109,7 +107,6 @@
 
             .available-shares {
                 display: flex;
-                justify-content: space-between;
                 flex-direction: column;
 
                 .shares-block {
@@ -121,6 +118,7 @@
                     .shares-item {
                         display: flex;
                         gap: 10px;
+                        align-items: center;
                     }
                 }
 
@@ -242,6 +240,7 @@
 
 .buy-shares-content {
     display: flex;
+    gap: 40px;
 
     .buy-shares-right-col {
         display: flex;
@@ -250,10 +249,17 @@
     }
 }
 
+@media only screen and (min-width: 1600px) {
+    .buy-shares-content {
+        gap: 150px;
+    }
+}
+
 
 @media only screen and (max-width: 1330px) {
     .buy-shares-content {
         flex-direction: column;
+        gap: 40px;
 
         .buy-shares-right-col {
             flex-direction: row;
@@ -277,4 +283,3 @@
         }
     }
 }
-

@@ -94,7 +94,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           <div className="title">{"Buy Shares"}</div>
           <div className="buy-shares-content">
             <div className="dao-shares buy-shares-left-col">
-              <div className="top-block">
+              <div className="top-block ">
                 <div className="available-shares">
                   <div className="d-flex gap-10">
                     <div className="subTitle mb-4">{"Available: "}</div>
@@ -119,20 +119,20 @@ export const InvestEmbedded = ({ deps, dao }) => {
                         </div>
                       </div>
                       <div className="blue-circle"></div>
-                      <div className="d-flex gap-10 align-center">
+                      <div className="shares-item">
                         <div>{"Share:"}</div>
-                        <div>{deps.investmentData.investor_share}</div>
+                        <div className="ft-weight-700">{deps.investmentData.investor_share}</div>
                       </div>
                     </div>
                   )}
                 </div>
               </div>
-              <div className="w-80">
+              <div>
                 <div className="labeled_input__error w-100">
                   {shareAmountError}
                 </div>
                 <input
-                  className="w-80 label-input-style mt-1"
+                  className="label-input-style"
                   placeholder={"Enter amount"}
                   size="30"
                   type="number"
@@ -166,9 +166,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
               </div>
               <div className="d-flex mobile-input-block">
                 <div id="retrieved-profits">
-                  <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18">
+                  <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
                     {"Expected share"}
-                    <div data-tip="Your total share of the project's income, after buying shares">
+                    <div className="d-flex align-center" data-tip="Your total share of the project's income, after buying shares">
                       <img src={info} alt="info" />
                     </div>
                     <ReactTooltip />

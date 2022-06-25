@@ -31,8 +31,7 @@ a {
 .box-container {
     background-color: #f5fafb;
     border-radius: $global-border-radius-m;
-    padding: 32px;
-    position: relative;
+    padding: 40px;
 
     .title {
         color: $blue-primary;
@@ -620,6 +619,10 @@ p {
     align-items: flex-start;
 }
 
+.opacity-0 {
+    opacity: 0;
+}
+
 .opacity-70 {
     opacity: 0.7;
 }
@@ -789,21 +792,7 @@ p {
         margin-top: 68px;
 
         .buy-more-shares.box-container {
-            height: 787px;
             box-sizing: border-box;
-
-            .shares-mobile {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-
-            .shares-chart {
-                position: absolute;
-                top: 260px;
-            }
         }
 
         .box-container {
@@ -839,7 +828,7 @@ p {
     display: none;
 }
 
-$tablet_bp: 1440px;
+$tablet_bp: 1600px;
 $mobile_bp: 650px;
 
 @media only screen and (max-width: $mobile_bp) {
@@ -852,9 +841,26 @@ $mobile_bp: 650px;
     }
 }
 
+@media only screen and (min-width: 1330px) {
+    .d-desktop-none {
+        display: none;
+    }
+}
 @media only screen and (min-width: $tablet_bp) {
     .d-desktop-block {
         display: block;
+    }
+}
+
+@media only screen and (max-width: $mobile_bp) {
+    .available-shares {
+        flex-direction: column;
+
+        .shares-chart {
+            display: flex;
+            align-self: center;
+            width: 160px;
+        }
     }
 }
 
@@ -866,5 +872,73 @@ $mobile_bp: 650px;
     .d-tablet-block {
         margin-top: 40px;
         display: block;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+
+    .d-tablet-mobile-none {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+
+    .buy-more-shares {
+        width: 100%;
+
+        .shares-mobile {
+            width: 100%;
+
+            .available-shares {
+                width: 100%;
+                justify-content: space-between;
+        
+                .shares-chart {
+                    width: 240px;
+                } 
+            }
+        }
+    }
+
+    .buy-more-shares .shares-mobile .buy-shares-input .labeled_input {
+        margin-top: 0;
+    }
+
+}
+
+@media only screen and (min-width: 1330px) {
+    .buy-more-shares {
+        .shares-mobile {
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .shares-chart {
+            min-width: 350px;
+        }
+    }
+
+    .buy-shares-left-col {
+        width: 100%;
+        max-width: 500px;
+    }
+}
+
+.position-relative {
+    position: relative;
+}
+
+.buy-more-shares {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shares-mobile .available-shares {
+    display: flex;
+    width: 100%;
+
+    .shares-chart {
+        min-width: 350px;
     }
 }

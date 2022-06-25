@@ -44,10 +44,12 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 .holder_item {
     &__container {
         display: flex;
-        gap: 30px;
+        gap: 16px;
         box-sizing: border-box;
         height: 32px;
         align-items: center;
+        margin: 0 0 12px -16px;
+        padding: 8px 16px;
 
         .percentage-text {
             width: 55px;
@@ -73,25 +75,32 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
     &__text {
         font-weight: 400;
+        color: #000;
     }
 }
 
-.chart_with_legends_container>svg {
-    display: block;
+.chart_with_legends_container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.select-legend-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .spacer {
+        flex-basis: 100px;
+    }
 }
 
 .charts-container {
     .labeled_box_children {
-        padding: 30px;
-        padding-bottom: 0;
-        padding-right: 0;
-        position: relative;
 
         .charts-select {
             width: 200px;
-            position: absolute;
-            right: 20px;
-            top: 20px;
         }
 
         .charts-select.css-b62m3t-container {
@@ -142,18 +151,29 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-@media only screen and (max-width: 1440px) {
-    .chart_legends_container {
-        justify-content: flex-start;
-        padding-left: 60px;
-    }
-}
-
 @media only screen and (max-width: 650px) {
     .chart_legends_container {
         padding-left: 0;
         flex-direction: column;
         gap: 12px;
         margin-bottom: 32px;
+    }
+
+    .pie_chart {
+        &__container {
+            align-self: center;
+        }
+    }
+
+    .select-legend-container {
+        align-items: flex-start;
+
+        .spacer {
+            display: none;
+        }
+    }
+
+    .charts-container .labeled_box .labeled_box_children {
+        padding: 20px;
     }
 }

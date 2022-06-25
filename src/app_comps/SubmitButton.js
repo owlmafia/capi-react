@@ -5,43 +5,29 @@ export const SubmitButton = ({
   className,
   onClick,
 }) => {
-  if (isLoading) {
-    return loadingButton(className);
-  } else {
-    return button(label, disabled, className, onClick);
-  }
-};
-
-const button = (label, disabled, className, onClick) => {
   return (
     <button
-      className={className}
+      className={`position-relative ${className}`}
       disabled={disabled}
       onClick={async () => {
         onClick();
       }}
     >
-      {label}
-    </button>
-  );
-};
+      <span className={isLoading && "opacity-0"}>{label}</span>
 
-const loadingButton = (className) => {
-  return (
-    <button className={className}>
-      <div>
-        <svg className="btn-loader">
+      {isLoading && (
+        <svg className="btn-loader" viewBox="0 0 40 40">
           <circle
             className="path-btn"
-            cx="50"
-            cy="50"
+            cx="20"
+            cy="20"
             r="16"
             fill="none"
             strokeWidth="5"
             strokeMiterlimit="10"
           ></circle>
         </svg>
-      </div>
+      )}
     </button>
   );
 };

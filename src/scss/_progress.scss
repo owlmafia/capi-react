@@ -32,12 +32,12 @@ body {
 }
 
 .btn-loader {
+    width: 24px;
+    height: 24px;
     position: absolute;
-    height: 100px;
-    width: 100px;
-    margin-bottom: 50px;
-    top: -26px;
-    left: 30%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     .path-btn {
         stroke-dashoffset: 0;

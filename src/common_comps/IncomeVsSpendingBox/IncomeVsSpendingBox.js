@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { IncomeVsSpendingChart } from "../../charts/IncomeVsSpendingChart";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { LabeledBox } from "../LabeledBox";
 import { fetchIncomeVsSpendingChartData } from "./controller";
 import Select from "react-select";
 import Progress from "../../app_comps/Progress";
+import { ChartLegends } from "../../charts/ChartLegends";
+import renderBarChart from "../../charts/renderBarChart";
 
 const barsOptions = [
   { value: "days7", label: "Last 7 days" },
@@ -29,20 +30,40 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
     fetchData();
   }, [statusMsg, daoId, selectedBarsInterval]);
 
+  const chart = useRef(null);
+
+  const colors = useMemo(() => {
+    return ["#DE5C62", "#6BB9BC"];
+  }, []);
+
+  useEffect(() => {
+    if (chartData && chart.current) {
+      renderBarChart(chart.current, chartData.points, colors, selectedBarsInterval.value);
+    }
+  }, [chartData, colors]);
+
   const content = () => {
     if (chartData) {
       return (
         <LabeledBox label={"Income and spending"}>
-          <Select
-            className="charts-select"
-            value={selectedBarsInterval}
-            onChange={setSelectedBarsInterval}
-            options={barsOptions}
-          />
-          <IncomeVsSpendingChart
-            chartData={chartData}
-            interval={selectedBarsInterval.value}
-          />
+          <div className="chart_with_legends_container">
+            <div className="select-legend-container">
+            <div className="spacer"></div>
+              <ChartLegends
+                legends={[
+                  { color: colors[1], text: "Income" },
+                  { color: colors[0], text: "Spending" },
+                ]}
+              />
+              <Select
+                className="charts-select"
+                value={selectedBarsInterval}
+                onChange={setSelectedBarsInterval}
+                options={barsOptions}
+              />
+            </div>
+            <svg ref={chart} />
+          </div>
         </LabeledBox>
       );
     } else {
