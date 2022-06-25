@@ -38,7 +38,12 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
 
   useEffect(() => {
     if (chartData && chart.current) {
-      renderBarChart(chart.current, chartData.points, colors, selectedBarsInterval.value);
+      renderBarChart(
+        chart.current,
+        chartData.points,
+        colors,
+        selectedBarsInterval.value
+      );
     }
   }, [chartData, colors]);
 
@@ -48,7 +53,7 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
         <LabeledBox label={"Income and spending"}>
           <div className="chart_with_legends_container">
             <div className="select-legend-container">
-            <div className="spacer"></div>
+              <div className="spacer"></div>
               <ChartLegends
                 legends={[
                   { color: colors[1], text: "Income" },

@@ -121,7 +121,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
                       <div className="blue-circle"></div>
                       <div className="shares-item">
                         <div>{"Share:"}</div>
-                        <div className="ft-weight-700">{deps.investmentData.investor_share}</div>
+                        <div className="ft-weight-700">
+                          {deps.investmentData.investor_share}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -168,7 +170,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div id="retrieved-profits">
                   <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
                     {"Expected share"}
-                    <div className="d-flex align-center" data-tip="Your total share of the project's income, after buying shares">
+                    <div
+                      className="d-flex align-center"
+                      data-tip="Your total share of the project's income, after buying shares"
+                    >
                       <img src={info} alt="info" />
                     </div>
                     <ReactTooltip />
