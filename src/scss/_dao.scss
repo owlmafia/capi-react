@@ -2,14 +2,14 @@
 
 #dao_actions_top_bar {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     align-items: center;
     margin-bottom: 30px;
 
     .link_button {
         color: #787e82;
         text-decoration: none;
-        padding-bottom: 10px;
+        padding: 0 0 10px 0;
         cursor: pointer;
         font-size: 24px;
         font-weight: 700;
@@ -249,7 +249,7 @@
     }
 }
 
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1601px) {
     .buy-shares-content {
         gap: 150px;
     }

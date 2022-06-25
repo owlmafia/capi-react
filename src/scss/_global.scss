@@ -844,7 +844,7 @@ $mobile_bp: 650px;
         display: none;
     }
 }
-@media only screen and (min-width: $tablet_bp) {
+@media only screen and (min-width: 1601px) {
     .d-desktop-block {
         display: block;
     }
@@ -877,7 +877,7 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (max-width: 1599px) {
+@media only screen and (max-width: $tablet_bp) {
 
     .d-tablet-mobile-none {
         display: none;
@@ -907,7 +907,7 @@ $mobile_bp: 650px;
 
 }
 
-@media only screen and (min-width: 1600px) {
+@media only screen and (min-width: 1601px) {
     .buy-more-shares {
         .shares-mobile {
             width: 100%;
