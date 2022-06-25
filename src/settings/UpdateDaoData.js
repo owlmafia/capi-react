@@ -68,12 +68,12 @@ export const UpdateDaoData = ({ deps }) => {
           initImageBytes={imageBytes}
           setImageBytes={setImageBytes}
         />
-        {/* <LabeledInput
+        <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
           onChange={(input) => setSocialMediaUrl(input)}
           errorMsg={socialMediaUrlError}
-        /> */}
+        />
         <SubmitButton
           label={"Update data"}
           className="button-primary"
