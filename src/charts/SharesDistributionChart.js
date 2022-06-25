@@ -25,7 +25,7 @@ export const SharesDistributionChart = ({
         disableClick
       );
     }
-  }, [onAddressSelected, sharesDistr]);
+  }, [onAddressSelected, sharesDistr, col, animated, disableClick]);
 
   return <svg className="pie_chart__svg" ref={chart} />;
 };

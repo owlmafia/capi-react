@@ -16,8 +16,6 @@ export const Investment = ({ deps }) => {
   const [showUnlockTab, setShowUnlockTab] = useState(false);
   const [showLockTab, setShowLockTab] = useState(false);
 
-  const myShareChart = useRef(null);
-
   useEffect(() => {
     async function doInit() {
       await init(

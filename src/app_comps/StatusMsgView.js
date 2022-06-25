@@ -18,7 +18,7 @@ export const StatusMsgView = ({ deps }) => {
 
   var classNames = "msg " + notificationTypeClass;
   if (closing) {
-    classNames += " " + "msg-close";
+    classNames += " msg-close";
   }
 
   return (

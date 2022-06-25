@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LabeledAmountInput,
   LabeledCurrencyInput,
@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
-import info from "../images/svg/info.svg";
 import funds from "../images/funds.svg";
 import link from "../images/svg/link.svg";
 

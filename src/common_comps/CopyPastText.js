@@ -17,7 +17,8 @@ const CopyPasteText = ({ statusMsg, text, copyText: copyTextOpt, copyMsg }) => {
 export default CopyPasteText;
 
 export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
-  const [isCopied, _setIsCopied] = useState(false);
+  //   const [isCopied, _setIsCopied] = useState(false);
+  const isCopied = false;
 
   const onCopy = () => {
     if (copyMsg) {

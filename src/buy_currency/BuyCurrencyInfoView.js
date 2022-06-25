@@ -1,6 +1,5 @@
 import { SubmitButton } from "../app_comps/SubmitButton";
 import useScript from "../common_hooks/useScript";
-import { startBuyCurrencyFlow } from "./controller";
 
 export const BuyCurrencyInfoView = ({ closeModal, children, onSubmit }) => {
   useScript("https://verify.sendwyre.com/js/verify-module-init-beta.js");

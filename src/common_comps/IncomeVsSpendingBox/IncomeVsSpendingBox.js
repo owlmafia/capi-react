@@ -28,7 +28,7 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
       setChartData(chartData);
     }
     fetchData();
-  }, [statusMsg, daoId, selectedBarsInterval]);
+  }, [statusMsg, daoId, selectedBarsInterval.value]);
 
   const chart = useRef(null);
 
@@ -45,7 +45,7 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
         selectedBarsInterval.value
       );
     }
-  }, [chartData, colors]);
+  }, [chartData, colors, selectedBarsInterval.value]);
 
   const content = () => {
     if (chartData) {

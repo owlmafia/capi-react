@@ -13,7 +13,7 @@ export const IncomeVsSpendingChart = ({ chartData, interval }) => {
     if (chartData && chart.current) {
       renderBarChart(chart.current, chartData.points, colors, interval);
     }
-  }, [chartData, colors]);
+  }, [chartData, colors, interval]);
 
   return (
     <div className="chart_with_legends_container">

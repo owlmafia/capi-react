@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
-import { LabeledAmountInput, LabeledInput } from "../common_comps/LabeledInput";
+import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";
-// import arrow from "../images/svg/arrow.svg";
 
 export const LockOrUnlockShares = ({
   dao,

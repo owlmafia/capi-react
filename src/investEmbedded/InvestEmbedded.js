@@ -11,7 +11,6 @@ import {
   invest,
   updateTotalPriceAndPercentage,
 } from "./controller";
-import { triggerIfNumber } from "../common_functions/common";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();

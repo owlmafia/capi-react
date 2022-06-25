@@ -12,16 +12,16 @@ export const MyDaoItem = ({ dao }) => {
   );
 };
 
-const involvementIcons = (dao) => {
-  let icons = [];
-  if (dao.created_by_me === "true") {
-    icons.push(involvementIcon("todo", ""));
-  }
-  if (dao.invested_by_me === "true") {
-    icons.push(involvementIcon("todo", ""));
-  }
-  return icons;
-};
+// const involvementIcons = (dao) => {
+//   let icons = [];
+//   if (dao.created_by_me === "true") {
+//     icons.push(involvementIcon("todo", ""));
+//   }
+//   if (dao.invested_by_me === "true") {
+//     icons.push(involvementIcon("todo", ""));
+//   }
+//   return icons;
+// };
 
 const involvementIcon = (src, alt) => {
   return (
