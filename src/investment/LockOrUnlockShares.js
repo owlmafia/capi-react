@@ -21,79 +21,98 @@ export const LockOrUnlockShares = ({
 
   const view = () => {
     return (
-      <div className="box-container d-flex">
-        <div className="w-60">
-          <div className="title">{title}</div>
-          <div className="chartBlock">
-            <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
-            <div className="ft-size-24 ft-weight-700 color-black-000">
-              {dao.share_supply}
-            </div>
+      <div className="buy-more-shares box-container d-flex">
+        <div className="shares-mobile">
+          <div className="available-shares">
             <div>
-              <img src={redArrow} alt="redArrow" />
+              <div className="title">{title}</div>
+              <div className="chartBlock">
+                <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
+                <div className="ft-size-24 ft-weight-700 color-black-000">
+                  {dao.share_supply}
+                </div>
+                <div>
+                  <img src={redArrow} alt="redArrow" />
+                </div>
+              </div>
+              <div className="chartBlock ">
+                <div className="numbers ft-size-18 ft-weight-600">
+                  {investmentData.investor_locked_shares}
+                </div>
+                <div className="h-16">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="8" cy="8.5" r="8" fill="#6BB9BD" />
+                  </svg>
+                </div>
+                <div>{"Your locked shares"}</div>
+              </div>
+              <div className="chartBlock">
+                <div className="numbers ft-size-18 ft-weight-600">
+                  {investmentData.investor_unlocked_shares}
+                </div>
+                <div className="h-16">
+                  <svg
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="8" cy="8.5" r="8" fill="#8ECACD" />
+                  </svg>
+                </div>
+                <div>{"Your unlocked shares"}</div>
+              </div>
+            </div>
+            <div className="shares-chart d-desktop-none">
+              <SharesDistributionChart
+                sharesDistr={[
+                  to_pie_chart_slice(investmentData.investor_locked_shares),
+                  to_pie_chart_slice(investmentData.investor_unlocked_shares),
+                ]}
+                col={pieChartColors()}
+                animated={false}
+                disableClick={true}
+              />
             </div>
           </div>
-          <div className="chartBlock ">
-            <div className="numbers ft-size-18 ft-weight-600">
-              {investmentData.investor_locked_shares}
-            </div>
-            <div className="h-16">
-              <svg
-                width="16"
-                height="17"
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="8" cy="8.5" r="8" fill="#6BB9BD" />
-              </svg>
-            </div>
-            <div>{"Your locked shares"}</div>
-          </div>
-          <div className="chartBlock">
-            <div className="numbers ft-size-18 ft-weight-600">
-              {investmentData.investor_unlocked_shares}
-            </div>
-            <div className="h-16">
-              <svg
-                width="16"
-                height="17"
-                viewBox="0 0 16 17"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <circle cx="8" cy="8.5" r="8" fill="#8ECACD" />
-              </svg>
-            </div>
-            <div>{"Your unlocked shares"}</div>
-          </div>
-          {showInput && (
-            <LabeledAmountInput
-              label={inputLabel}
-              placeholder={"Enter amount"}
-              inputValue={input}
-              onChange={setInput}
-              errorMsg={inputError}
+          <div className="buy-shares-input">
+            {showInput && (
+              <LabeledAmountInput
+                label={inputLabel}
+                placeholder={"Enter amount"}
+                inputValue={input}
+                onChange={setInput}
+                errorMsg={inputError}
+              />
+            )}
+            <SubmitButton
+              label={buttonLabel}
+              className="button-primary"
+              isLoading={submitting}
+              onClick={async () => {
+                onSubmit(input, setInputError);
+              }}
             />
-          )}
-          <SubmitButton
-            label={buttonLabel}
-            className="button-primary"
-            isLoading={submitting}
-            onClick={async () => {
-              onSubmit(input, setInputError);
-            }}
+          </div>
+        </div>
+        <div className="shares-chart d-tablet-mobile-none">
+          <SharesDistributionChart
+            sharesDistr={[
+              to_pie_chart_slice(investmentData.investor_locked_shares),
+              to_pie_chart_slice(investmentData.investor_unlocked_shares),
+            ]}
+            col={pieChartColors()}
+            animated={false}
+            disableClick={true}
           />
         </div>
-        <SharesDistributionChart
-          sharesDistr={[
-            to_pie_chart_slice(investmentData.investor_locked_shares),
-            to_pie_chart_slice(investmentData.investor_unlocked_shares),
-          ]}
-          col={pieChartColors()}
-          animated={false}
-          disableClick={true}
-        />
       </div>
     );
   };
