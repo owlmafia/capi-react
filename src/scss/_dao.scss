@@ -240,12 +240,18 @@
 
 .buy-shares-content {
     display: flex;
-    gap: 150px;
+    gap: 40px;
 
     .buy-shares-right-col {
         display: flex;
         flex-direction: column;
         gap: 40px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .buy-shares-content {
+        gap: 150px;
     }
 }
 
