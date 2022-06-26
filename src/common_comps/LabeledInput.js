@@ -55,7 +55,7 @@ export const LabeledInput = ({
 const InfoView = ({ info: infoText }) => {
   return (
     <Fragment>
-      <div data-tip={infoText}>
+      <div className="d-flex align-center" data-tip={infoText}>
         <img src={info} alt="info" />
       </div>
       <ReactTooltip />
@@ -99,8 +99,10 @@ export const LabeledAmountInput = ({
 }) => {
   return (
     <div className="labeled_input">
-      <div className="labeled_input__label">{label}</div>
-      {info && <InfoView info={info} />}
+      <div className="labeled_input__label">
+        {label}
+        {info && <InfoView info={info} />}
+      </div>
       {input(inputValue, "number", onChange, placeholder)}
       <ValidationMsg errorMsg={errorMsg} />
     </div>

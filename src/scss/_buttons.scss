@@ -57,7 +57,6 @@ button {
 
 .link_button {
     text-align: center;
-    min-width: 88px;
     color: $blue-primary;
     padding: 0 8px;
     margin-top: 16px;
@@ -101,7 +100,6 @@ button {
 }
 
 .upload-form {
-    position: relative;
 
     .upload-container {
         margin-bottom: 60px;
@@ -115,15 +113,7 @@ button {
         background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%23DEE2E2FF' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
         border-radius: 32px;
 
-        &:hover {
-            transition: 0.3s;
-            background-color: #F5FAFB;
-            cursor: pointer;
-        }
-
         .upload-custom {
-            position: relative;
-
             .file-custom {
                 content: "Upload image";
             }
@@ -141,10 +131,11 @@ button {
 // for now only changed stroke color
 // need to wait for designer
 .upload-form-highlighted {
-    position: relative;
-
+    border-radius: 32px;
+    transition: 0.3s;
+    background-color: #F5FAFB;
+    
     .upload-container {
-        margin-bottom: 60px;
         height: 307px;
         box-sizing: border-box;
         display: flex;
@@ -152,14 +143,13 @@ button {
         align-items: center;
         justify-content: center;
         gap: 16px;
-        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='black' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
+        background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%23DEE2E2FF' stroke-width='2' stroke-dasharray='6%2c 14' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
         border-radius: 32px;
 
         .upload-custom {
-            position: relative;
-
             .file-custom {
-                content: "Upload image";
+                transition: 0.3s;
+                background-color: #F5FAFB;
             }
 
             .upload-input {

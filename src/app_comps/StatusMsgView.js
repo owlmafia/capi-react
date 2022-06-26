@@ -13,7 +13,7 @@ export const StatusMsgView = ({ deps }) => {
     setClosing(true);
     setTimeout(() => {
       deps.statusMsg.clear();
-    }, 600);
+    }, 400);
   };
 
   var classNames = "msg " + notificationTypeClass;

@@ -15,16 +15,15 @@
         align-items: center;
         font-size: 16px;
         padding: 0 24px;
-        flex-wrap: wrap;
         justify-content: space-between;
         position: fixed;
         top: 16px;
         z-index: 100;
         box-sizing: border-box;
         animation-name: notification;
-        animation-duration: 0.5s;
+        animation-duration: 0.4s;
         height: 120px;
-        gap: 50px;
+        gap: 40px;
         border-radius: 24px;
 
         &__error {

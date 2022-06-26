@@ -567,6 +567,10 @@ p {
     justify-content: center;
 }
 
+.position-relative {
+    position: relative;
+}
+
 .s-14 {
     width: 14px;
     height: 14px;
@@ -840,15 +844,13 @@ $mobile_bp: 650px;
         display: none;
     }
 }
-
-@media only screen and (min-width: 1330px) {
-    .d-desktop-none {
-        display: none;
-    }
-}
-@media only screen and (min-width: $tablet_bp) {
+@media only screen and (min-width: 1601px) {
     .d-desktop-block {
         display: block;
+    }
+
+    .d-desktop-none {
+        display: none;
     }
 }
 
@@ -859,7 +861,7 @@ $mobile_bp: 650px;
         .shares-chart {
             display: flex;
             align-self: center;
-            width: 160px;
+            width: 200px;
         }
     }
 }
@@ -875,28 +877,22 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet_bp) {
 
     .d-tablet-mobile-none {
         display: none;
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1600px) {
 
     .buy-more-shares {
-        width: 100%;
-
         .shares-mobile {
             width: 100%;
 
             .available-shares {
                 width: 100%;
                 justify-content: space-between;
-        
-                .shares-chart {
-                    width: 240px;
-                } 
             }
         }
     }
@@ -905,28 +901,24 @@ $mobile_bp: 650px;
         margin-top: 0;
     }
 
+    .box-container .shares-mobile .buy-shares-input .labeled_input {
+        margin-top: 0;
+    }
+
 }
 
-@media only screen and (min-width: 1330px) {
+@media only screen and (min-width: 1601px) {
     .buy-more-shares {
         .shares-mobile {
             width: 100%;
-            max-width: 500px;
-        }
-        
-        .shares-chart {
-            min-width: 350px;
+            max-width: 400px;
         }
     }
 
     .buy-shares-left-col {
         width: 100%;
-        max-width: 500px;
+        max-width: 400px;
     }
-}
-
-.position-relative {
-    position: relative;
 }
 
 .buy-more-shares {
@@ -937,8 +929,4 @@ $mobile_bp: 650px;
 .shares-mobile .available-shares {
     display: flex;
     width: 100%;
-
-    .shares-chart {
-        min-width: 350px;
-    }
 }
