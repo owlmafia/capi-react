@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   LabeledAmountInput,
   LabeledCurrencyInput,
@@ -13,6 +13,8 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import link from "../images/svg/link.svg";
+import { SelectDateModal } from "./SelectDateModal";
+import moment from "moment";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -25,12 +27,17 @@ export const CreateDao = ({ deps }) => {
   const [socialMediaUrl, setSocialMediaUrl] = useState(
     "https://twitter.com/doesnotexist"
   );
-  // mock data, while we've no UI for this
-  const [minRaiseTarget, setMinRaiseTarget] = useState("0");
-  // mock data, while we've no UI for this
-  // this is a "date in the past", meaning that there's practically no funds raising phase
-  const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] =
-    useState("1652945905");
+
+  const [minRaiseTarget, setMinRaiseTarget] = useState("");
+  const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
+    moment(new Date()).add(1, "M")
+  );
+  const [showMinRaiseTargetEndDateModal, setShowMinRaiseTargetEndDateModal] =
+    useState(false);
+  const formattedMinRaiseTargetEndDate = useMemo(() => {
+    return moment(minRaiseTargetEndDate).format("D MMM YYYY");
+  }, [minRaiseTargetEndDate]);
+
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
   const [shareCountError, setShareCountError] = useState("");
@@ -158,6 +165,26 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />
+        <LabeledCurrencyInput
+          label={"Min funding target"}
+          info={"The minumum funds amount needed to start the project."}
+          inputValue={minRaiseTarget}
+          onChange={(input) => setMinRaiseTarget(input)}
+          errorMsg={minRaiseTargetError}
+        />
+
+        <LabeledInput
+          label={"Fundraising end date"}
+          info={
+            "If min. target not reached on this day, project fails and investors can reclaim their funds."
+          }
+          inputValue={formattedMinRaiseTargetEndDate}
+          disabled={true}
+          errorMsg={minRaiseTargetEndDateError}
+        />
+        <button onClick={() => setShowMinRaiseTargetEndDateModal(true)}>
+          TODO Calendar icon
+        </button>
 
         <SubmitButton
           label={"Create project"}
@@ -200,6 +227,13 @@ export const CreateDao = ({ deps }) => {
         <SelectWalletModal
           deps={deps}
           setShowModal={setShowSelectWalletModal}
+        />
+      )}
+      {showMinRaiseTargetEndDateModal && (
+        <SelectDateModal
+          closeModal={() => setShowMinRaiseTargetEndDateModal(false)}
+          endDate={minRaiseTargetEndDate}
+          setEndDate={setMinRaiseTargetEndDate}
         />
       )}
     </div>

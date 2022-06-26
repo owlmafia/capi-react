@@ -13,6 +13,7 @@ export const LabeledInput = ({
   maxLength,
   img,
   info,
+  disabled,
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
@@ -47,7 +48,8 @@ export const LabeledInput = ({
           placeholder,
           (focus) => {
             setShowLength(focus);
-          }
+          },
+          disabled
         )}
         {img && <img src={img} alt="img" />}
       </div>
@@ -85,8 +87,10 @@ export const LabeledCurrencyInput = ({
 }) => {
   return (
     <div className="labeled_input">
-      <div className="labeled_input__label">{label}</div>
-      {info && <InfoView info={info} />}
+      <div className="labeled_input__label">
+        {label}
+        {info && <InfoView info={info} />}
+      </div>
       <div className="input_with_image__container">
         {input(inputValue, "number", onChange, placeholder)}
         <img src={funds} alt="img" />
@@ -126,7 +130,14 @@ export const ValidationMsg = ({ errorMsg }) => {
 };
 
 // onFocusToggle: optional: pass to be called when the input gains or loses focus
-const input = (inputValue, type, onChange, placeholder, onFocusToggle) => {
+const input = (
+  inputValue,
+  type,
+  onChange,
+  placeholder,
+  onFocusToggle,
+  disabled
+) => {
   return (
     <input
       className="label-input-style"
@@ -135,6 +146,7 @@ const input = (inputValue, type, onChange, placeholder, onFocusToggle) => {
       type={type}
       min="0" // only active if type is number
       value={inputValue}
+      disabled={disabled}
       onChange={(event) => {
         onChange(event.target.value);
       }}

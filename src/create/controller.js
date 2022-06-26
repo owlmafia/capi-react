@@ -59,7 +59,7 @@ export const createDao = async (
         compressed_image: await toBytesForRust(imageBytes),
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,
-        min_raise_target_end_date: minRaiseTargetEndDate,
+        min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
       },
     });
     showProgress(false);
