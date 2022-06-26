@@ -168,14 +168,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
               <div className="d-flex mobile-input-block">
                 <div id="retrieved-profits">
                   <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
-                    {"Expected share"}
-                    <div
-                      className="d-flex align-center"
-                      data-tip="Your total share of the project's income, after buying shares"
-                    >
-                      <img src={info} alt="info" />
-                    </div>
-                    <ReactTooltip />
+                    {"Expected dividend"}
                   </div>
                   <div className="d-flex gap-10">
                     <div className="ft-weight-700 ft-size-24 ft-color-black-000">

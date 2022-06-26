@@ -136,27 +136,31 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setShareCount(input)}
           errorMsg={shareCountError}
         />
-        <LabeledCurrencyInput
-          label={"Share price per unit"}
-          inputValue={sharePrice}
-          img={funds}
-          onChange={(input) => setSharePrice(input)}
-          errorMsg={sharePriceError}
+        <LabeledAmountInput
+          label={"Shares for sale"}
+          info={
+            "Shares available for sale. Not available shares stay in the creator's wallet."
+          }
+          inputValue={sharesForInvestors}
+          onChange={(input) => setSharesForInvestors(input)}
+          errorMsg={sharesForInvestorsError}
         />
         <LabeledAmountInput
-          label={"Investor's part:"}
-          info={"Percentage of income directed to investors"}
+          label={"Investor's %"}
+          info={"Percentage of project income directed to investors."}
           inputValue={investorsShare}
           onChange={(input) => setInvestorsShare(input)}
           errorMsg={investorsShareError}
           placeholder="Investor's part in %"
         />
-        <LabeledAmountInput
-          label={"Shares for investors"}
-          inputValue={sharesForInvestors}
-          onChange={(input) => setSharesForInvestors(input)}
-          errorMsg={sharesForInvestorsError}
+        <LabeledCurrencyInput
+          label={"Share price (unit)"}
+          inputValue={sharePrice}
+          img={funds}
+          onChange={(input) => setSharePrice(input)}
+          errorMsg={sharePriceError}
         />
+
         <SubmitButton
           label={"Create project"}
           className={"button-primary"}
