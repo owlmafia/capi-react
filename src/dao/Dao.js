@@ -6,6 +6,7 @@ import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
 import Progress from "../app_comps/Progress";
 import { loadDescription } from "./controller";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
+import { RaisedFunds } from "./RaisedFunds";
 
 export const Dao = ({ deps }) => {
   let params = useParams();
@@ -61,6 +62,8 @@ export const Dao = ({ deps }) => {
         <div>
           <div>
             {description && <div id="dao_description">{description}</div>}
+
+            <RaisedFunds deps={deps} dao={deps.dao} />
 
             {deps.size.s4 && (
               <FundsActivityEmbedded deps={deps} daoId={params.id} />

@@ -1,0 +1,45 @@
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import Progress from "../app_comps/Progress";
+import { loadRaisedFunds } from "./controller";
+
+export const RaisedFunds = ({ deps, dao }) => {
+  let params = useParams();
+
+  const [raisedFunds, setRaisedFunds] = useState(null);
+  const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
+
+  console.log("deps: " + JSON.stringify(deps));
+
+  useEffect(() => {
+    async function nestedAsync() {
+      loadRaisedFunds(
+        deps.statusMsg,
+        params.id,
+        setRaisedFunds,
+        setRaisedFundsNumber
+      );
+    }
+    nestedAsync();
+  }, [params.id, dao, deps.statusMsg]);
+
+  const view = () => {
+    if (deps.dao && raisedFunds && raisedFundsNumber) {
+      return (
+        <div>
+          <div>{"Raised funds: " + raisedFunds}</div>
+          <div>{"Raised funds number: " + raisedFundsNumber}</div>
+          <div>{"End date: " + dao.raise_end_date}</div>
+          <div>{"Min target: " + dao.raise_min_target}</div>
+          <div>{"Min target number: " + dao.raise_min_target_number}</div>
+          <div>{"Total raisable: " + dao.total_raisable}</div>
+          <div>{"Total raisable number: " + dao.total_raisable_number}</div>
+        </div>
+      );
+    } else {
+      return <Progress />;
+    }
+  };
+
+  return <div>{view()}</div>;
+};
