@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
-import funds from "../images/funds.svg";
 import link from "../images/svg/link.svg";
 
 export const CreateDao = ({ deps }) => {
@@ -120,7 +119,7 @@ export const CreateDao = ({ deps }) => {
           errorMsg={daoDescrError}
           maxLength={2000} // NOTE: has to match WASM
         />
-        <LabeledCurrencyInput
+        <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
           img={link}
@@ -156,7 +155,6 @@ export const CreateDao = ({ deps }) => {
         <LabeledCurrencyInput
           label={"Share price (unit)"}
           inputValue={sharePrice}
-          img={funds}
           onChange={(input) => setSharePrice(input)}
           errorMsg={sharePriceError}
         />

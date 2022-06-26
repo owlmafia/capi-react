@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import ReactTooltip from "react-tooltip";
 import info from "../images/svg/info.svg";
 import error from "../images/svg/error.svg";
+import funds from "../images/funds.svg";
 
 export const LabeledInput = ({
   label,
@@ -10,10 +11,13 @@ export const LabeledInput = ({
   placeholder,
   errorMsg,
   maxLength,
+  img,
   info,
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
+
+  const container_class = img ? "input_with_image__container" : "";
 
   useEffect(() => {
     setInputLength(inputValue?.length);
@@ -32,18 +36,21 @@ export const LabeledInput = ({
           )}
         </div>
       </div>
-      {input(
-        inputValue,
-        "text",
-        (input) => {
-          setInputLength(input.length);
-          onChange(input);
-        },
-        placeholder,
-        (focus) => {
-          setShowLength(focus);
-        }
-      )}
+      <div className={container_class}>
+        {input(
+          inputValue,
+          "text",
+          (input) => {
+            setInputLength(input.length);
+            onChange(input);
+          },
+          placeholder,
+          (focus) => {
+            setShowLength(focus);
+          }
+        )}
+        {img && <img src={img} alt="img" />}
+      </div>
       <div className="labeled_input__error">
         {errorMsg ? <img src={error} alt="error" /> : ""}
         {errorMsg}
@@ -80,9 +87,9 @@ export const LabeledCurrencyInput = ({
     <div className="labeled_input">
       <div className="labeled_input__label">{label}</div>
       {info && <InfoView info={info} />}
-      <div className="input_with_currency__container">
+      <div className="input_with_image__container">
         {input(inputValue, "number", onChange, placeholder)}
-        <img src={img} alt="img" />
+        <img src={funds} alt="img" />
       </div>
       <ValidationMsg errorMsg={errorMsg} />
     </div>
