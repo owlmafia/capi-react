@@ -271,6 +271,12 @@
     }
 }
 
+@media only screen and (max-width: 680px) {
+    .shares-block {
+        flex-wrap: wrap;
+    }
+}
+
 @media only screen and (max-width: 650px) {
     .buy-shares-content {
         
