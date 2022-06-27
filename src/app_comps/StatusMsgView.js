@@ -5,20 +5,15 @@ import error from "../images/svg/error.svg";
 import success from "../images/svg/success.svg";
 
 export const StatusMsgView = ({ deps }) => {
-  const [closing, setClosing] = useState(false);
-
   const notificationTypeClass = notificationClassName(deps.statusMsgDisplay);
 
-  const onCloseClick = () => {
-    setClosing(true);
-    setTimeout(() => {
-      deps.statusMsg.clear();
-    }, 400);
-  };
-
   var classNames = "msg " + notificationTypeClass;
-  if (closing) {
+  console.log("??? deps.statusMsgClosing: " + deps.statusMsgClosing);
+  if (deps.statusMsgClosing) {
+    console.log("??? adding msg-close class");
     classNames += " msg-close";
+  } else {
+    console.log("??? NO msg-close class");
   }
 
   return (
@@ -29,7 +24,7 @@ export const StatusMsgView = ({ deps }) => {
           {label(deps.statusMsg, deps.statusMsgDisplay)}
         </div>
         {!deps.statusMsgDisplay.hideClose && (
-          <button className="msg__close" onClick={() => onCloseClick()}>
+          <button className="msg__close" onClick={() => deps.statusMsg.clear()}>
             <img src={close} alt="close" />
           </button>
         )}

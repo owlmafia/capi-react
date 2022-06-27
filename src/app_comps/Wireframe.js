@@ -27,6 +27,8 @@ export const Wireframe = ({ isGlobal, deps, dao }) => {
     return !isGlobal && dao && <DaoTop dao={dao} />;
   };
 
+  console.log("??? deps.statusMsgDisplay: " + deps.statusMsgDisplay);
+
   return (
     <div id="nav_and_main">
       {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
