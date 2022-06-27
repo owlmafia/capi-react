@@ -430,9 +430,7 @@ p {
     .investors-container {
         display: flex;
         justify-content: space-between;
-        position: relative;
         max-width: 830px;
-        align-items: flex-start;
 
         .sub-title {
             display: flex;
@@ -453,6 +451,14 @@ p {
         }
     }
 }
+
+@media only screen and (min-width: 651px) {
+    .pie_chart__container {
+        height: 370px;
+        display: flex;
+        align-items: center;
+    }
+} 
 
 .first_dao_widget {
     margin-top: 40px;
@@ -851,6 +857,10 @@ $mobile_bp: 650px;
 
     .d-desktop-none {
         display: none;
+    }
+
+    .holder_list_container {
+        min-width: 203px;
     }
 }
 
