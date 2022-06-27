@@ -924,10 +924,13 @@ $mobile_bp: 650px;
             max-width: 400px;
         }
     }
+}
+
+@media only screen and (min-width: 1631px) {
 
     .buy-shares-left-col {
         width: 100%;
-        max-width: 400px;
+        max-width: 520px;
     }
 }
 

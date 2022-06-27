@@ -113,7 +113,6 @@
                     display: flex;
                     gap: 10px;
                     align-items: center;
-                    flex-wrap: wrap;
 
                     .shares-item {
                         display: flex;
@@ -243,7 +242,7 @@
 
 .buy-shares-content {
     display: flex;
-    gap: 40px;
+    justify-content: space-between;
 
     .buy-shares-right-col {
         display: flex;
@@ -252,14 +251,15 @@
     }
 }
 
-@media only screen and (min-width: 1601px) {
+@media only screen and (min-width: 1751px) {
     .buy-shares-content {
+        justify-content: flex-start;
         gap: 150px;
     }
 }
 
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1631px) {
     .buy-shares-content {
         flex-direction: column;
         gap: 40px;
