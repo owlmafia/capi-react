@@ -87,7 +87,12 @@ export const Dao = ({ deps }) => {
               />
             )}
 
-            <IncomeVsSpendingBox statusMsg={deps.statusMsg} daoId={params.id} />
+            {deps.dao && deps.dao && deps.dao.funds_raised === "true" && (
+              <IncomeVsSpendingBox
+                statusMsg={deps.statusMsg}
+                daoId={params.id}
+              />
+            )}
           </div>
           <div className="section-spacer" />
         </div>
