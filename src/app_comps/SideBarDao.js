@@ -46,7 +46,7 @@ export const SideBarDao = ({ deps, containerClass }) => {
           label="My Investment"
         />
       )}
-      {iAmDaoOwner && (
+      {iAmDaoOwner && deps.dao && deps.dao.funds_raised === "true" && (
         <SideBarItem imageSrc={funds} route="withdraw" label="Withdraw" />
       )}
       <SideBarItem
