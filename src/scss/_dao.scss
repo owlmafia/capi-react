@@ -113,18 +113,12 @@
                     display: flex;
                     gap: 10px;
                     align-items: center;
-                    flex-wrap: wrap;
 
                     .shares-item {
                         display: flex;
                         gap: 10px;
                         align-items: center;
                     }
-                }
-
-                .subTitle {
-                    font-weight: 600;
-                    font-size: 18px;
                 }
             }
         }
@@ -161,12 +155,6 @@
 
     .description {
         border: 2px solid red;
-    }
-
-    .subtitle {
-        color: #000000;
-        margin-bottom: 48px;
-        font-size: 18px;
     }
 
     .info {
@@ -243,7 +231,7 @@
 
 .buy-shares-content {
     display: flex;
-    gap: 40px;
+    justify-content: space-between;
 
     .buy-shares-right-col {
         display: flex;
@@ -252,14 +240,15 @@
     }
 }
 
-@media only screen and (min-width: 1601px) {
+@media only screen and (min-width: 1751px) {
     .buy-shares-content {
+        justify-content: flex-start;
         gap: 150px;
     }
 }
 
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: 1631px) {
     .buy-shares-content {
         flex-direction: column;
         gap: 40px;
@@ -268,6 +257,12 @@
             flex-direction: row;
             gap: 130px;
         }
+    }
+}
+
+@media only screen and (max-width: 1430px) {
+    .shares-block {
+        flex-wrap: wrap;
     }
 }
 

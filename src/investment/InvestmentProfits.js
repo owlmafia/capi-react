@@ -43,11 +43,11 @@ export const InvestmentProfits = ({ deps }) => {
             <div className="d-flex d-tablet-flex-column justify-between">
               <div className="flex-block flex-column align-start">
                 <div className="flex-block align-center mb-4">
-                  <div className="ft-size-18 ft-weight-600">
+                  <div className="desc">
                     {"Retrievable:"}
                   </div>
                   <FundsAssetImg className="fund-asset" />
-                  <div className="ft-size-24 ft-weight-700">
+                  <div className="subtitle">
                     {deps.investmentData.investor_claimable_dividend}
                   </div>
                 </div>
@@ -73,12 +73,12 @@ export const InvestmentProfits = ({ deps }) => {
                 />
               </div>
               <div className="flex-block flex-column profits-tab mr-60">
-                <div className="ft-size-18 ft-weight-600 retrieved">
+                <div className="desc retrieved">
                   {"Retrieved:"}
                 </div>
                 <div className="d-flex align-center">
                   <FundsAssetImg className="fund-asset opacity-50" />
-                  <div className="ft-size-24 ft-weight-700 retrieved">
+                  <div className="subtitle retrieved">
                     {" "}
                     {deps.investmentData.investor_already_retrieved_amount}
                   </div>

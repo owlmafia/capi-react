@@ -88,6 +88,21 @@
     }
 }
 
+@media only screen and (max-width: 1600px) {
+    .first_dao_widget {
+        padding: 24px;
+    }
+
+    #rightcol {
+        width: auto;
+
+        .my-account-container {
+            padding: 24px;
+        }
+    }
+}
+
+
 @media only screen and (max-width: 1330px) {
 
     #rightcol,

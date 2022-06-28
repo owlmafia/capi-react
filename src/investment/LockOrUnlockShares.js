@@ -27,8 +27,8 @@ export const LockOrUnlockShares = ({
             <div>
               <div className="title">{title}</div>
               <div className="chartBlock">
-                <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
-                <div className="ft-size-24 ft-weight-700 color-black-000">
+                <div className="desc">{"Share supply"}</div>
+                <div className="subtitle color-black-000">
                   {dao.share_supply}
                 </div>
                 <div>
@@ -36,7 +36,7 @@ export const LockOrUnlockShares = ({
                 </div>
               </div>
               <div className="chartBlock ">
-                <div className="numbers ft-size-18 ft-weight-600">
+                <div className="numbers desc">
                   {investmentData.investor_locked_shares}
                 </div>
                 <div className="h-16">
@@ -53,7 +53,7 @@ export const LockOrUnlockShares = ({
                 <div>{"Your locked shares"}</div>
               </div>
               <div className="chartBlock">
-                <div className="numbers ft-size-18 ft-weight-600">
+                <div className="numbers desc">
                   {investmentData.investor_unlocked_shares}
                 </div>
                 <div className="h-16">

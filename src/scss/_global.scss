@@ -366,10 +366,14 @@ select {
     padding-bottom: 20px;
 }
 
-.subtitle {
+.desc {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-weight: 700;
 }
 
 .name-label {
@@ -430,9 +434,7 @@ p {
     .investors-container {
         display: flex;
         justify-content: space-between;
-        position: relative;
         max-width: 830px;
-        align-items: flex-start;
 
         .sub-title {
             display: flex;
@@ -453,6 +455,14 @@ p {
         }
     }
 }
+
+@media only screen and (min-width: 651px) {
+    .pie_chart__container {
+        height: 370px;
+        display: flex;
+        align-items: center;
+    }
+} 
 
 .first_dao_widget {
     margin-top: 40px;
@@ -852,6 +862,10 @@ $mobile_bp: 650px;
     .d-desktop-none {
         display: none;
     }
+
+    .holder_list_container {
+        min-width: 203px;
+    }
 }
 
 @media only screen and (max-width: $mobile_bp) {
@@ -914,10 +928,13 @@ $mobile_bp: 650px;
             max-width: 400px;
         }
     }
+}
+
+@media only screen and (min-width: 1631px) {
 
     .buy-shares-left-col {
         width: 100%;
-        max-width: 400px;
+        max-width: 520px;
     }
 }
 
