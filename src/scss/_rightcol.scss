@@ -93,8 +93,12 @@
         padding: 24px;
     }
 
-    #rightcol .my-account-container {
-        padding: 24px;
+    #rightcol {
+        width: auto;
+
+        .my-account-container {
+            padding: 24px;
+        }
     }
 }
 
