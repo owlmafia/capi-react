@@ -27,7 +27,7 @@ const entryBody = (entry, isSelected, col) => {
   }
   return (
     <div className={containerClasses}>
-      <div className="percentage-text ft-color-black ft-size-18 ft-weight-600">
+      <div className="percentage-text ft-color-black desc">
         {entry.percentage_formatted}
       </div>
       <div className="h-16">

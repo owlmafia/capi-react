@@ -47,10 +47,10 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
       <div className="first_dao_widget">
         {deps.funds && (
           <div className="d-flex flex-column gap-10">
-            <div className="ft-weight-600 ft-size-18">{"Project funds"}</div>
+            <div className="desc">{"Project funds"}</div>
             <div className="d-flex align-center gap-10">
               <img src={funds} alt="funds" />
-              <div className="ft-weight-700 ft-size-24">{deps.funds}</div>
+              <div className="subtitle">{deps.funds}</div>
               <div>{changeArrow(deps.fundsChange)}</div>
             </div>
           </div>

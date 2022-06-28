@@ -83,7 +83,7 @@ const DividendSection = ({ deps, daoId }) => {
   if (deps.myDividend) {
     return (
       <div className="d-flex flex-column">
-        <div className="mb-32 ft-weight-600 ft-size-18 d-flex align-center justify-between">
+        <div className="mb-32 desc d-flex align-center justify-between">
           {"Claimable dividend: "}
           <div className="w-100-p d-flex align-center gap-10">
             <img className="s-14" src={funds} alt="funds" />

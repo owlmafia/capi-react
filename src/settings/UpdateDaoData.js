@@ -102,7 +102,7 @@ export const UpdateDaoData = ({ deps }) => {
             );
           }}
         />
-        <div className="subtitle settings-space">{"Ownership"}</div>
+        <div className="info settings-space">{"Ownership"}</div>
         <LabeledInput
           label={"Rekey owner to:"}
           inputValue={rekeyAuthAddress}

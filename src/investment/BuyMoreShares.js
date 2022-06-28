@@ -59,8 +59,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
             <div>
               <div className="title nowrap">{"Buy more shares"}</div>
               <div className="mb-4 flex-block align-center">
-                <div className="ft-size-18 ft-weight-600">{"Share supply"}</div>
-                <div className="ft-weight-700 ft-size-24 color-black-000">
+                <div className="desc">{"Share supply"}</div>
+                <div className="subtitle color-black-000">
                   {dao.share_supply}
                 </div>
                 <div>
@@ -68,7 +68,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 </div>
               </div>
               <div className="chartBlock">
-                <div className="numbers ft-size-18 ft-weight-600">
+                <div className="numbers desc">
                   {availableShares}
                 </div>
                 <div className="h-16">
@@ -85,7 +85,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 <div>{"Available"}</div>
               </div>
               <div className="chartBlock">
-                <div className="numbers ft-size-18 ft-weight-600">
+                <div className="numbers desc">
                   {deps.investmentData.investor_locked_shares}
                 </div>
                 <div className="h-16">
@@ -102,7 +102,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 <div>{"Your locked shares"}</div>
               </div>
               <div className="chartBlock">
-                <div className="numbers ft-size-18 ft-weight-600">
+                <div className="numbers desc">
                   {deps.investmentData.investor_unlocked_shares}
                 </div>
                 <div className="h-16">

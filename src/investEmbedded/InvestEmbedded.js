@@ -96,14 +96,14 @@ export const InvestEmbedded = ({ deps, dao }) => {
               <div className="top-block ">
                 <div className="available-shares">
                   <div className="d-flex gap-10">
-                    <div className="subTitle mb-4">{"Available: "}</div>
-                    <div className="ft-weight-600 ft-size-18">
+                    <div className="desc mb-4">{"Available: "}</div>
+                    <div className="desc">
                       {availableShares}
                     </div>
                   </div>
                   {deps.investmentData && (
                     <div className="shares-block">
-                      <div className="ft-weight-600 ft-size-18">You have:</div>
+                      <div className="desc">You have:</div>
                       <div className="shares-item">
                         <div>{"Locked shares:"}</div>
                         <div className="ft-weight-700">
@@ -157,10 +157,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
             </div>
             <div className="buy-shares-right-col">
               <div id="shares_const_container">
-                <div className="ft-weight-600 ft-size-18">{"Total price"}</div>
+                <div className="desc">{"Total price"}</div>
                 <div className="d-flex gap-10">
                   <img src={funds} alt="funds" />
-                  <div className="ft-weight-700 ft-size-24 ft-color-black-000">
+                  <div className="subtitle ft-color-black-000">
                     {totalCost}
                   </div>
                 </div>
@@ -178,7 +178,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                     <ReactTooltip />
                   </div>
                   <div className="d-flex gap-10">
-                    <div className="ft-weight-700 ft-size-24 ft-color-black-000">
+                    <div className="subtitle ft-color-black-000">
                       {totalPercentage}
                     </div>
                   </div>
