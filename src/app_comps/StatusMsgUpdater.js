@@ -35,7 +35,6 @@ export const StatusMsgUpdater = (setStatusMsg, setClosing) => ({
   },
 
   clear() {
-    console.log("??? calling clear");
     setClosing(true); // starts close animation (changes css class)
     setTimeout(() => {
       setStatusMsg(null); // effectively removes the notification

@@ -8,12 +8,8 @@ export const StatusMsgView = ({ deps }) => {
   const notificationTypeClass = notificationClassName(deps.statusMsgDisplay);
 
   var classNames = "msg " + notificationTypeClass;
-  console.log("??? deps.statusMsgClosing: " + deps.statusMsgClosing);
   if (deps.statusMsgClosing) {
-    console.log("??? adding msg-close class");
     classNames += " msg-close";
-  } else {
-    console.log("??? NO msg-close class");
   }
 
   return (
