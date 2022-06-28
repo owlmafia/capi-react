@@ -115,3 +115,30 @@ export const createDao = async (
     showProgress(false);
   }
 };
+
+export const calculateTotalPrice = async (
+  shareAmount,
+  sharePrice,
+  setTotalPrice
+) => {
+  if (!shareAmount || !sharePrice) {
+    return;
+  }
+
+  const { bridge_calculate_max_funds } = await wasmPromise;
+
+  try {
+    let res = await bridge_calculate_max_funds({
+      shares_amount: shareAmount,
+      share_price: sharePrice,
+    });
+    console.log("res: %o", res);
+
+    setTotalPrice(res.total_price);
+  } catch (e) {
+    // errors for now ignored: this is calculated on the fly to show the result in the form
+    // we currently don't show any validation errors before submitting
+    console.error("Ignored: error calculating total price: %o", e);
+    setTotalPrice("");
+  }
+};

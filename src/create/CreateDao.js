@@ -6,7 +6,7 @@ import {
   LabeledTextArea,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
-import { createDao } from "./controller";
+import { calculateTotalPrice, createDao } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
@@ -15,6 +15,9 @@ import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import link from "../images/svg/link.svg";
 import { SelectDateModal } from "./SelectDateModal";
 import moment from "moment";
+import funds from "../images/funds.svg";
+import ReactTooltip from "react-tooltip";
+import info from "../images/svg/info.svg";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -62,6 +65,16 @@ export const CreateDao = ({ deps }) => {
     useState(false);
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [pendingSubmitDao, setSubmitDaoIntent] = useState(false);
+
+  const [totalSharePrice, setTotalSharePrice] = useState("");
+
+  const updateTotalPrice = () => {
+    calculateTotalPrice(shareCount, sharePrice, setTotalSharePrice);
+  };
+
+  useEffect(() => {
+    updateTotalPrice();
+  }, []);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -139,7 +152,10 @@ export const CreateDao = ({ deps }) => {
         <LabeledAmountInput
           label={"Share supply"}
           inputValue={shareCount}
-          onChange={(input) => setShareCount(input)}
+          onChange={(input) => {
+            setShareCount(input);
+            updateTotalPrice();
+          }}
           errorMsg={shareCountError}
         />
         <LabeledAmountInput
@@ -162,16 +178,34 @@ export const CreateDao = ({ deps }) => {
         <LabeledCurrencyInput
           label={"Share price (unit)"}
           inputValue={sharePrice}
-          onChange={(input) => setSharePrice(input)}
+          onChange={(input) => {
+            setSharePrice(input);
+            updateTotalPrice();
+          }}
           errorMsg={sharePriceError}
         />
         <LabeledCurrencyInput
           label={"Min funding target"}
-          info={"The minumum funds amount needed to start the project."}
+          info={"The minumum amount needed to start the project."}
           inputValue={minRaiseTarget}
           onChange={(input) => setMinRaiseTarget(input)}
           errorMsg={minRaiseTargetError}
         />
+
+        <div>
+          <div>{"Max funding target"}</div>
+          <img src={funds} alt="img" />
+          <div
+            className="d-flex align-center"
+            data-tip={
+              "The maximum amount that can be raised (share supply x price)"
+            }
+          >
+            <img src={info} alt="info" />
+          </div>
+          <ReactTooltip />
+          <div>{totalSharePrice}</div>
+        </div>
 
         <LabeledInput
           label={"Fundraising end date"}
