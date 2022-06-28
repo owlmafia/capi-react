@@ -76,21 +76,33 @@ const renderFundsProgressChart = (
 
   // raised funds label
   const raisedFundsTextSize = calculateTextSize(formattedRaisedFunds);
-  selected
+  const raisedLabel = selected
     .append("text")
     .text(formattedRaisedFunds)
     .attr("fill", "black")
     .attr("font-size", 10)
     .attr("font-weight", 600)
+    .attr("x", 0)
+    .attr("opacity", 0)
     // .attr("x", x.bandwidth() * data.length + margin.left)
     // .attr("dominant-baseline", "central")
     // .attr("alignment-baseline", "central")
     // .attr("y", (barHeight - textSize.height) / 2 - textSize.height / 2);
+    // .attr("x", function () {
+    //   // - 8: offset from bar end
+    //   return x(raisedFundsNumber) - raisedFundsTextSize.width - 8;
+    // })
+    .attr("y", margin.top + 11); // offset: center text manually
+
+  // animate funds label
+  raisedLabel
+    .transition()
+    .duration(1000)
+    .attr("opacity", 1)
     .attr("x", function () {
       // - 8: offset from bar end
-      return x(raisedFundsNumber) - raisedFundsTextSize.width - 8;
-    })
-    .attr("y", margin.top + 11); // offset: center text manually
+      return x(raisedFundsNumber) - raisedFundsTextSize.width - 14;
+    });
 
   // min funds label
   const minFundsTextSize = calculateTextSize(formattedMinFunds);
