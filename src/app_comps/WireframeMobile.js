@@ -8,7 +8,7 @@ import logo from "../images/logo.svg";
 import { MobileWalletView } from "../right_col/MobileWalletView";
 import wallet from "../images/svg/account.svg";
 
-export const WireframeMobile = ({ isGlobal, deps, dao }) => {
+export const WireframeMobile = ({ isGlobal, deps }) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [showWallet, setShowWallet] = useState(false);
 
@@ -37,7 +37,7 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
   };
 
   const daoTop = () => {
-    return !isGlobal && dao && <DaoTop dao={dao} />;
+    return !isGlobal && deps.dao && <DaoTop dao={deps.dao} />;
   };
 
   const showOverlay = showSidebar || showWallet;
