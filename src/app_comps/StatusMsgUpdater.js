@@ -38,13 +38,8 @@ export const StatusMsgUpdater = (setStatusMsg, setClosing) => ({
     console.log("??? calling clear");
     setClosing(true); // starts close animation (changes css class)
     setTimeout(() => {
-      console.log("??? removing the msg");
       setStatusMsg(null); // effectively removes the notification
-
-      setTimeout(() => {
-        console.log("clearing error class");
-        setClosing(false); // clears close animation css class
-      }, 100); // a bit after removing the notification, to ensure doesn't re-appear before removal
-    }, 350); // note: a bit less than close animation time in css, to ensure removed before it finishes (so it doesn't re-appear)
+      setClosing(false); // clears close animation css class
+    }, 400); // note: same time as close animation in css
   },
 });
