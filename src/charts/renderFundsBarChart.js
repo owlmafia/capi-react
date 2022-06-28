@@ -55,7 +55,7 @@ const renderFundsProgressChart = (
 
   const barColor = successColors ? "cyan" : "red";
 
-  var progress = selected
+  const progress = selected
     .append("rect")
     // .attr("class", "progress-rect")
     .attr("fill", barColor)
