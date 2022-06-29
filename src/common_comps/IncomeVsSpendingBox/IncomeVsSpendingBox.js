@@ -18,17 +18,6 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
   const [selectedBarsInterval, setSelectedBarsInterval] = useState(
     barsOptions[0]
   );
-  useEffect(() => {
-    async function fetchData() {
-      const chartData = await fetchIncomeVsSpendingChartData(
-        statusMsg,
-        daoId,
-        selectedBarsInterval.value
-      );
-      setChartData(chartData);
-    }
-    fetchData();
-  }, [statusMsg, daoId, selectedBarsInterval.value]);
 
   const chart = useRef(null);
 
@@ -37,16 +26,26 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
   }, []);
 
   useEffect(() => {
-    if (chartData && chart.current) {
-      renderBarChart(
-        chart.current,
-        chartData.points,
-        colors,
+    async function fetchData() {
+      const chartData = await fetchIncomeVsSpendingChartData(
+        statusMsg,
+        daoId,
         selectedBarsInterval.value
       );
-    }
-  }, [chartData, colors, selectedBarsInterval.value]);
+      setChartData(chartData);
 
+      if (chartData && chart.current) {
+        renderBarChart(
+          chart.current,
+          chartData.points,
+          colors,
+          selectedBarsInterval.value
+        );
+      }
+    }
+    fetchData();
+  }, [statusMsg, daoId, selectedBarsInterval.value, colors]);
+  
   const content = () => {
     if (chartData) {
       return (

@@ -21,8 +21,8 @@ export const LockOrUnlockShares = ({
 
   const view = () => {
     return (
-      <div className="buy-more-shares box-container d-flex">
-        <div className="shares-mobile">
+      <div className="shares-box box-container">
+        <div className="shares-amount">
           <div className="available-shares">
             <div>
               <div className="title">{title}</div>
@@ -118,9 +118,7 @@ export const LockOrUnlockShares = ({
   };
 
   return (
-    <div>
-      <div>{dao && investmentData && view()}</div>
-    </div>
+    <div>{dao && investmentData && view()}</div>
   );
 };
 

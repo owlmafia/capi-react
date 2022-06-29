@@ -805,7 +805,11 @@ p {
         padding: 0 20px;
         margin-top: 68px;
 
-        .buy-more-shares.box-container {
+        .shares-box {
+            height: 750px;
+        }
+
+        .shares-box.box-container {
             box-sizing: border-box;
         }
 
@@ -870,12 +874,22 @@ $mobile_bp: 650px;
 
 @media only screen and (max-width: $mobile_bp) {
     .available-shares {
+        height: 100%;
         flex-direction: column;
+
+        .title {
+            margin-bottom: 80px;
+        }
 
         .shares-chart {
             display: flex;
             align-self: center;
             width: 200px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 600;
         }
     }
 }
@@ -900,8 +914,8 @@ $mobile_bp: 650px;
 
 @media only screen and (max-width: 1600px) {
 
-    .buy-more-shares {
-        .shares-mobile {
+    .shares-box {
+        .shares-amount {
             width: 100%;
 
             .available-shares {
@@ -911,22 +925,26 @@ $mobile_bp: 650px;
         }
     }
 
-    .buy-more-shares .shares-mobile .buy-shares-input .labeled_input {
+    .shares-box .shares-amount .buy-shares-input .labeled_input {
         margin-top: 0;
     }
 
-    .box-container .shares-mobile .buy-shares-input .labeled_input {
+    .box-container .shares-amount .buy-shares-input .labeled_input {
         margin-top: 0;
     }
 
 }
 
 @media only screen and (min-width: 1601px) {
-    .buy-more-shares {
-        .shares-mobile {
+    .shares-box {
+        .shares-amount {
             width: 100%;
-            max-width: 400px;
+            max-width: 550px;
         }
+    }
+
+    .shares-chart {
+        min-width: 350px;
     }
 }
 
@@ -938,12 +956,24 @@ $mobile_bp: 650px;
     }
 }
 
-.buy-more-shares {
+.shares-box {
+    height: 565px;
     display: flex;
     justify-content: space-between;
+    box-sizing: border-box;
+
+    .shares-amount {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .shares-chart {
+        max-width: 350px;
+    }
 }
 
-.shares-mobile .available-shares {
+.shares-amount .available-shares {
     display: flex;
     width: 100%;
 }

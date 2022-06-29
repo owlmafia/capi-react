@@ -53,8 +53,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
 
   const view = () => {
     return (
-      <div className="buy-more-shares box-container d-flex">
-        <div className="shares-mobile">
+      <div className="shares-box box-container">
+        <div className="shares-amount">
           <div className="available-shares">
             <div>
               <div className="title nowrap">{"Buy more shares"}</div>
@@ -199,9 +199,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
   };
 
   return (
-    <div>
-      <div>{dao && deps.investmentData && availableShares && view()}</div>
-    </div>
+    <div>{dao && deps.investmentData && availableShares && view()}</div>
   );
 };
 
