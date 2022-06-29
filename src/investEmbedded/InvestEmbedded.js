@@ -88,7 +88,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const view = () => {
     return (
-      <div>
+      <div className="mt-80">
         <div className="dao_action_active_tab box-container">
           <div className="title">{"Buy Shares"}</div>
           <div className="buy-shares-content">
