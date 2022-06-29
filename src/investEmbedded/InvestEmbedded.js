@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ReactTooltip from "react-tooltip";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
-import info from "../images/svg/info.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import {
   fetchAvailableShares,
   invest,
   updateTotalPriceAndPercentage,
 } from "./controller";
+import { DisclaimerModal } from "../modal/DisclaimerModal";
+import {
+  needsToAcceptDisclaimer,
+  saveAcceptedDisclaimer,
+} from "../modal/storage";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -25,10 +28,19 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [buyIntent, setBuyIntent] = useState(false);
+  const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
 
   // show modal carries an object here, to pass details
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(null);
+
+  const onSubmitBuy = () => {
+    setBuyIntent(true);
+    var myAddress = deps.myAddress;
+    if (myAddress === "") {
+      setShowSelectWalletModal(true);
+    }
+  };
 
   useEffect(() => {
     fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
@@ -97,9 +109,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div className="available-shares">
                   <div className="d-flex gap-10">
                     <div className="desc mb-4">{"Available: "}</div>
-                    <div className="desc">
-                      {availableShares}
-                    </div>
+                    <div className="desc">{availableShares}</div>
                   </div>
                   {deps.investmentData && (
                     <div className="shares-block">
@@ -147,10 +157,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 className={"button-primary"}
                 isLoading={submitting}
                 onClick={async (_) => {
-                  setBuyIntent(true);
-                  var myAddress = deps.myAddress;
-                  if (myAddress === "") {
-                    setShowSelectWalletModal(true);
+                  if (await needsToAcceptDisclaimer()) {
+                    setShowDisclaimerModal(true);
+                  } else {
+                    onSubmitBuy();
                   }
                 }}
               />
@@ -160,9 +170,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div className="desc">{"Total price"}</div>
                 <div className="d-flex gap-10">
                   <img src={funds} alt="funds" />
-                  <div className="subtitle ft-color-black-000">
-                    {totalCost}
-                  </div>
+                  <div className="subtitle ft-color-black-000">{totalCost}</div>
                 </div>
               </div>
               <div className="d-flex mobile-input-block">
@@ -193,6 +201,18 @@ export const InvestEmbedded = ({ deps, dao }) => {
             />
           )}
         </div>
+
+        {showDisclaimerModal && (
+          <DisclaimerModal
+            closeModal={() => setShowDisclaimerModal(false)}
+            onAccept={() => {
+              saveAcceptedDisclaimer();
+              setShowDisclaimerModal(false);
+              // continue with buy flow: assumes that the disclaimer here is (only) shown when clicking on buy
+              onSubmitBuy();
+            }}
+          />
+        )}
       </div>
     );
   };
