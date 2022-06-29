@@ -5,7 +5,7 @@ import { CopyPasteHtml } from "../common_comps/CopyPastText";
 import Progress from "../app_comps/Progress";
 import { SubmitButton } from "./SubmitButton";
 import { SelectWallet } from "../wallet/SelectWallet";
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 import funds from "../images/funds.svg";
 
 export const MyAccount = ({ deps, daoId }) => {

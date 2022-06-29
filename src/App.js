@@ -12,7 +12,7 @@ import {
   updateDao_,
   initLog,
 } from "./controller";
-import Modal from "./Modal";
+import Modal from "./modal/Modal";
 import {
   updateInvestmentData_,
   updateFunds_,

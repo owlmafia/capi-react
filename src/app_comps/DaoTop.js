@@ -1,6 +1,6 @@
 import twitter from "../images/svg/twitter.svg";
 import share from "../images/svg/share.svg";
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 import ShareView from "./ShareView";
 import React, { useState } from "react";
 
