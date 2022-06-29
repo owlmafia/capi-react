@@ -736,6 +736,12 @@ p {
     }
 }
 
+@media only screen and (min-width: 1331px) and (max-width: 1450px) {
+    #content {
+        padding: 0 24px;
+    }
+}
+
 @media only screen and (max-width: 1330px) {
     #content {
         margin-top: 60px;
