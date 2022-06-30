@@ -42,10 +42,7 @@ const App = () => {
 
   const [dao, setDao] = useState(null);
 
-  const [statusMsgClosing, setStatusMsgClosing] = useState(false);
-  const [statusMsgUpdater] = useState(
-    StatusMsgUpdater(setStatusMsg, setStatusMsgClosing)
-  );
+  const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
 
   const windowSize = useWindowSize();
 
@@ -163,7 +160,6 @@ const App = () => {
 
           statusMsgDisplay: statusMsg,
           statusMsg: statusMsgUpdater,
-          statusMsgClosing: statusMsgClosing,
 
           myBalance: myBalance,
           updateMyBalance: updateMyBalance,

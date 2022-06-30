@@ -1,6 +1,6 @@
 import { toFriendlyError } from "./friendlyErrors";
 
-export const StatusMsgUpdater = (setStatusMsg, setClosing) => ({
+export const StatusMsgUpdater = (setStatusMsg) => ({
   // Display text as a success notification
   success(msg, hideClose) {
     msg = msg + "";
@@ -35,10 +35,16 @@ export const StatusMsgUpdater = (setStatusMsg, setClosing) => ({
   },
 
   clear() {
-    setClosing(true); // starts close animation (changes css class)
+    setStatusMsg((statusMsg) => {
+      if (statusMsg) {
+        return { ...statusMsg, closing: true };
+      } else {
+        return null;
+      }
+    });
+
     setTimeout(() => {
       setStatusMsg(null); // effectively removes the notification
-      setClosing(false); // clears close animation css class
     }, 400); // note: same time as close animation in css
   },
 });
