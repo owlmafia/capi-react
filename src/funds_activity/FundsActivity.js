@@ -23,6 +23,7 @@ export const FundsActivity = ({ deps }) => {
             {activityEntries &&
               activityEntries.map((entry) => (
                 <FundsActivityEntry
+                  deps={deps}
                   entry={entry}
                   showDescr={true}
                   key={entry.tx_id}

@@ -4,53 +4,64 @@ import arrowDown from "../images/svg/arrow-down.svg";
 import funds from "../images/funds.svg";
 import ReactTooltip from "react-tooltip";
 
-// TODO mobile views via react (size classes), not css
-export const FundsActivityEntry = ({ entry }) => {
+export const FundsActivityEntry = ({ deps, entry }) => {
+  if (deps.size.s4) {
+    return mobileEntryView(entry);
+  } else {
+    return desktopEntryView(entry);
+  }
+};
+
+const desktopEntryView = (entry) => {
   return (
-    <div>
-      <div className="funds_act_entry funds-act-display">
-        <AmountView entry={entry} />
-        <div className="funds_act_entry__body">
-          <div className="d-flex align-center">
-            <div className="ft-weight-500 ft-size-18 ft-color-black-000">
-              {entry.address}
-            </div>
-            <div className="ellipse"></div>
-            <div className="ft-color-black ft-size-14">
-              {fundsActivityEntryLabel(entry)}
-            </div>
+    <div className="funds_act_entry">
+      <AmountView entry={entry} />
+      <div className="funds_act_entry__body">
+        <div className="d-flex align-center">
+          <div className="ft-weight-500 ft-size-18 ft-color-black-000">
+            {entry.address}
           </div>
-          <div className="description">{entry.description}</div>
+          <div className="ellipse"></div>
+          <div className="ft-color-black ft-size-14">
+            {fundsActivityEntryLabel(entry)}
+          </div>
         </div>
-        <div className="details">
-          <div className="funds_act_entry__date">{entry.date}</div>
-          <a href={entry.tx_link} target="_blank" rel="noreferrer">
-            {"Details"}
-          </a>
-        </div>
+        <div className="description">{entry.description}</div>
       </div>
-      <div className="funds_act_entry-tab">
-        <div className="funds_act_entry__body">
-          <div className="d-flex align-center order-2">
-            <div className="ft-weight-500 ft-size-18 ft-color-grey">
-              {entry.address}
-            </div>
+      {detailsLink(entry)}
+    </div>
+  );
+};
+
+const mobileEntryView = (entry) => {
+  return (
+    <div className="funds_act_entry-tab">
+      <div className="funds_act_entry__body">
+        <div className="d-flex align-center order-2">
+          <div className="ft-weight-500 ft-size-18 ft-color-grey">
+            {entry.address}
           </div>
-          <div className="d-flex align-center gap-32 order-1">
-            <AmountView entry={entry} />
-            <div className="ft-color-black ft-size-14 ft-color-grey status">
-              {fundsActivityEntryLabel(entry)}
-            </div>
+        </div>
+        <div className="d-flex align-center gap-32 order-1">
+          <AmountView entry={entry} />
+          <div className="ft-color-black ft-size-14 ft-color-grey status">
+            {fundsActivityEntryLabel(entry)}
           </div>
-          <div className="description order-3">{entry.description}</div>
         </div>
-        <div className="details">
-          <div className="funds_act_entry__date">{entry.date}</div>
-          <a href={entry.tx_link} target="_blank" rel="noreferrer">
-            {"Details"}
-          </a>
-        </div>
+        <div className="description order-3">{entry.description}</div>
       </div>
+      {detailsLink(entry)}
+    </div>
+  );
+};
+
+const detailsLink = (entry) => {
+  return (
+    <div className="details">
+      <div className="funds_act_entry__date">{entry.date}</div>
+      <a href={entry.tx_link} target="_blank" rel="noreferrer">
+        {"Details"}
+      </a>
     </div>
   );
 };

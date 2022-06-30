@@ -244,6 +244,7 @@ const windowSizeClasses = (windowSize) => {
   const windowWidth = windowSize.width;
   console.log("Window width updated: " + windowWidth);
 
+  // Note: tablet and phone here implies portrait mode. Landscape hasn't been explicitly designed for or tested yet.
   const isTablet =
     windowWidth <= SIZE_TABLET_THRESHOLD && windowWidth > SIZE_PHONE_THRESHOLD;
   const isPhone = windowWidth <= SIZE_PHONE_THRESHOLD;
