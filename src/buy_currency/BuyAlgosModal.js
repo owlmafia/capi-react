@@ -1,18 +1,18 @@
-import Modal from "../Modal";
+import useScript from "../common_hooks/useScript";
+import { OkCancelModal } from "../modal/OkCancelModal";
 import { BuyAlgosContent } from "./BuyAlgosContent";
-import { BuyCurrencyInfoView } from "./BuyCurrencyInfoView";
 import { startBuyCurrencyFlow } from "./controller";
 
 export const BuyAlgosModal = ({ deps, closeModal }) => {
+  useScript("https://verify.sendwyre.com/js/verify-module-init-beta.js");
+
   return (
-    <Modal title={"Top your account"} onCloseClick={() => closeModal()}>
-      <BuyCurrencyInfoView
-        deps={deps}
-        closeModal={() => closeModal()}
-        onSubmit={() => startBuyCurrencyFlow(deps, "ALGO", "1", closeModal)}
-      >
-        <BuyAlgosContent />
-      </BuyCurrencyInfoView>
-    </Modal>
+    <OkCancelModal
+      title={"Top your account"}
+      closeModal={closeModal}
+      onSubmit={() => startBuyCurrencyFlow(deps, "ALGO", "1", closeModal)}
+    >
+      <BuyAlgosContent />
+    </OkCancelModal>
   );
 };

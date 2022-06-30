@@ -5,11 +5,18 @@ import { CopyPasteHtml } from "../common_comps/CopyPastText";
 import Progress from "../app_comps/Progress";
 import { SubmitButton } from "./SubmitButton";
 import { SelectWallet } from "../wallet/SelectWallet";
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 import funds from "../images/funds.svg";
+import {
+  needsToAcceptDisclaimer,
+  saveAcceptedDisclaimer,
+} from "../modal/storage";
+import { DisclaimerModal } from "../modal/DisclaimerModal";
 
 export const MyAccount = ({ deps, daoId }) => {
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
+
+  const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
 
   return (
     <div className="my-account-container">
@@ -18,7 +25,7 @@ export const MyAccount = ({ deps, daoId }) => {
       </div>
       <div className="my-address">
         {myAddressView(deps, daoId)}
-        {connectButton(deps, setShowSelectWalletModal)}
+        {connectButton(deps, setShowSelectWalletModal, setShowDisclaimerModal)}
       </div>
       {showSelectWalletModal && (
         <Modal
@@ -30,6 +37,17 @@ export const MyAccount = ({ deps, daoId }) => {
             onConnected={() => setShowSelectWalletModal(false)}
           />
         </Modal>
+      )}
+      {showDisclaimerModal && (
+        <DisclaimerModal
+          closeModal={() => setShowDisclaimerModal(false)}
+          onAccept={() => {
+            saveAcceptedDisclaimer();
+            setShowDisclaimerModal(false);
+            // continue to select wallet: assumes that the disclaimer here is (only) shown when clicking on connect wallet
+            setShowSelectWalletModal(true);
+          }}
+        />
       )}
     </div>
   );
@@ -119,13 +137,21 @@ const DividendSection = ({ deps, daoId }) => {
   }
 };
 
-const connectButton = (deps, setShowSelectWalletModal) => {
+const connectButton = (
+  deps,
+  setShowSelectWalletModal,
+  setShowDisclaimerModal
+) => {
   if (deps.myAddress === "") {
     return (
       <button
         className="button-primary full-width-btn"
         onClick={async (event) => {
-          setShowSelectWalletModal(true);
+          if (await needsToAcceptDisclaimer()) {
+            setShowDisclaimerModal(true);
+          } else {
+            setShowSelectWalletModal(true);
+          }
         }}
       >
         {"Connect wallet"}

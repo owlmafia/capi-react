@@ -1,6 +1,6 @@
 import * as ReactDOM from "react-dom";
 import React from "react";
-import close from "./images/svg/close.svg";
+import close from "../images/svg/close.svg";
 
 const Modal = ({ title, children, onCloseClick }) => {
   const onModalClick = (event) => {
