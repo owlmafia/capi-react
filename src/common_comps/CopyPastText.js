@@ -6,7 +6,7 @@ import myalgo from "../images/svg/myalgo.svg";
 const CopyPasteText = ({ statusMsg, text, copyText: copyTextOpt, copyMsg }) => {
   return (
     <CopyPasteHtml
-      element={<div className="ft-color-black ft-weight-500">{text}</div>}
+      element={<div className="ft-color-black">{text}</div>}
       copyText={copyTextOpt ?? text}
       statusMsg={statusMsg}
       copyMsg={copyMsg}
@@ -33,7 +33,7 @@ export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
 
   return (
     <CopyToClipboard text={copyText} onCopy={onCopy}>
-      <div className="copyable d-flex gap-10">
+      <div className="copyable d-flex gap-18">
         {element}
         {/* <span className="copy_msg">{isCopied ? "Copied!" : null}</span> */}
         <span className={`copy ${isCopied ? "active" : ""}`}>
@@ -61,7 +61,7 @@ export const CopyPasteCompleteText = ({ text, copyText: copyTextOpt }) => {
 export const CopyPasteCompleteHtml = ({ element, copyText }) => {
   return (
     <CopyToClipboard text={copyText}>
-      <div className="copyable d-flex gap-10">
+      <div className="copyable d-flex gap-18">
         <span>{element}</span>
       </div>
     </CopyToClipboard>

@@ -36,9 +36,9 @@ const AmountView = ({ entry }) => {
       />
       <div className="d-flex flex-column gap-4">
         <div className="ft-color-grey ft-size-18 address">{entry.address}</div>
-        <div className="d-flex gap-4 align-center">
+        <div className="d-flex align-center">
           <img
-            className="opacity-50"
+            className="opacity-50 mr-5"
             width="14px"
             height="14px"
             src={funds}

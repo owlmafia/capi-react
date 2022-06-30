@@ -100,15 +100,15 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const view = () => {
     return (
-      <div>
+      <div className="mt-80">
         <div className="dao_action_active_tab box-container">
           <div className="title">{"Buy Shares"}</div>
           <div className="buy-shares-content">
             <div className="dao-shares buy-shares-left-col">
               <div className="top-block ">
                 <div className="available-shares">
-                  <div className="d-flex gap-10">
-                    <div className="desc mb-4">{"Available: "}</div>
+                  <div className="d-flex mb-16 gap-12">
+                    <div className="desc">{"Available: "}</div>
                     <div className="desc">{availableShares}</div>
                   </div>
                   {deps.investmentData && (

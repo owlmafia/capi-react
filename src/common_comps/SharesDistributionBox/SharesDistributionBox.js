@@ -129,7 +129,7 @@ export const SharesDistributionBox = ({
     let showMore = !showMoreSelected;
     return (
       <button
-        className="link_button ml-36"
+        className="link_button ml-50"
         onClick={() => setShowMoreSelected(showMore)}
       >
         {showMore ? "See all" : "Show less"}
@@ -191,11 +191,11 @@ export const SharesDistributionBox = ({
                   <div className="subtitle">{sharesSupply}</div>
                   <div></div>
                 </div>
-                <div className="d-flex align-center">
-                  <div className="desc">
+                <div className="d-flex align-center gap-16 w-100">
+                  <div className="desc w-55px">
                     {notOwnedShares}
                   </div>
-                  <div className="circle ml-5 mr-3"></div>
+                  <div className="circle"></div>
                   <div className="ft-color-black">{"Available for sale"}</div>
                 </div>
               </div>
