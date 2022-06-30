@@ -66,7 +66,7 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
                 options={barsOptions}
               />
             </div>
-            <svg ref={chart} />
+            <svg className="mb--40" ref={chart} />
           </div>
         </LabeledBox>
       );

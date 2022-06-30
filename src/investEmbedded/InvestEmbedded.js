@@ -95,8 +95,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
             <div className="dao-shares buy-shares-left-col">
               <div className="top-block ">
                 <div className="available-shares">
-                  <div className="d-flex gap-10">
-                    <div className="desc mb-4">{"Available: "}</div>
+                  <div className="d-flex mb-16 gap-12">
+                    <div className="desc">{"Available: "}</div>
                     <div className="desc">
                       {availableShares}
                     </div>

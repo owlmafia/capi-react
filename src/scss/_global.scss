@@ -37,7 +37,7 @@ a {
         color: $blue-primary;
         font-size: 32px;
         font-weight: 700;
-        margin-bottom: 36px;
+        margin-bottom: 40px;
         
     }
 }
@@ -434,7 +434,7 @@ p {
     .investors-container {
         display: flex;
         justify-content: space-between;
-        max-width: 830px;
+        max-width: 900px;
 
         .sub-title {
             display: flex;
@@ -451,7 +451,7 @@ p {
         .flexBlock {
             display: flex;
             align-items: center;
-            margin-bottom: 37px;
+            margin-bottom: 32px;
         }
     }
 }
@@ -470,6 +470,14 @@ p {
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
+
+    .project-wallet {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+        margin-top: 5px;
+    }
 
     .labeled_box {
         margin-bottom: 32px;
@@ -606,6 +614,10 @@ p {
     width: 25%;
 }
 
+.w-55px {
+    width: 55px;
+}
+
 .h-16 {
     height: 16px;
 }
@@ -701,6 +713,10 @@ p {
     gap: 12px;
 }
 
+.gap-16 {
+    gap: 16px;
+}
+
 .gap-18 {
     gap: 18px;
 }
@@ -769,16 +785,10 @@ p {
             gap: 40px;
             align-items: flex-start;
             margin-bottom: 40px;
-        }
-
-        .profits-by-shares {
-            position: relative;
-            height: 280px;
-            padding: 44px 40px;
-
-            .profits-tab {
-                margin-top: 40px;
-            }
+        }            
+        
+        .profits-tab {
+            margin-top: 40px;
         }
 
         .box-container {
@@ -802,8 +812,6 @@ p {
 
     #investors-distribution {
         .labeled_box_children {
-            padding: 44px 40px 40px 40px;
-
             .investors-container {
                 .holder_list_container .sub-title {
                     padding-left: 0;
@@ -855,7 +863,13 @@ p {
             .investors-container {
                 flex-direction: column;
                 justify-content: space-between;
+                gap: 40px;
             }
+        }
+    }
+    .first_dao_widget {
+        .project-wallet {
+            display: none;
         }
     }
 }
@@ -876,6 +890,7 @@ $mobile_bp: 650px;
         display: none;
     }
 }
+
 @media only screen and (min-width: 1601px) {
     .d-desktop-block {
         display: block;
@@ -966,11 +981,11 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (min-width: 1631px) {
+@media only screen and (min-width: 1701px) {
 
     .buy-shares-left-col {
         width: 100%;
-        max-width: 520px;
+        max-width: 535px;
     }
 }
 
