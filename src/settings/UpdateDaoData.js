@@ -115,6 +115,7 @@ export const UpdateDaoData = ({ deps }) => {
           label={"Rekey owner"}
           className="button-primary mb-7"
           isLoading={submitting}
+          disabled={!rekeyAuthAddress}
           onClick={async () => {
             setShowConfirmRekeyModal(true);
           }}
