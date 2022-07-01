@@ -38,11 +38,11 @@ export const InvestmentProfits = ({ deps }) => {
     if (dao && deps.investmentData) {
       return (
         <div>
-          <div className="box-container profits-by-shares">
+          <div className="box-container">
             <div className="title">{"Your profits"}</div>
-            <div className="d-flex d-tablet-flex-column justify-between">
-              <div className="flex-block flex-column align-start">
-                <div className="flex-block align-center mb-4">
+            <div className="retrievable-profits">
+              <div className="retrievable-tab">
+                <div className="flex-block align-center">
                   <div className="desc">
                     {"Retrievable:"}
                   </div>
@@ -72,13 +72,13 @@ export const InvestmentProfits = ({ deps }) => {
                   }}
                 />
               </div>
-              <div className="flex-block flex-column profits-tab mr-60">
-                <div className="desc retrieved">
+              <div className="retrieved-tab">
+                <div className="desc">
                   {"Retrieved:"}
                 </div>
-                <div className="d-flex align-center">
-                  <FundsAssetImg className="fund-asset opacity-50" />
-                  <div className="subtitle retrieved">
+                <div className="flex-block align-center">
+                  <FundsAssetImg className="fund-asset" />
+                  <div className="subtitle">
                     {" "}
                     {deps.investmentData.investor_already_retrieved_amount}
                   </div>
