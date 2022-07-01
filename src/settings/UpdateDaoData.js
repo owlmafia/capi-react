@@ -5,6 +5,7 @@ import { LabeledInput, LabeledTextArea } from "../common_comps/LabeledInput";
 import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { toBytesForRust } from "../common_functions/common";
+import { OkCancelModal } from "../modal/OkCancelModal";
 
 export const UpdateDaoData = ({ deps }) => {
   let params = useParams();
@@ -24,6 +25,7 @@ export const UpdateDaoData = ({ deps }) => {
   const [imageError, setImageError] = useState("");
 
   const [rekeyAddressError, setRekeyAddressError] = useState("");
+  const [showConfirmRekeyModal, setShowConfirmRekeyModal] = useState(false);
 
   useEffect(() => {
     async function prefill() {
@@ -113,15 +115,9 @@ export const UpdateDaoData = ({ deps }) => {
           label={"Rekey owner"}
           className="button-primary mb-7"
           isLoading={submitting}
+          disabled={!rekeyAuthAddress}
           onClick={async () => {
-            rekeyOwner(
-              deps.statusMsg,
-              setSubmitting,
-              params.id,
-              rekeyAuthAddress,
-              deps.wallet,
-              setRekeyAddressError
-            );
+            setShowConfirmRekeyModal(true);
           }}
         />
       </div>
@@ -131,6 +127,54 @@ export const UpdateDaoData = ({ deps }) => {
   return (
     <div>
       <div>{body()}</div>
+      {showConfirmRekeyModal && (
+        <OkCancelModal
+          title="WARNING"
+          closeModal={() => setShowConfirmRekeyModal(false)}
+          okLabel="Continue"
+          cancelLabel="Cancel"
+          onSubmit={() => {
+            rekeyOwner(
+              deps.statusMsg,
+              setSubmitting,
+              params.id,
+              rekeyAuthAddress,
+              deps.wallet,
+              setRekeyAddressError
+            );
+            setShowConfirmRekeyModal(false);
+          }}
+        >
+          <div className="mb-16">
+            {"This will transfer all signing authority to the entered address."}
+          </div>
+          <div className="ft-weight-bold mb-16">
+            {
+              "YOUR CURRENT ACCOUNT WILL IRREVERSIBLY BECOME USELESS: IT WILL NOT BE ABLE TO SIGN *ANY* TRANSACTIONS (INCLUDING REVERTING THIS OPERATION)."
+            }
+          </div>
+          <div className="ft-weight-bold mb-16">
+            {
+              "THIS IS A UNIVERSAL (BLOCKCHAIN-WIDE) OPERATION, NOT LIMITED TO CAPI."
+            }
+          </div>
+          <div>
+            <div className="mb-16">{"Please ensure:"}</div>
+            <ol>
+              <li>{"That the entered address to be rekeyed to is correct."}</li>
+              <li>
+                {
+                  "That you / the expected account owner(s) of said address actually own it, i.e., can successfully sign and submit transactions with it."
+                }
+              </li>
+            </ol>
+            <div className="ft-weight-bold  mb-16">
+              {"IF ANY OF THE POINTS ABOVE IS NOT TRUE, " +
+                "YOUR CAPI PROJECT, AS WELL AS ANY FUNDS, ASSETS AND APPLICATIONS LINKED TO YOUR CURRENT ADDRESS, RELATED OR NOT RELATED TO CAPI, WILL BE PERMANENTLY AND IRREVERSIBLY LOST."}
+            </div>
+          </div>
+        </OkCancelModal>
+      )}
     </div>
   );
 };

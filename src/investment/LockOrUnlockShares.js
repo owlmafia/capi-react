@@ -26,12 +26,12 @@ export const LockOrUnlockShares = ({
           <div className="available-shares">
             <div>
               <div className="title">{title}</div>
-              <div className="chartBlock">
+              <div className="mb-16 flex-block align-center">
                 <div className="desc">{"Share supply"}</div>
                 <div className="subtitle color-black-000">
                   {dao.share_supply}
                 </div>
-                <div>
+                <div className="arrow-container">
                   <img src={redArrow} alt="redArrow" />
                 </div>
               </div>

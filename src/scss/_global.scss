@@ -552,7 +552,12 @@ p {
 }
 
 .section_container {
-    margin-bottom: 20px;
+    margin: 80px 0 20px 0;
+}
+@media only screen and (min-width: 650px) and (max-width: 1330px) {
+    .section_container {
+        margin-top: 40px;
+    }
 }
 
 .text_with_currency {
@@ -595,9 +600,9 @@ p {
     position: relative;
 }
 
-.s-14 {
-    width: 14px;
-    height: 14px;
+.s-16 {
+    width: 16px;
+    height: 16px;
 }
 
 .w-100 {
@@ -801,10 +806,6 @@ p {
             margin-top: 40px;
         }
 
-        .box-container {
-            padding: 40px;
-        }
-
         .first_dao_widget {
             display: flex;
             width: 100%;
@@ -843,9 +844,21 @@ p {
 
         .shares-box {
             height: 750px;
+
+            .shares-amount {
+                .available-shares {
+                    .mb-16 {
+                        margin-bottom: 24px;
+                    }
+                }
+
+                .labeled_input {
+                    margin-bottom: 24px;
+                }
+            }
         }
 
-        .shares-box.box-container {
+        .shares-box .box-container {
             box-sizing: border-box;
         }
 
@@ -964,6 +977,10 @@ $mobile_bp: 650px;
             .available-shares {
                 width: 100%;
                 justify-content: space-between;
+
+                .shares-chart {
+                    max-width: 250px;
+                }
             }
         }
     }
@@ -1000,7 +1017,7 @@ $mobile_bp: 650px;
 }
 
 .shares-box {
-    height: 565px;
+    height: 545px;
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
@@ -1019,4 +1036,87 @@ $mobile_bp: 650px;
 .shares-amount .available-shares {
     display: flex;
     width: 100%;
+}
+
+.retrievable-profits {
+    display: flex;
+    gap: 300px;
+
+    .retrievable-tab {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .retrieved-tab {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        color: #686777;
+
+        .flex-block {
+            .fund-asset {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1600px) {
+    .retrievable-profits {
+        gap: 190;
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .retrievable-profits {
+        gap: 0;
+        flex-direction: column;
+
+        .retrieved-tab {
+            margin-top: 40px;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .retrievable-profits {
+        gap: 0;
+        flex-direction: column;
+
+        .retrievable-tab {
+            gap: 40px;
+
+            .flex-block {
+                .fund-asset {
+                    width: 16px;
+                }
+            }
+
+            .subtitle {
+                font-size: 18px;
+            }
+        }
+
+        .retrieved-tab {
+            flex-direction: row;
+            margin-top: 60px;
+            color: $black;
+
+            .desc {
+                font-weight: 400;
+            }
+
+            .flex-block {
+                .fund-asset {
+                    width: 16px;
+                    opacity: 1;
+                }
+            }
+
+            .subtitle {
+                font-size: 16px;
+            }
+        }
+    }
 }

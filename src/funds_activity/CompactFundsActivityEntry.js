@@ -39,8 +39,8 @@ const AmountView = ({ entry }) => {
         <div className="d-flex align-center">
           <img
             className="opacity-50 mr-5"
-            width="14px"
-            height="14px"
+            width="16px"
+            height="16px"
             src={funds}
             alt="funds"
           />

@@ -58,12 +58,12 @@ export const BuyMoreShares = ({ deps, dao }) => {
           <div className="available-shares">
             <div>
               <div className="title nowrap">{"Buy more shares"}</div>
-              <div className="mb-4 flex-block align-center">
+              <div className="mb-16 flex-block align-center">
                 <div className="desc">{"Share supply"}</div>
                 <div className="subtitle color-black-000">
                   {dao.share_supply}
                 </div>
-                <div>
+                <div className="arrow-container">
                   <img src={redArrow} alt="redArrow" />
                 </div>
               </div>
