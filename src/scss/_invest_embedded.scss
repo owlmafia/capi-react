@@ -11,7 +11,7 @@
     gap: 16px;
 
     svg {
-        height: 14px;
+        height: 16px;
         margin-left: 4px;
     }
 }
@@ -28,14 +28,6 @@
             margin-top: -16px;
         }
 
-        .retrieved {
-            color: #686777;
-
-            &:nth-child(2) {
-                margin-left: 12px;
-            }
-        }
-
         .fund-asset {
             width: 22px;
             height: 22px;
@@ -49,7 +41,7 @@
         gap: 16px;
 
         .numbers {
-            width: 60px;
+            min-width: 55px;
             flex-shrink: 0;
         }
     }

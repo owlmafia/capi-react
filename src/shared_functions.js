@@ -113,13 +113,13 @@ export const updateFunds_ = async (
 export const changeArrow = (change) => {
   if (change === "up") {
     return (
-      <div>
+      <div className="arrow-container">
         <img src={arrowUp} alt="arrow up" />
       </div>
     );
   } else if (change === "down") {
     return (
-      <div>
+      <div className="arrow-container">
         <img src={arrowDown} alt="arrow down" />
       </div>
     );
