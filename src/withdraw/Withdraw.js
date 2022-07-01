@@ -30,7 +30,7 @@ export const Withdrawal = ({ deps }) => {
   const view = () => {
     if (dao) {
       return (
-        <div className="box-container">
+        <div className="box-container mt-80">
           <div className="title">Withdraw Funds from project</div>
           {/* <DaoName dao={dao} /> */}
           <Funds

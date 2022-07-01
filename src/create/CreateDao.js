@@ -52,7 +52,7 @@ export const CreateDao = ({ deps }) => {
   const navigate = useNavigate();
 
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
-    useState(true);
+    useState(false);
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [pendingSubmitDao, setSubmitDaoIntent] = useState(false);
 
