@@ -12,11 +12,11 @@ const Modal = ({ title, children, onCloseClick }) => {
   return ReactDOM.createPortal(
     <div className="modal" onClick={onModalClick}>
       <div className="modal-content modal-content-size">
+        <div className="modal-topbar-x" onClick={() => onCloseClick()}>
+          <img src={close} alt="close" />
+        </div>
         <div className="modal-topbar">
           <p className="modal-topbar-title">{title}</p>
-          <div className="modal-topbar-x" onClick={() => onCloseClick()}>
-            <img src={close} alt="close" />
-          </div>
         </div>
         <div className="modal-body">{children}</div>
       </div>

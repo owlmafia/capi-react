@@ -51,6 +51,28 @@ button {
     }
 }
 
+.button-cyan {
+    background-color: $global-cyan-button;
+    color: $global-white;
+    font-weight: 700;
+
+    &:hover {
+        background-color: #4CA5A9;
+        transition: 0.3s;
+    }
+
+    &:active {
+        background-color: #4CA5A9;
+        transition: 0.3s;
+    }
+
+    &:disabled {
+        background-color: #eaecf1;
+        color: #bccac6;
+        pointer-events: none;
+    }
+}
+
 .full-width-btn {
     width: 100%;
 }

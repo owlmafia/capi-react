@@ -222,6 +222,10 @@ select {
     margin-right: 20px;
 }
 
+span {
+    line-height: 25.6px;
+}
+
 .modal {
     position: absolute;
     bottom: 0;
@@ -234,7 +238,7 @@ select {
 
     .modal-content {
         box-sizing: border-box;
-        padding: 60px 40px;
+        padding: 40px;
         width: 40%;
         max-width: 650px;
         position: absolute;
@@ -246,23 +250,24 @@ select {
         z-index: 2000;
         animation-name: modalAnimation;
         animation-duration: 0.5s;
+        color: $black-000;
+
+        .modal-topbar-x {
+            display: flex;
+            justify-content: flex-end;
+            cursor: pointer;
+        }
 
         .modal-topbar {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 32px;
 
             .modal-topbar-title {
                 font-weight: 700;
                 font-size: 32px;
-                color: black;
-                margin-bottom: 48px;
-            }
-
-            .modal-topbar-x {
-                margin-top: -100px;
-                cursor: pointer;
             }
         }
 
@@ -732,6 +737,10 @@ p {
 
 .gap-32 {
     gap: 32px;
+}
+
+.gap-40 {
+    gap: 40px;
 }
 
 .gap-4 {
