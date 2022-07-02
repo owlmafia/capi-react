@@ -70,6 +70,26 @@
     }
 
     .label-input-style {
-        padding-left: 52px;
+        padding-left: 56px;
+    }
+}
+
+.textarea_with_image__container {
+    position: relative;
+
+    img {
+        position: absolute;
+        left: 24px;
+        top: 22px;
+    }
+
+    textarea {
+        padding-left: 56px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .textarea-withdraw textarea {
+        height: 150px;
     }
 }

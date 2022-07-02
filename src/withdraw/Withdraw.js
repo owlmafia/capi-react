@@ -4,7 +4,7 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
-  LabeledInput,
+  LabeledTextArea
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";
@@ -45,11 +45,14 @@ export const Withdrawal = ({ deps }) => {
             img={funds}
             onChange={(input) => setWithdrawalAmount(input)}
           />
-          <LabeledInput
+          <LabeledTextArea
+            className="textarea-withdraw"
             label={"For what?"}
             img={pencil}
             inputValue={withdrawalDescr}
             onChange={(input) => setWithdrawalDescr(input)}
+            maxLength={200} // NOTE: has to match WASM
+            rows={1}
           />
 
           <SubmitButton
