@@ -34,7 +34,7 @@ const AmountView = ({ entry }) => {
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"
       />
-      <div className="d-flex flex-column gap-4">
+      <div className="d-flex flex-column justify-between h-100">
         <div className="ft-color-grey ft-size-18 address">{entry.address}</div>
         <div className="d-flex align-center">
           <img
