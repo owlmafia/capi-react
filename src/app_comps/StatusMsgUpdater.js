@@ -6,7 +6,7 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
   success(msg, hideClose) {
     msg = msg + "";
     console.log(msg);
-    toast(msg, { toastId: msg, type: toast.TYPE.SUCCESS });
+    toast(msg, { toastId: msg, type: toast.TYPE.SUCCESS, closeOnClick: false });
   },
 
   // Displays text as error notification,
@@ -29,7 +29,11 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
     console.error("Error notification: %o", msg);
     // NOTE that for now msg (which contains the full original error message) isn't included in the notification
     // if user wants to send a report, they've to copy paste from the console
-    toast(displayMsg, { toastId: displayMsg, type: toast.TYPE.ERROR });
+    toast(displayMsg, {
+      toastId: displayMsg,
+      type: toast.TYPE.ERROR,
+      closeOnClick: false,
+    });
   },
 
   clear() {
