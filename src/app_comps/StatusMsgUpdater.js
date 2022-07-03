@@ -1,11 +1,12 @@
 import { toFriendlyError } from "./friendlyErrors";
+import { toast } from "react-toastify";
 
 export const StatusMsgUpdater = (setStatusMsg) => ({
   // Display text as a success notification
   success(msg, hideClose) {
     msg = msg + "";
     console.log(msg);
-    setStatusMsg({ displayMsg: msg, type: "success", hideClose: hideClose });
+    toast(msg, { toastId: msg, type: toast.TYPE.SUCCESS });
   },
 
   // Displays text as error notification,
@@ -26,25 +27,12 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
       msg += "\n+Error mapping to friendly error: " + (e + "");
     }
     console.error("Error notification: %o", msg);
-    setStatusMsg({
-      displayMsg: displayMsg,
-      copyMsg: msg,
-      type: "error",
-      hideClose: hideClose,
-    });
+    // NOTE that for now msg (which contains the full original error message) isn't included in the notification
+    // if user wants to send a report, they've to copy paste from the console
+    toast(displayMsg, { toastId: displayMsg, type: toast.TYPE.ERROR });
   },
 
   clear() {
-    setStatusMsg((statusMsg) => {
-      if (statusMsg) {
-        return { ...statusMsg, closing: true };
-      } else {
-        return null;
-      }
-    });
-
-    setTimeout(() => {
-      setStatusMsg(null); // effectively removes the notification
-    }, 400); // note: same time as close animation in css
+    toast.dismiss();
   },
 });

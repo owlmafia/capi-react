@@ -20,6 +20,8 @@ import {
 } from "./shared_functions";
 import OpenWalletModal from "./wallet/OpenWalletModal";
 import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -36,7 +38,7 @@ const App = () => {
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
-  const [statusMsg, setStatusMsg] = useState(null);
+  const [_, setStatusMsg] = useState(null);
 
   const [investmentData, setInvestmentData] = useState(null);
 
@@ -158,7 +160,6 @@ const App = () => {
 
           setModal: setModal,
 
-          statusMsgDisplay: statusMsg,
           statusMsg: statusMsgUpdater,
 
           myBalance: myBalance,
@@ -223,6 +224,7 @@ const App = () => {
           {wcShowOpenWalletModal && (
             <OpenWalletModal setShowModal={setWcShowOpenWalletModal} />
           )}
+          <ToastContainer />
         </div>
       </div>
     );

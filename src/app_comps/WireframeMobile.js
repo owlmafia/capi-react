@@ -3,7 +3,6 @@ import { Link, Outlet } from "react-router-dom";
 import { DaoTop } from "./DaoTop";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
-import { StatusMsgView } from "./StatusMsgView";
 import menu from "../images/svg/menu.svg";
 import logo from "../images/logo.svg";
 import { MobileWalletView } from "../right_col/MobileWalletView";
@@ -51,7 +50,6 @@ export const WireframeMobile = ({ isGlobal, deps, dao }) => {
       />
       {/* now it's always shown */}
       {/* {showSidebar && sideBar()} */}
-      {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
       {sideBar()}
       {showOverlay && (
         <ContentOverlay

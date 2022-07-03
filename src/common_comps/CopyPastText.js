@@ -24,11 +24,6 @@ export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
     if (copyMsg) {
       statusMsg.success(copyMsg, true);
     }
-    // setIsCopied(true);
-    setTimeout(() => {
-      statusMsg.clear();
-      //   setIsCopied(false);
-    }, 1500);
   };
 
   return (

@@ -4,7 +4,6 @@ import { RightDaoCol } from "../right_col/RightDaoCol";
 import { DaoTop } from "./DaoTop";
 import { SideBar } from "./SideBar";
 import { SideBarDao } from "./SideBarDao";
-import { StatusMsgView } from "./StatusMsgView";
 
 export const Wireframe = ({ isGlobal, deps, dao }) => {
   const sideBar = () => {
@@ -29,7 +28,6 @@ export const Wireframe = ({ isGlobal, deps, dao }) => {
 
   return (
     <div id="nav_and_main">
-      {deps.statusMsgDisplay && <StatusMsgView deps={deps} />}
       {sideBar()}
       <div id="content">
         {daoTop()}
