@@ -4,7 +4,7 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
-  LabeledInput,
+  LabeledTextArea
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";
@@ -30,7 +30,7 @@ export const Withdrawal = ({ deps }) => {
   const view = () => {
     if (dao) {
       return (
-        <div className="box-container">
+        <div className="box-container mt-80">
           <div className="title">Withdraw Funds from project</div>
           {/* <DaoName dao={dao} /> */}
           <Funds
@@ -45,11 +45,14 @@ export const Withdrawal = ({ deps }) => {
             img={funds}
             onChange={(input) => setWithdrawalAmount(input)}
           />
-          <LabeledInput
+          <LabeledTextArea
+            className="textarea-withdraw"
             label={"For what?"}
             img={pencil}
             inputValue={withdrawalDescr}
             onChange={(input) => setWithdrawalDescr(input)}
+            maxLength={200} // NOTE: has to match WASM
+            rows={1}
           />
 
           <SubmitButton

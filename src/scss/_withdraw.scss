@@ -2,7 +2,7 @@
 
 .dao_funds {
     &__cont_in_withdraw {
-        margin-bottom: 30px;
+        margin-top: -28px;
         display: flex;
         align-items: center;
         gap: 12px;
@@ -11,6 +11,22 @@
         #dao_funds__val {
             font-size: 16px;
             font-weight: normal;
+        }
+    }
+}
+
+@media only screen and (max-width: 1330px) {
+    .dao_funds {
+        &__cont_in_withdraw {
+            margin-top: -8px;
+        }
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .dao_funds {
+        &__cont_in_withdraw {
+            margin-top: -16px;
         }
     }
 }
@@ -54,6 +70,26 @@
     }
 
     .label-input-style {
-        padding-left: 52px;
+        padding-left: 56px;
+    }
+}
+
+.textarea_with_image__container {
+    position: relative;
+
+    img {
+        position: absolute;
+        left: 24px;
+        top: 22px;
+    }
+
+    textarea {
+        padding-left: 56px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .textarea-withdraw textarea {
+        height: 150px;
     }
 }

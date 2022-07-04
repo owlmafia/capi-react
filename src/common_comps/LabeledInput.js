@@ -159,16 +159,21 @@ export const LabeledTextArea = ({
   placeholder,
   errorMsg,
   maxLength,
+  img,
+  className,
+  rows=10
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);
+
+  const container_class = img ? "textarea_with_image__container" : "";
 
   useEffect(() => {
     setInputLength(inputValue.length);
   }, [inputValue]);
 
   return (
-    <div className="labeled_input">
+    <div className={`labeled_input ${className}`}>
       <div className="labeled_input__label d-flex align-center w-94 justify-between">
         {label}
         <div>
@@ -178,23 +183,26 @@ export const LabeledTextArea = ({
         </div>
       </div>
       <div className="labeled_input__error">{errorMsg}</div>
-      <textarea
-        rows="10"
-        cols="50"
-        value={inputValue}
-        placeholder={placeholder}
-        onChange={(event) => {
-          const input = event.target.value;
-          setInputLength(input.length);
-          onChange(input);
-        }}
-        onFocus={(e) => {
-          setShowLength(true);
-        }}
-        onBlur={(e) => {
-          setShowLength(false);
-        }}
-      />
+      <div className={container_class}>
+        <textarea
+          rows={rows}
+          cols="50"
+          value={inputValue}
+          placeholder={placeholder}
+          onChange={(event) => {
+            const input = event.target.value;
+            setInputLength(input.length);
+            onChange(input);
+          }}
+          onFocus={(e) => {
+            setShowLength(true);
+          }}
+          onBlur={(e) => {
+            setShowLength(false);
+          }}
+        />
+        {img && <img src={img} alt="img" />}
+      </div>
     </div>
   );
 };

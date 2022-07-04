@@ -53,8 +53,6 @@
 
 #dao_funds {
     &__cont {
-        margin-left: auto;
-
         .dao-funds-title {
             font-size: 2rem;
             margin-bottom: 20px;
@@ -126,6 +124,7 @@
                     display: flex;
                     gap: 12px;
                     align-items: center;
+                    line-height: 25.6px;
 
                     .shares-item {
                         display: flex;
