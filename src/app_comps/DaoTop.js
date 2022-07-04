@@ -43,7 +43,7 @@ export const DaoTop = ({ dao }) => {
 const logoView = (dao) => {
   return (
     dao.image_url && (
-      <div>
+      <div className="content-img-container">
         <div className="content-img-skeleton-loader"></div> 
         <div
           className="content-img"
