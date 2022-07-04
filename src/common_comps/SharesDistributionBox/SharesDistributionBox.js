@@ -189,7 +189,7 @@ export const SharesDistributionBox = ({
                     {"Total shares"}
                   </div>
                   <div className="subtitle">{sharesSupply}</div>
-                  <div></div>
+                  <div className="arrow-container"></div>
                 </div>
                 <div className="d-flex align-center gap-16 w-100">
                   <div className="desc w-55px">

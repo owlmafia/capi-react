@@ -36,15 +36,21 @@ const desktopEntryView = (entry) => {
 const mobileEntryView = (entry) => {
   return (
     <div className="funds_act_entry-tab">
+      <img
+        className="arrow funds-arrow-icon d-mobile-none"
+        src={entry.is_income === "true" ? arrowUp : arrowDown}
+        alt="arrow"
+      />
       <div className="funds_act_entry__body">
         <div className="d-flex align-center order-2">
-          <div className="desc ft-color-grey">
+          <div className="wallet">
             {entry.address}
           </div>
+          <div className="ellipse tablet-none"></div>
         </div>
         <div className="d-flex align-center order-1">
           <AmountView entry={entry} />
-          <div className="ft-color-black ft-size-14 ft-color-grey status">
+          <div className="status">
             {fundsActivityEntryLabel(entry)}
           </div>
         </div>
@@ -57,7 +63,7 @@ const mobileEntryView = (entry) => {
 
 const detailsLink = (entry) => {
   return (
-    <div className="details">
+    <div className="funds_act_entry__details">
       <div className="funds_act_entry__date">{entry.date}</div>
       <a href={entry.tx_link} target="_blank" rel="noreferrer">
         {"Details"}
@@ -86,7 +92,7 @@ const AmountView = ({ entry }) => {
   return (
     <div className="funds_act_entry__amount__container">
       <img
-        className="arrow funds-arrow-icon"
+        className="arrow funds-arrow-icon tablet-none"
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"
       />

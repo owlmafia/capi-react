@@ -30,13 +30,18 @@ const AmountView = ({ entry }) => {
   return (
     <div className="funds_act_entry__amount__container">
       <img
-        className="arrow-icon"
+        className="arrow-icon d-mobile-none"
         src={entry.is_income === "true" ? arrowUp : arrowDown}
         alt="arrow"
       />
-      <div className="d-flex flex-column justify-between h-100">
-        <div className="ft-color-grey ft-size-18 address">{entry.address}</div>
+      <div className="d-flex flex-column justify-between">
+        <div className="ft-color-grey ft-size-18 line-height-1">{entry.address}</div>
         <div className="d-flex align-center">
+          <img
+            className="arrow funds-arrow-icon tablet-desktop-none"
+            src={entry.is_income === "true" ? arrowUp : arrowDown}
+            alt="arrow"
+          />
           <img
             className="opacity-50 mr-5"
             width="16px"

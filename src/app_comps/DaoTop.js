@@ -43,10 +43,13 @@ export const DaoTop = ({ dao }) => {
 const logoView = (dao) => {
   return (
     dao.image_url && (
-      <div
-        className="content-img"
-        style={{ backgroundImage: `url(${dao.image_url})` }}
-      ></div>
+      <div>
+        <div className="content-img-skeleton-loader"></div> 
+        <div
+          className="content-img"
+          style={{ backgroundImage: `url(${dao.image_url})` }}
+        ></div>
+      </div>
     )
   );
 };

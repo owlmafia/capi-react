@@ -528,12 +528,13 @@ p {
         &__body {
             display: flex;
             align-items: flex-end;
-            justify-content: space-between;
+            gap: 0;
         }
 
         &__date {
             color: #787e82;
-            font-size: 12px;
+            font-size: 13px;
+            line-height: 25.6px;
         }
 
         .details {
@@ -946,6 +947,18 @@ $mobile_bp: 650px;
             font-size: 18px;
             font-weight: 600;
         }
+    }
+}
+
+@media only screen and (min-width: 651px) {
+    .tablet-desktop-none {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 651px) and (max-width: 1330px) {
+    .tablet-none {
+        display: none;
     }
 }
 
