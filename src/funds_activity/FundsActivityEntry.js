@@ -18,9 +18,7 @@ const desktopEntryView = (entry) => {
       <AmountView entry={entry} />
       <div className="funds_act_entry__body">
         <div className="d-flex align-center">
-          <div className="desc ft-color-black-000">
-            {entry.address}
-          </div>
+          <div className="desc ft-color-black-000">{entry.address}</div>
           <div className="ellipse"></div>
           <div className="ft-color-black ft-size-14">
             {fundsActivityEntryLabel(entry)}
@@ -43,16 +41,12 @@ const mobileEntryView = (entry) => {
       />
       <div className="funds_act_entry__body">
         <div className="d-flex align-center order-2">
-          <div className="wallet">
-            {entry.address}
-          </div>
+          <div className="wallet">{entry.address}</div>
           <div className="ellipse tablet-none"></div>
         </div>
         <div className="d-flex align-center order-1">
           <AmountView entry={entry} />
-          <div className="status">
-            {fundsActivityEntryLabel(entry)}
-          </div>
+          <div className="status">{fundsActivityEntryLabel(entry)}</div>
         </div>
         <div className="description order-3">{entry.description}</div>
       </div>

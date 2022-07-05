@@ -117,9 +117,7 @@ export const LockOrUnlockShares = ({
     );
   };
 
-  return (
-    <div>{dao && investmentData && view()}</div>
-  );
+  return <div>{dao && investmentData && view()}</div>;
 };
 
 const to_pie_chart_slice = (percentage) => {

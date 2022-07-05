@@ -173,7 +173,7 @@ export const LabeledTextArea = ({
   maxLength,
   img,
   className,
-  rows=10
+  rows = 10,
 }) => {
   const [inputLength, setInputLength] = useState(0);
   const [showLength, setShowLength] = useState(false);

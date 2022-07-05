@@ -4,7 +4,7 @@ import Progress from "../app_comps/Progress";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
-  LabeledTextArea
+  LabeledTextArea,
 } from "../common_comps/LabeledInput";
 import { Funds } from "../dao/Funds";
 import { init, withdraw } from "./controller";

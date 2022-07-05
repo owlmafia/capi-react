@@ -43,9 +43,7 @@ export const InvestmentProfits = ({ deps }) => {
             <div className="retrievable-profits">
               <div className="retrievable-tab">
                 <div className="flex-block align-center">
-                  <div className="desc">
-                    {"Retrievable:"}
-                  </div>
+                  <div className="desc">{"Retrievable:"}</div>
                   <FundsAssetImg className="fund-asset" />
                   <div className="subtitle">
                     {deps.investmentData.investor_claimable_dividend}
@@ -73,9 +71,7 @@ export const InvestmentProfits = ({ deps }) => {
                 />
               </div>
               <div className="retrieved-tab">
-                <div className="desc">
-                  {"Retrieved:"}
-                </div>
+                <div className="desc">{"Retrieved:"}</div>
                 <div className="flex-block align-center">
                   <FundsAssetImg className="fund-asset" />
                   <div className="subtitle">

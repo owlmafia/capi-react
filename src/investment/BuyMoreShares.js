@@ -68,9 +68,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 </div>
               </div>
               <div className="chartBlock">
-                <div className="numbers desc">
-                  {availableShares}
-                </div>
+                <div className="numbers desc">{availableShares}</div>
                 <div className="h-16">
                   <svg
                     width="16"
@@ -198,9 +196,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
     );
   };
 
-  return (
-    <div>{dao && deps.investmentData && availableShares && view()}</div>
-  );
+  return <div>{dao && deps.investmentData && availableShares && view()}</div>;
 };
 
 const to_pie_chart_slice = (percentage) => {

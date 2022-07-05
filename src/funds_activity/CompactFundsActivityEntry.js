@@ -35,7 +35,9 @@ const AmountView = ({ entry }) => {
         alt="arrow"
       />
       <div className="d-flex flex-column justify-between">
-        <div className="ft-color-grey ft-size-18 line-height-1">{entry.address}</div>
+        <div className="ft-color-grey ft-size-18 line-height-1">
+          {entry.address}
+        </div>
         <div className="d-flex align-center">
           <img
             className="arrow funds-arrow-icon tablet-desktop-none"
