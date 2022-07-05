@@ -6,7 +6,12 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
   success(msg, hideClose) {
     msg = msg + "";
     console.log(msg);
-    toast(msg, { toastId: msg, type: toast.TYPE.SUCCESS, closeOnClick: false });
+    toast(msg, {
+      toastId: msg,
+      type: toast.TYPE.SUCCESS,
+      closeOnClick: false,
+      position: toast.POSITION.TOP_CENTER,
+    });
   },
 
   // Displays text as error notification,
@@ -33,6 +38,7 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
       toastId: displayMsg,
       type: toast.TYPE.ERROR,
       closeOnClick: false,
+      position: toast.POSITION.TOP_CENTER,
     });
   },
 
