@@ -194,6 +194,21 @@
     }
 }
 
+.date-input__container {
+    position: relative;
+
+    img {
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .label-input-style {
+        padding-right: 56px;
+    }
+}
+
 .settings-space {
     margin-top: 60px;
 }

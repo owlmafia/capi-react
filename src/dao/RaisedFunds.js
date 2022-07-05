@@ -52,7 +52,9 @@ export const RaisedFunds = ({ deps, dao }) => {
           <div>{"Min target number: " + dao.raise_min_target_number}</div>
           <div>{"Total raisable: " + dao.total_raisable}</div>
           <div>{"Total raisable number: " + dao.total_raisable_number}</div> */}
-          {raiseState && <div>{raiseState.text}</div>}
+          {raiseState && (
+            <div className="subtitle mb-32">{raiseState.text}</div>
+          )}
           <svg ref={chart} />
         </div>
       );
