@@ -265,7 +265,6 @@ select {
     .modal-content {
         box-sizing: border-box;
         padding: 40px;
-        width: 40%;
         max-width: 650px;
         position: absolute;
         border-radius: $global-border-radius-m;
@@ -356,7 +355,6 @@ select {
     .modal-content-size {
         min-width: 400px;
         min-height: 320px;
-        max-height: 400px;
     }
 
     @keyframes modalAnimation {
