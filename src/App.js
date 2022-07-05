@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
-import "./App.scss";
 import { routesView } from "./app_comps/routes";
 import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
 import { checkForUpdates } from "./common_functions/common";
@@ -22,6 +21,7 @@ import OpenWalletModal from "./wallet/OpenWalletModal";
 import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.scss";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
