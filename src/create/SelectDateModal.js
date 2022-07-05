@@ -1,4 +1,4 @@
-import Modal from "../Modal";
+import Modal from "../modal/Modal";
 import Calendar from "react-calendar";
 import moment from "moment";
 
