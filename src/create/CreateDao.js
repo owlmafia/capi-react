@@ -32,6 +32,7 @@ export const CreateDao = ({ deps }) => {
   );
 
   const [minRaiseTarget, setMinRaiseTarget] = useState("");
+  const [maxRaiseTarget, setMaxRaiseTarget] = useState("");
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
@@ -50,6 +51,7 @@ export const CreateDao = ({ deps }) => {
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
   // mock data, while we've no UI for this
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
+  const [maxRaiseTargetError, setMaxRaiseTargetError] = useState("");
 
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
     useState("");
@@ -109,6 +111,7 @@ export const CreateDao = ({ deps }) => {
           setImageBytesError,
           setSocialMediaUrlError,
           setMinRaiseTargetError,
+          setMaxRaiseTargetError,
           setMinRaiseTargetEndDateError,
           setShowBuyCurrencyInfoModal,
           deps.wallet
@@ -191,22 +194,13 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setMinRaiseTarget(input)}
           errorMsg={minRaiseTargetError}
         />
-
-        <div>
-          <div>{"Max funding target"}</div>
-          <img src={funds} alt="img" />
-          <div
-            className="d-flex align-center"
-            data-tip={
-              "The maximum amount that can be raised (share supply x price)"
-            }
-          >
-            <img src={info} alt="info" />
-          </div>
-          <ReactTooltip />
-          <div>{totalSharePrice}</div>
-        </div>
-
+        <LabeledCurrencyInput
+          label={"Max funding target"}
+          info={"The maximum amount that can be raised (share supply x price)"}
+          inputValue={maxRaiseTarget}
+          onChange={(input) => setMaxRaiseTarget(input)}
+          errorMsg={maxRaiseTargetError}
+        />
         <LabeledInput
           label={"Fundraising end date"}
           info={
