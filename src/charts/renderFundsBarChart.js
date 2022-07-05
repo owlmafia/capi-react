@@ -25,8 +25,8 @@ const renderFundsProgressChart = (
   const radius = 10;
 
   // these could be calculated, but there was some weirdness with text baseline etc, so manually.
-  const bottomLabelsOffset = 12;
-  const topLabelsOffset = -5;
+  const bottomLabelsOffset = 15;
+  const topLabelsOffset = -10;
   const topLabelsY = margin.top + topLabelsOffset;
   const bottomLabelsY = margin.top + barHeight + bottomLabelsOffset;
 
@@ -47,13 +47,13 @@ const renderFundsProgressChart = (
     // .attr("class", "bg-rect")
     .attr("rx", radius)
     .attr("ry", radius)
-    .attr("fill", "gray")
+    .attr("fill", "#EAECF1")
     .attr("height", barHeight)
     .attr("width", totalWidth)
     .attr("x", 0)
     .attr("y", margin.top);
 
-  const barColor = successColors ? "cyan" : "red";
+  const barColor = successColors ? "#6BB9BD" : "#DE5C62";
 
   const progress = selected
     .append("rect")
@@ -79,7 +79,7 @@ const renderFundsProgressChart = (
   const raisedLabel = selected
     .append("text")
     .text(formattedRaisedFunds)
-    .attr("fill", "black")
+    .attr("fill", "white")
     .attr("font-size", 10)
     .attr("font-weight", 600)
     .attr("x", 0)
@@ -110,7 +110,7 @@ const renderFundsProgressChart = (
     .attr("x", function () {
       return x(minFunds) - minFundsTextSize.width / 2;
     })
-    .attr("y", margin.top + barHeight + 12);
+    .attr("y", bottomLabelsY);
 
   // min funds line
   selected
@@ -143,10 +143,10 @@ const renderFundsProgressChart = (
     })
     .attr("y", bottomLabelsY);
 
-  const textCTextSize = calculateTextSize(textTopRight + "");
   surroundingTopLabel(selected, textTopRight)
+    .attr("text-anchor", "end")
     .attr("x", function () {
-      return x(maxFunds) - textCTextSize.width;
+      return x(maxFunds);
     })
     .attr("y", topLabelsY);
 
@@ -174,22 +174,21 @@ const calculateTextSize = (text) => {
 };
 
 const surroundingTopLabel = (svg, text) => {
-  return surroundingLabel(svg, text).attr("class", "funds-progress-text-top");
+  return surroundingLabel(svg, text)
+    .attr("font-size", 12)
+    .attr("class", "funds-progress-text-top");
 };
 
 const surroundingBottomLabel = (svg, text) => {
-  return surroundingLabel(svg, text).attr(
-    "class",
-    "funds-progress-text-bottom"
-  );
+  return surroundingLabel(svg, text)
+    .attr("font-size", 10)
+    .attr("class", "funds-progress-text-bottom");
 };
 
 const surroundingLabel = (svg, text) => {
   return svg
     .append("text")
     .text(text)
-    .attr("fill", "black")
-    .attr("font-size", 10)
-    .attr("font-weight", 600)
-    .attr("class", "funds-progress-text-bottom");
+    .attr("fill", "#787E82")
+    .attr("font-weight", 400);
 };
