@@ -1161,4 +1161,26 @@ $mobile_bp: 650px;
             }
         }
     }
+}}
+
+.http-error-label {
+    font-size: 230px;
+    font-weight: 700;
+    color: $global-red-button;
+}
+
+.http-error-message {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.http-error-descr {
+    font-size: 16;
+    margin-bottom: 5px;
+}
+
+.http-submit-button {
+    // @extend .button-primary;
+    background-color: #6bb9bd;
 }
