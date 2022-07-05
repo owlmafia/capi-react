@@ -355,7 +355,8 @@ select {
 
     .modal-content-size {
         min-width: 400px;
-        min-height: 400px;
+        min-height: 320px;
+        max-height: 400px;
     }
 
     @keyframes modalAnimation {
@@ -723,8 +724,12 @@ p {
     font-size: 18px;
 }
 
-.w-100-p {
+.w-100px {
     width: 100px;
+}
+
+.w-300px {
+    width: 300px;
 }
 
 .ft-size-14 {

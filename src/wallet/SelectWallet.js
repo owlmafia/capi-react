@@ -4,10 +4,10 @@ import { createWcWallet } from "./walletConnectWallet";
 
 export const SelectWallet = ({ deps, onConnected }) => {
   return (
-    <div>
+    <div className="d-flex flex-column align-center">
       <SubmitButton
         label={"Wallet Connect"}
-        className="button-primary full-width-btn mb-4"
+        className="button-primary w-300px mb-4"
         onClick={async () =>
           selectWallet(
             deps,
@@ -22,7 +22,7 @@ export const SelectWallet = ({ deps, onConnected }) => {
       />
       <SubmitButton
         label={"My Algo"}
-        className="button-primary full-width-btn"
+        className="button-primary w-300px"
         onClick={async () =>
           selectWallet(
             deps,
