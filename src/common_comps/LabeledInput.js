@@ -250,10 +250,15 @@ export const LabeledDateInput = ({
           "text",
           () => {},
           placeholder,
-          () => setShowMinRaiseTargetEndDateModal(true),
+          () => {},
           disabled
         )}
-        <img src={calendar} alt="img" className={disabled && "opacity-50"} />
+        <img
+          src={calendar}
+          alt="img"
+          className={disabled && "opacity-50"}
+          onClick={() => setShowMinRaiseTargetEndDateModal(true)}
+        />
       </div>
       <ValidationMsg errorMsg={errorMsg} />
       {showMinRaiseTargetEndDateModal && (
