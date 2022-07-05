@@ -4,6 +4,7 @@ import {
   LabeledCurrencyInput,
   LabeledInput,
   LabeledTextArea,
+  LabeledDateInput,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { calculateTotalPrice, createDao } from "./controller";
@@ -13,7 +14,6 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import link from "../images/svg/link.svg";
-import { SelectDateModal } from "./SelectDateModal";
 import moment from "moment";
 import funds from "../images/funds.svg";
 import ReactTooltip from "react-tooltip";
@@ -36,8 +36,6 @@ export const CreateDao = ({ deps }) => {
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
-  const [showMinRaiseTargetEndDateModal, setShowMinRaiseTargetEndDateModal] =
-    useState(false);
   const formattedMinRaiseTargetEndDate = useMemo(() => {
     return moment(minRaiseTargetEndDate).format("D MMM YYYY");
   }, [minRaiseTargetEndDate]);
@@ -201,18 +199,16 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setMaxRaiseTarget(input)}
           errorMsg={maxRaiseTargetError}
         />
-        <LabeledInput
+        <LabeledDateInput
           label={"Fundraising end date"}
           info={
             "If min. target not reached on this day, project fails and investors can reclaim their funds."
           }
-          inputValue={formattedMinRaiseTargetEndDate}
+          inputValue={minRaiseTargetEndDate}
+          onChange={setMinRaiseTargetEndDate}
           disabled={true}
           errorMsg={minRaiseTargetEndDateError}
         />
-        <button onClick={() => setShowMinRaiseTargetEndDateModal(true)}>
-          TODO Calendar icon
-        </button>
 
         <SubmitButton
           label={"Create project"}
@@ -255,13 +251,6 @@ export const CreateDao = ({ deps }) => {
         <SelectWalletModal
           deps={deps}
           setShowModal={setShowSelectWalletModal}
-        />
-      )}
-      {showMinRaiseTargetEndDateModal && (
-        <SelectDateModal
-          closeModal={() => setShowMinRaiseTargetEndDateModal(false)}
-          endDate={minRaiseTargetEndDate}
-          setEndDate={setMinRaiseTargetEndDate}
         />
       )}
     </div>

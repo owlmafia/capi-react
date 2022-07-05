@@ -1,8 +1,11 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useMemo, Fragment } from "react";
 import ReactTooltip from "react-tooltip";
+import moment from "moment";
+import { SelectDateModal } from "../create/SelectDateModal";
 import info from "../images/svg/info.svg";
 import error from "../images/svg/error.svg";
 import funds from "../images/funds.svg";
+import calendar from "../images/calendar_today.svg";
 
 export const LabeledInput = ({
   label,
@@ -215,6 +218,51 @@ export const LabeledTextArea = ({
         />
         {img && <img src={img} alt="img" />}
       </div>
+    </div>
+  );
+};
+
+export const LabeledDateInput = ({
+  label,
+  inputValue,
+  onChange,
+  placeholder,
+  errorMsg,
+  info,
+  disabled,
+}) => {
+  const [showMinRaiseTargetEndDateModal, setShowMinRaiseTargetEndDateModal] =
+    useState(false);
+
+  const formattedMinRaiseTargetEndDate = useMemo(() => {
+    return moment(inputValue).format("D MMM YYYY");
+  }, [inputValue]);
+
+  return (
+    <div className="labeled_input">
+      <div className="labeled_input__label">
+        {label}
+        {info && <InfoView info={info} />}
+      </div>
+      <div className="date-input__container">
+        {input(
+          formattedMinRaiseTargetEndDate,
+          "text",
+          () => {},
+          placeholder,
+          () => setShowMinRaiseTargetEndDateModal(true),
+          disabled
+        )}
+        <img src={calendar} alt="img" className={disabled && "opacity-50"} />
+      </div>
+      <ValidationMsg errorMsg={errorMsg} />
+      {showMinRaiseTargetEndDateModal && (
+        <SelectDateModal
+          closeModal={() => setShowMinRaiseTargetEndDateModal(false)}
+          endDate={inputValue}
+          setEndDate={onChange}
+        />
+      )}
     </div>
   );
 };
