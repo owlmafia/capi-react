@@ -13,7 +13,6 @@ export const SelectDateModal = ({ closeModal, endDate, setEndDate }) => {
       <Calendar
         onChange={(value) => {
           setNewEndDate(moment(value)); // date -> moment
-          // closeModal();
         }}
         value={newEndDate.toDate()} // moment -> date
       />
