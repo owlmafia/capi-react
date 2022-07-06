@@ -5,7 +5,7 @@ export const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="error404-container">
       <div className="container">
         <div className="http-error-label">{"404"}</div>
         <div className="http-error-message">

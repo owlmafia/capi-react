@@ -12,6 +12,7 @@
 
 .Toastify__toast-container {
   max-width: 500px;
+  word-break: break-all;
 
   .Toastify__toast {
       padding: 26px;

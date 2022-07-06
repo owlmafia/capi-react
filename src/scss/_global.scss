@@ -593,6 +593,10 @@ p {
     margin-bottom: 40px;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .d-flex {
     display: flex;
 }
@@ -706,6 +710,14 @@ p {
 
 .ft-color-black-000 {
     color: $black-000;
+}
+
+.ft-color-cyan {
+    color: #6BB9BD;
+}
+
+.ft-color-red {
+    color: #DE5C62;
 }
 
 .ft-color-grey {
@@ -1162,15 +1174,40 @@ $mobile_bp: 650px;
 .http-error-message {
     font-size: 40px;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 32px;
+    color: $black-000;
 }
 
 .http-error-descr {
     font-size: 16;
     margin-bottom: 5px;
+    color: #686777;
 }
 
 .http-submit-button {
     // @extend .button-primary;
+    width: 340px;
+    margin-top: 40px;
     background-color: #6bb9bd;
+}
+
+@media only screen and (max-width: 1330px) {
+    .error404-container {
+        padding: 0 40px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .error404-container {
+        padding: 0 20px;
+
+        .http-error-label {
+            font-size: 130px;
+        }
+
+        .http-submit-button {
+            width: 180px;
+            margin-top: 80px;
+        }
+    }
 }

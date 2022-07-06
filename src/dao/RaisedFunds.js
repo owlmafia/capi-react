@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Progress from "../app_comps/Progress";
 import renderFundsProgressChart from "../charts/renderFundsBarChart";
@@ -52,10 +52,20 @@ export const RaisedFunds = ({ deps, dao }) => {
           <div>{"Min target number: " + dao.raise_min_target_number}</div>
           <div>{"Total raisable: " + dao.total_raisable}</div>
           <div>{"Total raisable number: " + dao.total_raisable_number}</div> */}
+          <div className="subtitle mb-32">Investing progress</div>
+
           {raiseState && (
-            <div className="subtitle mb-32">{raiseState.text}</div>
+            <div>
+              <div
+                className={`text-center subtitle mb-12 ${
+                  raiseState.success ? "ft-color-cyan" : "ft-color-red"
+                }`}
+              >
+                {raiseState.text}
+              </div>
+              <svg ref={chart} />
+            </div>
           )}
-          <svg ref={chart} />
         </div>
       );
     } else {
