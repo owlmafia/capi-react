@@ -74,6 +74,7 @@ const myAddressView = (deps, daoId) => {
               }
               copyText={deps.myAddress}
               statusMsg={deps.statusMsg}
+              copyMsg={"Address copied to clipboard"}
             />
           </div>
           <div id="my_account_my_balance__balance">
