@@ -49,7 +49,6 @@ export const CreateDao = ({ deps }) => {
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
   // mock data, while we've no UI for this
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
-  const [maxRaiseTargetError, setMaxRaiseTargetError] = useState("");
 
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
     useState("");
@@ -109,7 +108,6 @@ export const CreateDao = ({ deps }) => {
           setImageBytesError,
           setSocialMediaUrlError,
           setMinRaiseTargetError,
-          setMaxRaiseTargetError,
           setMinRaiseTargetEndDateError,
           setShowBuyCurrencyInfoModal,
           deps.wallet
@@ -197,7 +195,6 @@ export const CreateDao = ({ deps }) => {
           info={"The maximum amount that can be raised (share supply x price)"}
           inputValue={maxRaiseTarget}
           onChange={(input) => setMaxRaiseTarget(input)}
-          errorMsg={maxRaiseTargetError}
         />
         <LabeledDateInput
           label={"Fundraising end date"}
