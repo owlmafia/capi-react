@@ -32,7 +32,6 @@ export const CreateDao = ({ deps }) => {
   );
 
   const [minRaiseTarget, setMinRaiseTarget] = useState("");
-  const [maxRaiseTarget, setMaxRaiseTarget] = useState("");
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
@@ -190,12 +189,6 @@ export const CreateDao = ({ deps }) => {
           onChange={(input) => setMinRaiseTarget(input)}
           errorMsg={minRaiseTargetError}
         />
-        <LabeledCurrencyInput
-          label={"Max funding target"}
-          info={"The maximum amount that can be raised (share supply x price)"}
-          inputValue={maxRaiseTarget}
-          onChange={(input) => setMaxRaiseTarget(input)}
-        />
         <LabeledDateInput
           label={"Fundraising end date"}
           info={
@@ -206,6 +199,21 @@ export const CreateDao = ({ deps }) => {
           disabled={true}
           errorMsg={minRaiseTargetEndDateError}
         />
+
+        <div>
+          <div>{"Max funding target"}</div>
+          <img src={funds} alt="img" />
+          <div
+            className="d-flex align-center"
+            data-tip={
+              "The maximum amount that can be raised (share supply x price)"
+            }
+          >
+            <img src={info} alt="info" />
+          </div>
+          <ReactTooltip />
+          <div>{totalSharePrice}</div>
+        </div>
 
         <SubmitButton
           label={"Create project"}
