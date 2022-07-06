@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Progress from "../app_comps/Progress";
 import renderFundsProgressChart from "../charts/renderFundsBarChart";
 import { loadRaisedFunds } from "./controller";
+import moment from "moment";
 
 export const RaisedFunds = ({ deps, dao }) => {
   let params = useParams();
@@ -10,10 +11,20 @@ export const RaisedFunds = ({ deps, dao }) => {
   const [raisedFunds, setRaisedFunds] = useState(null);
   const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
   const [raiseState, setRaiseState] = useState(null);
+  const [isPastDue, setIsPastDue] = useState(false);
+  const [ratioReached, setRatioReached] = useState(false);
 
   const chart = useRef(null);
 
   console.log("deps: " + JSON.stringify(deps));
+
+  useEffect(() => {
+    setIsPastDue(moment.unix(dao.raise_end_date).isBefore());
+  }, [dao.raise_end_date]);
+
+  useEffect(() => {
+    setRatioReached(raisedFundsNumber / dao.raise_min_target_number);
+  }, [dao.raise_min_target_number, raisedFundsNumber]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -54,6 +65,19 @@ export const RaisedFunds = ({ deps, dao }) => {
           <div>{"Total raisable number: " + dao.total_raisable_number}</div> */}
           {raiseState && (
             <div className="subtitle mb-32">{raiseState.text}</div>
+          )}
+          {isPastDue && (
+            <div
+              className={`text-center subtitle mb-12 ${
+                ratioReached > 1 ? "ft-color-cyan" : "ft-color-red"
+              }`}
+            >
+              {ratioReached > 1
+                ? `Fundrise is ${Math.round(
+                    (ratioReached - 1) * 100
+                  )}% over the goal`
+                : "Wasn't able to raise funds"}
+            </div>
           )}
           <svg ref={chart} />
         </div>

@@ -593,6 +593,10 @@ p {
     margin-bottom: 40px;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .d-flex {
     display: flex;
 }
@@ -706,6 +710,14 @@ p {
 
 .ft-color-black-000 {
     color: $black-000;
+}
+
+.ft-color-cyan {
+    color: #6BB9BD;
+}
+
+.ft-color-red {
+    color: #DE5C62;
 }
 
 .ft-color-grey {
@@ -1199,4 +1211,3 @@ $mobile_bp: 650px;
         }
     }
 }
-
