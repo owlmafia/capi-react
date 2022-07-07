@@ -120,6 +120,7 @@
                 flex-direction: column;
 
                 .shares-block {
+                    white-space: nowrap;
                     display: flex;
                     gap: 12px;
                     align-items: center;
