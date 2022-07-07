@@ -256,7 +256,6 @@ export const LabeledDateInput = ({
         <img
           src={calendar}
           alt="img"
-          className={disabled && "opacity-50"}
           onClick={() => setShowMinRaiseTargetEndDateModal(true)}
         />
       </div>
