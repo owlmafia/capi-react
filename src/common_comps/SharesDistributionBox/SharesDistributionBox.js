@@ -12,6 +12,7 @@ export const SharesDistributionBox = ({
   deps,
   sharesAssetId,
   sharesSupply,
+  sharesSupplyNumber,
   appId,
 }) => {
   const [sharesDistr, setSharesDistr] = useState(null);
@@ -32,7 +33,7 @@ export const SharesDistributionBox = ({
         await fetchSharesDistribution(
           deps.statusMsg,
           sharesAssetId,
-          sharesSupply,
+          sharesSupplyNumber,
           appId,
           setSharesDistr,
           setNotOwnedShares
