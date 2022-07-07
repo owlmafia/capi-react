@@ -26,7 +26,6 @@ export const ImageCropper = ({ updateBlob, inputImg, clear }) => {
         onZoomChange={setZoom}
       />
       <div className="btn-container">
-        <button className="reposition">Reposition</button>
         <button className="delete" onClick={() => clear()}>
           Delete
         </button>
