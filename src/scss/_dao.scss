@@ -16,7 +16,7 @@
         border-bottom: 2px solid transparent;
 
         &:hover {
-            color: #C6444A;
+            color: #c6444a;
         }
     }
 
@@ -49,7 +49,6 @@
         width: 100%;
     }
 }
-
 
 #dao_funds {
     &__cont {
@@ -128,8 +127,12 @@
 
                     .shares-item {
                         display: flex;
-                        gap: 12px;
+                        // gap: 12px;
                         align-items: center;
+                    }
+
+                    .shares-item-right {
+                        margin-right: 4px;
                     }
                 }
             }
@@ -164,7 +167,6 @@
 
 .create-dao-container,
 .update-dao-data {
-
     .description {
         border: 2px solid red;
     }
@@ -178,7 +180,7 @@
 
     .dao-title {
         font-size: 24px;
-        color: #787E82;
+        color: #787e82;
         font-weight: bold;
         margin-bottom: 40px;
     }
@@ -286,7 +288,6 @@
     }
 }
 
-
 @media only screen and (max-width: 1700px) {
     .buy-shares-content {
         flex-direction: column;
@@ -306,12 +307,12 @@
 }
 
 @media only screen and (max-width: 650px) {
-    .dao_action_active_tab {    
-        .dao-shares {    
-            .top-block {    
+    .dao_action_active_tab {
+        .dao-shares {
+            .top-block {
                 .blue-circle {
                     display: none;
-                }    
+                }
                 .available-shares {
                     .shares-block {
                         flex-direction: column;
@@ -332,13 +333,12 @@
 
 @media only screen and (max-width: 650px) {
     .buy-shares-content {
-        
         .buy-shares-right-col {
             flex-direction: column;
             align-items: center;
             gap: 24px;
-    
-            #shares_const_container, 
+
+            #shares_const_container,
             #retrieved-profits {
                 align-items: center;
             }

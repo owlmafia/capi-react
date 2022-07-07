@@ -115,21 +115,25 @@ export const InvestEmbedded = ({ deps, dao }) => {
                     <div className="shares-block">
                       <div className="desc">You have:</div>
                       <div className="shares-item">
-                        <div>{"Locked shares:"}</div>
+                        <div className="shares-item-right">
+                          {"Locked shares:"}
+                        </div>
                         <div className="ft-weight-700">
                           {deps.investmentData.investor_locked_shares}
                         </div>
                       </div>
                       <div className="blue-circle"></div>
                       <div className="shares-item">
-                        <div>{"Unlocked shares:"}</div>
+                        <div className="shares-item-right">
+                          {"Unlocked shares:"}
+                        </div>
                         <div className="ft-weight-700">
                           {deps.investmentData.investor_unlocked_shares}
                         </div>
                       </div>
                       <div className="blue-circle"></div>
                       <div className="shares-item">
-                        <div>{"Share:"}</div>
+                        <div className="shares-item-right">{"Share:"}</div>
                         <div className="ft-weight-700">
                           {deps.investmentData.investor_share}
                         </div>
