@@ -185,11 +185,11 @@ export const CreateDao = ({ deps }) => {
         <div className="d-flex gap-32">
           <div className="f-basis-50">
             <LabeledCurrencyInput
-            label={"Min funding target"}
-            info={"The minumum amount needed to start the project."}
-            inputValue={minRaiseTarget}
-            onChange={(input) => setMinRaiseTarget(input)}
-            errorMsg={minRaiseTargetError}
+              label={"Min funding target"}
+              info={"The minumum amount needed to start the project."}
+              inputValue={minRaiseTarget}
+              onChange={(input) => setMinRaiseTarget(input)}
+              errorMsg={minRaiseTargetError}
             />
           </div>
           <div className="f-basis-50">
@@ -197,12 +197,12 @@ export const CreateDao = ({ deps }) => {
               <div className="d-flex align-center mb-8">
                 <div className="ft-weight-600">{"Max funding target"}</div>
                 <div
-                    className="d-flex align-center ml-10"
-                    data-tip={
-                      "The maximum amount that can be raised (share supply x price)"
-                    }
-                  >
-                    <img src={info} alt="info" />
+                  className="d-flex align-center ml-10"
+                  data-tip={
+                    "The maximum amount that can be raised (share supply x price)"
+                  }
+                >
+                  <img src={info} alt="info" />
                 </div>
                 <ReactTooltip />
               </div>
