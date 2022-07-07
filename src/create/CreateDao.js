@@ -148,15 +148,6 @@ export const CreateDao = ({ deps }) => {
         <ImageUpload setImageBytes={setImageBytes} />
         <div className="dao-title mt-60">Project Funds</div>
         <LabeledAmountInput
-          label={"Share supply"}
-          inputValue={shareCount}
-          onChange={(input) => {
-            setShareCount(input);
-            updateTotalPrice();
-          }}
-          errorMsg={shareCountError}
-        />
-        <LabeledAmountInput
           label={"Shares for sale"}
           info={
             "Shares available for sale. Not available shares stay in the creator's wallet."
@@ -173,22 +164,61 @@ export const CreateDao = ({ deps }) => {
           errorMsg={investorsShareError}
           placeholder="Investor's part in %"
         />
-        <LabeledCurrencyInput
-          label={"Share price (unit)"}
-          inputValue={sharePrice}
-          onChange={(input) => {
-            setSharePrice(input);
-            updateTotalPrice();
-          }}
-          errorMsg={sharePriceError}
-        />
-        <LabeledCurrencyInput
-          label={"Min funding target"}
-          info={"The minumum amount needed to start the project."}
-          inputValue={minRaiseTarget}
-          onChange={(input) => setMinRaiseTarget(input)}
-          errorMsg={minRaiseTargetError}
-        />
+        <div className="d-flex gap-32">
+          <div className="f-basis-50">
+            <LabeledAmountInput
+              label={"Share supply"}
+              inputValue={shareCount}
+              onChange={(input) => {
+                setShareCount(input);
+                updateTotalPrice();
+              }}
+              errorMsg={shareCountError}
+            />
+          </div>
+          <div className="f-basis-50">
+            <LabeledCurrencyInput
+              label={"Share price (unit)"}
+              inputValue={sharePrice}
+              onChange={(input) => {
+                setSharePrice(input);
+                updateTotalPrice();
+              }}
+              errorMsg={sharePriceError}
+            />
+          </div>
+        </div>
+        <div className="d-flex gap-32">
+          <div className="f-basis-50">
+            <LabeledCurrencyInput
+            label={"Min funding target"}
+            info={"The minumum amount needed to start the project."}
+            inputValue={minRaiseTarget}
+            onChange={(input) => setMinRaiseTarget(input)}
+            errorMsg={minRaiseTargetError}
+            />
+          </div>
+          <div className="f-basis-50">
+            <div className="pl-25 ft-color-grey">
+              <div className="d-flex align-center mb-8">
+                <div className="ft-weight-600">{"Max funding target"}</div>
+                <div
+                    className="d-flex align-center ml-10"
+                    data-tip={
+                      "The maximum amount that can be raised (share supply x price)"
+                    }
+                  >
+                    <img src={info} alt="info" />
+                </div>
+                <ReactTooltip />
+              </div>
+              <div className="d-flex align-center h-64">
+                <img src={funds} alt="img" />
+                <div className="ml-10">{totalSharePrice}</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <LabeledDateInput
           label={"Fundraising end date"}
           info={
@@ -199,22 +229,6 @@ export const CreateDao = ({ deps }) => {
           disabled={true}
           errorMsg={minRaiseTargetEndDateError}
         />
-
-        <div>
-          <div>{"Max funding target"}</div>
-          <img src={funds} alt="img" />
-          <div
-            className="d-flex align-center"
-            data-tip={
-              "The maximum amount that can be raised (share supply x price)"
-            }
-          >
-            <img src={info} alt="info" />
-          </div>
-          <ReactTooltip />
-          <div>{totalSharePrice}</div>
-        </div>
-
         <SubmitButton
           label={"Create project"}
           className={"button-primary"}

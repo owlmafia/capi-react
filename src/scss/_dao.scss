@@ -197,6 +197,11 @@
 .date-input__container {
     position: relative;
 
+    input:disabled {
+        background: #fff;
+        color: $black;
+    }
+
     img {
         position: absolute;
         right: 25px;
