@@ -66,13 +66,9 @@ export const CreateDao = ({ deps }) => {
 
   const [totalSharePrice, setTotalSharePrice] = useState("");
 
-  const updateTotalPrice = () => {
-    calculateTotalPrice(shareCount, sharePrice, setTotalSharePrice);
-  };
-
   useEffect(() => {
-    updateTotalPrice();
-  }, []);
+    calculateTotalPrice(shareCount, sharePrice, setTotalSharePrice);
+  }, [shareCount, sharePrice]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -171,7 +167,6 @@ export const CreateDao = ({ deps }) => {
               inputValue={shareCount}
               onChange={(input) => {
                 setShareCount(input);
-                updateTotalPrice();
               }}
               errorMsg={shareCountError}
             />
@@ -182,7 +177,6 @@ export const CreateDao = ({ deps }) => {
               inputValue={sharePrice}
               onChange={(input) => {
                 setSharePrice(input);
-                updateTotalPrice();
               }}
               errorMsg={sharePriceError}
             />
