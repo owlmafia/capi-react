@@ -658,6 +658,10 @@ p {
     height: 16px;
 }
 
+.h-64 {
+    height: 64px;
+}
+
 .flex-wrap {
     flex-wrap: wrap;
 }
@@ -724,8 +728,16 @@ p {
     color: #686777;
 }
 
+.pl-25 {
+    padding-left: 25px;
+}
+
 .ft-size-18 {
     font-size: 18px;
+}
+
+.f-basis-50 {
+    flex-basis: 50%;
 }
 
 .w-100px {
