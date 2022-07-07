@@ -33,6 +33,11 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
     setImageBytes(bytes);
   };
 
+  const clear = () => {
+    setInputImg(null); // clear displayed image
+    setImageBytes([]); // clear state
+  };
+
   const handleSubmitImage = (e) => {
     e.preventDefault();
   };
@@ -60,7 +65,13 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
       </div>
 
       {/* crop image: gets image from inputImg hook, updates it via updateCrop */}
-      {inputImg && <ImageCropper updateBlob={updateCrop} inputImg={inputImg} />}
+      {inputImg && (
+        <ImageCropper
+          updateBlob={updateCrop}
+          inputImg={inputImg}
+          clear={() => clear()}
+        />
+      )}
     </form>
   );
 };

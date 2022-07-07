@@ -4,7 +4,7 @@ import Cropper from "react-easy-crop";
 const IMAGE_WIDTH = 1033;
 const ASPECT_RATIO = 2.86944444;
 
-export const ImageCropper = ({ updateBlob, inputImg }) => {
+export const ImageCropper = ({ updateBlob, inputImg, clear }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
 
@@ -27,7 +27,9 @@ export const ImageCropper = ({ updateBlob, inputImg }) => {
       />
       <div className="btn-container">
         <button className="reposition">Reposition</button>
-        <button className="delete">Delete</button>
+        <button className="delete" onClick={() => clear()}>
+          Delete
+        </button>
       </div>
     </div>
   );
