@@ -1,6 +1,10 @@
 import * as d3 from "d3";
 import moment from "moment";
 
+const topLabelFontSize = 12;
+const bottomLabelFontSize = 10;
+const surroundingLabelWeight = 400;
+
 const renderFundsProgressChart = (
   svg,
   dao,
@@ -12,11 +16,14 @@ const renderFundsProgressChart = (
   let textTopLeft = moment.unix(0).format("D MMM YYYY");
   let textBottomLeft = "0";
   let textTopRight = moment.unix(dao.raise_end_date).format("D MMM YYYY");
-  let textBottomRight = dao.total_raisable;
+  let textBottomRight = dao.total_raisable + "";
 
   const minFunds = dao.raise_min_target_number;
   const formattedMinFunds = dao.raise_min_target;
   const maxFunds = dao.total_raisable_number;
+
+  const raisedFundsFontSize = 10;
+  const raisedFundsFontWeight = 600;
 
   const margin = { top: 30, right: 10, bottom: 30, left: 40 },
     width = 600 - margin.right;
@@ -75,13 +82,17 @@ const renderFundsProgressChart = (
     });
 
   // raised funds label
-  const raisedFundsTextSize = calculateTextSize(formattedRaisedFunds);
+  const raisedFundsTextSize = calculateTextSize(
+    formattedRaisedFunds,
+    raisedFundsFontWeight,
+    10
+  );
   const raisedLabel = selected
     .append("text")
     .text(formattedRaisedFunds)
     .attr("fill", "white")
-    .attr("font-size", 10)
-    .attr("font-weight", 600)
+    .attr("font-size", raisedFundsFontSize)
+    .attr("font-weight", raisedFundsFontWeight)
     .attr("x", 0)
     .attr("opacity", 0)
     // .attr("x", x.bandwidth() * data.length + margin.left)
@@ -105,7 +116,11 @@ const renderFundsProgressChart = (
     });
 
   // min funds label
-  const minFundsTextSize = calculateTextSize(formattedMinFunds);
+  const minFundsTextSize = calculateTextSize(
+    formattedMinFunds,
+    surroundingLabelWeight,
+    bottomLabelFontSize
+  );
   const minFundsX = x(minFunds) - minFundsTextSize.width / 2;
   // if the label overlaps the 0 on the botton left, don't show it
   // could have better solution like moving the label somewhere else
@@ -155,7 +170,11 @@ const renderFundsProgressChart = (
     })
     .attr("y", topLabelsY);
 
-  const textBottomRightTextSize = calculateTextSize(textBottomRight + "");
+  const textBottomRightTextSize = calculateTextSize(
+    textBottomRight,
+    surroundingLabelWeight,
+    bottomLabelFontSize
+  );
   surroundingBottomLabel(selected, textBottomRight)
     .attr("x", function () {
       return x(maxFunds) - textBottomRightTextSize.width;
@@ -164,12 +183,12 @@ const renderFundsProgressChart = (
 };
 export default renderFundsProgressChart;
 
-const calculateTextSize = (text) => {
+const calculateTextSize = (text, fontWeight, fontSize) => {
   var container = d3.select("body").append("svg");
   container
     .append("text")
-    .attr("font-size", 10)
-    .attr("font-weight", 600)
+    .attr("font-size", fontSize)
+    .attr("font-weight", fontWeight)
     .attr("x", -99999)
     .attr("y", -99999)
     .text(text);
@@ -180,13 +199,13 @@ const calculateTextSize = (text) => {
 
 const surroundingTopLabel = (svg, text) => {
   return surroundingLabel(svg, text)
-    .attr("font-size", 12)
+    .attr("font-size", topLabelFontSize)
     .attr("class", "funds-progress-text-top");
 };
 
 const surroundingBottomLabel = (svg, text) => {
   return surroundingLabel(svg, text)
-    .attr("font-size", 10)
+    .attr("font-size", bottomLabelFontSize)
     .attr("class", "funds-progress-text-bottom");
 };
 
@@ -195,5 +214,5 @@ const surroundingLabel = (svg, text) => {
     .append("text")
     .text(text)
     .attr("fill", "#787E82")
-    .attr("font-weight", 400);
+    .attr("font-weight", surroundingLabelWeight);
 };
