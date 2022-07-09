@@ -150,10 +150,10 @@ const renderFundsProgressChart = (
     })
     .attr("y", topLabelsY);
 
-  const textDTextSize = calculateTextSize(textBottomRight + "");
+  const textBottomRightTextSize = calculateTextSize(textBottomRight + "");
   surroundingBottomLabel(selected, textBottomRight)
     .attr("x", function () {
-      return x(maxFunds) - textDTextSize.width;
+      return x(maxFunds) - textBottomRightTextSize.width;
     })
     .attr("y", bottomLabelsY);
 };
