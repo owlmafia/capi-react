@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
@@ -17,32 +17,14 @@ export const Stats = ({ deps }) => {
     asyncInit();
   }, [params.id, deps.statusMsg]);
 
-  const sharesAssetId = useMemo(() => {
-    if (dao) {
-      return dao.shares_asset_id;
-    }
-  }, [dao]);
-
-  const sharesSupply = useMemo(() => {
-    if (dao) {
-      return dao.share_supply;
-    }
-  }, [dao]);
-
-  const sharesSupplyNumber = useMemo(() => {
-    if (deps.dao) {
-      return deps.dao.share_supply_number;
-    }
-  }, [deps.dao]);
-
   return (
     <div>
       {dao && (
         <SharesDistributionBox
           deps={deps}
-          sharesAssetId={sharesAssetId}
-          sharesSupply={sharesSupply}
-          sharesSupplyNumber={sharesSupplyNumber}
+          sharesAssetId={dao.shares_asset_id}
+          sharesSupply={dao.share_supply}
+          sharesSupplyNumber={dao.share_supply_number}
           appId={dao.app_id}
         />
       )}

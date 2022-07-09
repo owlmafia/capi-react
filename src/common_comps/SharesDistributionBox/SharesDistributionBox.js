@@ -41,7 +41,7 @@ export const SharesDistributionBox = ({
       }
     }
     fetchData();
-  }, [deps.statusMsg, sharesAssetId, sharesSupply, appId]);
+  }, [deps.statusMsg, sharesAssetId, sharesSupply, appId, sharesSupplyNumber]);
 
   useEffect(() => {
     const showAll = () => {
