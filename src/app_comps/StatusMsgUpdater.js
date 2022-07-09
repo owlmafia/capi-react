@@ -43,6 +43,8 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
   },
 
   clear() {
-    toast.dismiss();
+    // quick fix for "project created" toast disappearing quickly
+    // TODO probably delete clear() - with timed notifications seems not neded anymore
+    // toast.dismiss();
   },
 });
