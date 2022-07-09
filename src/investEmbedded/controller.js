@@ -4,21 +4,6 @@ import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
 
-export const fetchAvailableShares = async (
-  statusMsg,
-  daoId,
-  setAvailableShares
-) => {
-  try {
-    const { bridge_load_available_shares } = await wasmPromise;
-    let res = await bridge_load_available_shares({
-      dao_id: daoId,
-    });
-    setAvailableShares(res.available_shares);
-  } catch (e) {
-    statusMsg.error(e);
-  }
-};
 
 export const updateTotalPriceAndPercentage = async (
   _statusMsg,

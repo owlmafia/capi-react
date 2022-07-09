@@ -74,3 +74,19 @@ export const updateDao_ = async (daoId, setDao, statusMsg) => {
     statusMsg.error(e);
   }
 };
+
+export const fetchAvailableShares = async (
+  statusMsg,
+  daoId,
+  setAvailableShares
+) => {
+  try {
+    const { bridge_load_available_shares } = await wasmPromise;
+    let res = await bridge_load_available_shares({
+      dao_id: daoId,
+    });
+    setAvailableShares(res.available_shares);
+  } catch (e) {
+    statusMsg.error(e);
+  }
+};

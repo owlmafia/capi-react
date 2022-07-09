@@ -4,11 +4,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
-import {
-  fetchAvailableShares,
-  invest,
-  updateTotalPriceAndPercentage,
-} from "./controller";
+import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { DisclaimerModal } from "../modal/DisclaimerModal";
 import {
   needsToAcceptDisclaimer,
@@ -43,18 +39,18 @@ export const InvestEmbedded = ({ deps, dao }) => {
   };
 
   useEffect(() => {
-    fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
+    deps.updateAvailableShares.call(null, params.id);
   }, [deps.statusMsg, params.id]);
 
   useEffect(() => {
     async function nestedAsync() {
-      if (availableShares) {
+      if (deps.availableShares) {
         if (buySharesCount) {
           updateTotalPriceAndPercentage(
             deps.statusMsg,
             buySharesCount,
             dao,
-            availableShares,
+            deps.availableShares,
             setTotalCost,
             setTotalCostNumber,
             setProfitPercentage
@@ -68,7 +64,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
       }
     }
     nestedAsync();
-  }, [deps.statusMsg, params.id, buySharesCount, availableShares, dao]);
+  }, [deps.statusMsg, params.id, buySharesCount, deps.availableShares, dao]);
 
   useEffect(() => {
     async function nestedAsync() {
@@ -109,7 +105,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div className="available-shares">
                   <div className="d-flex mb-16 gap-12">
                     <div className="desc">{"Available: "}</div>
-                    <div className="desc">{availableShares}</div>
+                    <div className="desc">{deps.availableShares}</div>
                   </div>
                   {deps.investmentData && (
                     <div className="shares-block">
@@ -221,5 +217,5 @@ export const InvestEmbedded = ({ deps, dao }) => {
     );
   };
 
-  return availableShares && view();
+  return deps.availableShares && view();
 };

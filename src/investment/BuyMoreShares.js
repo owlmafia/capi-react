@@ -7,7 +7,6 @@ import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors, PIE_CHART_GRAY } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";
 import {
-  fetchAvailableShares,
   invest,
   updateTotalPriceAndPercentage,
 } from "../investEmbedded/controller";
@@ -21,7 +20,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
   const [submitting, setSubmitting] = useState(false);
 
   const [totalCostNumber, setTotalCostNumber] = useState(null);
-  const [availableShares, setAvailableShares] = useState(null);
   // these 2 are not used currently - copied from InvestEmbedded, which has basically the same functionality but a different UI
   // may be used in the future
   const [_totalCost, setTotalCost] = useState(null);
@@ -31,17 +29,17 @@ export const BuyMoreShares = ({ deps, dao }) => {
     useState(null);
 
   useEffect(() => {
-    fetchAvailableShares(deps.statusMsg, params.id, setAvailableShares);
+    deps.updateAvailableShares.call(null, params.id);
   }, [deps.statusMsg, params.id]);
 
   useEffect(() => {
     async function nestedAsync() {
-      if (availableShares && buySharesCount) {
+      if (deps.availableShares && buySharesCount) {
         updateTotalPriceAndPercentage(
           deps.statusMsg,
           buySharesCount,
           dao,
-          availableShares,
+          deps.availableShares,
           setTotalCost,
           setTotalCostNumber,
           setProfitPercentage
@@ -49,7 +47,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
       }
     }
     nestedAsync();
-  }, [deps.statusMsg, params.id, buySharesCount, availableShares, dao]);
+  }, [deps.statusMsg, params.id, buySharesCount, deps.availableShares, dao]);
 
   const view = () => {
     return (
@@ -68,8 +66,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 </div>
               </div>
               <div className="chartBlock">
-                {availableShares && (
-                  <div className="numbers desc">{availableShares}</div>
+                {deps.availableShares && (
+                  <div className="numbers desc">{deps.availableShares}</div>
                 )}
                 <div className="h-16">
                   <svg
@@ -132,7 +130,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               label={"Buy"}
               className="button-primary"
               isLoading={submitting}
-              disabled={availableShares === "0"}
+              disabled={deps.availableShares === "0"}
               onClick={async () => {
                 await invest(
                   deps.myAddress,
@@ -153,11 +151,11 @@ export const BuyMoreShares = ({ deps, dao }) => {
             />
           </div>
         </div>
-        {availableShares && (
+        {deps.availableShares && (
           <div className="shares-chart d-tablet-mobile-none">
             <SharesDistributionChart
               sharesDistr={[
-                to_pie_chart_slice(availableShares),
+                to_pie_chart_slice(deps.availableShares),
                 to_pie_chart_slice(deps.investmentData.investor_locked_shares),
                 to_pie_chart_slice(
                   deps.investmentData.investor_unlocked_shares

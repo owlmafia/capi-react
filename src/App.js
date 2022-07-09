@@ -10,6 +10,7 @@ import {
   updateMyDividend_,
   updateDao_,
   initLog,
+  fetchAvailableShares,
 } from "./controller";
 import Modal from "./modal/Modal";
 import {
@@ -50,6 +51,8 @@ const App = () => {
 
   const [wallet, setWallet] = useState(null);
 
+  const [availableShares, setAvailableShares] = useState(null);
+
   // this is only used when the selected wallet is wallet connect
   const [wcShowOpenWalletModal, setWcShowOpenWalletModal] = useState(false);
 
@@ -87,6 +90,13 @@ const App = () => {
     }
     nestedAsync();
   }, [myAddress, updateMyBalance]);
+
+  const updateAvailableShares = useCallback(
+    async (daoId) => {
+      await fetchAvailableShares(statusMsgUpdater, daoId, setAvailableShares);
+    },
+    [statusMsgUpdater]
+  );
 
   const updateDao = useCallback(
     async (daoId) => {
@@ -189,6 +199,9 @@ const App = () => {
           setWallet: setWallet,
 
           setWcShowOpenWalletModal: setWcShowOpenWalletModal,
+
+          availableShares: availableShares,
+          updateAvailableShares: updateAvailableShares,
 
           size: windowSizeClasses(windowSize),
         })}
