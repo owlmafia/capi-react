@@ -68,7 +68,9 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 </div>
               </div>
               <div className="chartBlock">
-                <div className="numbers desc">{availableShares}</div>
+                {availableShares && (
+                  <div className="numbers desc">{availableShares}</div>
+                )}
                 <div className="h-16">
                   <svg
                     width="16"
@@ -149,7 +151,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               label={"Buy"}
               className="button-primary"
               isLoading={submitting}
-              disabled={deps.investmentData.available_shares === "0"}
+              disabled={availableShares === "0"}
               onClick={async () => {
                 await invest(
                   deps.myAddress,
@@ -170,21 +172,25 @@ export const BuyMoreShares = ({ deps, dao }) => {
             />
           </div>
         </div>
-        <div className="shares-chart d-tablet-mobile-none">
-          <SharesDistributionChart
-            sharesDistr={[
-              to_pie_chart_slice(availableShares),
-              to_pie_chart_slice(deps.investmentData.investor_locked_shares),
-              to_pie_chart_slice(deps.investmentData.investor_unlocked_shares),
-            ]}
-            // we want to show available shares in gray and it's the first segment, so we prepend gray to the colors
-            // note that this is inconsistent with how it's shown on investors distribution (using NOT_OWNED segment type)
-            // we should refactor this (maybe create a generic "gray" segment type)
-            col={[PIE_CHART_GRAY].concat(pieChartColors())}
-            animated={false}
-            disableClick={true}
-          />
-        </div>
+        {availableShares && (
+          <div className="shares-chart d-tablet-mobile-none">
+            <SharesDistributionChart
+              sharesDistr={[
+                to_pie_chart_slice(availableShares),
+                to_pie_chart_slice(deps.investmentData.investor_locked_shares),
+                to_pie_chart_slice(
+                  deps.investmentData.investor_unlocked_shares
+                ),
+              ]}
+              // we want to show available shares in gray and it's the first segment, so we prepend gray to the colors
+              // note that this is inconsistent with how it's shown on investors distribution (using NOT_OWNED segment type)
+              // we should refactor this (maybe create a generic "gray" segment type)
+              col={[PIE_CHART_GRAY].concat(pieChartColors())}
+              animated={false}
+              disableClick={true}
+            />
+          </div>
+        )}
         {showBuyCurrencyInfoModal && deps.myAddress && (
           <BuyFundsAssetModal
             deps={deps}
@@ -196,7 +202,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
     );
   };
 
-  return <div>{dao && deps.investmentData && availableShares && view()}</div>;
+  return <div>{dao && deps.investmentData && view()}</div>;
 };
 
 const to_pie_chart_slice = (percentage) => {
