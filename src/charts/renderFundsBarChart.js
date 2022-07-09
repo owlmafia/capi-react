@@ -106,11 +106,16 @@ const renderFundsProgressChart = (
 
   // min funds label
   const minFundsTextSize = calculateTextSize(formattedMinFunds);
-  surroundingBottomLabel(selected, formattedMinFunds)
-    .attr("x", function () {
-      return x(minFunds) - minFundsTextSize.width / 2;
-    })
-    .attr("y", bottomLabelsY);
+  const minFundsX = x(minFunds) - minFundsTextSize.width / 2;
+  // if the label overlaps the 0 on the botton left, don't show it
+  // could have better solution like moving the label somewhere else
+  if (minFundsX > 9) {
+    surroundingBottomLabel(selected, formattedMinFunds)
+      .attr("x", function () {
+        return minFundsX;
+      })
+      .attr("y", bottomLabelsY);
+  }
 
   // min funds line
   selected
