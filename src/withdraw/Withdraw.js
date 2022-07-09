@@ -52,7 +52,7 @@ export const Withdrawal = ({ deps }) => {
             inputValue={withdrawalDescr}
             onChange={(input) => setWithdrawalDescr(input)}
             maxLength={200} // NOTE: has to match WASM
-            rows={1}
+            rows={3}
           />
 
           <SubmitButton
