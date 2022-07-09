@@ -29,6 +29,12 @@ export const Stats = ({ deps }) => {
     }
   }, [dao]);
 
+  const sharesSupplyNumber = useMemo(() => {
+    if (deps.dao) {
+      return deps.dao.share_supply_number;
+    }
+  }, [deps.dao]);
+
   return (
     <div>
       {dao && (
@@ -36,6 +42,7 @@ export const Stats = ({ deps }) => {
           deps={deps}
           sharesAssetId={sharesAssetId}
           sharesSupply={sharesSupply}
+          sharesSupplyNumber={sharesSupplyNumber}
           appId={dao.app_id}
         />
       )}
