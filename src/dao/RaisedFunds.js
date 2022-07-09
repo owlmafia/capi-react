@@ -29,19 +29,20 @@ export const RaisedFunds = ({ deps, dao }) => {
   }, [params.id, dao, deps.statusMsg]);
 
   useEffect(() => {
-    if (dao && raisedFunds && raisedFundsNumber && raiseState) {
+    if (dao && raisedFunds) {
       renderFundsProgressChart(
         chart.current,
         dao,
         raisedFunds,
         raisedFundsNumber,
-        raiseState.success
+        raiseState?.success ?? true // no state (still raising) has same colors as successful
       );
     }
   }, [dao, raisedFunds, raisedFundsNumber, raiseState]);
 
   const view = () => {
-    if (deps.dao && raisedFunds && raisedFundsNumber) {
+    // if (deps.dao && raisedFunds && raisedFundsNumber) {
+    if (deps.dao) {
       return (
         <div>
           {/* debug */}
@@ -54,8 +55,8 @@ export const RaisedFunds = ({ deps, dao }) => {
           <div>{"Total raisable number: " + dao.total_raisable_number}</div> */}
           <div className="subtitle mb-32">Investing progress</div>
 
-          {raiseState && (
-            <div>
+          <div>
+            {raiseState && (
               <div
                 className={`text-center subtitle mb-12 ${
                   raiseState.success ? "ft-color-cyan" : "ft-color-red"
@@ -63,9 +64,9 @@ export const RaisedFunds = ({ deps, dao }) => {
               >
                 {raiseState.text}
               </div>
-              <svg ref={chart} />
-            </div>
-          )}
+            )}
+            <svg ref={chart} />
+          </div>
         </div>
       );
     } else {
