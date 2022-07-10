@@ -64,7 +64,7 @@ export const LabeledInput = ({
   );
 };
 
-const InfoView = ({ info: infoText }) => {
+export const InfoView = ({ info: infoText }) => {
   return (
     <Fragment>
       <div className="d-flex align-center" data-tip={infoText}>

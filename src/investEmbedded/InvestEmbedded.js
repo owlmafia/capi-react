@@ -10,6 +10,7 @@ import {
   needsToAcceptDisclaimer,
   saveAcceptedDisclaimer,
 } from "../modal/storage";
+import { InfoView } from "../common_comps/LabeledInput";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -178,6 +179,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 <div id="retrieved-profits">
                   <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
                     {"Expected dividend"}
+                    {
+                      <InfoView
+                        info={
+                          "Total expected dividend if you buy these shares (includes already locked shares)"
+                        }
+                      />
+                    }
                   </div>
                   <div className="d-flex gap-10">
                     <div className="subtitle ft-color-black-000">
