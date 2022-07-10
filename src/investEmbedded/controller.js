@@ -12,7 +12,8 @@ export const updateTotalPriceAndPercentage = async (
   availableShares,
   setBuySharesTotalPrice,
   setBuySharesTotalPriceNumber,
-  setProfitPercentage
+  setProfitPercentage,
+  lockedShares
 ) => {
   try {
     const { bridge_calculate_shares_price } = await wasmPromise;
@@ -23,6 +24,7 @@ export const updateTotalPriceAndPercentage = async (
       share_supply: dao.share_supply_number,
       investors_share: dao.investors_share,
       share_price: dao.share_price_number_algo,
+      locked_shares: lockedShares
     });
 
     console.log("res: %o", res);

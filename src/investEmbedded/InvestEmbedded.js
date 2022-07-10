@@ -53,7 +53,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
             deps.availableShares,
             setTotalCost,
             setTotalCostNumber,
-            setProfitPercentage
+            setProfitPercentage,
+            deps.investmentData?.investor_locked_shares
           );
         } else {
           // no input: clear fields
