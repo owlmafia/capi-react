@@ -24,6 +24,7 @@ export const UnlockShares = ({ deps, dao, daoId }) => {
           daoId,
           dao,
           deps.updateInvestmentData,
+          deps.updateMyDividend,
           deps.wallet
         );
       }}

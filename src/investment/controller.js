@@ -34,6 +34,7 @@ export const unlock = async (
   daoId,
   dao,
   updateInvestmentData,
+  updateMyDividend,
   wallet
 ) => {
   try {
@@ -64,6 +65,7 @@ export const unlock = async (
     await updateInvestmentData(daoId, myAddress);
     await updateMyBalance(myAddress);
     await updateMyShares(daoId, myAddress);
+    await updateMyDividend(daoId, myAddress);
   } catch (e) {
     statusMsg.error(e);
     showProgress(false);
