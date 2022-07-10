@@ -87,7 +87,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
           setShowBuyCurrencyInfoModal,
           totalCostNumber,
           deps.updateInvestmentData,
-          deps.updateAvailableShares
+          deps.updateAvailableShares,
+          deps.updateRaisedFunds
         );
       }
     }

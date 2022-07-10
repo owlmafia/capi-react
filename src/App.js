@@ -23,6 +23,7 @@ import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
+import { loadRaisedFunds } from "./dao/controller";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -52,6 +53,9 @@ const App = () => {
   const [wallet, setWallet] = useState(null);
 
   const [availableShares, setAvailableShares] = useState(null);
+  const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
+  const [raisedFunds, setRaisedFunds] = useState(null);
+  const [raiseState, setRaiseState] = useState(null);
 
   // this is only used when the selected wallet is wallet connect
   const [wcShowOpenWalletModal, setWcShowOpenWalletModal] = useState(false);
@@ -158,6 +162,19 @@ const App = () => {
     [statusMsgUpdater]
   );
 
+  const updateRaisedFunds = useCallback(
+    async (daoId) => {
+      await loadRaisedFunds(
+        statusMsgUpdater,
+        daoId,
+        setRaisedFunds,
+        setRaisedFundsNumber,
+        setRaiseState
+      );
+    },
+    [statusMsgUpdater]
+  );
+
   const navigation = () => {
     return (
       <BrowserRouter>
@@ -202,6 +219,11 @@ const App = () => {
 
           availableShares: availableShares,
           updateAvailableShares: updateAvailableShares,
+
+          updateRaisedFunds: updateRaisedFunds,
+          raisedFundsNumber: raisedFundsNumber,
+          raisedFunds: raisedFunds,
+          raiseState: raiseState,
 
           size: windowSizeClasses(windowSize),
         })}

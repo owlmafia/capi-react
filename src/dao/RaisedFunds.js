@@ -1,15 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Progress from "../app_comps/Progress";
 import renderFundsProgressChart from "../charts/renderFundsBarChart";
-import { loadRaisedFunds } from "./controller";
 
 export const RaisedFunds = ({ deps, dao }) => {
   let params = useParams();
-
-  const [raisedFunds, setRaisedFunds] = useState(null);
-  const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
-  const [raiseState, setRaiseState] = useState(null);
 
   const chart = useRef(null);
 
@@ -17,28 +12,22 @@ export const RaisedFunds = ({ deps, dao }) => {
 
   useEffect(() => {
     async function nestedAsync() {
-      loadRaisedFunds(
-        deps.statusMsg,
-        params.id,
-        setRaisedFunds,
-        setRaisedFundsNumber,
-        setRaiseState
-      );
+      deps.updateRaisedFunds(params.id);
     }
     nestedAsync();
   }, [params.id, dao, deps.statusMsg]);
 
   useEffect(() => {
-    if (dao && raisedFunds) {
+    if (dao && deps.raisedFunds) {
       renderFundsProgressChart(
         chart.current,
         dao,
-        raisedFunds,
-        raisedFundsNumber,
-        raiseState?.success ?? true // no state (still raising) has same colors as successful
+        deps.raisedFunds,
+        deps.raisedFundsNumber,
+        deps.raiseState?.success ?? true // no state (still raising) has same colors as successful
       );
     }
-  }, [dao, raisedFunds, raisedFundsNumber, raiseState]);
+  }, [dao, deps.raisedFunds, deps.raisedFundsNumber, deps.raiseState]);
 
   const view = () => {
     // if (deps.dao && raisedFunds && raisedFundsNumber) {
@@ -56,13 +45,13 @@ export const RaisedFunds = ({ deps, dao }) => {
           <div className="subtitle mb-32">Investing progress</div>
 
           <div>
-            {raiseState && (
+            {deps.raiseState && (
               <div
                 className={`text-center subtitle mb-12 ${
-                  raiseState.success ? "ft-color-cyan" : "ft-color-red"
+                  deps.raiseState.success ? "ft-color-cyan" : "ft-color-red"
                 }`}
               >
-                {raiseState.text}
+                {deps.raiseState.text}
               </div>
             )}
             <svg ref={chart} />

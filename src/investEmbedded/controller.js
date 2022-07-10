@@ -53,7 +53,8 @@ export const invest = async (
   setShowBuyCurrencyInfoModal,
   totalCostNumber,
   updateInvestmentData,
-  updateAvailableShares
+  updateAvailableShares,
+  updateRaisedFunds
 ) => {
   try {
     const {
@@ -116,6 +117,7 @@ export const invest = async (
     await updateFunds(daoId);
     await updateInvestmentData(daoId, myAddress);
     await updateAvailableShares(daoId);
+    await updateRaisedFunds(daoId);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setShareAmountError(toErrorMsg(e.amount));
