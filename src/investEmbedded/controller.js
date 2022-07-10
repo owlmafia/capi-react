@@ -4,7 +4,6 @@ import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
 
-
 export const updateTotalPriceAndPercentage = async (
   _statusMsg,
   shareCount,
@@ -24,7 +23,7 @@ export const updateTotalPriceAndPercentage = async (
       share_supply: dao.share_supply_number,
       investors_share: dao.investors_share,
       share_price: dao.share_price_number_algo,
-      locked_shares: lockedShares
+      locked_shares: lockedShares,
     });
 
     console.log("res: %o", res);
@@ -52,7 +51,9 @@ export const invest = async (
   setShareAmountError,
   wallet,
   setShowBuyCurrencyInfoModal,
-  totalCostNumber
+  totalCostNumber,
+  updateInvestmentData,
+  updateAvailableShares
 ) => {
   try {
     const {
@@ -113,6 +114,8 @@ export const invest = async (
 
     await updateMyShares(daoId, myAddress);
     await updateFunds(daoId);
+    await updateInvestmentData(daoId, myAddress);
+    await updateAvailableShares(daoId);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setShareAmountError(toErrorMsg(e.amount));

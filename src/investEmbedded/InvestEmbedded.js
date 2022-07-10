@@ -17,7 +17,6 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const [buySharesCount, setBuySharesCount] = useState("1");
   const [totalCost, setTotalCost] = useState(null);
   const [totalCostNumber, setTotalCostNumber] = useState(null);
-  const [availableShares, setAvailableShares] = useState(null);
   const [totalPercentage, setProfitPercentage] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -86,7 +85,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
           setShareAmountError,
           deps.wallet,
           setShowBuyCurrencyInfoModal,
-          totalCostNumber
+          totalCostNumber,
+          deps.updateInvestmentData,
+          deps.updateAvailableShares
         );
       }
     }
