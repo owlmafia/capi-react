@@ -145,7 +145,12 @@ export const BuyMoreShares = ({ deps, dao }) => {
                   setBuySharesAmountError,
                   deps.wallet,
                   setShowBuyCurrencyInfoModal,
-                  totalCostNumber
+                  totalCostNumber,
+                  deps.updateInvestmentData,
+                  deps.updateAvailableShares,
+                  deps.updateRaisedFunds,
+                  deps.updateCompactFundsActivity,
+                  deps.updateSharesDistr
                 );
               }}
             />
