@@ -8,30 +8,32 @@ import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
 import Progress from "../app_comps/Progress";
 
 export const FundsActivityEmbedded = ({ deps, daoId }) => {
-  const [activityEntries, setActivityEntries] = useState(null);
   const [dao, setDao] = useState(null);
-
-  useEffect(() => {
-    loadFundsActivity(deps.statusMsg, daoId, setActivityEntries, "3");
-  }, [daoId, deps.statusMsg]);
 
   useEffect(() => {
     loadDao(deps.statusMsg, daoId, setDao);
   }, [daoId, deps.statusMsg]);
 
+  useEffect(() => {
+    deps.updateCompactFundsActivity.call(null, daoId);
+  }, [daoId]);
+
+  const hasEntries = () => {
+    return deps.compactFundsActivity && deps.compactFundsActivity.length > 0;
+  };
+
   const fundsActivity = () => {
-    if (activityEntries) {
-      if (activityEntries.length > 0) {
+    if (deps.compactFundsActivity) {
+      if (deps.compactFundsActivity.length > 0) {
         return (
           <div>
-            {activityEntries &&
-              activityEntries.map((entry) => (
-                <CompactFundsActivityEntry
-                  entry={entry}
-                  showDescr={false}
-                  key={entry.tx_id}
-                />
-              ))}
+            {deps.compactFundsActivity.map((entry) => (
+              <CompactFundsActivityEntry
+                entry={entry}
+                showDescr={false}
+                key={entry.tx_id}
+              />
+            ))}
           </div>
         );
       } else {
@@ -66,7 +68,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
             />
           </div>
         )}
-        {activityEntries && activityEntries.length > 0 && (
+        {hasEntries() && (
           <div>
             <div className="mt-6 ft-weight-600 mb-32 ft-size-18">
               {"Recent funds activity"}
@@ -82,7 +84,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
   };
 
   const view = () => {
-    if (deps.funds || dao || (activityEntries && activityEntries.length > 0)) {
+    if (deps.funds || dao || hasEntries()) {
       return box();
     } else {
       return null;

@@ -24,6 +24,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import { loadRaisedFunds } from "./dao/controller";
+import { loadFundsActivity } from "./funds_activity/controller";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -56,6 +57,8 @@ const App = () => {
   const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
   const [raisedFunds, setRaisedFunds] = useState(null);
   const [raiseState, setRaiseState] = useState(null);
+
+  const [compactFundsActivity, setCompactFundsActivity] = useState(null);
 
   // this is only used when the selected wallet is wallet connect
   const [wcShowOpenWalletModal, setWcShowOpenWalletModal] = useState(false);
@@ -175,6 +178,18 @@ const App = () => {
     [statusMsgUpdater]
   );
 
+  const updateCompactFundsActivity = useCallback(
+    async (daoId) => {
+      await loadFundsActivity(
+        statusMsgUpdater,
+        daoId,
+        setCompactFundsActivity,
+        "3"
+      );
+    },
+    [statusMsgUpdater]
+  );
+
   const navigation = () => {
     return (
       <BrowserRouter>
@@ -224,6 +239,9 @@ const App = () => {
           raisedFundsNumber: raisedFundsNumber,
           raisedFunds: raisedFunds,
           raiseState: raiseState,
+
+          updateCompactFundsActivity: updateCompactFundsActivity,
+          compactFundsActivity: compactFundsActivity,
 
           size: windowSizeClasses(windowSize),
         })}
