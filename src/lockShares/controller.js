@@ -69,7 +69,7 @@ export const lock = async (
       "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
-    await updateInvestmentData();
+    await updateInvestmentData(daoId, myAddress);
     await updateMyBalance(myAddress);
     await updateMyShares(daoId, myAddress);
 

@@ -61,7 +61,7 @@ export const unlock = async (
     statusMsg.success("Shares unlocked");
     showProgress(false);
 
-    await updateInvestmentData();
+    await updateInvestmentData(daoId, myAddress);
     await updateMyBalance(myAddress);
     await updateMyShares(daoId, myAddress);
   } catch (e) {
