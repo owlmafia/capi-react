@@ -19,7 +19,7 @@ textarea {
     }
 
     &:disabled {
-        color: #DEE2E2;
+        color: #dee2e2;
         pointer-events: none;
     }
 
@@ -51,7 +51,7 @@ textarea {
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #E84F5F;
+        color: #e84f5f;
         margin-top: 8px;
         margin-left: 20px;
     }
@@ -75,7 +75,7 @@ textarea {
 }
 
 .msg_error {
-    border: 1px solid #E84F5F;
+    border: 1px solid #e84f5f;
 }
 
 .last_input {
@@ -96,7 +96,7 @@ textarea {
         display: flex;
         gap: 10px;
 
-        >svg {
+        > svg {
             height: 40px;
         }
     }
