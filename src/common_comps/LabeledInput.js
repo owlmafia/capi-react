@@ -23,6 +23,34 @@ export const LabeledInput = ({
 
   const container_class = img ? "input_with_image__container" : "";
 
+  const remainingChars = useMemo(() => {
+    return maxLength - inputLength;
+  }, [inputLength]);
+
+  const stateForRemainingChars = useMemo(() => {
+    if (remainingChars < 0) {
+      return "over";
+    } else {
+      return "ok";
+    }
+  }, [remainingChars]);
+
+  const inputTextLengthClass = () => {
+    if (stateForRemainingChars == "over") {
+      return "input-length-error";
+    } else {
+      return null;
+    }
+  };
+
+  const counterClass = () => {
+    if (stateForRemainingChars == "over") {
+      return "chars-counter-error";
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
     setInputLength(inputValue?.length);
   }, [inputValue]);
@@ -36,7 +64,10 @@ export const LabeledInput = ({
         </div>
         <div>
           {showLength && maxLength && (
-            <InputLength length={inputLength} maxLength={maxLength} />
+            <InputLength
+              remainingChars={remainingChars}
+              className={counterClass()}
+            />
           )}
         </div>
       </div>
@@ -52,7 +83,8 @@ export const LabeledInput = ({
           (focus) => {
             setShowLength(focus);
           },
-          disabled
+          disabled,
+          inputTextLengthClass()
         )}
         {img && <img src={img} alt="img" />}
       </div>
@@ -75,8 +107,8 @@ export const InfoView = ({ info: infoText }) => {
   );
 };
 
-const InputLength = ({ length, maxLength }) => {
-  return <div>{maxLength - length}</div>;
+const InputLength = ({ remainingChars, className }) => {
+  return <div className={className}>{remainingChars}</div>;
 };
 
 export const LabeledCurrencyInput = ({
@@ -139,11 +171,17 @@ const input = (
   onChange,
   placeholder,
   onFocusToggle,
-  disabled
+  disabled,
+  textLengthClass
 ) => {
+  var className = "label-input-style";
+  if (textLengthClass) {
+    className += ` ${textLengthClass}`;
+  }
+
   return (
     <input
-      className="label-input-style"
+      className={className}
       placeholder={placeholder}
       size="30"
       type={type}
@@ -167,6 +205,7 @@ const input = (
   );
 };
 
+// TODO refactor common code with LabeledInput
 export const LabeledTextArea = ({
   label,
   inputValue,
@@ -183,6 +222,34 @@ export const LabeledTextArea = ({
 
   const container_class = img ? "textarea_with_image__container" : "";
 
+  const remainingChars = useMemo(() => {
+    return maxLength - inputLength;
+  }, [inputLength]);
+
+  const stateForRemainingChars = useMemo(() => {
+    if (remainingChars < 0) {
+      return "over";
+    } else {
+      return "ok";
+    }
+  }, [remainingChars]);
+
+  const inputTextLengthClass = () => {
+    if (stateForRemainingChars == "over") {
+      return "input-length-error";
+    } else {
+      return null;
+    }
+  };
+
+  const counterClass = () => {
+    if (stateForRemainingChars == "over") {
+      return "chars-counter-error";
+    } else {
+      return null;
+    }
+  };
+
   useEffect(() => {
     setInputLength(inputValue.length);
   }, [inputValue]);
@@ -193,13 +260,17 @@ export const LabeledTextArea = ({
         {label}
         <div>
           {showLength && maxLength && (
-            <InputLength length={inputLength} maxLength={maxLength} />
+            <InputLength
+              remainingChars={remainingChars}
+              className={counterClass()}
+            />
           )}
         </div>
       </div>
       <div className="labeled_input__error">{errorMsg}</div>
       <div className={container_class}>
         <textarea
+          className={inputTextLengthClass()}
           rows={rows}
           cols="50"
           value={inputValue}

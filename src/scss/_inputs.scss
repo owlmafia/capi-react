@@ -61,6 +61,19 @@ textarea {
     font-family: "Gilroy", sans-serif;
 }
 
+.input-length-error {
+    border-color: #e84f5f;
+    &:hover,
+    &:active,
+    &:focus {
+        border: 1px solid #e84f5f;
+    }
+}
+
+.chars-counter-error {
+    color: #e84f5f;
+}
+
 .msg_error {
     border: 1px solid #E84F5F;
 }
