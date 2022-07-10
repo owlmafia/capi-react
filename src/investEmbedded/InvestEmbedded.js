@@ -89,7 +89,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
           deps.updateInvestmentData,
           deps.updateAvailableShares,
           deps.updateRaisedFunds,
-          deps.updateCompactFundsActivity
+          deps.updateCompactFundsActivity,
+          deps.updateSharesDistr
         );
       }
     }

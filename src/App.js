@@ -25,6 +25,10 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import { loadRaisedFunds } from "./dao/controller";
 import { loadFundsActivity } from "./funds_activity/controller";
+import {
+  fetchHoldersChange,
+  fetchSharesDistribution,
+} from "./common_comps/SharesDistributionBox/controller";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 
@@ -59,6 +63,10 @@ const App = () => {
   const [raiseState, setRaiseState] = useState(null);
 
   const [compactFundsActivity, setCompactFundsActivity] = useState(null);
+
+  const [sharesDistr, setSharesDistr] = useState(null);
+  const [notOwnedShares, setNotOwnedShares] = useState(null);
+  const [holdersChange, setHoldersChange] = useState(null);
 
   // this is only used when the selected wallet is wallet connect
   const [wcShowOpenWalletModal, setWcShowOpenWalletModal] = useState(false);
@@ -190,6 +198,27 @@ const App = () => {
     [statusMsgUpdater]
   );
 
+  const updateSharesDistr = useCallback(async (dao) => {
+    console.log("??? dao: $o", dao);
+    if (dao) {
+      await fetchSharesDistribution(
+        statusMsgUpdater,
+        dao.shares_asset_id,
+        dao.share_supply_number,
+        dao.app_id,
+        setSharesDistr,
+        setNotOwnedShares
+      );
+
+      await fetchHoldersChange(
+        statusMsgUpdater,
+        dao.shares_asset_id,
+        dao.app_id,
+        setHoldersChange
+      );
+    }
+  }, [statusMsgUpdater]);
+
   const navigation = () => {
     return (
       <BrowserRouter>
@@ -242,6 +271,11 @@ const App = () => {
 
           updateCompactFundsActivity: updateCompactFundsActivity,
           compactFundsActivity: compactFundsActivity,
+
+          updateSharesDistr: updateSharesDistr,
+          sharesDistr: sharesDistr,
+          notOwnedShares: notOwnedShares,
+          holdersChange: holdersChange,
 
           size: windowSizeClasses(windowSize),
         })}

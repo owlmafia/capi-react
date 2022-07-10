@@ -55,7 +55,8 @@ export const invest = async (
   updateInvestmentData,
   updateAvailableShares,
   updateRaisedFunds,
-  updateCompactFundsActivity
+  updateCompactFundsActivity,
+  updateSharesDistr
 ) => {
   try {
     const {
@@ -120,6 +121,7 @@ export const invest = async (
     await updateAvailableShares(daoId);
     await updateRaisedFunds(daoId);
     await updateCompactFundsActivity(daoId);
+    await updateSharesDistr(dao);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setShareAmountError(toErrorMsg(e.amount));

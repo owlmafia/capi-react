@@ -1,71 +1,53 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
 import { LabeledBox } from "../../common_comps/LabeledBox";
-import { fetchHoldersChange, fetchSharesDistribution } from "./controller";
 import { HolderEntry } from "./HolderEntry";
 import Progress from "../../app_comps/Progress";
 import { pieChartColors } from "../../common_functions/common";
 import { changeArrow } from "../../shared_functions";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
-export const SharesDistributionBox = ({
-  deps,
-  sharesAssetId,
-  sharesSupply,
-  sharesSupplyNumber,
-  appId,
-}) => {
-  const [sharesDistr, setSharesDistr] = useState(null);
-  const [notOwnedShares, setNotOwnedShares] = useState(null);
-  const [holdersChange, setHoldersChange] = useState(null);
-
+export const SharesDistributionBox = ({ deps }) => {
   const [showMoreSelected, setShowMoreSelected] = useState(false);
   // used to highlight the address on the right side
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  const [entries, setEntries] = useState(sharesDistr);
+  const [entries, setEntries] = useState(deps.sharesDistr);
 
   const entries_small_count = 3;
 
   useEffect(() => {
-    async function fetchData() {
-      if (sharesAssetId && sharesSupply) {
-        await fetchSharesDistribution(
-          deps.statusMsg,
-          sharesAssetId,
-          sharesSupplyNumber,
-          appId,
-          setSharesDistr,
-          setNotOwnedShares
-        );
+    async function nestedAsync() {
+      if (deps.dao) {
+        deps.updateSharesDistr.call(null, deps.dao);
       }
     }
-    fetchData();
-  }, [deps.statusMsg, sharesAssetId, sharesSupply, appId, sharesSupplyNumber]);
+    nestedAsync();
+  }, [deps.statusMsg, deps.dao]);
 
   useEffect(() => {
     const showAll = () => {
       return (
         showMoreSelected ||
-        (sharesDistr && sharesDistr.length <= entries_small_count)
+        (deps.sharesDistr && deps.sharesDistr.length <= entries_small_count)
       );
     };
 
     const filterHolders = (startIndex) => {
-      if (!sharesDistr) return null;
+      if (!deps.sharesDistr) return null;
 
-      let min = Math.min(sharesDistr.length, entries_small_count);
-      const holders = sharesDistr.slice(startIndex, startIndex + min);
+      let min = Math.min(deps.sharesDistr.length, entries_small_count);
+      const holders = deps.sharesDistr.slice(startIndex, startIndex + min);
       return holders;
     };
 
     if (showAll()) {
-      setEntries(sharesDistr);
+      setEntries(deps.sharesDistr);
     } else {
       // collapsed
       var startIndex = 0;
       if (selectedAddress) {
-        startIndex = sharesDistr.findIndex(
+        startIndex = deps.sharesDistr.findIndex(
           (d) => d.address === selectedAddress
         );
       }
@@ -73,25 +55,11 @@ export const SharesDistributionBox = ({
     }
   }, [
     deps.statusMsg,
-    sharesAssetId,
-    sharesDistr,
+    deps.dao.shares_asset_id,
+    deps.sharesDistr,
     showMoreSelected,
     selectedAddress,
   ]);
-
-  useEffect(() => {
-    async function nestedAsync() {
-      if (appId) {
-        await fetchHoldersChange(
-          deps.statusMsg,
-          sharesAssetId,
-          appId,
-          setHoldersChange
-        );
-      }
-    }
-    nestedAsync();
-  }, [deps.statusMsg, sharesAssetId, appId]);
 
   const col = useMemo(() => {
     return pieChartColors();
@@ -103,13 +71,15 @@ export const SharesDistributionBox = ({
 
   const onAddressSelected = useCallback(
     (address) => {
-      const addressIndex = sharesDistr.findIndex((d) => d.address === address);
+      const addressIndex = deps.sharesDistr.findIndex(
+        (d) => d.address === address
+      );
       // toggle selected state
-      let newSelected = !sharesDistr[addressIndex].isSelected;
+      let newSelected = !deps.sharesDistr[addressIndex].isSelected;
 
       // clear selection
-      sharesDistr.forEach((share) => (share.isSelected = false));
-      sharesDistr[addressIndex].isSelected = newSelected;
+      deps.sharesDistr.forEach((share) => (share.isSelected = false));
+      deps.sharesDistr[addressIndex].isSelected = newSelected;
 
       // set selected address (for address list) - if it was deselected, it's cleared
       const selection = newSelected ? address : null;
@@ -117,12 +87,12 @@ export const SharesDistributionBox = ({
 
       return newSelected;
     },
-    [sharesDistr, setSelectedAddress]
+    [deps.sharesDistr, setSelectedAddress]
   );
 
   const showMoreOrLessFooter = () => {
     // not enough entries for collapsing: no footer needed
-    if (sharesDistr && sharesDistr.length <= entries_small_count) {
+    if (deps.sharesDistr && deps.sharesDistr.length <= entries_small_count) {
       return null;
     }
 
@@ -139,13 +109,13 @@ export const SharesDistributionBox = ({
   };
 
   const holdersListItems = () => {
-    if (sharesDistr && entries) {
+    if (deps.sharesDistr && entries) {
       return (
         <div className="holder_list_container">
           <div className="flexBlock">
             <span className="desc mr-12">{"Investors"}</span>
-            <span className="subtitle">{sharesDistr.length}</span>
-            <div>{changeArrow(holdersChange)}</div>
+            <span className="subtitle">{deps.sharesDistr.length}</span>
+            <div>{changeArrow(deps.holdersChange)}</div>
           </div>
           {entries.map((entry) => {
             // not owned is shown on the left side, so we remove the entry from the list here
@@ -183,11 +153,11 @@ export const SharesDistributionBox = ({
               <div className="d-flex flex-column flex-wrap">
                 <div className="flexBlock">
                   <div className="mr-12 desc nowrap">{"Total shares"}</div>
-                  <div className="subtitle">{sharesSupply}</div>
+                  <div className="subtitle">{deps.dao.share_supply}</div>
                   <div className="arrow-container"></div>
                 </div>
                 <div className="d-flex align-center gap-16 w-100">
-                  <div className="desc w-55px">{notOwnedShares}</div>
+                  <div className="desc w-55px">{deps.notOwnedShares}</div>
                   <div className="circle"></div>
                   <div className="ft-color-black">{"Available for sale"}</div>
                 </div>
@@ -196,7 +166,7 @@ export const SharesDistributionBox = ({
             </div>
             <div className="pie_chart__container">
               <SharesDistributionChart
-                sharesDistr={sharesDistr}
+                sharesDistr={deps.sharesDistr}
                 onAddressSelected={onAddressSelected}
                 col={col}
                 animated={true}

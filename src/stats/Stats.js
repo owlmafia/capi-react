@@ -19,15 +19,7 @@ export const Stats = ({ deps }) => {
 
   return (
     <div>
-      {dao && (
-        <SharesDistributionBox
-          deps={deps}
-          sharesAssetId={dao.shares_asset_id}
-          sharesSupply={dao.share_supply}
-          sharesSupplyNumber={dao.share_supply_number}
-          appId={dao.app_id}
-        />
-      )}
+      {dao && <SharesDistributionBox deps={deps} />}
 
       <IncomeVsSpendingBox statusMsg={deps.statusMsg} daoId={params.id} />
     </div>

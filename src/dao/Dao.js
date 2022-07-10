@@ -44,24 +44,6 @@ export const Dao = ({ deps }) => {
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);
 
-  const sharesAssetId = useMemo(() => {
-    if (deps.dao) {
-      return deps.dao.shares_asset_id;
-    }
-  }, [deps.dao]);
-
-  const sharesSupply = useMemo(() => {
-    if (deps.dao) {
-      return deps.dao.share_supply;
-    }
-  }, [deps.dao]);
-
-  const sharesSupplyNumber = useMemo(() => {
-    if (deps.dao) {
-      return deps.dao.share_supply_number;
-    }
-  }, [deps.dao]);
-
   const daoView = () => {
     if (deps.dao) {
       return (
@@ -84,15 +66,7 @@ export const Dao = ({ deps }) => {
             >
               <button>{"Withdraw"}</button>
             </Link> */}
-            {deps.dao && (
-              <SharesDistributionBox
-                deps={deps}
-                sharesAssetId={sharesAssetId}
-                sharesSupply={sharesSupply}
-                sharesSupplyNumber={sharesSupplyNumber}
-                appId={deps.dao.app_id}
-              />
-            )}
+            {deps.dao && <SharesDistributionBox deps={deps} />}
 
             {deps.dao && deps.dao && deps.dao.funds_raised === "true" && (
               <IncomeVsSpendingBox
