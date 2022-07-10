@@ -123,6 +123,7 @@ const DividendSection = ({ deps, daoId }) => {
                 daoId,
                 deps.updateInvestmentData,
                 deps.updateFunds,
+                deps.updateMyDividend,
                 deps.wallet
               );
             }}

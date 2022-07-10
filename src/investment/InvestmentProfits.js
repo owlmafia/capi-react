@@ -65,6 +65,7 @@ export const InvestmentProfits = ({ deps }) => {
                       params.id,
                       deps.updateInvestmentData,
                       deps.updateFunds,
+                      deps.updateMyDividend,
                       deps.wallet
                     );
                   }}

@@ -33,6 +33,7 @@ export const retrieveProfits = async (
   daoId,
   updateInvestmentData,
   updateFunds,
+  updateMyDividend,
   wallet
 ) => {
   try {
@@ -62,6 +63,7 @@ export const retrieveProfits = async (
 
     await updateInvestmentData(daoId, myAddress);
     await updateFunds(daoId);
+    await updateMyDividend(daoId, myAddress);
 
     statusMsg.success("Dividend claimed");
     showProgress(false);
