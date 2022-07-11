@@ -160,9 +160,13 @@ export const UpdateDaoData = ({ deps }) => {
           </div>
           <div>
             <div className="mb-32 line-height-1">{"Please ensure:"}</div>
-            <div className="line-height-1">{"1. That the entered address to be rekeyed to is correct."}</div>
+            <div className="line-height-1">
+              {"1. That the entered address to be rekeyed to is correct."}
+            </div>
             <div className="mb-32 line-height-1">
-              {"2. That you / the expected account owner(s) of said address actually own it, i.e., can successfully sign and submit transactions with it." }
+              {
+                "2. That you / the expected account owner(s) of said address actually own it, i.e., can successfully sign and submit transactions with it."
+              }
             </div>
             <div className="mb-32 line-height-1">
               {"IF ANY OF THE POINTS ABOVE IS NOT TRUE, " +

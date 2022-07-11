@@ -204,26 +204,29 @@ const App = () => {
     [statusMsgUpdater]
   );
 
-  const updateSharesDistr = useCallback(async (dao) => {
-    console.log("??? dao: $o", dao);
-    if (dao) {
-      await fetchSharesDistribution(
-        statusMsgUpdater,
-        dao.shares_asset_id,
-        dao.share_supply_number,
-        dao.app_id,
-        setSharesDistr,
-        setNotOwnedShares
-      );
+  const updateSharesDistr = useCallback(
+    async (dao) => {
+      console.log("??? dao: $o", dao);
+      if (dao) {
+        await fetchSharesDistribution(
+          statusMsgUpdater,
+          dao.shares_asset_id,
+          dao.share_supply_number,
+          dao.app_id,
+          setSharesDistr,
+          setNotOwnedShares
+        );
 
-      await fetchHoldersChange(
-        statusMsgUpdater,
-        dao.shares_asset_id,
-        dao.app_id,
-        setHoldersChange
-      );
-    }
-  }, [statusMsgUpdater]);
+        await fetchHoldersChange(
+          statusMsgUpdater,
+          dao.shares_asset_id,
+          dao.app_id,
+          setHoldersChange
+        );
+      }
+    },
+    [statusMsgUpdater]
+  );
 
   const navigation = () => {
     return (
