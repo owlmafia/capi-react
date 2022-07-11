@@ -58,6 +58,7 @@ const App = () => {
   const [wallet, setWallet] = useState(null);
 
   const [availableShares, setAvailableShares] = useState(null);
+  const [availableSharesNumber, setAvailableSharesNumber] = useState(null);
   const [raisedFundsNumber, setRaisedFundsNumber] = useState(null);
   const [raisedFunds, setRaisedFunds] = useState(null);
   const [raiseState, setRaiseState] = useState(null);
@@ -108,7 +109,12 @@ const App = () => {
 
   const updateAvailableShares = useCallback(
     async (daoId) => {
-      await fetchAvailableShares(statusMsgUpdater, daoId, setAvailableShares);
+      await fetchAvailableShares(
+        statusMsgUpdater,
+        daoId,
+        setAvailableShares,
+        setAvailableSharesNumber
+      );
     },
     [statusMsgUpdater]
   );
@@ -262,6 +268,7 @@ const App = () => {
           setWcShowOpenWalletModal: setWcShowOpenWalletModal,
 
           availableShares: availableShares,
+          availableSharesNumber: availableSharesNumber,
           updateAvailableShares: updateAvailableShares,
 
           updateRaisedFunds: updateRaisedFunds,

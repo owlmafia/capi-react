@@ -78,7 +78,8 @@ export const updateDao_ = async (daoId, setDao, statusMsg) => {
 export const fetchAvailableShares = async (
   statusMsg,
   daoId,
-  setAvailableShares
+  setAvailableShares,
+  setAvailableSharesNumber
 ) => {
   try {
     const { bridge_load_available_shares } = await wasmPromise;
@@ -86,6 +87,7 @@ export const fetchAvailableShares = async (
       dao_id: daoId,
     });
     setAvailableShares(res.available_shares);
+    setAvailableSharesNumber(res.available_shares_number);
   } catch (e) {
     statusMsg.error(e);
   }

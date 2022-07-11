@@ -8,7 +8,7 @@ export const updateTotalPriceAndPercentage = async (
   _statusMsg,
   shareCount,
   dao,
-  availableShares,
+  availableSharesNumber,
   setBuySharesTotalPrice,
   setBuySharesTotalPriceNumber,
   setProfitPercentage,
@@ -19,7 +19,7 @@ export const updateTotalPriceAndPercentage = async (
 
     let res = await bridge_calculate_shares_price({
       shares_amount: shareCount,
-      available_shares: availableShares,
+      available_shares: availableSharesNumber,
       share_supply: dao.share_supply_number,
       investors_share: dao.investors_share,
       share_price: dao.share_price_number_algo,

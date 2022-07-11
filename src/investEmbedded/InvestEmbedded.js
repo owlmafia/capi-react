@@ -44,13 +44,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   useEffect(() => {
     async function nestedAsync() {
-      if (deps.availableShares) {
+      if (deps.availableSharesNumber != null) {
         if (buySharesCount) {
           updateTotalPriceAndPercentage(
             deps.statusMsg,
             buySharesCount,
             dao,
-            deps.availableShares,
+            deps.availableSharesNumber,
             setTotalCost,
             setTotalCostNumber,
             setProfitPercentage,
@@ -65,7 +65,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
       }
     }
     nestedAsync();
-  }, [deps.statusMsg, params.id, buySharesCount, deps.availableShares, dao]);
+  }, [
+    deps.statusMsg,
+    params.id,
+    buySharesCount,
+    deps.availableSharesNumber,
+    dao,
+  ]);
 
   useEffect(() => {
     async function nestedAsync() {
