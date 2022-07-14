@@ -12,8 +12,7 @@ const renderFundsProgressChart = (
   raisedFundsNumber,
   successColors
 ) => {
-  // TODO start date - dao currently doesn't store this
-  let textTopLeft = moment.unix(0).format("D MMM YYYY");
+  let textTopLeft = moment.unix(dao.setup_date).format("D MMM YYYY");
   let textBottomLeft = "0";
   let textTopRight = moment.unix(dao.raise_end_date).format("D MMM YYYY");
   let textBottomRight = dao.total_raisable + "";
