@@ -1,13 +1,22 @@
 import React, { useState, useCallback } from "react";
 import { ImageCropper } from "./ImageCropper";
 import { useDropzone } from "react-dropzone";
+import { useEffect } from "react";
 
 const fileReader = new FileReader();
 
 export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
   // the initial image - not updated when changing the crop area
-  const [inputImg, setInputImg] = useState(initImageBytes + "");
-  //   console.log("initImageBytes: %o", initImageBytes);
+  const [inputImg, setInputImg] = useState(null);
+
+  useEffect(() => {
+    // Quick fix: "object" check: prevents a circular update, where on initialization
+    // image is set and initImageBytes sets it again (to invalid type)
+    // TODO proper fix
+    if (initImageBytes != null && typeof initImageBytes !== "object") {
+      setInputImg(initImageBytes + "");
+    }
+  }, [initImageBytes]);
 
   // sets image: called when uploading image with button or dropping it in target zone
   const onDrop = useCallback((acceptedFiles) => {
@@ -23,8 +32,8 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   // called when the crop area is updated (also triggered by setting the image)
-  const updateCrop = (blob) => {
-    const bytes = blobToArrayBuffer(blob);
+  const updateCrop = async (blob) => {
+    const bytes = await blobToArrayBuffer(blob);
     console.log("crop updated - setting image bytes: %o", bytes);
     setImageBytes(bytes);
   };
