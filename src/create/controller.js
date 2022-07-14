@@ -1,5 +1,6 @@
 import { toBytesForRust } from "../common_functions/common";
 import { toErrorMsg } from "../validation";
+import { toMaybeIpfsUrl } from "../ipfs/store";
 
 const wasmPromise = import("wasm");
 
@@ -44,6 +45,8 @@ export const createDao = async (
 
   statusMsg.clear();
 
+  const imageUrl = await toMaybeIpfsUrl(await imageBytes);
+
   showProgress(true);
 
   try {
@@ -57,6 +60,7 @@ export const createDao = async (
         investors_share: investorsShare,
         shares_for_investors: sharesForInvestors,
         compressed_image: await toBytesForRust(imageBytes),
+        image_url: imageUrl,
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
