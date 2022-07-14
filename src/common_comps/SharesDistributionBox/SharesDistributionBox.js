@@ -12,7 +12,15 @@ export const SharesDistributionBox = ({ deps }) => {
   // used to highlight the address on the right side
   const [selectedAddress, setSelectedAddress] = useState(null);
 
-  const [entries, setEntries] = useState(deps.sharesDistr);
+  /// Distribution that's not "not owned", i.e. owned by someone
+  /// needed for the views where "not owned" is not used
+  const ownedSharesDistr = useMemo(() => {
+    if (deps.sharesDistr) {
+      return deps.sharesDistr.filter((entry) => entry.type_ !== "not_owned");
+    }
+  }, [deps.sharesDistr]);
+
+  const [entries, setEntries] = useState(ownedSharesDistr);
 
   const entries_small_count = 3;
 
@@ -29,25 +37,25 @@ export const SharesDistributionBox = ({ deps }) => {
     const showAll = () => {
       return (
         showMoreSelected ||
-        (deps.sharesDistr && deps.sharesDistr.length <= entries_small_count)
+        (ownedSharesDistr && ownedSharesDistr.length <= entries_small_count)
       );
     };
 
     const filterHolders = (startIndex) => {
-      if (!deps.sharesDistr) return null;
+      if (!ownedSharesDistr) return null;
 
-      let min = Math.min(deps.sharesDistr.length, entries_small_count);
-      const holders = deps.sharesDistr.slice(startIndex, startIndex + min);
+      let min = Math.min(ownedSharesDistr.length, entries_small_count);
+      const holders = ownedSharesDistr.slice(startIndex, startIndex + min);
       return holders;
     };
 
     if (showAll()) {
-      setEntries(deps.sharesDistr);
+      setEntries(ownedSharesDistr);
     } else {
       // collapsed
       var startIndex = 0;
       if (selectedAddress) {
-        startIndex = deps.sharesDistr.findIndex(
+        startIndex = ownedSharesDistr.findIndex(
           (d) => d.address === selectedAddress
         );
       }
@@ -56,7 +64,7 @@ export const SharesDistributionBox = ({ deps }) => {
   }, [
     deps.statusMsg,
     deps.dao.shares_asset_id,
-    deps.sharesDistr,
+    ownedSharesDistr,
     showMoreSelected,
     selectedAddress,
   ]);
@@ -71,15 +79,15 @@ export const SharesDistributionBox = ({ deps }) => {
 
   const onAddressSelected = useCallback(
     (address) => {
-      const addressIndex = deps.sharesDistr.findIndex(
+      const addressIndex = ownedSharesDistr.findIndex(
         (d) => d.address === address
       );
       // toggle selected state
-      let newSelected = !deps.sharesDistr[addressIndex].isSelected;
+      let newSelected = !ownedSharesDistr[addressIndex].isSelected;
 
       // clear selection
-      deps.sharesDistr.forEach((share) => (share.isSelected = false));
-      deps.sharesDistr[addressIndex].isSelected = newSelected;
+      ownedSharesDistr.forEach((share) => (share.isSelected = false));
+      ownedSharesDistr[addressIndex].isSelected = newSelected;
 
       // set selected address (for address list) - if it was deselected, it's cleared
       const selection = newSelected ? address : null;
@@ -87,12 +95,12 @@ export const SharesDistributionBox = ({ deps }) => {
 
       return newSelected;
     },
-    [deps.sharesDistr, setSelectedAddress]
+    [ownedSharesDistr, setSelectedAddress]
   );
 
   const showMoreOrLessFooter = () => {
     // not enough entries for collapsing: no footer needed
-    if (deps.sharesDistr && deps.sharesDistr.length <= entries_small_count) {
+    if (ownedSharesDistr && ownedSharesDistr.length <= entries_small_count) {
       return null;
     }
 
@@ -109,12 +117,12 @@ export const SharesDistributionBox = ({ deps }) => {
   };
 
   const holdersListItems = () => {
-    if (deps.sharesDistr && entries) {
+    if (ownedSharesDistr && entries) {
       return (
         <div className="holder_list_container">
           <div className="flexBlock">
             <span className="desc mr-12">{"Investors"}</span>
-            <span className="subtitle">{deps.sharesDistr.length}</span>
+            <span className="subtitle">{ownedSharesDistr.length}</span>
             <div>{changeArrow(deps.holdersChange)}</div>
           </div>
           {entries.map((entry) => {
