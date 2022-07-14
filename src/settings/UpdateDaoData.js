@@ -6,6 +6,7 @@ import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../app_comps/ImageUpload";
 import { toBytesForRust } from "../common_functions/common";
 import { OkCancelModal } from "../modal/OkCancelModal";
+import { toMaybeIpfsUrl } from "../ipfs/store";
 
 export const UpdateDaoData = ({ deps }) => {
   let params = useParams();
@@ -93,6 +94,7 @@ export const UpdateDaoData = ({ deps }) => {
 
                 owner: deps.myAddress,
 
+                image_url: await toMaybeIpfsUrl(imageBytes),
                 image: await toBytesForRust(imageBytes),
                 social_media_url: socialMediaUrl,
               },
