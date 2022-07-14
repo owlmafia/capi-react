@@ -1,4 +1,6 @@
 import MyAlgo from "@randlabs/myalgo-connect";
+import buffer from "buffer";
+const { Buffer } = buffer;
 
 // Note: the wallet connect and my algo wallets share the same "interface"
 export function createMyAlgoWallet(statusMsg, setMyAddress) {
@@ -33,6 +35,7 @@ export function createMyAlgoWallet(statusMsg, setMyAddress) {
   function onPageLoad() {}
 
   async function signTxs(toSign) {
+    if (!window.Buffer) window.Buffer = Buffer;
     let signedTxs = await wallet.signTransaction(toSign.my_algo);
     return signedTxs.map((t) => toSignedTxForRust(t));
   }
