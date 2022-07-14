@@ -52,7 +52,7 @@ export const LabeledInput = ({
   };
 
   useEffect(() => {
-    setInputLength(inputValue?.length);
+    setInputLength(inputValue?.length ?? 0);
   }, [inputValue]);
 
   return (
@@ -251,7 +251,7 @@ export const LabeledTextArea = ({
   };
 
   useEffect(() => {
-    setInputLength(inputValue.length);
+    setInputLength(inputValue?.length ?? 0);
   }, [inputValue]);
 
   return (
