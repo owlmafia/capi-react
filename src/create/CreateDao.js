@@ -144,14 +144,14 @@ export const CreateDao = ({ deps }) => {
         <ImageUpload setImageBytes={setImageBytes} />
         <div className="dao-title mt-60">Project Funds</div>
         <LabeledAmountInput
-          label={"Shares for sale"}
-          info={
-            "Shares available for sale. Not available shares stay in the creator's wallet."
-          }
-          inputValue={sharesForInvestors}
-          onChange={(input) => setSharesForInvestors(input)}
-          errorMsg={sharesForInvestorsError}
+          label={"Share supply"}
+          inputValue={shareCount}
+          onChange={(input) => {
+            setShareCount(input);
+          }}
+          errorMsg={shareCountError}
         />
+
         <LabeledAmountInput
           label={"Investor's %"}
           info={"Percentage of project income directed to investors."}
@@ -163,12 +163,13 @@ export const CreateDao = ({ deps }) => {
         <div className="d-flex gap-32">
           <div className="f-basis-50">
             <LabeledAmountInput
-              label={"Share supply"}
-              inputValue={shareCount}
-              onChange={(input) => {
-                setShareCount(input);
-              }}
-              errorMsg={shareCountError}
+              label={"Shares for sale"}
+              info={
+                "Shares available for sale. Not available shares stay in the creator's wallet."
+              }
+              inputValue={sharesForInvestors}
+              onChange={(input) => setSharesForInvestors(input)}
+              errorMsg={sharesForInvestorsError}
             />
           </div>
           <div className="f-basis-50">
