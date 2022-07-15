@@ -60,7 +60,6 @@ export const createDao = async (
         share_price: sharePrice,
         investors_share: investorsShare,
         shares_for_investors: sharesForInvestors,
-        compressed_image: await toBytesForRust(imageBytes),
         image_url: imageUrl,
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,

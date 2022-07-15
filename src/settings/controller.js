@@ -112,7 +112,6 @@ export const updateDaoData = async (
       owner: myAddress,
 
       image_url: imageUrl,
-      image: await toBytesForRust(imageBytes),
       social_media_url: socialMediaUrl,
     });
     console.log("Update DAO data res: %o", updateDataRes);
