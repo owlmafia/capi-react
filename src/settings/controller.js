@@ -85,6 +85,9 @@ export const updateDaoData = async (
   socialMediaUrl,
 
   wallet,
+
+  updateDao,
+
   setDaoNameError,
   setDaoDescrError,
   setImageError,
@@ -127,7 +130,10 @@ export const updateDaoData = async (
       "submitUpdateDaoDataRes: " + JSON.stringify(submitUpdateDaoDataRes)
     );
 
+    await updateDao(daoId);
+
     statusMsg.success("Dao data updated!");
+
     showProgress(false);
   } catch (e) {
     if (e.id === "validations") {

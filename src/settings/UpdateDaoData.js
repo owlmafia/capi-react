@@ -95,6 +95,9 @@ export const UpdateDaoData = ({ deps }) => {
               socialMediaUrl,
 
               deps.wallet,
+
+              deps.updateDao,
+
               setDaoNameError,
               setDaoDescrError,
               setImageError,
