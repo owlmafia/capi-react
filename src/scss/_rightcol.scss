@@ -5,7 +5,7 @@
     width: 420px;
     min-width: 342px;
     flex-shrink: 0;
-    
+
     .my-account-container {
         border: 1px solid rgb(237, 231, 231);
         padding: 40px;
@@ -48,7 +48,7 @@
     }
 }
 
-.my_address>a {
+.my_address > a {
     color: black;
     font-size: 18px;
 }
@@ -104,9 +104,7 @@
     }
 }
 
-
 @media only screen and (max-width: 1330px) {
-
     #rightcol,
     #rightcol-closing {
         width: 100%;
@@ -163,7 +161,6 @@
 }
 
 @media only screen and (max-width: 650px) {
-
     #rightcol,
     #rightcol-closing {
         bottom: auto;
