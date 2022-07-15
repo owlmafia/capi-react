@@ -1,3 +1,5 @@
+import { toBytes, toBytesForRust } from "../common_functions/common";
+import { toMaybeIpfsUrl } from "../ipfs/store";
 import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
@@ -73,7 +75,15 @@ export const updateApp = async (
 export const updateDaoData = async (
   statusMsg,
   showProgress,
-  data,
+  myAddress,
+
+  daoId,
+  projectName,
+  daoDescr,
+  sharePrice,
+  imageBytes,
+  socialMediaUrl,
+
   wallet,
   setDaoNameError,
   setDaoDescrError,
@@ -85,7 +95,23 @@ export const updateDaoData = async (
       await wasmPromise;
 
     showProgress(true);
-    let updateDataRes = await bridge_update_data(data);
+
+    const imageUrl = await toMaybeIpfsUrl(await imageBytes);
+    const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
+
+    let updateDataRes = await bridge_update_data({
+      dao_id: daoId,
+
+      project_name: projectName,
+      project_desc_url: descrUrl,
+      share_price: sharePrice,
+
+      owner: myAddress,
+
+      image_url: imageUrl,
+      image: await toBytesForRust(imageBytes),
+      social_media_url: socialMediaUrl,
+    });
     console.log("Update DAO data res: %o", updateDataRes);
     showProgress(false);
 

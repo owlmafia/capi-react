@@ -1,4 +1,4 @@
-import { toBytesForRust } from "../common_functions/common";
+import { toBytes, toBytesForRust } from "../common_functions/common";
 import { toErrorMsg } from "../validation";
 import { toMaybeIpfsUrl } from "../ipfs/store";
 
@@ -46,6 +46,7 @@ export const createDao = async (
   statusMsg.clear();
 
   const imageUrl = await toMaybeIpfsUrl(await imageBytes);
+  const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
 
   showProgress(true);
 
@@ -54,7 +55,7 @@ export const createDao = async (
       inputs: {
         creator: myAddress,
         dao_name: daoName,
-        dao_description: daoDescr,
+        dao_descr_url: descrUrl,
         share_count: shareCount,
         share_price: sharePrice,
         investors_share: investorsShare,

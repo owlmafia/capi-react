@@ -1,13 +1,9 @@
 const wasmPromise = import("wasm");
 
-export const loadDescription = async (
-  statusMsg,
-  descriptionId,
-  setDescription
-) => {
+export const loadDescription = async (statusMsg, descrUrl, setDescription) => {
   try {
     const { bridge_description } = await wasmPromise;
-    let description = await bridge_description(descriptionId);
+    let description = await bridge_description(descrUrl);
     setDescription(description);
   } catch (e) {
     statusMsg.error(e);

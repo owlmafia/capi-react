@@ -85,19 +85,15 @@ export const UpdateDaoData = ({ deps }) => {
             updateDaoData(
               deps.statusMsg,
               setSubmitting,
-              {
-                dao_id: params.id,
+              deps.myAddress,
 
-                project_name: daoName,
-                project_desc: daoDescr,
-                share_price: sharePrice,
+              params.id,
+              daoName,
+              daoDescr,
+              sharePrice,
+              imageBytes,
+              socialMediaUrl,
 
-                owner: deps.myAddress,
-
-                image_url: await toMaybeIpfsUrl(imageBytes),
-                image: await toBytesForRust(imageBytes),
-                social_media_url: socialMediaUrl,
-              },
               deps.wallet,
               setDaoNameError,
               setDaoDescrError,

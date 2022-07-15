@@ -6,6 +6,11 @@ export const toBytesForRust = async (imageBytesPromise) => {
   return [...typedArray];
 };
 
+export const toBytes = (str) => {
+  let utf8Encode = new TextEncoder();
+  return utf8Encode.encode(str);
+};
+
 export const checkForUpdates = async (statusMsg, daoId, setVersionData) => {
   try {
     const { bridge_check_for_updates } = await wasmPromise;

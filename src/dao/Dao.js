@@ -34,10 +34,10 @@ export const Dao = ({ deps }) => {
   useEffect(() => {
     async function fetch() {
       if (deps.dao) {
-        if (deps.dao.description_id) {
+        if (deps.dao.descr_url) {
           await loadDescription(
             deps.statusMsg,
-            deps.dao.description_id,
+            deps.dao.descr_url,
             setDescription
           );
         } else {
