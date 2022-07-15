@@ -164,7 +164,7 @@ export const SharesDistributionBox = ({ deps }) => {
                   <div className="subtitle">{deps.dao.share_supply}</div>
                   <div className="arrow-container"></div>
                 </div>
-                <div className="d-flex align-center justify-between w-100">
+                <div className="d-flex align-center justify-between w-100 gap-10">
                   <div className="desc">{deps.notOwnedShares}</div>
                   <div className="circle"></div>
                   <div className="ft-color-black">{"Available for sale"}</div>
