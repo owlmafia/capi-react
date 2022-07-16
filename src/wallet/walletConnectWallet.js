@@ -96,6 +96,7 @@ export function createWcWallet(
   }
 
   return {
+    id: "WC", // just to identify quickly wallet in logs
     connect,
     disconnect,
     onPageLoad,

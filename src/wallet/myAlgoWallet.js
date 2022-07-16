@@ -41,6 +41,7 @@ export function createMyAlgoWallet(statusMsg, setMyAddress) {
   }
 
   return {
+    id: "myalgo", // just to identify quickly wallet in logs
     connect,
     disconnect,
     onPageLoad,
