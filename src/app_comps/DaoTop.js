@@ -3,12 +3,13 @@ import share from "../images/svg/share.svg";
 import Modal from "../modal/Modal";
 import ShareView from "./ShareView";
 import React, { useState } from "react";
+import Progress from "../app_comps/Progress";
 
 export const DaoTop = ({ dao }) => {
   const [showShareModal, setShowShareModal] = useState(false);
   return (
     <div>
-      <div>{logoView(dao)}</div>
+      <div>{LogoView(dao)}</div>
       <div className="title-container">
         <div className="title">{dao.name}</div>
         <div className="social-media-buttons">
@@ -40,15 +41,18 @@ export const DaoTop = ({ dao }) => {
   );
 };
 
-const logoView = (dao) => {
+const LogoView = (dao) => {
+  const [imgLoaded, setImageLoaded] = useState(false);
   return (
     dao.image_url && (
       <div className="content-img-container">
-        <div className="content-img-skeleton-loader"></div>
-        <div
-          className="content-img"
-          style={{ backgroundImage: `url(${dao.image_url})` }}
-        ></div>
+        {!imgLoaded && <Progress />}
+        <img
+          className={`content-img ${!imgLoaded ? "d-none" : ""}`}
+          src={dao.image_url}
+          alt="Cover"
+          onLoad={() => setImageLoaded(true)}
+        />
       </div>
     )
   );
