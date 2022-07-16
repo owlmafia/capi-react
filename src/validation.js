@@ -43,6 +43,8 @@ export const toErrorMsg = (e) => {
         " fractional digits. Current: " +
         e.max_fractionals.actual
       );
+    case "count_le_supply":
+      return "Please enter an amount smaller or equal to available shares";
     case "unexpected":
       return "Unexpected problem: " + e.unexpected;
     default:
