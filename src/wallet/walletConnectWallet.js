@@ -1,6 +1,8 @@
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "algorand-walletconnect-qrcode-modal";
 import { formatJsonRpcRequest } from "@json-rpc-tools/utils";
+import buffer from "buffer";
+const { Buffer } = buffer;
 
 export function initWcWalletIfAvailable(
   statusMsg,
@@ -37,6 +39,7 @@ export function createWcWallet(
 
   // returns address, if needed for immediate use
   async function connect() {
+    if (!window.Buffer) window.Buffer = Buffer;
     try {
       if (!connector.connected) {
         await connector.createSession();
@@ -48,6 +51,7 @@ export function createWcWallet(
   }
 
   async function disconnect() {
+    if (!window.Buffer) window.Buffer = Buffer;
     try {
       await connector.killSession();
       onDisconnect();
@@ -57,6 +61,7 @@ export function createWcWallet(
   }
 
   function onPageLoad() {
+    if (!window.Buffer) window.Buffer = Buffer;
     try {
       if (connector.connected) {
         initSession();
@@ -67,6 +72,7 @@ export function createWcWallet(
   }
 
   function initSession() {
+    if (!window.Buffer) window.Buffer = Buffer;
     try {
       onConnectorConnected(connector, onAddressUpdate, onDisconnect);
     } catch (e) {
@@ -79,6 +85,7 @@ export function createWcWallet(
   }
 
   async function signTxs(toSign) {
+    if (!window.Buffer) window.Buffer = Buffer;
     // modal tells the user to look at the wallet (usually phone)
     setShowOpenWalletModal(true);
     let blob = await sign(connector, toSign.wc);
