@@ -16,7 +16,7 @@ import { DisclaimerModal } from "../modal/DisclaimerModal";
 export const MyAccount = ({ deps, daoId }) => {
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
 
-  const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
+  const [showDisclaimerModal, setShowDisclaimerModal] = useState(true);
 
   return (
     <div className="my-account-container">
