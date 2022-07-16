@@ -88,7 +88,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
         </div>
-        {deps.daoId && <DividendSection deps={deps} daoId={daoId} />}
+        {daoId && <DividendSection deps={deps} daoId={daoId} />}
       </div>
     );
   } else {
