@@ -34,7 +34,7 @@ export const MyAccount = ({ deps, daoId }) => {
         >
           <SelectWallet
             deps={deps}
-            onConnected={() => setShowSelectWalletModal(false)}
+            closeModal={() => setShowSelectWalletModal(false)}
           />
         </Modal>
       )}

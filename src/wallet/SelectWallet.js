@@ -2,7 +2,7 @@ import { SubmitButton } from "../app_comps/SubmitButton";
 import { createMyAlgoWallet } from "./myAlgoWallet";
 import { createWcWallet } from "./walletConnectWallet";
 
-export const SelectWallet = ({ deps, onConnected }) => {
+export const SelectWallet = ({ deps, closeModal }) => {
   return (
     <div className="d-flex flex-column align-center">
       <SubmitButton
@@ -16,7 +16,7 @@ export const SelectWallet = ({ deps, onConnected }) => {
               deps.setMyAddress,
               deps.setWcShowOpenWalletModal
             ),
-            onConnected
+            closeModal
           )
         }
       />
@@ -27,7 +27,7 @@ export const SelectWallet = ({ deps, onConnected }) => {
           selectWallet(
             deps,
             createMyAlgoWallet(deps.statusMsg, deps.setMyAddress),
-            onConnected
+            closeModal
           )
         }
       />
@@ -35,9 +35,9 @@ export const SelectWallet = ({ deps, onConnected }) => {
   );
 };
 
-const selectWallet = async (deps, wallet, onConnected) => {
+const selectWallet = async (deps, wallet, closeModal) => {
   deps.setWallet(wallet);
 
   await wallet.connect();
-  onConnected();
+  closeModal();
 };
