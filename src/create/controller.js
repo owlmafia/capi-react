@@ -45,10 +45,10 @@ export const createDao = async (
 
   statusMsg.clear();
 
+  showProgress(true);
+
   const imageUrl = await toMaybeIpfsUrl(await imageBytes);
   const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
-
-  showProgress(true);
 
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
