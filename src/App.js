@@ -206,7 +206,6 @@ const App = () => {
 
   const updateSharesDistr = useCallback(
     async (dao) => {
-      console.log("??? dao: $o", dao);
       if (dao) {
         await fetchSharesDistribution(
           statusMsgUpdater,
