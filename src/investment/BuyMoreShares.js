@@ -139,6 +139,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
                   deps.updateMyBalance,
                   params.id,
                   dao,
+                  deps.availableShares,
                   buySharesCount,
                   deps.updateMyShares,
                   deps.updateFunds,
