@@ -36,8 +36,8 @@ export const SelectWallet = ({ deps, onConnected }) => {
 };
 
 const selectWallet = async (deps, wallet, onConnected) => {
-  await wallet.connect();
   deps.setWallet(wallet);
 
+  await wallet.connect();
   onConnected();
 };
