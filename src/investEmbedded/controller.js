@@ -45,7 +45,7 @@ export const invest = async (
   updateMyBalance,
   daoId,
   dao,
-  availableShares,
+  availableSharesNumber,
   buySharesCount,
   updateMyShares,
   updateFunds,
@@ -91,7 +91,7 @@ export const invest = async (
     let buyRes = await bridge_buy_shares({
       dao_id: daoId,
       share_count: buySharesCount,
-      available_shares: availableShares,
+      available_shares: availableSharesNumber,
       investor_address: myAddress,
       app_opt_ins: optInToAppsSignedOptional,
     });

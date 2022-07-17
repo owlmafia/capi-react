@@ -85,7 +85,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           deps.updateMyBalance,
           params.id,
           dao,
-          deps.availableShares,
+          deps.availableSharesNumber,
           buySharesCount,
           deps.updateMyShares,
           deps.updateFunds,
