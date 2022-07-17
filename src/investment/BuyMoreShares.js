@@ -39,7 +39,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
           deps.statusMsg,
           buySharesCount,
           dao,
-          deps.availableShares,
+          deps.availableSharesNumber,
           setTotalCost,
           setTotalCostNumber,
           setProfitPercentage
