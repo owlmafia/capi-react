@@ -60,9 +60,9 @@ export const unlock = async (
     console.log("submitUnlockRes: " + JSON.stringify(submitUnlockRes));
 
     statusMsg.success("Shares unlocked");
+    await updateInvestmentData(daoId, myAddress);
     showProgress(false);
 
-    await updateInvestmentData(daoId, myAddress);
     await updateMyBalance(myAddress);
     await updateMyShares(daoId, myAddress);
     await updateMyDividend(daoId, myAddress);
