@@ -114,6 +114,7 @@ const DividendSection = ({ deps, daoId }) => {
             label={"Claim"}
             className="button-primary full-width-btn"
             isLoading={submitting}
+            disabled={deps.investmentData?.investor_claimable_dividend === "0"}
             onClick={async () => {
               await retrieveProfits(
                 deps.myAddress,
