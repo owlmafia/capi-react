@@ -50,7 +50,7 @@ export const InvestmentProfits = ({ deps }) => {
                   </div>
                 </div>
                 <SubmitButton
-                  label={"Retrieve"}
+                  label={"Claim"}
                   className="button-primary"
                   isLoading={submitting}
                   disabled={
