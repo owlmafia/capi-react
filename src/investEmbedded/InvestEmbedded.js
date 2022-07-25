@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { SubmitButton } from "../app_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
 import funds from "../images/funds.svg";
+import error from "../images/svg/error.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { DisclaimerModal } from "../modal/DisclaimerModal";
@@ -152,11 +153,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 </div>
               </div>
               <div>
-                <div className="labeled_input__error w-100">
-                  {shareAmountError}
-                </div>
                 <input
-                  className="label-input-style"
                   placeholder={"Enter amount"}
                   size="30"
                   type="number"
@@ -164,6 +161,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
                   value={buySharesCount}
                   onChange={(event) => setBuySharesCount(event.target.value)}
                 />
+                <div className="labeled_input__error w-100 mb-32">
+                  {shareAmountError ? <img src={error} alt="error" /> : ""}
+                  {shareAmountError}
+                </div>
               </div>
               <SubmitButton
                 label={"Buy"}
