@@ -32,7 +32,7 @@ export const UpdateDaoData = ({ deps }) => {
     async function prefill() {
       if (params.id) {
         await prefillInputs(
-          deps.statusMsg,
+          deps,
           params.id,
           setDaoName,
           setDaoDescr,
@@ -83,9 +83,7 @@ export const UpdateDaoData = ({ deps }) => {
           isLoading={submitting}
           onClick={async () => {
             updateDaoData(
-              deps.statusMsg,
-              setSubmitting,
-              deps.myAddress,
+              deps,
 
               params.id,
               daoName,
@@ -93,10 +91,6 @@ export const UpdateDaoData = ({ deps }) => {
               sharePrice,
               imageBytes,
               socialMediaUrl,
-
-              deps.wallet,
-
-              deps.updateDao,
 
               setDaoNameError,
               setDaoDescrError,
@@ -140,7 +134,6 @@ export const UpdateDaoData = ({ deps }) => {
               setSubmitting,
               params.id,
               rekeyAuthAddress,
-              deps.wallet,
               setRekeyAddressError
             );
             setShowConfirmRekeyModal(false);

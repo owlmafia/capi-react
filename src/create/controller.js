@@ -5,10 +5,9 @@ import { toMaybeIpfsUrl } from "../ipfs/store";
 const wasmPromise = import("wasm");
 
 export const createDao = async (
-  myAddress,
+  deps,
+
   showProgress,
-  statusMsg,
-  updateMyBalance,
 
   daoName,
   daoDescr,
@@ -33,9 +32,7 @@ export const createDao = async (
   setSocialMediaUrlError,
   setMinRaiseTargetError,
   setMinRaiseTargetEndDateError,
-  setShowBuyCurrencyInfoModal,
-
-  wallet
+  setShowBuyCurrencyInfoModal
 ) => {
   const {
     bridge_create_dao_assets_txs,
@@ -43,7 +40,7 @@ export const createDao = async (
     bridge_submit_create_dao,
   } = await wasmPromise;
 
-  statusMsg.clear();
+  deps.statusMsg.clear();
 
   showProgress(true);
 
@@ -53,7 +50,7 @@ export const createDao = async (
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
       inputs: {
-        creator: myAddress,
+        creator: deps.myAddress,
         dao_name: daoName,
         dao_descr_url: descrUrl,
         share_count: shareCount,
@@ -68,7 +65,9 @@ export const createDao = async (
     });
     showProgress(false);
 
-    let createAssetSigned = await wallet.signTxs(createDaoAssetsRes.to_sign);
+    let createAssetSigned = await deps.wallet.signTxs(
+      createDaoAssetsRes.to_sign
+    );
     console.log("createAssetSigned: " + JSON.stringify(createAssetSigned));
 
     showProgress(true);
@@ -79,7 +78,7 @@ export const createDao = async (
     console.log("createDaoRes: " + JSON.stringify(createDaoRes));
     showProgress(false);
 
-    let createDaoSigned = await wallet.signTxs(createDaoRes.to_sign);
+    let createDaoSigned = await deps.wallet.signTxs(createDaoRes.to_sign);
     console.log("createDaoSigned: " + JSON.stringify(createDaoSigned));
 
     showProgress(true);
@@ -92,9 +91,9 @@ export const createDao = async (
     navigate(submitDaoRes.dao.dao_link);
 
     showProgress(false);
-    statusMsg.success("Project created!");
+    deps.statusMsg.success("Project created!");
 
-    await updateMyBalance(myAddress);
+    await deps.updateMyBalance(deps.myAddress);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setDaoNameError(toErrorMsg(e.name));
@@ -109,11 +108,11 @@ export const createDao = async (
       setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
 
       // show a general message additionally, just in case
-      statusMsg.error("Please fix the errors");
+      deps.statusMsg.error("Please fix the errors");
     } else if (e.id === "not_enough_algos") {
       setShowBuyCurrencyInfoModal(true);
     } else {
-      statusMsg.error(e);
+      deps.statusMsg.error(e);
     }
 
     showProgress(false);

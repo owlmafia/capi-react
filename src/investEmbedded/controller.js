@@ -5,10 +5,9 @@ import { toErrorMsg } from "../validation";
 const wasmPromise = import("wasm");
 
 export const updateTotalPriceAndPercentage = async (
-  _statusMsg,
+  deps,
   shareCount,
   dao,
-  availableSharesNumber,
   setBuySharesTotalPrice,
   setBuySharesTotalPriceNumber,
   setProfitPercentage,
@@ -19,7 +18,7 @@ export const updateTotalPriceAndPercentage = async (
 
     let res = await bridge_calculate_shares_price({
       shares_amount: shareCount,
-      available_shares: availableSharesNumber,
+      available_shares: deps.availableSharesNumber,
       share_supply: dao.share_supply_number,
       investors_share: dao.investors_share,
       share_price: dao.share_price_number_algo,
@@ -33,31 +32,21 @@ export const updateTotalPriceAndPercentage = async (
     setProfitPercentage(res.profit_percentage);
   } catch (e) {
     // for now disabled - we don't want to show validation messages while typing, to be consistent with other inputs
-    // statusMsg.error(e);
+    // deps.statusMsg.error(e);
     console.error("updateTotalPriceAndPercentage error (ignored): %o", e);
   }
 };
 
 export const invest = async (
-  myAddress,
+  deps,
   showProgress,
-  statusMsg,
-  updateMyBalance,
   daoId,
   dao,
   availableSharesNumber,
   buySharesCount,
-  updateMyShares,
-  updateFunds,
   setShareAmountError,
-  wallet,
   setShowBuyCurrencyInfoModal,
-  totalCostNumber,
-  updateInvestmentData,
-  updateAvailableShares,
-  updateRaisedFunds,
-  updateCompactFundsActivity,
-  updateSharesDistr
+  totalCostNumber
 ) => {
   try {
     const {
@@ -65,20 +54,22 @@ export const invest = async (
       bridge_buy_shares,
       bridge_submit_buy_shares,
     } = await wasmPromise;
-    statusMsg.clear();
+    deps.statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/lock
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
       app_id: "" + dao.app_id,
-      investor_address: myAddress,
+      investor_address: deps.myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
     var optInToAppsSignedOptional = null;
     if (optInToAppsRes.to_sign != null) {
       showProgress(false);
-      optInToAppsSignedOptional = await wallet.signTxs(optInToAppsRes.to_sign);
+      optInToAppsSignedOptional = await deps.wallet.signTxs(
+        optInToAppsRes.to_sign
+      );
     }
     console.log(
       "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
@@ -92,18 +83,18 @@ export const invest = async (
       dao_id: daoId,
       share_count: buySharesCount,
       available_shares: availableSharesNumber,
-      investor_address: myAddress,
+      investor_address: deps.myAddress,
       app_opt_ins: optInToAppsSignedOptional,
     });
     console.log("buyRes: " + JSON.stringify(buyRes));
     showProgress(false);
 
-    let buySharesSigned = await wallet.signTxs(buyRes.to_sign);
+    let buySharesSigned = await deps.wallet.signTxs(buyRes.to_sign);
     console.log("buySharesSigned: " + JSON.stringify(buySharesSigned));
 
     showProgress(true);
     let submitBuySharesRes = await bridge_submit_buy_shares({
-      investor_address: myAddress,
+      investor_address: deps.myAddress,
       buy_total_cost: totalCostNumber,
       txs: buySharesSigned,
       pt: buyRes.pt,
@@ -111,28 +102,28 @@ export const invest = async (
     console.log("submitBuySharesRes: " + JSON.stringify(submitBuySharesRes));
     showProgress(false);
 
-    await updateMyBalance(myAddress);
+    await deps.updateMyBalance(deps.myAddress);
 
-    statusMsg.success(
+    deps.statusMsg.success(
       "Congratulations! you bought " + buySharesCount + " shares."
     );
 
-    await updateMyShares(daoId, myAddress);
-    await updateFunds(daoId);
-    await updateInvestmentData(daoId, myAddress);
-    await updateAvailableShares(daoId);
-    await updateRaisedFunds(daoId);
-    await updateCompactFundsActivity(daoId);
-    await updateSharesDistr(dao);
+    await deps.updateMyShares(daoId, deps.myAddress);
+    await deps.updateFunds(daoId);
+    await deps.updateInvestmentData(daoId, deps.myAddress);
+    await deps.updateAvailableShares(daoId);
+    await deps.updateRaisedFunds(daoId);
+    await deps.updateCompactFundsActivity(daoId);
+    await deps.updateSharesDistr(dao);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setShareAmountError(toErrorMsg(e.amount));
       // show a general message additionally, just in case
-      statusMsg.error("Please fix the errors");
+      deps.statusMsg.error("Please fix the errors");
     } else if (e.id === "not_enough_funds_asset") {
       setShowBuyCurrencyInfoModal({ amount: e.details });
     } else {
-      statusMsg.error(e);
+      deps.statusMsg.error(e);
     }
     showProgress(false);
   }

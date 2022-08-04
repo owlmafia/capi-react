@@ -36,10 +36,9 @@ export const BuyMoreShares = ({ deps, dao }) => {
     async function nestedAsync() {
       if (deps.availableShares && buySharesCount) {
         updateTotalPriceAndPercentage(
-          deps.statusMsg,
+          deps,
           buySharesCount,
           dao,
-          deps.availableSharesNumber,
           setTotalCost,
           setTotalCostNumber,
           setProfitPercentage
@@ -135,23 +134,13 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 await invest(
                   deps.myAddress,
                   setSubmitting,
-                  deps.statusMsg,
-                  deps.updateMyBalance,
                   params.id,
                   dao,
                   deps.availableSharesNumber,
                   buySharesCount,
-                  deps.updateMyShares,
-                  deps.updateFunds,
                   setBuySharesAmountError,
-                  deps.wallet,
                   setShowBuyCurrencyInfoModal,
-                  totalCostNumber,
-                  deps.updateInvestmentData,
-                  deps.updateAvailableShares,
-                  deps.updateRaisedFunds,
-                  deps.updateCompactFundsActivity,
-                  deps.updateSharesDistr
+                  totalCostNumber
                 );
               }}
             />

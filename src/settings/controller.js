@@ -5,7 +5,7 @@ import { toErrorMsg } from "../validation";
 const wasmPromise = import("wasm");
 
 export const prefillInputs = async (
-  statusMsg,
+  deps,
   daoId,
   setDaoName,
   setDaoDescr,
@@ -25,19 +25,17 @@ export const prefillInputs = async (
     setImageBytes("data:image/png;base64," + updatableData.image_base64);
     setSocialMediaUrl(updatableData.social_media_url);
   } catch (e) {
-    statusMsg.error(e);
+    deps.statusMsg.error(e);
   }
 };
 
 export const updateApp = async (
-  statusMsg,
+  deps,
   showProgress,
   daoId,
-  owner,
   approvalVersion,
   clearVersion,
-  updateVersion,
-  wallet
+  updateVersion
 ) => {
   try {
     const { bridge_update_app_txs, bridge_submit_update_app } =
@@ -46,14 +44,14 @@ export const updateApp = async (
     showProgress(true);
     let updateAppRes = await bridge_update_app_txs({
       dao_id: daoId,
-      owner: owner,
+      owner: deps.myAddress,
       approval_version: approvalVersion,
       clear_version: clearVersion,
     });
     console.log("Update app res: %o", updateAppRes);
     showProgress(false);
 
-    let updateAppResSigned = await wallet.signTxs(updateAppRes.to_sign);
+    let updateAppResSigned = await deps.wallet.signTxs(updateAppRes.to_sign);
     console.log("updateAppResSigned: " + JSON.stringify(updateAppResSigned));
 
     showProgress(true);
@@ -66,27 +64,20 @@ export const updateApp = async (
     updateVersion(daoId);
 
     showProgress(false);
-    statusMsg.success("App updated!");
+    deps.statusMsg.success("App updated!");
   } catch (e) {
-    statusMsg.error(e);
+    deps.statusMsg.error(e);
   }
 };
 
 export const updateDaoData = async (
-  statusMsg,
-  showProgress,
-  myAddress,
-
+  deps,
   daoId,
   projectName,
   daoDescr,
   sharePrice,
   imageBytes,
   socialMediaUrl,
-
-  wallet,
-
-  updateDao,
 
   setDaoNameError,
   setDaoDescrError,
@@ -97,7 +88,7 @@ export const updateDaoData = async (
     const { bridge_update_data, bridge_submit_update_dao_data } =
       await wasmPromise;
 
-    showProgress(true);
+    deps.showProgress(true);
 
     const imageUrl = await toMaybeIpfsUrl(await imageBytes);
     const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
@@ -109,18 +100,18 @@ export const updateDaoData = async (
       project_desc_url: descrUrl,
       share_price: sharePrice,
 
-      owner: myAddress,
+      owner: deps.myAddress,
 
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
     });
     console.log("Update DAO data res: %o", updateDataRes);
-    showProgress(false);
+    deps.showProgress(false);
 
-    let updateDataResSigned = await wallet.signTxs(updateDataRes.to_sign);
+    let updateDataResSigned = await deps.wallet.signTxs(updateDataRes.to_sign);
     console.log("updateDataResSigned: " + JSON.stringify(updateDataResSigned));
 
-    showProgress(true);
+    deps.showProgress(true);
     let submitUpdateDaoDataRes = await bridge_submit_update_dao_data({
       txs: updateDataResSigned,
       pt: updateDataRes.pt, // passthrough
@@ -129,11 +120,11 @@ export const updateDaoData = async (
       "submitUpdateDaoDataRes: " + JSON.stringify(submitUpdateDaoDataRes)
     );
 
-    await updateDao(daoId);
+    await deps.updateDao(daoId);
 
-    statusMsg.success("Dao data updated!");
+    deps.statusMsg.success("Dao data updated!");
 
-    showProgress(false);
+    deps.showProgress(false);
   } catch (e) {
     if (e.id === "validations") {
       let details = e.details;
@@ -142,20 +133,19 @@ export const updateDaoData = async (
       setImageError(toErrorMsg(details.image));
       setSocialMediaUrlError(toErrorMsg(details.social_media_url));
 
-      statusMsg.error("Please fix the errors");
+      deps.statusMsg.error("Please fix the errors");
     } else {
-      statusMsg.error(e);
+      deps.statusMsg.error(e);
     }
-    showProgress(false);
+    deps.showProgress(false);
   }
 };
 
 export const rekeyOwner = async (
-  statusMsg,
+  deps,
   showProgress,
   daoId,
   authAddress,
-  wallet,
   setInputError
 ) => {
   try {
@@ -169,7 +159,7 @@ export const rekeyOwner = async (
     console.log("rekeyRes: %o", rekeyRes);
     showProgress(false);
 
-    let rekeySigned = await wallet.signTxs(rekeyRes.to_sign);
+    let rekeySigned = await deps.wallet.signTxs(rekeyRes.to_sign);
     console.log("rekeySigned: " + JSON.stringify(rekeySigned));
 
     showProgress(true);
@@ -178,7 +168,7 @@ export const rekeyOwner = async (
     });
     console.log("submitRekeyRes: " + JSON.stringify(submitRekeyRes));
 
-    statusMsg.success(
+    deps.statusMsg.success(
       "Owner rekeyed to: " +
         authAddress +
         ". Please login with this account to be able to sign transactions."
@@ -189,7 +179,7 @@ export const rekeyOwner = async (
       console.error("%o", e);
       setInputError(toErrorMsg(e.details));
     } else {
-      statusMsg.error(e);
+      deps.statusMsg.error(e);
     }
     showProgress(false);
   }

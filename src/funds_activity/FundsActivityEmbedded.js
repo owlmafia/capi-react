@@ -11,6 +11,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
   const [dao, setDao] = useState(null);
 
   useEffect(() => {
+    // TODO use dao in deps? - might need to call update
     loadDao(deps.statusMsg, daoId, setDao);
   }, [daoId, deps.statusMsg]);
 

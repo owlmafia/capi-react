@@ -33,17 +33,7 @@ export const Dao = ({ deps }) => {
 
   useEffect(() => {
     async function fetch() {
-      if (deps.dao) {
-        if (deps.dao.descr_url) {
-          await loadDescription(
-            deps.statusMsg,
-            deps.dao.descr_url,
-            setDescription
-          );
-        } else {
-          setDescription("");
-        }
-      }
+      await loadDescription(deps, setDescription);
     }
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);

@@ -48,10 +48,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
       if (deps.availableSharesNumber != null) {
         if (buySharesCount) {
           updateTotalPriceAndPercentage(
-            deps.statusMsg,
+            deps,
             buySharesCount,
             dao,
-            deps.availableSharesNumber,
             setTotalCost,
             setTotalCostNumber,
             setProfitPercentage,
@@ -80,25 +79,15 @@ export const InvestEmbedded = ({ deps, dao }) => {
         setBuyIntent(false);
 
         await invest(
-          deps.myAddress,
+          deps,
           setSubmitting,
-          deps.statusMsg,
-          deps.updateMyBalance,
           params.id,
           dao,
           deps.availableSharesNumber,
           buySharesCount,
-          deps.updateMyShares,
-          deps.updateFunds,
           setShareAmountError,
-          deps.wallet,
           setShowBuyCurrencyInfoModal,
-          totalCostNumber,
-          deps.updateInvestmentData,
-          deps.updateAvailableShares,
-          deps.updateRaisedFunds,
-          deps.updateCompactFundsActivity,
-          deps.updateSharesDistr
+          totalCostNumber
         );
       }
     }

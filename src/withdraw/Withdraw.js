@@ -22,7 +22,7 @@ export const Withdrawal = ({ deps }) => {
   useEffect(() => {
     async function asyncInit() {
       // init(params.id, props.history.location.state, setDao, props.statusMsg);
-      await init(params.id, null, setDao, deps.statusMsg);
+      await init(deps, params.id, null, setDao);
     }
     asyncInit();
   }, [params.id, setDao, deps.statusMsg]);
@@ -62,15 +62,11 @@ export const Withdrawal = ({ deps }) => {
             disabled={deps.myAddress === ""}
             onClick={async () => {
               await withdraw(
-                deps.myAddress,
+                deps,
                 setSubmitting,
-                deps.statusMsg,
-                deps.updateMyBalance,
                 params.id,
                 withdrawalAmount,
-                withdrawalDescr,
-                deps.updateFunds,
-                deps.wallet
+                withdrawalDescr
               );
             }}
           />

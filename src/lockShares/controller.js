@@ -5,36 +5,33 @@ import { toErrorMsg } from "../validation";
 const wasmPromise = import("wasm");
 
 export const lock = async (
-  myAddress,
+  deps,
   showProgress,
-  statusMsg,
-  updateMyBalance,
   daoId,
   dao,
   lockSharesCount,
-  updateMyShares,
-  updateInvestmentData,
   onLockOpt,
-  wallet,
   setInputError
 ) => {
   try {
     const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
       await wasmPromise;
-    statusMsg.clear();
+    deps.statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/lock
     // 1. sign tx for app opt-in
     showProgress(true);
     let optInToAppsRes = await bridge_opt_in_to_apps_if_needed({
       app_id: "" + dao.app_id,
-      investor_address: myAddress,
+      investor_address: deps.myAddress,
     });
     console.log("optInToAppsRes: " + JSON.stringify(optInToAppsRes));
     var optInToAppsSignedOptional = null;
     if (optInToAppsRes.to_sign != null) {
       showProgress(false);
-      optInToAppsSignedOptional = await wallet.signTxs(optInToAppsRes.to_sign);
+      optInToAppsSignedOptional = await deps.wallet.signTxs(
+        optInToAppsRes.to_sign
+      );
     }
     console.log(
       "optInToAppsSignedOptional: " + JSON.stringify(optInToAppsSignedOptional)
@@ -47,13 +44,13 @@ export const lock = async (
 
     let lockRes = await bridge_lock({
       dao_id: daoId,
-      investor_address: myAddress,
+      investor_address: deps.myAddress,
       share_count: lockSharesCount,
     });
     console.log("lockRes: " + JSON.stringify(lockRes));
     showProgress(false);
 
-    let lockResSigned = await wallet.signTxs(lockRes.to_sign);
+    let lockResSigned = await deps.wallet.signTxs(lockRes.to_sign);
     console.log("lockResSigned: " + JSON.stringify(lockResSigned));
 
     showProgress(true);
@@ -65,13 +62,13 @@ export const lock = async (
     console.log("submitLockRes: " + JSON.stringify(submitLockRes));
     showProgress(false);
 
-    statusMsg.success(
+    deps.statusMsg.success(
       "Congratulations! you locked " + lockSharesCount + " shares."
     );
 
-    await updateInvestmentData(daoId, myAddress);
-    await updateMyBalance(myAddress);
-    await updateMyShares(daoId, myAddress);
+    await deps.updateInvestmentData(daoId, deps.myAddress);
+    await deps.updateMyBalance(deps.myAddress);
+    await deps.updateMyShares(daoId, deps.myAddress);
 
     if (onLockOpt) {
       onLockOpt();
@@ -81,7 +78,7 @@ export const lock = async (
       console.error("%o", e);
       setInputError(toErrorMsg(e.details));
     } else {
-      statusMsg.error(e);
+      deps.statusMsg.error(e);
     }
     showProgress(false);
   }

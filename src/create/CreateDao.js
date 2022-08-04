@@ -76,10 +76,8 @@ export const CreateDao = ({ deps }) => {
         setSubmitDaoIntent(false);
 
         await createDao(
-          deps.myAddress,
+          deps,
           setSubmitting,
-          deps.statusMsg,
-          deps.updateMyBalance,
 
           daoName,
           daoDescr,
@@ -104,8 +102,7 @@ export const CreateDao = ({ deps }) => {
           setSocialMediaUrlError,
           setMinRaiseTargetError,
           setMinRaiseTargetEndDateError,
-          setShowBuyCurrencyInfoModal,
-          deps.wallet
+          setShowBuyCurrencyInfoModal
         );
       }
     }

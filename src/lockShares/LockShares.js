@@ -16,15 +16,11 @@ export const LockShares = ({ deps, dao, daoId, onLockOpt }) => {
       submitting={submitting}
       onSubmit={async (input, setInputError) => {
         await lock(
-          deps.myAddress,
+          deps,
           setSubmitting,
-          deps.statusMsg,
-          deps.updateMyBalance,
           daoId,
           dao,
           input,
-          deps.updateMyShares,
-          deps.updateInvestmentData,
           onLockOpt,
           deps.wallet,
           setInputError

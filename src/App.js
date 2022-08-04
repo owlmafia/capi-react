@@ -11,6 +11,7 @@ import {
   updateDao_,
   initLog,
   fetchAvailableShares,
+  loadRaisedFunds,
 } from "./controller";
 import Modal from "./modal/Modal";
 import {
@@ -23,7 +24,6 @@ import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
-import { loadRaisedFunds } from "./dao/controller";
 import { loadFundsActivity } from "./funds_activity/controller";
 import {
   fetchHoldersChange,

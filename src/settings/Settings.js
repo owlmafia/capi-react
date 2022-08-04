@@ -45,14 +45,12 @@ export const Settings = ({ deps }) => {
               isLoading={submitting}
               onClick={async () => {
                 await updateApp(
-                  deps.statusMsg,
+                  deps,
                   setSubmitting,
                   params.id,
-                  deps.myAddress,
                   deps.daoVersion.update_data.new_approval_version,
                   deps.daoVersion.update_data.new_clear_version,
-                  deps.updateDaoVersion,
-                  deps.wallet
+                  deps.updateDaoVersion
                 );
               }}
             />
