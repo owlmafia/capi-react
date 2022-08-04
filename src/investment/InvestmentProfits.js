@@ -5,8 +5,8 @@ import { FundsAssetImg } from "../images/FundsAssetImg";
 // import {updateChainInvestmentData_ as updateInvestmentData_} from "./controller";
 import { init } from "./controller";
 import { retrieveProfits } from "../shared_functions";
-import { SubmitButton } from "../app_comps/SubmitButton";
-import Progress from "../app_comps/Progress";
+import { SubmitButton } from "../common_comps/SubmitButton";
+import Progress from "../common_comps/Progress";
 
 export const InvestmentProfits = ({ deps }) => {
   let params = useParams();

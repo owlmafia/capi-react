@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { SharesDistributionChart } from "../../charts/SharesDistributionChart";
-import { LabeledBox } from "../../common_comps/LabeledBox";
+import { SharesDistributionChart } from "../charts/SharesDistributionChart";
+import { LabeledBox } from "../common_comps/LabeledBox";
 import { HolderEntry } from "./HolderEntry";
-import Progress from "../../app_comps/Progress";
-import { pieChartColors } from "../../common_functions/common";
-import { changeArrow } from "../../shared_functions";
+import Progress from "../common_comps/Progress";
+import { pieChartColors } from "../common_functions/common";
+import { changeArrow } from "../shared_functions";
 
 // Currently contains only a labeled chart but later could contain also e.g. list of holders / top holders
 export const SharesDistributionBox = ({ deps }) => {

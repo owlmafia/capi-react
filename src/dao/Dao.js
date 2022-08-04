@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
-import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
+import { IncomeVsSpendingBox } from "../income_spending_box/IncomeVsSpendingBox";
+import { SharesDistributionBox } from "../shares_distribution_box/SharesDistributionBox";
 import { InvestEmbedded } from "../investEmbedded/InvestEmbedded";
-import Progress from "../app_comps/Progress";
+import Progress from "../common_comps/Progress";
 import { loadDescription } from "./controller";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
 import { RaisedFunds } from "./RaisedFunds";

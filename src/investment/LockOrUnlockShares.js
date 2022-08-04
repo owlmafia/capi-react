@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import { SubmitButton } from "../common_comps/SubmitButton";
 import { SharesDistributionChart } from "../charts/SharesDistributionChart";
 import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors } from "../common_functions/common";

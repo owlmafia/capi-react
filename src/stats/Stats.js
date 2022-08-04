@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IncomeVsSpendingBox } from "../common_comps/IncomeVsSpendingBox/IncomeVsSpendingBox";
-import { SharesDistributionBox } from "../common_comps/SharesDistributionBox/SharesDistributionBox";
+import { IncomeVsSpendingBox } from "../income_spending_box/IncomeVsSpendingBox";
+import { SharesDistributionBox } from "../shares_distribution_box/SharesDistributionBox";
 import { init } from "./controller";
 
 export const Stats = ({ deps }) => {

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import { DaoTop } from "./DaoTop";
-import { SideBar } from "./SideBar";
-import { SideBarDao } from "./SideBarDao";
+import { DaoTop } from "../common_comps/DaoTop";
+import { SideBar } from "../left_col/SideBar";
+import { SideBarDao } from "../left_col/SideBarDao";
 import menu from "../images/svg/menu.svg";
 import logo from "../images/logo.svg";
 import { MobileWalletView } from "../right_col/MobileWalletView";

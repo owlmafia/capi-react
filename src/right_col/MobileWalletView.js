@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MyAccount } from "../app_comps/MyAccount";
+import { MyAccount } from "../common_comps/MyAccount";
 
 export const MobileWalletView = ({ deps, containerClass, onClose }) => {
   let params = useParams();

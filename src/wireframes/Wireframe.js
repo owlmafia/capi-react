@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { RightCol } from "../right_col/RightCol";
 import { RightDaoCol } from "../right_col/RightDaoCol";
-import { DaoTop } from "./DaoTop";
-import { SideBar } from "./SideBar";
-import { SideBarDao } from "./SideBarDao";
+import { DaoTop } from "../common_comps/DaoTop";
+import { SideBar } from "../left_col/SideBar";
+import { SideBarDao } from "../left_col/SideBarDao";
 
 export const Wireframe = ({ isGlobal, deps }) => {
   const sideBar = () => {

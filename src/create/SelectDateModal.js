@@ -1,7 +1,7 @@
 import Modal from "../modal/Modal";
 import Calendar from "react-calendar";
 import moment from "moment";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import { SubmitButton } from "../common_comps/SubmitButton";
 import { useState } from "react";
 
 // endDate, setEndDate: moment.js date (converted internally to/from regular date for calendar)

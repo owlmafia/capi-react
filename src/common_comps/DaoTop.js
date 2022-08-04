@@ -3,7 +3,7 @@ import share from "../images/svg/share.svg";
 import Modal from "../modal/Modal";
 import ShareView from "./ShareView";
 import React, { useState } from "react";
-import Progress from "../app_comps/Progress";
+import Progress from "./Progress";
 
 export const DaoTop = ({ dao }) => {
   const [showShareModal, setShowShareModal] = useState(false);

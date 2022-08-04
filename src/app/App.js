@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect, Fragment } from "react";
 import { BrowserRouter } from "react-router-dom";
-import { routesView } from "./app_comps/routes";
-import { StatusMsgUpdater } from "./app_comps/StatusMsgUpdater";
-import { checkForUpdates } from "./common_functions/common";
-import { useWindowSize } from "./common_hooks/useWindowSize";
+import { routesView } from "./routes";
+import { StatusMsgUpdater } from "./StatusMsgUpdater";
+import { checkForUpdates } from "../common_functions/common";
+import { useWindowSize } from "../common_hooks/useWindowSize";
 import {
   updateMyShares,
   updateMyBalance_,
@@ -13,22 +13,22 @@ import {
   fetchAvailableShares,
   loadRaisedFunds,
 } from "./controller";
-import Modal from "./modal/Modal";
+import Modal from "../modal/Modal";
 import {
   updateInvestmentData_,
   updateFunds_,
   shortedAddress,
-} from "./shared_functions";
-import OpenWalletModal from "./wallet/OpenWalletModal";
-import { initWcWalletIfAvailable } from "./wallet/walletConnectWallet";
+} from "../shared_functions";
+import OpenWalletModal from "../wallet/OpenWalletModal";
+import { initWcWalletIfAvailable } from "../wallet/walletConnectWallet";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.scss";
-import { loadFundsActivity } from "./funds_activity/controller";
+import "../scss/App.scss";
+import { loadFundsActivity } from "../funds_activity/controller";
 import {
   fetchHoldersChange,
   fetchSharesDistribution,
-} from "./common_comps/SharesDistributionBox/controller";
+} from "../shares_distribution_box/controller";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 

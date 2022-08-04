@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Progress from "../app_comps/Progress";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import Progress from "../common_comps/Progress";
+import { SubmitButton } from "../common_comps/SubmitButton";
 import {
   LabeledCurrencyInput,
   LabeledTextArea,

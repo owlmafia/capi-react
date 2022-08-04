@@ -6,10 +6,10 @@ import { MyDaos } from "../my_daos/MyDaos";
 import { Dao } from "../dao/Dao";
 import { Stats } from "../stats/Stats";
 import { Withdrawal } from "../withdraw/Withdraw";
-import { NotFound } from "./NotFound";
-import { OuterWireframe } from "./OuterWireframe.js";
+import { NotFound } from "../common_comps/NotFound";
+import { OuterWireframe } from "../wireframes/OuterWireframe.js";
 import { Settings } from "../settings/Settings";
-import { WireframeWrapper } from "./WireframeWrapper";
+import { WireframeWrapper } from "../wireframes/WireframeWrapper";
 
 export const routesView = (deps) => {
   return (

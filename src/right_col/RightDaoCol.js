@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FundsActivityEmbedded } from "../funds_activity/FundsActivityEmbedded";
-import { MyAccount } from "../app_comps/MyAccount";
+import { MyAccount } from "../common_comps/MyAccount";
 
 export const RightDaoCol = ({ deps }) => {
   let params = useParams();

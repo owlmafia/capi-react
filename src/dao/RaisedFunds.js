@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import Progress from "../app_comps/Progress";
+import Progress from "../common_comps/Progress";
 import renderFundsProgressChart from "../charts/renderFundsBarChart";
 
 export const RaisedFunds = ({ deps, dao }) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import { SubmitButton } from "../common_comps/SubmitButton";
 import { ContentTitle } from "../ContentTitle";
 import { updateApp } from "./controller";
 import { UpdateDaoData } from "./UpdateDaoData";

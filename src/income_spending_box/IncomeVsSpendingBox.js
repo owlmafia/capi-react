@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import { LabeledBox } from "../LabeledBox";
+import { LabeledBox } from "../common_comps/LabeledBox";
 import { fetchIncomeVsSpendingChartData } from "./controller";
 import Select from "react-select";
-import Progress from "../../app_comps/Progress";
-import { ChartLegends } from "../../charts/ChartLegends";
-import renderBarChart from "../../charts/renderBarChart";
+import Progress from "../common_comps/Progress";
+import { ChartLegends } from "../charts/ChartLegends";
+import renderBarChart from "../charts/renderBarChart";
 
 const barsOptions = [
   { value: "days7", label: "Last 7 days" },

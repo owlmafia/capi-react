@@ -5,7 +5,7 @@ import { init } from "./controller";
 import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
-import Progress from "../app_comps/Progress";
+import Progress from "../common_comps/Progress";
 
 export const Investment = ({ deps }) => {
   let params = useParams();

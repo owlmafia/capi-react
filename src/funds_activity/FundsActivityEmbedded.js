@@ -5,7 +5,7 @@ import funds from "../images/funds.svg";
 import { changeArrow, shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
 import { CompactFundsActivityEntry } from "./CompactFundsActivityEntry";
-import Progress from "../app_comps/Progress";
+import Progress from "../common_comps/Progress";
 
 export const FundsActivityEmbedded = ({ deps, daoId }) => {
   const [dao, setDao] = useState(null);

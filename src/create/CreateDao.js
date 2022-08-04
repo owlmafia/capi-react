@@ -8,9 +8,9 @@ import {
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { calculateTotalPrice, createDao } from "./controller";
-import { ImageUpload } from "../app_comps/ImageUpload";
+import { ImageUpload } from "../common_comps/ImageUpload";
 import { useNavigate } from "react-router-dom";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import { SubmitButton } from "../common_comps/SubmitButton";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import link from "../images/svg/link.svg";

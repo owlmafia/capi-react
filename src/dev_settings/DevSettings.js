@@ -4,7 +4,7 @@ import {
   saveDevSettingFundsAssetId,
 } from "../modal/storage";
 import { LabeledInput } from "../common_comps/LabeledInput";
-import { SubmitButton } from "../app_comps/SubmitButton";
+import { SubmitButton } from "../common_comps/SubmitButton";
 
 export const DevSettings = ({ closeModal }) => {
   const [fundsAssetId, setFundsAssetId] = useState("");

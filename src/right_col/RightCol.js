@@ -1,4 +1,4 @@
-import { MyAccount } from "../app_comps/MyAccount";
+import { MyAccount } from "../common_comps/MyAccount";
 
 export const RightCol = ({ deps }) => {
   return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import arrow from "../images/svg/arrow-right.svg";
 import { retrieveProfits } from "../shared_functions";
-import { CopyPasteHtml } from "../common_comps/CopyPastText";
-import Progress from "../app_comps/Progress";
+import { CopyPasteHtml } from "./CopyPastText";
+import Progress from "./Progress";
 import { SubmitButton } from "./SubmitButton";
 import { SelectWallet } from "../wallet/SelectWallet";
 import Modal from "../modal/Modal";
