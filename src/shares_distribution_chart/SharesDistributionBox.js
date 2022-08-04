@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { SharesDistributionChart } from "../charts/SharesDistributionChart";
+import { SharesDistributionChart } from "../shares_distribution_chart/SharesDistributionChart";
 import { LabeledBox } from "../common_comps/LabeledBox";
 import { HolderEntry } from "./HolderEntry";
 import Progress from "../common_comps/Progress";

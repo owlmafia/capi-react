@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../common_comps/SubmitButton";
 import { BuyFundsAssetModal } from "../buy_currency/BuyFundsAssetModal";
-import { SharesDistributionChart } from "../charts/SharesDistributionChart";
+import { SharesDistributionChart } from "../shares_distribution_chart/SharesDistributionChart";
 import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors, PIE_CHART_GRAY } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";

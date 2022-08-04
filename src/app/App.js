@@ -28,7 +28,7 @@ import { loadFundsActivity } from "../funds_activity/controller";
 import {
   fetchHoldersChange,
   fetchSharesDistribution,
-} from "../shares_distribution_box/controller";
+} from "../shares_distribution_chart/controller";
 
 const isIE = /*@cc_on!@*/ false || !!document.documentMode;
 

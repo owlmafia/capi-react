@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import renderPieChart from "./renderPieChart";
+import renderPieChart from "../charts/renderPieChart";
 
 // onAddressSelected has to return selected status, to highlight the segment
 export const SharesDistributionChart = ({

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SubmitButton } from "../common_comps/SubmitButton";
-import { SharesDistributionChart } from "../charts/SharesDistributionChart";
+import { SharesDistributionChart } from "../shares_distribution_chart/SharesDistributionChart";
 import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";
