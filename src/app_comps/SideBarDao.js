@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import home from "../images/sidebar/home.svg";
 import stats from "../images/sidebar/stats.svg";
@@ -9,8 +9,11 @@ import create from "../images/sidebar/create.svg";
 import project from "../images/sidebar/projects.svg";
 import SideBarItem from "./SideBarItem";
 import logo from "../images/logo.svg";
+import { DevSettingsModal } from "../dev_settings/DevSettingsModal";
 
 export const SideBarDao = ({ deps, containerClass }) => {
+  const [devSettingsModal, setDevSettingsModal] = useState(false);
+
   let params = useParams();
 
   useEffect(() => {
@@ -36,6 +39,10 @@ export const SideBarDao = ({ deps, containerClass }) => {
         route="/my_projects"
         label="My Projects"
       />
+      <div className="clickable" onClick={() => setDevSettingsModal(true)}>
+        {"Dev settings"}
+      </div>
+
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />
       <SideBarItem imageSrc={stats} route="stats" label="Statistics" />
@@ -61,6 +68,9 @@ export const SideBarDao = ({ deps, containerClass }) => {
           label="Project settings"
           showBadge={deps.daoVersion?.update_data}
         />
+      )}
+      {devSettingsModal && (
+        <DevSettingsModal closeModal={() => setDevSettingsModal(false)} />
       )}
     </div>
   );
