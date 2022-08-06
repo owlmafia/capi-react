@@ -32,7 +32,7 @@ export const CreateDao = ({ deps }) => {
     "https://twitter.com/doesnotexist"
   );
 
-  const [minRaiseTarget, setMinRaiseTarget] = useState("");
+  const [minRaiseTarget, setMinRaiseTarget] = useState("100");
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
