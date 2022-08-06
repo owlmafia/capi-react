@@ -14,7 +14,7 @@ export const storeIpfs = async (bytes) => {
   const cid = await storage.put([file]);
   console.log("Content added with CID:", cid);
 
-  return "https://ipfs.io/ipfs/" + cid + "/img";
+  return "https://ipfs.io/ipfs/" + cid + "/file";
   //   const files = [];
 
   //   for (const path of args._) {

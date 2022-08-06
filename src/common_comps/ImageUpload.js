@@ -2,6 +2,7 @@ import React, { useState, useCallback } from "react";
 import { ImageCropper } from "./ImageCropper";
 import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";
+import { useDrop } from "./FileUploader";
 
 const fileReader = new FileReader();
 
@@ -19,15 +20,9 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
   }, [initImageBytes]);
 
   // sets image: called when uploading image with button or dropping it in target zone
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log("drop: accepted files: %o", acceptedFiles);
-    if (acceptedFiles && acceptedFiles.length === 1) {
-      let file = acceptedFiles[0];
-      setImageFromFile(file, setInputImg);
-    } else {
-      console.error("Unexpected: acceptedFiles: %o", acceptedFiles);
-    }
-  }, []);
+  const onDrop = useDrop((file) => {
+    setImageFromFile(file, setInputImg);
+  });
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -49,14 +44,16 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
 
   return (
     <form
-      className={isDragActive ? "upload-form-highlighted" : "upload-form"}
+      className={
+        isDragActive ? "upload-form-image-highlighted" : "upload-form-image"
+      }
       onSubmit={handleSubmitImage}
     >
       {/* <div className="upload-container"> */}
 
       {/* upload image: set in inputImg via onDrop */}
       <div {...getRootProps({ className: "upload-container" })}>
-        <div className="ft-color-black">Upload an cover image</div>
+        <div className="ft-color-black">Upload a cover image</div>
         <div className="upload-custom">
           <button className="file-custom secondary-button">Upload Image</button>
           <input

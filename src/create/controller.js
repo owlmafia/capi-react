@@ -19,6 +19,7 @@ export const createDao = async (
   socialMediaUrl,
   minRaiseTarget,
   minRaiseTargetEndDate,
+  prospectusBytes,
 
   navigate,
 
@@ -46,6 +47,7 @@ export const createDao = async (
 
   const imageUrl = await toMaybeIpfsUrl(await imageBytes);
   const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
+  const prospectusUrl = await toMaybeIpfsUrl(await prospectusBytes);
 
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
@@ -61,6 +63,7 @@ export const createDao = async (
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
+        prospectus_url: prospectusUrl,
       },
     });
     showProgress(false);

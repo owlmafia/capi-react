@@ -5,6 +5,7 @@ import {
   LabeledInput,
   LabeledTextArea,
   LabeledDateInput,
+  InfoView,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { calculateTotalPrice, createDao } from "./controller";
@@ -17,6 +18,7 @@ import link from "../images/svg/link.svg";
 import moment from "moment";
 
 import { MaxFundingTargetLabel } from "./MaxFundingTargetLabel";
+import { FileUploader } from "../common_comps/FileUploader";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -37,6 +39,7 @@ export const CreateDao = ({ deps }) => {
   const formattedMinRaiseTargetEndDate = useMemo(() => {
     return moment(minRaiseTargetEndDate).format("D MMM YYYY");
   }, [minRaiseTargetEndDate]);
+  const [prospectusBytes, setProspectusBytes] = useState([]);
 
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
@@ -88,6 +91,7 @@ export const CreateDao = ({ deps }) => {
           socialMediaUrl,
           minRaiseTarget,
           minRaiseTargetEndDate,
+          prospectusBytes,
 
           navigate,
 
@@ -138,6 +142,11 @@ export const CreateDao = ({ deps }) => {
         />
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
+
+        <div className="dao-title mt-60">Prospectus</div>
+
+        <FileUploader setBytes={setProspectusBytes} />
+
         <div className="dao-title mt-60">Project Funds</div>
         <LabeledAmountInput
           label={"Share supply"}
