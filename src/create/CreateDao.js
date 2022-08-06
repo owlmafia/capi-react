@@ -15,9 +15,8 @@ import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { BuyAlgosModal } from "../buy_currency/BuyAlgosModal";
 import link from "../images/svg/link.svg";
 import moment from "moment";
-import funds from "../images/funds.svg";
-import ReactTooltip from "react-tooltip";
-import info from "../images/svg/info.svg";
+
+import { MaxFundingTargetLabel } from "./MaxFundingTargetLabel";
 
 export const CreateDao = ({ deps }) => {
   const [daoName, setDaoName] = useState("My project");
@@ -190,26 +189,7 @@ export const CreateDao = ({ deps }) => {
               errorMsg={minRaiseTargetError}
             />
           </div>
-          <div className="f-basis-50">
-            <div className="pl-25 ft-color-grey">
-              <div className="d-flex align-center mb-8">
-                <div className="ft-weight-600">{"Max funding target"}</div>
-                <div
-                  className="d-flex align-center ml-10"
-                  data-tip={
-                    "The maximum amount that can be raised (share supply x price)"
-                  }
-                >
-                  <img src={info} alt="info" />
-                </div>
-                <ReactTooltip />
-              </div>
-              <div className="d-flex align-center h-64">
-                <img src={funds} alt="img" />
-                <div className="ml-10">{totalSharePrice}</div>
-              </div>
-            </div>
-          </div>
+          <MaxFundingTargetLabel text={totalSharePrice} />
         </div>
         <LabeledDateInput
           label={"Fundraising end date"}
