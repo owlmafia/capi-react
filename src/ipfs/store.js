@@ -8,13 +8,15 @@ export const storeIpfs = async (bytes) => {
 
   //   var bytes = new Uint8Array(bytesArr);
 
+  const fileName = "file";
+
   const blob = new Blob([bytes]);
-  const file = new File([blob], "img");
+  const file = new File([blob], fileName);
 
   const cid = await storage.put([file]);
   console.log("Content added with CID:", cid);
 
-  return "https://ipfs.io/ipfs/" + cid + "/file";
+  return "https://ipfs.io/ipfs/" + cid + "/" + fileName;
   //   const files = [];
 
   //   for (const path of args._) {
