@@ -104,43 +104,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           <div className="title">{"Buy Shares"}</div>
           <div className="buy-shares-content">
             <div className="dao-shares buy-shares-left-col">
-              <div className="top-block ">
-                <div className="available-shares">
-                  <div className="d-flex mb-16 gap-12">
-                    <div className="desc">{"Available: "}</div>
-                    <div className="desc">{deps.availableShares}</div>
-                  </div>
-                  {deps.investmentData && (
-                    <div className="shares-block">
-                      <div className="desc">You have:</div>
-                      <div className="shares-item">
-                        <div className="shares-item-right">
-                          {"Locked shares:"}
-                        </div>
-                        <div className="ft-weight-700">
-                          {deps.investmentData.investor_locked_shares}
-                        </div>
-                      </div>
-                      <div className="blue-circle"></div>
-                      <div className="shares-item">
-                        <div className="shares-item-right">
-                          {"Unlocked shares:"}
-                        </div>
-                        <div className="ft-weight-700">
-                          {deps.investmentData.investor_unlocked_shares}
-                        </div>
-                      </div>
-                      <div className="blue-circle"></div>
-                      <div className="shares-item">
-                        <div className="shares-item-right">{"Share:"}</div>
-                        <div className="ft-weight-700">
-                          {deps.investmentData.investor_share}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              <TopBlock deps={deps} />
               <div>
                 <input
                   placeholder={"Enter amount"}
@@ -168,35 +132,13 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 }}
               />
             </div>
-            <div className="buy-shares-right-col">
-              <div id="shares_const_container">
-                <div className="desc">{"Total price"}</div>
-                <div className="d-flex gap-10">
-                  <img src={funds} alt="funds" />
-                  <div className="subtitle ft-color-black-000">{totalCost}</div>
-                </div>
-              </div>
-              <div className="d-flex mobile-input-block">
-                <div id="retrieved-profits">
-                  <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
-                    {"Expected dividend"}
-                    {
-                      <InfoView
-                        info={
-                          "Total expected dividend if you buy these shares (includes already locked shares)"
-                        }
-                      />
-                    }
-                  </div>
-                  <div className="d-flex gap-10">
-                    <div className="subtitle ft-color-black-000">
-                      {totalPercentage}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <RightView
+              funds={funds}
+              totalCost={totalCost}
+              totalPercentage={totalPercentage}
+            />
           </div>
+
           {showSelectWalletModal && (
             <SelectWalletModal
               deps={deps}
@@ -228,4 +170,76 @@ export const InvestEmbedded = ({ deps, dao }) => {
   };
 
   return deps.availableShares && view();
+};
+
+const TopBlock = ({ deps }) => {
+  return (
+    <div className="top-block">
+      <div className="available-shares">
+        <div className="d-flex mb-16 gap-12">
+          <div className="desc">{"Available: "}</div>
+          <div className="desc">{deps.availableShares}</div>
+        </div>
+        {deps.investmentData && (
+          <div className="shares-block">
+            <div className="desc">You have:</div>
+            <TopBlockItem
+              label={"Locked shares:"}
+              value={deps.investmentData.investor_locked_shares}
+            />
+            <div className="blue-circle"></div>
+            <TopBlockItem
+              label={"Unlocked shares:"}
+              value={deps.investmentData.investor_unlocked_shares}
+            />
+            <div className="blue-circle"></div>
+            <TopBlockItem
+              label={"Share:"}
+              value={deps.investmentData.investor_share}
+            />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const TopBlockItem = ({ label, value }) => {
+  return (
+    <div className="shares-item">
+      <div className="shares-item-right">{label}</div>
+      <div className="ft-weight-700">{value}</div>
+    </div>
+  );
+};
+
+const RightView = ({ funds, totalCost, totalPercentage }) => {
+  return (
+    <div className="buy-shares-right-col">
+      <div id="shares_const_container">
+        <div className="desc">{"Total price"}</div>
+        <div className="d-flex gap-10">
+          <img src={funds} alt="funds" />
+          <div className="subtitle ft-color-black-000">{totalCost}</div>
+        </div>
+      </div>
+      <div className="d-flex mobile-input-block">
+        <div id="retrieved-profits">
+          <div className="ft-weight-600 d-flex align-center gap-10 ft-size-18 nowrap">
+            {"Expected dividend"}
+            {
+              <InfoView
+                info={
+                  "Total expected dividend if you buy these shares (includes already locked shares)"
+                }
+              />
+            }
+          </div>
+          <div className="d-flex gap-10">
+            <div className="subtitle ft-color-black-000">{totalPercentage}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
