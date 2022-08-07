@@ -6,12 +6,8 @@ import funds from "../images/funds.svg";
 import error from "../images/svg/error.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
-import { DisclaimerModal } from "../modal/DisclaimerModal";
-import {
-  needsToAcceptDisclaimer,
-  saveAcceptedDisclaimer,
-} from "../modal/storage";
 import { InfoView } from "../common_comps/LabeledInput";
+import { PdfModal } from "../pdf/PdfModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -25,7 +21,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [buyIntent, setBuyIntent] = useState(false);
-  const [showDisclaimerModal, setShowDisclaimerModal] = useState(false);
+  const [showProspectusModal, setShowProspectusModal] = useState(false);
 
   // show modal carries an object here, to pass details
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
@@ -124,11 +120,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 className={"button-primary"}
                 isLoading={submitting}
                 onClick={async (_) => {
-                  if (await needsToAcceptDisclaimer()) {
-                    setShowDisclaimerModal(true);
-                  } else {
-                    onSubmitBuy();
-                  }
+                  setShowProspectusModal(true);
                 }}
               />
             </div>
@@ -154,12 +146,14 @@ export const InvestEmbedded = ({ deps, dao }) => {
           )}
         </div>
 
-        {showDisclaimerModal && (
-          <DisclaimerModal
-            closeModal={() => setShowDisclaimerModal(false)}
+        {showProspectusModal && (
+          <PdfModal
+            url={deps.dao.prospectus_url}
+            closeModal={() => setShowProspectusModal(false)}
             onAccept={() => {
-              saveAcceptedDisclaimer();
-              setShowDisclaimerModal(false);
+              // TODO save in local state, with hash
+              //   saveAcceptedDisclaimer();
+              setShowProspectusModal(false);
               // continue with buy flow: assumes that the disclaimer here is (only) shown when clicking on buy
               onSubmitBuy();
             }}
