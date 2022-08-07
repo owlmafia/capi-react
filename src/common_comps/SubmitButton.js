@@ -13,7 +13,7 @@ export const SubmitButton = ({
         onClick();
       }}
     >
-      <span className={isLoading && "opacity-0"}>{label}</span>
+      <span className={isLoading ? "opacity-0" : ""}>{label}</span>
 
       {isLoading && (
         <svg className="btn-loader" viewBox="0 0 40 40">
