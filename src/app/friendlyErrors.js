@@ -4,7 +4,8 @@ export const toFriendlyError = (msg) => {
     txIdNotFoundError(msg) ??
     tryOverspendError(msg) ??
     tryAssetNotOptedInError(msg) ??
-    tryAssetOverspendError(msg)
+    tryAssetOverspendError(msg) ??
+    tealApiConnectionError(msg)
   );
 };
 
@@ -64,6 +65,14 @@ export const txIdNotFoundError = (msg) => {
   if (match && match.length === 2) {
     let txId = match[1];
     return "Tx id not found: " + txId;
+  } else {
+    return null;
+  }
+};
+
+export const tealApiConnectionError = (msg) => {
+  if (msg.includes("Failed to fetch") && msg.includes("TealApi")) {
+    return "Couldn't connect to smart contracts api. Please try again.";
   } else {
     return null;
   }
