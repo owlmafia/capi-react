@@ -38,6 +38,13 @@ export const Investment = ({ deps }) => {
       return (
         <div>
           <div className="section_container">
+            {deps.features.prospectus && (
+              <div>
+                <a href={deps.dao.prospectus_url}>
+                  {"Acknowledged prospectus"}
+                </a>
+              </div>
+            )}
             <InvestmentProfits deps={deps} />
 
             <div id="dao_actions_top_bar">

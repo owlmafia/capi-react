@@ -10,6 +10,7 @@ import {
   invest,
   updateTotalPriceAndPercentage,
 } from "../investEmbedded/controller";
+import { ProspectusModal } from "../prospectus/ProspectusModal";
 
 export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
@@ -24,6 +25,9 @@ export const BuyMoreShares = ({ deps, dao }) => {
   // may be used in the future
   const [_totalCost, setTotalCost] = useState(null);
   const [_totalPercentage, setProfitPercentage] = useState(null);
+
+  const [showProspectusModal, setShowProspectusModal] = useState(false);
+  const [prospectusHash, setProspectusHash] = useState("");
 
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(null);
@@ -131,17 +135,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               isLoading={submitting}
               disabled={deps.availableShares === "0"}
               onClick={async () => {
-                await invest(
-                  deps.myAddress,
-                  setSubmitting,
-                  params.id,
-                  dao,
-                  deps.availableSharesNumber,
-                  buySharesCount,
-                  setBuySharesAmountError,
-                  setShowBuyCurrencyInfoModal,
-                  totalCostNumber
-                );
+                setShowProspectusModal(true);
               }}
             />
           </div>
@@ -170,6 +164,30 @@ export const BuyMoreShares = ({ deps, dao }) => {
             deps={deps}
             amount={showBuyCurrencyInfoModal.amount}
             closeModal={() => setShowBuyCurrencyInfoModal(null)}
+          />
+        )}
+        {showProspectusModal && (
+          <ProspectusModal
+            url={deps.dao.prospectus_url}
+            prospectusHash={prospectusHash}
+            setProspectusHash={setProspectusHash}
+            closeModal={() => setShowProspectusModal(false)}
+            onAccept={async () => {
+              setShowProspectusModal(false);
+
+              await invest(
+                deps.myAddress,
+                setSubmitting,
+                params.id,
+                dao,
+                prospectusHash,
+                deps.availableSharesNumber,
+                buySharesCount,
+                setBuySharesAmountError,
+                setShowBuyCurrencyInfoModal,
+                totalCostNumber
+              );
+            }}
           />
         )}
       </div>

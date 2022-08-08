@@ -8,7 +8,7 @@ import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { InfoView } from "../common_comps/LabeledInput";
 import { PdfModal } from "../pdf/PdfModal";
-import { features } from "process";
+import { ProspectusModal } from "../prospectus/ProspectusModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -22,7 +22,9 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
   const [buyIntent, setBuyIntent] = useState(false);
+
   const [showProspectusModal, setShowProspectusModal] = useState(false);
+  const [prospectusHash, setProspectusHash] = useState("");
 
   // show modal carries an object here, to pass details
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
@@ -72,7 +74,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   useEffect(() => {
     async function nestedAsync() {
-      if (deps.wallet && buyIntent && deps.myAddress) {
+      if (deps.wallet && buyIntent && deps.myAddress && prospectusHash) {
         setBuyIntent(false);
 
         await invest(
@@ -80,6 +82,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
           setSubmitting,
           params.id,
           dao,
+          prospectusHash,
           deps.availableSharesNumber,
           buySharesCount,
           setShareAmountError,
@@ -92,7 +95,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
     // TODO warning about missing deps here - we *don't* want to trigger this effect when inputs change,
     // we want to send whatever is in the form when user submits - so we care only about the conditions that trigger submit
     // suppress lint? are we approaching this incorrectly?
-  }, [buyIntent, deps.wallet, deps.myAddress]);
+  }, [buyIntent, deps.wallet, deps.myAddress, prospectusHash]);
 
   const view = () => {
     return (
@@ -152,8 +155,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
         </div>
 
         {showProspectusModal && (
-          <PdfModal
+          <ProspectusModal
             url={deps.dao.prospectus_url}
+            prospectusHash={prospectusHash}
+            setProspectusHash={setProspectusHash}
             closeModal={() => setShowProspectusModal(false)}
             onAccept={() => {
               // TODO save in local state, with hash
