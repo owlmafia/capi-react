@@ -143,9 +143,12 @@ export const CreateDao = ({ deps }) => {
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
 
-        <div className="dao-title mt-60">Prospectus</div>
-
-        <FileUploader setBytes={setProspectusBytes} />
+        {deps.features.prospectus && (
+          <React.Fragment>
+            <div className="dao-title mt-60">Prospectus</div>
+            <FileUploader setBytes={setProspectusBytes} />
+          </React.Fragment>
+        )}
 
         <div className="dao-title mt-60">Project Funds</div>
         <LabeledAmountInput

@@ -231,6 +231,11 @@ const App = () => {
     return (
       <BrowserRouter>
         {routesView({
+          // conditional features
+          features: {
+            prospectus: false,
+          },
+
           myAddress: myAddress,
           setMyAddress: setMyAddress,
 

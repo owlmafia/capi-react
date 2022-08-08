@@ -8,6 +8,7 @@ import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { InfoView } from "../common_comps/LabeledInput";
 import { PdfModal } from "../pdf/PdfModal";
+import { features } from "process";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -120,7 +121,11 @@ export const InvestEmbedded = ({ deps, dao }) => {
                 className={"button-primary"}
                 isLoading={submitting}
                 onClick={async (_) => {
-                  setShowProspectusModal(true);
+                  if (deps.features.prospectus) {
+                    setShowProspectusModal(true);
+                  } else {
+                    onSubmitBuy();
+                  }
                 }}
               />
             </div>
