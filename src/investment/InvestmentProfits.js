@@ -16,14 +16,7 @@ export const InvestmentProfits = ({ deps }) => {
 
   useEffect(() => {
     async function doInit() {
-      await init(
-        params.id,
-        deps.myAddress,
-        deps.statusMsg,
-        setDao,
-        deps.updateInvestmentData,
-        deps.updateMyShares
-      );
+      await init(deps, params.id, setDao);
     }
     doInit();
   }, [
