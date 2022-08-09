@@ -7,7 +7,6 @@ export const ProspectusModal = ({
   closeModal,
   prospectusHash,
 }) => {
-
   return (
     <OkCancelModal
       title={"Prospectus"}
@@ -15,10 +14,7 @@ export const ProspectusModal = ({
       okLabel={"Acknowledge"}
       onSubmit={() => onAccept()}
     >
-      <ProspectusView
-        url={url}
-        hash={prospectusHash}
-      />
+      <ProspectusView url={url} hash={prospectusHash} />
     </OkCancelModal>
   );
 };
