@@ -7,7 +7,6 @@ import error from "../images/svg/error.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { InfoView } from "../common_comps/LabeledInput";
-import { PdfModal } from "../pdf/PdfModal";
 import { ProspectusModal } from "../prospectus/ProspectusModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
@@ -24,7 +23,6 @@ export const InvestEmbedded = ({ deps, dao }) => {
   const [buyIntent, setBuyIntent] = useState(false);
 
   const [showProspectusModal, setShowProspectusModal] = useState(false);
-  const [prospectusHash, setProspectusHash] = useState("");
 
   // show modal carries an object here, to pass details
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
@@ -74,7 +72,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   useEffect(() => {
     async function nestedAsync() {
-      if (deps.wallet && buyIntent && deps.myAddress && prospectusHash) {
+      if (deps.wallet && buyIntent && deps.myAddress) {
         setBuyIntent(false);
 
         await invest(
@@ -82,7 +80,6 @@ export const InvestEmbedded = ({ deps, dao }) => {
           setSubmitting,
           params.id,
           dao,
-          prospectusHash,
           deps.availableSharesNumber,
           buySharesCount,
           setShareAmountError,
@@ -95,7 +92,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
     // TODO warning about missing deps here - we *don't* want to trigger this effect when inputs change,
     // we want to send whatever is in the form when user submits - so we care only about the conditions that trigger submit
     // suppress lint? are we approaching this incorrectly?
-  }, [buyIntent, deps.wallet, deps.myAddress, prospectusHash]);
+  }, [buyIntent, deps.wallet, deps.myAddress]);
 
   const view = () => {
     return (
@@ -156,13 +153,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
         {showProspectusModal && (
           <ProspectusModal
-            url={deps.dao.prospectus_url}
-            prospectusHash={prospectusHash}
-            setProspectusHash={setProspectusHash}
+            url={deps.dao.prospectus.url}
+            prospectusHash={deps.dao.prospectus.hash}
             closeModal={() => setShowProspectusModal(false)}
             onAccept={() => {
-              // TODO save in local state, with hash
-              //   saveAcceptedDisclaimer();
               setShowProspectusModal(false);
               // continue with buy flow: assumes that the disclaimer here is (only) shown when clicking on buy
               onSubmitBuy();

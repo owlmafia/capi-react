@@ -1,12 +1,6 @@
-import { useEffect } from "react";
 import { PdfView } from "../pdf/PdfView";
-import { updateHash } from "./controller";
 
-export const ProspectusView = ({ deps, url, hash, setHash }) => {
-  useEffect(() => {
-    updateHash(deps, [], setHash);
-  }, []);
-
+export const ProspectusView = ({ deps, url, hash }) => {
   return (
     <div>
       <PdfView url={url} />

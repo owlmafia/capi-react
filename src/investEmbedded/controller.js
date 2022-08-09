@@ -42,7 +42,6 @@ export const invest = async (
   showProgress,
   daoId,
   dao,
-  prospectusHash,
   availableSharesNumber,
   buySharesCount,
   setShareAmountError,
@@ -86,10 +85,7 @@ export const invest = async (
       available_shares: availableSharesNumber,
       investor_address: deps.myAddress,
       app_opt_ins: optInToAppsSignedOptional,
-      signed_prospectus: {
-        url: dao.prospectus_url,
-        hash: prospectusHash,
-      },
+      signed_prospectus: dao.prospectus,
     });
     console.log("buyRes: " + JSON.stringify(buyRes));
     showProgress(false);

@@ -6,7 +6,6 @@ export const ProspectusModal = ({
   onAccept,
   closeModal,
   prospectusHash,
-  setProspectusHash,
 }) => {
 
   return (
@@ -19,7 +18,6 @@ export const ProspectusModal = ({
       <ProspectusView
         url={url}
         hash={prospectusHash}
-        setHash={setProspectusHash}
       />
     </OkCancelModal>
   );

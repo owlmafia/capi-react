@@ -1,7 +1,7 @@
 const wasmPromise = import("wasm");
 
 export const toBytesForRust = (bytes) => {
-  if (bytes && bytes.length > 0) {
+  if (bytes && bytes.byteLength > 0) {
     const typedArray = new Uint8Array(bytes);
     return [...typedArray];
   } else {

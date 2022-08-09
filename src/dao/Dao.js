@@ -38,6 +38,15 @@ export const Dao = ({ deps }) => {
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);
 
+  const showBuyShares = () => {
+    // if prospectus feature is disabled, we always show buy shares,
+    // otherwise only if there's a prospectus
+    return (
+      !deps.features.prospectus ||
+      (deps.features.prospectus && deps.dao.prospectus)
+    );
+  };
+
   const daoView = () => {
     if (deps.dao) {
       return (
@@ -51,7 +60,7 @@ export const Dao = ({ deps }) => {
               <FundsActivityEmbedded deps={deps} daoId={params.id} />
             )}
 
-            <InvestEmbedded deps={deps} dao={deps.dao} />
+            {showBuyShares() && <InvestEmbedded deps={deps} dao={deps.dao} />}
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}

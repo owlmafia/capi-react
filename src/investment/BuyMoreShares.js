@@ -27,7 +27,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
   const [_totalPercentage, setProfitPercentage] = useState(null);
 
   const [showProspectusModal, setShowProspectusModal] = useState(false);
-  const [prospectusHash, setProspectusHash] = useState("");
 
   const [showBuyCurrencyInfoModal, setShowBuyCurrencyInfoModal] =
     useState(null);
@@ -168,9 +167,8 @@ export const BuyMoreShares = ({ deps, dao }) => {
         )}
         {showProspectusModal && (
           <ProspectusModal
-            url={deps.dao.prospectus_url}
-            prospectusHash={prospectusHash}
-            setProspectusHash={setProspectusHash}
+            url={deps.dao.prospectus.url}
+            prospectusHash={deps.dao.prospectus.hash}
             closeModal={() => setShowProspectusModal(false)}
             onAccept={async () => {
               setShowProspectusModal(false);
@@ -180,7 +178,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 setSubmitting,
                 params.id,
                 dao,
-                prospectusHash,
                 deps.availableSharesNumber,
                 buySharesCount,
                 setBuySharesAmountError,
