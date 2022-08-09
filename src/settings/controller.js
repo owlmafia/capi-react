@@ -1,4 +1,4 @@
-import { toBytes, toBytesForRust } from "../common_functions/common";
+import { toBytes } from "../common_functions/common";
 import { toMaybeIpfsUrl } from "../ipfs/store";
 import { toErrorMsg } from "../validation";
 

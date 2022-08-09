@@ -1,9 +1,15 @@
 const wasmPromise = import("wasm");
 
-export const toBytesForRust = async (imageBytesPromise) => {
-  const ib = await imageBytesPromise;
-  const typedArray = new Uint8Array(ib);
-  return [...typedArray];
+export const toBytesForRust = (bytes) => {
+  if (bytes && bytes.length > 0) {
+    const typedArray = new Uint8Array(bytes);
+    return [...typedArray];
+  } else {
+    // in rust we often (always?) consider empty byte arrays invalid: it's has to be either "not set" or "set to something"
+    // while here in js we e.g. initialize the image, files hooks to empty array for simpler handling
+    // so we've to map empty array to null when passing to rust
+    return null;
+  }
 };
 
 export const toBytes = (str) => {

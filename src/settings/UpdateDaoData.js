@@ -4,7 +4,6 @@ import { SubmitButton } from "../common_comps/SubmitButton";
 import { LabeledInput, LabeledTextArea } from "../common_comps/LabeledInput";
 import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../common_comps/ImageUpload";
-import { toBytesForRust } from "../common_functions/common";
 import { OkCancelModal } from "../modal/OkCancelModal";
 import { toMaybeIpfsUrl } from "../ipfs/store";
 

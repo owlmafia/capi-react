@@ -48,7 +48,10 @@ export const createDao = async (
 
   const imageUrl = await toMaybeIpfsUrl(await imageBytes);
   const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
-  const prospectusUrl = await toMaybeIpfsUrl(await prospectusBytes);
+
+  const prospectusBytesResolved = await prospectusBytes;
+  const prospectusUrl = await toMaybeIpfsUrl(prospectusBytesResolved);
+  const prospectusBytesForRust = toBytesForRust(prospectusBytesResolved);
 
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
@@ -65,6 +68,7 @@ export const createDao = async (
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
         prospectus_url: prospectusUrl,
+        prospectus_bytes: prospectusBytesForRust,
       },
     });
     showProgress(false);
