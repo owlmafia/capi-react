@@ -54,8 +54,9 @@ export const CreateDao = ({ deps }) => {
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
     useState("");
 
-  // TODO show this error
-  const [imageBytesError, setImageBytesError] = useState("");
+  // TODO show these errors
+  const [imageError, setImageError] = useState("");
+  const [prospectusError, setProspectusError] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
 
@@ -101,7 +102,8 @@ export const CreateDao = ({ deps }) => {
           setSharePriceError,
           setInvestorsShareError,
           setSharesForInvestorsError,
-          setImageBytesError,
+          setImageError,
+          setProspectusError,
           setSocialMediaUrlError,
           setMinRaiseTargetError,
           setMinRaiseTargetEndDateError,

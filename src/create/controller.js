@@ -29,7 +29,8 @@ export const createDao = async (
   setSharePriceError,
   setInvestorsShareError,
   setSharesForInvestorsError,
-  setLogoUrlError,
+  setImageError,
+  setProspectusError,
   setSocialMediaUrlError,
   setMinRaiseTargetError,
   setMinRaiseTargetEndDateError,
@@ -105,10 +106,23 @@ export const createDao = async (
       setSharePriceError(toErrorMsg(e.share_price));
       setInvestorsShareError(toErrorMsg(e.investors_share));
       setSharesForInvestorsError(toErrorMsg(e.shares_for_investors));
-      setLogoUrlError(toErrorMsg(e.logo_url));
+      setImageError(toErrorMsg(e.logo_url));
       setSocialMediaUrlError(toErrorMsg(e.social_media_url));
       setMinRaiseTargetError(toErrorMsg(e.min_raise_target));
       setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
+
+      // note that here, the later will override the former if both are set
+      // this is ok - we don't expect any of these to happen, normally,
+      // and this is in theory oriented towards being fixable by the user,
+      // in which case it can be done incrementally
+      // the console in any case logs all the errors simultaneously
+      setProspectusError(toErrorMsg(e.prospectus_url));
+      setProspectusError(toErrorMsg(e.prospectus_bytes));
+
+      // workaround: the inline errors for these are not functional yet, so show as notification
+      showErrorNotificationIfError(deps, e.image_url);
+      showErrorNotificationIfError(deps, e.prospectus_url);
+      showErrorNotificationIfError(deps, e.prospectus_bytes);
 
       // show a general message additionally, just in case
       deps.statusMsg.error("Please fix the errors");
@@ -119,6 +133,13 @@ export const createDao = async (
     }
 
     showProgress(false);
+  }
+};
+
+const showErrorNotificationIfError = (deps, payload) => {
+  const errorMsg = toErrorMsg(payload);
+  if (errorMsg) {
+    deps.statusMsg.error(errorMsg);
   }
 };
 
