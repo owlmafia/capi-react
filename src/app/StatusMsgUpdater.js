@@ -20,6 +20,10 @@ export const StatusMsgUpdater = (setStatusMsg) => ({
   // if friendly error, the copy paste text corresponds to the original (not friendly) text
   // if not friendly error, the copy paste text is equal to the displayed text
   error(msg, hideClose) {
+    // special handling for error instances - they're objects, but JSON.stringify and JSON.parse don't work
+    if (msg.message) {
+      msg = msg.message;
+    }
     if (typeof msg === "object") {
       msg = JSON.stringify(msg);
     }
