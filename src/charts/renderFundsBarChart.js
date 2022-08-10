@@ -21,9 +21,6 @@ const renderFundsProgressChart = (
   const formattedMinFunds = dao.raise_min_target;
   const maxFunds = dao.total_raisable_number;
 
-  const raisedFundsFontSize = 10;
-  const raisedFundsFontWeight = 600;
-
   const margin = { top: 30, right: 10, bottom: 30, left: 40 },
     width = 600 - margin.right;
 
@@ -61,58 +58,41 @@ const renderFundsProgressChart = (
 
   const barColor = successColors ? "#6BB9BD" : "#DE5C62";
 
-  const progress = selected
-    .append("rect")
-    // .attr("class", "progress-rect")
-    .attr("fill", barColor)
-    .attr("height", barHeight)
-    .attr("width", 0)
-    .attr("rx", radius)
-    .attr("ry", radius)
-    .attr("x", 0)
-    .attr("y", margin.top);
+  // the progress bar looks weird when it's too small (issue with rounded corners), so hidden
+  if (x(raisedFundsNumber) > 14) {
+    showProgress(
+      selected,
+      barColor,
+      barHeight,
+      radius,
+      margin.top,
+      x,
+      raisedFundsNumber
+    );
 
-  // animate progress
-  progress
-    .transition()
-    .duration(1000)
-    .attr("width", function () {
-      return x(raisedFundsNumber);
-    });
+    const raisedFundsFontSize = 10;
+    const raisedFundsFontWeight = 600;
 
-  // raised funds label
-  const raisedFundsTextSize = calculateTextSize(
-    formattedRaisedFunds,
-    raisedFundsFontWeight,
-    10
-  );
-  const raisedLabel = selected
-    .append("text")
-    .text(formattedRaisedFunds)
-    .attr("fill", "white")
-    .attr("font-size", raisedFundsFontSize)
-    .attr("font-weight", raisedFundsFontWeight)
-    .attr("x", 0)
-    .attr("opacity", 0)
-    // .attr("x", x.bandwidth() * data.length + margin.left)
-    // .attr("dominant-baseline", "central")
-    // .attr("alignment-baseline", "central")
-    // .attr("y", (barHeight - textSize.height) / 2 - textSize.height / 2);
-    // .attr("x", function () {
-    //   // - 8: offset from bar end
-    //   return x(raisedFundsNumber) - raisedFundsTextSize.width - 8;
-    // })
-    .attr("y", margin.top + 11); // offset: center text manually
+    const raisedFundsTextSize = calculateTextSize(
+      formattedRaisedFunds,
+      raisedFundsFontWeight,
+      raisedFundsFontSize
+    );
 
-  // animate funds label
-  raisedLabel
-    .transition()
-    .duration(1000)
-    .attr("opacity", 1)
-    .attr("x", function () {
-      // - 8: offset from bar end
-      return x(raisedFundsNumber) - raisedFundsTextSize.width - 14;
-    });
+    const labelRightOffset = 12;
+    if (x(raisedFundsNumber) > raisedFundsTextSize.width + labelRightOffset) {
+      showProgressLabel(
+        selected,
+        formattedRaisedFunds,
+        raisedFundsNumber,
+        margin.top + 11,
+        x,
+        raisedFundsFontSize,
+        raisedFundsFontWeight,
+        labelRightOffset
+      );
+    }
+  }
 
   // min funds label
   const minFundsTextSize = calculateTextSize(
@@ -181,6 +161,80 @@ const renderFundsProgressChart = (
     .attr("y", bottomLabelsY);
 };
 export default renderFundsProgressChart;
+
+const showProgress = (
+  svg,
+  color,
+  height,
+  radius,
+  yValue,
+  xAxis,
+  raisedFunds
+) => {
+  const progress = svg
+    .append("rect")
+    // .attr("class", "progress-rect")
+    .attr("fill", color)
+    .attr("height", height)
+    .attr("width", 0)
+    .attr("rx", radius)
+    .attr("ry", radius)
+    .attr("x", 0)
+    .attr("y", yValue);
+
+  // animate progress
+  progress
+    .transition()
+    .duration(1000)
+    .attr("width", function () {
+      return xAxis(raisedFunds);
+    });
+};
+
+const showProgressLabel = (
+  svg,
+  formattedRaisedFunds,
+  raisedFundsNumber,
+  yValue,
+  xAxis,
+  raisedFundsFontSize,
+  raisedFundsFontWeight,
+  rightOffset
+) => {
+  const raisedFundsTextSize = calculateTextSize(
+    formattedRaisedFunds,
+    raisedFundsFontWeight,
+    10
+  );
+
+  const raisedLabel = svg
+    .append("text")
+    .text(formattedRaisedFunds)
+    .attr("fill", "white")
+    .attr("font-size", raisedFundsFontSize)
+    .attr("font-weight", raisedFundsFontWeight)
+    .attr("x", 0)
+    .attr("opacity", 0)
+    // .attr("x", x.bandwidth() * data.length + margin.left)
+    // .attr("dominant-baseline", "central")
+    // .attr("alignment-baseline", "central")
+    // .attr("y", (barHeight - textSize.height) / 2 - textSize.height / 2);
+    // .attr("x", function () {
+    //   // - 8: offset from bar end
+    //   return x(raisedFundsNumber) - raisedFundsTextSize.width - 8;
+    // })
+    .attr("y", yValue); // offset: center text manually
+
+  // animate funds label
+  raisedLabel
+    .transition()
+    .duration(1000)
+    .attr("opacity", 1)
+    .attr("x", function () {
+      // - 8: offset from bar end
+      return xAxis(raisedFundsNumber) - raisedFundsTextSize.width - rightOffset;
+    });
+};
 
 const calculateTextSize = (text, fontWeight, fontSize) => {
   var container = d3.select("body").append("svg");
