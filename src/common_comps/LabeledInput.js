@@ -97,10 +97,14 @@ export const LabeledInput = ({
 };
 
 export const InfoView = ({ info: infoText }) => {
+  return wrapWithInfoView(infoText, <img src={info} alt="info" />);
+};
+
+export const wrapWithInfoView = (infoText, element) => {
   return (
     <Fragment>
       <div className="d-flex align-center" data-tip={infoText}>
-        <img src={info} alt="info" />
+        {element}
       </div>
       <ReactTooltip />
     </Fragment>

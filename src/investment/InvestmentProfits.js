@@ -85,7 +85,6 @@ export const InvestmentProfits = ({ deps }) => {
 
   return (
     <div>
-      <ContentTitle title={"My investment"} />
       <div className="mt-40">{view()}</div>
     </div>
   );

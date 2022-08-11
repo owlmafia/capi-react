@@ -6,6 +6,7 @@ import { InvestmentProfits } from "./InvestmentProfits";
 import { UnlockShares } from "./UnlockShares";
 import { LockShares } from "../lockShares/LockShares";
 import Progress from "../common_comps/Progress";
+import { ContentTitle } from "../ContentTitle";
 
 export const Investment = ({ deps }) => {
   let params = useParams();
@@ -45,6 +46,18 @@ export const Investment = ({ deps }) => {
                 </a>
               </div>
             )}
+
+            <ContentTitle title={"My investment"} />
+
+            {deps.features.stillRaisingFundsLabels &&
+              dao.funds_raised === "false" && (
+                <div>
+                  {
+                    "The project is still raising funds. Some features are disabled."
+                  }
+                </div>
+              )}
+
             <InvestmentProfits deps={deps} />
 
             <div id="dao_actions_top_bar">

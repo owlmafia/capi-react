@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { SubmitButton } from "../common_comps/SubmitButton";
 import { SharesDistributionChart } from "../shares_distribution_chart/SharesDistributionChart";
-import { LabeledAmountInput } from "../common_comps/LabeledInput";
+import {
+  LabeledAmountInput,
+  wrapWithInfoView,
+} from "../common_comps/LabeledInput";
 import { pieChartColors } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";
 
@@ -18,6 +21,38 @@ export const LockOrUnlockShares = ({
 }) => {
   const [input, setInput] = useState(null);
   const [inputError, setInputError] = useState(null);
+
+  const submitButton = () => {
+    return (
+      <SubmitButton
+        label={buttonLabel}
+        disabled={dao.funds_raised === "false"}
+        className="button-primary"
+        isLoading={submitting}
+        onClick={async () => {
+          onSubmit(input, setInputError);
+        }}
+      />
+    );
+  };
+
+  const submitButtonWithMaybeTooltip = () => {
+    const button = submitButton();
+    if (dao.funds_raised === "true") {
+      return button;
+    } else if (dao.funds_raised === "false") {
+      return wrapWithInfoView(
+        "You can't unlock or lock shares before the funds raising phase is finished",
+        button
+      );
+    } else {
+      console.error(
+        "Invalid state: funds raised should be true or false: %o",
+        dao.funds_raised
+      );
+      return null;
+    }
+  };
 
   const view = () => {
     return (
@@ -92,14 +127,7 @@ export const LockOrUnlockShares = ({
                 errorMsg={inputError}
               />
             )}
-            <SubmitButton
-              label={buttonLabel}
-              className="button-primary"
-              isLoading={submitting}
-              onClick={async () => {
-                onSubmit(input, setInputError);
-              }}
-            />
+            {submitButtonWithMaybeTooltip()}
           </div>
         </div>
         <div className="shares-chart d-tablet-mobile-none">

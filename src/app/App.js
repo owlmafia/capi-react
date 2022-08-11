@@ -235,6 +235,8 @@ const App = () => {
           features: {
             prospectus: true,
             minMaxInvestment: true,
+            // shows info labels in diverse places when the project hasn't finished the fundsraising phase
+            stillRaisingFundsLabels: true,
           },
 
           myAddress: myAddress,
