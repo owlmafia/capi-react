@@ -233,8 +233,8 @@ const App = () => {
         {routesView({
           // conditional features
           features: {
-            prospectus: false,
-            minMaxInvestment: false,
+            prospectus: true,
+            minMaxInvestment: true,
           },
 
           myAddress: myAddress,
