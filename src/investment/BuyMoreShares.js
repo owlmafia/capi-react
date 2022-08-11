@@ -174,7 +174,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
               setShowProspectusModal(false);
 
               await invest(
-                deps.myAddress,
+                deps,
                 setSubmitting,
                 params.id,
                 dao,
