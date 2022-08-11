@@ -234,6 +234,7 @@ const App = () => {
           // conditional features
           features: {
             prospectus: false,
+            minMaxInvestment: false,
           },
 
           myAddress: myAddress,

@@ -20,6 +20,8 @@ export const createDao = async (
   minRaiseTarget,
   minRaiseTargetEndDate,
   prospectusBytes,
+  minInvestShares,
+  maxInvestShares,
 
   navigate,
 
@@ -34,6 +36,8 @@ export const createDao = async (
   setSocialMediaUrlError,
   setMinRaiseTargetError,
   setMinRaiseTargetEndDateError,
+  setMinInvestSharesError,
+  setMaxInvestSharesError,
   setShowBuyCurrencyInfoModal
 ) => {
   const {
@@ -69,6 +73,8 @@ export const createDao = async (
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
         prospectus_url: prospectusUrl,
         prospectus_bytes: prospectusBytesForRust,
+        min_invest_amount: minInvestShares,
+        max_invest_amount: maxInvestShares,
       },
     });
     showProgress(false);
@@ -109,11 +115,12 @@ export const createDao = async (
       setShareCountError(toErrorMsg(e.share_supply));
       setSharePriceError(toErrorMsg(e.share_price));
       setInvestorsShareError(toErrorMsg(e.investors_share));
-      setSharesForInvestorsError(toErrorMsg(e.shares_for_investors));
       setImageError(toErrorMsg(e.logo_url));
       setSocialMediaUrlError(toErrorMsg(e.social_media_url));
       setMinRaiseTargetError(toErrorMsg(e.min_raise_target));
       setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
+      setMinInvestSharesError(toErrorMsg(e.min_invest_shares));
+      setMaxInvestSharesError(toErrorMsg(e.max_invest_shares));
 
       // note that here, the later will override the former if both are set
       // this is ok - we don't expect any of these to happen, normally,

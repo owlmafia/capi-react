@@ -27,6 +27,8 @@ export const CreateDao = ({ deps }) => {
   const [sharePrice, setSharePrice] = useState("10");
   const [investorsShare, setInvestorsShare] = useState("40");
   const [sharesForInvestors, setSharesForInvestors] = useState("100");
+  const [minInvestShares, setMinInvestShares] = useState("3");
+  const [maxInvestShares, setMaxInvestShares] = useState("10");
   const [imageBytes, setImageBytes] = useState([]);
   const [socialMediaUrl, setSocialMediaUrl] = useState(
     "https://twitter.com/doesnotexist"
@@ -47,6 +49,8 @@ export const CreateDao = ({ deps }) => {
   const [sharePriceError, setSharePriceError] = useState("");
   const [investorsShareError, setInvestorsShareError] = useState("");
   const [sharesForInvestorsError, setSharesForInvestorsError] = useState("");
+  const [minInvestSharesError, setMinInvestSharesError] = useState("");
+  const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
   // mock data, while we've no UI for this
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
@@ -93,6 +97,8 @@ export const CreateDao = ({ deps }) => {
           minRaiseTarget,
           minRaiseTargetEndDate,
           prospectusBytes,
+          minInvestShares,
+          maxInvestShares,
 
           navigate,
 
@@ -107,6 +113,8 @@ export const CreateDao = ({ deps }) => {
           setSocialMediaUrlError,
           setMinRaiseTargetError,
           setMinRaiseTargetEndDateError,
+          setMinInvestSharesError,
+          setMaxInvestSharesError,
           setShowBuyCurrencyInfoModal
         );
       }
@@ -193,6 +201,28 @@ export const CreateDao = ({ deps }) => {
             />
           </div>
         </div>
+        {deps.features.minMaxInvestment && (
+          <div className="d-flex gap-32">
+            <div className="f-basis-50">
+              <LabeledAmountInput
+                label={"Min investment (shares)"}
+                info={"Minimum amount of shares an investor has to buy"}
+                inputValue={minInvestShares}
+                onChange={(input) => setMinInvestShares(input)}
+                errorMsg={minInvestSharesError}
+              />
+            </div>
+            <div className="f-basis-50">
+              <LabeledAmountInput
+                label={"Max investment (shares)"}
+                info={"Maximum total amount of shares an investor can buy"}
+                inputValue={maxInvestShares}
+                onChange={(input) => setMaxInvestShares(input)}
+                errorMsg={maxInvestSharesError}
+              />
+            </div>
+          </div>
+        )}
         <div className="d-flex gap-32">
           <div className="f-basis-50">
             <LabeledCurrencyInput

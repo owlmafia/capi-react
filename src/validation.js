@@ -45,6 +45,19 @@ export const toErrorMsg = (e) => {
       );
     case "count_le_supply":
       return "Please enter an amount smaller or equal to available shares";
+    case "must_be_less_max_invest":
+      return "Must be less or equal than max investment";
+    case "must_be_more_min_min_invest":
+      return "Must be more or equal than min investment";
+    case "buying_less_shares_than_min":
+      return "The minimum of shares to buy is " + e.min.min;
+    case "buying_more_shares_than_max":
+      return (
+        "You can't own more than " +
+        e.max_share_buy.max +
+        " shares. Currently owned: " +
+        e.max_share_buy.currently_owned
+      );
     case "unexpected":
       return "Unexpected problem: " + e.unexpected;
     default:
