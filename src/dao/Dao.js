@@ -47,6 +47,24 @@ export const Dao = ({ deps }) => {
     );
   };
 
+  const maybeInvestView = (dao) => {
+    if (!deps.features.prospectus) {
+      return null;
+    } else {
+      if (dao.prospectus) {
+        return <InvestEmbedded deps={deps} dao={dao} />;
+      } else {
+        return (
+          <div>
+            {
+              "Investing currently is not possible, because the project hasn't added a prospectus."
+            }
+          </div>
+        );
+      }
+    }
+  };
+
   const daoView = () => {
     if (deps.dao) {
       return (
@@ -60,7 +78,7 @@ export const Dao = ({ deps }) => {
               <FundsActivityEmbedded deps={deps} daoId={params.id} />
             )}
 
-            {showBuyShares() && <InvestEmbedded deps={deps} dao={deps.dao} />}
+            {maybeInvestView(deps.dao)}
 
             {/* <Link
               disabled={deps.myAddress === "" || funds === 0}
