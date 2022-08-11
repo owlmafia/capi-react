@@ -54,7 +54,10 @@ export const invest = async (
       bridge_buy_shares,
       bridge_submit_buy_shares,
     } = await wasmPromise;
+
     deps.statusMsg.clear();
+    setShareAmountError(null);
+
     ///////////////////////////////////
     // TODO refactor invest/lock
     // 1. sign tx for app opt-in
