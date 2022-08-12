@@ -38,15 +38,6 @@ export const Dao = ({ deps }) => {
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);
 
-  const showBuyShares = () => {
-    // if prospectus feature is disabled, we always show buy shares,
-    // otherwise only if there's a prospectus
-    return (
-      !deps.features.prospectus ||
-      (deps.features.prospectus && deps.dao.prospectus)
-    );
-  };
-
   const maybeInvestView = (dao) => {
     if (!deps.features.prospectus) {
       return null;
