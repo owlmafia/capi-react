@@ -7,7 +7,7 @@ import error from "../images/svg/error.svg";
 import { SelectWalletModal } from "../wallet/SelectWalletModal";
 import { invest, updateTotalPriceAndPercentage } from "./controller";
 import { InfoView } from "../common_comps/LabeledInput";
-import { ProspectusModal } from "../prospectus/ProspectusModal";
+import { AckProspectusModal } from "../prospectus/AckProspectusModal";
 
 export const InvestEmbedded = ({ deps, dao }) => {
   let params = useParams();
@@ -152,7 +152,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
         </div>
 
         {showProspectusModal && (
-          <ProspectusModal
+          <AckProspectusModal
             url={deps.dao.prospectus.url}
             prospectusHash={deps.dao.prospectus.hash}
             closeModal={() => setShowProspectusModal(false)}

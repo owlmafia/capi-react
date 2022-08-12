@@ -1,4 +1,4 @@
-import { toBytes } from "../common_functions/common";
+import { toBytes, toBytesForRust } from "../common_functions/common";
 import { toMaybeIpfsUrl } from "../ipfs/store";
 import { toErrorMsg } from "../validation";
 
@@ -11,7 +11,10 @@ export const prefillInputs = async (
   setDaoDescr,
   setSharePrice,
   setImageBytes,
-  setSocialMediaUrl
+  setSocialMediaUrl,
+  setMinInvestShares,
+  setMaxInvestShares,
+  setProspectus
 ) => {
   try {
     const { bridge_updatable_data } = await wasmPromise;
@@ -24,6 +27,9 @@ export const prefillInputs = async (
     // TODO header may not be needed - test without once everything else works, remove if not needed
     setImageBytes("data:image/png;base64," + updatableData.image_base64);
     setSocialMediaUrl(updatableData.social_media_url);
+    setMinInvestShares(updatableData.min_invest_amount);
+    setMaxInvestShares(updatableData.max_invest_amount);
+    setProspectus(updatableData.prospectus);
   } catch (e) {
     deps.statusMsg.error(e);
   }
@@ -79,20 +85,30 @@ export const updateDaoData = async (
   sharePrice,
   imageBytes,
   socialMediaUrl,
+  prospectusBytes,
+  minInvestShares,
+  maxInvestShares,
 
   setDaoNameError,
   setDaoDescrError,
   setImageError,
-  setSocialMediaUrlError
+  setProspectusError,
+  setSocialMediaUrlError,
+  setMinInvestSharesError,
+  setMaxInvestSharesError
 ) => {
   try {
     const { bridge_update_data, bridge_submit_update_dao_data } =
       await wasmPromise;
 
-    deps.showProgress(true);
+    showProgress(true);
 
     const imageUrl = await toMaybeIpfsUrl(await imageBytes);
     const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
+
+    const prospectusBytesResolved = await prospectusBytes;
+    const prospectusUrl = await toMaybeIpfsUrl(prospectusBytesResolved);
+    const prospectusBytesForRust = toBytesForRust(prospectusBytesResolved);
 
     let updateDataRes = await bridge_update_data({
       dao_id: daoId,
@@ -105,6 +121,11 @@ export const updateDaoData = async (
 
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
+
+      prospectus_url: prospectusUrl,
+      prospectus_bytes: prospectusBytesForRust,
+      min_invest_amount: minInvestShares,
+      max_invest_amount: maxInvestShares,
     });
     console.log("Update DAO data res: %o", updateDataRes);
     showProgress(false);
@@ -132,7 +153,10 @@ export const updateDaoData = async (
       setDaoNameError(toErrorMsg(details.name));
       setDaoDescrError(toErrorMsg(details.description));
       setImageError(toErrorMsg(details.image));
+      setProspectusError(toErrorMsg(details.prospectus));
       setSocialMediaUrlError(toErrorMsg(details.social_media_url));
+      setMinInvestSharesError(toErrorMsg(details.min_invest_shares));
+      setMaxInvestSharesError(toErrorMsg(details.max_invest_shares));
 
       deps.statusMsg.error("Please fix the errors");
     } else {
