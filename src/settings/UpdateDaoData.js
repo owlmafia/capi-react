@@ -83,6 +83,7 @@ export const UpdateDaoData = ({ deps }) => {
           onClick={async () => {
             updateDaoData(
               deps,
+              setSubmitting,
 
               params.id,
               daoName,

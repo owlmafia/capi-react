@@ -72,6 +72,7 @@ export const updateApp = async (
 
 export const updateDaoData = async (
   deps,
+  showProgress,
   daoId,
   projectName,
   daoDescr,
@@ -106,12 +107,12 @@ export const updateDaoData = async (
       social_media_url: socialMediaUrl,
     });
     console.log("Update DAO data res: %o", updateDataRes);
-    deps.showProgress(false);
+    showProgress(false);
 
     let updateDataResSigned = await deps.wallet.signTxs(updateDataRes.to_sign);
     console.log("updateDataResSigned: " + JSON.stringify(updateDataResSigned));
 
-    deps.showProgress(true);
+    showProgress(true);
     let submitUpdateDaoDataRes = await bridge_submit_update_dao_data({
       txs: updateDataResSigned,
       pt: updateDataRes.pt, // passthrough
@@ -124,7 +125,7 @@ export const updateDaoData = async (
 
     deps.statusMsg.success("Dao data updated!");
 
-    deps.showProgress(false);
+    showProgress(false);
   } catch (e) {
     if (e.id === "validations") {
       let details = e.details;
@@ -137,7 +138,7 @@ export const updateDaoData = async (
     } else {
       deps.statusMsg.error(e);
     }
-    deps.showProgress(false);
+    showProgress(false);
   }
 };
 
