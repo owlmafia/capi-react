@@ -25,7 +25,11 @@ export const prefillInputs = async (
     setDaoDescr(updatableData.project_desc);
     setSharePrice(updatableData.share_price);
     // TODO header may not be needed - test without once everything else works, remove if not needed
-    setImageBytes("data:image/png;base64," + updatableData.image_base64);
+    if (updatableData.image_base64) {
+      setImageBytes("data:image/png;base64," + updatableData.image_base64);
+    } else {
+      setImageBytes(null);
+    }
     setSocialMediaUrl(updatableData.social_media_url);
     setMinInvestShares(updatableData.min_invest_amount);
     setMaxInvestShares(updatableData.max_invest_amount);
