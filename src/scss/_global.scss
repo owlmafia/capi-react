@@ -1,5 +1,9 @@
 @import "global_vars";
 
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
 body {
     // font-family: system-ui;
     font-style: normal;
@@ -8,12 +12,25 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Gilroy";
-    box-sizing: border-box;
-    color: $black;
+    color: $grey-200;
 }
 
 a {
     text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+.desc {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-weight: 700;
 }
 
 #nav_and_main {
@@ -23,34 +40,38 @@ a {
     margin: auto;
     margin-top: 60px;
     padding: 0 60px;
-    box-sizing: border-box;
     min-width: 1032px;
     position: relative;
 }
 
+@media only screen and (max-width: $desktop-max-width) {
+    #nav_and_main {
+        padding: 0 40px;
+
+        #content {
+            padding: 0 24px 0 40px;
+        }
+    }
+}
+
 .box-container {
-    background-color: #f5fafb;
+    background-color: $blue-20;
     border-radius: $global-border-radius-m;
     padding: 40px;
 
     .title {
-        color: $blue-primary;
+        color: $cyan-20;
         font-size: 32px;
         font-weight: 700;
         margin-bottom: 40px;
     }
 }
 
-.dao-name-container {
-    margin-bottom: 26px;
-}
-
 #content {
     width: 100%;
     display: inline-block;
-    box-sizing: border-box;
     position: relative;
-    background-color: white;
+    background-color: $white;
     padding: 0 40px 0 80px;
     z-index: 2;
     justify-content: center;
@@ -64,7 +85,7 @@ a {
         .title {
             font-size: $global-title;
             font-weight: 700;
-            color: $black-000;
+            color: $black;
         }
     }
 
@@ -87,7 +108,7 @@ a {
     &__title {
         font-weight: 700;
         font-size: $global-title;
-        color: #000;
+        color: $black;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -95,324 +116,24 @@ a {
         a {
             font-weight: 700;
             font-size: 2rem;
-            color: $black;
+            color: $grey-200;
         }
     }
-}
-
-dl {
-    display: grid;
-    grid-template-columns: max-content auto;
-}
-
-dt {
-    grid-column-start: 1;
-}
-
-dd {
-    grid-column-start: 2;
-}
-
-.submit-button {
-    display: block;
-    position: relative;
-    margin-top: 8px;
-    margin-bottom: 16px;
 }
 
 select {
     outline: none;
     height: 35px;
     border-radius: 20px;
-    border: 1px solid #d8e1ea;
+    border: 1px solid $grey-130;
     padding: 0px 15px;
     font-size: 16px;
 }
 
 #container {
-    // width: 100vw;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.input-row input {
-    margin-right: 5px;
-}
-
-.form {
-    padding-top: 20px;
-    margin-bottom: 10px;
-}
-
-.inline {
-    display: inline-block;
-}
-
-.error {
-    border-radius: $global-border-radius;
-    border-style: solid;
-    border-width: 1px;
-    border-color: red;
-    margin-bottom: 16px;
-    padding: 10px;
-    background-color: red;
-    color: white;
-    /* color: red; */
-}
-
-.success {
-    border-radius: $global-border-radius;
-    border-style: solid;
-    border-width: 1px;
-    border-color: green;
-    margin-bottom: 16px;
-    padding: 10px;
-    background-color: green;
-    color: white;
-    /* color: green; */
-}
-
-.submit-msg {
-    margin-bottom: 16px;
-}
-
-.submit-msg-warning {
-    margin-bottom: 16px;
-    color: orangered;
-}
-
-.submit-swap-title {
-    margin-bottom: 16px;
-}
-
-.submit-swap-label {
-    margin-top: 16px;
-    margin-bottom: 2px;
-}
-
-.submit-sign-and-submit-button {
-    display: block;
-    position: relative;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    left: 50%;
-    -ms-transform: translate(-50%, 0%);
-    transform: translate(-50%, 0%);
-}
-
-.warning {
-    color: orangered;
-    margin-bottom: 12px;
-}
-
-.footer {
-    position: fixed;
-    left: 0;
-    padding-bottom: 20px;
-    padding-top: 10px;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 1000;
-    background-color: white;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer > *:not(:last-child) {
-    margin-right: 20px;
-}
-
-.line-height-1 {
-    line-height: 25.6px;
-}
-
-.modal {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 10001;
-
-    .modal-content {
-        box-sizing: border-box;
-        padding: 40px;
-        max-width: 650px;
-        position: absolute;
-        border-radius: $global-border-radius-m;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: #fff;
-        z-index: 2000;
-        animation-name: modalAnimation;
-        animation-duration: 0.5s;
-        color: $black-000;
-
-        .modal-topbar-x {
-            display: flex;
-            justify-content: flex-end;
-            cursor: pointer;
-        }
-
-        .modal-topbar {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
-
-            .modal-topbar-title {
-                font-weight: 700;
-                font-size: 32px;
-            }
-        }
-
-        .modal-body {
-            .modal-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 24px;
-                margin-bottom: 60px;
-
-                .social-media-share {
-                    width: 300px;
-                    border-radius: $button-border-radius;
-                    height: 48px;
-                    padding: 14px 18px;
-                    box-sizing: border-box;
-                    cursor: pointer;
-
-                    a {
-                        display: flex;
-                        gap: 10px;
-                        width: 100%;
-                    }
-
-                    img {
-                        z-index: 2;
-                    }
-
-                    .title {
-                        color: $global-white;
-                        font-weight: 700;
-                    }
-                }
-
-                .facebook {
-                    background-color: #3b5999;
-                }
-
-                .linkedin {
-                    background-color: #0a66c2;
-                }
-
-                .twitter {
-                    background-color: #55acee;
-                }
-
-                .instagram {
-                    background-color: #db4379;
-                }
-
-                .discord {
-                    background-color: #5865f2;
-                }
-            }
-        }
-    }
-
-    .modal-content-size {
-        min-width: 400px;
-        min-height: 320px;
-    }
-
-    @keyframes modalAnimation {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-}
-
-@media only screen and (max-width: 460px) {
-    .modal-content-size {
-        max-width: 350px;
-        min-width: 350px;
-        min-height: 350px;
-    }
-}
-
-.link-data-container {
-    text-align: center;
-}
-
-.withdrawal-cell-container {
-    margin-top: 40px;
-    min-width: 400px;
-}
-
-.withdrawal-cell {
-    border-style: solid;
-    border-width: 1px;
-    border-radius: $global-border-radius;
-    border: 1px solid grey;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-}
-
-.desc {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.subtitle {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.name-label {
-    margin-bottom: 6px;
-}
-
-.key-val-key {
-    /* font-weight: 300; */
-    color: gray;
-}
-
-.key-val-val {
-    margin-left: 4px;
-}
-
-.right-button {
-    margin-left: 6px;
-    height: 25px;
-    border: 1px solid lightgray;
-    padding: 0px 6px;
-}
-
-.section-spacer {
-    height: 20px;
-}
-
-.modal-button {
-    margin-top: 20px;
-}
-
-.shares-total-price {
-    margin-left: 4px;
-    color: gray;
 }
 
 .labeled_box {
@@ -424,31 +145,18 @@ select {
     font-weight: 700;
     font-size: $global-title;
     margin-bottom: 40px;
-    color: $black;
-}
-
-p {
-    margin: 0px;
+    color: $grey-200;
 }
 
 .labeled_box_children {
-    border: 1px solid $global-border;
+    border: 1px solid $grey-120;
     border-radius: $global-border-radius;
     padding: 40px;
-    box-sizing: border-box;
 
     .investors-container {
         display: flex;
         justify-content: space-between;
         max-width: 900px;
-
-        .sub-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 26px;
-            font-weight: 600;
-            font-size: 18px;
-        }
 
         img {
             margin-left: 10px;
@@ -462,7 +170,7 @@ p {
     }
 }
 
-@media only screen and (min-width: 651px) {
+@media only screen and (min-width: $tablet-min-width) {
     .pie_chart__container {
         height: 370px;
         display: flex;
@@ -472,10 +180,9 @@ p {
 
 .first_dao_widget {
     margin-top: 40px;
-    border: 1px solid $global-border;
+    border: 1px solid $grey-120;
     border-radius: 20px;
     padding: 40px;
-    box-sizing: border-box;
 
     .project-wallet {
         display: flex;
@@ -487,11 +194,6 @@ p {
 
     .labeled_box {
         margin-bottom: 32px;
-    }
-
-    .funds-assets {
-        width: 20px;
-        height: 20px;
     }
 
     .labeled_box_label {
@@ -518,13 +220,6 @@ p {
         border-radius: 0;
         position: relative;
 
-        &__amount__container {
-            .type-label {
-                margin-left: 16px;
-                color: #787e82;
-            }
-        }
-
         &__body {
             display: flex;
             align-items: flex-end;
@@ -532,13 +227,13 @@ p {
         }
 
         &__date {
-            color: #787e82;
+            color: $grey-160;
             font-size: 13px;
             line-height: 25.6px;
         }
 
         .details {
-            color: #6bb9bd;
+            color: $cyan-20;
             text-decoration: underline;
             width: auto;
             font-weight: 600;
@@ -550,269 +245,32 @@ p {
     margin: 80px 0 20px 0;
 }
 
-@media only screen and (min-width: 650px) and (max-width: 1330px) {
+@media only screen and (min-width: $tablet-min-width) and (max-width: $tablet-max-width) {
     .section_container {
         margin-top: 40px;
     }
 }
 
-.text_with_currency {
-    display: flex;
-    align-items: center;
-}
-
-.section_small_bottom {
-    margin-bottom: 10px;
-}
-
 .section_large_bottom {
-    color: #686777;
+    color: $grey-170;
     font-weight: 600;
     font-size: 18px;
-    margin-bottom: 40px;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.d-flex {
-    display: flex;
-}
-
-.align-center {
-    align-items: center;
-}
-
-.align-start {
-    align-items: flex-start;
-}
-
-.justify-between {
-    justify-content: space-between;
-}
-
-.justify-center {
-    justify-content: center;
-}
-
-.position-relative {
-    position: relative;
-}
-
-.s-16 {
-    width: 16px;
-    height: 16px;
-}
-
-.h-100 {
-    height: 100%;
-}
-
-.w-100 {
-    width: 100%;
-}
-
-.w-94 {
-    width: 94%;
-}
-
-.w-80 {
-    width: 80%;
-}
-
-.w-60 {
-    width: 60%;
-}
-
-.w-25 {
-    width: 25%;
-}
-
-.w-55px {
-    width: 55px;
-}
-
-.h-16 {
-    height: 16px;
-}
-
-.h-64 {
-    height: 64px;
-}
-
-.flex-wrap {
-    flex-wrap: wrap;
-}
-
-.flex-column {
-    flex-direction: column;
-}
-
-@media only screen and (max-width: 1330px) {
-    .d-tablet-flex-column {
-        flex-direction: column;
-    }
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.align-start {
-    align-items: flex-start;
-}
-
-.opacity-0 {
-    opacity: 0;
-}
-
-.opacity-70 {
-    opacity: 0.7;
-}
-
-.opacity-50 {
-    opacity: 0.5;
-}
-
-.ft-weight-500 {
-    font-weight: 500;
-}
-
-.ft-weight-600 {
-    font-weight: 600;
-}
-
-.ft-weight-700 {
-    font-weight: 700;
-}
-
-.ft-color-black {
-    color: $black;
-}
-
-.ft-color-black-000 {
-    color: $black-000;
-}
-
-.ft-color-cyan {
-    color: #6bb9bd;
-}
-
-.ft-color-red {
-    color: #de5c62;
-}
-
-.ft-color-grey {
-    color: #686777;
-}
-
-.pl-25 {
-    padding-left: 25px;
-}
-
-.ft-size-18 {
-    font-size: 18px;
-}
-
-.f-basis-50 {
-    flex-basis: 50%;
-}
-
-.w-100px {
-    width: 100px;
-}
-
-.w-300px {
-    width: 300px;
-}
-
-.ft-size-14 {
-    font-size: 14px;
-}
-
-.ft-size-12 {
-    font-size: 12px;
-}
-
-.ft-size-24 {
-    font-size: 24px;
-}
-
-.ft-size-32 {
-    font-size: 32px;
-}
-
-.gap-10 {
-    gap: 10px;
-}
-
-.gap-12 {
-    gap: 12px;
-}
-
-.gap-16 {
-    gap: 16px;
-}
-
-.gap-18 {
-    gap: 18px;
-}
-
-.gap-20 {
-    gap: 20px;
-}
-
-.gap-24 {
-    gap: 24px;
-}
-
-.gap-32 {
-    gap: 32px;
-}
-
-.gap-40 {
-    gap: 40px;
-}
-
-.gap-4 {
-    gap: 4px;
-}
-
-.ft-weight-bold {
-    font-weight: 700;
+    margin: 24px 0 40px 0;
 }
 
 .selected {
-    border: 1px solid $global-red-button;
+    border: 1px solid $red-10;
     border-radius: $global-border-radius;
-    box-sizing: border-box;
 }
 
 .circle {
-    background-color: #eaecf1;
+    background-color: $grey-110;
     width: 16px;
     height: 16px;
     border-radius: 50%;
 }
 
-#update-app {
-    .button-primary {
-        margin-left: 30px;
-    }
-}
-
-@media only screen and (max-width: 1600px) {
-    #nav_and_main {
-        padding: 0 40px;
-
-        #content {
-            padding: 0 24px 0 40px;
-        }
-    }
-}
-
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     #content {
         margin-top: 60px;
         padding: 0 40px;
@@ -829,10 +287,6 @@ p {
             margin-bottom: 40px;
         }
 
-        .profits-tab {
-            margin-top: 40px;
-        }
-
         .first_dao_widget {
             display: flex;
             width: 100%;
@@ -841,30 +295,11 @@ p {
             flex-direction: column;
             justify-content: center;
             padding: 0;
-
-            .see-all {
-                text-align: center;
-            }
         }
-    }
-
-    #investors-distribution {
-        .labeled_box_children {
-            .investors-container {
-                .holder_list_container .sub-title {
-                    padding-left: 0;
-                }
-            }
-        }
-    }
-
-    .modal .modal-content {
-        width: 85%;
-        max-width: auto;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     #content {
         padding: 0 20px;
         margin-top: 68px;
@@ -883,10 +318,6 @@ p {
                     margin-bottom: 24px;
                 }
             }
-        }
-
-        .shares-box .box-container {
-            box-sizing: border-box;
         }
 
         .box-container {
@@ -924,38 +355,14 @@ p {
     }
 }
 
-.d-none {
-    display: none;
-}
 
-$tablet_bp: 1600px;
-$mobile_bp: 650px;
-
-@media only screen and (max-width: $mobile_bp) {
-    .d-mobile-block {
-        display: block;
-    }
-
-    .d-mobile-none {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 1601px) {
-    .d-desktop-block {
-        display: block;
-    }
-
-    .d-desktop-none {
-        display: none;
-    }
-
+@media only screen and (min-width: $desktop-min-width) {
     .holder_list_container {
         min-width: 203px;
     }
 }
 
-@media only screen and (max-width: $mobile_bp) {
+@media only screen and (max-width: $mobile-max-width) {
     .available-shares {
         height: 100%;
         flex-direction: column;
@@ -977,36 +384,7 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (min-width: 651px) {
-    .tablet-desktop-none {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 651px) and (max-width: 1330px) {
-    .tablet-none {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: $mobile_bp) and (max-width: $tablet_bp) {
-    .d-tablet-none {
-        display: none;
-    }
-
-    .d-tablet-block {
-        margin-top: 40px;
-        display: block;
-    }
-}
-
-@media only screen and (max-width: $tablet_bp) {
-    .d-tablet-mobile-none {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: $desktop-max-width) {
     .shares-box {
         .shares-amount {
             width: 100%;
@@ -1031,7 +409,7 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (min-width: 1601px) {
+@media only screen and (min-width: $desktop-lg-min-width) {
     .shares-box {
         .shares-amount {
             width: 100%;
@@ -1087,7 +465,7 @@ $mobile_bp: 650px;
         display: flex;
         flex-direction: column;
         gap: 12px;
-        color: #686777;
+        color: $grey-170;
 
         .flex-block {
             .fund-asset {
@@ -1097,13 +475,13 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: $desktop-max-width) {
     .retrievable-profits {
         gap: 190;
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     .retrievable-profits {
         gap: 0;
         flex-direction: column;
@@ -1114,7 +492,7 @@ $mobile_bp: 650px;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .retrievable-profits {
         gap: 0;
         flex-direction: column;
@@ -1159,36 +537,36 @@ $mobile_bp: 650px;
 .http-error-label {
     font-size: 230px;
     font-weight: 700;
-    color: $global-red-button;
+    color: $red-10;
 }
 
 .http-error-message {
     font-size: 40px;
     font-weight: 700;
     margin-bottom: 32px;
-    color: $black-000;
+    color: $black;
 }
 
 .http-error-descr {
     font-size: 16;
     margin-bottom: 5px;
-    color: #686777;
+    color: $grey-170;
 }
 
 .http-submit-button {
     // @extend .button-primary;
     width: 340px;
     margin-top: 40px;
-    background-color: #6bb9bd;
+    background-color: $cyan-20;
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     .error404-container {
         padding: 0 40px;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .error404-container {
         padding: 0 20px;
 
@@ -1201,8 +579,4 @@ $mobile_bp: 650px;
             margin-top: 80px;
         }
     }
-}
-
-.clickable {
-    cursor: pointer;
 }

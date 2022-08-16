@@ -8,10 +8,9 @@ button {
     padding: 12px 16px;
     text-align: center;
     border: none;
-    color: $global-white;
+    color: $white;
     cursor: pointer;
     outline: 0;
-    box-sizing: border-box;
 
     &:focus {
         outline: none;
@@ -30,56 +29,52 @@ button {
 }
 
 .button-primary {
-    background-color: $global-red-button;
-    color: $global-white;
+    background-color: $red-10;
+    color: $white;
     font-weight: 700;
 
     &:hover {
-        background-color: #c6444a;
+        background-color: $red-40;
         transition: 0.3s;
     }
 
     &:active {
-        background-color: #cc3038;
+        background-color: $red-50;
         transition: 0.3s;
     }
 
     &:disabled {
-        background-color: #eaecf1;
-        color: #bccac6;
+        background-color: $grey-110;
+        color: $grey-140;
         pointer-events: none;
     }
 }
 
 .button-cyan {
-    background-color: $global-cyan-button;
-    color: $global-white;
+    background-color: $cyan-20;
+    color: $white;
     font-weight: 700;
 
     &:hover {
-        background-color: #4CA5A9;
+        background-color: $cyan-30;
         transition: 0.3s;
     }
 
     &:active {
-        background-color: #4CA5A9;
+        background-color: $cyan-30;
         transition: 0.3s;
     }
 
     &:disabled {
-        background-color: #eaecf1;
-        color: #bccac6;
+        background-color: $grey-110;
+        color: $grey-140;
         pointer-events: none;
     }
 }
 
-.full-width-btn {
-    width: 100%;
-}
-
 .link_button {
     text-align: center;
-    color: $blue-primary;
+    color: $cyan-20;
     padding: 0 8px;
     margin-top: 16px;
     border-radius: 5px;
@@ -94,30 +89,30 @@ button {
 
     &:active {
         transition: 0.3s;
-        color: #4ca5a9;
+        color: $cyan-30;
     }
 
     &:disabled {
-        color: #bccac6;
-        border: 1px solid #bccac6;
+        color: $grey-140;
+        border: 1px solid $grey-140;
     }
 }
 
 .secondary-button {
-    border: 1px solid $global-red-button;
-    color: $global-red-button;
-    background-color: white;
+    border: 1px solid $red-10;
+    color: $red-10;
+    background-color: $white;
     font-weight: 700;
     cursor: pointer;
 
     &:hover {
         transition: 0.3s;
-        background-color: #ffcccc;
+        background-color: $pink-20;
     }
 
     &:disabled {
-        color: #bccac6;
-        border: 1px solid #bccac6;
+        color: $grey-140;
+        border: 1px solid $grey-140;
     }
 }
 
@@ -127,7 +122,6 @@ button {
     .upload-container {
         margin-bottom: 60px;
         height: 307px;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -156,12 +150,11 @@ button {
 .upload-form-image-highlighted {
     border-radius: 32px;
     transition: 0.3s;
-    background-color: #F5FAFB;
+    background-color: $blue-20;
     
     .upload-container {
         margin-bottom: 60px;
         height: 307px;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -173,7 +166,7 @@ button {
         .upload-custom {
             .file-custom {
                 transition: 0.3s;
-                background-color: #F5FAFB;
+                background-color: $blue-20;
             }
 
             .upload-input {
@@ -192,7 +185,6 @@ button {
     .upload-container {
         margin-bottom: 60px;
         height: 200px;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -219,12 +211,11 @@ button {
 .upload-form-file-highlighted {
     border-radius: 32px;
     transition: 0.3s;
-    background-color: #f5fafb;
+    background-color: $blue-20;
 
     .upload-container {
         margin-bottom: 60px;
         height: 200px;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -236,7 +227,7 @@ button {
         .upload-custom {
             .file-custom {
                 transition: 0.3s;
-                background-color: #f5fafb;
+                background-color: $blue-20;
             }
 
             .upload-input {

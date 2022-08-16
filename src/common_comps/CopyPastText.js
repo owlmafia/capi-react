@@ -6,7 +6,7 @@ import myalgo from "../images/svg/myalgo.svg";
 const CopyPasteText = ({ statusMsg, text, copyText: copyTextOpt, copyMsg }) => {
   return (
     <CopyPasteHtml
-      element={<div className="ft-color-black">{text}</div>}
+      element={<div className="grey-220">{text}</div>}
       copyText={copyTextOpt ?? text}
       statusMsg={statusMsg}
       copyMsg={copyMsg}
@@ -28,15 +28,15 @@ export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
 
   return (
     <CopyToClipboard text={copyText} onCopy={onCopy}>
-      <div className="copyable d-flex gap-18">
+      <div className="clickable ft-size-18 d-flex gap-18">
         {element}
-        {/* <span className="copy_msg">{isCopied ? "Copied!" : null}</span> */}
+        {/* <span className="ft-weight-600">{isCopied ? "Copied!" : null}</span> */}
         <span className={`copy ${isCopied ? "active" : ""}`}>
           {isCopied ? (
-            // <img className="copy_icon" src={checkmark} alt="checkmark" />
-            <img className="copy_icon" src={myalgo} alt="myalgo" />
+            // <img className="clickable" src={checkmark} alt="checkmark" />
+            <img className="clickable" src={myalgo} alt="myalgo" />
           ) : (
-            <img className="copy_icon" src={myalgo} alt="myalgo" />
+            <img className="clickable" src={myalgo} alt="myalgo" />
           )}
         </span>
       </div>
@@ -47,7 +47,7 @@ export const CopyPasteHtml = ({ statusMsg, element, copyText, copyMsg }) => {
 export const CopyPasteCompleteText = ({ text, copyText: copyTextOpt }) => {
   return (
     <CopyPasteCompleteHtml
-      element={<div className="ft-color-black">{text}</div>}
+      element={<div className="grey-220">{text}</div>}
       copyText={copyTextOpt ?? text}
     />
   );
@@ -56,7 +56,7 @@ export const CopyPasteCompleteText = ({ text, copyText: copyTextOpt }) => {
 export const CopyPasteCompleteHtml = ({ element, copyText }) => {
   return (
     <CopyToClipboard text={copyText}>
-      <div className="copyable d-flex gap-18">
+      <div className="clickable ft-size-18 d-flex gap-18">
         <span>{element}</span>
       </div>
     </CopyToClipboard>

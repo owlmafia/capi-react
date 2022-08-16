@@ -10,7 +10,6 @@
         gap: 20px;
         flex-direction: column-reverse;
         width: calc((100% - 40px) / 2);
-        box-sizing: border-box;
         font-size: 1.2rem;
         font-weight: bold;
         border-radius: $global-border-radius;
@@ -39,7 +38,7 @@
 
     .my_dao_create_project {
         height: 180px;
-        border: 2px dashed $global-red-button;
+        border: 2px dashed $red-10;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -51,17 +50,13 @@
     }
 
     a {
-        color: black;
+        color: $black;
         font-size: 18px;
         font-weight: 700;
     }
-
-    .create-link {
-        text-align: center;
-    }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .my-daos-container .my_dao {
         width: 100%;
     }

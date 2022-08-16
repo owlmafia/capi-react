@@ -127,7 +127,7 @@ export const CreateDao = ({ deps }) => {
 
   const formView = () => {
     return (
-      <div className="create-dao-container mb-6">
+      <div className="create-dao-container mb-40">
         <div className="dao-title mt-80">Project Info</div>
         <LabeledInput
           label={"Project name"}

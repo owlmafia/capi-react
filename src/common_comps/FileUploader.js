@@ -26,7 +26,7 @@ export const FileUploader = ({ setBytes }) => {
       onSubmit={handleSubmit}
     >
       <div {...getRootProps({ className: "upload-container" })}>
-        <div className="ft-color-black">Upload your business prospectus</div>
+        <div className="grey-220">Upload your business prospectus</div>
         <div>{filename}</div>
         <InfoView
           info={
@@ -44,7 +44,7 @@ export const FileUploader = ({ setBytes }) => {
             accept="image/*"
           />
         </div>
-        <div className="ft-color-black">or Drag and drop here</div>
+        <div className="grey-220">or Drag and drop here</div>
       </div>
     </form>
   );

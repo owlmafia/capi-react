@@ -1,7 +1,9 @@
+@import "global_vars";
+
 $width: 100px;
 
 body {
-    background-color: white;
+    background-color: $white;
 }
 
 .loader {
@@ -28,7 +30,7 @@ body {
 .path {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0;
-    stroke: rgb(106, 204, 204);
+    stroke: $cyan-10;
     animation: dash 1.5s ease-in-out infinite;
     stroke-linecap: round;
 }
@@ -43,7 +45,7 @@ body {
 
     .path-btn {
         stroke-dashoffset: 0;
-        stroke: #DEE2E2;
+        stroke: $grey-120;
         animation: dash 1.5s ease-in-out infinite;
         stroke-linecap: round;
     }

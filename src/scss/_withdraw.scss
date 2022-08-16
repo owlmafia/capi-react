@@ -6,7 +6,7 @@
         display: flex;
         align-items: center;
         gap: 12px;
-        color: rgb(41, 38, 38);
+        color: $grey-190;
 
         #dao_funds__val {
             font-size: 16px;
@@ -15,7 +15,7 @@
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     .dao_funds {
         &__cont_in_withdraw {
             margin-top: -8px;
@@ -23,7 +23,7 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .dao_funds {
         &__cont_in_withdraw {
             margin-top: -16px;
@@ -34,12 +34,12 @@
 .withdraw-container {
     padding: 30px;
     border-radius: $global-border-radius;
-    border: 1px solid $global-border;
-    background-color: $global-blue-background;
+    border: 1px solid $grey-120;
+    background-color: $blue-10;
 
     .title {
         font-size: 1.5rem;
-        color: $global-light-blue;
+        color: $blue-30;
         font-weight: bold;
         margin-bottom: 16px;
     }
@@ -88,7 +88,7 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .textarea-withdraw textarea {
         height: 150px;
     }

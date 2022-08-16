@@ -6,17 +6,16 @@
 @use "modal";
 @use "my_daos";
 @use "charts";
-@use "labels";
 @use "dao";
 @use "invest_embedded";
 @use "funds_activity";
-@use "status_msg";
 @use "withdraw";
 @use "rightcol";
 @use "image";
 @use "progress";
 @use "toastify";
 @use "react-calendar";
+@use "utils";
 
 @font-face {
     font-family: "Gilroy";

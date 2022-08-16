@@ -27,10 +27,8 @@ const entryBody = (entry, isSelected, col) => {
   }
   return (
     <div className={containerClasses}>
-      <div className="percentage-text ft-color-black desc">
-        {entry.percentage_formatted}
-      </div>
-      <div className="h-16">
+      <div className="w-55px grey-220 desc">{entry.percentage_formatted}</div>
+      <div className="h-16px">
         <svg
           width="16"
           height="17"
@@ -41,7 +39,7 @@ const entryBody = (entry, isSelected, col) => {
           <circle cx="8" cy="8.5" r="8" fill={col} />
         </svg>
       </div>
-      <div className="ft-color-black">{entry.label}</div>
+      <div className="grey-220">{entry.label}</div>
     </div>
   );
 };

@@ -53,7 +53,7 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
 
       {/* upload image: set in inputImg via onDrop */}
       <div {...getRootProps({ className: "upload-container" })}>
-        <div className="ft-color-black">Upload a cover image</div>
+        <div className="grey-220">Upload a cover image</div>
         <div className="upload-custom">
           <button className="file-custom secondary-button">Upload Image</button>
           <input
@@ -63,7 +63,7 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
             accept="image/*"
           />
         </div>
-        <div className="ft-color-black">or Drag and drop here</div>
+        <div className="grey-220">or Drag and drop here</div>
       </div>
 
       {/* crop image: gets image from inputImg hook, updates it via updateCrop */}

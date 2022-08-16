@@ -63,9 +63,7 @@ export const LockOrUnlockShares = ({
               <div className="title">{title}</div>
               <div className="mb-16 flex-block align-center">
                 <div className="desc">{"Share supply"}</div>
-                <div className="subtitle color-black-000">
-                  {dao.share_supply}
-                </div>
+                <div className="subtitle black">{dao.share_supply}</div>
                 <div className="arrow-container">
                   <img src={redArrow} alt="redArrow" />
                 </div>
@@ -74,7 +72,7 @@ export const LockOrUnlockShares = ({
                 <div className="numbers desc">
                   {investmentData.investor_locked_shares}
                 </div>
-                <div className="h-16">
+                <div className="h-16px">
                   <svg
                     width="16"
                     height="17"
@@ -91,7 +89,7 @@ export const LockOrUnlockShares = ({
                 <div className="numbers desc">
                   {investmentData.investor_unlocked_shares}
                 </div>
-                <div className="h-16">
+                <div className="h-16px">
                   <svg
                     width="16"
                     height="17"

@@ -7,7 +7,7 @@
     margin-bottom: 40px;
 
     .link_button {
-        color: #787e82;
+        color: $grey-160;
         text-decoration: none;
         padding: 0 0 10px 0;
         cursor: pointer;
@@ -16,7 +16,7 @@
         border-bottom: 2px solid transparent;
 
         &:hover {
-            color: #c6444a;
+            color: $red-40;
         }
     }
 
@@ -26,12 +26,13 @@
 
     .dao_action_tab_item__sel {
         border-radius: 0;
-        color: $global-red-button;
-        border-bottom: 2px solid $global-red-button;
+        color: $red-10;
+        border-bottom: 2px solid $red-10;
+        font-weight: 600;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     #dao_actions_top_bar {
         margin-bottom: 60px;
     }
@@ -39,39 +40,18 @@
 
 #dao_description {
     width: 80%;
-    color: #686777;
+    color: $grey-170;
     margin-bottom: 60px;
     line-height: 25.6px;
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     #dao_description {
         width: 100%;
     }
 }
 
 #dao_funds {
-    &__cont {
-        .dao-funds-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: rgb(106, 204, 204);
-        }
-
-        .available-funds {
-            display: flex;
-            font-size: 14px;
-            gap: 40px;
-            align-items: center;
-
-            .funds {
-                font-size: 14px;
-                font-weight: normal;
-            }
-        }
-    }
-
     &__val {
         font-size: 1.2rem;
         font-weight: 600;
@@ -90,12 +70,6 @@
     }
 }
 
-.dao_action_tab_item {
-    &__sel {
-        font-weight: 600;
-    }
-}
-
 .dao_action_active_tab {
     display: flex;
     flex-direction: column;
@@ -111,7 +85,7 @@
             .blue-circle {
                 width: 8px;
                 height: 8px;
-                background-color: $blue-primary;
+                background-color: $cyan-20;
                 border-radius: 50%;
             }
 
@@ -125,16 +99,6 @@
                     gap: 12px;
                     align-items: center;
                     line-height: 25.6px;
-
-                    .shares-item {
-                        display: flex;
-                        // gap: 12px;
-                        align-items: center;
-                    }
-
-                    .shares-item-right {
-                        margin-right: 3px;
-                    }
                 }
             }
         }
@@ -145,23 +109,9 @@
     }
 }
 
-.dao_action {
-    &__lock_container {
-        margin-top: 10px;
-        padding-top: 20px;
-        border-top: 1px solid black;
-    }
-
-    &__lock_info {
-        margin-bottom: 20px;
-    }
-}
-
 #withdraw_icon {
-    // needed to center vertically (given it's in flex box)
     display: block;
     margin: 0 auto;
-
     margin-left: 6px;
     cursor: pointer;
 }
@@ -169,11 +119,11 @@
 .create-dao-container,
 .update-dao-data {
     .description {
-        border: 2px solid red;
+        border: 2px solid $red-30;
     }
 
     .info {
-        color: #686777;
+        color: $grey-170;
         font-weight: bold;
         font-size: 24px;
         margin-bottom: 40px;
@@ -181,7 +131,7 @@
 
     .dao-title {
         font-size: 24px;
-        color: #787e82;
+        color: $grey-160;
         font-weight: bold;
         margin-bottom: 40px;
     }
@@ -201,8 +151,8 @@
     position: relative;
 
     input:disabled {
-        background: #fff;
-        color: $black;
+        background: $white;
+        color: $grey-200;
     }
 
     img {
@@ -218,21 +168,17 @@
     }
 }
 
-.settings-space {
-    margin-top: 60px;
-}
-
 .social-media-buttons {
     display: flex;
     gap: 16px;
     align-items: center;
 
     .button__follow {
-        border: 1px solid #55acee;
+        border: 1px solid $blue-40;
 
         &:hover {
             transition: 0.3s;
-            background-color: #55acee;
+            background-color: $blue-40;
         }
 
         &:hover img {
@@ -241,11 +187,11 @@
     }
 
     .button-share {
-        border: 1px solid $blue-primary;
+        border: 1px solid $cyan-20;
 
         &:hover {
             transition: 0.3s;
-            background-color: $blue-primary;
+            background-color: $cyan-20;
         }
 
         &:hover img {
@@ -260,7 +206,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: white;
+        color: $white;
         cursor: pointer;
     }
 }
@@ -307,13 +253,14 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .dao_action_active_tab {
         .dao-shares {
             .top-block {
                 .blue-circle {
                     display: none;
                 }
+
                 .available-shares {
                     .shares-block {
                         flex-direction: column;
@@ -330,9 +277,7 @@
             display: none;
         }
     }
-}
 
-@media only screen and (max-width: 650px) {
     .buy-shares-content {
         .buy-shares-right-col {
             flex-direction: column;

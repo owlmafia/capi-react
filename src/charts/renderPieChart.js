@@ -29,7 +29,7 @@ const renderPieChart = (
   };
 
   const segmentClass = (d, i, isGray = false) => {
-    return isGray || disableClick ? "" : "clickable_pie_segment";
+    return isGray || disableClick ? "" : "clickable";
   };
 
   const svg = d3.select(container);

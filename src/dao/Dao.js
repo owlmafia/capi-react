@@ -96,7 +96,7 @@ export const Dao = ({ deps }) => {
               />
             )}
           </div>
-          <div className="section-spacer" />
+          <div className="h-20px" />
         </div>
       );
     } else {

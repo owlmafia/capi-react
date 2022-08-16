@@ -35,9 +35,7 @@ const AmountView = ({ entry }) => {
         alt="arrow"
       />
       <div className="d-flex flex-column justify-between">
-        <div className="ft-color-grey ft-size-18 line-height-1">
-          {entry.address}
-        </div>
+        <div className="grey-190 ft-size-18 line-height-1">{entry.address}</div>
         <div className="d-flex align-center">
           <img
             className="arrow funds-arrow-icon tablet-desktop-none"
@@ -52,7 +50,7 @@ const AmountView = ({ entry }) => {
             alt="funds"
           />
           <div className="ft-weight-600">{nestedAmountView(entry)}</div>
-          <div className="ft-size-14 type-label">
+          <div className="ft-size-14 ml-16 grey-180">
             {fundsActivityEntryLabel(entry)}
           </div>
         </div>
