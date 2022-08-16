@@ -237,6 +237,7 @@ const App = () => {
             minMaxInvestment: true,
             // shows info labels in diverse places when the project hasn't finished the fundsraising phase
             stillRaisingFundsLabels: true,
+            developer: true,
           },
 
           myAddress: myAddress,

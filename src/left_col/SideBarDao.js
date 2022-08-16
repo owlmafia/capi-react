@@ -40,10 +40,12 @@ export const SideBarDao = ({ deps, containerClass }) => {
         route="/my_projects"
         label="My Projects"
       />
-      <div className="clickable" onClick={() => setDevSettingsModal(true)}>
-        {"Dev settings"}
-      </div>
-      <AppVersion />
+      {deps.features.developer && (
+        <div className="clickable" onClick={() => setDevSettingsModal(true)}>
+          {"Dev settings"}
+        </div>
+      )}
+      {deps.features.developer && <AppVersion />}
 
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />

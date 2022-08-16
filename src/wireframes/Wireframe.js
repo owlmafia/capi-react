@@ -8,7 +8,7 @@ import { SideBarDao } from "../left_col/SideBarDao";
 export const Wireframe = ({ isGlobal, deps }) => {
   const sideBar = () => {
     if (isGlobal) {
-      return <SideBar containerClass={"sidebar-container"} />;
+      return <SideBar deps={deps} containerClass={"sidebar-container"} />;
     } else {
       return <SideBarDao deps={deps} containerClass={"sidebar-container"} />;
     }

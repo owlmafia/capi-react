@@ -30,7 +30,7 @@ export const WireframeMobile = ({ isGlobal, deps }) => {
 
   const sideBar = () => {
     if (isGlobal) {
-      return <SideBar containerClass={sideMenuClass} />;
+      return <SideBar deps={deps} containerClass={sideMenuClass} />;
     } else {
       return <SideBarDao deps={deps} containerClass={sideMenuClass} />;
     }
