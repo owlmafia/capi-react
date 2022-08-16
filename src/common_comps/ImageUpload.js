@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { ImageCropper } from "./ImageCropper";
 import { useDropzone } from "react-dropzone";
 import { useEffect } from "react";

@@ -25,7 +25,7 @@ export const LabeledInput = ({
 
   const remainingChars = useMemo(() => {
     return maxLength - inputLength;
-  }, [inputLength]);
+  }, [maxLength, inputLength]);
 
   const stateForRemainingChars = useMemo(() => {
     if (remainingChars < 0) {
@@ -36,7 +36,7 @@ export const LabeledInput = ({
   }, [remainingChars]);
 
   const inputTextLengthClass = () => {
-    if (stateForRemainingChars == "over") {
+    if (stateForRemainingChars === "over") {
       return "input-length-error";
     } else {
       return null;
@@ -44,8 +44,13 @@ export const LabeledInput = ({
   };
 
   const counterClass = () => {
+<<<<<<< HEAD
     if (stateForRemainingChars == "over") {
       return "red-20";
+=======
+    if (stateForRemainingChars === "over") {
+      return "chars-counter-error";
+>>>>>>> main
     } else {
       return null;
     }
@@ -88,10 +93,7 @@ export const LabeledInput = ({
         )}
         {img && <img src={img} alt="img" />}
       </div>
-      <div className="labeled_input__error">
-        {errorMsg ? <img src={error} alt="error" /> : ""}
-        {errorMsg}
-      </div>
+      <ValidationMsg errorMsg={errorMsg} />
     </div>
   );
 };
@@ -228,7 +230,7 @@ export const LabeledTextArea = ({
 
   const remainingChars = useMemo(() => {
     return maxLength - inputLength;
-  }, [inputLength]);
+  }, [maxLength, inputLength]);
 
   const stateForRemainingChars = useMemo(() => {
     if (remainingChars < 0) {
@@ -239,7 +241,7 @@ export const LabeledTextArea = ({
   }, [remainingChars]);
 
   const inputTextLengthClass = () => {
-    if (stateForRemainingChars == "over") {
+    if (stateForRemainingChars === "over") {
       return "input-length-error";
     } else {
       return null;

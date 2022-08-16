@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../income_spending_chart/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../shares_distribution_chart/SharesDistributionBox";
@@ -12,8 +12,6 @@ export const Dao = ({ deps }) => {
   let params = useParams();
 
   const [description, setDescription] = useState(null);
-
-  console.log("deps: " + JSON.stringify(deps));
 
   useEffect(() => {
     async function asyncInit() {
@@ -37,15 +35,6 @@ export const Dao = ({ deps }) => {
     }
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);
-
-  const showBuyShares = () => {
-    // if prospectus feature is disabled, we always show buy shares,
-    // otherwise only if there's a prospectus
-    return (
-      !deps.features.prospectus ||
-      (deps.features.prospectus && deps.dao.prospectus)
-    );
-  };
 
   const maybeInvestView = (dao) => {
     if (!deps.features.prospectus) {

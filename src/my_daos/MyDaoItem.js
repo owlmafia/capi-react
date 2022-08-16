@@ -6,7 +6,7 @@ export const MyDaoItem = ({ dao }) => {
     <div key={dao.url_rel} className="my_dao">
       <Link to={dao.url_rel}>{dao.name}</Link>
       <div className="img-placeholder">
-        <img src={dao.image_url}></img>
+        <img src={dao.image_url} alt=""></img>
       </div>
       {/* for now not don't involvement role - there's no design and not sure it's really needed */}
       {/* {involvementIcons(dao)} */}
@@ -25,12 +25,12 @@ export const MyDaoItem = ({ dao }) => {
 //   return icons;
 // };
 
-const involvementIcon = (src, alt) => {
-  return (
-    <img
-      className="my_dao__involvement_icon img-placeholder"
-      src={src}
-      alt={alt}
-    />
-  );
-};
+// const involvementIcon = (src, alt) => {
+//   return (
+//     <img
+//       className="my_dao__involvement_icon img-placeholder"
+//       src={src}
+//       alt={alt}
+//     />
+//   );
+// };

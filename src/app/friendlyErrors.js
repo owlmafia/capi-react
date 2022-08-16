@@ -5,7 +5,8 @@ export const toFriendlyError = (msg) => {
     tryOverspendError(msg) ??
     tryAssetNotOptedInError(msg) ??
     tryAssetOverspendError(msg) ??
-    tealApiConnectionError(msg)
+    tealApiConnectionError(msg) ??
+    smartContractLogicError(msg)
   );
 };
 
@@ -73,6 +74,16 @@ export const txIdNotFoundError = (msg) => {
 export const tealApiConnectionError = (msg) => {
   if (msg.includes("Failed to fetch") && msg.includes("TealApi")) {
     return "Couldn't connect to smart contracts api. Please try again.";
+  } else {
+    return null;
+  }
+};
+
+export const smartContractLogicError = (msg) => {
+  // http error 400 included just to make 100% sure that it's the "typical" smart contract error,
+  // no particular reason, just to be sure
+  if (msg.includes("logic eval error") && msg.includes("Http error: 400")) {
+    return "The smart contract rejected the transaction. Please contact support.";
   } else {
     return null;
   }

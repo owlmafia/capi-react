@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import myalgo from "../images/svg/myalgo.svg";
 // import checkmark from "../images/svg/checkmark.svg";

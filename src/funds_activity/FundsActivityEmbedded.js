@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { loadFundsActivity, loadDao } from "./controller";
+import { loadDao } from "./controller";
 import funds from "../images/funds.svg";
 import { changeArrow, shortedAddress } from "../shared_functions";
 import CopyPasteText from "../common_comps/CopyPastText";
@@ -17,7 +17,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
 
   useEffect(() => {
     deps.updateCompactFundsActivity.call(null, daoId);
-  }, [daoId]);
+  }, [deps.updateCompactFundsActivity, daoId]);
 
   const hasEntries = () => {
     return deps.compactFundsActivity && deps.compactFundsActivity.length > 0;

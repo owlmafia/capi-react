@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, Fragment } from "react";
+import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { InfoView } from "./LabeledInput";
 
@@ -62,15 +62,18 @@ const setBytesFromFile = (file, setBytes) => {
 
 // shared callback to be used for regular file and image upload
 export const useDrop = (onFile) => {
-  return useCallback((acceptedFiles) => {
-    console.log("drop: accepted files: %o", acceptedFiles);
-    if (acceptedFiles && acceptedFiles.length === 1) {
-      let file = acceptedFiles[0];
-      console.log(file);
-      //   console.log("will set file: " + file.name);
-      onFile(file);
-    } else {
-      console.error("Unexpected: acceptedFiles: %o", acceptedFiles);
-    }
-  }, []);
+  return useCallback(
+    (acceptedFiles) => {
+      console.log("drop: accepted files: %o", acceptedFiles);
+      if (acceptedFiles && acceptedFiles.length === 1) {
+        let file = acceptedFiles[0];
+        console.log(file);
+        //   console.log("will set file: " + file.name);
+        onFile(file);
+      } else {
+        console.error("Unexpected: acceptedFiles: %o", acceptedFiles);
+      }
+    },
+    [onFile]
+  );
 };

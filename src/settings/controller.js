@@ -1,4 +1,4 @@
-import { toBytes } from "../common_functions/common";
+import { toBytes, toBytesForRust } from "../common_functions/common";
 import { toMaybeIpfsUrl } from "../ipfs/store";
 import { toErrorMsg } from "../validation";
 
@@ -11,7 +11,10 @@ export const prefillInputs = async (
   setDaoDescr,
   setSharePrice,
   setImageBytes,
-  setSocialMediaUrl
+  setSocialMediaUrl,
+  setMinInvestShares,
+  setMaxInvestShares,
+  setProspectus
 ) => {
   try {
     const { bridge_updatable_data } = await wasmPromise;
@@ -22,8 +25,15 @@ export const prefillInputs = async (
     setDaoDescr(updatableData.project_desc);
     setSharePrice(updatableData.share_price);
     // TODO header may not be needed - test without once everything else works, remove if not needed
-    setImageBytes("data:image/png;base64," + updatableData.image_base64);
+    if (updatableData.image_base64) {
+      setImageBytes("data:image/png;base64," + updatableData.image_base64);
+    } else {
+      setImageBytes(null);
+    }
     setSocialMediaUrl(updatableData.social_media_url);
+    setMinInvestShares(updatableData.min_invest_amount);
+    setMaxInvestShares(updatableData.max_invest_amount);
+    setProspectus(updatableData.prospectus);
   } catch (e) {
     deps.statusMsg.error(e);
   }
@@ -72,26 +82,37 @@ export const updateApp = async (
 
 export const updateDaoData = async (
   deps,
+  showProgress,
   daoId,
   projectName,
   daoDescr,
   sharePrice,
   imageBytes,
   socialMediaUrl,
+  prospectusBytes,
+  minInvestShares,
+  maxInvestShares,
 
   setDaoNameError,
   setDaoDescrError,
   setImageError,
-  setSocialMediaUrlError
+  setProspectusError,
+  setSocialMediaUrlError,
+  setMinInvestSharesError,
+  setMaxInvestSharesError
 ) => {
   try {
     const { bridge_update_data, bridge_submit_update_dao_data } =
       await wasmPromise;
 
-    deps.showProgress(true);
+    showProgress(true);
 
     const imageUrl = await toMaybeIpfsUrl(await imageBytes);
     const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
+
+    const prospectusBytesResolved = await prospectusBytes;
+    const prospectusUrl = await toMaybeIpfsUrl(prospectusBytesResolved);
+    const prospectusBytesForRust = toBytesForRust(prospectusBytesResolved);
 
     let updateDataRes = await bridge_update_data({
       dao_id: daoId,
@@ -104,14 +125,19 @@ export const updateDaoData = async (
 
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
+
+      prospectus_url: prospectusUrl,
+      prospectus_bytes: prospectusBytesForRust,
+      min_invest_amount: minInvestShares,
+      max_invest_amount: maxInvestShares,
     });
     console.log("Update DAO data res: %o", updateDataRes);
-    deps.showProgress(false);
+    showProgress(false);
 
     let updateDataResSigned = await deps.wallet.signTxs(updateDataRes.to_sign);
     console.log("updateDataResSigned: " + JSON.stringify(updateDataResSigned));
 
-    deps.showProgress(true);
+    showProgress(true);
     let submitUpdateDaoDataRes = await bridge_submit_update_dao_data({
       txs: updateDataResSigned,
       pt: updateDataRes.pt, // passthrough
@@ -124,20 +150,31 @@ export const updateDaoData = async (
 
     deps.statusMsg.success("Dao data updated!");
 
-    deps.showProgress(false);
+    showProgress(false);
   } catch (e) {
     if (e.id === "validations") {
       let details = e.details;
       setDaoNameError(toErrorMsg(details.name));
       setDaoDescrError(toErrorMsg(details.description));
       setImageError(toErrorMsg(details.image));
+
+      // Note that this will make appear the prospectus errors incrementally, if both happen at once (normally not expected)
+      // i.e. user has to fix one first and submit, then the other would appear
+      if (details.prospectus_url) {
+        setProspectusError(toErrorMsg(details.prospectus_url));
+      } else if (details.prospectus_bytes) {
+        setProspectusError(toErrorMsg(details.prospectus_bytes));
+      }
+
       setSocialMediaUrlError(toErrorMsg(details.social_media_url));
+      setMinInvestSharesError(toErrorMsg(details.min_invest_shares));
+      setMaxInvestSharesError(toErrorMsg(details.max_invest_shares));
 
       deps.statusMsg.error("Please fix the errors");
     } else {
       deps.statusMsg.error(e);
     }
-    deps.showProgress(false);
+    showProgress(false);
   }
 };
 

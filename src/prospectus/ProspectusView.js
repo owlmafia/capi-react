@@ -8,11 +8,6 @@ export const ProspectusView = ({ deps, url, hash }) => {
         <span>{"Hash: "}</span>
         <span>{hash}</span>
       </div>
-      <div>
-        {
-          "By acknowledging, you accept the conditions presented in this prospectus."
-        }
-      </div>
     </div>
   );
 };

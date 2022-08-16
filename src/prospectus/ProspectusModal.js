@@ -1,20 +1,10 @@
-import { OkCancelModal } from "../modal/OkCancelModal";
+import { OkModal } from "../modal/OkModal";
 import { ProspectusView } from "./ProspectusView";
 
-export const ProspectusModal = ({
-  url,
-  onAccept,
-  closeModal,
-  prospectusHash,
-}) => {
+export const ProspectusModal = ({ url, closeModal, prospectusHash }) => {
   return (
-    <OkCancelModal
-      title={"Prospectus"}
-      closeModal={closeModal}
-      okLabel={"Acknowledge"}
-      onSubmit={() => onAccept()}
-    >
+    <OkModal title={"Prospectus"} closeModal={closeModal}>
       <ProspectusView url={url} hash={prospectusHash} />
-    </OkCancelModal>
+    </OkModal>
   );
 };

@@ -10,6 +10,7 @@ import project from "../images/sidebar/projects.svg";
 import SideBarItem from "./SideBarItem";
 import logo from "../images/logo.svg";
 import { DevSettingsModal } from "../dev_settings/DevSettingsModal";
+import { AppVersion } from "./AppVersion";
 
 export const SideBarDao = ({ deps, containerClass }) => {
   const [devSettingsModal, setDevSettingsModal] = useState(false);
@@ -39,9 +40,12 @@ export const SideBarDao = ({ deps, containerClass }) => {
         route="/my_projects"
         label="My Projects"
       />
-      <div className="clickable" onClick={() => setDevSettingsModal(true)}>
-        {"Dev settings"}
-      </div>
+      {deps.features.developer && (
+        <div className="clickable" onClick={() => setDevSettingsModal(true)}>
+          {"Dev settings"}
+        </div>
+      )}
+      {deps.features.developer && <AppVersion deps={deps} />}
 
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />

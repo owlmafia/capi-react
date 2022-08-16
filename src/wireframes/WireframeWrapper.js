@@ -16,7 +16,7 @@ export const WireframeWrapper = ({ isGlobal, deps }) => {
       }
     }
     asyncInit();
-  }, [params.id, deps.statusMsg, deps.updateDaoVersion]);
+  }, [params.id, deps.statusMsg, deps.updateDaoVersion, deps.updateDao]);
 
   useEffect(() => {
     deps.statusMsg.clear();

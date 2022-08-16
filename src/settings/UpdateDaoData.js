@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { SubmitButton } from "../common_comps/SubmitButton";
-import { LabeledInput, LabeledTextArea } from "../common_comps/LabeledInput";
+import {
+  LabeledAmountInput,
+  LabeledInput,
+  LabeledTextArea,
+  ValidationMsg,
+} from "../common_comps/LabeledInput";
 import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../common_comps/ImageUpload";
 import { OkCancelModal } from "../modal/OkCancelModal";
-import { toMaybeIpfsUrl } from "../ipfs/store";
+import { FileUploader } from "../common_comps/FileUploader";
+import { ProspectusModal } from "../prospectus/ProspectusModal";
 
 export const UpdateDaoData = ({ deps }) => {
   let params = useParams();
@@ -15,6 +21,13 @@ export const UpdateDaoData = ({ deps }) => {
   const [sharePrice, setSharePrice] = useState("");
   const [imageBytes, setImageBytes] = useState(null);
   const [socialMediaUrl, setSocialMediaUrl] = useState("");
+  const [minInvestShares, setMinInvestShares] = useState("");
+  const [maxInvestShares, setMaxInvestShares] = useState("");
+
+  // prefill-only (new url and hash are only generated when submitting and not set here), thus prefill prefix
+  const [prefillProspectus, setPrefillProspectus] = useState([]);
+  // the bytes of prospectus uploaded - note that this is *not
+  const [prospectusBytes, setProspectusBytes] = useState([]);
 
   const [rekeyAuthAddress, setRekeyAuthAddress] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -22,10 +35,16 @@ export const UpdateDaoData = ({ deps }) => {
   const [daoNameError, setDaoNameError] = useState("");
   const [daoDescrError, setDaoDescrError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+  const [minInvestSharesError, setMinInvestSharesError] = useState("");
+  const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
+
   const [imageError, setImageError] = useState("");
+  const [prospectusError, setProspectusError] = useState("");
 
   const [rekeyAddressError, setRekeyAddressError] = useState("");
+
   const [showConfirmRekeyModal, setShowConfirmRekeyModal] = useState(false);
+  const [showProspectusModal, setShowProspectusModal] = useState(false);
 
   useEffect(() => {
     async function prefill() {
@@ -37,7 +56,10 @@ export const UpdateDaoData = ({ deps }) => {
           setDaoDescr,
           setSharePrice,
           setImageBytes,
-          setSocialMediaUrl
+          setSocialMediaUrl,
+          setMinInvestShares,
+          setMaxInvestShares,
+          setPrefillProspectus
         );
       }
     }
@@ -70,6 +92,46 @@ export const UpdateDaoData = ({ deps }) => {
           initImageBytes={imageBytes}
           setImageBytes={setImageBytes}
         />
+        <ValidationMsg errorMsg={imageError} />
+
+        {deps.features.prospectus && (
+          <React.Fragment>
+            <div className="dao-title mt-60">Prospectus</div>
+            {prefillProspectus && (
+              <div
+                className="clickable"
+                href={prefillProspectus.url}
+                onClick={() => setShowProspectusModal(true)}
+              >
+                {"Current: " + prefillProspectus.hash}
+              </div>
+            )}
+            <FileUploader setBytes={setProspectusBytes} />
+            <ValidationMsg errorMsg={prospectusError} />
+          </React.Fragment>
+        )}
+        {deps.features.minMaxInvestment && (
+          <div className="d-flex gap-32">
+            <div className="f-basis-50">
+              <LabeledAmountInput
+                label={"Min investment (shares)"}
+                info={"Minimum amount of shares an investor has to buy"}
+                inputValue={minInvestShares}
+                onChange={(input) => setMinInvestShares(input)}
+                errorMsg={minInvestSharesError}
+              />
+            </div>
+            <div className="f-basis-50">
+              <LabeledAmountInput
+                label={"Max investment (shares)"}
+                info={"Maximum total amount of shares an investor can buy"}
+                inputValue={maxInvestShares}
+                onChange={(input) => setMaxInvestShares(input)}
+                errorMsg={maxInvestSharesError}
+              />
+            </div>
+          </div>
+        )}
         <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
@@ -83,6 +145,7 @@ export const UpdateDaoData = ({ deps }) => {
           onClick={async () => {
             updateDaoData(
               deps,
+              setSubmitting,
 
               params.id,
               daoName,
@@ -90,11 +153,17 @@ export const UpdateDaoData = ({ deps }) => {
               sharePrice,
               imageBytes,
               socialMediaUrl,
+              prospectusBytes,
+              minInvestShares,
+              maxInvestShares,
 
               setDaoNameError,
               setDaoDescrError,
               setImageError,
-              setSocialMediaUrlError
+              setProspectusError,
+              setSocialMediaUrlError,
+              setMinInvestSharesError,
+              setMaxInvestSharesError
             );
           }}
         />
@@ -167,6 +236,13 @@ export const UpdateDaoData = ({ deps }) => {
             </div>
           </div>
         </OkCancelModal>
+      )}
+      {showProspectusModal && (
+        <ProspectusModal
+          url={prefillProspectus.url}
+          prospectusHash={prefillProspectus.hash}
+          closeModal={() => setShowProspectusModal(false)}
+        />
       )}
     </div>
   );

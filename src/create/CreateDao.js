@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LabeledAmountInput,
   LabeledCurrencyInput,
   LabeledInput,
   LabeledTextArea,
   LabeledDateInput,
-  InfoView,
+  ValidationMsg,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { calculateTotalPrice, createDao } from "./controller";
@@ -38,9 +38,6 @@ export const CreateDao = ({ deps }) => {
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
-  const formattedMinRaiseTargetEndDate = useMemo(() => {
-    return moment(minRaiseTargetEndDate).format("D MMM YYYY");
-  }, [minRaiseTargetEndDate]);
   const [prospectusBytes, setProspectusBytes] = useState([]);
 
   const [daoNameError, setDaoNameError] = useState("");
@@ -52,13 +49,11 @@ export const CreateDao = ({ deps }) => {
   const [minInvestSharesError, setMinInvestSharesError] = useState("");
   const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
-  // mock data, while we've no UI for this
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
 
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
     useState("");
 
-  // TODO show these errors
   const [imageError, setImageError] = useState("");
   const [prospectusError, setProspectusError] = useState("");
 
@@ -152,11 +147,13 @@ export const CreateDao = ({ deps }) => {
         />
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
+        <ValidationMsg errorMsg={imageError} />
 
         {deps.features.prospectus && (
           <React.Fragment>
             <div className="dao-title mt-60">Prospectus</div>
             <FileUploader setBytes={setProspectusBytes} />
+            <ValidationMsg errorMsg={prospectusError} />
           </React.Fragment>
         )}
 
