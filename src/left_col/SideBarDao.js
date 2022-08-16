@@ -45,7 +45,7 @@ export const SideBarDao = ({ deps, containerClass }) => {
           {"Dev settings"}
         </div>
       )}
-      {deps.features.developer && <AppVersion />}
+      {deps.features.developer && <AppVersion deps={deps} />}
 
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />

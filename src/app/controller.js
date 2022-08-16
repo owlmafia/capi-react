@@ -135,3 +135,12 @@ const stateObj = (state, exceeded) => {
 
   return { text: text, success: success };
 };
+
+export const getWasmVersion = async (deps, setWasmVersion) => {
+  try {
+    const { bridge_wasm_version } = await wasmPromise;
+    setWasmVersion(await bridge_wasm_version());
+  } catch (e) {
+    deps.statusMsg.error(e);
+  }
+};
