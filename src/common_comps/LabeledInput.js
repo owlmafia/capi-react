@@ -44,13 +44,8 @@ export const LabeledInput = ({
   };
 
   const counterClass = () => {
-<<<<<<< HEAD
     if (stateForRemainingChars == "over") {
       return "red-20";
-=======
-    if (stateForRemainingChars === "over") {
-      return "chars-counter-error";
->>>>>>> main
     } else {
       return null;
     }
