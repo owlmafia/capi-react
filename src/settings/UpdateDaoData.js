@@ -5,6 +5,7 @@ import {
   LabeledAmountInput,
   LabeledInput,
   LabeledTextArea,
+  ValidationMsg,
 } from "../common_comps/LabeledInput";
 import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../common_comps/ImageUpload";
@@ -38,7 +39,6 @@ export const UpdateDaoData = ({ deps }) => {
   const [minInvestSharesError, setMinInvestSharesError] = useState("");
   const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
 
-  // TODO show these errors
   const [imageError, setImageError] = useState("");
   const [prospectusError, setProspectusError] = useState("");
 
@@ -93,6 +93,7 @@ export const UpdateDaoData = ({ deps }) => {
           initImageBytes={imageBytes}
           setImageBytes={setImageBytes}
         />
+        <ValidationMsg errorMsg={imageError} />
 
         {deps.features.prospectus && (
           <React.Fragment>
@@ -107,6 +108,7 @@ export const UpdateDaoData = ({ deps }) => {
               </div>
             )}
             <FileUploader setBytes={setProspectusBytes} />
+            <ValidationMsg errorMsg={prospectusError} />
           </React.Fragment>
         )}
         {deps.features.minMaxInvestment && (

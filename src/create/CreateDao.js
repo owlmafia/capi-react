@@ -6,6 +6,7 @@ import {
   LabeledTextArea,
   LabeledDateInput,
   InfoView,
+  ValidationMsg,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
 import { calculateTotalPrice, createDao } from "./controller";
@@ -58,7 +59,6 @@ export const CreateDao = ({ deps }) => {
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
     useState("");
 
-  // TODO show these errors
   const [imageError, setImageError] = useState("");
   const [prospectusError, setProspectusError] = useState("");
 
@@ -152,11 +152,13 @@ export const CreateDao = ({ deps }) => {
         />
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
+        <ValidationMsg errorMsg={imageError} />
 
         {deps.features.prospectus && (
           <React.Fragment>
             <div className="dao-title mt-60">Prospectus</div>
             <FileUploader setBytes={setProspectusBytes} />
+            <ValidationMsg errorMsg={prospectusError} />
           </React.Fragment>
         )}
 

@@ -88,10 +88,7 @@ export const LabeledInput = ({
         )}
         {img && <img src={img} alt="img" />}
       </div>
-      <div className="labeled_input__error">
-        {errorMsg ? <img src={error} alt="error" /> : ""}
-        {errorMsg}
-      </div>
+      <ValidationMsg errorMsg={errorMsg} />
     </div>
   );
 };

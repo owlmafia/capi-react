@@ -127,8 +127,15 @@ export const createDao = async (
       // and this is in theory oriented towards being fixable by the user,
       // in which case it can be done incrementally
       // the console in any case logs all the errors simultaneously
-      setProspectusError(toErrorMsg(e.prospectus_url));
-      setProspectusError(toErrorMsg(e.prospectus_bytes));
+
+      setImageError(toErrorMsg(e.image_url));
+      // Note that this will make appear the prospectus errors incrementally, if both happen at once (normally not expected)
+      // i.e. user has to fix one first and submit, then the other would appear
+      if (e.prospectus_url) {
+        setProspectusError(toErrorMsg(e.prospectus_url));
+      } else if (e.prospectus_bytes) {
+        setProspectusError(toErrorMsg(e.prospectus_bytes));
+      }
 
       // workaround: the inline errors for these are not functional yet, so show as notification
       showErrorNotificationIfError(deps, e.image_url);

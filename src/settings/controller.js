@@ -157,7 +157,15 @@ export const updateDaoData = async (
       setDaoNameError(toErrorMsg(details.name));
       setDaoDescrError(toErrorMsg(details.description));
       setImageError(toErrorMsg(details.image));
-      setProspectusError(toErrorMsg(details.prospectus));
+
+      // Note that this will make appear the prospectus errors incrementally, if both happen at once (normally not expected)
+      // i.e. user has to fix one first and submit, then the other would appear
+      if (details.prospectus_url) {
+        setProspectusError(toErrorMsg(details.prospectus_url));
+      } else if (details.prospectus_bytes) {
+        setProspectusError(toErrorMsg(details.prospectus_bytes));
+      }
+
       setSocialMediaUrlError(toErrorMsg(details.social_media_url));
       setMinInvestSharesError(toErrorMsg(details.min_invest_shares));
       setMaxInvestSharesError(toErrorMsg(details.max_invest_shares));
