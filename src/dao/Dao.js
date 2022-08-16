@@ -13,8 +13,6 @@ export const Dao = ({ deps }) => {
 
   const [description, setDescription] = useState(null);
 
-  console.log("deps: " + JSON.stringify(deps));
-
   useEffect(() => {
     async function asyncInit() {
       await deps.updateDao.call(null, params.id);
