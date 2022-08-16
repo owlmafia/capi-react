@@ -5,6 +5,7 @@ import logo from "../images/logo.svg";
 import Modal from "../modal/Modal";
 import { useState } from "react";
 import { DevSettingsModal } from "../dev_settings/DevSettingsModal";
+import { AppVersion } from "./AppVersion";
 
 export const SideBar = ({ containerClass }) => {
   const [devSettingsModal, setDevSettingsModal] = useState(false);
@@ -23,6 +24,7 @@ export const SideBar = ({ containerClass }) => {
       <div className="clickable" onClick={() => setDevSettingsModal(true)}>
         {"Dev settings"}
       </div>
+      <AppVersion />
       {devSettingsModal && (
         <DevSettingsModal closeModal={() => setDevSettingsModal(false)} />
       )}
