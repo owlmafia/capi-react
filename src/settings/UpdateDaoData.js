@@ -10,7 +10,6 @@ import {
 import { prefillInputs, rekeyOwner, updateDaoData } from "./controller";
 import { ImageUpload } from "../common_comps/ImageUpload";
 import { OkCancelModal } from "../modal/OkCancelModal";
-import { toMaybeIpfsUrl } from "../ipfs/store";
 import { FileUploader } from "../common_comps/FileUploader";
 import { ProspectusModal } from "../prospectus/ProspectusModal";
 

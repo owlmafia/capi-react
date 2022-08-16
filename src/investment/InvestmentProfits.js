@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ContentTitle } from "../ContentTitle";
 import { FundsAssetImg } from "../images/FundsAssetImg";
 // import {updateChainInvestmentData_ as updateInvestmentData_} from "./controller";
 import { init } from "./controller";

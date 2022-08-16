@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, Fragment } from "react";
+import React, { useState, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import { InfoView } from "./LabeledInput";
 

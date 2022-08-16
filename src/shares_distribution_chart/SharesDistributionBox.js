@@ -31,7 +31,7 @@ export const SharesDistributionBox = ({ deps }) => {
       }
     }
     nestedAsync();
-  }, [deps.statusMsg, deps.dao]);
+  }, [deps.updateSharesDistr, deps.statusMsg, deps.dao]);
 
   useEffect(() => {
     const showAll = () => {

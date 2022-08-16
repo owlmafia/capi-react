@@ -1,11 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   LabeledAmountInput,
   LabeledCurrencyInput,
   LabeledInput,
   LabeledTextArea,
   LabeledDateInput,
-  InfoView,
   ValidationMsg,
 } from "../common_comps/LabeledInput";
 import { ContentTitle } from "../ContentTitle";
@@ -39,9 +38,6 @@ export const CreateDao = ({ deps }) => {
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
     moment(new Date()).add(1, "M")
   );
-  const formattedMinRaiseTargetEndDate = useMemo(() => {
-    return moment(minRaiseTargetEndDate).format("D MMM YYYY");
-  }, [minRaiseTargetEndDate]);
   const [prospectusBytes, setProspectusBytes] = useState([]);
 
   const [daoNameError, setDaoNameError] = useState("");

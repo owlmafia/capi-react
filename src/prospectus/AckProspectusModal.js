@@ -1,6 +1,5 @@
 import { OkCancelModal } from "../modal/OkCancelModal";
 import { AckProspectusView } from "./AckProspectusView";
-import { ProspectusView } from "./ProspectusView";
 
 export const AckProspectusModal = ({
   url,

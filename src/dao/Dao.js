@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { IncomeVsSpendingBox } from "../income_spending_chart/IncomeVsSpendingBox";
 import { SharesDistributionBox } from "../shares_distribution_chart/SharesDistributionBox";

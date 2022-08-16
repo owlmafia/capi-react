@@ -65,8 +65,3 @@ export const RaisedFunds = ({ deps, dao }) => {
 
   return <div>{view()}</div>;
 };
-
-const fundsRaiseStateLabel = (raisedFunds, dao) => {
-  // const minFunds = dao.raise_min_target_number;
-  // if (raisedFunds)
-};

@@ -38,7 +38,7 @@ export const InvestEmbedded = ({ deps, dao }) => {
 
   useEffect(() => {
     deps.updateAvailableShares.call(null, params.id);
-  }, [deps.statusMsg, params.id]);
+  }, [deps.updateAvailableShares, deps.statusMsg, params.id]);
 
   useEffect(() => {
     async function nestedAsync() {
