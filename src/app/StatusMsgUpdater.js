@@ -1,7 +1,7 @@
 import { toFriendlyError } from "./friendlyErrors";
 import { toast } from "react-toastify";
 
-export const StatusMsgUpdater = (setStatusMsg) => ({
+export const StatusMsgUpdater = () => ({
   // Display text as a success notification
   success(msg, hideClose) {
     msg = msg + "";

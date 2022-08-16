@@ -45,13 +45,12 @@ const App = () => {
 
   const [myAddressDisplay, setMyAddressDisplay] = useState("");
   const [modal, setModal] = useState(null);
-  const [_, setStatusMsg] = useState(null);
 
   const [investmentData, setInvestmentData] = useState(null);
 
   const [dao, setDao] = useState(null);
 
-  const [statusMsgUpdater] = useState(StatusMsgUpdater(setStatusMsg));
+  const [statusMsgUpdater] = useState(StatusMsgUpdater());
 
   const windowSize = useWindowSize();
 
