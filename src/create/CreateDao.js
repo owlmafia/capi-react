@@ -53,7 +53,6 @@ export const CreateDao = ({ deps }) => {
   const [minInvestSharesError, setMinInvestSharesError] = useState("");
   const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
-  // mock data, while we've no UI for this
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
 
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
