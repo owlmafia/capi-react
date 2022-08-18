@@ -3,7 +3,7 @@
 @mixin calendar_main_text {
   text-transform: capitalize;
   font-size: 16px;
-  color: $grey-180;
+  color: $grey-170;
 }
 
 .react-calendar {
@@ -74,7 +74,7 @@
     &__label {
       flex-grow: 0 !important;
       text-transform: capitalize;
-      color: $grey-200;
+      color: $grey-190;
       font-size: 15px;
       font-weight: 600;
       
@@ -90,7 +90,7 @@
         abbr {
           padding: 4px 0;
           font-size: 12px;
-          color: $grey-170;
+          color: $grey-160;
           text-decoration: none;
           text-transform: uppercase;
         }
@@ -106,7 +106,7 @@
 
       &__day--neighboringMonth {
         abbr {
-          color: $grey-160;
+          color: $grey-150;
         }
       }
 

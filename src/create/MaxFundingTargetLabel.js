@@ -5,7 +5,7 @@ import info from "../images/svg/info.svg";
 export const MaxFundingTargetLabel = ({ text }) => {
   return (
     <div className="f-basis-50">
-      <div className="pl-25 grey-190">
+      <div className="pl-25 grey-160">
         <div className="d-flex align-center mb-8">
           <div className="ft-weight-600">{"Max funding target"}</div>
           <div

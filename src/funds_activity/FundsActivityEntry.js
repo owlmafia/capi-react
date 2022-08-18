@@ -20,7 +20,7 @@ const desktopEntryView = (entry) => {
         <div className="d-flex align-center">
           <div className="desc black">{entry.address}</div>
           <div className="ellipse"></div>
-          <div className="grey-220 ft-size-14">
+          <div className="grey-190 ft-size-14">
             {fundsActivityEntryLabel(entry)}
           </div>
         </div>

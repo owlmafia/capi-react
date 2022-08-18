@@ -7,7 +7,7 @@
     margin-bottom: 40px;
 
     .link_button {
-        color: $grey-160;
+        color: $grey-150;
         text-decoration: none;
         padding: 0 0 10px 0;
         cursor: pointer;
@@ -40,7 +40,7 @@
 
 #dao_description {
     width: 80%;
-    color: $grey-170;
+    color: $grey-160;
     margin-bottom: 60px;
     line-height: 25.6px;
 }
@@ -123,7 +123,7 @@
     }
 
     .info {
-        color: $grey-170;
+        color: $grey-160;
         font-weight: bold;
         font-size: 24px;
         margin-bottom: 40px;
@@ -131,7 +131,7 @@
 
     .dao-title {
         font-size: 24px;
-        color: $grey-160;
+        color: $grey-150;
         font-weight: bold;
         margin-bottom: 40px;
     }
@@ -152,7 +152,7 @@
 
     input:disabled {
         background: $white;
-        color: $grey-200;
+        color: $grey-190;
     }
 
     img {
@@ -174,11 +174,11 @@
     align-items: center;
 
     .button__follow {
-        border: 1px solid $blue-40;
+        border: 1px solid $blue-20;
 
         &:hover {
             transition: 0.3s;
-            background-color: $blue-40;
+            background-color: $blue-20;
         }
 
         &:hover img {

@@ -67,7 +67,7 @@ const myAddressView = (deps, daoId) => {
                   }
                   target="_blank"
                   rel="noreferrer"
-                  className="grey-220"
+                  className="grey-190"
                 >
                   {deps.myAddressDisplay}
                 </a>

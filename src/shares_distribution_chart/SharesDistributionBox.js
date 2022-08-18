@@ -167,7 +167,7 @@ export const SharesDistributionBox = ({ deps }) => {
                 <div className="d-flex align-center justify-between-tablet w-100 gap-10">
                   <div className="desc">{deps.notOwnedShares}</div>
                   <div className="circle"></div>
-                  <div className="grey-220">{"Available for sale"}</div>
+                  <div className="grey-190">{"Available for sale"}</div>
                 </div>
               </div>
               <div className="d-none d-tablet-block">{holdersListItems()}</div>

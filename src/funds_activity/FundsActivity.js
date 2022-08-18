@@ -56,7 +56,7 @@ const NoActivityView = ({ daoId }) => {
     <div className="d-flex w-100 justify-center">
       <div className="no-activity">
         <div className="title mb-6">{"No activity yet"}</div>
-        <div className="ft-weight-600 grey-220">
+        <div className="ft-weight-600 grey-190">
           {"Let's make some investments!"}
         </div>
         <Link className="text-center w-100" to={"/" + daoId}>

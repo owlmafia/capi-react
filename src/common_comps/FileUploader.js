@@ -20,13 +20,11 @@ export const FileUploader = ({ setBytes }) => {
 
   return (
     <form
-      className={
-        isDragActive ? "upload-form-file-highlighted" : "upload-form-file"
-      }
+      className={`upload-form-image ${isDragActive ? 'highlighted' : ''}`}
       onSubmit={handleSubmit}
     >
-      <div {...getRootProps({ className: "upload-container" })}>
-        <div className="grey-220">Upload your business prospectus</div>
+      <div {...getRootProps({ className: "upload-container prospectus" })}>
+        <div className="grey-190">Upload your business prospectus</div>
         <div>{filename}</div>
         <InfoView
           info={
@@ -44,7 +42,7 @@ export const FileUploader = ({ setBytes }) => {
             accept="image/*"
           />
         </div>
-        <div className="grey-220">or Drag and drop here</div>
+        <div className="grey-190">or Drag and drop here</div>
       </div>
     </form>
   );

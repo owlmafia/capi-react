@@ -104,7 +104,6 @@
 .h-64px {
   height: 64px;
 }
-
 .opacity-0 {
   opacity: 0;
 }
@@ -129,16 +128,16 @@
   font-weight: 700;
 }
 
-.grey-180 {
+.grey-150 {
+  color: $grey-150;
+}
+
+.grey-160 {
   color: $grey-160;
 }
 
 .grey-190 {
-  color: $grey-170;
-}
-
-.grey-220 {
-  color: $grey-200;
+  color: $grey-190;
 }
 
 .black {

@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Gilroy";
-    color: $grey-200;
+    color: $grey-190;
 }
 
 a {
@@ -55,7 +55,7 @@ p {
 }
 
 .box-container {
-    background-color: $blue-20;
+    background-color: $blue-10;
     border-radius: $global-border-radius-m;
     padding: 40px;
 
@@ -94,7 +94,7 @@ p {
         height: 360px;
         margin-bottom: 40px;
         position: relative;
-        border-radius: 12px;
+        border-radius: $global-border-radius;
         overflow: hidden;
 
         .content-img {
@@ -116,7 +116,7 @@ p {
         a {
             font-weight: 700;
             font-size: 2rem;
-            color: $grey-200;
+            color: $grey-190;
         }
     }
 }
@@ -124,7 +124,7 @@ p {
 select {
     outline: none;
     height: 35px;
-    border-radius: 20px;
+    border-radius: $global-border-radius-m;
     border: 1px solid $grey-130;
     padding: 0px 15px;
     font-size: 16px;
@@ -145,7 +145,7 @@ select {
     font-weight: 700;
     font-size: $global-title;
     margin-bottom: 40px;
-    color: $grey-200;
+    color: $grey-190;
 }
 
 .labeled_box_children {
@@ -181,7 +181,7 @@ select {
 .first_dao_widget {
     margin-top: 40px;
     border: 1px solid $grey-120;
-    border-radius: 20px;
+    border-radius: $global-border-radius-m;
     padding: 40px;
 
     .project-wallet {
@@ -227,7 +227,7 @@ select {
         }
 
         &__date {
-            color: $grey-160;
+            color: $grey-150;
             font-size: 13px;
             line-height: 25.6px;
         }
@@ -252,7 +252,7 @@ select {
 }
 
 .section_large_bottom {
-    color: $grey-170;
+    color: $grey-160;
     font-weight: 600;
     font-size: 18px;
     margin: 24px 0 40px 0;
@@ -465,7 +465,7 @@ select {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        color: $grey-170;
+        color: $grey-160;
 
         .flex-block {
             .fund-asset {
@@ -550,7 +550,7 @@ select {
 .http-error-descr {
     font-size: 16;
     margin-bottom: 5px;
-    color: $grey-170;
+    color: $grey-160;
 }
 
 .http-submit-button {

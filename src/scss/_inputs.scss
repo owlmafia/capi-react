@@ -14,7 +14,7 @@ textarea {
     &:active,
     &:focus {
         transition: 0.3s;
-        border: 1px solid $grey-170;
+        border: 1px solid $grey-160;
     }
 
     &:disabled {
@@ -23,7 +23,7 @@ textarea {
     }
 
     &::placeholder {
-        color: $grey-200;
+        color: $grey-190;
         font-family: "Gilroy";
     }
 }
@@ -39,7 +39,7 @@ textarea {
     margin-bottom: 30px;
 
     &__label {
-        color: $grey-200;
+        color: $grey-190;
         margin-bottom: 8px;
         font-size: 16px;
         font-weight: 600;

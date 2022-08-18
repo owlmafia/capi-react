@@ -60,7 +60,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {dao && (
           <div className="project-wallet">
-            <div className="grey-220">{"Project wallet address:"}</div>
+            <div className="grey-190">{"Project wallet address:"}</div>
             <CopyPasteText
               text={shortedAddress(dao.app_address)}
               copyText={dao.app_address}

@@ -82,11 +82,11 @@
         .description {
             font-size: 14px;
             line-height: 25.6px;
-            color: $grey-200;
+            color: $grey-190;
         }
 
         .status {
-            color: $grey-160;
+            color: $grey-150;
             font-size: 14px;
         }
     }
@@ -101,7 +101,7 @@
         .funds_act_entry__date {
             white-space: nowrap;
             font-size: 16px;
-            color: $grey-160;
+            color: $grey-150;
         }
 
         a {
@@ -149,7 +149,7 @@
             .wallet {
                 font-size: 18px;
                 font-weight: 500;
-                color: $grey-170;
+                color: $grey-160;
             }
 
             .funds_act_entry__amount__number {
@@ -218,7 +218,7 @@
                 position: absolute;
                 top: 71px;
                 left: 137px;
-                color: $grey-200;
+                color: $grey-190;
             }
 
             .wallet {

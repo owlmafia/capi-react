@@ -44,16 +44,14 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
 
   return (
     <form
-      className={
-        isDragActive ? "upload-form-image-highlighted" : "upload-form-image"
-      }
+      className={`upload-form-image ${isDragActive ? "highlighted" : ""}`}
       onSubmit={handleSubmitImage}
     >
       {/* <div className="upload-container"> */}
 
       {/* upload image: set in inputImg via onDrop */}
       <div {...getRootProps({ className: "upload-container" })}>
-        <div className="grey-220">Upload a cover image</div>
+        <div className="grey-190">Upload a cover image</div>
         <div className="upload-custom">
           <button className="file-custom secondary-button">Upload Image</button>
           <input
@@ -63,7 +61,7 @@ export const ImageUpload = ({ initImageBytes, setImageBytes }) => {
             accept="image/*"
           />
         </div>
-        <div className="grey-220">or Drag and drop here</div>
+        <div className="grey-190">or Drag and drop here</div>
       </div>
 
       {/* crop image: gets image from inputImg hook, updates it via updateCrop */}
