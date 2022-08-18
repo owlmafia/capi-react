@@ -44,8 +44,8 @@ export const LabeledInput = ({
   };
 
   const counterClass = () => {
-    if (stateForRemainingChars === "over") {
-      return "chars-counter-error";
+    if (stateForRemainingChars == "over") {
+      return "red-20";
     } else {
       return null;
     }
@@ -244,8 +244,8 @@ export const LabeledTextArea = ({
   };
 
   const counterClass = () => {
-    if (stateForRemainingChars === "over") {
-      return "chars-counter-error";
+    if (stateForRemainingChars == "over") {
+      return "red-20";
     } else {
       return null;
     }

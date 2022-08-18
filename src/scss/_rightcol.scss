@@ -7,21 +7,16 @@
     flex-shrink: 0;
 
     .my-account-container {
-        border: 1px solid rgb(237, 231, 231);
+        border: 1px solid $grey-100;
         padding: 40px;
-        border-radius: $global-border-radius;
+        border-radius: $global-border-radius-m;
         height: auto;
-        box-sizing: border-box;
         display: flex;
         flex-direction: column;
         gap: 24px;
 
-        .close-icon {
-            display: none;
-        }
-
         .text {
-            color: $black;
+            color: $grey-190;
             font-weight: 700;
             font-size: 24px;
         }
@@ -33,13 +28,6 @@
     display: flex;
     justify-content: space-between;
 
-    .myalgo {
-        width: 19px;
-        height: 22px;
-        margin-bottom: -4px;
-        margin-left: 14px;
-    }
-
     .arrow {
         width: 20px;
         height: 18px;
@@ -49,7 +37,7 @@
 }
 
 .my_address > a {
-    color: black;
+    color: $black;
     font-size: 18px;
 }
 
@@ -61,16 +49,9 @@
 }
 
 #my_account_my_balance {
-    &__shares {
-        font-size: 1rem;
-        color: $black;
-        font-weight: 600;
-        margin-bottom: 32px;
-    }
-
     &__balance {
         font-size: 1rem;
-        color: $black;
+        color: $grey-190;
         display: flex;
         align-items: center;
         font-weight: 600;
@@ -78,18 +59,7 @@
     }
 }
 
-.social_media {
-    &__container {
-        padding: 20px 20px 20px 40px;
-    }
-
-    &__link {
-        color: #adadad;
-        font-weight: 300;
-    }
-}
-
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: $desktop-max-width) {
     .first_dao_widget {
         padding: 24px;
         margin-top: 24px;
@@ -104,7 +74,7 @@
     }
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
     #rightcol,
     #rightcol-closing {
         width: 100%;
@@ -112,9 +82,9 @@
         position: fixed;
         bottom: 0px;
         z-index: 10000;
-        background-color: white;
+        background-color: $white;
         border-radius: 32px 32px 0 0;
-        border: 1px solid $global-border;
+        border: 1px solid $grey-120;
         transform: translateY(100%);
         animation-name: wallet;
         animation-duration: 0.3s;
@@ -123,17 +93,11 @@
         .my-account-container {
             border: none;
             height: 350px;
-            box-sizing: border-box;
-
-            .close-icon {
-                display: block;
-            }
 
             .my-address {
                 width: 50%;
 
-                .button-primary,
-                .full-width-btn {
+                .button-primary {
                     width: 295px;
                 }
             }
@@ -160,7 +124,7 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     #rightcol,
     #rightcol-closing {
         bottom: auto;
@@ -184,12 +148,6 @@
                 .button-primary {
                     width: 100%;
                 }
-            }
-
-            .btn-block {
-                width: 100%;
-                display: flex;
-                justify-content: center;
             }
         }
     }

@@ -50,7 +50,7 @@ export const IncomeVsSpendingBox = ({ statusMsg, daoId }) => {
     if (chartData) {
       return (
         <LabeledBox label={"Income and spending"}>
-          <div className="chart_with_legends_container">
+          <div className="d-flex flex-column gap-24">
             <div className="select-legend-container">
               <div className="spacer"></div>
               <ChartLegends

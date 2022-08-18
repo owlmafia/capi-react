@@ -1,9 +1,5 @@
 @import "global_vars";
 
-#invest_em_share_count_input {
-    width: 100px;
-}
-
 #shares_const_container,
 #retrieved-profits {
     display: flex;
@@ -50,7 +46,7 @@
         width: 236px;
     }
 
-    @media only screen and (max-width: 650px) {
+    @media only screen and (max-width: $mobile-max-width) {
     
         .button-primary {
             width: 100%;

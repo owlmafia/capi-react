@@ -60,7 +60,7 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {dao && (
           <div className="project-wallet">
-            <div className="ft-color-black">{"Project wallet address:"}</div>
+            <div className="grey-190">{"Project wallet address:"}</div>
             <CopyPasteText
               text={shortedAddress(dao.app_address)}
               copyText={dao.app_address}
@@ -71,11 +71,14 @@ export const FundsActivityEmbedded = ({ deps, daoId }) => {
         )}
         {hasEntries() && (
           <div>
-            <div className="mt-6 ft-weight-600 mb-32 ft-size-18">
+            <div className="mt-32 ft-weight-600 mb-32 ft-size-18">
               {"Recent funds activity"}
             </div>
             {fundsActivity()}
-            <Link className="see-all d-flex justify-center" to="funds_activity">
+            <Link
+              className="text-center d-flex justify-center"
+              to="funds_activity"
+            >
               <button className="link_button">{"See all"}</button>
             </Link>
           </div>

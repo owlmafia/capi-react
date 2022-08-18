@@ -204,8 +204,8 @@ const TopBlock = ({ deps }) => {
 
 const TopBlockItem = ({ label, value }) => {
   return (
-    <div className="shares-item">
-      <div className="shares-item-right">{label}</div>
+    <div className="d-flex align-center">
+      <div className="mr-3">{label}</div>
       <div className="ft-weight-700">{value}</div>
     </div>
   );
@@ -218,7 +218,7 @@ const RightView = ({ funds, totalCost, totalPercentage }) => {
         <div className="desc">{"Total price"}</div>
         <div className="d-flex gap-10">
           <img src={funds} alt="funds" />
-          <div className="subtitle ft-color-black-000">{totalCost}</div>
+          <div className="subtitle black">{totalCost}</div>
         </div>
       </div>
       <div className="d-flex mobile-input-block">
@@ -234,7 +234,7 @@ const RightView = ({ funds, totalCost, totalPercentage }) => {
             }
           </div>
           <div className="d-flex gap-10">
-            <div className="subtitle ft-color-black-000">{totalPercentage}</div>
+            <div className="subtitle black">{totalPercentage}</div>
           </div>
         </div>
       </div>

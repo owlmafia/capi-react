@@ -14,7 +14,7 @@ export const Settings = ({ deps }) => {
     return (
       deps.daoVersion && (
         <div className="section_large_bottom">
-          <div className="mt-24">
+          <div>
             {"Current version: " +
               appVersionStr(
                 deps.daoVersion.current_approval_version,
@@ -41,7 +41,7 @@ export const Settings = ({ deps }) => {
 
             <SubmitButton
               label={"Update"}
-              className="button-primary"
+              className="button-primary ml-30"
               isLoading={submitting}
               onClick={async () => {
                 await updateApp(

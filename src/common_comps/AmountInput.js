@@ -4,7 +4,7 @@ export const AmountInput = ({ value, onChange }) => {
       placeholder=""
       type="text"
       size="30"
-      id="invest_em_share_count_input"
+      id="w-100px"
       value={value}
       onChange={(event) => onChange(event.target.value)}
     />

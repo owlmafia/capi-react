@@ -1,11 +1,11 @@
 @import "global_vars";
 
 :root {
-  --toastify-color-error: #E84F5F;
-  --toastify-color-success: #6BBE8C;
+  --toastify-color-error: #{$red-20};
+  --toastify-color-success: #{$green-20};
   --toastify-font-family: "Gilroy", sans-serif;
-  --toastify-text-color-light: #000;
-  --toastify-color-light: #EEFDF6;
+  --toastify-text-color-light: #{$black};
+  --toastify-color-light: #{$green-10};
   --toastify-toast-width: 100%;
   --toastify-toast-min-height: 120px;
 }
@@ -29,12 +29,12 @@
       }
 
       .Toastify__close-button--light {
-          color: $black;
+          color: #{$grey-190};
           opacity: 1;
       }
   }
 
   .Toastify__toast--error.Toastify__toast-theme--light {
-      --toastify-color-light: #FFF2F2;
+      --toastify-color-light: #{$pink-10};
   }
 }

@@ -1,10 +1,6 @@
-$pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
+@import "global_vars";
 
-.chart {
-    &__title {
-        margin-bottom: 10px;
-    }
-}
+$pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
 .pie_chart {
     &__container {
@@ -14,46 +10,17 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     &__svg {
         width: $pie_chart_diameter;
         height: $pie_chart_diameter;
-
-        .clickable_pie_segment {
-            cursor: pointer;
-        }
     }
-
-    &__centered_text {
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        position: absolute;
-    }
-
-    &__perc_symbol {
-        position: absolute;
-        margin: 0;
-        top: 50%;
-        transform: translate(12%, -50%);
-        color: white;
-    }
-}
-
-.holder_list_container .sub-title {
-    box-sizing: border-box;
-    padding-left: 12px;
 }
 
 .holder_item {
     &__container {
         display: flex;
         gap: 16px;
-        box-sizing: border-box;
         align-items: center;
         margin: 0 0 8px -16px;
         padding: 8px 16px;
         max-width: fit-content;
-
-        .percentage-text {
-            width: 55px;
-        }
     }
 }
 
@@ -76,14 +43,8 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
     &__text {
         font-weight: 400;
-        color: #000;
+        color: $black;
     }
-}
-
-.chart_with_legends_container {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
 }
 
 .select-legend-container {
@@ -105,12 +66,11 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
         }
 
         .charts-select.css-b62m3t-container {
-
             .css-1s2u09g-control,
             .css-1pahdxg-control,
             .css-1f43avz-a11yText-A11yText {
                 cursor: pointer;
-                background-color: #eaecf1;
+                background-color: $grey-110;
                 border-radius: 24px;
                 border: none;
                 box-shadow: none;
@@ -120,7 +80,7 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
                     .css-qc6sy-singleValue {
                         padding: 2px 16px;
-                        color: #686777;
+                        color: $grey-160;
                         font-size: 14px;
                     }
 
@@ -139,7 +99,7 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
 
                     .css-tlfecz-indicatorContainer {
                         svg {
-                            fill: #686777;
+                            fill: $grey-160;
                         }
                     }
                 }
@@ -152,7 +112,7 @@ $pie_chart_diameter: 100%; // NOTE: has to be equal to value in js passed to d3
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .chart_legends_container {
         padding-left: 0;
         flex-direction: column;

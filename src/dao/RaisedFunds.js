@@ -48,7 +48,7 @@ export const RaisedFunds = ({ deps, dao }) => {
             {deps.raiseState && (
               <div
                 className={`text-center subtitle mb-12 ${
-                  deps.raiseState.success ? "ft-color-cyan" : "ft-color-red"
+                  deps.raiseState.success ? "cyan-20" : "red-10"
                 }`}
               >
                 {deps.raiseState.text}

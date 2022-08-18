@@ -7,7 +7,7 @@ export const SelectWallet = ({ deps, closeModal }) => {
     <div className="d-flex flex-column align-center">
       <SubmitButton
         label={"Wallet Connect"}
-        className="button-primary w-300px mb-4"
+        className="button-primary w-300px mb-24"
         onClick={async () =>
           selectWallet(
             deps,

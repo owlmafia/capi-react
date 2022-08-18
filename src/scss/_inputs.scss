@@ -4,27 +4,26 @@ input,
 textarea {
     width: 100%;
     border-radius: 32px;
-    border: 1px solid $global-border;
+    border: 1px solid $grey-120;
     padding: 19px 24px;
     line-height: 24px;
     font-size: 16px;
-    box-sizing: border-box;
     outline: none;
 
     &:hover,
     &:active,
     &:focus {
         transition: 0.3s;
-        border: 1px solid #686777;
+        border: 1px solid $grey-160;
     }
 
     &:disabled {
-        color: #dee2e2;
+        color: $grey-120;
         pointer-events: none;
     }
 
     &::placeholder {
-        color: $black;
+        color: $grey-190;
         font-family: "Gilroy";
     }
 }
@@ -40,7 +39,7 @@ textarea {
     margin-bottom: 30px;
 
     &__label {
-        color: $black;
+        color: $grey-190;
         margin-bottom: 8px;
         font-size: 16px;
         font-weight: 600;
@@ -51,7 +50,7 @@ textarea {
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #e84f5f;
+        color: $red-20;
         margin-top: 8px;
         margin-left: 20px;
     }
@@ -62,42 +61,10 @@ textarea {
 }
 
 .input-length-error {
-    border-color: #e84f5f;
+    border-color: $red-20;
     &:hover,
     &:active,
     &:focus {
-        border: 1px solid #e84f5f;
-    }
-}
-
-.chars-counter-error {
-    color: #e84f5f;
-}
-
-.msg_error {
-    border: 1px solid #e84f5f;
-}
-
-.last_input {
-    margin-bottom: 30px;
-}
-
-.full_width_input {
-    width: 100%;
-}
-
-// for things that are not inputs but appear in forms and need the same bottom spacing
-.input_spacing {
-    margin-bottom: 20px;
-}
-
-.input_with_currency {
-    &__container {
-        display: flex;
-        gap: 10px;
-
-        > svg {
-            height: 40px;
-        }
+        border: 1px solid $red-20;
     }
 }

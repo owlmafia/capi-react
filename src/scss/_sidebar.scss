@@ -2,12 +2,11 @@
 
 .sidebar-container {
     width: 200px;
-    color: $black;
+    color: $grey-190;
     display: flex;
     flex-direction: column;
     gap: 34px;
     flex-shrink: 0;
-    box-sizing: border-box;
 
     .logo-container {
         display: flex;
@@ -24,7 +23,7 @@
     .dividing-line {
         width: 80%;
         height: 1px;
-        background-color: #dee2e2;
+        background-color: $grey-120;
     }
 
     .sidebar-item {
@@ -36,9 +35,9 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background-color: $global-red-button;
+            background-color: $red-10;
             font-size: 8px;
-            color: white;
+            color: $white;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -54,12 +53,12 @@
             display: flex;
             gap: 12px;
             align-items: center;
-            color: $black;
+            color: $grey-190;
         }
 
         &:hover a,
         a.menu_active {
-            color: $blue-primary;
+            color: $cyan-20;
             font-weight: 700;
             transition: 0.2s;
         }
@@ -72,19 +71,8 @@
     }
 }
 
-.social_media {
-    &__container {
-        padding: 20px 20px 20px 40px;
-    }
-
-    &__link {
-        color: #adadad;
-        font-weight: 300;
-    }
-}
-
 .mob_nav_bar {
-    background-color: white;
+    background-color: $white;
     width: 100%;
     display: flex;
     align-items: center;
@@ -92,7 +80,6 @@
     top: 0;
     height: 60px;
     padding: 0 42px;
-    box-sizing: border-box;
     z-index: 2000;
     justify-content: space-between;
 
@@ -119,7 +106,7 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1330px) {
+@media only screen and (max-width: $tablet-max-width) {
 
     .sidebar-container {
         width: 250px;
@@ -128,7 +115,7 @@
         top: 0;
         left: 0;
         z-index: 10000;
-        background-color: white;
+        background-color: $white;
         padding: 16px 40px;
         backdrop-filter: brightness(60%);
 
@@ -137,7 +124,7 @@
         }
 
         .settings {
-            border-top: 1px solid $global-border;
+            border-top: 1px solid $grey-120;
             padding-top: 32px;
             margin-top: 0;
         }
@@ -172,7 +159,7 @@
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: $mobile-max-width) {
     .mob_nav_bar {
         height: 68px;
     }
@@ -182,7 +169,6 @@
         top: 68px;
         padding: 20px;
         z-index: 1900;
-        box-sizing: border-box;
 
         .logo-container {
             display: none;

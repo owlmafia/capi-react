@@ -67,7 +67,7 @@ const myAddressView = (deps, daoId) => {
                   }
                   target="_blank"
                   rel="noreferrer"
-                  className="ft-color-black"
+                  className="grey-190"
                 >
                   {deps.myAddressDisplay}
                 </a>
@@ -78,7 +78,7 @@ const myAddressView = (deps, daoId) => {
             />
           </div>
           <div id="my_account_my_balance__balance">
-            <img className="mr-2 s-16" src={funds} alt="funds" />
+            <img className="mr-10 s-16" src={funds} alt="funds" />
             <div>{deps.myBalance.balance_funds_asset}</div>
             <img
               className="arrow"
@@ -109,10 +109,10 @@ const DividendSection = ({ deps, daoId }) => {
             {deps.myDividend}
           </div>
         </div>
-        <div className="btn-block w-100">
+        <div className="d-flex justify-center w-100">
           <SubmitButton
             label={"Claim"}
-            className="button-primary full-width-btn"
+            className="button-primary w-100"
             isLoading={submitting}
             disabled={deps.investmentData?.investor_claimable_dividend === "0"}
             onClick={async () => {
@@ -148,7 +148,7 @@ const connectButton = (
   if (deps.myAddress === "") {
     return (
       <button
-        className="button-primary full-width-btn"
+        className="button-primary w-100"
         onClick={async (event) => {
           if (await needsToAcceptDisclaimer()) {
             setShowDisclaimerModal(true);

@@ -167,7 +167,7 @@ export const UpdateDaoData = ({ deps }) => {
             );
           }}
         />
-        <div className="info settings-space">{"Ownership"}</div>
+        <div className="info mt-60">{"Ownership"}</div>
         <LabeledInput
           label={"Rekey owner to:"}
           inputValue={rekeyAuthAddress}
@@ -176,7 +176,7 @@ export const UpdateDaoData = ({ deps }) => {
         />
         <SubmitButton
           label={"Rekey owner"}
-          className="button-primary mb-7"
+          className="button-primary mb-80"
           isLoading={submitting}
           disabled={!rekeyAuthAddress}
           onClick={async () => {
