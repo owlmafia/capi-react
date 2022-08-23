@@ -154,6 +154,7 @@ export const UpdateDaoData = ({ deps }) => {
               imageBytes,
               socialMediaUrl,
               prospectusBytes,
+              prefillProspectus,
               minInvestShares,
               maxInvestShares,
 

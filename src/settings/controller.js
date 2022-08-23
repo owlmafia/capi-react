@@ -1,5 +1,5 @@
 import { toBytes, toBytesForRust } from "../common_functions/common";
-import { toMaybeIpfsUrl } from "../ipfs/store";
+import { storeIpfs, toMaybeIpfsUrl } from "../ipfs/store";
 import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
@@ -89,7 +89,11 @@ export const updateDaoData = async (
   sharePrice,
   imageBytes,
   socialMediaUrl,
+
+  // OR: either bytes (new prospectus) or prospectus (existing prospectus) is set
   prospectusBytes,
+  existingProspectus,
+
   minInvestShares,
   maxInvestShares,
 
@@ -110,9 +114,10 @@ export const updateDaoData = async (
     const imageUrl = await toMaybeIpfsUrl(await imageBytes);
     const descrUrl = await toMaybeIpfsUrl(toBytes(await daoDescr));
 
-    const prospectusBytesResolved = await prospectusBytes;
-    const prospectusUrl = await toMaybeIpfsUrl(prospectusBytesResolved);
-    const prospectusBytesForRust = toBytesForRust(prospectusBytesResolved);
+    const prospectusInputs = await toProspectusInputs(
+      existingProspectus,
+      prospectusBytes
+    );
 
     let updateDataRes = await bridge_update_data({
       dao_id: daoId,
@@ -126,8 +131,10 @@ export const updateDaoData = async (
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
 
-      prospectus_url: prospectusUrl,
-      prospectus_bytes: prospectusBytesForRust,
+      prospectus_url: prospectusInputs.url,
+      prospectus_bytes: prospectusInputs.bytes,
+      prospectus_hash: prospectusInputs.hash,
+
       min_invest_amount: minInvestShares,
       max_invest_amount: maxInvestShares,
     });
@@ -175,6 +182,33 @@ export const updateDaoData = async (
       deps.statusMsg.error(e);
     }
     showProgress(false);
+  }
+};
+
+export const toProspectusInputs = async (
+  existingProspectus,
+  newProspectusBytesPromise
+) => {
+  const prospectusBytes = await newProspectusBytesPromise;
+
+  // new prospectus: generate the IPFS url and return corresponding data
+  // note that the bytes are returned too, to generate a hash in rust
+  // the IPFS CID is not easily reproducible, so we manage a separate hash
+  if (prospectusBytes && prospectusBytes.byteLength > 0) {
+    const prospectusUrl = await storeIpfs(prospectusBytes);
+    const prospectusBytesForRust = toBytesForRust(prospectusBytes);
+
+    return { url: prospectusUrl, bytes: prospectusBytesForRust, hash: null };
+    // no new prospectus data: return the existing prospectus
+  } else if (existingProspectus) {
+    return {
+      url: existingProspectus.url,
+      bytes: null,
+      hash: existingProspectus.hash,
+    };
+  } else {
+    // no new or pre-existing prospectus data (the prospectus is optional)
+    return null;
   }
 };
 
