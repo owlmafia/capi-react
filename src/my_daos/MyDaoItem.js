@@ -4,9 +4,13 @@ export const MyDaoItem = ({ dao }) => {
   return (
     // the dao url is unique
     <div key={dao.url_rel} className="my_dao">
-      <div><Link to={dao.url_rel}>{dao.name}</Link></div>
+      <div>
+        <Link to={dao.url_rel}>{dao.name}</Link>
+      </div>
       <div className="img-placeholder">
-        <img src={dao.image_url} alt=""></img>
+        <Link to={dao.url_rel}>
+          <img src={dao.image_url} alt=""></img>
+        </Link>
       </div>
       {/* for now not don't involvement role - there's no design and not sure it's really needed */}
       {/* {involvementIcons(dao)} */}
