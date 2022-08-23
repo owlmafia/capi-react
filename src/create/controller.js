@@ -121,6 +121,7 @@ export const createDao = async (
       setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
       setMinInvestSharesError(toErrorMsg(e.min_invest_shares));
       setMaxInvestSharesError(toErrorMsg(e.max_invest_shares));
+      setSharesForInvestorsError(toErrorMsg(e.shares_for_investors));
 
       // note that here, the later will override the former if both are set
       // this is ok - we don't expect any of these to happen, normally,

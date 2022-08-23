@@ -58,6 +58,8 @@ export const toErrorMsg = (e) => {
         " shares. Currently owned: " +
         e.max_share_buy.currently_owned
       );
+    case "shares_for_investors_greater_than_supply":
+      return "Must be less than or equal to supply";
     case "unexpected":
       return "Unexpected problem: " + e.unexpected;
     default:
