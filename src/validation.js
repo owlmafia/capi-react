@@ -60,6 +60,8 @@ export const toErrorMsg = (e) => {
       );
     case "shares_for_investors_greater_than_supply":
       return "Must be less than or equal to supply";
+    case "mus_be_after_now":
+      return "Date must be in the future";
     case "unexpected":
       return "Unexpected problem: " + e.unexpected;
     default:
