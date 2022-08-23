@@ -50,12 +50,10 @@
 
 #my_account_my_balance {
     &__balance {
-        font-size: 1rem;
         color: $grey-190;
         display: flex;
         align-items: center;
         font-weight: 600;
-        width: 100px;
     }
 }
 

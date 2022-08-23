@@ -96,7 +96,7 @@ export const UpdateDaoData = ({ deps }) => {
 
         {deps.features.prospectus && (
           <React.Fragment>
-            <div className="dao-title mt-60">Prospectus</div>
+            <div className="info">Prospectus</div>
             {prefillProspectus && (
               <div
                 className="clickable"
@@ -111,7 +111,7 @@ export const UpdateDaoData = ({ deps }) => {
           </React.Fragment>
         )}
         {deps.features.minMaxInvestment && (
-          <div className="d-flex gap-32">
+          <div className="d-flex gap-32 mt-40">
             <div className="f-basis-50">
               <LabeledAmountInput
                 label={"Min investment (shares)"}
@@ -167,7 +167,7 @@ export const UpdateDaoData = ({ deps }) => {
             );
           }}
         />
-        <div className="info mt-60">{"Ownership"}</div>
+        <div className="info">{"Ownership"}</div>
         <LabeledInput
           label={"Rekey owner to:"}
           inputValue={rekeyAuthAddress}

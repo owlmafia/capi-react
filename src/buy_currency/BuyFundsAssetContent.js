@@ -1,7 +1,7 @@
 export const BuyFundsAssetContent = () => {
   return (
-    <div>
-      <div>
+    <div className="mb-32 line-height-1">
+      <div className="mb-32">
         {
           "You don't have enough USDC in your wallet to pay for this transaction."
         }
