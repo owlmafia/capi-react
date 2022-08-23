@@ -27,9 +27,9 @@ const ShareView = ({ projectUrl }) => {
         </a>
       </div>
       {/*TODO telegram icon*/}
-      <div className="social-media-share instagram">
+      <div className="social-media-share telegram">
         <a href={telegramLink(projectUrl, shareText)}>
-          <img src={instagram} alt="instagram" />
+          <img src={instagram} alt="telegram" />
           <div className="title">Share with Telegram</div>
         </a>
       </div>
