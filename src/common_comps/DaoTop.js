@@ -20,12 +20,13 @@ export const DaoTop = ({ dao }) => {
               </div>
             </a>
           )}
-          <div className="button-share share-icon">
-            <img
-              src={share}
-              alt="share-icon"
-              onClick={() => setShowShareModal((visible) => !visible)}
-            />
+          <div 
+            className="button-share share-icon"
+            onClick={() => setShowShareModal((visible) => !visible)}>
+              <img
+                src={share}
+                alt="share-icon"
+              />
           </div>
         </div>
       </div>

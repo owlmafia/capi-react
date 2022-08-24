@@ -1,7 +1,7 @@
 import facebook from "../images/svg/facebook.svg";
 import linkedin from "../images/svg/linkedin.svg";
 import twitter from "../images/svg/twitter-white.svg";
-import instagram from "../images/svg/instagram.svg";
+import telegram from "../images/svg/telegram.svg";
 
 const ShareView = ({ projectUrl }) => {
   const shareText = "Invest in my project!";
@@ -29,7 +29,7 @@ const ShareView = ({ projectUrl }) => {
       {/*TODO telegram icon*/}
       <div className="social-media-share telegram">
         <a href={telegramLink(projectUrl, shareText)}>
-          <img src={instagram} alt="telegram" />
+          <img src={telegram} alt="telegram" />
           <div className="title">Share with Telegram</div>
         </a>
       </div>
