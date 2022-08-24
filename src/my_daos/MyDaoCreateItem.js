@@ -10,7 +10,9 @@ export const MyDaoCreateItem = () => {
         </Link>
       </div>
       <div className="my_dao_create_project">
-        <img src={plus} alt="icon" />
+        <Link className="text-center" to={"/"}>
+          <img src={plus} alt="icon" />
+        </Link>
       </div>
     </div>
   );
