@@ -119,7 +119,7 @@ export const updateDaoData = async (
       prospectusBytes
     );
 
-    let updateDataRes = await bridge_update_data({
+    const data = {
       dao_id: daoId,
 
       project_name: projectName,
@@ -131,13 +131,16 @@ export const updateDaoData = async (
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
 
-      prospectus_url: prospectusInputs.url,
-      prospectus_bytes: prospectusInputs.bytes,
-      prospectus_hash: prospectusInputs.hash,
+      prospectus_url: prospectusInputs?.url,
+      prospectus_bytes: prospectusInputs?.bytes,
+      prospectus_hash: prospectusInputs?.hash,
 
       min_invest_amount: minInvestShares,
       max_invest_amount: maxInvestShares,
-    });
+    };
+    // console.log("Will send update data to wasm: %o", data);
+
+    let updateDataRes = await bridge_update_data(data);
     console.log("Update DAO data res: %o", updateDataRes);
     showProgress(false);
 
