@@ -21,6 +21,7 @@ export const ImageCropper = ({ updateBlob, inputImg, clear }) => {
         crop={crop}
         zoom={zoom}
         aspect={ASPECT_RATIO}
+        objectFit="horizontal-cover"
         onCropChange={setCrop}
         onCropComplete={onCropComplete}
         onZoomChange={setZoom}
