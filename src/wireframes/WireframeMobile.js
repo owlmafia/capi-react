@@ -37,7 +37,7 @@ export const WireframeMobile = ({ isGlobal, deps }) => {
   };
 
   const daoTop = () => {
-    return !isGlobal && deps.dao && <DaoTop deps={deps} />;
+    return !isGlobal && deps.dao && <DaoTop dao={deps.dao} />;
   };
 
   const showOverlay = showSidebar || showWallet;
