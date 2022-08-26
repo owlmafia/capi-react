@@ -33,6 +33,7 @@ export const CreateDao = ({ deps }) => {
   const [socialMediaUrl, setSocialMediaUrl] = useState(
     "https://twitter.com/doesnotexist"
   );
+  const [homepageUrl, setHomepageUrl] = useState("https://doesnotexist.com");
 
   const [minRaiseTarget, setMinRaiseTarget] = useState("100");
   const [minRaiseTargetEndDate, setMinRaiseTargetEndDate] = useState(
@@ -49,6 +50,7 @@ export const CreateDao = ({ deps }) => {
   const [minInvestSharesError, setMinInvestSharesError] = useState("");
   const [maxInvestSharesError, setMaxInvestSharesError] = useState("");
   const [socialMediaUrlError, setSocialMediaUrlError] = useState("");
+  const [homepageUrlError, setHomepageUrlError] = useState("");
   const [minRaiseTargetError, setMinRaiseTargetError] = useState("");
 
   const [minRaiseTargetEndDateError, setMinRaiseTargetEndDateError] =
@@ -89,6 +91,7 @@ export const CreateDao = ({ deps }) => {
           sharesForInvestors,
           imageBytes,
           socialMediaUrl,
+          homepageUrl,
           minRaiseTarget,
           minRaiseTargetEndDate,
           prospectusBytes,
@@ -106,6 +109,7 @@ export const CreateDao = ({ deps }) => {
           setImageError,
           setProspectusError,
           setSocialMediaUrlError,
+          setHomepageUrlError,
           setMinRaiseTargetError,
           setMinRaiseTargetEndDateError,
           setMinInvestSharesError,
@@ -138,6 +142,15 @@ export const CreateDao = ({ deps }) => {
           errorMsg={daoDescrError}
           maxLength={2000} // NOTE: has to match WASM
         />
+        {deps.features.homepage_url && (
+          <LabeledInput
+            label={"Homepage (optional)"}
+            inputValue={homepageUrl}
+            img={link}
+            onChange={(input) => setHomepageUrl(input)}
+            errorMsg={homepageUrlError}
+          />
+        )}
         <LabeledInput
           label={"Primary social media (optional)"}
           inputValue={socialMediaUrl}
@@ -148,7 +161,6 @@ export const CreateDao = ({ deps }) => {
         <div className="dao-title mt-60">Project Cover</div>
         <ImageUpload setImageBytes={setImageBytes} />
         <ValidationMsg errorMsg={imageError} />
-
         {deps.features.prospectus && (
           <React.Fragment>
             <div className="dao-title mt-60">Prospectus</div>
@@ -156,7 +168,6 @@ export const CreateDao = ({ deps }) => {
             <ValidationMsg errorMsg={prospectusError} />
           </React.Fragment>
         )}
-
         <div className="dao-title mt-60">Project Funds</div>
         <LabeledAmountInput
           label={"Share supply"}
@@ -166,7 +177,6 @@ export const CreateDao = ({ deps }) => {
           }}
           errorMsg={shareCountError}
         />
-
         <LabeledAmountInput
           label={"Investor's %"}
           info={"Percentage of project income directed to investors."}

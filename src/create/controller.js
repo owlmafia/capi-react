@@ -17,6 +17,7 @@ export const createDao = async (
   sharesForInvestors,
   imageBytes,
   socialMediaUrl,
+  homepageUrl,
   minRaiseTarget,
   minRaiseTargetEndDate,
   prospectusBytes,
@@ -34,6 +35,7 @@ export const createDao = async (
   setImageError,
   setProspectusError,
   setSocialMediaUrlError,
+  setHomepageUrlError,
   setMinRaiseTargetError,
   setMinRaiseTargetEndDateError,
   setMinInvestSharesError,
@@ -69,6 +71,7 @@ export const createDao = async (
         shares_for_investors: sharesForInvestors,
         image_url: imageUrl,
         social_media_url: socialMediaUrl,
+        homepage_url: homepageUrl,
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
         prospectus_url: prospectusUrl,
@@ -117,6 +120,7 @@ export const createDao = async (
       setInvestorsShareError(toErrorMsg(e.investors_share));
       setImageError(toErrorMsg(e.logo_url));
       setSocialMediaUrlError(toErrorMsg(e.social_media_url));
+      setHomepageUrlError(toErrorMsg(e.homepage_url));
       setMinRaiseTargetError(toErrorMsg(e.min_raise_target));
       setMinRaiseTargetEndDateError(toErrorMsg(e.min_raise_target_end_date));
       setMinInvestSharesError(toErrorMsg(e.min_invest_shares));

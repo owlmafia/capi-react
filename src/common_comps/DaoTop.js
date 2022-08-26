@@ -5,7 +5,8 @@ import ShareView from "./ShareView";
 import React, { useState } from "react";
 import Progress from "./Progress";
 
-export const DaoTop = ({ dao }) => {
+export const DaoTop = ({ deps }) => {
+  const dao = deps.dao;
   const [showShareModal, setShowShareModal] = useState(false);
   return (
     <div>
@@ -13,6 +14,13 @@ export const DaoTop = ({ dao }) => {
       <div className="title-container">
         <div className="title">{dao.name}</div>
         <div className="social-media-buttons">
+          {deps.features.homepage_url && dao.homepage_url && (
+            <a href={dao.homepage_url} target="_blank" rel="noreferrer">
+              <div className="button__follow share-icon">
+                <img src={twitter} alt="logo-twitter" />
+              </div>
+            </a>
+          )}
           {dao.social_media_url && (
             <a href={dao.social_media_url} target="_blank" rel="noreferrer">
               <div className="button__follow share-icon">
@@ -20,13 +28,11 @@ export const DaoTop = ({ dao }) => {
               </div>
             </a>
           )}
-          <div 
+          <div
             className="button-share share-icon"
-            onClick={() => setShowShareModal((visible) => !visible)}>
-              <img
-                src={share}
-                alt="share-icon"
-              />
+            onClick={() => setShowShareModal((visible) => !visible)}
+          >
+            <img src={share} alt="share-icon" />
           </div>
         </div>
       </div>

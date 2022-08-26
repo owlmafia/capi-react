@@ -23,7 +23,7 @@ export const Wireframe = ({ isGlobal, deps }) => {
   };
 
   const daoTop = () => {
-    return !isGlobal && deps.dao && <DaoTop dao={deps.dao} />;
+    return !isGlobal && deps.dao && <DaoTop deps={deps} />;
   };
 
   return (
