@@ -51,6 +51,20 @@ export const BuyMoreShares = ({ deps, dao }) => {
     nestedAsync();
   }, [deps.statusMsg, params.id, buySharesCount, deps.availableShares, dao]);
 
+  const onSubmitBuy = async () => {
+    await invest(
+      deps,
+      setSubmitting,
+      params.id,
+      dao,
+      deps.availableSharesNumber,
+      buySharesCount,
+      setBuySharesAmountError,
+      setShowBuyCurrencyInfoModal,
+      totalCostNumber
+    );
+  };
+
   const view = () => {
     return (
       <div className="shares-box box-container">
@@ -132,7 +146,11 @@ export const BuyMoreShares = ({ deps, dao }) => {
               isLoading={submitting}
               disabled={deps.availableShares === "0"}
               onClick={async () => {
-                setShowProspectusModal(true);
+                if (deps.features.prospectus) {
+                  setShowProspectusModal(true);
+                } else {
+                  await onSubmitBuy();
+                }
               }}
             />
           </div>
@@ -170,18 +188,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
             closeModal={() => setShowProspectusModal(false)}
             onAccept={async () => {
               setShowProspectusModal(false);
-
-              await invest(
-                deps,
-                setSubmitting,
-                params.id,
-                dao,
-                deps.availableSharesNumber,
-                buySharesCount,
-                setBuySharesAmountError,
-                setShowBuyCurrencyInfoModal,
-                totalCostNumber
-              );
+              onSubmitBuy();
             }}
           />
         )}
