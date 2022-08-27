@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import arrow from "../images/svg/arrow-right.svg";
 import { retrieveProfits } from "../shared_functions";
 import { CopyPasteHtml } from "./CopyPastText";
@@ -12,6 +12,7 @@ import {
   saveAcceptedDisclaimer,
 } from "../modal/storage";
 import { DisclaimerModal } from "../modal/DisclaimerModal";
+import { useParams } from "react-router-dom";
 
 export const MyAccount = ({ deps, daoId }) => {
   const [showSelectWalletModal, setShowSelectWalletModal] = useState(false);
@@ -97,7 +98,18 @@ const myAddressView = (deps, daoId) => {
 };
 
 const DividendSection = ({ deps, daoId }) => {
+  let params = useParams();
+
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    async function nestedAsync() {
+      if (deps.myAddress) {
+        await deps.updateInvestmentData.call(null, params.id, deps.myAddress);
+      }
+    }
+    nestedAsync();
+  }, [deps.statusMsg, deps.myAddress, params.id, deps.updateInvestmentData]);
 
   if (deps.myDividend) {
     return (

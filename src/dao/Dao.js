@@ -21,15 +21,6 @@ export const Dao = ({ deps }) => {
   }, [params.id, deps.statusMsg, deps.updateDao]);
 
   useEffect(() => {
-    async function nestedAsync() {
-      if (deps.myAddress) {
-        await deps.updateInvestmentData.call(null, params.id, deps.myAddress);
-      }
-    }
-    nestedAsync();
-  }, [deps.statusMsg, deps.myAddress, params.id, deps.updateInvestmentData]);
-
-  useEffect(() => {
     async function fetch() {
       await loadDescription(deps, setDescription);
     }
