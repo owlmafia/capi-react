@@ -9,12 +9,12 @@
     left: 0;
     z-index: 200;
 
-    .container,
     .reactEasyCrop_Container {
         border-radius: 32px;
 
-        .reactEasyCrop_Image {
-            max-height: auto;
+        .reactEasyCrop_CropArea {
+            border: none;
+            box-shadow: none;
         }
     }
 
