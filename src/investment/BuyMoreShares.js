@@ -10,7 +10,7 @@ import {
   invest,
   updateTotalPriceAndPercentage,
 } from "../investEmbedded/controller";
-import { ProspectusModal } from "../prospectus/ProspectusModal";
+import { AckProspectusModal } from "../prospectus/AckProspectusModal";
 
 export const BuyMoreShares = ({ deps, dao }) => {
   let params = useParams();
@@ -164,7 +164,7 @@ export const BuyMoreShares = ({ deps, dao }) => {
           />
         )}
         {showProspectusModal && (
-          <ProspectusModal
+          <AckProspectusModal
             url={deps.dao.prospectus.url}
             prospectusHash={deps.dao.prospectus.hash}
             closeModal={() => setShowProspectusModal(false)}
