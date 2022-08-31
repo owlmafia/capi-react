@@ -6,7 +6,8 @@ export const toFriendlyError = (msg) => {
     tryAssetNotOptedInError(msg) ??
     tryAssetOverspendError(msg) ??
     tealApiConnectionError(msg) ??
-    smartContractLogicError(msg)
+    smartContractLogicError(msg) ??
+    nodeApiConnectionError(msg)
   );
 };
 
@@ -74,6 +75,14 @@ export const txIdNotFoundError = (msg) => {
 export const tealApiConnectionError = (msg) => {
   if (msg.includes("Failed to fetch") && msg.includes("TealApi")) {
     return "Couldn't connect to smart contracts api. Please try again.";
+  } else {
+    return null;
+  }
+};
+
+export const nodeApiConnectionError = (msg) => {
+  if (msg.includes("Failed to fetch") && msg.includes("algonaut_client")) {
+    return "Couldn't connect to Algorand node. Please try again.";
   } else {
     return null;
   }
