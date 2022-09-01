@@ -27,7 +27,10 @@ export const SideBar = ({ deps, containerClass }) => {
       )}
       {deps.features.developer && <AppVersion deps={deps} />}
       {devSettingsModal && (
-        <DevSettingsModal closeModal={() => setDevSettingsModal(false)} />
+        <DevSettingsModal
+          deps={deps}
+          closeModal={() => setDevSettingsModal(false)}
+        />
       )}
     </div>
   );

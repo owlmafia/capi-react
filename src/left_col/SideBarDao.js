@@ -74,7 +74,10 @@ export const SideBarDao = ({ deps, containerClass }) => {
         />
       )}
       {devSettingsModal && (
-        <DevSettingsModal closeModal={() => setDevSettingsModal(false)} />
+        <DevSettingsModal
+          deps={deps}
+          closeModal={() => setDevSettingsModal(false)}
+        />
       )}
     </div>
   );
