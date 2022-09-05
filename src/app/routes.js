@@ -28,7 +28,9 @@ export const routesView = (deps) => {
           element={<WireframeWrapper deps={deps} isGlobal={false} />}
         >
           <Route index element={<Dao deps={deps} />} />
-          <Route exact path="team" element={<Team deps={deps} />} />
+          {deps.features.team && (
+            <Route exact path="team" element={<Team deps={deps} />} />
+          )}
           <Route exact path="investment" element={<Investment deps={deps} />} />
           <Route exact path="withdraw" element={<Withdrawal deps={deps} />} />
           <Route

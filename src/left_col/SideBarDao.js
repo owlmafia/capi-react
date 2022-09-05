@@ -56,7 +56,9 @@ export const SideBarDao = ({ deps, containerClass }) => {
 
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />
-      <SideBarItem imageSrc={project} route="team" label="Team" />
+      {deps.features.team && (
+        <SideBarItem imageSrc={project} route="team" label="Team" />
+      )}
       <SideBarItem imageSrc={stats} route="stats" label="Statistics" />
       {iHaveShares && (
         <SideBarItem
