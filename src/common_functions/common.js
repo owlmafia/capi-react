@@ -45,3 +45,8 @@ export const pieChartColors = () => {
 };
 
 export const PIE_CHART_GRAY = "#EBECF1";
+
+export const logUnexpected = (statusMsg, consoleMsg) => {
+  console.error(consoleMsg);
+  statusMsg.error("Unexpected error. Please contact support.");
+};

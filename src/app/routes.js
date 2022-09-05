@@ -10,6 +10,7 @@ import { NotFound } from "../common_comps/NotFound";
 import { OuterWireframe } from "../wireframes/OuterWireframe.js";
 import { Settings } from "../settings/Settings";
 import { WireframeWrapper } from "../wireframes/WireframeWrapper";
+import { Team } from "../team/Team";
 
 export const routesView = (deps) => {
   return (
@@ -27,6 +28,7 @@ export const routesView = (deps) => {
           element={<WireframeWrapper deps={deps} isGlobal={false} />}
         >
           <Route index element={<Dao deps={deps} />} />
+          <Route exact path="team" element={<Team deps={deps} />} />
           <Route exact path="investment" element={<Investment deps={deps} />} />
           <Route exact path="withdraw" element={<Withdrawal deps={deps} />} />
           <Route

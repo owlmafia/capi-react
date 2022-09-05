@@ -26,6 +26,13 @@ export const SideBarDao = ({ deps, containerClass }) => {
     }
   }, [params.id, deps.myAddress, deps.updateMyShares]);
 
+  useEffect(() => {
+    async function asyncInit() {
+      await deps.updateDao.call(null, params.id);
+    }
+    asyncInit();
+  }, [params.id, deps.statusMsg, deps.updateDao]);
+
   const iHaveShares = deps.myShares && deps.myShares.total > 0;
   const iAmDaoOwner = iAmDaoOwner_(deps.dao, deps.myAddress);
 
@@ -49,6 +56,7 @@ export const SideBarDao = ({ deps, containerClass }) => {
 
       <div className="dividing-line"></div>
       <SideBarItem imageSrc={home} route="" label="Project Home" />
+      <SideBarItem imageSrc={project} route="team" label="Team" />
       <SideBarItem imageSrc={stats} route="stats" label="Statistics" />
       {iHaveShares && (
         <SideBarItem
