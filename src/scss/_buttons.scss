@@ -126,7 +126,7 @@ button {
     }
 
     .upload-container {
-        height: 307px;
+        aspect-ratio: $image-uploader-aspect-ratio;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -136,6 +136,7 @@ button {
 
         &.prospectus {
             height: 200px;
+            width: 100%;
         }
 
         .upload-custom {

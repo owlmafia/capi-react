@@ -3,7 +3,6 @@
 #rightcol,
 #rightcol-closing {
     width: 420px;
-    min-width: 342px;
     flex-shrink: 0;
 
     .my-account-container {
@@ -64,7 +63,7 @@
     }
 
     #rightcol {
-        width: auto;
+        width: 350px;
 
         .my-account-container {
             padding: 24px;
