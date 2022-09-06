@@ -3,7 +3,7 @@
 .crop_container {
     position: absolute;
     width: 100%;
-    height: 300px;
+    aspect-ratio: $image-uploader-aspect-ratio;
     border-radius: 32px;
     top: 0;
     left: 0;
