@@ -59,7 +59,7 @@ const dummyPrefillData = () => {
 const TeamMember = ({ data }) => {
   return (
     <div>
-      <img src={data.picture} alt="Team member picture" />
+      <img src={data.picture} alt="" />
       <div>{data.name}</div>
       <div>{data.role}</div>
       <div>{data.descr}</div>
