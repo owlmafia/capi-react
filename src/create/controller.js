@@ -71,6 +71,8 @@ export const createDao = async (
         social_media_url: socialMediaUrl,
         min_raise_target: minRaiseTarget,
         min_raise_target_end_date: minRaiseTargetEndDate.unix() + "",
+        // min_raise_target_end_date:
+        //   Math.ceil(Date.now() / 1000) + 30 /* seconds */ + "", // end date after short delay - for testing
         prospectus_url: prospectusUrl,
         prospectus_bytes: prospectusBytesForRust,
         min_invest_amount: minInvestShares,
