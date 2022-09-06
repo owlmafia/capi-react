@@ -5,7 +5,8 @@ import { toErrorMsg } from "../validation";
 const wasmPromise = import("wasm");
 
 export const prefillInputs = async (
-  deps,
+  statusMsg,
+
   daoId,
   setDaoName,
   setDaoDescr,
@@ -35,12 +36,15 @@ export const prefillInputs = async (
     setMaxInvestShares(updatableData.max_invest_amount);
     setProspectus(updatableData.prospectus);
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
   }
 };
 
 export const updateApp = async (
-  deps,
+  statusMsg,
+  myAddress,
+  wallet,
+
   showProgress,
   daoId,
   approvalVersion,
@@ -54,14 +58,14 @@ export const updateApp = async (
     showProgress(true);
     let updateAppRes = await bridge_update_app_txs({
       dao_id: daoId,
-      owner: deps.myAddress,
+      owner: myAddress,
       approval_version: approvalVersion,
       clear_version: clearVersion,
     });
     console.log("Update app res: %o", updateAppRes);
     showProgress(false);
 
-    let updateAppResSigned = await deps.wallet.signTxs(updateAppRes.to_sign);
+    let updateAppResSigned = await wallet.signTxs(updateAppRes.to_sign);
     console.log("updateAppResSigned: " + JSON.stringify(updateAppResSigned));
 
     showProgress(true);
@@ -74,14 +78,18 @@ export const updateApp = async (
     updateVersion(daoId);
 
     showProgress(false);
-    deps.statusMsg.success("App updated!");
+    statusMsg.success("App updated!");
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
   }
 };
 
 export const updateDaoData = async (
-  deps,
+  statusMsg,
+  myAddress,
+  wallet,
+  updateDao,
+
   showProgress,
   daoId,
   projectName,
@@ -126,7 +134,7 @@ export const updateDaoData = async (
       project_desc_url: descrUrl,
       share_price: sharePrice,
 
-      owner: deps.myAddress,
+      owner: myAddress,
 
       image_url: imageUrl,
       social_media_url: socialMediaUrl,
@@ -144,7 +152,7 @@ export const updateDaoData = async (
     console.log("Update DAO data res: %o", updateDataRes);
     showProgress(false);
 
-    let updateDataResSigned = await deps.wallet.signTxs(updateDataRes.to_sign);
+    let updateDataResSigned = await wallet.signTxs(updateDataRes.to_sign);
     console.log("updateDataResSigned: " + JSON.stringify(updateDataResSigned));
 
     showProgress(true);
@@ -156,9 +164,9 @@ export const updateDaoData = async (
       "submitUpdateDaoDataRes: " + JSON.stringify(submitUpdateDaoDataRes)
     );
 
-    await deps.updateDao(daoId);
+    await updateDao(daoId);
 
-    deps.statusMsg.success("Dao data updated!");
+    statusMsg.success("Dao data updated!");
 
     showProgress(false);
   } catch (e) {
@@ -180,9 +188,9 @@ export const updateDaoData = async (
       setMinInvestSharesError(toErrorMsg(details.min_invest_shares));
       setMaxInvestSharesError(toErrorMsg(details.max_invest_shares));
 
-      deps.statusMsg.error("Please fix the errors");
+      statusMsg.error("Please fix the errors");
     } else {
-      deps.statusMsg.error(e);
+      statusMsg.error(e);
     }
     showProgress(false);
   }
@@ -216,7 +224,9 @@ export const toProspectusInputs = async (
 };
 
 export const rekeyOwner = async (
-  deps,
+  statusMsg,
+  wallet,
+
   showProgress,
   daoId,
   authAddress,
@@ -233,7 +243,7 @@ export const rekeyOwner = async (
     console.log("rekeyRes: %o", rekeyRes);
     showProgress(false);
 
-    let rekeySigned = await deps.wallet.signTxs(rekeyRes.to_sign);
+    let rekeySigned = await wallet.signTxs(rekeyRes.to_sign);
     console.log("rekeySigned: " + JSON.stringify(rekeySigned));
 
     showProgress(true);
@@ -242,7 +252,7 @@ export const rekeyOwner = async (
     });
     console.log("submitRekeyRes: " + JSON.stringify(submitRekeyRes));
 
-    deps.statusMsg.success(
+    statusMsg.success(
       "Owner rekeyed to: " +
         authAddress +
         ". Please login with this account to be able to sign transactions."
@@ -253,7 +263,7 @@ export const rekeyOwner = async (
       console.error("%o", e);
       setInputError(toErrorMsg(e.details));
     } else {
-      deps.statusMsg.error(e);
+      statusMsg.error(e);
     }
     showProgress(false);
   }

@@ -50,7 +50,8 @@ export const UpdateDaoData = ({ deps }) => {
     async function prefill() {
       if (params.id) {
         await prefillInputs(
-          deps,
+          deps.statusMsg,
+
           params.id,
           setDaoName,
           setDaoDescr,
@@ -144,7 +145,11 @@ export const UpdateDaoData = ({ deps }) => {
           isLoading={submitting}
           onClick={async () => {
             updateDaoData(
-              deps,
+              deps.statusMsg,
+              deps.myAddress,
+              deps.wallet,
+              deps.updateDao,
+
               setSubmitting,
 
               params.id,
@@ -200,6 +205,8 @@ export const UpdateDaoData = ({ deps }) => {
           onSubmit={() => {
             rekeyOwner(
               deps.statusMsg,
+              deps.wallet,
+
               setSubmitting,
               params.id,
               rekeyAuthAddress,

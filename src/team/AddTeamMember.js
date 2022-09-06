@@ -72,7 +72,9 @@ export const AddTeamMember = ({
           className="button-primary w-100"
           onClick={async () => {
             await addTeamMember(
-              deps,
+              deps.statusMsg,
+              deps.wallet,
+
               setSubmitting,
 
               params.id,

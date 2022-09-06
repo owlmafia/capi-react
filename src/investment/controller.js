@@ -1,6 +1,14 @@
 const wasmPromise = import("wasm");
 
-export const init = async (deps, daoId, setDao) => {
+export const init = async (
+  statusMsg,
+  myAddress,
+  updateInvestmentData,
+  updateMyShares,
+
+  daoId,
+  setDao
+) => {
   try {
     const { bridge_load_dao } = await wasmPromise;
 
@@ -8,30 +16,40 @@ export const init = async (deps, daoId, setDao) => {
     console.log("dao: " + JSON.stringify(dao));
     setDao(dao);
 
-    if (deps.myAddress) {
+    if (myAddress) {
       // TODO check for daoId? or do we know it's always set?
-      await deps.updateInvestmentData();
-      await deps.updateMyShares(daoId, deps.myAddress);
+      await updateInvestmentData();
+      await updateMyShares(daoId, myAddress);
     }
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
   }
 };
 
-export const unlock = async (deps, showProgress, daoId) => {
+export const unlock = async (
+  statusMsg,
+  myAddress,
+  wallet,
+  updateInvestmentData,
+  updateMyBalance,
+  updateMyShares,
+
+  showProgress,
+  daoId
+) => {
   try {
     const { bridge_unlock, bridge_submit_unlock } = await wasmPromise;
-    deps.statusMsg.clear();
+    statusMsg.clear();
 
     showProgress(true);
     let unlockRes = await bridge_unlock({
       dao_id: daoId,
-      investor_address: deps.myAddress,
+      investor_address: myAddress,
     });
     console.log("unlockRes: " + JSON.stringify(unlockRes));
     showProgress(false);
 
-    let unlockResSigned = await deps.wallet.signTxs(unlockRes.to_sign);
+    let unlockResSigned = await wallet.signTxs(unlockRes.to_sign);
     console.log("unlockResSigned: " + JSON.stringify(unlockResSigned));
 
     showProgress(true);
@@ -41,15 +59,15 @@ export const unlock = async (deps, showProgress, daoId) => {
     });
     console.log("submitUnlockRes: " + JSON.stringify(submitUnlockRes));
 
-    deps.statusMsg.success("Shares unlocked");
-    await deps.updateInvestmentData(daoId, deps.myAddress);
+    statusMsg.success("Shares unlocked");
+    await updateInvestmentData(daoId, myAddress);
     showProgress(false);
 
-    await deps.updateMyBalance(deps.myAddress);
-    await deps.updateMyShares(daoId, deps.myAddress);
-    // await deps.updateMyDividend(daoId, deps.myAddress);
+    await updateMyBalance(myAddress);
+    await updateMyShares(daoId, myAddress);
+    // await updateMyDividend(daoId, myAddress);
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
     showProgress(false);
   }
 };

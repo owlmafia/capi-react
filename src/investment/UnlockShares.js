@@ -15,7 +15,16 @@ export const UnlockShares = ({ deps, dao, daoId }) => {
       buttonLabel={"Unlock"}
       submitting={submitting}
       onSubmit={async () => {
-        await unlock(deps, setSubmitting, daoId);
+        await unlock(
+          deps.statusMsg,
+          deps.myAddress,
+          deps.wallet,
+          deps.updateInvestmentData,
+          deps.updateMyBalance,
+          deps.updateMyShares,
+          setSubmitting,
+          daoId
+        );
       }}
     />
   );

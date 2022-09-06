@@ -45,7 +45,8 @@ export const InvestEmbedded = ({ deps, dao }) => {
       if (deps.availableSharesNumber != null) {
         if (buySharesCount) {
           updateTotalPriceAndPercentage(
-            deps,
+            deps.availableSharesNumber,
+
             buySharesCount,
             dao,
             setTotalCost,
@@ -64,9 +65,10 @@ export const InvestEmbedded = ({ deps, dao }) => {
     nestedAsync();
   }, [
     deps.statusMsg,
+    deps.availableSharesNumber,
+    deps.investmentData?.investor_locked_shares,
     params.id,
     buySharesCount,
-    deps.availableSharesNumber,
     dao,
   ]);
 
@@ -76,7 +78,18 @@ export const InvestEmbedded = ({ deps, dao }) => {
         setBuyIntent(false);
 
         await invest(
-          deps,
+          deps.statusMsg,
+          deps.myAddress,
+          deps.wallet,
+          deps.updateMyBalance,
+          deps.updateMyShares,
+          deps.updateFunds,
+          deps.updateInvestmentData,
+          deps.updateAvailableShares,
+          deps.updateRaisedFunds,
+          deps.updateCompactFundsActivity,
+          deps.updateSharesDistr,
+
           setSubmitting,
           params.id,
           dao,
@@ -92,7 +105,26 @@ export const InvestEmbedded = ({ deps, dao }) => {
     // TODO warning about missing deps here - we *don't* want to trigger this effect when inputs change,
     // we want to send whatever is in the form when user submits - so we care only about the conditions that trigger submit
     // suppress lint? are we approaching this incorrectly?
-  }, [buyIntent, deps.wallet, deps.myAddress]);
+  }, [
+    deps.statusMsg,
+    deps.myAddress,
+    deps.wallet,
+    deps.updateMyBalance,
+    deps.updateMyShares,
+    deps.updateFunds,
+    deps.updateInvestmentData,
+    deps.updateAvailableShares,
+    deps.updateRaisedFunds,
+    deps.updateCompactFundsActivity,
+    deps.updateSharesDistr,
+    deps.availableSharesNumber,
+
+    buyIntent,
+    buySharesCount,
+    dao,
+    params.id,
+    totalCostNumber,
+  ]);
 
   const view = () => {
     return (

@@ -78,7 +78,11 @@ export const CreateDao = ({ deps }) => {
         setSubmitDaoIntent(false);
 
         await createDao(
-          deps,
+          deps.statusMsg,
+          deps.myAddress,
+          deps.wallet,
+          deps.updateMyBalance,
+
           setSubmitting,
 
           daoName,

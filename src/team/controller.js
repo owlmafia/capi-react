@@ -20,7 +20,9 @@ export const getTeam = async (statusMsg, url, setTeam) => {
 };
 
 export const addTeamMember = async (
-  deps,
+  statusMsg,
+  wallet,
+
   showProgress,
 
   daoId,
@@ -43,7 +45,7 @@ export const addTeamMember = async (
   try {
     const { bridge_add_team_member, bridge_set_team, bridge_submit_set_team } =
       await wasmPromise;
-    deps.statusMsg.clear();
+    statusMsg.clear();
 
     showProgress(true);
     // update json + possible validations in wasm
@@ -71,7 +73,7 @@ export const addTeamMember = async (
     console.log("setTeamRes: " + JSON.stringify(setTeamRes));
     showProgress(false);
 
-    let setTeamResSigned = await deps.wallet.signTxs(setTeamRes.to_sign);
+    let setTeamResSigned = await wallet.signTxs(setTeamRes.to_sign);
     console.log("withdrawResSigned: " + setTeamResSigned);
 
     showProgress(true);
@@ -81,7 +83,7 @@ export const addTeamMember = async (
 
     console.log("submitTeamRes: " + JSON.stringify(submitTeamRes));
 
-    deps.statusMsg.success("Update team submitted");
+    statusMsg.success("Update team submitted");
 
     // we wait for the complete process to succeed before showing the updated team
     setTeam(addMemberRes.team);
@@ -96,9 +98,9 @@ export const addTeamMember = async (
       setSocialError(toErrorMsg(e.investors_share));
 
       // show a general message additionally, just in case
-      deps.statusMsg.error("Please fix the errors");
+      statusMsg.error("Please fix the errors");
     } else {
-      deps.statusMsg.error(e);
+      statusMsg.error(e);
     }
 
     showProgress(false);

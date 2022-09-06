@@ -5,7 +5,10 @@ import { toMaybeIpfsUrl } from "../ipfs/store";
 const wasmPromise = import("wasm");
 
 export const createDao = async (
-  deps,
+  statusMsg,
+  myAddress,
+  wallet,
+  updateMyBalance,
 
   showProgress,
 
@@ -46,7 +49,7 @@ export const createDao = async (
     bridge_submit_create_dao,
   } = await wasmPromise;
 
-  deps.statusMsg.clear();
+  statusMsg.clear();
 
   showProgress(true);
 
@@ -60,7 +63,7 @@ export const createDao = async (
   try {
     let createDaoAssetsRes = await bridge_create_dao_assets_txs({
       inputs: {
-        creator: deps.myAddress,
+        creator: myAddress,
         dao_name: daoName,
         dao_descr_url: descrUrl,
         share_count: shareCount,
@@ -81,9 +84,7 @@ export const createDao = async (
     });
     showProgress(false);
 
-    let createAssetSigned = await deps.wallet.signTxs(
-      createDaoAssetsRes.to_sign
-    );
+    let createAssetSigned = await wallet.signTxs(createDaoAssetsRes.to_sign);
     console.log("createAssetSigned: " + JSON.stringify(createAssetSigned));
 
     showProgress(true);
@@ -94,7 +95,7 @@ export const createDao = async (
     console.log("createDaoRes: " + JSON.stringify(createDaoRes));
     showProgress(false);
 
-    let createDaoSigned = await deps.wallet.signTxs(createDaoRes.to_sign);
+    let createDaoSigned = await wallet.signTxs(createDaoRes.to_sign);
     console.log("createDaoSigned: " + JSON.stringify(createDaoSigned));
 
     showProgress(true);
@@ -107,9 +108,9 @@ export const createDao = async (
     navigate(submitDaoRes.dao.dao_link);
 
     showProgress(false);
-    deps.statusMsg.success("Project created!");
+    statusMsg.success("Project created!");
 
-    await deps.updateMyBalance(deps.myAddress);
+    await updateMyBalance(myAddress);
   } catch (e) {
     if (e.type_identifier === "input_errors") {
       setDaoNameError(toErrorMsg(e.name));
@@ -141,26 +142,26 @@ export const createDao = async (
       }
 
       // workaround: the inline errors for these are not functional yet, so show as notification
-      showErrorNotificationIfError(deps, e.image_url);
-      showErrorNotificationIfError(deps, e.prospectus_url);
-      showErrorNotificationIfError(deps, e.prospectus_bytes);
+      showErrorNotificationIfError(statusMsg, e.image_url);
+      showErrorNotificationIfError(statusMsg, e.prospectus_url);
+      showErrorNotificationIfError(statusMsg, e.prospectus_bytes);
 
       // show a general message additionally, just in case
-      deps.statusMsg.error("Please fix the errors");
+      statusMsg.error("Please fix the errors");
     } else if (e.id === "not_enough_algos") {
       setShowBuyCurrencyInfoModal(true);
     } else {
-      deps.statusMsg.error(e);
+      statusMsg.error(e);
     }
 
     showProgress(false);
   }
 };
 
-const showErrorNotificationIfError = (deps, payload) => {
+const showErrorNotificationIfError = (statusMsg, payload) => {
   const errorMsg = toErrorMsg(payload);
   if (errorMsg) {
-    deps.statusMsg.error(errorMsg);
+    statusMsg.error(errorMsg);
   }
 };
 

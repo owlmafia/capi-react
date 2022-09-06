@@ -1,6 +1,6 @@
 const wasmPromise = import("wasm");
 
-export const init = async (deps, daoId, daoMaybe, setDao) => {
+export const init = async (statusMsg, daoId, daoMaybe, setDao) => {
   try {
     const { bridge_load_dao } = await wasmPromise;
 
@@ -14,12 +14,17 @@ export const init = async (deps, daoId, daoMaybe, setDao) => {
 
     setDao(dao);
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
   }
 };
 
 export const withdraw = async (
-  deps,
+  statusMsg,
+  myAddress,
+  wallet,
+  updateMyBalance,
+  updateFunds,
+
   showProgress,
   daoId,
   withdrawalAmount,
@@ -27,12 +32,12 @@ export const withdraw = async (
 ) => {
   try {
     const { bridge_withdraw, bridge_submit_withdraw } = await wasmPromise;
-    deps.statusMsg.clear();
+    statusMsg.clear();
 
     showProgress(true);
     let withdrawRes = await bridge_withdraw({
       dao_id: daoId,
-      sender: deps.myAddress,
+      sender: myAddress,
       withdrawal_amount: withdrawalAmount,
       description: withdrawalDescr,
     });
@@ -40,7 +45,7 @@ export const withdraw = async (
     console.log("withdrawRes: " + JSON.stringify(withdrawRes));
     showProgress(false);
 
-    let withdrawResSigned = await deps.wallet.signTxs(withdrawRes.to_sign);
+    let withdrawResSigned = await wallet.signTxs(withdrawRes.to_sign);
     console.log("withdrawResSigned: " + withdrawResSigned);
 
     showProgress(true);
@@ -51,13 +56,13 @@ export const withdraw = async (
 
     console.log("submitWithdrawRes: " + JSON.stringify(submitWithdrawRes));
 
-    deps.statusMsg.success("Withdrawal request submitted");
+    statusMsg.success("Withdrawal request submitted");
     showProgress(false);
 
-    await deps.updateMyBalance(deps.myAddress);
-    await deps.updateFunds(daoId);
+    await updateMyBalance(myAddress);
+    await updateFunds(daoId);
   } catch (e) {
-    deps.statusMsg.error(e);
+    statusMsg.error(e);
     showProgress(false);
   }
 };

@@ -22,7 +22,7 @@ export const Dao = ({ deps }) => {
 
   useEffect(() => {
     async function fetch() {
-      await loadDescription(deps, setDescription);
+      await loadDescription(deps.statusMsg, deps.dao, setDescription);
     }
     fetch();
   }, [deps.statusMsg, deps.dao, setDescription]);

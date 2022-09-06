@@ -12,10 +12,10 @@ export const Stats = ({ deps }) => {
   useEffect(() => {
     async function asyncInit() {
       //   console.log("loading dao id: " + JSON.stringify(params));
-      await init(deps, params.id, setDao);
+      await init(deps.statusMsg, params.id, setDao);
     }
     asyncInit();
-  }, [params.id, deps.statusMsg]);
+  }, [deps.statusMsg, params.id]);
 
   return (
     <div>

@@ -9,7 +9,7 @@ export const MyDaos = ({ deps }) => {
 
   useEffect(() => {
     if (deps.myAddress) {
-      loadMyDaos(deps, setMyDaos);
+      loadMyDaos(deps.statusMsg, deps.myAddress, setMyDaos);
     }
   }, [deps.statusMsg, deps.myAddress]);
 

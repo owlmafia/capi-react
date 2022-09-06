@@ -12,10 +12,10 @@ export const RaisedFunds = ({ deps, dao }) => {
 
   useEffect(() => {
     async function nestedAsync() {
-      deps.updateRaisedFunds(params.id);
+      deps.updateRaisedFunds.call(null, params.id);
     }
     nestedAsync();
-  }, [params.id, dao, deps.statusMsg]);
+  }, [params.id, dao, deps.statusMsg, deps.updateRaisedFunds]);
 
   useEffect(() => {
     if (dao && deps.raisedFunds) {
