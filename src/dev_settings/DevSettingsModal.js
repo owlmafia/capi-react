@@ -1,10 +1,10 @@
 import Modal from "../modal/Modal";
 import { DevSettings } from "./DevSettings";
 
-export const DevSettingsModal = ({ deps, closeModal }) => {
+export const DevSettingsModal = ({ closeModal }) => {
   return (
     <Modal title={"Dev settings"} onCloseClick={() => closeModal()}>
-      <DevSettings deps={deps} closeModal={closeModal} />
+      <DevSettings closeModal={closeModal} />
     </Modal>
   );
 };
