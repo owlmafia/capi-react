@@ -14,13 +14,6 @@ module.exports = function override(config, env) {
     });
   });
 
-  // add a dedicated loader for WASM
-  config.module.rules.push({
-    test: wasmExtensionRegExp,
-    include: path.resolve(__dirname, "src"),
-    use: [{ loader: require.resolve("wasm-loader"), options: {} }],
-  });
-
   config.experiments = {
     asyncWebAssembly: true,
   };
