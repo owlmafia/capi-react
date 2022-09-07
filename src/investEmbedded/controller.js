@@ -4,6 +4,30 @@ import { toErrorMsg } from "../validation";
 
 const wasmPromise = import("wasm");
 
+export const updateTotalPriceNumber = async (
+  availableSharesNumber,
+
+  shareCount,
+  dao,
+  setBuySharesTotalPriceNumber,
+  lockedShares
+) => {
+  try {
+    let res = await calculateSharesPrice(
+      availableSharesNumber,
+      shareCount,
+      dao,
+      lockedShares
+    );
+
+    setBuySharesTotalPriceNumber(res.total_price_number);
+  } catch (e) {
+    // for now disabled - we don't want to show validation messages while typing, to be consistent with other inputs
+    // deps.statusMsg.error(e);
+    console.error("updatePercentage error (ignored): %o", e);
+  }
+};
+
 export const updateTotalPriceAndPercentage = async (
   availableSharesNumber,
 
@@ -12,6 +36,30 @@ export const updateTotalPriceAndPercentage = async (
   setBuySharesTotalPrice,
   setBuySharesTotalPriceNumber,
   setProfitPercentage,
+  lockedShares
+) => {
+  try {
+    let res = await calculateSharesPrice(
+      availableSharesNumber,
+      shareCount,
+      dao,
+      lockedShares
+    );
+
+    setBuySharesTotalPrice(res.total_price);
+    setBuySharesTotalPriceNumber(res.total_price_number);
+    setProfitPercentage(res.profit_percentage);
+  } catch (e) {
+    // for now disabled - we don't want to show validation messages while typing, to be consistent with other inputs
+    // deps.statusMsg.error(e);
+    console.error("updateTotalPriceAndPercentage error (ignored): %o", e);
+  }
+};
+
+const calculateSharesPrice = async (
+  availableSharesNumber,
+  shareCount,
+  dao,
   lockedShares
 ) => {
   try {
@@ -29,13 +77,11 @@ export const updateTotalPriceAndPercentage = async (
 
     console.log("res: %o", res);
 
-    setBuySharesTotalPrice(res.total_price);
-    setBuySharesTotalPriceNumber(res.total_price_number);
-    setProfitPercentage(res.profit_percentage);
+    return res;
   } catch (e) {
     // for now disabled - we don't want to show validation messages while typing, to be consistent with other inputs
     // deps.statusMsg.error(e);
-    console.error("updateTotalPriceAndPercentage error (ignored): %o", e);
+    console.error("calculateSharesPrice error (ignored): %o", e);
   }
 };
 

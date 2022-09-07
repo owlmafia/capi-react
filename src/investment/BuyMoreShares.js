@@ -6,10 +6,7 @@ import { SharesDistributionChart } from "../shares_distribution_chart/SharesDist
 import { LabeledAmountInput } from "../common_comps/LabeledInput";
 import { pieChartColors, PIE_CHART_GRAY } from "../common_functions/common";
 import redArrow from "../images/svg/arrow.svg";
-import {
-  invest,
-  updateTotalPriceAndPercentage,
-} from "../investEmbedded/controller";
+import { invest, updateTotalPriceNumber } from "../investEmbedded/controller";
 import { AckProspectusModal } from "../prospectus/AckProspectusModal";
 
 export const BuyMoreShares = ({ deps, dao }) => {
@@ -21,10 +18,6 @@ export const BuyMoreShares = ({ deps, dao }) => {
   const [submitting, setSubmitting] = useState(false);
 
   const [totalCostNumber, setTotalCostNumber] = useState(null);
-  // these 2 are not used currently - copied from InvestEmbedded, which has basically the same functionality but a different UI
-  // may be used in the future
-  const [_totalCost, setTotalCost] = useState(null);
-  const [_totalPercentage, setProfitPercentage] = useState(null);
 
   const [showProspectusModal, setShowProspectusModal] = useState(false);
 
@@ -38,13 +31,11 @@ export const BuyMoreShares = ({ deps, dao }) => {
   useEffect(() => {
     async function nestedAsync() {
       if (deps.availableShares && buySharesCount) {
-        updateTotalPriceAndPercentage(
+        updateTotalPriceNumber(
           deps.availableSharesNumber,
           buySharesCount,
           dao,
-          setTotalCost,
-          setTotalCostNumber,
-          setProfitPercentage
+          setTotalCostNumber
         );
       }
     }
