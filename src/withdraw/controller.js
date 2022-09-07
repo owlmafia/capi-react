@@ -1,9 +1,11 @@
-const wasmPromise = import("wasm");
+import {
+  bridge_load_dao,
+  bridge_submit_withdraw,
+  bridge_withdraw,
+} from "../pkg";
 
 export const init = async (statusMsg, daoId, daoMaybe, setDao) => {
   try {
-    const { bridge_load_dao } = await wasmPromise;
-
     // if we're loading via URL (instead of another page that passes the dao as parameter), fetch the dao
     var dao = null;
     if (daoMaybe) {
@@ -31,7 +33,6 @@ export const withdraw = async (
   withdrawalDescr
 ) => {
   try {
-    const { bridge_withdraw, bridge_submit_withdraw } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);

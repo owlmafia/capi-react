@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const { override } = require("customize-cra");
+const WasmPackPlugin = require("@wasm-tool/wasm-pack-plugin");
 
 module.exports = function override(config, env) {
   const wasmExtensionRegExp = /\.wasm$/;
@@ -31,11 +32,20 @@ module.exports = function override(config, env) {
     ".js",
   ];
 
+  config.experiments = {
+    asyncWebAssembly: true,
+    syncWebAssembly: true,
+  };
+
   config.plugins = [
     ...config.plugins,
     new webpack.ProvidePlugin({
       process: "process/browser",
       Buffer: ["buffer", "Buffer"],
+    }),
+    new WasmPackPlugin({
+      crateDirectory: path.resolve(__dirname, "../wasm-build"),
+      outDir: path.resolve(__dirname, "src/pkg"),
     }),
   ];
 

@@ -1,4 +1,4 @@
-const wasmPromise = import("wasm");
+import { bridge_holders_change, bridge_shares_distribution } from "../pkg";
 
 export const fetchSharesDistribution = async (
   statusMsg,
@@ -9,7 +9,6 @@ export const fetchSharesDistribution = async (
   setNotOwnedShares
 ) => {
   try {
-    const { bridge_shares_distribution } = await wasmPromise;
     let res = await bridge_shares_distribution({
       asset_id: assetId,
       share_supply: assetSupply,
@@ -39,7 +38,6 @@ export const fetchHoldersChange = async (
   setHoldersChange
 ) => {
   try {
-    const { bridge_holders_change } = await wasmPromise;
     let res = await bridge_holders_change({
       asset_id: assetId,
       app_id: appId,

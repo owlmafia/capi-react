@@ -1,4 +1,4 @@
-const wasmPromise = import("wasm");
+import { bridge_reserve_wyre } from "../pkg";
 
 export const startBuyCurrencyFlow = async (
   deps,
@@ -7,7 +7,6 @@ export const startBuyCurrencyFlow = async (
   closeModal
 ) => {
   try {
-    const { bridge_reserve_wyre } = await wasmPromise;
     const reserveWyreRes = await bridge_reserve_wyre({
       address: deps.myAddress,
       dst_currency: dstCurrency,

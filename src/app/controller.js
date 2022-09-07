@@ -1,8 +1,16 @@
-const wasmPromise = import("wasm");
+import {
+  init_log,
+  bridge_my_shares,
+  bridge_balance,
+  bridge_my_dividend,
+  bridge_load_dao,
+  bridge_load_available_shares,
+  bridge_raised_funds,
+  bridge_wasm_version,
+} from "../pkg";
 
 export const initLog = async (statusMsg) => {
   try {
-    const { init_log } = await wasmPromise;
     init_log();
   } catch (e) {
     statusMsg.error(e);
@@ -16,7 +24,6 @@ export const updateMyShares = async (
   setMyShares
 ) => {
   try {
-    const { bridge_my_shares } = await wasmPromise;
     let mySharesRes = await bridge_my_shares({
       dao_id: daoId,
       my_address: myAddress,
@@ -34,7 +41,6 @@ export const updateMyBalance_ = async (
   updateMyBalance
 ) => {
   try {
-    const { bridge_balance } = await wasmPromise;
     const balance = await bridge_balance({ address: myAddress });
     console.log("Balance update res: %o", balance);
     await updateMyBalance(balance);
@@ -50,7 +56,6 @@ export const updateMyDividend_ = async (
   setMyDividend
 ) => {
   try {
-    const { bridge_my_dividend } = await wasmPromise;
     let myDividendRes = await bridge_my_dividend({
       dao_id: daoId,
       investor_address: myAddress,
@@ -64,7 +69,6 @@ export const updateMyDividend_ = async (
 
 export const updateDao_ = async (daoId, setDao, statusMsg) => {
   try {
-    const { bridge_load_dao } = await wasmPromise;
     let dao = await bridge_load_dao(daoId);
     setDao(dao);
     // // these are overwritten when draining, so we keep them separate
@@ -82,7 +86,6 @@ export const fetchAvailableShares = async (
   setAvailableSharesNumber
 ) => {
   try {
-    const { bridge_load_available_shares } = await wasmPromise;
     let res = await bridge_load_available_shares({
       dao_id: daoId,
     });
@@ -101,7 +104,6 @@ export const loadRaisedFunds = async (
   setState
 ) => {
   try {
-    const { bridge_raised_funds } = await wasmPromise;
     let funds = await bridge_raised_funds({ dao_id: daoId });
     setRaisedFunds(funds.raised);
     setRaisedFundsNumber(funds.raised_number);
@@ -138,7 +140,6 @@ const stateObj = (state, exceeded) => {
 
 export const getWasmVersion = async (statusMsg, setWasmVersion) => {
   try {
-    const { bridge_wasm_version } = await wasmPromise;
     setWasmVersion(await bridge_wasm_version());
   } catch (e) {
     statusMsg.error(e);

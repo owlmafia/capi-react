@@ -1,8 +1,12 @@
 import { toBytes, toBytesForRust } from "../common_functions/common";
 import { toErrorMsg } from "../validation";
 import { toMaybeIpfsUrl } from "../ipfs/store";
-
-const wasmPromise = import("wasm");
+import {
+  bridge_calculate_max_funds,
+  bridge_create_dao,
+  bridge_create_dao_assets_txs,
+  bridge_submit_create_dao,
+} from "../pkg";
 
 export const createDao = async (
   statusMsg,
@@ -43,12 +47,6 @@ export const createDao = async (
   setMaxInvestSharesError,
   setShowBuyCurrencyInfoModal
 ) => {
-  const {
-    bridge_create_dao_assets_txs,
-    bridge_create_dao,
-    bridge_submit_create_dao,
-  } = await wasmPromise;
-
   statusMsg.clear();
 
   showProgress(true);
@@ -173,8 +171,6 @@ export const calculateTotalPrice = async (
   if (!shareAmount || !sharePrice) {
     return;
   }
-
-  const { bridge_calculate_max_funds } = await wasmPromise;
 
   try {
     let res = await bridge_calculate_max_funds({

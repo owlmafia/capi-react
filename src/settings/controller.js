@@ -1,8 +1,15 @@
 import { toBytes, toBytesForRust } from "../common_functions/common";
 import { storeIpfs, toMaybeIpfsUrl } from "../ipfs/store";
+import {
+  bridge_rekey_owner,
+  bridge_submit_rekey_owner,
+  bridge_submit_update_app,
+  bridge_submit_update_dao_data,
+  bridge_updatable_data,
+  bridge_update_app_txs,
+  bridge_update_data,
+} from "../pkg";
 import { toErrorMsg } from "../validation";
-
-const wasmPromise = import("wasm");
 
 export const prefillInputs = async (
   statusMsg,
@@ -18,8 +25,6 @@ export const prefillInputs = async (
   setProspectus
 ) => {
   try {
-    const { bridge_updatable_data } = await wasmPromise;
-
     // prefill dao inputs
     let updatableData = await bridge_updatable_data({ dao_id: daoId });
     setDaoName(updatableData.project_name);
@@ -52,9 +57,6 @@ export const updateApp = async (
   updateVersion
 ) => {
   try {
-    const { bridge_update_app_txs, bridge_submit_update_app } =
-      await wasmPromise;
-
     showProgress(true);
     let updateAppRes = await bridge_update_app_txs({
       dao_id: daoId,
@@ -114,9 +116,6 @@ export const updateDaoData = async (
   setMaxInvestSharesError
 ) => {
   try {
-    const { bridge_update_data, bridge_submit_update_dao_data } =
-      await wasmPromise;
-
     showProgress(true);
 
     const imageUrl = await toMaybeIpfsUrl(await imageBytes);
@@ -233,8 +232,6 @@ export const rekeyOwner = async (
   setInputError
 ) => {
   try {
-    const { bridge_rekey_owner, bridge_submit_rekey_owner } = await wasmPromise;
-
     showProgress(true);
     let rekeyRes = await bridge_rekey_owner({
       dao_id: daoId,
