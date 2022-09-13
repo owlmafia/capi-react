@@ -1,12 +1,7 @@
 import arrowUp from "./images/svg/green-arrow.svg";
 import arrowDown from "./images/svg/arrow.svg";
-import {
-  bridge_claim,
-  bridge_load_investment,
-  bridge_submit_claim,
-  bridge_view_dao,
-  get_balance_change,
-} from "./pkg";
+
+const wasmPromise = import("wasm");
 
 export const updateInvestmentData_ = async (
   statusMsg,
@@ -15,6 +10,8 @@ export const updateInvestmentData_ = async (
   setInvestmentData
 ) => {
   try {
+    const { bridge_load_investment } = await wasmPromise;
+
     if (myAddress) {
       let data = await bridge_load_investment({
         dao_id: daoId,
@@ -40,6 +37,7 @@ export const retrieveProfits = async (
   wallet
 ) => {
   try {
+    const { bridge_claim, bridge_submit_claim } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
@@ -95,6 +93,7 @@ export const updateFunds_ = async (
   /// We don't have a function in WASM yet to fetch only the funds so we re-fetch the dao.
   /// TODO: optimize: fetch only the funds (probably pass dao as input), so request is quicker.
   try {
+    const { bridge_view_dao, get_balance_change } = await wasmPromise;
     let viewDao = await bridge_view_dao({
       dao_id: daoId,
     });

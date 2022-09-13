@@ -1,12 +1,8 @@
-import {
-  bridge_buy_shares,
-  bridge_calculate_shares_price,
-  bridge_opt_in_to_apps_if_needed,
-  bridge_submit_buy_shares,
-} from "../pkg";
 import { toErrorMsg } from "../validation";
 
 // Note: no locking for the embedded view because there's no design yet
+
+const wasmPromise = import("wasm");
 
 export const updateTotalPriceNumber = async (
   availableSharesNumber,
@@ -67,6 +63,8 @@ const calculateSharesPrice = async (
   lockedShares
 ) => {
   try {
+    const { bridge_calculate_shares_price } = await wasmPromise;
+
     let res = await bridge_calculate_shares_price({
       shares_amount: shareCount,
       available_shares: availableSharesNumber,
@@ -110,6 +108,12 @@ export const invest = async (
   totalCostNumber
 ) => {
   try {
+    const {
+      bridge_opt_in_to_apps_if_needed,
+      bridge_buy_shares,
+      bridge_submit_buy_shares,
+    } = await wasmPromise;
+
     statusMsg.clear();
     setShareAmountError(null);
 

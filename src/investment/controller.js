@@ -1,4 +1,4 @@
-import { bridge_load_dao, bridge_submit_unlock, bridge_unlock } from "../pkg";
+const wasmPromise = import("wasm");
 
 export const init = async (
   statusMsg,
@@ -10,6 +10,8 @@ export const init = async (
   setDao
 ) => {
   try {
+    const { bridge_load_dao } = await wasmPromise;
+
     let dao = await bridge_load_dao(daoId);
     console.log("dao: " + JSON.stringify(dao));
     setDao(dao);
@@ -36,6 +38,7 @@ export const unlock = async (
   daoId
 ) => {
   try {
+    const { bridge_unlock, bridge_submit_unlock } = await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);

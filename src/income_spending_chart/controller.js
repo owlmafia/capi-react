@@ -1,4 +1,4 @@
-import { bridge_income_vs_spending } from "../pkg";
+const wasmPromise = import("wasm");
 
 export const fetchIncomeVsSpendingChartData = async (
   statusMsg,
@@ -6,6 +6,7 @@ export const fetchIncomeVsSpendingChartData = async (
   interval
 ) => {
   try {
+    const { bridge_income_vs_spending } = await wasmPromise;
     let res = await bridge_income_vs_spending({
       dao_id: daoId,
       interval: interval,

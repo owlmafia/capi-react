@@ -1,11 +1,8 @@
 // Note: no locking for the embedded view because there's no design yet
 
-import {
-  bridge_lock,
-  bridge_opt_in_to_apps_if_needed,
-  bridge_submit_lock,
-} from "../pkg";
 import { toErrorMsg } from "../validation";
+
+const wasmPromise = import("wasm");
 
 export const lock = async (
   statusMsg,
@@ -23,6 +20,8 @@ export const lock = async (
   setInputError
 ) => {
   try {
+    const { bridge_opt_in_to_apps_if_needed, bridge_lock, bridge_submit_lock } =
+      await wasmPromise;
     statusMsg.clear();
     ///////////////////////////////////
     // TODO refactor invest/lock

@@ -1,15 +1,13 @@
 import { toBytes } from "../common_functions/common";
 import { toMaybeIpfsUrl } from "../ipfs/store";
-import {
-  bridge_add_team_member,
-  bridge_get_team,
-  bridge_set_team,
-  bridge_submit_set_team,
-} from "../pkg";
 import { toErrorMsg } from "../validation";
+
+const wasmPromise = import("wasm");
 
 export const getTeam = async (statusMsg, url, setTeam) => {
   try {
+    const { bridge_get_team } = await wasmPromise;
+
     const team = await bridge_get_team({
       url: url,
     });
@@ -45,6 +43,8 @@ export const addTeamMember = async (
   setSocialError
 ) => {
   try {
+    const { bridge_add_team_member, bridge_set_team, bridge_submit_set_team } =
+      await wasmPromise;
     statusMsg.clear();
 
     showProgress(true);
