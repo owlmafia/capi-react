@@ -140,6 +140,23 @@ export const BuyMoreShares = ({ deps, dao }) => {
                 <div>{"Your unlocked shares"}</div>
               </div>
             </div>
+            <div className="shares-chart d-desktop-none">
+            <SharesDistributionChart
+              sharesDistr={[
+                to_pie_chart_slice(deps.availableShares),
+                to_pie_chart_slice(deps.investmentData.investor_locked_shares),
+                to_pie_chart_slice(
+                  deps.investmentData.investor_unlocked_shares
+                ),
+              ]}
+              // we want to show available shares in gray and it's the first segment, so we prepend gray to the colors
+              // note that this is inconsistent with how it's shown on investors distribution (using NOT_OWNED segment type)
+              // we should refactor this (maybe create a generic "gray" segment type)
+              col={[PIE_CHART_GRAY].concat(pieChartColors())}
+              animated={false}
+              disableClick={true}
+            />
+          </div>
           </div>
           <div className="buy-shares-input">
             <LabeledAmountInput

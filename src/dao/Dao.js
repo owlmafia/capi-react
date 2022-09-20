@@ -76,7 +76,6 @@ export const Dao = ({ deps }) => {
               />
             )}
           </div>
-          <div className="h-20px" />
         </div>
       );
     } else {
